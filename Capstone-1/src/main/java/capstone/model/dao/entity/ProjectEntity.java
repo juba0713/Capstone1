@@ -3,6 +3,7 @@ package capstone.model.dao.entity;
 import java.sql.Timestamp;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,16 +22,21 @@ public class ProjectEntity {
 	
 	private int applicantIdPk;
 	
+	@Column(columnDefinition = "text")
 	private String projectTitle;
 	
+	@Column(columnDefinition = "text")
 	private String projectDescription;
 	
 	private List<String> teams;
 	
+	@Column(columnDefinition = "text")
 	private String problemStatement;
 	
+	@Column(columnDefinition = "text")
 	private String targetMarket;
 	
+	@Column(columnDefinition = "text")
 	private String solutionDescription;
 	
 	private List<String> historicalTimeline;
@@ -39,16 +45,21 @@ public class ProjectEntity {
 	
 	private List<String> pricingStrategy;
 	
+	@Column(columnDefinition = "text")
 	private String intPropertyStatus;
 	
+	@Column(columnDefinition = "text")
 	private String objectives;
 	
+	@Column(columnDefinition = "text")
 	private String scopeProposal;
 	
+	@Column(columnDefinition = "text")
 	private String methodology;
 	
 	private String vitaeFile;
 	
+	@Column(columnDefinition = "text")
 	private String supportLink;
 	
 	private Timestamp createdDate;
