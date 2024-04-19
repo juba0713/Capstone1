@@ -1,11 +1,14 @@
 package capstone.model.logic;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
 import capstone.model.dao.entity.ProjectEntity;
+
 
 @Service
 public interface ApplicantLogic {
@@ -27,11 +30,11 @@ public interface ApplicantLogic {
 	 * To save group entity
 	 * @param entity
 	 */
-	public void saveGroupEntity(GroupEntity entity);
+	public int saveGroupEntity(GroupEntity entity);
 	
 	/**
 	 * To save group member entity
 	 * @param entity
 	 */
-	public void saveGroupMemberEntity(GroupMemberEntity entity);
+	public void saveGroupMemberEntity(List<GroupMemberEntity> entity);
 }

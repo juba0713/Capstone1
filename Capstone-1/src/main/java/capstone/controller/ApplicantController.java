@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import capstone.common.CommonConstant;
+import capstone.common.constant.CommonConstant;
 import capstone.controller.webdto.ApplicantWebDto;
 import capstone.model.dto.ApplicantInOutDto;
 import capstone.model.service.ApplicantService;
@@ -35,6 +35,8 @@ public class ApplicantController {
 	 */
 	@PostMapping("/form")
 	public String processApplicantForm(@ModelAttribute ApplicantWebDto webDto) {
+		
+		System.out.println("Agree Flg: " + webDto.getAgreeFlg());
 		
 		ApplicantInOutDto inDto = new ApplicantInOutDto();
 		
@@ -80,13 +82,9 @@ public class ApplicantController {
 		
 		inDto.setLeaderEmail(webDto.getLeaderEmail());
 		
-		inDto.setMemberTwo(webDto.getMemberTwo());
+		inDto.setMembers(webDto.getMembers());
 		
-		inDto.setMemberThree(webDto.getMemberThree());
-		
-		inDto.setMemberFour(webDto.getMemberFour());
-		
-		inDto.setMemberFive(webDto.getMemberFive());
+		inDto.setUniversity(webDto.getUniversity());
 		
 		inDto.setTechonologyAns(webDto.getTechonologyAns());
 		
@@ -112,13 +110,24 @@ public class ApplicantController {
 		
 		inDto.setCommitmentFourFlg(webDto.getCommitmentFourFlg());
 		
-		ApplicantInOutDto outDto = applicantService.saveApplicant(inDto);
+		ApplicantInOutDto outDto = applicantService.validateApplicant(inDto);
 		
 		if(CommonConstant.INVALID.equals(outDto.getResult())) {
 			
 			return "redirect:/applicant/form";
 		}
 		
+		System.out.println(webDto.getTeams().get(0));
+		
+		applicantService.saveApplicant(inDto);
+		
 		return "applicant/form";
+	}
+	
+	
+	@GetMapping("/home")
+	public String showApplicantHome() {
+		
+		return "applicant/home";
 	}
 }

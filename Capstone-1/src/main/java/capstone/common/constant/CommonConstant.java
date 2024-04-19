@@ -1,4 +1,4 @@
-package capstone.common;
+package capstone.common.constant;
 
 public class CommonConstant {
 	

@@ -72,17 +72,8 @@ public class ApplicantInOutDto {
 	//Leader email address
 	public String leaderEmail;
 	
-	//Member two;
-	public String memberTwo;
-	
-	//Member Three;
-	public String memberThree;
-	
-	//Member Four;
-	public String memberFour;
-	
-	//Member Five;
-	public String memberFive;
+	//Members;
+	public List<String> members;
 	
 	//University
 	public String university;

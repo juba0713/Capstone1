@@ -12,8 +12,8 @@
 		</div>
 		<div>
 			<label>Agreement1</label>
-			<input type="radio" name="agreeFlg" th:value="*{agreeFlg}"/>
-			<input type="radio" name="agreeFlg" th:value="*{agreeFlg}"/>
+			<input type="radio" name="agreeFlg" value="true"/>
+			<input type="radio" name="agreeFlg" value="false"/>
 		</div>
 		<div>
 			<label>Project Title</label>
@@ -40,7 +40,7 @@
 			<textarea placeholder="Type something here..." name="problemStatement" th:value="*{problemStatement}"></textarea>
 		</div>
 		<div>
-			<label>Problem Statement</label>
+			<label>Target Market</label>
 			<textarea placeholder="Type something here..." name="targetMarket" th:value="*{targetMarket}"></textarea>
 		</div>
 		<div>
@@ -121,23 +121,23 @@
 		</div>
 		<div>
 			<label>Team Leader - Member2(LastName, FirstName)</label>
-			<input type="text" placeholder="Input here" name="memberTwo" th:value="*{memberTwo}"/>
+			<input type="text" placeholder="Input here" name="members[0]" />
 		</div>
 		<div>
 			<label>Team Leader - Member3(LastName, FirstName)</label>
-			<input type="text" placeholder="Input here" name="memberThree" th:value="*{memberThree}"/>
+			<input type="text" placeholder="Input here" name="members[1]" />
 		</div>
 		<div>
 			<label>Team Leader - Member4(LastName, FirstName)</label>
-			<input type="text" placeholder="Input here" name="memberFour" th:value="*{memberFour}"/>
+			<input type="text" placeholder="Input here" name="members[2]" />
 		</div>
 		<div>
 			<label>Team Leader - Member5(LastName, FirstName)</label>
-			<input type="text" placeholder="Input here" name="memberFive" th:value="*{memberFive}"/>
+			<input type="text" placeholder="Input here" name="members[3]"/>
 		</div>
 		<div>
 			<label>University</label>
-			<input type="text" placeholder="Input here" name="university" th:value="*{university}"/>
+			<input type="text" placeholder="Input here" name="university" />
 		</div>
 		<div>
 			<label>Technology</label>

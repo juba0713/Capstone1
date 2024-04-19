@@ -1,5 +1,7 @@
 package capstone.model.logic.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,15 +46,17 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	}
 
 	@Override
-	public void saveGroupEntity(GroupEntity entity) {
+	public int saveGroupEntity(GroupEntity entity) {
 		
 		groupDao.save(entity);
+		
+		return entity.getIdPk();
 	}
 
 	@Override
-	public void saveGroupMemberEntity(GroupMemberEntity entity) {
+	public void saveGroupMemberEntity(List<GroupMemberEntity> entities) {
 		
-		groupMemberDao.save(entity);
+		groupMemberDao.saveAll(entities);
 	}
 	
 
