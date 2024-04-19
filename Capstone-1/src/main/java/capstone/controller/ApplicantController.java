@@ -117,8 +117,6 @@ public class ApplicantController {
 			return "redirect:/applicant/form";
 		}
 		
-		System.out.println(webDto.getTeams().get(0));
-		
 		applicantService.saveApplicant(inDto);
 		
 		return "applicant/form";

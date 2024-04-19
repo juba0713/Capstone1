@@ -51,4 +51,6 @@ public class ApplicantEntity {
 	private Timestamp createdDate;
 	
 	private Boolean deleteFlg;
+	
+	private int status;
 }
