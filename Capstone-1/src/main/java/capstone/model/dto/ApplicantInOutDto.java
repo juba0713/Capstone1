@@ -7,6 +7,8 @@ import lombok.Data;
 @Data
 public class ApplicantInOutDto {
 	
+	public String result;
+	
 	//Email
 	public String email;
 	
