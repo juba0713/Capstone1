@@ -8,6 +8,14 @@
 	<p>Applicant Home</p>
 	<div sec:authorize="isAuthenticated()">
         Welcome, <span th:text="${session.username}"></span>!
+        <div>
+			Id: <span th:text="${session.id}"></span>
+		</div>
     </div>
+    <div>
+		<form th:action="@{/logout}" method="POST">
+			<button>Logout</button>
+		</form>
+	</div>
 </body>
 </html>

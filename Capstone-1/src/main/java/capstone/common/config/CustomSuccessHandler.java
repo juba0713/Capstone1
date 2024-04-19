@@ -3,14 +3,21 @@ package capstone.common.config;
 import java.io.IOException;
 import java.util.Collection;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import capstone.model.dao.entity.UserInformationEntity;
+import capstone.model.service.LoggedInUserService;
+
 @Component
 public class CustomSuccessHandler implements AuthenticationSuccessHandler {
+	
+	@Autowired
+	private LoggedInUserService loggedInUserService;
 
 	@Override
 	public void onAuthenticationSuccess(jakarta.servlet.http.HttpServletRequest request,
@@ -33,8 +40,12 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 	      
 	        if (authentication != null) {
 	            String username = authentication.getName();
+	            
+	            UserInformationEntity user = loggedInUserService.getUserInformation();
 	    
 	            request.getSession().setAttribute("username", username);
+	      
+	            request.getSession().setAttribute("id", user.getIdPk());
 	        }
 		
 	}

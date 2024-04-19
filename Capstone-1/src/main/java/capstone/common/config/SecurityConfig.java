@@ -80,7 +80,7 @@ public class SecurityConfig{
 				.successHandler(authenticationSuccessHandler())
 			)
 			.logout((logout) -> logout
-					.logoutSuccessUrl("/login")
+					.logoutSuccessUrl("/")
 					.invalidateHttpSession(true)
 					.permitAll()
 			);		
