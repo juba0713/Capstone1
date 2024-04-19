@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body th:object="${applicantWebDto}">
+	<form th:action="@{/applicant/form}" method="POST">
+		<div>
+			<label>Enter email</label>
+			<input type="text" placeholder="Input email" name="email" th:value="*{email}"/>
+		</div>
+		<div>
+			<label>Agreement1</label>
+			<input type="radio" name="agreeFlg" th:value="*{agreeFlg}"/>
+			<input type="radio" name="agreeFlg" th:value="*{agreeFlg}"/>
+		</div>
+		<div>
+			<label>Project Title</label>
+			<textarea placeholder="Enter Project title" name="projectTitle" th:value="*{projectTitle}"></textarea>
+		</div>
+		<div>
+			<label>Project Description</label>
+			<input type="text" placeholder="Type something here..." name="projectDescription" th:value="*{projectDescription}"/>
+		</div>
+		<div>
+			<label>Team Composition</label>
+			<div>
+				<input type="text" placeholder="Member name" name="teams[0][0]"/><input type="text" placeholder="Input role" name="teams[0][1]"/>
+			</div>
+			<div>
+				<input type="text" placeholder="Member name" name="teams[1][0]"/><input type="text" placeholder="Input role" name="teams[1][1]"/>
+			</div>
+			<div>
+				<input type="text" placeholder="Member name" name="teams[2][0]"/><input type="text" placeholder="Input role" name="teams[2][1]"/>
+			</div>
+		</div>
+		<div>
+			<label>Problem Statement</label>
+			<textarea placeholder="Type something here..." name="problemStatement" th:value="*{problemStatement}"></textarea>
+		</div>
+		<div>
+			<label>Problem Statement</label>
+			<textarea placeholder="Type something here..." name="targetMarket" th:value="*{targetMarket}"></textarea>
+		</div>
+		<div>
+			<label>Solution Description</label>
+			<textarea placeholder="Type something here..." name="solutionDescription" th:value="*{solutionDescription}"></textarea>
+		</div>
+		<div>
+			<label>Team Composition</label>
+			<div>
+				<input type="text" name="historicalTimeline[0][0]"/><input type="text" name="historicalTimeline[0][1]"/>
+			</div>
+			<div>
+				<input type="text" name="historicalTimeline[1][0]"/><input type="text" name="historicalTimeline[1][1]"/>
+			</div>
+			<div>
+				<input type="text" name="historicalTimeline[2][0]"/><input type="text" name="historicalTimeline[2][1]"/>
+			</div>
+			<div>
+				<input type="text" name="historicalTimeline[3][0]"/><input type="text" name="historicalTimeline[3][1]"/>
+			</div>
+			<div>
+				<input type="text" name="historicalTimeline[4][0]"/><input type="text" name="historicalTimeline[4][1]"/>
+			</div>
+		</div>
+		<div>
+			<label>Product or Service offering</label>		
+			<input type="text" name="productServiceOffering[0]"/>
+			<input type="text" name="productServiceOffering[1]"/>
+			<input type="text" name="productServiceOffering[2]"/>	
+			<input type="text" name="productServiceOffering[3]"/>	
+		</div>
+		<div>
+			<label>Pricing Strategies</label>		
+			<input type="text" name="pricingStrategy[0]"/>
+			<input type="text" name="pricingStrategy[1]"/>
+			<input type="text" name="pricingStrategy[2]"/>	
+			<input type="text" name="pricingStrategy[3]"/>	
+		</div>
+		<div>
+			<label>Intellectual Property Status (If applicable)</label>
+			<textarea placeholder="Type something here..." name="intPropertyStatus" th:value="*{intPropertyStatus}"></textarea>
+		</div>
+		<div>
+			<label>Objectives</label>
+			<textarea placeholder="Type something here..." name="objectives" th:value="*{objectives}"></textarea>
+		</div>
+		<div>
+			<label>Scope of the proposal</label>
+			<textarea placeholder="Type something here..." name="scopeProposal" th:value="*{scopeProposal}"></textarea>
+		</div>
+		<div>
+			<label>Methodology and Expected Outputs</label>
+			<textarea placeholder="Type something here..." name="methodology" th:value="*{methodology}"></textarea>
+		</div>
+		<div>
+			<label>Curriculum Vitae of the Project Leader</label>
+			<input type="file" name="vitaeFile" th:value="*{vitaeFile}"/>
+		</div>
+		<div>
+			<label>Links to any supporting materials</label>
+			<input type="text" placeholder="Input here" name="supportLink" th:value="*{supportLink}"/>
+		</div>
+		<div>
+			<label>Group name</label>
+			<input type="text" placeholder="Input here" name="groupName" th:value="*{groupName}"/>
+		</div>
+		<div>
+			<label>Team Leader - Team Member1(LastName, FirstName)</label>
+			<input type="text" placeholder="Input here" name="groupLeader" th:value="*{groupLeader}"/>
+		</div>
+		<div>
+			<label>Team Leader's Mobile Number</label>
+			<input type="text" placeholder="Input here" name="leaderNumber" th:value="*{leaderNumber}"/>
+		</div>
+		<div>
+			<label>Team Leader's Email Address</label>
+			<input type="text" placeholder="Input here" name="leaderEmail" th:value="*{leaderEmail}"/>
+		</div>
+		<div>
+			<label>Team Leader - Member2(LastName, FirstName)</label>
+			<input type="text" placeholder="Input here" name="memberTwo" th:value="*{memberTwo}"/>
+		</div>
+		<div>
+			<label>Team Leader - Member3(LastName, FirstName)</label>
+			<input type="text" placeholder="Input here" name="memberThree" th:value="*{memberThree}"/>
+		</div>
+		<div>
+			<label>Team Leader - Member4(LastName, FirstName)</label>
+			<input type="text" placeholder="Input here" name="memberFour" th:value="*{memberFour}"/>
+		</div>
+		<div>
+			<label>Team Leader - Member5(LastName, FirstName)</label>
+			<input type="text" placeholder="Input here" name="memberFive" th:value="*{memberFive}"/>
+		</div>
+		<div>
+			<label>University</label>
+			<input type="text" placeholder="Input here" name="university" th:value="*{university}"/>
+		</div>
+		<div>
+			<label>Technology</label>
+			<div>
+				<input type="radio" name="techonologyAns" value="1"/>
+				<label>Choice1</label>
+			</div>
+			<div>
+				<input type="radio" name="techonologyAns" value="2"/>
+				<label>Choice2</label>
+			</div>
+			<div>
+				<input type="radio" name="techonologyAns" value="3"/>
+				<label>Choice3</label>
+			</div>
+			<div>
+				<input type="radio" name="techonologyAns" value="4"/>
+				<label>Choice4</label>
+			</div>
+			<div>
+				<input type="radio" name="techonologyAns" value="5"/>
+				<label>Choice5</label>
+			</div>
+		</div>
+		<div>
+			<label>Product Development</label>
+			<div>
+				<input type="radio" name="productDevelopmentAns" value="1"/>
+				<label>Choice1</label>
+			</div>
+			<div>
+				<input type="radio" name="productDevelopmentAns" value="2"/>
+				<label>Choice2</label>
+			</div>
+			<div>
+				<input type="radio" name="productDevelopmentAns" value="3"/>
+				<label>Choice3</label>
+			</div>
+			<div>
+				<input type="radio" name="productDevelopmentAns" value="4"/>
+				<label>Choice4</label>
+			</div>
+			<div>
+				<input type="radio" name="productDevelopmentAns" value="5"/>
+				<label>Choice5</label>
+			</div>
+		</div>
+		<div>
+			<label>Competitive Landscape</label>
+			<div>
+				<input type="radio" name="CompetitiveLandscapeAns" value="1"/>
+				<label>Choice1</label>
+			</div>
+			<div>
+				<input type="radio" name="CompetitiveLandscapeAns" value="2"/>
+				<label>Choice2</label>
+			</div>
+			<div>
+				<input type="radio" name="CompetitiveLandscapeAns" value="3"/>
+				<label>Choice3</label>
+			</div>
+			<div>
+				<input type="radio" name="CompetitiveLandscapeAns" value="4"/>
+				<label>Choice4</label>
+			</div>
+			<div>
+				<input type="radio" name="CompetitiveLandscapeAns" value="5"/>
+				<label>Choice5</label>
+			</div>
+		</div>
+		<div>
+			<label>Product Development/Design</label>
+			<div>
+				<input type="radio" name="productDesignAns" value="1"/>
+				<label>Choice1</label>
+			</div>
+			<div>
+				<input type="radio" name="productDesignAns" value="2"/>
+				<label>Choice2</label>
+			</div>
+			<div>
+				<input type="radio" name="productDesignAns" value="3"/>
+				<label>Choice3</label>
+			</div>
+			<div>
+				<input type="radio" name="productDesignAns" value="4"/>
+				<label>Choice4</label>
+			</div>
+			<div>
+				<input type="radio" name="productDesignAns" value="5"/>
+				<label>Choice5</label>
+			</div>
+		</div>
+		<div>
+			<label>Team</label>
+			<div>
+				<input type="radio" name="teamAns" value="1"/>
+				<label>Choice1</label>
+			</div>
+			<div>
+				<input type="radio" name="teamAns" value="2"/>
+				<label>Choice2</label>
+			</div>
+			<div>
+				<input type="radio" name="teamAns" value="3"/>
+				<label>Choice3</label>
+			</div>
+			<div>
+				<input type="radio" name="teamAns" value="4"/>
+				<label>Choice4</label>
+			</div>
+			<div>
+				<input type="radio" name="teamAns" value="5"/>
+				<label>Choice5</label>
+			</div>
+		</div>
+		<div>
+			<label>Go-To-Market</label>
+			<div>
+				<input type="radio" name="goToMarketAns" value="1"/>
+				<label>Choice1</label>
+			</div>
+			<div>
+				<input type="radio" name="goToMarketAns" value="2"/>
+				<label>Choice2</label>
+			</div>
+			<div>
+				<input type="radio" name="goToMarketAns" value="3"/>
+				<label>Choice3</label>
+			</div>
+			<div>
+				<input type="radio" name="goToMarketAns" value="4"/>
+				<label>Choice4</label>
+			</div>
+			<div>
+				<input type="radio" name="goToMarketAns" value="5"/>
+				<label>Choice5</label>
+			</div>
+		</div>
+		<div>
+			<label>Manufacturing/Supply Chain</label>
+			<div>
+				<input type="radio" name="manufacturingAns" value="1"/>
+				<label>Choice1</label>
+			</div>
+			<div>
+				<input type="radio" name="manufacturingAns" value="2"/>
+				<label>Choice2</label>
+			</div>
+			<div>
+				<input type="radio" name="manufacturingAns" value="3"/>
+				<label>Choice3</label>
+			</div>
+			<div>
+				<input type="radio" name="manufacturingAns" value="4"/>
+				<label>Choice4</label>
+			</div>
+			<div>
+				<input type="radio" name="manufacturingAns" value="5"/>
+				<label>Choice5</label>
+			</div>
+		</div>
+		<div>
+			<label>Egilibility Agreement</label>
+			<input type="radio" name="eligibilityAgreeFlg" value="true"/>
+			<input type="radio" name="eligibilityAgreeFlg" value="false"/>
+		</div>
+		<div>
+			<label>Commitment1</label>
+			<input type="radio" name="commitmentOneFlg" value="true"/>
+			<input type="radio" name="commitmentOneFlg" value="false"/>
+		</div>
+		<div>
+			<label>Commitment2</label>
+			<input type="radio" name="commitmentTwoFlg" value="true"/>
+			<input type="radio" name="commitmentTwoFlg" value="false"/>
+		</div>
+		<div>
+			<label>Commitment3</label>
+			<input type="radio" name="commitmentThreeFlg" value="true"/>
+			<input type="radio" name="commitmentThreeFlg" value="false"/>
+		</div>
+		<div>
+			<label>Commitment4</label>
+			<input type="radio" name="commitmentFourFlg" value="true"/>
+			<input type="radio" name="commitmentFourFlg" value="false"/>
+		</div>
+		
+		<button>Submit</button>
+	</form>
+</body>
+</html>
