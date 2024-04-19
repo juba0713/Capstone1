@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<p>Applicant Home</p>
+	<div sec:authorize="isAuthenticated()">
+        Welcome, <span th:text="${session.username}"></span>!
+    </div>
 </body>
 </html>

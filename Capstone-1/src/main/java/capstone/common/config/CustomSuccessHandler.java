@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 			Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 			
 			// Check if the user has the "ROLE_ADMIN" authority
-	        if (authorities.stream().anyMatch(role -> role.getAuthority().equals("APPLICANT"))) {
+	        if (authorities.stream().anyMatch(role -> role.getAuthority().equals("ADMIN"))) {
 	            // Redirect to the admin page if the user has the ROLE_ADMIN
 	            response.sendRedirect("/applicant/home");
 	        } 
@@ -28,6 +29,13 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 			 * role.getAuthority().equals("CUSTOMER"))) { // Redirect to the default user
 			 * page for default users response.sendRedirect("/home"); }
 			 */
+	        
+	      
+	        if (authentication != null) {
+	            String username = authentication.getName();
+	    
+	            request.getSession().setAttribute("username", username);
+	        }
 		
 	}
 	
