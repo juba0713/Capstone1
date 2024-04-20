@@ -68,7 +68,7 @@ public class SecurityConfig{
 				.requestMatchers("/design/**").permitAll()
 				.requestMatchers("/applicant/form").permitAll()
 				.requestMatchers("applicant/**").hasAnyAuthority("APPLICANT", "ADMIN")
-
+				.requestMatchers("officer/**").hasAnyAuthority("OFFICER", "ADMIN")
 			)
 			.formLogin((form) -> form
 				.loginPage("/login")

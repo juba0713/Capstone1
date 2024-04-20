@@ -27,15 +27,13 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 			Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 			
 			// Check if the user has the "ROLE_ADMIN" authority
-	        if (authorities.stream().anyMatch(role -> role.getAuthority().equals("ADMIN"))) {
+	        if (authorities.stream().anyMatch(role -> role.getAuthority().equals("APPLICANT"))) {
 	            // Redirect to the admin page if the user has the ROLE_ADMIN
 	            response.sendRedirect("/applicant/home");
-	        } 
-			/*
-			 * else if (authorities.stream().anyMatch(role ->
-			 * role.getAuthority().equals("CUSTOMER"))) { // Redirect to the default user
-			 * page for default users response.sendRedirect("/home"); }
-			 */
+	        } else if (authorities.stream().anyMatch(role -> role.getAuthority().equals("ADMIN"))) { // Redirect to the default user
+				 response.sendRedirect("/officer/home"); 
+			}
+			 
 	        
 	      
 	        if (authentication != null) {
