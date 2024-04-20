@@ -112,4 +112,18 @@ public class ApplicantWebDto {
 	//Commitment Four
 	public Boolean commitmentFourFlg;
 	
+	
+	/*
+	 * Change Password
+	 */
+	
+	//Current Password
+	public String currentPassword;
+	
+	//New Password
+	public String newPassword;
+	
+	//Confirm Password
+	public String confirmPassword;
+	
 }

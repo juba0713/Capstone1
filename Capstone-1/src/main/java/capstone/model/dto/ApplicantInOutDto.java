@@ -2,12 +2,17 @@ package capstone.model.dto;
 
 import java.util.List;
 
+import capstone.model.object.ErrorObj;
 import lombok.Data;
 
 @Data
 public class ApplicantInOutDto {
 	
+	//Result
 	public String result;
+	
+	//Error
+	public ErrorObj error;
 	
 	//Email
 	public String email;
@@ -113,5 +118,18 @@ public class ApplicantInOutDto {
 	
 	//Commitment Four
 	public Boolean commitmentFourFlg;
+	
+	/*
+	 * Change Password
+	 */
+	
+	//Current Password
+	public String currentPassword;
+	
+	//New Password
+	public String newPassword;
+	
+	//Confirm Password
+	public String confirmPassword;
 	
 }

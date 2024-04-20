@@ -21,4 +21,17 @@ public interface UserLogic {
 	 * @return UserInfoAccountEntity
 	 */
 	public UserInfoAccountEntity getUserAccountByUserIdPk(int userIdPk);
+	
+	/**
+	 * TO save user account
+	 * @param entity
+	 */
+	public void saveUserAccount(UserInfoAccountEntity entity);
+	
+	/**
+	 * To save user
+	 * @param entity
+	 * @return int
+	 */
+	public int saveUser(UserInformationEntity entity);
 }

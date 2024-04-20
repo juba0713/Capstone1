@@ -46,6 +46,8 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 	            request.getSession().setAttribute("username", username);
 	      
 	            request.getSession().setAttribute("id", user.getIdPk());
+	            
+	            request.getSession().setAttribute("initialChangePass", user.getInitialChangePass());
 	        }
 		
 	}

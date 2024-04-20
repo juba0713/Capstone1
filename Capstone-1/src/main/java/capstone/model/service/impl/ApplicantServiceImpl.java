@@ -5,22 +5,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import capstone.common.constant.CommonConstant;
+import capstone.common.constant.MessageConstant;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
 import capstone.model.dao.entity.ProjectEntity;
+import capstone.model.dao.entity.UserInfoAccountEntity;
+import capstone.model.dao.entity.UserInformationEntity;
 import capstone.model.dto.ApplicantInOutDto;
 import capstone.model.logic.ApplicantLogic;
+import capstone.model.logic.UserLogic;
+import capstone.model.object.ErrorObj;
 import capstone.model.service.ApplicantService;
+import capstone.model.service.LoggedInUserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Service
 public class ApplicantServiceImpl implements ApplicantService {
 	
 	@Autowired
 	private ApplicantLogic applicantLogic;
+	
+	@Autowired
+	private LoggedInUserService loggedInUserService;
+	
+	@Autowired
+	private UserLogic userLogic;
+	
+	@Autowired
+	private PasswordEncoder encoder;
+	
+	@Autowired
+	private HttpServletRequest request;
 	
 	@Override
 	public ApplicantInOutDto validateApplicant(ApplicantInOutDto inDto) {
@@ -188,6 +209,94 @@ public class ApplicantServiceImpl implements ApplicantService {
 	public String[] splitArray(String var) {
 		
 		return var.split(",");
+	}
+
+	@Override
+	public void changePassword(ApplicantInOutDto inDto) {
+	
+		UserInformationEntity user = loggedInUserService.getUserInformation();
+		
+		UserInfoAccountEntity userAcc = loggedInUserService.getUserInfoAccount(user.getIdPk());
+		
+		user.setInitialChangePass(true);
+		
+		userLogic.saveUser(user);
+		
+		userAcc.setPassword(encoder.encode(inDto.getNewPassword()));
+		
+		userLogic.saveUserAccount(userAcc);
+		
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("initialChangePass", user.getInitialChangePass());
+
+	}
+	
+	@Override
+	public ApplicantInOutDto validatePassword(ApplicantInOutDto inDto) {
+		
+		UserInfoAccountEntity userAcc = loggedInUserService.getUserInfoAccount(loggedInUserService.getUserInformation().getIdPk());
+		
+		ApplicantInOutDto result = new ApplicantInOutDto();
+		
+		ErrorObj error = new ErrorObj();
+		
+		List<String> currentPasswordError = new ArrayList<>();
+		
+		List<String> newPasswordError = new ArrayList<>();
+		
+		List<String> confirmPasswordError = new ArrayList<>();
+		
+		if(inDto.getCurrentPassword().isEmpty() || inDto.getCurrentPassword() == null) {
+			
+			currentPasswordError.add(MessageConstant.CURRENT_PASSWORD_ERROR);
+					
+			result.setResult(CommonConstant.INVALID);
+		}
+		
+		if(inDto.getNewPassword().isEmpty() || inDto.getNewPassword() == null) {
+			
+			newPasswordError.add(MessageConstant.NEW_PASSWORD_ERROR);
+			
+			result.setResult(CommonConstant.INVALID);
+		}
+		
+		if(encoder.matches(inDto.getNewPassword(), userAcc.getPassword())) {
+			
+			newPasswordError.add(MessageConstant.NEW_INITIAL_EQUAL_ERROR);
+			
+			result.setResult(CommonConstant.INVALID);
+		}
+		
+		if(!inDto.getNewPassword().equals(inDto.getConfirmPassword())) {
+			
+			newPasswordError.add(MessageConstant.NEW_CONFIRM_EQUAL_ERROR);
+
+			result.setResult(CommonConstant.INVALID);
+
+		}
+		
+		if(inDto.getConfirmPassword().isEmpty() || inDto.getConfirmPassword() == null) {
+			
+			confirmPasswordError.add(MessageConstant.CONFIRM_PASSWORD_ERROR);
+			
+			result.setResult(CommonConstant.INVALID);
+		}
+		
+		if(CommonConstant.INVALID.equals(result.getResult())) {
+			
+			error.setNewPasswordError(newPasswordError);
+			
+			error.setConfirmPasswordError(confirmPasswordError);
+			
+			error.setCurrentPasswordError(currentPasswordError);
+			
+			result.setError(error);
+		}else {
+			result.setResult(CommonConstant.VALID);
+		}
+		
+		return result;
 	}
 
 

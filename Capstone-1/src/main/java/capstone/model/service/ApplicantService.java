@@ -20,4 +20,18 @@ public interface ApplicantService {
 	 * @return ApplicantInOutDto
 	 */
 	public ApplicantInOutDto saveApplicant(ApplicantInOutDto inDto);
+	
+	/**
+	 * To validate the apssword
+	 * @param inDto
+	 * @return ApplicantInOutDto
+	 */
+	public ApplicantInOutDto validatePassword(ApplicantInOutDto inDto);
+	
+	/**
+	 * To change password for the first time
+	 * @param inDto
+	 * @return ApplicantInOutDto
+	 */
+	public void changePassword(ApplicantInOutDto inDto);
 }

@@ -30,4 +30,18 @@ public class UserLogicImpl implements UserLogic {
 		return userInfoAccountDao.getUserInfoAccountByUserIdPk(userIdPk);
 	}
 
+	@Override
+	public void saveUserAccount(UserInfoAccountEntity entity) {
+		
+		userInfoAccountDao.save(entity);
+	}
+
+	@Override
+	public int saveUser(UserInformationEntity entity) {
+		
+		userInformationDao.save(entity);
+		
+		return entity.getIdPk();
+	}
+
 }

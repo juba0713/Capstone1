@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import capstone.common.constant.CommonConstant;
 import capstone.controller.webdto.ApplicantWebDto;
@@ -127,5 +128,36 @@ public class ApplicantController {
 	public String showApplicantHome() {
 		
 		return "applicant/home";
+	}
+	
+	@PostMapping("/change-password")
+	public String processChangePassword(@ModelAttribute ApplicantWebDto webDto, RedirectAttributes ra) {
+		
+		ApplicantInOutDto inDto = new ApplicantInOutDto();
+		
+		inDto.setCurrentPassword(webDto.getCurrentPassword());
+		
+		inDto.setNewPassword(webDto.getNewPassword());
+		
+		inDto.setConfirmPassword(webDto.getConfirmPassword());
+		
+		ApplicantInOutDto outDto = applicantService.validatePassword(inDto);
+		
+		if(CommonConstant.INVALID.equals(outDto.getResult())) {
+			
+			ra.addFlashAttribute("error", outDto.getError());
+			
+			System.out.println("ERROR");
+			
+			return "redirect:/applicant/home";
+		}
+		
+		System.out.println(webDto.getCurrentPassword());
+		
+		System.out.println("NO ERROR");
+		
+		applicantService.changePassword(inDto);
+		
+		return "redirect:/applicant/home";
 	}
 }
