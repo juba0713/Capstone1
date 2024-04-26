@@ -1,337 +1,680 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" th:href="@{/css/applicant/form.css}" />
-</head>
-<body th:object="${applicantWebDto}">
-	<form th:action="@{/applicant/form}" method="POST">
-		<div>
-			<label>Enter email</label>
-			<input type="text" placeholder="Input email" name="email" th:value="*{email}"/>
-		</div>
-		<div>
-			<label>Agreement1</label>
-			<input type="radio" name="agreeFlg" value="true"/>
-			<input type="radio" name="agreeFlg" value="false"/>
-		</div>
-		
-		
-		
-		
-		<div>
-			<label>Project Title</label>
-			<textarea placeholder="Enter Project title" name="projectTitle" th:value="*{projectTitle}"></textarea>
-		</div>
-		<div>
-			<label>Project Description</label>
-			<input type="text" placeholder="Type something here..." name="projectDescription" th:value="*{projectDescription}"/>
-		</div>
-		<div>
-			<label>Team Composition</label>
-			<div>
-				<input type="text" placeholder="Member name" name="teams[0][0]"/><input type="text" placeholder="Input role" name="teams[0][1]"/>
-			</div>
-			<div>
-				<input type="text" placeholder="Member name" name="teams[1][0]"/><input type="text" placeholder="Input role" name="teams[1][1]"/>
-			</div>
-			<div>
-				<input type="text" placeholder="Member name" name="teams[2][0]"/><input type="text" placeholder="Input role" name="teams[2][1]"/>
-			</div>
-		</div>
-		<div>
-			<label>Problem Statement</label>
-			<textarea placeholder="Type something here..." name="problemStatement" th:value="*{problemStatement}"></textarea>
-		</div>
-		<div>
-			<label>Target Market</label>
-			<textarea placeholder="Type something here..." name="targetMarket" th:value="*{targetMarket}"></textarea>
-		</div>
-		<div>
-			<label>Solution Description</label>
-			<textarea placeholder="Type something here..." name="solutionDescription" th:value="*{solutionDescription}"></textarea>
-		</div>
-		<div>
-			<label>Team Composition</label>
-			<div>
-				<input type="text" name="historicalTimeline[0][0]"/><input type="text" name="historicalTimeline[0][1]"/>
-			</div>
-			<div>
-				<input type="text" name="historicalTimeline[1][0]"/><input type="text" name="historicalTimeline[1][1]"/>
-			</div>
-			<div>
-				<input type="text" name="historicalTimeline[2][0]"/><input type="text" name="historicalTimeline[2][1]"/>
-			</div>
-			<div>
-				<input type="text" name="historicalTimeline[3][0]"/><input type="text" name="historicalTimeline[3][1]"/>
-			</div>
-			<div>
-				<input type="text" name="historicalTimeline[4][0]"/><input type="text" name="historicalTimeline[4][1]"/>
-			</div>
-		</div>
-		<div>
-			<label>Product or Service offering</label>		
-			<input type="text" name="productServiceOffering[0]"/>
-			<input type="text" name="productServiceOffering[1]"/>
-			<input type="text" name="productServiceOffering[2]"/>	
-			<input type="text" name="productServiceOffering[3]"/>	
-		</div>
-		<div>
-			<label>Pricing Strategies</label>		
-			<input type="text" name="pricingStrategy[0]"/>
-			<input type="text" name="pricingStrategy[1]"/>
-			<input type="text" name="pricingStrategy[2]"/>	
-			<input type="text" name="pricingStrategy[3]"/>	
-		</div>
-		<div>
-			<label>Intellectual Property Status (If applicable)</label>
-			<textarea placeholder="Type something here..." name="intPropertyStatus" th:value="*{intPropertyStatus}"></textarea>
-		</div>
-		<div>
-			<label>Objectives</label>
-			<textarea placeholder="Type something here..." name="objectives" th:value="*{objectives}"></textarea>
-		</div>
-		<div>
-			<label>Scope of the proposal</label>
-			<textarea placeholder="Type something here..." name="scopeProposal" th:value="*{scopeProposal}"></textarea>
-		</div>
-		<div>
-			<label>Methodology and Expected Outputs</label>
-			<textarea placeholder="Type something here..." name="methodology" th:value="*{methodology}"></textarea>
-		</div>
-		<div>
-			<label>Curriculum Vitae of the Project Leader</label>
-			<input type="file" name="vitaeFile" th:value="*{vitaeFile}"/>
-		</div>
-		<div>
-			<label>Links to any supporting materials</label>
-			<input type="text" placeholder="Input here" name="supportLink" th:value="*{supportLink}"/>
-		</div>
-		<div>
-			<label>Group name</label>
-			<input type="text" placeholder="Input here" name="groupName" th:value="*{groupName}"/>
-		</div>
-		<div>
-			<label>Team Leader - Team Member1(LastName, FirstName)</label>
-			<input type="text" placeholder="Input here" name="groupLeader" th:value="*{groupLeader}"/>
-		</div>
-		<div>
-			<label>Team Leader's Mobile Number</label>
-			<input type="text" placeholder="Input here" name="leaderNumber" th:value="*{leaderNumber}"/>
-		</div>
-		<div>
-			<label>Team Leader's Email Address</label>
-			<input type="text" placeholder="Input here" name="leaderEmail" th:value="*{leaderEmail}"/>
-		</div>
-		<div>
-			<label>Team Leader - Member2(LastName, FirstName)</label>
-			<input type="text" placeholder="Input here" name="members[0]" />
-		</div>
-		<div>
-			<label>Team Leader - Member3(LastName, FirstName)</label>
-			<input type="text" placeholder="Input here" name="members[1]" />
-		</div>
-		<div>
-			<label>Team Leader - Member4(LastName, FirstName)</label>
-			<input type="text" placeholder="Input here" name="members[2]" />
-		</div>
-		<div>
-			<label>Team Leader - Member5(LastName, FirstName)</label>
-			<input type="text" placeholder="Input here" name="members[3]"/>
-		</div>
-		<div>
-			<label>University</label>
-			<input type="text" placeholder="Input here" name="university" />
-		</div>
-		<div>
-			<label>Technology</label>
-			<div>
-				<input type="radio" name="techonologyAns" value="1"/>
-				<label>Choice1</label>
-			</div>
-			<div>
-				<input type="radio" name="techonologyAns" value="2"/>
-				<label>Choice2</label>
-			</div>
-			<div>
-				<input type="radio" name="techonologyAns" value="3"/>
-				<label>Choice3</label>
-			</div>
-			<div>
-				<input type="radio" name="techonologyAns" value="4"/>
-				<label>Choice4</label>
-			</div>
-			<div>
-				<input type="radio" name="techonologyAns" value="5"/>
-				<label>Choice5</label>
-			</div>
-		</div>
-		<div>
-			<label>Product Development</label>
-			<div>
-				<input type="radio" name="productDevelopmentAns" value="1"/>
-				<label>Choice1</label>
-			</div>
-			<div>
-				<input type="radio" name="productDevelopmentAns" value="2"/>
-				<label>Choice2</label>
-			</div>
-			<div>
-				<input type="radio" name="productDevelopmentAns" value="3"/>
-				<label>Choice3</label>
-			</div>
-			<div>
-				<input type="radio" name="productDevelopmentAns" value="4"/>
-				<label>Choice4</label>
-			</div>
-			<div>
-				<input type="radio" name="productDevelopmentAns" value="5"/>
-				<label>Choice5</label>
-			</div>
-		</div>
-		<div>
-			<label>Competitive Landscape</label>
-			<div>
-				<input type="radio" name="CompetitiveLandscapeAns" value="1"/>
-				<label>Choice1</label>
-			</div>
-			<div>
-				<input type="radio" name="CompetitiveLandscapeAns" value="2"/>
-				<label>Choice2</label>
-			</div>
-			<div>
-				<input type="radio" name="CompetitiveLandscapeAns" value="3"/>
-				<label>Choice3</label>
-			</div>
-			<div>
-				<input type="radio" name="CompetitiveLandscapeAns" value="4"/>
-				<label>Choice4</label>
-			</div>
-			<div>
-				<input type="radio" name="CompetitiveLandscapeAns" value="5"/>
-				<label>Choice5</label>
-			</div>
-		</div>
-		<div>
-			<label>Product Development/Design</label>
-			<div>
-				<input type="radio" name="productDesignAns" value="1"/>
-				<label>Choice1</label>
-			</div>
-			<div>
-				<input type="radio" name="productDesignAns" value="2"/>
-				<label>Choice2</label>
-			</div>
-			<div>
-				<input type="radio" name="productDesignAns" value="3"/>
-				<label>Choice3</label>
-			</div>
-			<div>
-				<input type="radio" name="productDesignAns" value="4"/>
-				<label>Choice4</label>
-			</div>
-			<div>
-				<input type="radio" name="productDesignAns" value="5"/>
-				<label>Choice5</label>
-			</div>
-		</div>
-		<div>
-			<label>Team</label>
-			<div>
-				<input type="radio" name="teamAns" value="1"/>
-				<label>Choice1</label>
-			</div>
-			<div>
-				<input type="radio" name="teamAns" value="2"/>
-				<label>Choice2</label>
-			</div>
-			<div>
-				<input type="radio" name="teamAns" value="3"/>
-				<label>Choice3</label>
-			</div>
-			<div>
-				<input type="radio" name="teamAns" value="4"/>
-				<label>Choice4</label>
-			</div>
-			<div>
-				<input type="radio" name="teamAns" value="5"/>
-				<label>Choice5</label>
-			</div>
-		</div>
-		<div>
-			<label>Go-To-Market</label>
-			<div>
-				<input type="radio" name="goToMarketAns" value="1"/>
-				<label>Choice1</label>
-			</div>
-			<div>
-				<input type="radio" name="goToMarketAns" value="2"/>
-				<label>Choice2</label>
-			</div>
-			<div>
-				<input type="radio" name="goToMarketAns" value="3"/>
-				<label>Choice3</label>
-			</div>
-			<div>
-				<input type="radio" name="goToMarketAns" value="4"/>
-				<label>Choice4</label>
-			</div>
-			<div>
-				<input type="radio" name="goToMarketAns" value="5"/>
-				<label>Choice5</label>
-			</div>
-		</div>
-		<div>
-			<label>Manufacturing/Supply Chain</label>
-			<div>
-				<input type="radio" name="manufacturingAns" value="1"/>
-				<label>Choice1</label>
-			</div>
-			<div>
-				<input type="radio" name="manufacturingAns" value="2"/>
-				<label>Choice2</label>
-			</div>
-			<div>
-				<input type="radio" name="manufacturingAns" value="3"/>
-				<label>Choice3</label>
-			</div>
-			<div>
-				<input type="radio" name="manufacturingAns" value="4"/>
-				<label>Choice4</label>
-			</div>
-			<div>
-				<input type="radio" name="manufacturingAns" value="5"/>
-				<label>Choice5</label>
-			</div>
-		</div>
-		<div>
-			<label>Egilibility Agreement</label>
-			<input type="radio" name="eligibilityAgreeFlg" value="true"/>
-			<input type="radio" name="eligibilityAgreeFlg" value="false"/>
-		</div>
-		<div>
-			<label>Commitment1</label>
-			<input type="radio" name="commitmentOneFlg" value="true"/>
-			<input type="radio" name="commitmentOneFlg" value="false"/>
-		</div>
-		<div>
-			<label>Commitment2</label>
-			<input type="radio" name="commitmentTwoFlg" value="true"/>
-			<input type="radio" name="commitmentTwoFlg" value="false"/>
-		</div>
-		<div>
-			<label>Commitment3</label>
-			<input type="radio" name="commitmentThreeFlg" value="true"/>
-			<input type="radio" name="commitmentThreeFlg" value="false"/>
-		</div>
-		<div>
-			<label>Commitment4</label>
-			<input type="radio" name="commitmentFourFlg" value="true"/>
-			<input type="radio" name="commitmentFourFlg" value="false"/>
-		</div>
-		
-		<button>Submit</button>
-	</form>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}" />
+  </head>
+  <body th:object="${applicantWebDto}">
+    <div class="bg-red-300">
+      <form th:action="@{/applicant/form}" method="POST">
+        <div>
+          <p>logo here</p>
+          <p>
+            Thank you for your interest in participating the LaunchLab Program
+            of DASIG. This program is spearheaded by CIT-U Wildcat Innovation
+            Labs. Please complete the following form to submit your capsule
+            proposal for consideration.
+          </p>
+          <label>Enter email</label>
+          <input
+            type="text"
+            placeholder="Input email"
+            name="email"
+            th:value="*{email}"
+          />
+        </div>
+        <hr />
+        <div>
+          <p
+            className="font-secondary text-black text-justify mt-10 mb-8 ml-6 mr-8"
+          >
+            By accomplishing this form, the following personal information will
+            be collected including, startup team members names, personal email
+            address, mobile phone number and other relevant information. The
+            personal information you will provide in this form will be used
+            within LaunchLab Program, DASIG consortium committee and will not be
+            shared with any outside parties unless you have prior written
+            consent. Development and Acceleration Support for Innovation Growth
+            (DASIG) respects your rights as a data subject under the Data
+            Privacy Act.
+          </p>
+          <p
+            className="font-secondary text-black text-justify mt-8 mb-8 ml-6 mr-8"
+          >
+            If you have further questions and concerns regarding the processing
+            of your personal information, you are welcome to contact our team,
+            Engr. Ralph Laviste at
+            <a
+              href="mailto:ralph.laviste@cit.edu"
+              className="font-semibold text-blue-700"
+            >
+              ralph.laviste@cit.edu
+            </a>
+            and
+            <a
+              href="mailto:rlaviste@gmail.com"
+              className="font-semibold text-blue-700"
+            >
+              rlaviste@gmail.com
+            </a>
+            , and Engr. Jurydel Rama at
+            <a
+              href="mailto:jurydel.rama@cit.edu"
+              className="font-semibold text-blue-700"
+            >
+              jurydel.rama@cit.edu
+            </a>
+            and
+            <a
+              href="mailto:jurydelrama@gmail.com"
+              className="font-semibold text-blue-700"
+            >
+              jurydelrama@gmail.com
+            </a>
+            .
+          </p>
+          <p
+            className="font-secondary text-black text-justify mt-8 mb-8 ml-6 mr-8"
+          >
+            In compliance with the Data Privacy Act (DPA) of 2012, also known as
+            the Republic Act of 10173 (RA 10173), I agree and authorize the
+            Development and Acceleration Support for Innovation Growth (DASIG)
+            consortium members to use the personal information for the purpose
+            of LaunchLab programs and initiatives. I also acknowledge and
+            warrant that I have acquired the consent from all parties relevant
+            to this consent and hold free and harmless and indemnify Development
+            and Acceleration Support for Innovation Growth (DASIG) from any
+            complaint, suit, or damages which any party may file or claim in
+            relation to my consent.
+          </p>
+          <label>Agreement1</label>
+          <input type="radio" name="agreeFlg" value="true" />
+          <input type="radio" name="agreeFlg" value="false" />
+        </div>
+        <hr />
+        <div>
+          <label>Project Title</label>
+          <textarea
+            placeholder="Enter Project title"
+            name="projectTitle"
+            th:value="*{projectTitle}"
+          ></textarea>
+        </div>
+
+        <div>
+          <p>I. Fill up Launchlab Capsule Proposal</p>
+          <label>a. Project Description</label>
+          <input
+            type="text"
+            placeholder="Type something here..."
+            name="projectDescription"
+            th:value="*{projectDescription}"
+          />
+        </div>
+        <div>
+          <label>b. Team Composition</label>
+          <div>
+            <input
+              type="text"
+              placeholder="Member name"
+              name="teams[0][0]"
+            /><input type="text" placeholder="Input role" name="teams[0][1]" />
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Member name"
+              name="teams[1][0]"
+            /><input type="text" placeholder="Input role" name="teams[1][1]" />
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Member name"
+              name="teams[2][0]"
+            /><input type="text" placeholder="Input role" name="teams[2][1]" />
+          </div>
+        </div>
+        <div>
+          <p>about product</p>
+          <label>1. Problem Statement</label>
+          <textarea
+            placeholder="Type something here..."
+            name="problemStatement"
+            th:value="*{problemStatement}"
+          ></textarea>
+        </div>
+        <div>
+          <label>2. Target Market</label>
+          <textarea
+            placeholder="Type something here..."
+            name="targetMarket"
+            th:value="*{targetMarket}"
+          ></textarea>
+        </div>
+        <div>
+          <label>3. Solution Description</label>
+          <textarea
+            placeholder="Type something here..."
+            name="solutionDescription"
+            th:value="*{solutionDescription}"
+          ></textarea>
+        </div>
+        <div>
+          <label
+            >d. Historical Timeline of the Product/Project Development</label
+          >
+          <p>Month-Year</p>
+          <p>Key Activities or Milestones</p>
+          <div>
+            <input type="text" name="historicalTimeline[0][0]" /><input
+              type="text"
+              name="historicalTimeline[0][1]"
+            />
+          </div>
+          <div>
+            <input type="text" name="historicalTimeline[1][0]" /><input
+              type="text"
+              name="historicalTimeline[1][1]"
+            />
+          </div>
+          <div>
+            <input type="text" name="historicalTimeline[2][0]" /><input
+              type="text"
+              name="historicalTimeline[2][1]"
+            />
+          </div>
+
+          <div>
+            <input type="text" name="historicalTimeline[3][0]" /><input
+              type="text"
+              name="historicalTimeline[3][1]"
+            />
+          </div>
+          <div>
+            <input type="text" name="historicalTimeline[4][0]" /><input
+              type="text"
+              name="historicalTimeline[4][1]"
+            />
+          </div>
+        </div>
+        <div>
+          <p>e. Competitive Advantage Analysis</p>
+          <label>Product or Service offering</label>
+          <input type="text" name="productServiceOffering[0]" />
+          <input type="text" name="productServiceOffering[1]" />
+          <input type="text" name="productServiceOffering[2]" />
+          <input type="text" name="productServiceOffering[3]" />
+        </div>
+        <div>
+          <label>Pricing Strategies</label>
+          <input type="text" name="pricingStrategy[0]" />
+          <input type="text" name="pricingStrategy[1]" />
+          <input type="text" name="pricingStrategy[2]" />
+          <input type="text" name="pricingStrategy[3]" />
+        </div>
+        <div>
+          <label>f. Intellectual Property Status (If applicable)</label>
+          <textarea
+            placeholder="Type something here..."
+            name="intPropertyStatus"
+            th:value="*{intPropertyStatus}"
+          ></textarea>
+        </div>
+        <div>
+          <p>II. About the Proposed Acceleration</p>
+          <label>a. Objectives</label>
+          <textarea
+            placeholder="Type something here..."
+            name="objectives"
+            th:value="*{objectives}"
+          ></textarea>
+        </div>
+        <div>
+          <label>b. Scope of the proposal</label>
+          <textarea
+            placeholder="Type something here..."
+            name="scopeProposal"
+            th:value="*{scopeProposal}"
+          ></textarea>
+        </div>
+        <div>
+          <label>c. Methodology and Expected Outputs</label>
+          <textarea
+            placeholder="Type something here..."
+            name="methodology"
+            th:value="*{methodology}"
+          ></textarea>
+        </div>
+        <div>
+          <label>III. Curriculum Vitae of the Project Leader</label>
+          <input type="file" name="vitaeFile" th:value="*{vitaeFile}" />
+        </div>
+        <hr />
+        <div>
+          <label>Links to any supporting materials</label>
+          <input
+            type="text"
+            placeholder="Input here"
+            name="supportLink"
+            th:value="*{supportLink}"
+          />
+        </div>
+        <div>
+          <label>Group name</label>
+          <input
+            type="text"
+            placeholder="Input here"
+            name="groupName"
+            th:value="*{groupName}"
+          />
+        </div>
+        <div>
+          <label>Team Leader - Team Member1(LastName, FirstName)</label>
+          <input
+            type="text"
+            placeholder="Input here"
+            name="groupLeader"
+            th:value="*{groupLeader}"
+          />
+        </div>
+        <div>
+          <label>Team Leader's Mobile Number</label>
+          <input
+            type="text"
+            placeholder="Input here"
+            name="leaderNumber"
+            th:value="*{leaderNumber}"
+          />
+        </div>
+        <div>
+          <label>Team Leader's Email Address</label>
+          <input
+            type="text"
+            placeholder="Input here"
+            name="leaderEmail"
+            th:value="*{leaderEmail}"
+          />
+        </div>
+        <div>
+          <label>Team Leader - Member2(LastName, FirstName)</label>
+          <input type="text" placeholder="Input here" name="members[0]" />
+        </div>
+        <div>
+          <label>Team Leader - Member3(LastName, FirstName)</label>
+          <input type="text" placeholder="Input here" name="members[1]" />
+        </div>
+        <div>
+          <label>Team Leader - Member4(LastName, FirstName)</label>
+          <input type="text" placeholder="Input here" name="members[2]" />
+        </div>
+        <div>
+          <label>Team Leader - Member5(LastName, FirstName)</label>
+          <input type="text" placeholder="Input here" name="members[3]" />
+        </div>
+        <div>
+          <label>University</label>
+          <p>
+            If this is a school project, please provide the full name of your
+            organization. Do not use acronyms. Otherwise, put NA
+          </p>
+          <input type="text" placeholder="Input here" name="university" />
+        </div>
+        <hr />
+        <div>
+          <p>Technology and Commercialization Readiness Level</p>
+          <p>
+            This form, adopted from NYSERDA, assists emerging and growing
+            companies in determining the technical and commercial maturity of
+            their products or innovations. It utilizes a customized and
+            integrated tool that measures both the Technology Readiness Level
+            (TRL) and Commercial Readiness Level (CRL). This TRL/CRL tool is
+            based on systems developed by NASA, DOE, and ARPA-E. Although it has
+            been specifically designed for ventures in the clean energy
+            industry, it has also been widely used in solutions and ventures
+            across various other industries. For each category, please select
+            the option that best describes the current status of your product,
+            solution, or innovation.
+          </p>
+          <label>Technology</label>
+          <div>
+            <input type="radio" name="techonologyAns" value="1" />
+            <label
+              >Project work is beyond basic research and technology concept has
+              been defined</label
+            >
+          </div>
+          <div>
+            <input type="radio" name="techonologyAns" value="2" />
+            <label
+              >Applied research has begun and practical application(s) have been
+              identified</label
+            >
+          </div>
+          <div>
+            <input type="radio" name="techonologyAns" value="3" />
+            <label
+              >Preliminary testing of technology components has begun, and
+              technical feasibility has been established in a laboratory
+              environment</label
+            >
+          </div>
+          <div>
+            <input type="radio" name="techonologyAns" value="4" />
+            <label
+              >Initial testing of integrated product/system has been completed
+              in a laboratory environment
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="techonologyAns" value="5" />
+            <label
+              >Laboratory scale integrated product/system demonstrates
+              performance in the intended application(s)
+            </label>
+          </div>
+        </div>
+        <div>
+          <label>Product Development</label>
+          <div>
+            <input type="radio" name="productDevelopmentAns" value="1" />
+            <label>Initial product/market fit has been defined</label>
+          </div>
+          <div>
+            <input type="radio" name="productDevelopmentAns" value="2" />
+            <label
+              >Pilot scale product/system has been tested in the intended
+              application(s)</label
+            >
+          </div>
+          <div>
+            <input type="radio" name="productDevelopmentAns" value="3" />
+            <label
+              >Demonstration of a full scale product/system prototype has been
+              completed in the intended application(s)
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="productDevelopmentAns" value="4" />
+            <label
+              >Actual product/system has been proven to work in its near-final
+              form under a representative set of expected conditions and
+              environments
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="productDevelopmentAns" value="5" />
+            <label
+              >Product/system is in final form and has been operated under the
+              full range of operating conditions and environments
+            </label>
+          </div>
+        </div>
+        <div>
+          <label>Competitive Landscape</label>
+          <div>
+            <input type="radio" name="CompetitiveLandscapeAns" value="1" />
+            <label
+              >Secondary market research has been performed and basic knowledge
+              of potential applications and competitive landscape have been
+              identified
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="CompetitiveLandscapeAns" value="2" />
+            <label
+              >Primary market research to prove the product/system commercial
+              feasibility has been completed and basic understanding of
+              competitive products/systems has been demonstrated
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="CompetitiveLandscapeAns" value="3" />
+            <label
+              >Comprehensive market research to prove the product/system
+              commercial feasibility has been completed and intermediate
+              understanding of competitive products/systems has been
+              demonstrated
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="CompetitiveLandscapeAns" value="4" />
+            <label
+              >Competitive analysis to illustrate unique features and advantages
+              of the product/system compared to competitive products/systems has
+              been completed
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="CompetitiveLandscapeAns" value="5" />
+            <label
+              >Full and complete understanding of the competitive landscape,
+              target application(s), competitive products/systems, and market
+              has been achieved
+            </label>
+          </div>
+        </div>
+        <div>
+          <label>Product Development/Design</label>
+          <div>
+            <input type="radio" name="productDesignAns" value="1" />
+            <label
+              >One or more initial product hypotheses have been defined
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="productDesignAns" value="2" />
+            <label
+              >Mapping product/system attributes against customer needs has
+              highlighted a clear value proposition
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="productDesignAns" value="3" />
+            <label
+              >The product/system has been scaled from laboratory to pilot scale
+              and issues that may affect achieving full scale have been
+              identified
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="productDesignAns" value="4" />
+            <label
+              >Comprehensive customer value proposition model has been
+              developed, including a detailed understanding of product/system
+              design specifications, required certifications, and trade-offs
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="productDesignAns" value="5" />
+            <label
+              >Product/system final design optimization has been completed,
+              required certifications have been obtained, and product/system has
+              incorporated detailed customer and product requirements
+            </label>
+          </div>
+        </div>
+        <div>
+          <label>Team</label>
+          <div>
+            <input type="radio" name="teamAns" value="1" />
+            <label
+              >No team or company in place (single individual, no legal entity)
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="teamAns" value="2" />
+            <label
+              >Solely technical or non-technical founder(s) running the company
+              with no outside assistance
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="teamAns" value="3" />
+            <label
+              >Solely technical or non-technical founder(s) running the company
+              with assistance from outside advisors/mentors and/or
+              incubator/accelerator
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="teamAns" value="4" />
+            <label
+              >Balanced team with technical and business
+              development/commercialization experience running the company with
+              assistance from outside advisors/mentors
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="teamAns" value="5" />
+            <label
+              >Balanced team with all capabilities onboard (e.g., sales,
+              marketing, customer service, operations, etc.) running the company
+              with assistance from outside advisors/mentors
+            </label>
+          </div>
+        </div>
+        <div>
+          <label>Go-To-Market</label>
+          <div>
+            <input type="radio" name="goToMarketAns" value="1" />
+            <label
+              >Initial business model and value proposition have been defined
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="goToMarketAns" value="2" />
+            <label
+              >Customers/partners have been interviewed to understand their pain
+              points/needs, and business model and value proposition have been
+              refined based on customer/partner feedback
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="goToMarketAns" value="3" />
+            <label
+              >Market and customer/partner needs and how those translate to
+              product requirements have been defined, and initial relationships
+              have been developed with key stakeholders across the value chain
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="goToMarketAns" value="4" />
+            <label
+              >Partnerships have been formed with key stakeholders across the
+              value chain (e.g., suppliers, partners, service providers, and
+              customers)
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="goToMarketAns" value="5" />
+            <label
+              >Supply agreements with suppliers and partners are in place and
+              initial purchase orders from customers have been received
+            </label>
+          </div>
+        </div>
+        <div>
+          <label>Manufacturing/Supply Chain</label>
+          <div>
+            <input type="radio" name="manufacturingAns" value="1" />
+            <label
+              >Potential suppliers, partners, and customers have been identified
+              and mapped in an initial value chain analysis
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="manufacturingAns" value="2" />
+            <label
+              >Relationships have been established with potential suppliers,
+              partners, service providers, and customers and they have provided
+              input on product and manufacturability requirements
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="manufacturingAns" value="3" />
+            <label
+              >Manufacturing process qualifications (e.g. QC/QA) have been
+              defined and are in progress
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="manufacturingAns" value="4" />
+            <label
+              >Products/systems have been pilot manufactured and sold to initial
+              customerss
+            </label>
+          </div>
+          <div>
+            <input type="radio" name="manufacturingAns" value="5" />
+            <label
+              >Full scale manufacturing and widespread deployment of
+              product/system to customers and/or users has been achieved
+            </label>
+          </div>
+        </div>
+        <div>
+          <label>Egilibility Agreement</label>
+          <p>
+            I confirm that I have read, understood, and agree to comply with the
+            eligibility criteria and rules of LaunchLab program.
+          </p>
+          <input type="radio" name="eligibilityAgreeFlg" value="true" />
+          <input type="radio" name="eligibilityAgreeFlg" value="false" />
+        </div>
+        <div>
+          <p>Applicant Commitment Verification Form</p>
+          <p>
+            To ensure your commitment to the LaunchLab Program, please respond
+            to the following questions with a Yes or No.
+          </p>
+          <label
+            >Do you commit to complete and actively cooperate in all scheduled
+            activities, workshops, and mentorship sessions during the 4-month
+            program of the LaunchLab Program?</label
+          >
+          <input type="radio" name="commitmentOneFlg" value="true" />
+          <input type="radio" name="commitmentOneFlg" value="false" />
+        </div>
+        <div>
+          <label
+            >Do you commit to diligently working towards executing your
+            startup’s approved growth plan as outlined in the program?
+          </label>
+          <input type="radio" name="commitmentTwoFlg" value="true" />
+          <input type="radio" name="commitmentTwoFlg" value="false" />
+        </div>
+        <div>
+          <label
+            >If the founder is not always available, will you assign at least
+            one dedicated personnel, directly involved in the aspect of the
+            startup being accelerated, to be consistently involved in all
+            program activities and deliverables, understanding that changing
+            personnel frequently can adversely affect the progress of the
+            acceleration?
+          </label>
+          <input type="radio" name="commitmentThreeFlg" value="true" />
+          <input type="radio" name="commitmentThreeFlg" value="false" />
+        </div>
+        <div>
+          <label
+            >Do you understand and agree that your evaluation results and
+            performance reports will be shared with DOST as part of the
+            program’s accomplishment reports?</label
+          >
+          <input type="radio" name="commitmentFourFlg" value="true" />
+          <input type="radio" name="commitmentFourFlg" value="false" />
+        </div>
+        <div>
+          Thank you for taking the time to complete the registration. We
+          understand and respect your concerns. If you have further questions
+          and concerns , you are welcome to contact our project lead, Engr.
+          Jurydel Rama, atjurydel.rama@cit.edu
+        </div>
+        <button>Submit</button>
+      </form>
+    </div>
+    <div>already applied? <a>login</a></div>
+  </body>
 </html>
