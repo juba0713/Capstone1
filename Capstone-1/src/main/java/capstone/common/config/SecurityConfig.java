@@ -59,7 +59,7 @@ public class SecurityConfig{
 		http
 			.authorizeHttpRequests((requests) -> requests
 				.requestMatchers("/").permitAll()
-				.requestMatchers("/login").permitAll()
+				.requestMatchers("/login/**").permitAll()
 				.requestMatchers("/css/**").permitAll()
 				.requestMatchers("/js/**").permitAll()
 				.requestMatchers("/icons/**").permitAll()	

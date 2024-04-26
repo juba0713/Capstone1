@@ -6,6 +6,7 @@
 </head>
 <body>
 	<form th:action="@{/login}" method="POST">
+		<div>Welcome! <span th:text="${role}"></span></div>
 		<div>
 			<label>Username</label>
 			<input type="text" name="username"/>
