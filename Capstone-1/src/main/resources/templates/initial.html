@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <html>
-    <head>
-      <meta charset="UTF-8" />
-      <title>Insert title here</title>
-      <link th:href="@{output.css}" rel="stylesheet" />
-    </head>
-    <body>
-      <div>
-        <div class="text-3xl font-bold bg-amber-400">Login As</div>
-        <form th:action="@{/login}" method="GET">
-          <button name="applicant">Applicant</button>
-          <button name="officer">Officer</button>
-          <button name="tbiboard">TBI Board</button>
-          <button name="manager">Manager</button>
-        </form>
-      </div>
-    </body>
-  </html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+  </head>
+  <body>
+    <div>
+      <div>Login As</div>
+      <a th:href="@{/login/applicant}" class="role-btn" name="applicant"
+        >Applicant</a
+      >
+      <a th:href="@{/login/officer}" class="role-btn" name="officer">Officer</a>
+      <a th:href="@{/login/tbi-board}" class="role-btn" name="tbiboard"
+        >TBI Board</a
+      >
+      <a th:href="@{/login/manager}" class="role-btn" name="manager">Manager</a>
+    </div>
+  </body>
 </html>

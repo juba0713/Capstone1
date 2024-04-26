@@ -1,23 +1,21 @@
 <!DOCTYPE html>
-<!-- <html xmlns:th="http://www.thymeleaf.org"> -->
-  <html>
-    <head>
-      <meta charset="UTF-8" />
-      <title>Insert title here</title>
-      <link href="../static/output.css" rel="stylesheet" />
-    </head>
-    <body>
-      <form th:action="@{/login}" method="POST">
-        <div class="bg-rose-600">
-          <label>Username</label>
-          <input type="text" name="username" />
-        </div>
-        <div>
-          <label>Password</label>
-          <input type="password" name="password" />
-        </div>
-        <button>Submit</button>
-      </form>
-    </body>
-  </html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+  </head>
+  <body>
+    <form th:action="@{/login}" method="POST">
+      <div>Welcome! <span th:text="${role}"></span></div>
+      <div>
+        <label>Username</label>
+        <input type="text" name="username" />
+      </div>
+      <div>
+        <label>Password</label>
+        <input type="password" name="password" />
+      </div>
+      <button>Submit</button>
+    </form>
+  </body>
 </html>
