@@ -5,7 +5,7 @@
     <title>Insert title here</title>
   </head>
   <body>
-    <form th:action="@{/login}" method="POST">
+    <form th:action="@{/login/}" method="POST">
       <div>Welcome! <span th:text="${role}"></span></div>
       <div>
         <label>Username</label>
@@ -15,7 +15,7 @@
         <label>Password</label>
         <input type="password" name="password" />
       </div>
-      <button>Submit</button>
+      <button class=bg-rose-500> Submit</button>
     </form>
   </body>
 </html>

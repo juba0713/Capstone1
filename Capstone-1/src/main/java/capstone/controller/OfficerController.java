@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import capstone.controller.webdto.OfficerWebDto;
@@ -22,8 +23,31 @@ public class OfficerController {
 		
 		OfficerInOutDto outDto = officerService.getAllApplicants();
 		
-		
+		webDto.setListOfApplicants(outDto.getListOfApplicants());
 		
 		return "officer/home";
+	}
+	
+	@PostMapping(value="/action", params="accept")
+	public String acceptApplicant() {
+		System.out.println("ACCEPTED");
+		
+		return "redirect:/officer/home";
+	}
+	
+	@PostMapping(value="/action", params="reject")
+	public String rejectApplicant(@ModelAttribute OfficerWebDto webDto) {
+		
+		OfficerInOutDto inDto = new OfficerInOutDto();
+		
+		inDto.setApplicantIdPk(webDto.getApplicantIdPk());
+		
+		inDto.setFeedback(webDto.getFeedback());
+		
+		inDto.setResubmitFlg(webDto.getResubmitFlg());
+		
+		OfficerInOutDto outDto = officerService.rejectApplicant(inDto);
+		
+		return "redirect:/officer/home";
 	}
 }

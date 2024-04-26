@@ -8,5 +8,11 @@ import lombok.Data;
 @Data
 public class OfficerWebDto {
 
-	List<ApplicantObj> listOfApplicants;
+	public List<ApplicantObj> listOfApplicants;
+	
+	public int applicantIdPk;
+	
+	public String feedback;
+	
+	public Boolean resubmitFlg;
 }

@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
+import capstone.model.dao.entity.JoinApplicantProject;
 import capstone.model.dao.entity.ProjectEntity;
+import capstone.model.dao.entity.RejectedApplicantEntity;
 
 
 @Service
@@ -37,4 +39,22 @@ public interface ApplicantLogic {
 	 * @param entity
 	 */
 	public void saveGroupMemberEntity(List<GroupMemberEntity> entity);
+	
+	/**
+	 * To get all applicant
+	 */
+	public List<JoinApplicantProject> getAllApplicant();
+	
+	/**
+	 * To get applicant by idPk
+	 * @param applicantIdPk
+	 * @return ApplicantEntity
+	 */
+	public ApplicantEntity getApplicantByIdPk(int applicantIdPk);
+	
+	/**
+	 * To save rejected applicant entity
+	 * @param entity
+	 */
+	public void saveRejectedApplicantEntity(RejectedApplicantEntity entity);
 }

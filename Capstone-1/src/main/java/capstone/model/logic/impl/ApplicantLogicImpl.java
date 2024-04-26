@@ -9,10 +9,13 @@ import capstone.model.dao.ApplicantDao;
 import capstone.model.dao.GroupDao;
 import capstone.model.dao.GroupMemberDao;
 import capstone.model.dao.ProjectDao;
+import capstone.model.dao.RejectedApplicantDao;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
+import capstone.model.dao.entity.JoinApplicantProject;
 import capstone.model.dao.entity.ProjectEntity;
+import capstone.model.dao.entity.RejectedApplicantEntity;
 import capstone.model.logic.ApplicantLogic;
 
 @Service
@@ -29,6 +32,9 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	
 	@Autowired
 	private GroupMemberDao groupMemberDao;
+	
+	@Autowired
+	private RejectedApplicantDao rejectedApplicantDao;
 
 	@Override
 	public int saveApplicantEntity(ApplicantEntity entity) {
@@ -57,6 +63,25 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	public void saveGroupMemberEntity(List<GroupMemberEntity> entities) {
 		
 		groupMemberDao.saveAll(entities);
+	}
+
+	@Override
+	public List<JoinApplicantProject> getAllApplicant() {
+		
+		return applicantDao.getAllApplicant();
+		
+	}
+
+	@Override
+	public ApplicantEntity getApplicantByIdPk(int applicantIdPk) {
+		
+		return applicantDao.getApplicantByIdPk(applicantIdPk);
+	}
+
+	@Override
+	public void saveRejectedApplicantEntity(RejectedApplicantEntity entity) {
+	
+		rejectedApplicantDao.save(entity);
 	}
 	
 

@@ -71,7 +71,7 @@ public class SecurityConfig{
 				.requestMatchers("officer/**").hasAnyAuthority("OFFICER", "ADMIN")
 			)
 			.formLogin((form) -> form
-				.loginPage("/login")
+				.loginPage("/login/")
 				.permitAll()
 				.failureUrl("/login?error")
 				.usernameParameter("username")

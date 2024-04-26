@@ -197,7 +197,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 			
 			for(String[] value : var) {
 				
-				String stringValue = String.join(" ", value);
+				String stringValue = String.join("-", value);
 				
 				convertedValue.add(stringValue);
 			}	
