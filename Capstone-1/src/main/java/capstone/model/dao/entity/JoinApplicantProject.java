@@ -17,7 +17,8 @@ public class JoinApplicantProject {
 			(String) objects[2],
 			(String) objects[3],
 			(Boolean) objects[4],
-			(String[]) objects[5]
+			(String[]) objects[5],
+			(Integer) objects[6]
 		);
 	}
 	
@@ -32,4 +33,6 @@ public class JoinApplicantProject {
 	public Boolean consent;
 	
 	public String[] team;
+	
+	public int status;
 }

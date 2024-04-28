@@ -18,4 +18,6 @@ public class ApplicantObj {
 	public String description;
 	
 	public List<String> team;
+	
+	public int status;
 }

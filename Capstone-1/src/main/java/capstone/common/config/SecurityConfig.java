@@ -28,15 +28,15 @@ public class SecurityConfig{
 		return new BCryptPasswordEncoder();
 	}
 	
-	private static final String USER_ACCOUNT_SQL =  "SELECT USERNAME,PASSWORD,TRUE"
+	private static final String USER_ACCOUNT_SQL =  "SELECT EMAIL,PASSWORD,TRUE"
 														+ " FROM M_USER_INFO_ACCOUNT "
 														+ " INNER JOIN M_USER_INFORMATION "
 														+ " ON M_USER_INFORMATION.ID_PK = M_USER_INFO_ACCOUNT.USER_ID_PK "
-														+ " WHERE USERNAME = ?" 
+														+ " WHERE EMAIL = ?" 
 														+ " AND M_USER_INFORMATION.DELETE_FLG = FALSE " 
 														+ " AND M_USER_INFO_ACCOUNT.DELETE_FLG = FALSE ";
 
-	private static final String USER_ROLE_SQL = "SELECT USERNAME, ROLE FROM M_USER_INFORMATION WHERE USERNAME = ?";
+	private static final String USER_ROLE_SQL = "SELECT EMAIL, ROLE FROM M_USER_INFORMATION WHERE EMAIL = ?";
 
 	@Bean
 	protected UserDetailsManager userDetailsService(){
@@ -69,12 +69,13 @@ public class SecurityConfig{
 				.requestMatchers("/applicant/form").permitAll()
 				.requestMatchers("applicant/**").hasAnyAuthority("APPLICANT", "ADMIN")
 				.requestMatchers("officer/**").hasAnyAuthority("OFFICER", "ADMIN")
+				.requestMatchers("/manager/**").hasAnyAuthority("MANAGER", "ADMIN")
 			)
 			.formLogin((form) -> form
 				.loginPage("/login/")
 				.permitAll()
-				.failureUrl("/login?error")
-				.usernameParameter("username")
+				.failureUrl("/login/")
+				.usernameParameter("email")
 				.passwordParameter("password")
 				//.defaultSuccessUrl("/applicant/home")
 				.successHandler(authenticationSuccessHandler())

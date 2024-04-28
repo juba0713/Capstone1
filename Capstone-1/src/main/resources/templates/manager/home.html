@@ -8,22 +8,25 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <link rel="stylesheet" th:href="@{/css/officer/officer.css}"}
 </head>
-<body th:object="${officerWebDto}">
+<body th:object="${managerWebDto}">
 	<p>Officer Home</p>
 	<div>
 		<table id="applicants-table">
 			<thead>
 				<tr>
+					<th></th>
 					<th>Email</th>
 					<th>Consent</th>
 					<th>Project Title</th>
 					<th>Description</th>
 					<th>Team</th>	
+					<th>Status</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="app : *{listOfApplicants}" class="row-btn" th:data-id="${app.applicantIdPk}">
+					<td><input type="checkbox" /></td>
 					<td th:text="${app.email}"></td>
 					<td th:text="${app.consent ? 'Yes' : 'No'}"></td>
 					<td th:text="${app.projectTitle}"></td>
@@ -31,12 +34,15 @@
 					<td>
 						<div th:each="mem : ${app.team}" th:text="${mem}"></div>
 					</td>
+					<td th:text="${app.status == 0 ? 'Pending' : app.status != 2 OR app.status != 0 ? 'Passed' : 'Failed'}" th:style="${app.status != 1 OR app.status != 0 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}" ></td>
 					<td>
-						<button class="btn-row" type="button" th:data-id="${app.applicantIdPk}" name="accept">Accept</button>
-						<button class="btn-row" type="button" th:data-id="${app.applicantIdPk}" name="reject">Reject</button>
+						<form th:action="@{/manager/account/activate}" method="POST" th:if="${app.status == 1}">
+							<input type="hidden" name="applicantIdPk" th:value="${app.applicantIdPk}"/>
+							<button class="btn-row" th:data-id="${app.applicantIdPk}" name="activate">Activate Account</button>
+						</form>
+						<span th:if="${app.status == 3}">Activated</span>
 					</td>
-				</tr>
-				
+				</tr>	
 			</tbody>
 		</table>
 		<div>
@@ -60,65 +66,13 @@
 	    </div>
 	  </div>
 	</div>
-	<div class="modal" tabindex="-1" role="dialog" id="accept-modal">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title">Applicant Details</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body" id="modal-body">
-	        <form th:action="@{/officer/action}" method="POST">
-				<div>Do you want to accept this application?</div>
-				<input type="hidden" name="applicantIdPk" id="reject-applicant-id-pk" value=""/>
-				<button type="button">Cancel</button>
-				<button name="accept">Accept</button>
-			</form>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<div class="modal" tabindex="-1" role="dialog" id="reject-modal">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title">Applicant Details</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body" id="modal-body">
-	        <form th:action="@{/officer/action}" method="POST">
-				<input type="hidden" name="applicantIdPk" id="reject-applicant-id-pk" value=""/>
-				<label>Input Feedback</label>
-				<textarea name="feedback"></textarea>
-				<div>
-					<div>Qualified for Reapplication?</div>
-					<div>
-						<input type="radio" name="resubmitFlg"/>
-						<label>Yes</label>
-					</div>
-					<div>
-						<input type="radio" name="resubmitFlg"/>
-						<label>No</label>
-					</div>
-				</div>
-				<button type="button">Cancel</button>
-				<button name="reject">Reject</button>
-			</form>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	
+
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
 	<script th:inline="javascript">
-		console.log(/*[[${officerWebDto}]]*/'');
+		console.log(/*[[${managerWebDto}]]*/'');
 		$(document).ready(function() {
 			new DataTable('#applicants-table');
 			
@@ -145,7 +99,6 @@
 					let idPk = this.getAttribute('data-id');
 					if(this.innerHTML === 'Accept'){
 						$('#accept-modal').modal('show');
-						document.getElementById('reject-applicant-id-pk').setAttribute('value', idPk);
 						rowBtnClicked = false;
 					}else{
 						document.getElementById('reject-applicant-id-pk').setAttribute('value', idPk);

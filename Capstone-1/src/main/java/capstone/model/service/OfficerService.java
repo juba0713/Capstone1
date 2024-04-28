@@ -14,6 +14,13 @@ public interface OfficerService {
 	public OfficerInOutDto getAllApplicants();
 	
 	/**
+	 * To accept an applicantion
+	 * @param inDto
+	 * @return OfficerInOutDto
+	 */
+	public OfficerInOutDto acceptApplicant(OfficerInOutDto inDto);
+	
+	/**
 	 * To reject an applicants
 	 * @param inDto
 	 * @return OfficerInOutDto

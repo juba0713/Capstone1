@@ -18,8 +18,6 @@ public class UserInformationEntity {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idPk;
 	
-	private String username;
-	
 	private String email;
 	
 	private String mobileNumber;

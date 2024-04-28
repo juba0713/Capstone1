@@ -8,4 +8,6 @@ public class CommonConstant {
 	
 	public static String BLANK = "";
 	
+	public static String EMAIL = "mieminabua@gmail.com";
+	
 }

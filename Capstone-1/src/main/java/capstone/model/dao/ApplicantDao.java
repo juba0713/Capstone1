@@ -12,16 +12,32 @@ import capstone.model.dao.entity.JoinApplicantProject;
 
 public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 	
-	public final String GET_ALL_APPLICANTS = "SELECT "
+	public final String GET_ALL_APPLICANTS_0 = "SELECT "
 			+ "	a.id_pk,"
 			+ "	a.email,"
 			+ "	p.project_title,"
 			+ "	p.project_description,"
 			+ "	a.agree_flg,"
-			+ "	p.teams "
+			+ "	p.teams,"
+			+ " a.status "
 			+ "FROM m_applicant a "
 			+ "JOIN t_project p ON p.applicant_id_pk = a.id_pk "
-			+ "WHERE a.delete_flg = false";
+			+ "WHERE a.status = 0 "
+			+ "AND a.delete_flg = false";
+	
+	
+	public final String GET_ALL_APPLICANTS_1_3 = "SELECT "
+			+ "	a.id_pk,"
+			+ "	a.email,"
+			+ "	p.project_title,"
+			+ "	p.project_description,"
+			+ "	a.agree_flg,"
+			+ "	p.teams,"
+			+ " a.status "
+			+ "FROM m_applicant a "
+			+ "JOIN t_project p ON p.applicant_id_pk = a.id_pk "
+			+ "WHERE a.status = 1 OR a.status = 3 "
+			+ "AND a.delete_flg = false";
 	
 	public final String GET_APPLICANT_BY_ID_PK = "SELECT e"
 			+ " FROM ApplicantEntity e"
@@ -29,11 +45,26 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ " AND e.deleteFlg = false";
 
 	
-	@Query(value=GET_ALL_APPLICANTS, nativeQuery=true)
-	public List<Object[]> getAllApplicantRaw() throws DataAccessException;
+	@Query(value=GET_ALL_APPLICANTS_0, nativeQuery=true)
+	public List<Object[]> getAllApplicant0Raw() throws DataAccessException;
 	
-	default List<JoinApplicantProject> getAllApplicant(){
-		List<Object[]> rawResults = getAllApplicantRaw();
+	default List<JoinApplicantProject> getAllApplicant0(){
+		List<Object[]> rawResults = getAllApplicant0Raw();
+	    List<JoinApplicantProject> applicants = new ArrayList<>();
+
+	    for (Object[] objects : rawResults) {
+	        JoinApplicantProject applicant = new JoinApplicantProject(objects);  
+	        applicants.add(applicant);
+	    }
+
+	    return applicants;
+	}
+	
+	@Query(value=GET_ALL_APPLICANTS_1_3, nativeQuery=true)
+	public List<Object[]> getAllApplicant13Raw() throws DataAccessException;
+	
+	default List<JoinApplicantProject> getAllApplicant13(){
+		List<Object[]> rawResults = getAllApplicant13Raw();
 	    List<JoinApplicantProject> applicants = new ArrayList<>();
 
 	    for (Object[] objects : rawResults) {

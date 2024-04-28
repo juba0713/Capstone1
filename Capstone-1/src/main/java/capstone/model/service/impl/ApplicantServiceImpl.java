@@ -21,6 +21,7 @@ import capstone.model.logic.ApplicantLogic;
 import capstone.model.logic.UserLogic;
 import capstone.model.object.ErrorObj;
 import capstone.model.service.ApplicantService;
+import capstone.model.service.CommonService;
 import capstone.model.service.LoggedInUserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -43,6 +44,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 	@Autowired
 	private HttpServletRequest request;
 	
+	@Autowired
+	private CommonService commonService;
+	
 	@Override
 	public ApplicantInOutDto validateApplicant(ApplicantInOutDto inDto) {
 		
@@ -59,6 +63,38 @@ public class ApplicantServiceImpl implements ApplicantService {
 		Timestamp currentDateTime = new Timestamp(System.currentTimeMillis());
 		
 		ApplicantInOutDto outDto = new ApplicantInOutDto();
+		
+		String[] leaderNames = commonService.splitArray(inDto.getGroupLeader());
+		
+		UserInformationEntity newUser = new UserInformationEntity();
+		
+		newUser.setEmail(inDto.getEmail());
+		
+		newUser.setFirstName(leaderNames[0]);
+		
+		newUser.setLastName(leaderNames[1]);
+		
+		newUser.setMobileNumber(inDto.getLeaderNumber());	
+		
+		newUser.setRole("APPLICANT");
+		
+		newUser.setInitialChangePass(false);
+		
+		newUser.setCreatedDate(currentDateTime);
+		
+		newUser.setDeleteFlg(false);
+		
+		int userIdPk = userLogic.saveUser(newUser);
+		
+		UserInfoAccountEntity newUserAccount = new UserInfoAccountEntity();
+		
+		newUserAccount.setUserIdPk(userIdPk);
+		
+		newUserAccount.setCreatedDate(currentDateTime);
+		
+		newUserAccount.setDeleteFlg(false);
+		
+		userLogic.saveUserAccount(newUserAccount);
 		
 		ApplicantEntity applicantEntity = new ApplicantEntity();
 		
@@ -94,6 +130,10 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		applicantEntity.setDeleteFlg(false);
 		
+		applicantEntity.setStatus(0);
+		
+		applicantEntity.setCreatedBy(userIdPk);
+		
 		int applicantIdPk = applicantLogic.saveApplicantEntity(applicantEntity);
 		
 		ProjectEntity projectEntity = new ProjectEntity();
@@ -104,7 +144,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		projectEntity.setProjectDescription(inDto.getProjectDescription());
 		
-		projectEntity.setTeams(convertToArray(inDto.getTeams()));
+		projectEntity.setTeams(commonService.convertToArray(inDto.getTeams()));
 		
 		projectEntity.setProblemStatement(inDto.getProblemStatement());
 		
@@ -112,7 +152,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		projectEntity.setSolutionDescription(inDto.getSolutionDescription());
 		
-		projectEntity.setHistoricalTimeline(convertToArray(inDto.getHistoricalTimeline()));
+		projectEntity.setHistoricalTimeline(commonService.convertToArray(inDto.getHistoricalTimeline()));
 		
 		projectEntity.setProductServiceOffering(inDto.getProductServiceOffering());
 		
@@ -142,8 +182,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		groupEntity.setGroupName(inDto.getGroupName());
 		
-		String[] leaderNames = splitArray(inDto.getGroupLeader());
-		
 		groupEntity.setFirstName(leaderNames[0]);
 		
 		groupEntity.setLastName(leaderNames[1]);
@@ -170,7 +208,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 				
 				groupMemberEntity.setGroupIdPk(groupIdPk);
 				
-				String[] memberNames = splitArray(inDto.getGroupLeader());
+				String[] memberNames = commonService.splitArray(inDto.getGroupLeader());
 				
 				groupMemberEntity.setFirstName(memberNames[0]);
 				
@@ -189,28 +227,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 		return outDto;
 	}
 	
-	public List<String> convertToArray(List<String[]> var) {
-		
-		List<String> convertedValue = new ArrayList<>();
-		
-		if(var != null && !var.isEmpty()) {
-			
-			for(String[] value : var) {
-				
-				String stringValue = String.join("-", value);
-				
-				convertedValue.add(stringValue);
-			}	
-		}
-			
-		return convertedValue;
-	}
-	
-	public String[] splitArray(String var) {
-		
-		return var.split(",");
-	}
-
 	@Override
 	public void changePassword(ApplicantInOutDto inDto) {
 	
