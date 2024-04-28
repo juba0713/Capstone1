@@ -74,7 +74,7 @@ public class SecurityConfig{
 			.formLogin((form) -> form
 				.loginPage("/login/")
 				.permitAll()
-				.failureUrl("/login/")
+				.failureUrl("/")
 				.usernameParameter("email")
 				.passwordParameter("password")
 				//.defaultSuccessUrl("/applicant/home")
