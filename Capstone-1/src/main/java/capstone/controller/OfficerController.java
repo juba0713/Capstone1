@@ -29,8 +29,13 @@ public class OfficerController {
 	}
 	
 	@PostMapping(value="/action", params="accept")
-	public String acceptApplicant() {
-		System.out.println("ACCEPTED");
+	public String acceptApplicant(@ModelAttribute OfficerWebDto webDto) {
+		
+		OfficerInOutDto inDto = new OfficerInOutDto();
+		
+		inDto.setApplicantIdPk(webDto.getApplicantIdPk());
+		
+		OfficerInOutDto outDto = officerService.acceptApplicant(inDto);	
 		
 		return "redirect:/officer/home";
 	}

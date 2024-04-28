@@ -10,9 +10,17 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 
 	public final String GET_USER_BY_USERNAME = "SELECT e"
 			+ " FROM UserInformationEntity e"
-			+ " WHERE e.username = :username"
+			+ " WHERE e.email = :email"
+			+ " AND e.deleteFlg = false";
+	
+	public final String GET_USER_BY_ID_PK = "SELECT e"
+			+ " FROM UserInformationEntity e"
+			+ " WHERE e.idPk = :idPk"
 			+ " AND e.deleteFlg = false";
 	
 	@Query(value=GET_USER_BY_USERNAME)
-	public UserInformationEntity getUserByUsername(String username) throws DataAccessException;
+	public UserInformationEntity getUserByUsername(String email) throws DataAccessException;
+	
+	@Query(value=GET_USER_BY_ID_PK)
+	public UserInformationEntity getUserByIdPk(int idPk) throws DataAccessException;
 }

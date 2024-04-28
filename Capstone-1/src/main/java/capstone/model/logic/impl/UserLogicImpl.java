@@ -19,9 +19,9 @@ public class UserLogicImpl implements UserLogic {
 	private UserInfoAccountDao userInfoAccountDao;
 
 	@Override
-	public UserInformationEntity getUserByUsername(String username) {
+	public UserInformationEntity getUserByEmail(String email) {
 		
-		return userInformationDao.getUserByUsername(username);
+		return userInformationDao.getUserByUsername(email);
 	}
 
 	@Override
@@ -42,6 +42,12 @@ public class UserLogicImpl implements UserLogic {
 		userInformationDao.save(entity);
 		
 		return entity.getIdPk();
+	}
+
+	@Override
+	public UserInformationEntity getUserByIdPk(int idPk) {
+
+		return userInformationDao.getUserByIdPk(idPk);
 	}
 
 }

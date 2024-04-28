@@ -9,11 +9,18 @@ import capstone.model.dao.entity.UserInformationEntity;
 public interface UserLogic {
 
 	/**
-	 * To get user by username
+	 * To get user by email
 	 * @param username
 	 * @return UserInformationEntity
 	 */
-	public UserInformationEntity getUserByUsername(String username);
+	public UserInformationEntity getUserByEmail(String email);
+	
+	/**
+	 * To get user by id pk
+	 * @param username
+	 * @return UserInformationEntity
+	 */
+	public UserInformationEntity getUserByIdPk(int idPk);
 	
 	/**
 	 * To get user account by user id pk

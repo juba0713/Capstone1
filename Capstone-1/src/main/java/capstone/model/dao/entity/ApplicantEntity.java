@@ -52,5 +52,15 @@ public class ApplicantEntity {
 	
 	private Boolean deleteFlg;
 	
+	/*
+	 * 0 - Pending
+	 * 1 - Accept
+	 * 2 - Reject
+	 * 3 - createdApplicantAccount
+	 * 4 - evaluated
+	 * 5 - createdIncubateACcount
+	 */
 	private int status;
+	
+	private int createdBy;
 }

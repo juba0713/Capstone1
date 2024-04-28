@@ -66,9 +66,9 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	}
 
 	@Override
-	public List<JoinApplicantProject> getAllApplicant() {
+	public List<JoinApplicantProject> getAllApplicant0() {
 		
-		return applicantDao.getAllApplicant();
+		return applicantDao.getAllApplicant0();
 		
 	}
 
@@ -82,6 +82,12 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	public void saveRejectedApplicantEntity(RejectedApplicantEntity entity) {
 	
 		rejectedApplicantDao.save(entity);
+	}
+
+	@Override
+	public List<JoinApplicantProject> getAllApplicant13() {
+	
+		return applicantDao.getAllApplicant13();
 	}
 	
 

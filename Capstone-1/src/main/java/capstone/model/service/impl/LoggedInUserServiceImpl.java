@@ -23,9 +23,9 @@ public class LoggedInUserServiceImpl implements LoggedInUserService{
 		
 		if(authentication != null) {
 			
-			String username = authentication.getName();
+			String email = authentication.getName();
 			
-			UserInformationEntity user = userLogic.getUserByUsername(username);
+			UserInformationEntity user = userLogic.getUserByEmail(email);
 			
 			return user;
 		}

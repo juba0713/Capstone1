@@ -43,7 +43,12 @@ public interface ApplicantLogic {
 	/**
 	 * To get all applicant
 	 */
-	public List<JoinApplicantProject> getAllApplicant();
+	public List<JoinApplicantProject> getAllApplicant0();
+	
+	/**
+	 * To get all applicant
+	 */
+	public List<JoinApplicantProject> getAllApplicant13();
 	
 	/**
 	 * To get applicant by idPk

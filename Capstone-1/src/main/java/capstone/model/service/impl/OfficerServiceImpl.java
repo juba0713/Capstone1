@@ -13,6 +13,7 @@ import capstone.model.dao.entity.RejectedApplicantEntity;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.logic.ApplicantLogic;
 import capstone.model.object.ApplicantObj;
+import capstone.model.service.CommonService;
 import capstone.model.service.OfficerService;
 
 @Service
@@ -20,13 +21,16 @@ public class OfficerServiceImpl implements OfficerService{
 	
 	@Autowired
 	private ApplicantLogic applicantLogic;
+	
+	@Autowired
+	private CommonService commonService;
 
 	@Override
 	public OfficerInOutDto getAllApplicants() {
 		
 		OfficerInOutDto outDto = new OfficerInOutDto();
 		
-		List<JoinApplicantProject> listOfApplicant = applicantLogic.getAllApplicant();
+		List<JoinApplicantProject> listOfApplicant = applicantLogic.getAllApplicant0();
 		
 		List<ApplicantObj> listOfAppObj = new ArrayList<>();
 		
@@ -44,7 +48,7 @@ public class OfficerServiceImpl implements OfficerService{
 			
 			obj.setConsent(app.getConsent());
 			
-			obj.setTeam(convertToList(app.getTeam()));
+			obj.setTeam(commonService.convertToList(app.getTeam()));
 			
 			listOfAppObj.add(obj);
 			
@@ -55,19 +59,6 @@ public class OfficerServiceImpl implements OfficerService{
 		return outDto;
 	}
 	
-	public List<String> convertToList(String[] val){
-		
-		List<String> newList = new ArrayList<>();
-		
-		for(String v : val) {
-			String[] splitV = v.split("-");
-			
-			newList.add(splitV[0]+"("+splitV[1]+")");
-			
-		}
-		
-		return newList;
-	}
 
 	@Override
 	public OfficerInOutDto rejectApplicant(OfficerInOutDto inDto) {
@@ -101,6 +92,26 @@ public class OfficerServiceImpl implements OfficerService{
 		rejectedApplicantEntity.setDeleteFlg(false);
 		
 		applicantLogic.saveRejectedApplicantEntity(rejectedApplicantEntity);
+		
+		return outDto;
+	}
+
+	@Override
+	public OfficerInOutDto acceptApplicant(OfficerInOutDto inDto) {
+		
+		OfficerInOutDto outDto = new OfficerInOutDto();
+		
+		ApplicantEntity applicantEntity = applicantLogic.getApplicantByIdPk(inDto.getApplicantIdPk());
+		
+		/*
+		 * 0 - pending
+		 * 1 - accept
+		 * 2 - reject
+		 * 3 - evaluated
+		 */
+		applicantEntity.setStatus(1);
+		
+		applicantLogic.saveApplicantEntity(applicantEntity);
 		
 		return outDto;
 	}
