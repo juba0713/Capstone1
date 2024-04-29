@@ -50,6 +50,9 @@ module.exports = {
         transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
         transitionDuration: "300ms",
       },
+      backgroundImage: {
+        test: "url('/Capstone1/Capstone-1/src/main/resources/static/images/darkenlandingpageImg.png')",
+      },
     },
   },
   plugins: [],

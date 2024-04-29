@@ -1091,10 +1091,6 @@ video {
     border-radius: 40px;
   }
 
-  .md\:bg-\[url\(\'\/Capstone1\/Capstone-1\/src\/main\/resources\/static\/images\/darkenlandingpageImg\.png\'\)\]{
-    background-image: url('/Capstone1/Capstone-1/src/main/resources/static/images/darkenlandingpageImg.png');
-  }
-
   .md\:bg-cover{
     background-size: cover;
   }
