@@ -26,10 +26,11 @@ module.exports = {
         secondary: ["Poppins", "sans-serif"],
       },
       colors: {
-        formbg: {
-          dark: "#D3AC09",
-          light: "#E9D790",
-        },
+        // formbg: {
+        //   dark: "#D3AC09",
+        //   light: "#E9D790",
+        // },
+        customyellow: "#FDCC01",
       },
       backgroundColor: {
         tanglow: "#FDCC01",
