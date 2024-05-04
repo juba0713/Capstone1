@@ -3,19 +3,93 @@
   <head>
     <meta charset="UTF-8" />
     <title>Insert title here</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}" />
+    <!-- for live server[no springboot running] -->
+    <link
+      rel="stylesheet"
+      href="/Capstone1/Capstone-1/src/main/resources/static/css/output.css"
+    />
   </head>
   <body>
-    <form th:action="@{/login/}" method="POST">
-      <div>Welcome! <span th:text="${role}"></span></div>
-      <div>
-        <label>Username</label>
-        <input type="text" name="email" />
+    <div class="bg-tanglow absolute h-screen w-screen">
+      <img
+        class="w-1/2 bg-auto h-screen"
+        src="/Capstone1/Capstone-1/src/main/resources/static/images/geometricBg.png"
+      />
+    </div>
+
+    <div
+      class="z-50 relative border-2 border-red-800 flex justify-center h-screen items-center"
+    >
+      <div
+        class="h-520 border-2 border-red-700 w-642 bg-tanglow flex items-center justify-center p-32"
+      >
+        <img
+          class="pointer-events-none"
+          src="/Capstone1/Capstone-1/src/main/resources/static/images/wilBlackBox.png"
+          th:src="@{/images/wilBlackBox.png}"
+        />
       </div>
-      <div>
-        <label>Password</label>
-        <input type="password" name="password" />
+      <div class="h-520 border-2 border-blue-500 w-642 bg-rose-600">
+        <form th:action="@{/login/}" method="POST">
+          <div
+            class="font-primary text-black text-3xl m-20 flex justify-center"
+          >
+            Welcome, <span th:text="${role} + '!'" class="ml-2"> </span>
+          </div>
+          <div class="border-2 border-orange-700 flex flex-col items-center">
+            <div>
+              <!-- <label>Username</label>
+            <input type="text" name="email" /> -->
+              <label
+                htmlFor="Username"
+                class="relative block rounded-md border border-black shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 mb-6"
+              >
+                <input
+                  type="text"
+                  name="email"
+                  id="Username"
+                  class="peer border-none rounded-md placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 h-12 w-80"
+                  placeholder="Username"
+                />
+
+                <span
+                  class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs"
+                >
+                  Username
+                </span>
+              </label>
+            </div>
+            <div>
+              <!-- <label>Password</label>
+            <input type="password" name="password" /> -->
+              <label
+                htmlFor="Password"
+                class="relative block rounded-md border border-black shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 mb-6"
+              >
+                <input
+                  type="password"
+                  name="password"
+                  id="Password"
+                  class="peer border-none rounded-md bg-white placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 h-12 w-80"
+                  placeholder="Password"
+                />
+
+                <span
+                  class="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs"
+                >
+                  Password
+                </span>
+              </label>
+            </div>
+            <button
+              class="border-2 border-black hover:bg-black hover:text-white font-secondary text-black bg-transparent h-12 w-60 mt-16"
+            >
+              Login
+            </button>
+          </div>
+        </form>
       </div>
-      <button class=bg-rose-500> Submit</button>
-    </form>
+    </div>
   </body>
 </html>
