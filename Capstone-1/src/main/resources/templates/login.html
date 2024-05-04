@@ -12,32 +12,30 @@
   </head>
   <body>
     <div class="bg-tanglow absolute h-screen w-screen">
-      <img
-        class="w-1/2 bg-auto h-screen"
-        src="/Capstone1/Capstone-1/src/main/resources/static/images/geometricBg.png"
-      />
+      <div class="w-1/2 h-screen">
+        <img
+          class="w-full h-full object-cover"
+          src="/Capstone1/Capstone-1/src/main/resources/static/images/geometricBg.png"
+        />
+      </div>
     </div>
 
-    <div
-      class="z-50 relative border-2 border-red-800 flex justify-center h-screen items-center"
-    >
-      <div
-        class="h-520 border-2 border-red-700 w-642 bg-tanglow flex items-center justify-center p-32"
-      >
+    <div class="z-50 relative flex justify-center h-screen items-center">
+      <div class="h-520 w-642 bg-tanglow flex items-center justify-center p-32">
         <img
           class="pointer-events-none"
           src="/Capstone1/Capstone-1/src/main/resources/static/images/wilBlackBox.png"
           th:src="@{/images/wilBlackBox.png}"
         />
       </div>
-      <div class="h-520 border-2 border-blue-500 w-642 bg-rose-600">
+      <div class="h-520 w-642 bg-white">
         <form th:action="@{/login/}" method="POST">
           <div
             class="font-primary text-black text-3xl m-20 flex justify-center"
           >
             Welcome, <span th:text="${role} + '!'" class="ml-2"> </span>
           </div>
-          <div class="border-2 border-orange-700 flex flex-col items-center">
+          <div class="flex flex-col items-center">
             <div>
               <!-- <label>Username</label>
             <input type="text" name="email" /> -->
@@ -49,7 +47,7 @@
                   type="text"
                   name="email"
                   id="Username"
-                  class="peer border-none rounded-md placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 h-12 w-80"
+                  class="indent-2 peer border-none rounded-md placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 h-12 w-80"
                   placeholder="Username"
                 />
 
@@ -71,7 +69,7 @@
                   type="password"
                   name="password"
                   id="Password"
-                  class="peer border-none rounded-md bg-white placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 h-12 w-80"
+                  class="indent-2 peer border-none rounded-md bg-white placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 h-12 w-80"
                   placeholder="Password"
                 />
 
@@ -83,7 +81,7 @@
               </label>
             </div>
             <button
-              class="border-2 border-black hover:bg-black hover:text-white font-secondary text-black bg-transparent h-12 w-60 mt-16"
+              class="border border-black hover:bg-black hover:text-white font-secondary text-black bg-transparent h-12 w-60 mt-16"
             >
               Login
             </button>
