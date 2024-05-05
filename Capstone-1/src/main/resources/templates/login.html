@@ -16,17 +16,20 @@
         <img
           class="w-full h-full object-cover"
           src="/Capstone1/Capstone-1/src/main/resources/static/images/geometricBg.png"
+          th:src="@{/images/geometricBg.png}"
         />
       </div>
     </div>
 
-    <div class="z-50 relative flex justify-center h-screen items-center">
+    <div class="z-40 relative flex justify-center h-screen items-center">
       <div class="h-520 w-642 bg-tanglow flex items-center justify-center p-32">
-        <img
-          class="pointer-events-none"
-          src="/Capstone1/Capstone-1/src/main/resources/static/images/wilBlackBox.png"
-          th:src="@{/images/wilBlackBox.png}"
-        />
+        <a th:href="@{/}" class="z-50 hover:scale-105">
+          <img
+            class="pointer-events-none"
+            src="/Capstone1/Capstone-1/src/main/resources/static/images/wilBlackBox.png"
+            th:src="@{/images/wilBlackBox.png}"
+          />
+        </a>
       </div>
       <div class="h-520 w-642 bg-white">
         <form th:action="@{/login/}" method="POST">

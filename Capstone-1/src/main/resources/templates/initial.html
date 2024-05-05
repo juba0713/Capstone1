@@ -19,68 +19,67 @@
           <img
             src="/Capstone1/Capstone-1/src/main/resources/static/images/darkenlandingpageImg.png"
             th:src="@{/images/darkenlandingpageImg.png}"
-            class="h-full absolute bg-center bg-no-repeat w-full bg-cover mb-20 bg-local"
+            class="pointer-events-none absolute bg-no-repeat bg-center bg-local inset-0 w-full h-full object-cover"
           />
-          <div class="bg-green-600 h-44 z-10 absolute bottom-0 w-full"></div>
+          <div
+            class="curved-background h-64 z-10 absolute bottom-0 w-full"
+          ></div>
         </div>
         <div
-          class="z-50 relative flex justify-center items-center md:flex flex-wrap md:justify-between border-2 border-rose-500 h-24"
+          class="z-50 relative flex justify-center items-center md:flex flex-wrap md:justify-between h-24"
         >
           <div>
             <img
-              class="pointer-events-none h-20 p-3 md:ml-20 border-2 border-blue-500"
+              class="pointer-events-none h-20 p-3 md:ml-20"
               src="/Capstone1/Capstone-1/src/main/resources/static/images/yellowLogo.png"
               th:src="@{/images/yellowLogo.png}"
             />
           </div>
-          <a
-            th:href="@{/applicant/form}"
-            class="w-full md:w-1/5 border-2 border-indigo-800"
-          >
+          <a th:href="@{/applicant/form}" class="w-full md:w-1/5">
             <div
-              class="font-primary tracking-widest rounded-md cursor-pointer hover:text-customyellow bg-rose-700 hover:bg-rose-800 text-center h-14 md:mr-20 content-center"
+              class="font-primary tracking-widest cursor-pointer text-center h-14 md:mr-20 content-center buttonfx slideleft"
             >
-              <p>apply as applicant</p>
+              <p>APPLY AS APPLICANT</p>
             </div>
           </a>
         </div>
         <div
-          class="z-10 relative text-center p-10 md:p-20 font-primary md:text-5xl text-3xl border-2 border-green-500 mt-10"
+          class="pointer-events-none z-10 relative text-center p-8 md:p-28 font-primary md:text-5xl text-3xl mt-10"
         >
           <span class="text-white">LOGIN</span>
           <span class="text-[#FDCC01]">AS</span>
         </div>
 
         <div
-          class="md:bottom-24 border-2 border-yellow-300 text-lg z-10 absolute w-full justify-center flex flex-wrap flex-row text-center md:gap-10 font-secondary font-semibold text-50 text-black md:mt-20"
+          class="md:bottom-24 text-lg z-10 absolute w-full justify-center flex flex-wrap flex-row text-center md:gap-10 font-secondary font-semibold text-50 text-black md:mt-20"
         >
           <a th:href="@{/login/applicant}" class="role-btn" name="applicant">
             <div
-              class="opacity-40 hover:opacity-100 flex justify-center card md:rounded-radius-40 h-24 flex-col w-screen md:h-150 md:w-52 image-full items-center bg-[#EAEAEA] md:hover:bg-tanglow hover:shadow-xl duration-100 ease-in cursor-pointer border-b-10 border-transparent transform hover:border-black hover:border-b-10"
+              class="flex justify-center card md:rounded-radius-40 flex-col w-screen min-h-32 min-w-60 md:h-300 md:w-72 image-full items-center bg-[#EAEAEA] md:hover:bg-tanglow hover:shadow-xl duration-100 ease-in cursor-pointer border-b-10 border-transparent transform hover:border-black hover:border-b-10"
             >
-              <p>Applicant</p>
+              <p>APPLICANT</p>
             </div>
           </a>
           <a th:href="@{/login/officer}" class="role-btn" name="officer">
             <div
-              class="flex justify-center card md:rounded-radius-40 h-24 flex-col w-screen md:h-150 md:w-52 image-full items-center bg-[#EAEAEA] md:hover:bg-tanglow hover:shadow-xl duration-100 ease-in cursor-pointer border-b-10 border-transparent transform hover:border-black hover:border-b-10"
+              class="flex justify-center card md:rounded-radius-40 flex-col w-screen min-h-32 min-w-60 md:h-300 md:w-72 image-full items-center bg-[#EAEAEA] md:hover:bg-tanglow hover:shadow-xl duration-100 ease-in cursor-pointer border-b-10 border-transparent transform hover:border-black hover:border-b-10"
             >
-              <p>Officer</p>
+              <p>OFFICER</p>
             </div>
           </a>
 
           <a th:href="@{/login/tbi-board}" class="role-btn" name="tbiboard">
             <div
-              class="flex justify-center card md:rounded-radius-40 h-24 flex-col w-screen md:h-150 md:w-52 image-full items-center bg-[#EAEAEA] md:hover:bg-tanglow hover:shadow-xl duration-100 ease-in cursor-pointer border-b-10 border-transparent transform hover:border-black hover:border-b-10"
+              class="flex justify-center card md:rounded-radius-40 flex-col w-screen min-h-32 min-w-60 md:h-300 md:w-72 image-full items-center bg-[#EAEAEA] md:hover:bg-tanglow hover:shadow-xl duration-100 ease-in cursor-pointer border-b-10 border-transparent transform hover:border-black hover:border-b-10"
             >
-              <p>TBI Board</p>
+              <p>TBI BOARD</p>
             </div>
           </a>
           <a th:href="@{/login/manager}" class="role-btn" name="manager">
             <div
-              class="flex justify-center card md:rounded-radius-40 h-24 flex-col w-screen md:h-150 md:w-52 image-full items-center bg-[#EAEAEA] md:hover:bg-tanglow hover:shadow-xl duration-100 ease-in cursor-pointer border-b-10 border-transparent transform hover:border-black hover:border-b-10"
+              class="flex justify-center card md:rounded-radius-40 flex-col w-screen min-h-32 min-w-60 md:h-300 md:w-72 image-full items-center bg-[#EAEAEA] md:hover:bg-tanglow hover:shadow-xl duration-100 ease-in cursor-pointer border-b-10 border-transparent transform hover:border-black hover:border-b-10"
             >
-              <p>Manager</p>
+              <p>MANAGER</p>
             </div>
           </a>
         </div>

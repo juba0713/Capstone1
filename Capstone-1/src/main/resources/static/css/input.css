@@ -3,3 +3,171 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.buttonfx {
+  color: #ffffff; /* button text color */
+  outline: none;
+  background: transparent;
+  border: none;
+  border-left: 4px solid #e7ba05;
+  letter-spacing: 0.0625em;
+  padding: 8px 10px;
+  text-transform: uppercase;
+  font: bold 16px "Bebas", sans-serif; /* use google font */
+  line-height: 2;
+  position: relative;
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 10px;
+  cursor: pointer;
+  text-decoration: none; /* remove underline if using A instead of BUTTON tag */
+  overflow: hidden;
+  transition: all 0.5s;
+}
+
+/* //// Default effect: Slide from Top  //// */
+
+.buttonfx:before,
+.buttonfx:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  background: #fdcc01; /* onhover background color */
+  z-index: -1;
+  transform: translate3D(
+    0,
+    -100%,
+    0
+  ); /* move elements above button so they don't appear initially */
+  transition: all 0.5s;
+}
+
+.buttonfx:before {
+  background: transparent;
+  z-index: -2;
+  transform: translate3D(0, 0, 0);
+}
+
+.buttonfx:hover {
+  color: black !important;
+}
+
+.buttonfx:hover:after {
+  transform: translate3D(0, 0, 0);
+  transition: all 0.5s;
+}
+
+/* //// Slide Left  //// */
+
+.slideleft:after {
+  top: 0;
+  z-index: -1;
+  transform: translate3D(-101%, 0, 0);
+}
+
+.slideleft:hover:after {
+  transform: translate3D(0, 0, 0);
+  transition: all 0.5s;
+}
+
+.curved-background {
+  background: linear-gradient(to bottom, #e7ba05, #a78a14);
+  clip-path: polygon(
+    100% 100%,
+    0% 100%,
+    0% 3.49%,
+    2% 4.15%,
+    4% 4.9%,
+    6% 5.72%,
+    8% 6.61%,
+    10% 7.55%,
+    12% 8.55%,
+    14% 9.58%,
+    16% 10.64%,
+    18% 11.71%,
+    20% 12.8%,
+    22% 13.87%,
+    24% 14.93%,
+    26% 15.97%,
+    28% 16.97%,
+    30% 17.92%,
+    32% 18.81%,
+    34% 19.64%,
+    36% 20.4%,
+    38% 21.07%,
+    40% 21.65%,
+    42% 22.14%,
+    44% 22.53%,
+    46% 22.82%,
+    48% 23%,
+    50% 23.08%,
+    52% 23.04%,
+    54% 22.9%,
+    56% 22.65%,
+    58% 22.29%,
+    60% 21.83%,
+    62% 21.28%,
+    64% 20.64%,
+    66% 19.91%,
+    68% 19.11%,
+    70% 18.24%,
+    72% 17.3%,
+    74% 16.32%,
+    76% 15.3%,
+    78% 14.24%,
+    80% 13.17%,
+    82% 12.09%,
+    84% 11.01%,
+    86% 9.94%,
+    88% 8.9%,
+    90% 7.89%,
+    92% 6.93%,
+    94% 6.02%,
+    96% 5.17%,
+    98% 4.4%,
+    100% 3.71%
+  );
+}
+/* This is the base animation */
+.sheen:hover img::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  bottom: -50%;
+  left: -50%;
+  background: linear-gradient(
+    to bottom,
+    rgba(229, 172, 142, 0),
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(229, 172, 142, 0)
+  );
+  transform: rotateZ(60deg) translate(-5em, 7.5em);
+  animation: sheen 1s forwards;
+}
+
+@keyframes sheen {
+  100% {
+    transform: rotateZ(60deg) translate(1em, -9em);
+  }
+}
+
+.imageLogo:active {
+  box-shadow: 0px 0px 0px white;
+  -webkit-box-shadow: inset -2px 2px 2px #ccc;
+  -moz-box-shadow: inset -2px 2px 2px #ccc;
+  box-shadow: inset -2px 2px 2px #ccc;
+  transform: translate(0, 2px);
+  color: #ffc491;
+  background-color: #ede358;
+}
+
+.imageLogo:focus {
+  outline: 0;
+}
