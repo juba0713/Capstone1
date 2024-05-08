@@ -11,6 +11,19 @@
     />
   </head>
   <body>
+    <img
+      th:src="@{/images/halfball.png}"
+      src="/Capstone1/Capstone-1/src/main/resources/static/images/halfcircle.png"
+      class="mix-blend-overlay w-40 h-40 absolute bottom-0 md:fixed pointer-events-none z-50"
+      style="right: 2rem"
+    />
+    <img
+      th:src="@{/images/halfball.png}"
+      src="/Capstone1/Capstone-1/src/main/resources/static/images/halfball.png"
+      class="mix-blend-overlay w-40 h-40 absolute top-10 right-0 md:fixed pointer-events-none z-50"
+      style="right: 9rem"
+    />
+
     <div class="bg-tanglow absolute h-screen w-screen">
       <div class="w-1/2 h-screen">
         <img
@@ -22,16 +35,18 @@
     </div>
 
     <div class="z-40 relative flex justify-center h-screen items-center">
-      <div class="h-520 w-642 bg-tanglow flex items-center justify-center p-32">
+      <div
+        class="h-520 w-642 bg-tanglow flex items-center justify-center p-32 rounded-l-lg"
+      >
         <a th:href="@{/}" class="z-50 hover:scale-105">
           <img
-            class="pointer-events-none"
+            class="cursor-pointer hover:invert"
             src="/Capstone1/Capstone-1/src/main/resources/static/images/wilBlackBox.png"
             th:src="@{/images/wilBlackBox.png}"
           />
         </a>
       </div>
-      <div class="h-520 w-642 bg-white">
+      <div class="h-520 w-642 bg-white rounded-r-lg">
         <form th:action="@{/login/}" method="POST">
           <div
             class="font-primary text-black text-3xl m-20 flex justify-center"
