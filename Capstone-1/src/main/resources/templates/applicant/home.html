@@ -24,23 +24,37 @@
     />
   </head>
   <body>
-    <div>
+    <div class="bg-slate-500 p-2 h-screen">
       <div th:if="${!session.initialChangePass}" class="bg-red-700">
         <p>Hello</p>
       </div>
       <p>Applicant Home</p>
       <div sec:authorize="isAuthenticated()">
-        Welcome, <span th:text="${session.username}"></span>!
-        <div>Id: <span th:text="${session.id}"></span></div>
-        <div class="progress-container">
-          <img th:src="@{/icons/inoffice.svg}" />
+        <div
+          class="border-2 border-rose-600 flex place-items-end flex-col ml-60"
+        >
+          <div class="font-primary text-5xl">
+            Welcome, <span th:text="${session.username}"></span>!
+          </div>
+          <div>ID: <span th:text="${session.id}"></span></div>
         </div>
+
         <div>
           <div>Application Status:</div>
           <div>Pending...</div>
         </div>
+        <div
+          class="progress-container border-2 border-red-600 flex justify-center"
+        >
+          <img
+            th:src="@{/icons/inoffice.svg}"
+            src="/Capstone1/Capstone-1/src/main/resources/static/icons/inoffice.svg"
+          />
+        </div>
       </div>
-      <div>
+      <div
+        class="bottom-0 right-0 border-2 flex justify-end text-xl font-primary absolute w-full hover:text-white"
+      >
         <form th:action="@{/logout}" method="POST">
           <button>Logout</button>
         </form>
@@ -60,7 +74,7 @@
           <div>
             <button
               type="button"
-              class="close w-8 hover:text-white"
+              class="close w-8 hover:text-[#FEE902]"
               data-dismiss="modal"
               aria-label="Close"
             >
@@ -121,7 +135,7 @@
                 </div>
                 <div class="rounded-3xl w-60 m-auto">
                   <button
-                    class="hover:text-black text-gray-50 border border-black font-secondary h-12 w-60 rounded-3xl hover:bg-yellow-400 bg-gray-950"
+                    class="hover:text-black text-gray-50 border-black font-secondary h-12 w-60 rounded-3xl hover:bg-[#FEE902] bg-gray-950"
                   >
                     Confirm
                   </button>
