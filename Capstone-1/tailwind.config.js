@@ -6,7 +6,7 @@ module.exports = {
       width: {
         960: "960px",
         642: "542px",
-        w80: "80%",
+        w45: "45%",
       },
       height: {
         520: "520px",
