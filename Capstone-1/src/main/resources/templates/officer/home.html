@@ -25,6 +25,11 @@
       rel="stylesheet"
       href="/Capstone1/Capstone-1/src/main/resources/static/css/officer/officer.css"
     />
+    <style>
+      .dt-input {
+        margin-right: 10px;
+      }
+    </style>
   </head>
   <body th:object="${officerWebDto}">
     <!-- <p>Officer Home</p> -->
@@ -113,7 +118,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Applicant Details</h5>
+            <h5 class="modal-title">Applicant Details asdf</h5>
             <button
               type="button"
               class="close"
@@ -143,7 +148,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Applicant Details</h5>
+            <h5 class="modal-title">Applicant Details test</h5>
             <button
               type="button"
               class="close"
@@ -201,7 +206,15 @@
     <script th:inline="javascript">
       console.log(/*[[${officerWebDto}]]*/ "");
       $(document).ready(function () {
-        new DataTable("#applicants-table");
+        new DataTable("#applicants-table", {
+          order: [],
+          columnDefs: [
+            {
+              targets: -1,
+              orderable: false, // Disables sorting for the last column
+            },
+          ],
+        });
 
         let rows = document.getElementsByClassName("row-btn");
         let btnRows = document.getElementsByClassName("btn-row");
