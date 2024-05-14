@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}" />
+    <!-- for live server[no springboot running] -->
+    <link
+      rel="stylesheet"
+      href="/Capstone1/Capstone-1/src/main/resources/static/css/output.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/Capstone1/Capstone-1/src/main/resources/static/css/manager/manager.css"
+    />
+    <link rel="stylesheet" th:href="@{/css/manager/manager.css}" />
+  </head>
+  <body>
+    <div class="area"></div>
+    <nav class="main-menu">
+      <ul>
+        <li class="p-5 text-white">
+          <i class="fa fa-list fa-2x"></i>
+          <span class="nav-text text-lg"> dashboard </span>
+        </li>
+        <hr class="mb-6" />
+        <li class="has-subnav">
+          <a href="#">
+            <i class="fa fa-user fa-2x"></i>
+            <span class="nav-text"> text </span>
+          </a>
+        </li>
+        <li class="has-subnav">
+          <a href="#">
+            <i class="fa fa-user fa-2x"></i>
+            <span class="nav-text"> text </span>
+          </a>
+        </li>
+        <li class="has-subnav">
+          <a href="#">
+            <i class="fa fa-user fa-2x"></i>
+            <span class="nav-text"> text </span>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="logout">
+        <li>
+          <a href="#">
+            <i class="fa fa-power-off fa-2x"></i>
+            <span class="nav-text"> Logout </span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </body>
+</html>
