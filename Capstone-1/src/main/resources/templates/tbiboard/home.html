@@ -1,10 +1,870 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/officer/officer.css}" />
+    <link rel="stylesheet" th:href="@{/css/output.css}" />
+    <!-- for live server[no springboot running] -->
+    <link
+      rel="stylesheet"
+      href="/Capstone1/Capstone-1/src/main/resources/static/css/output.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/Capstone1/Capstone-1/src/main/resources/static/css/officer/officer.css"
+    />
+    <style>
+      .dt-input {
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body th:object="${officerWebDto}">
+    <!-- <p>Officer Home</p> -->
+    <div class="h-screen bg-rose-300">
+      <!-- <div class="bg-white h-full"> -->
+      <div
+        class="sm:overflow-x-auto overflow-hidden sm:w-auto p-10 ml-2 sm:ml-0"
+      >
+        <table id="applicants-table" class="w-screen h-4/5">
+          <!-- class="border-collapse table-auto border-4 border-violet-600 h-full border-spacing-0 w-fit" -->
 
-</body>
+          <thead class="font-secondary text-sm bg-customyellow">
+            <tr>
+              <th class="text-left rounded-top-left">Email</th>
+              <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
+              <th class="text-left w-3/12">Project Title</th>
+              <th class="text-left w-1/5 hidden sm:table-cell">Description</th>
+              <th class="text-left w-1/5 hidden sm:table-cell">University</th>
+              <th class="text-center rounded-top-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-red-500">
+            <tr
+              th:each="app : *{listOfApplicants}"
+              class="row-btn overflow-hidden text-sm"
+              th:data-id="${app.applicantIdPk}"
+            >
+              <td
+                th:text="${app.email}"
+                class="whitespace-nowrap max-w-0 truncate"
+              >
+                test@gmail.com
+              </td>
+              <!-- <td
+                th:text="${app.consent ? 'Yes' : 'No'}"
+                class="whitespace-nowrap hidden sm:table-cell"
+              >
+                oms
+              </td> -->
+              <td
+                th:text="${app.projectTitle}"
+                class="whitespace-nowrap max-w-0 truncate"
+              >
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Eligendi quaerat officia exercitationem. Voluptatum velit
+                asperiores reiciendis saepe soluta hic in!
+              </td>
+              <td
+                th:text="${app.description}"
+                class="whitespace-nowrap max-w-0 truncate hidden sm:table-cell"
+              >
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Recusandae ut consectetur cumque odit! Corporis commodi maiores
+                nostrum nulla! Doloremque nesciunt explicabo cum, quidem, sequi
+                accusamus, officiis ipsam quia fugiat cupiditate repudiandae.
+                Eligendi consectetur ad molestias perspiciatis officia debitis
+                nesciunt, praesentium cum tempore earum error delectus in est
+                odio. Necessitatibus, voluptatibus.
+              </td>
+              <td
+                class="whitespace-nowrap max-w-0 truncate hidden sm:table-cell"
+              >
+                <!-- <div th:each="mem : ${app.team}" th:text="${mem}"></div> -->
+                test/NA if walay university
+              </td>
+              <td class="w-auto flex justify-center gap-2 whitespace-nowrap">
+                <button
+                  class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  type="button"
+                  th:data-id="${app.applicantIdPk}"
+                  name="evaluate"
+                >
+                  Evaluate
+                </button>
+              </td>
+            </tr>
+            <!--  -->
+          </tbody>
+        </table>
+      </div>
+      <!-- </div> -->
+
+      <div
+        class="p-2 bottom-0 right-0 border-2 flex justify-end text-xl font-primary absolute hover:text-[#FEE902]"
+      >
+        <form th:action="@{/logout}" method="POST">
+          <button>Logout</button>
+        </form>
+      </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="details-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Applicant Details</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body font-secondary" id="modal-body">
+            <div>
+              <p class="font-bold">Email</p>
+              <p>[email data]</p>
+            </div>
+            <hr />
+            <div>
+              <p class="font-bold">Consent</p>
+              <p>[consent data]</p>
+            </div>
+            <hr />
+            <div>
+              <p class="font-bold">Project Title/Startup Name</p>
+              <p>[Project Title/Startup Name data]</p>
+            </div>
+            <hr />
+            <div>
+              <p class="font-bold">I. Fill up Launchlab Capsule Proposal</p>
+              <div>
+                <p class="font-semibold">A. Project Description</p>
+                <p>[Project Description data]</p>
+              </div>
+              <div>
+                <p class="font-semibold">B. Team Composition</p>
+                <p>MemberName</p>
+                <p>Role</p>
+                <hr />
+                <p>MemberName</p>
+                <p>Role</p>
+                <hr />
+                <p>MemberName</p>
+                <p>Role</p>
+              </div>
+
+              <hr />
+              <div>
+                <p class="font-semibold">C. About the Product/Solution</p>
+                <div>
+                  <p class="font-semibold">1. Problem Statement</p>
+                  <p>[Problem Statement data]</p>
+                </div>
+                <div>
+                  <p class="font-semibold">2. Target Market</p>
+                  <p>[Target Market data]</p>
+                </div>
+                <div>
+                  <p class="font-semibold">3. Solution Description</p>
+                  <p>[Solution Description data]</p>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+            <div>
+              <p class="font-semibold">
+                D. Historical Timeline of the Product/Project Development
+              </p>
+              <div class="mb-8 overflow-x-auto">
+                <table class="w-full">
+                  <thead>
+                    <tr>
+                      <th
+                        class="font-semibold border border-gray-500 px-4 py-2"
+                      >
+                        Month-Year
+                      </th>
+                      <th
+                        class="font-semibold border border-gray-500 px-4 py-2"
+                      >
+                        Key Activities or Milestones
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[mm-yy data]</p>
+                      </td>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[Key Activities or Milestones data]</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[mm-yy data]</p>
+                      </td>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[Key Activities or Milestones data]</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[mm-yy data]</p>
+                      </td>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[Key Activities or Milestones data]</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[mm-yy data]</p>
+                      </td>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[Key Activities or Milestones data]</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[mm-yy data]</p>
+                      </td>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[Key Activities or Milestones data]</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <hr />
+            <p class="font-semibold">E. Competitive Advantage Analysis</p>
+            <div class="mb-8 overflow-x-auto">
+              <table class="w-full table-auto">
+                <thead>
+                  <tr>
+                    <th class="border border-gray-500 px-2 py-2 w-1/5">
+                      Competitive Factors
+                    </th>
+                    <th class="border border-gray-500 px-2 py-2 w-1/5">
+                      Name of Competition 1/ Alternative 1
+                    </th>
+                    <th class="border border-gray-500 px-2 py-2 w-1/5">
+                      Name of Competition 2/ Alternative 2
+                    </th>
+                    <th class="border border-gray-500 px-2 py-2 w-1/5">
+                      Name of Competition 3/ Alternative 3
+                    </th>
+                    <th class="border border-gray-500 px-2 py-2 w-1/5">
+                      Your Startup/Project Name
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th class="border border-gray-500 px-2 py-2">
+                      Product/Service Offering
+                    </th>
+                    <td class="border border-gray-500 px-2 py-2">
+                      [Product/Service Offering data 1]
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      [Product/Service Offering data 2]
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      [Product/Service Offering data 3]
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      [Your Startup/Project Name offering data]
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="border border-gray-500 px-2 py-2">
+                      Pricing Strategy
+                    </th>
+                    <td class="border border-gray-500 px-2 py-2">
+                      [Pricing Strategy data 1]
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      [Pricing Strategy data 2]
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      [Pricing Strategy data 3]
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      [Your Startup/Project Name pricing strategy data]
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <p class="font-semibold">
+                F. Intellectual Property Status (If applicable)
+              </p>
+              <p>[Intellectual Property Status data]</p>
+            </div>
+            <div>
+              <p class="font-bold">II. About the Proposed Acceleration</p>
+              <div>
+                <p class="font-semibold">A. Objectives</p>
+                <p>[Objectives data]</p>
+              </div>
+              <div>
+                <p class="font-semibold">B. Scope of the proposal</p>
+                <p>[Scope of the proposal data]</p>
+              </div>
+              <div>
+                <p class="font-semibold">C. Methodology and Expected Outputs</p>
+                <p>[Methodology and Expected Outputs data]</p>
+              </div>
+            </div>
+            <div>
+              <p class="font-bold">
+                III. Curriculum Vitae of the Project Leader
+              </p>
+              <div>
+                <p class="font-semibold">View file</p>
+                <p>[file data]</p>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold">Links to any supporting materials</p>
+              <p>[Links to any supporting materials data]</p>
+              <p class="font-semibold">Group name</p>
+              <p>[Group name data]</p>
+              <p class="font-semibold">
+                Team Leader - Team Member1(LastName, FirstName)
+              </p>
+              <p>[Team Leader - Team Member1(LastName, FirstName) data]</p>
+              <p class="font-semibold">Team Leader's Mobile Number</p>
+              <p>[Team Leader's Mobile Number data]</p>
+              <p class="font-semibold">Team Leader's Address</p>
+              <p>[Team Leader's Address data]</p>
+              <p class="font-semibold">
+                Team Leader - Member2(LastName, FirstName)
+              </p>
+              <p>[Team Leader - Member2(LastName, FirstName)e data]</p>
+              <p class="font-semibold">
+                Team Leader - Member3(LastName, FirstName)
+              </p>
+              <p>[Team Leader - Member3(LastName, FirstName) data]</p>
+              <p class="font-semibold">
+                Team Leader - Member4(LastName, FirstName)
+              </p>
+              <p>[Team Leader - Member4(LastName, FirstName) data]</p>
+              <p class="font-semibold">
+                Team Leader - Member5(LastName, FirstName)
+              </p>
+              <p>[Team Leader - Member5(LastName, FirstName) data]</p>
+              <p class="font-semibold">University</p>
+              <p>[University data]</p>
+            </div>
+            <div>
+              <p class="font-bold">
+                Technology and Commercialization Readiness Level
+              </p>
+              <div>
+                <p class="font-semibold">Technology</p>
+                <p>[Technology data]</p>
+                <p class="font-semibold">Product Development</p>
+                <p>[Product Development data]</p>
+                <p class="font-semibold">Competitive Landscape</p>
+                <p>[Competitive Landscape data]</p>
+                <p class="font-semibold">Product Development/Design</p>
+                <p>[Product Development/Design data]</p>
+                <p class="font-semibold">Team</p>
+                <p>[Team data]</p>
+                <p class="font-semibold">Go-to-Market</p>
+                <p>[Go-to-Market data]</p>
+                <p class="font-semibold">Manufacturing/Supply Chain</p>
+                <p>[Manufacturing/Supply Chain data]</p>
+              </div>
+            </div>
+            <div>
+              <p class="font-bold">Egilibility Agreement</p>
+              <p>[Egilibility Agreement data]</p>
+            </div>
+            <div>
+              <p class="font-bold">Applicant Commitment Verification Form</p>
+              <p>[Applicant Commitment Verification Form data 1]</p>
+              <p>[Applicant Commitment Verification Form data 2]</p>
+              <p>[Applicant Commitment Verification Form data 3]</p>
+              <p>[Applicant Commitment Verification Form data 4]</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="details-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Applicant Details</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body font-secondary" id="modal-body">
+            <div>
+              <p class="font-bold">Email</p>
+              <p>[email data]</p>
+            </div>
+            <hr />
+            <div>
+              <p class="font-bold">Consent</p>
+              <p>[consent data]</p>
+            </div>
+            <hr />
+            <div>
+              <p class="font-bold">Project Title/Startup Name</p>
+              <p>[Project Title/Startup Name data]</p>
+            </div>
+            <hr />
+            <div>
+              <p class="font-bold">I. Fill up Launchlab Capsule Proposal</p>
+              <div>
+                <p class="font-semibold">A. Project Description</p>
+                <p>[Project Description data]</p>
+              </div>
+              <div>
+                <p class="font-semibold">B. Team Composition</p>
+                <p>MemberName</p>
+                <p>Role</p>
+                <hr />
+                <p>MemberName</p>
+                <p>Role</p>
+                <hr />
+                <p>MemberName</p>
+                <p>Role</p>
+              </div>
+
+              <hr />
+              <div>
+                <p class="font-semibold">C. About the Product/Solution</p>
+                <div>
+                  <p class="font-semibold">1. Problem Statement</p>
+                  <p>[Problem Statement data]</p>
+                </div>
+                <div>
+                  <p class="font-semibold">2. Target Market</p>
+                  <p>[Target Market data]</p>
+                </div>
+                <div>
+                  <p class="font-semibold">3. Solution Description</p>
+                  <p>[Solution Description data]</p>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+            <div>
+              <p class="font-semibold">
+                D. Historical Timeline of the Product/Project Development
+              </p>
+              <div class="mb-8 overflow-x-auto">
+                <table class="w-full">
+                  <thead>
+                    <tr>
+                      <th
+                        class="font-semibold border border-gray-500 px-4 py-2"
+                      >
+                        Month-Year
+                      </th>
+                      <th
+                        class="font-semibold border border-gray-500 px-4 py-2"
+                      >
+                        Key Activities or Milestones
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[mm-yy data]</p>
+                      </td>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[Key Activities or Milestones data]</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[mm-yy data]</p>
+                      </td>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[Key Activities or Milestones data]</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[mm-yy data]</p>
+                      </td>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[Key Activities or Milestones data]</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[mm-yy data]</p>
+                      </td>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[Key Activities or Milestones data]</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[mm-yy data]</p>
+                      </td>
+                      <td class="border border-gray-500 px-4 py-2">
+                        <p>[Key Activities or Milestones data]</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <hr />
+            <p class="font-semibold">E. Competitive Advantage Analysis</p>
+            <div class="mb-8 overflow-x-auto">
+              <table class="w-full table-auto">
+                <thead>
+                  <tr>
+                    <th class="border border-gray-500 px-2 py-2 w-1/5">
+                      Competitive Factors
+                    </th>
+                    <th class="border border-gray-500 px-2 py-2 w-1/5">
+                      Name of Competition 1/ Alternative 1
+                    </th>
+                    <th class="border border-gray-500 px-2 py-2 w-1/5">
+                      Name of Competition 2/ Alternative 2
+                    </th>
+                    <th class="border border-gray-500 px-2 py-2 w-1/5">
+                      Name of Competition 3/ Alternative 3
+                    </th>
+                    <th class="border border-gray-500 px-2 py-2 w-1/5">
+                      Your Startup/Project Name
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th class="border border-gray-500 px-2 py-2">
+                      Product/Service Offering
+                    </th>
+                    <td class="border border-gray-500 px-2 py-2">
+                      [Product/Service Offering data 1]
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      [Product/Service Offering data 2]
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      [Product/Service Offering data 3]
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      [Your Startup/Project Name offering data]
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="border border-gray-500 px-2 py-2">
+                      Pricing Strategy
+                    </th>
+                    <td class="border border-gray-500 px-2 py-2">
+                      [Pricing Strategy data 1]
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      [Pricing Strategy data 2]
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      [Pricing Strategy data 3]
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      [Your Startup/Project Name pricing strategy data]
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div>
+              <p class="font-semibold">
+                F. Intellectual Property Status (If applicable)
+              </p>
+              <p>[Intellectual Property Status data]</p>
+            </div>
+            <div>
+              <p class="font-bold">II. About the Proposed Acceleration</p>
+              <div>
+                <p class="font-semibold">A. Objectives</p>
+                <p>[Objectives data]</p>
+              </div>
+              <div>
+                <p class="font-semibold">B. Scope of the proposal</p>
+                <p>[Scope of the proposal data]</p>
+              </div>
+              <div>
+                <p class="font-semibold">C. Methodology and Expected Outputs</p>
+                <p>[Methodology and Expected Outputs data]</p>
+              </div>
+            </div>
+            <div>
+              <p class="font-bold">
+                III. Curriculum Vitae of the Project Leader
+              </p>
+              <div>
+                <p class="font-semibold">View file</p>
+                <p>[file data]</p>
+              </div>
+            </div>
+            <div>
+              <p class="font-semibold">Links to any supporting materials</p>
+              <p>[Links to any supporting materials data]</p>
+              <p class="font-semibold">Group name</p>
+              <p>[Group name data]</p>
+              <p class="font-semibold">
+                Team Leader - Team Member1(LastName, FirstName)
+              </p>
+              <p>[Team Leader - Team Member1(LastName, FirstName) data]</p>
+              <p class="font-semibold">Team Leader's Mobile Number</p>
+              <p>[Team Leader's Mobile Number data]</p>
+              <p class="font-semibold">Team Leader's Address</p>
+              <p>[Team Leader's Address data]</p>
+              <p class="font-semibold">
+                Team Leader - Member2(LastName, FirstName)
+              </p>
+              <p>[Team Leader - Member2(LastName, FirstName)e data]</p>
+              <p class="font-semibold">
+                Team Leader - Member3(LastName, FirstName)
+              </p>
+              <p>[Team Leader - Member3(LastName, FirstName) data]</p>
+              <p class="font-semibold">
+                Team Leader - Member4(LastName, FirstName)
+              </p>
+              <p>[Team Leader - Member4(LastName, FirstName) data]</p>
+              <p class="font-semibold">
+                Team Leader - Member5(LastName, FirstName)
+              </p>
+              <p>[Team Leader - Member5(LastName, FirstName) data]</p>
+              <p class="font-semibold">University</p>
+              <p>[University data]</p>
+            </div>
+            <div>
+              <p class="font-bold">
+                Technology and Commercialization Readiness Level
+              </p>
+              <div>
+                <p class="font-semibold">Technology</p>
+                <p>[Technology data]</p>
+                <p class="font-semibold">Product Development</p>
+                <p>[Product Development data]</p>
+                <p class="font-semibold">Competitive Landscape</p>
+                <p>[Competitive Landscape data]</p>
+                <p class="font-semibold">Product Development/Design</p>
+                <p>[Product Development/Design data]</p>
+                <p class="font-semibold">Team</p>
+                <p>[Team data]</p>
+                <p class="font-semibold">Go-to-Market</p>
+                <p>[Go-to-Market data]</p>
+                <p class="font-semibold">Manufacturing/Supply Chain</p>
+                <p>[Manufacturing/Supply Chain data]</p>
+              </div>
+            </div>
+            <div>
+              <p class="font-bold">Egilibility Agreement</p>
+              <p>[Egilibility Agreement data]</p>
+            </div>
+            <div>
+              <p class="font-bold">Applicant Commitment Verification Form</p>
+              <p>[Applicant Commitment Verification Form data 1]</p>
+              <p>[Applicant Commitment Verification Form data 2]</p>
+              <p>[Applicant Commitment Verification Form data 3]</p>
+              <p>[Applicant Commitment Verification Form data 4]</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- accept modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="accept-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Applicant Details asdf</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="modal-body">
+            <form th:action="@{/officer/action}" method="POST">
+              <div>Do you want to accept this application?</div>
+              <input
+                type="hidden"
+                name="applicantIdPk"
+                id="reject-applicant-id-pk"
+                value=""
+              />
+              <button type="button">Cancel</button>
+              <button name="accept">Send to manager</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- reject modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="reject-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Applicant Details test</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="modal-body">
+            <form th:action="@{/officer/action}" method="POST">
+              <input
+                type="hidden"
+                name="applicantIdPk"
+                id="reject-applicant-id-pk"
+                value=""
+              />
+              <label>Input Feedback</label>
+              <textarea name="feedback"></textarea>
+              <div>
+                <div>Qualified for Reapplication?</div>
+                <div>
+                  <input type="radio" name="resubmitFlg" />
+                  <label>Yes</label>
+                </div>
+                <div>
+                  <input type="radio" name="resubmitFlg" />
+                  <label>No</label>
+                </div>
+              </div>
+              <button type="button">Cancel</button>
+              <button name="reject">Reject</button>
+              <!-- once rejected, send info to applicant email the feedback -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+    <script th:inline="javascript">
+      console.log(/*[[${officerWebDto}]]*/ "");
+      $(document).ready(function () {
+        new DataTable("#applicants-table", {
+          order: [],
+          columnDefs: [
+            {
+              targets: -1,
+              orderable: false, // Disables sorting for the last column
+            },
+          ],
+        });
+
+        let rows = document.getElementsByClassName("row-btn");
+        let btnRows = document.getElementsByClassName("btn-row");
+
+        var rowBtnClicked = false;
+
+        for (let row of rows) {
+          row.addEventListener("click", function () {
+            let id = this.getAttribute("data-id");
+
+            if (!rowBtnClicked) {
+              $("#details-modal").modal("show");
+
+              // getApplicantDetails();
+              // ako ge comment kay di ko kita sako ge add na html hahahah
+            }
+          });
+        }
+
+        for (let btn of btnRows) {
+          btn.addEventListener("click", function () {
+            rowBtnClicked = true;
+            let idPk = this.getAttribute("data-id");
+            if (this.innerHTML === "Accept") {
+              $("#accept-modal").modal("show");
+              document
+                .getElementById("reject-applicant-id-pk")
+                .setAttribute("value", idPk);
+              rowBtnClicked = false;
+            } else {
+              document
+                .getElementById("reject-applicant-id-pk")
+                .setAttribute("value", idPk);
+              $("#reject-modal").modal("show");
+            }
+          });
+        }
+
+        async function getApplicantDetails() {
+          try {
+            const response = await fetch("/officer/retrieve-all");
+
+            document.getElementById("modal-body").innerHTML =
+              '<div class="loader"></div>';
+
+            if (!response.ok) {
+              document.getElementById("modal-body").innerHTML =
+                '<div><div>Reload</div><a href="/officer/home">Reload</a></div>';
+            }
+
+            const data = await response.json();
+            console.log(data);
+          } catch (error) {
+            console.error("Error:", error);
+          }
+        }
+      });
+    </script>
+  </body>
 </html>
