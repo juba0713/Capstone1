@@ -12,9 +12,12 @@ import capstone.model.dao.entity.JoinApplicantProject;
 import capstone.model.dao.entity.RejectedApplicantEntity;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.logic.ApplicantLogic;
+import capstone.model.logic.UserLogic;
 import capstone.model.object.ApplicantObj;
 import capstone.model.service.CommonService;
+import capstone.model.service.EmailService;
 import capstone.model.service.OfficerService;
+import jakarta.mail.MessagingException;
 
 @Service
 public class OfficerServiceImpl implements OfficerService{
@@ -24,6 +27,12 @@ public class OfficerServiceImpl implements OfficerService{
 	
 	@Autowired
 	private CommonService commonService;
+	
+	@Autowired
+	private EmailService emailService;
+	
+	@Autowired
+	private UserLogic userLogic;
 
 	@Override
 	public OfficerInOutDto getAllApplicants() {
@@ -61,7 +70,7 @@ public class OfficerServiceImpl implements OfficerService{
 	
 
 	@Override
-	public OfficerInOutDto rejectApplicant(OfficerInOutDto inDto) {
+	public OfficerInOutDto rejectApplicant(OfficerInOutDto inDto) throws MessagingException {
 		
 		OfficerInOutDto outDto = new OfficerInOutDto();
 		
@@ -92,6 +101,8 @@ public class OfficerServiceImpl implements OfficerService{
 		rejectedApplicantEntity.setDeleteFlg(false);
 		
 		applicantLogic.saveRejectedApplicantEntity(rejectedApplicantEntity);
+		
+		emailService.sendRejectionMail(inDto.getFeedback(), inDto.getResubmitFlg(), userLogic.getUserByIdPk(applicantEntity.getCreatedBy()).getEmail());
 		
 		return outDto;
 	}

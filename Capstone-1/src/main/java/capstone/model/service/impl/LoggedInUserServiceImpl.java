@@ -42,5 +42,7 @@ public class LoggedInUserServiceImpl implements LoggedInUserService{
 		
 		return userAccount;
 	}
+	
+	
 
 }

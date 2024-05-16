@@ -70,6 +70,7 @@ public class SecurityConfig{
 				.requestMatchers("applicant/**").hasAnyAuthority("APPLICANT", "ADMIN")
 				.requestMatchers("officer/**").hasAnyAuthority("OFFICER", "ADMIN")
 				.requestMatchers("/manager/**").hasAnyAuthority("MANAGER", "ADMIN")
+				.requestMatchers("/tbi-board/**").hasAnyAuthority("TBIBOARD", "ADMIN")
 			)
 			.formLogin((form) -> form
 				.loginPage("/login/")

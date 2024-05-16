@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import capstone.controller.webdto.OfficerWebDto;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.service.OfficerService;
+import jakarta.mail.MessagingException;
 
 @Controller
 @RequestMapping("/officer")
@@ -41,7 +42,7 @@ public class OfficerController {
 	}
 	
 	@PostMapping(value="/action", params="reject")
-	public String rejectApplicant(@ModelAttribute OfficerWebDto webDto) {
+	public String rejectApplicant(@ModelAttribute OfficerWebDto webDto) throws MessagingException {
 		
 		OfficerInOutDto inDto = new OfficerInOutDto();
 		

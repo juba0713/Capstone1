@@ -3,6 +3,7 @@ package capstone.model.service;
 import org.springframework.stereotype.Service;
 
 import capstone.model.dto.OfficerInOutDto;
+import jakarta.mail.MessagingException;
 
 @Service
 public interface OfficerService {
@@ -25,5 +26,5 @@ public interface OfficerService {
 	 * @param inDto
 	 * @return OfficerInOutDto
 	 */
-	public OfficerInOutDto rejectApplicant(OfficerInOutDto inDto);
+	public OfficerInOutDto rejectApplicant(OfficerInOutDto inDto) throws MessagingException;
 }

@@ -20,6 +20,7 @@ import capstone.model.logic.ApplicantLogic;
 import capstone.model.logic.UserLogic;
 import capstone.model.object.ApplicantObj;
 import capstone.model.service.CommonService;
+import capstone.model.service.EmailService;
 import capstone.model.service.LoggedInUserService;
 import capstone.model.service.ManagerService;
 import jakarta.mail.MessagingException;
@@ -36,10 +37,7 @@ public class ManagerServiceImpl implements ManagerService {
 	private CommonService commonService;
 	
 	@Autowired
-    private JavaMailSender emailSender;
-	
-	@Autowired
-	private LoggedInUserService loggedInUserService;
+    private EmailService emailService;
 	
 	@Autowired
 	private UserLogic userLogic;
@@ -97,7 +95,7 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		applicantLogic.saveApplicantEntity(applicantEntity);
 		
-		sendActivationMail(randomPassword, userLogic.getUserByIdPk(applicantEntity.getCreatedBy()).getEmail());
+		emailService.sendActivationMail(randomPassword, userLogic.getUserByIdPk(applicantEntity.getCreatedBy()).getEmail());
 		
 		UserInfoAccountEntity userAccount = userLogic.getUserAccountByUserIdPk(applicantEntity.getCreatedBy());
 		
@@ -108,32 +106,4 @@ public class ManagerServiceImpl implements ManagerService {
 		return outDto;
 	}
 	
-	public void sendActivationMail(String password, String email) throws MessagingException {
-		
-		MimeMessage message = emailSender.createMimeMessage();
-	     
-	    MimeMessageHelper helper = new MimeMessageHelper(message, true);
-	    
-	    helper.setFrom(CommonConstant.EMAIL);
-	    helper.setTo(email);
-	    helper.setSubject("Account Activated");
-	    
-	    String htmlText = "<h1>Welcome!</h1>" +
-                "<p>Your account has been activated.</p>" +
-                "<p>Your email: </p>" + email + "</p>" +
-                "<p>Your password: " + password + "</p>" +
-                "<div><a href='http://your-website.com/login'>Login Now</a></div>"; 
-
-	    helper.setText(htmlText, true); 
-		
-
-		
-
-	    emailSender.send(message);
-	    
-	    System.out.println("SEND");
-	}
-	
-	
-
 }
