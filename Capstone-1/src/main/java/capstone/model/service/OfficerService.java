@@ -27,4 +27,11 @@ public interface OfficerService {
 	 * @return OfficerInOutDto
 	 */
 	public OfficerInOutDto rejectApplicant(OfficerInOutDto inDto) throws MessagingException;
+	
+	/**
+	 * To get the details of the application by id pk
+	 * @param inDto
+	 * @return OfficerInOutDto
+	 */
+	public OfficerInOutDto getApplicantDetails(OfficerInOutDto inDto); 
 }

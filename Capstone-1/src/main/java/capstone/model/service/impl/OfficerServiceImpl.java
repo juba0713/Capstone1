@@ -7,12 +7,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
 import capstone.model.dao.entity.RejectedApplicantEntity;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.logic.ApplicantLogic;
 import capstone.model.logic.UserLogic;
+import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantObj;
 import capstone.model.service.CommonService;
 import capstone.model.service.EmailService;
@@ -56,6 +58,8 @@ public class OfficerServiceImpl implements OfficerService{
 			obj.setDescription(app.getDescription());
 			
 			obj.setConsent(app.getConsent());
+			
+			obj.setUniversity(app.getUniversity());
 			
 			obj.setTeam(commonService.convertToList(app.getTeam()));
 			
@@ -125,6 +129,79 @@ public class OfficerServiceImpl implements OfficerService{
 		applicantLogic.saveApplicantEntity(applicantEntity);
 		
 		return outDto;
+	}
+
+
+	@Override
+	public OfficerInOutDto getApplicantDetails(OfficerInOutDto inDto) {
+		
+		OfficerInOutDto outDto = new OfficerInOutDto();
+		
+		List<ApplicantDetailsEntity> applicant = applicantLogic.getApplicantDetailsByIdPk(inDto.getApplicantIdPk());
+		
+		ApplicantDetailsObj applicantDetailsObj = new ApplicantDetailsObj();
+		
+		String[] members = new String[4];
+		
+		int firstRow = 0;
+		for(ApplicantDetailsEntity app : applicant) {
+			
+			if(firstRow == 0) {
+				
+				applicantDetailsObj.setApplicantIdPk(app.getApplicantIdPk());
+				
+				applicantDetailsObj.setEmail(app.getEmail());
+				
+				applicantDetailsObj.setAgreeFlg(app.getAgreeFlg());
+				
+				applicantDetailsObj.setProjectDescription(app.getProjectDescription());		
+				
+				applicantDetailsObj.setTeams(app.getTeams());
+				
+				applicantDetailsObj.setProblemStatement(app.getProblemStatement());
+				
+				applicantDetailsObj.setTargetMarket(app.getTargetMarket());
+				
+				applicantDetailsObj.setSolutionDescription(app.getSolutionDescription());
+				
+				applicantDetailsObj.setHistoricalTimeline(app.getHistoricalTimeline());
+				
+				applicantDetailsObj.setProductServiceOffering(app.getProductServiceOffering());
+				
+				applicantDetailsObj.setPricingStrategy(app.getPricingStrategy());
+				
+				applicantDetailsObj.setIntPropertyStatus(app.getIntPropertyStatus());
+				
+				applicantDetailsObj.setMethodology(app.getMethodology());
+				
+				applicantDetailsObj.setVitaeFile(app.getVitaeFile());
+				
+				applicantDetailsObj.setSupportLink(app.getSupportLink());
+				
+				applicantDetailsObj.setGroupName(app.getGroupName());
+				
+				applicantDetailsObj.setLeaderFirstName(app.getLeaderFirstName());
+				
+				applicantDetailsObj.setLeaderLastName(app.getLeaderLastName());
+				
+				applicantDetailsObj.setMobileNumber(app.getMobileNumber());
+				
+				applicantDetailsObj.setEmailAddress(app.getEmailAddress());
+				
+				applicantDetailsObj.setUniversity(app.getUniversity());
+				
+				
+			}
+			
+			members[firstRow] = app.getMemberLastName()+", "+app.getMemberFirstName();
+			
+			firstRow++;
+		}
+		
+		outDto.setApplicantDetailsObj(applicantDetailsObj);
+		
+		return outDto;
+		
 	}
 
 }

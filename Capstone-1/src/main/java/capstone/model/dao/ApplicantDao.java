@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
 
@@ -19,9 +20,11 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "	p.project_description,"
 			+ "	a.agree_flg,"
 			+ "	p.teams,"
-			+ " a.status "
+			+ " a.status,"
+			+ " g.university "
 			+ "FROM m_applicant a "
 			+ "JOIN t_project p ON p.applicant_id_pk = a.id_pk "
+			+ "JOIN m_group g ON g.applicant_id_pk = a.id_pk "
 			+ "WHERE a.status = 0 "
 			+ "AND a.delete_flg = false";
 	
@@ -33,9 +36,11 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "	p.project_description,"
 			+ "	a.agree_flg,"
 			+ "	p.teams,"
-			+ " a.status "
+			+ " a.status, "
+			+ " g.university "
 			+ "FROM m_applicant a "
 			+ "JOIN t_project p ON p.applicant_id_pk = a.id_pk "
+			+ "JOIN m_group g ON g.applicant_id_pk = a.id_pk "
 			+ "WHERE a.status = 1 OR a.status = 3 "
 			+ "AND a.delete_flg = false";
 	
@@ -43,6 +48,39 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ " FROM ApplicantEntity e"
 			+ " WHERE e.idPk = :applicantIdPk"
 			+ " AND e.deleteFlg = false";
+	
+	public final String GET_APPLICANT_DETAILS_BY_ID_PK = "SELECT "
+			+ "	a.id_pk,"
+			+ "	a.email,"
+			+ "	a.agree_flg,"
+			+ "	p.project_title,"
+			+ "	p.project_description,"
+			+ "	p.teams, "
+			+ "	p.problem_statement,"
+			+ "	p.target_market,"
+			+ "	p.solution_description,"
+			+ "	p.historical_timeline,"
+			+ "	p.product_service_offering,"
+			+ "	p.pricing_strategy,"
+			+ "	p.int_property_status,"
+			+ "	p.objectives,"
+			+ "	p.scope_proposal,"
+			+ "	p.methodology,"
+			+ "	p.vitae_file,"
+			+ "	p.support_link,"
+			+ "	g.group_name,"
+			+ "	g.first_name AS leader_first_name,"
+			+ "	g.last_name AS leader_last_name,"
+			+ "	g.mobile_number,"
+			+ "	g.email_address,"
+			+ "	g.university,"
+			+ "	gm.first_name AS member_first_name,"
+			+ "	gm.last_name AS member_last_name "
+			+ "FROM m_applicant a "
+			+ "JOIN t_project p ON p.applicant_id_pk = a.id_pk "
+			+ "JOIN m_group g ON g.applicant_id_pk = a.id_pk "
+			+ "JOIN t_group_member gm ON gm.group_id_pk = g.id_pk "
+			+ "WHERE a.id_pk = :applicantIdPk";
 
 	
 	@Query(value=GET_ALL_APPLICANTS_0, nativeQuery=true)
@@ -77,4 +115,20 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 	
 	@Query(value=GET_APPLICANT_BY_ID_PK)
 	public ApplicantEntity getApplicantByIdPk(int applicantIdPk) throws DataAccessException;
+	
+	@Query(value=GET_APPLICANT_DETAILS_BY_ID_PK, nativeQuery=true)
+	public List<Object[]> getApplicantDetailsByIdPkRaw(int applicantIdPk) throws DataAccessException;
+	
+	default List<ApplicantDetailsEntity> getApplicantDetailsByIdPk(int applicantIdPk){
+		List<Object[]> rawResults = getApplicantDetailsByIdPkRaw(applicantIdPk);
+	    List<ApplicantDetailsEntity> applicants = new ArrayList<>();
+
+	    for (Object[] objects : rawResults) {
+	    	ApplicantDetailsEntity applicant = new ApplicantDetailsEntity(objects);  
+	        applicants.add(applicant);
+	    }
+
+	    return applicants;
+	}
+	
 }

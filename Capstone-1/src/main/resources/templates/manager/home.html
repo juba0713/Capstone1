@@ -36,8 +36,11 @@
           <tr
             th:each="app : *{listOfApplicants}"
             class="row-btn"
-            th:data-id="${app.applicantIdPk}"
+            
           >
+          <!--
+			  th:data-id="${app.applicantIdPk}"
+			  -->
             <td><input type="checkbox" /></td>
             <td th:text="${app.email}"></td>
             <td th:text="${app.consent ? 'Yes' : 'No'}"></td>
@@ -118,7 +121,9 @@
     ></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
     <script th:inline="javascript">
+		
       console.log(/*[[${managerWebDto}]]*/ "");
+      /*
       $(document).ready(function () {
         new DataTable("#applicants-table");
 
@@ -173,7 +178,7 @@
             console.error("Error:", error);
           }
         }
-      });
+      });*/
     </script>
   </body>
 </html>

@@ -90,10 +90,11 @@
                 odio. Necessitatibus, voluptatibus.
               </td>
               <td
+                th:text="${app.university	}"
                 class="whitespace-nowrap max-w-0 truncate hidden sm:table-cell"
               >
                 <!-- <div th:each="mem : ${app.team}" th:text="${mem}"></div> -->
-                test/NA if walay university
+                NA
               </td>
               <td class="w-auto flex justify-center gap-2 whitespace-nowrap">
                 <button
@@ -145,12 +146,12 @@
           <div class="modal-body font-secondary" id="modal-body">
             <div>
               <p class="font-bold">Email</p>
-              <p>[email data]</p>
+              <p id="email-value">[email data]</p>
             </div>
             <hr />
             <div>
               <p class="font-bold">Consent</p>
-              <p>[consent data]</p>
+              <p id>[consent data]</p>
             </div>
             <hr />
             <div>
@@ -441,7 +442,7 @@
               <input
                 type="hidden"
                 name="applicantIdPk"
-                id="reject-applicant-id-pk"
+                id="accept-applicant-id-pk"
                 value=""
               />
               <button type="button">Cancel</button>
@@ -472,7 +473,7 @@
                 type="hidden"
                 name="applicantIdPk"
                 id="reject-applicant-id-pk"
-                value=""
+                value="0"
               />
               <label>Input Feedback</label>
               <textarea name="feedback"></textarea>
@@ -488,14 +489,13 @@
                 </div>
               </div>
               <button type="button">Cancel</button>
-              <button name="reject">Reject</button>
+              <button name="reject" >Reject</button>
               <!-- once rejected, send info to applicant email the feedback -->
             </form>
           </div>
         </div>
       </div>
     </div>
-
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -533,7 +533,7 @@
         for (let row of rows) {
           row.addEventListener("click", function () {
             let id = this.getAttribute("data-id");
-
+			retrieveApplicantDetails(id);
             if (!rowBtnClicked) {
               $("#details-modal").modal("show");
 
@@ -547,17 +547,20 @@
           btn.addEventListener("click", function () {
             rowBtnClicked = true;
             let idPk = this.getAttribute("data-id");
+            console.log(idPk);
             if (this.innerHTML === "Accept") {
               $("#accept-modal").modal("show");
               document
-                .getElementById("reject-applicant-id-pk")
+                .getElementById("accept-applicant-id-pk")
                 .setAttribute("value", idPk);
               rowBtnClicked = false;
+              console.log("accept");
             } else {
               document
                 .getElementById("reject-applicant-id-pk")
                 .setAttribute("value", idPk);
               $("#reject-modal").modal("show");
+              console.log("reject");
             }
           });
         }
@@ -581,6 +584,31 @@
           }
         }
       });
+      
+      async function retrieveApplicantDetails(applicantIdPk){
+		  
+		  
+		  const url = `/officer/retrieve/details?applicantIdPk=${applicantIdPk}`;
+		  const response = await fetch(url, { method: 'GET' });
+		  
+		  if (!response.ok) {
+		
+		  	const errorData = await response.json(); 
+		  	throw new Error(`Server Error: ${errorData.message || 'Unknown'}`);
+		  }
+		  
+		  const data = await response.json(); 
+		  
+		  let applicant = data.applicantDetailsObj;
+		  
+		  let email = document.getElementById('email-value');
+		  
+		  email.innerHTML = applicant.email;
+
+
+    	  console.log(data); 
+
+		}
     </script>
   </body>
 </html>

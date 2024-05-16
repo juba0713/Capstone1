@@ -20,7 +20,8 @@ public class LoginController {
 		if(!role.equals("applicant") && 
 			!role.equals("officer") &&
 			!role.equals("tbi-board") && 
-			!role.equals("manager")) {
+			!role.equals("manager") &&
+			role.equals("")){
 			
 			return "redirect:/";
 		}

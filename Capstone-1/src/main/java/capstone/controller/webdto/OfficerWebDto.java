@@ -2,6 +2,7 @@ package capstone.controller.webdto;
 
 import java.util.List;
 
+import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantObj;
 import lombok.Data;
 
@@ -15,4 +16,6 @@ public class OfficerWebDto {
 	public String feedback;
 	
 	public Boolean resubmitFlg;
+	
+	ApplicantDetailsObj applicantDetailsObj;
 }

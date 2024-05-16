@@ -10,4 +10,6 @@ public class CommonConstant {
 	
 	public static String EMAIL = "mieminabua@gmail.com";
 	
+	public static String NULL = null;
+	
 }

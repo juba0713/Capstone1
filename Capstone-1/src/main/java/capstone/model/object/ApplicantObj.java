@@ -7,8 +7,10 @@ import lombok.Data;
 @Data
 public class ApplicantObj {
 	
+	//Applicant Id
 	public int applicantIdPk;
 	
+	//Id
 	public String email;
 	
 	public Boolean consent;
@@ -20,4 +22,6 @@ public class ApplicantObj {
 	public List<String> team;
 	
 	public int status;
+	
+	public String university;
 }

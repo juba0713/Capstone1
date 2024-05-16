@@ -10,6 +10,7 @@ import capstone.model.dao.GroupDao;
 import capstone.model.dao.GroupMemberDao;
 import capstone.model.dao.ProjectDao;
 import capstone.model.dao.RejectedApplicantDao;
+import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
@@ -88,6 +89,12 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	public List<JoinApplicantProject> getAllApplicant13() {
 	
 		return applicantDao.getAllApplicant13();
+	}
+
+	@Override
+	public List<ApplicantDetailsEntity> getApplicantDetailsByIdPk(int applicantIdPk) {
+		
+		return applicantDao.getApplicantDetailsByIdPk(applicantIdPk);
 	}
 	
 

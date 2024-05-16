@@ -208,7 +208,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 				
 				groupMemberEntity.setGroupIdPk(groupIdPk);
 				
-				String[] memberNames = commonService.splitArray(inDto.getGroupLeader());
+				String[] memberNames = commonService.splitArray(member);
 				
 				groupMemberEntity.setFirstName(memberNames[0]);
 				

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
@@ -62,4 +63,10 @@ public interface ApplicantLogic {
 	 * @param entity
 	 */
 	public void saveRejectedApplicantEntity(RejectedApplicantEntity entity);
+	
+	/**
+	 * To get the details of the applicant
+	 * @param entity
+	 */
+	public List<ApplicantDetailsEntity> getApplicantDetailsByIdPk(int applicantIdPk);
 }
