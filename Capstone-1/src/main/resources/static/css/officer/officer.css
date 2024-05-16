@@ -33,3 +33,7 @@
 .rounded-top-right {
   border-top-right-radius: 10px;
 }
+
+.bodyrowhover tr:hover {
+  background: #fff;
+}

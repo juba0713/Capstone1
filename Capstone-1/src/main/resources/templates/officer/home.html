@@ -51,7 +51,7 @@
               <th class="text-center rounded-top-right">Actions</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-red-500">
+          <tbody class="divide-y divide-red-500 bodyrowhover">
             <tr
               th:each="app : *{listOfApplicants}"
               class="row-btn overflow-hidden text-sm"
@@ -489,7 +489,7 @@
                 </div>
               </div>
               <button type="button">Cancel</button>
-              <button name="reject" >Reject</button>
+              <button name="reject">Reject</button>
               <!-- once rejected, send info to applicant email the feedback -->
             </form>
           </div>
@@ -533,7 +533,7 @@
         for (let row of rows) {
           row.addEventListener("click", function () {
             let id = this.getAttribute("data-id");
-			retrieveApplicantDetails(id);
+            retrieveApplicantDetails(id);
             if (!rowBtnClicked) {
               $("#details-modal").modal("show");
 
@@ -584,31 +584,26 @@
           }
         }
       });
-      
-      async function retrieveApplicantDetails(applicantIdPk){
-		  
-		  
-		  const url = `/officer/retrieve/details?applicantIdPk=${applicantIdPk}`;
-		  const response = await fetch(url, { method: 'GET' });
-		  
-		  if (!response.ok) {
-		
-		  	const errorData = await response.json(); 
-		  	throw new Error(`Server Error: ${errorData.message || 'Unknown'}`);
-		  }
-		  
-		  const data = await response.json(); 
-		  
-		  let applicant = data.applicantDetailsObj;
-		  
-		  let email = document.getElementById('email-value');
-		  
-		  email.innerHTML = applicant.email;
 
+      async function retrieveApplicantDetails(applicantIdPk) {
+        const url = `/officer/retrieve/details?applicantIdPk=${applicantIdPk}`;
+        const response = await fetch(url, { method: "GET" });
 
-    	  console.log(data); 
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(`Server Error: ${errorData.message || "Unknown"}`);
+        }
 
-		}
+        const data = await response.json();
+
+        let applicant = data.applicantDetailsObj;
+
+        let email = document.getElementById("email-value");
+
+        email.innerHTML = applicant.email;
+
+        console.log(data);
+      }
     </script>
   </body>
 </html>
