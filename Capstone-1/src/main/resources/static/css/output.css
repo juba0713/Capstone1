@@ -724,6 +724,10 @@ video {
   margin-top: 1rem;
 }
 
+.mt-5{
+  margin-top: 1.25rem;
+}
+
 .mt-6{
   margin-top: 1.5rem;
 }
@@ -830,6 +834,10 @@ video {
 
 .w-12{
   width: 3rem;
+}
+
+.w-28{
+  width: 7rem;
 }
 
 .w-3\/12{
@@ -1116,6 +1124,11 @@ video {
 .border-gray-500{
   --tw-border-opacity: 1;
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
+}
+
+.border-green-400{
+  --tw-border-opacity: 1;
+  border-color: rgb(74 222 128 / var(--tw-border-opacity));
 }
 
 .border-slate-300{
@@ -1771,6 +1784,10 @@ video {
 .hover\:text-yellow-400:hover{
   --tw-text-opacity: 1;
   color: rgb(250 204 21 / var(--tw-text-opacity));
+}
+
+.hover\:underline:hover{
+  text-decoration-line: underline;
 }
 
 .hover\:shadow-xl:hover{
