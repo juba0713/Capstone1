@@ -59,12 +59,10 @@
                   class="btn-row"
                   type="button"
                   th:data-id="${app.applicantIdPk}"
-                  name="activate"
-                  th:if="${app.status == 1}"
+                  name="feedback"
                 >
-                  Activate Account
+                  View Feedback
                 </button>
-              <span th:if="${app.status == 3}">Activated</span>
             </td>
           </tr>
         </tbody>
@@ -98,54 +96,18 @@
       </div>
     </div>
     
-       <div class="modal" tabindex="-1" role="dialog" id="activate-account-modal">
+    <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <form
-                th:action="@{/manager/account/activate}"
-                method="POST"
-              >
-                <input
-                  type="hidden"
-                  name="applicantIdPk"
-                  id="activate-applicant-id-pk"
-                  value="0"
-                />
-                <div>
-					Activate this account?
-				</div>
-                <button
-                  type="submit"
-                  name="activate"
-                >
-                  Activate Account
-                </button>
-              </form>
+          <div>
+			  <div id="score"></div>
+			  <div id="feedback"></div>
+		  </div>
         </div>
       </div>
     </div>
     
-    <div class="modal" tabindex="-1" role="dialog" id="proceed-to-tbi-modal">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Applicant Details</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body" id="modal-body">
-            <p>Hello</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
+  
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -164,7 +126,9 @@
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
     <script th:inline="javascript">
 		
-      console.log(/*[[${managerWebDto}]]*/ "");
+      const webDto = /*[[${managerWebDto}]]*/ "";
+      
+      console.log(webDto);
       
       $(document).ready(function () {
         new DataTable("#applicants-table");
@@ -190,12 +154,23 @@
           btn.addEventListener("click", function () {
             rowBtnClicked = true;
             let idPk = this.getAttribute("data-id");
-            if (this.name === "activate") {
-				
-			  let hiddenApplicantIdPk = document.getElementById('activate-applicant-id-pk').setAttribute('value', this.getAttribute('data-id'));
+            if (this.name === "feedback") {
+			  
+			  let score = document.getElementById('score');
+			  let feedback = document.getElementById('feedback');
+			  
+			  if(webDto.listOfApplicants.length != 0){
+				  webDto.listOfApplicants.forEach((applicant, index) => {
+			    	if(applicant.applicantIdPk == idPk){
+						score.innerHTML = applicant.score;
+						feedback.innerHTML = applicant.feedback;
+					}
+				});
+			  }
 			  
 			  	
-              $("#activate-account-modal").modal("show");
+			  	
+              $("#feedback-modal").modal("show");
             }             
             setTimeout(() => { rowBtnClicked = false}, 100);
           });

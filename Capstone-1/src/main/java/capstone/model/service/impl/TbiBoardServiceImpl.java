@@ -58,7 +58,7 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 			obj.setStatus(app.getStatus());
 			
 			obj.setUniversity(app.getUniversity());
-			
+						
 			listOfAppObj.add(obj);
 			
 		}

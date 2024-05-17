@@ -62,6 +62,10 @@ public class ManagerController {
 	@GetMapping("/evaluated-result")
 	public String showEvaluatedApplication(@ModelAttribute ManagerWebDto webDto) {
 		
+		ManagerInOutDto outDto = managerService.getAllEvaluatedApplicants();
+		
+		webDto.setListOfApplicants(outDto.getListOfApplicants());
+		
 		return "manager/evaluatedapplicants";
 	}
 }

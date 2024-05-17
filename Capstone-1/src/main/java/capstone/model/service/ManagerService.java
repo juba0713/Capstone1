@@ -26,7 +26,13 @@ public interface ManagerService {
 	 * @param inDto
 	 * @return ManagerInOutDto
 	 */
-	public ManagerInOutDto updateApplicantStatus(ManagerInOutDto inDto);
+	public void updateApplicantStatus(ManagerInOutDto inDto);
+	
+	/**
+	 * TO get all evaluated applicants for manager
+	 * @return ManagerInOutDto
+	 */
+	public ManagerInOutDto getAllEvaluatedApplicants();
 	
 
 }

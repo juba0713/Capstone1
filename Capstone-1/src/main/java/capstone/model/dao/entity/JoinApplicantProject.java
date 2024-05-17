@@ -19,7 +19,9 @@ public class JoinApplicantProject {
 			(Boolean) objects[4],
 			(String[]) objects[5],
 			(Integer) objects[6],
-			(String) objects[7]
+			(String) objects[7],
+			(Integer) objects[8],
+			(String) objects[9]
 		);
 	}
 	
@@ -38,4 +40,8 @@ public class JoinApplicantProject {
 	public int status;
 	
 	public String university;
+	
+	public int score;
+	
+	public String feedback;
 }

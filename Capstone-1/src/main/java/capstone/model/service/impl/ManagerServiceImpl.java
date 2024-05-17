@@ -107,11 +107,52 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public ManagerInOutDto updateApplicantStatus(ManagerInOutDto inDto) {
+	public void updateApplicantStatus(ManagerInOutDto inDto) {
 		
 		applicantLogic.updateApplicantStatus(inDto.getStatus(), inDto.getChosenApplicant()); 
+
+	}
+
+	@Override
+	public ManagerInOutDto getAllEvaluatedApplicants() {
 		
-		return null;
+		ManagerInOutDto outDto = new ManagerInOutDto();
+		
+		List<Integer> status = List.of(5);
+		
+		List<JoinApplicantProject> listOfApplicant = applicantLogic.getAllApplicantByStatus(status);
+		
+		List<ApplicantObj> listOfAppObj = new ArrayList<>();
+		
+		for(JoinApplicantProject app : listOfApplicant) {
+			
+			ApplicantObj obj = new ApplicantObj();
+			
+			obj.setApplicantIdPk(app.getApplicantIdPk());
+			
+			obj.setEmail(app.getEmail());
+			
+			obj.setProjectTitle(app.getProjectTitle());
+			
+			obj.setDescription(app.getDescription());
+			
+			obj.setConsent(app.getConsent());
+			
+			obj.setTeam(commonService.convertToList(app.getTeam()));
+			
+			obj.setStatus(app.getStatus());
+			
+			obj.setScore(app.getScore());
+			
+			obj.setFeedback(app.getFeedback());
+			
+			listOfAppObj.add(obj);
+			
+		}
+		
+		outDto.setListOfApplicants(listOfAppObj);
+		
+		return outDto;
 	}
 	
 }

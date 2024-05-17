@@ -23,10 +23,13 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "	a.agree_flg,"
 			+ "	p.teams,"
 			+ " a.status,"
-			+ " g.university "
+			+ " g.university,"
+			+ " COALESCE(e.score, 0) AS score, "
+			+ " COALESCE(e.feedback, '') AS feedback "
 			+ "FROM m_applicant a "
 			+ "JOIN t_project p ON p.applicant_id_pk = a.id_pk "
 			+ "JOIN m_group g ON g.applicant_id_pk = a.id_pk "
+			+ "LEFT JOIN t_evaluated_applicant e ON e.applicant_id_pk = a.id_pk "
 			+ "WHERE a.status IN (:status) "
 			+ "AND a.delete_flg = false";
 	
