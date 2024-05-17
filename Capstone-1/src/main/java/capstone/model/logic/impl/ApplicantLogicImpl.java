@@ -67,13 +67,6 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	}
 
 	@Override
-	public List<JoinApplicantProject> getAllApplicant0() {
-		
-		return applicantDao.getAllApplicant0();
-		
-	}
-
-	@Override
 	public ApplicantEntity getApplicantByIdPk(int applicantIdPk) {
 		
 		return applicantDao.getApplicantByIdPk(applicantIdPk);
@@ -85,16 +78,23 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 		rejectedApplicantDao.save(entity);
 	}
 
-	@Override
-	public List<JoinApplicantProject> getAllApplicant13() {
-	
-		return applicantDao.getAllApplicant13();
-	}
 
 	@Override
 	public List<ApplicantDetailsEntity> getApplicantDetailsByIdPk(int applicantIdPk) {
 		
 		return applicantDao.getApplicantDetailsByIdPk(applicantIdPk);
+	}
+
+	@Override
+	public void updateApplicantStatus(int status, List<Integer> idPks) {
+		
+		applicantDao.updateApplicantStatus(status, idPks);
+	}
+
+	@Override
+	public List<JoinApplicantProject> getAllApplicantByStatus(List<Integer> status) {
+			
+		return applicantDao.getAllApplicantByStatus(status);
 	}
 	
 

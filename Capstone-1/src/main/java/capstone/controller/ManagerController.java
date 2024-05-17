@@ -33,11 +33,30 @@ public class ManagerController {
 	@PostMapping("/account/activate")
 	public String activateAccount(@ModelAttribute ManagerWebDto webDto) throws MessagingException{
 		
+		System.out.println("AW");
+		
 		ManagerInOutDto inDto = new ManagerInOutDto();
 		
-		inDto.setApplicantIdPk(webDto.getApplicantIdPk());
+		inDto.setStatus(3);
+		
+		inDto.setApplicantIdPk(9);
 		
 		managerService.activateApplicantAccount(inDto);
+		
+		return "redirect:/manager/home";
+	}
+	
+	@PostMapping("/proceed")
+	public String proceedApplicationToTBI(@ModelAttribute ManagerWebDto webDto) {
+		
+		ManagerInOutDto inDto = new ManagerInOutDto();
+		
+		//4 - Pending for evaluation
+		inDto.setStatus(4);
+		
+		inDto.setChosenApplicant(webDto.getChosenApplicant());
+		
+		managerService.updateApplicantStatus(inDto);
 		
 		return "redirect:/manager/home";
 	}

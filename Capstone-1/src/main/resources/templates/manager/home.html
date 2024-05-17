@@ -19,6 +19,7 @@
   <body th:object="${managerWebDto}">
     <p>Officer Home</p>
     <div>
+		<form th:action="@{/manager/proceed}" method="POST">
       <table id="applicants-table">
         <thead>
           <tr>
@@ -41,7 +42,7 @@
           <!--
 			  th:data-id="${app.applicantIdPk}"
 			  -->
-            <td><input type="checkbox" /></td>
+            <td><input type="checkbox" name="chosenApplicant" th:value="${app.applicantIdPk}" th:if="${app.status == 3}"/></td>
             <td th:text="${app.email}"></td>
             <td th:text="${app.consent ? 'Yes' : 'No'}"></td>
             <td th:text="${app.projectTitle}"></td>
@@ -53,30 +54,23 @@
               th:text="${app.status == 0 ? 'Pending' : app.status != 2 OR app.status != 0 ? 'Passed' : 'Failed'}"
               th:style="${app.status != 1 OR app.status != 0 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"
             ></td>
-            <td>
-              <form
-                th:action="@{/manager/account/activate}"
-                method="POST"
-                th:if="${app.status == 1}"
-              >
-                <input
-                  type="hidden"
-                  name="applicantIdPk"
-                  th:value="${app.applicantIdPk}"
-                />
+            <td>      
                 <button
                   class="btn-row"
+                  type="button"
                   th:data-id="${app.applicantIdPk}"
                   name="activate"
+                  th:if="${app.status == 1}"
                 >
                   Activate Account
                 </button>
-              </form>
               <span th:if="${app.status == 3}">Activated</span>
             </td>
           </tr>
         </tbody>
       </table>
+      <button>Proceed to TBI</button>
+      </form>
       <div>
         <form th:action="@{/logout}" method="POST">
           <button>Logout</button>
@@ -84,6 +78,54 @@
       </div>
     </div>
     <div class="modal" tabindex="-1" role="dialog" id="details-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Applicant Details</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="modal-body">
+            <p>Hello</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+       <div class="modal" tabindex="-1" role="dialog" id="activate-account-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form
+                th:action="@{/manager/account/activate}"
+                method="POST"
+              >
+                <input
+                  type="hidden"
+                  name="applicantIdPk"
+                  id="activate-applicant-id-pk"
+                  value="0"
+                />
+                <div>
+					Activate this account?
+				</div>
+                <button
+                  type="submit"
+                  name="activate"
+                >
+                  Activate Account
+                </button>
+              </form>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal" tabindex="-1" role="dialog" id="proceed-to-tbi-modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -123,7 +165,7 @@
     <script th:inline="javascript">
 		
       console.log(/*[[${managerWebDto}]]*/ "");
-      /*
+      
       $(document).ready(function () {
         new DataTable("#applicants-table");
 
@@ -148,15 +190,14 @@
           btn.addEventListener("click", function () {
             rowBtnClicked = true;
             let idPk = this.getAttribute("data-id");
-            if (this.innerHTML === "Accept") {
-              $("#accept-modal").modal("show");
-              rowBtnClicked = false;
-            } else {
-              document
-                .getElementById("reject-applicant-id-pk")
-                .setAttribute("value", idPk);
-              $("#reject-modal").modal("show");
-            }
+            if (this.name === "activate") {
+				
+			  let hiddenApplicantIdPk = document.getElementById('activate-applicant-id-pk').setAttribute('value', this.getAttribute('data-id'));
+			  
+			  	
+              $("#activate-account-modal").modal("show");
+            }             
+            setTimeout(() => { rowBtnClicked = false}, 100);
           });
         }
 
@@ -178,7 +219,7 @@
             console.error("Error:", error);
           }
         }
-      });*/
+      });
     </script>
   </body>
 </html>

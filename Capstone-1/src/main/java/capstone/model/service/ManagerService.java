@@ -9,7 +9,7 @@ import jakarta.mail.MessagingException;
 public interface ManagerService {
 	
 	/**
-	 * TO get all applicants
+	 * TO get all applicants for manager
 	 * @return ManagerInOutDto
 	 */
 	public ManagerInOutDto getAllApplicants();
@@ -20,5 +20,13 @@ public interface ManagerService {
 	 * @return ManagerInOutDto
 	 */
 	public ManagerInOutDto activateApplicantAccount(ManagerInOutDto inDto) throws MessagingException;
+	
+	/**
+	 * To update applicant status
+	 * @param inDto
+	 * @return ManagerInOutDto
+	 */
+	public ManagerInOutDto updateApplicantStatus(ManagerInOutDto inDto);
+	
 
 }

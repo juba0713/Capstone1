@@ -70,7 +70,6 @@ public class SecurityConfig{
 				.requestMatchers("/applicant/form").permitAll()
 				.requestMatchers("applicant/**").hasAnyAuthority("APPLICANT", "ADMIN")
 				.requestMatchers("officer/**").hasAnyAuthority("OFFICER", "ADMIN")
-				.requestMatchers("officer/retrieve/details").permitAll()
 				.requestMatchers("/manager/**").hasAnyAuthority("MANAGER", "ADMIN")
 				.requestMatchers("/tbi-board/**").hasAnyAuthority("TBIBOARD", "ADMIN")
 			)

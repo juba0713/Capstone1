@@ -9,7 +9,7 @@ import jakarta.mail.MessagingException;
 public interface OfficerService {
 	
 	/**
-	 * To get all applicants
+	 * To get all applicants for officer
 	 * @return OfficerInOutDto
 	 */
 	public OfficerInOutDto getAllApplicants();

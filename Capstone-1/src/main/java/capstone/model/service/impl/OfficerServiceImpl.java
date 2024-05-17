@@ -41,7 +41,9 @@ public class OfficerServiceImpl implements OfficerService{
 		
 		OfficerInOutDto outDto = new OfficerInOutDto();
 		
-		List<JoinApplicantProject> listOfApplicant = applicantLogic.getAllApplicant0();
+		List<Integer> status = List.of(0);
+		
+		List<JoinApplicantProject> listOfApplicant = applicantLogic.getAllApplicantByStatus(status);
 		
 		List<ApplicantObj> listOfAppObj = new ArrayList<>();
 		
@@ -82,16 +84,8 @@ public class OfficerServiceImpl implements OfficerService{
 		
 		ApplicantEntity applicantEntity = applicantLogic.getApplicantByIdPk(inDto.getApplicantIdPk());
 		
-		/*
-		 * 0 - pending
-		 * 1 - accept
-		 * 2 - reject
-		 * 3 - evaluated
-		 */
-		applicantEntity.setStatus(2);
-		
-		applicantLogic.saveApplicantEntity(applicantEntity);
-		
+		applicantLogic.updateApplicantStatus(2, List.of(inDto.getApplicantIdPk()));
+				
 		RejectedApplicantEntity rejectedApplicantEntity = new RejectedApplicantEntity();
 		
 		rejectedApplicantEntity.setApplicantIdPk(inDto.getApplicantIdPk());
@@ -115,18 +109,8 @@ public class OfficerServiceImpl implements OfficerService{
 	public OfficerInOutDto acceptApplicant(OfficerInOutDto inDto) {
 		
 		OfficerInOutDto outDto = new OfficerInOutDto();
-		
-		ApplicantEntity applicantEntity = applicantLogic.getApplicantByIdPk(inDto.getApplicantIdPk());
-		
-		/*
-		 * 0 - pending
-		 * 1 - accept
-		 * 2 - reject
-		 * 3 - evaluated
-		 */
-		applicantEntity.setStatus(1);
-		
-		applicantLogic.saveApplicantEntity(applicantEntity);
+			
+		applicantLogic.updateApplicantStatus(1, List.of(inDto.getApplicantIdPk()));
 		
 		return outDto;
 	}

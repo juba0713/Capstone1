@@ -50,7 +50,9 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		ManagerInOutDto outDto = new ManagerInOutDto();
 		
-		List<JoinApplicantProject> listOfApplicant = applicantLogic.getAllApplicant13();
+		List<Integer> status = List.of(1,3);
+		
+		List<JoinApplicantProject> listOfApplicant = applicantLogic.getAllApplicantByStatus(status);
 		
 		List<ApplicantObj> listOfAppObj = new ArrayList<>();
 		
@@ -91,9 +93,7 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		ApplicantEntity applicantEntity = applicantLogic.getApplicantByIdPk(inDto.getApplicantIdPk());
 		
-		applicantEntity.setStatus(3);
-		
-		applicantLogic.saveApplicantEntity(applicantEntity);
+		applicantLogic.updateApplicantStatus(inDto.getStatus(), List.of(inDto.getApplicantIdPk())); 
 		
 		emailService.sendActivationMail(randomPassword, userLogic.getUserByIdPk(applicantEntity.getCreatedBy()).getEmail());
 		
@@ -104,6 +104,14 @@ public class ManagerServiceImpl implements ManagerService {
 		userLogic.saveUserAccount(userAccount);
 	       
 		return outDto;
+	}
+
+	@Override
+	public ManagerInOutDto updateApplicantStatus(ManagerInOutDto inDto) {
+		
+		applicantLogic.updateApplicantStatus(inDto.getStatus(), inDto.getChosenApplicant()); 
+		
+		return null;
 	}
 	
 }

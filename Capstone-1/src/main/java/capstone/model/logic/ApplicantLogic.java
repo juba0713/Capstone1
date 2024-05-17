@@ -42,16 +42,6 @@ public interface ApplicantLogic {
 	public void saveGroupMemberEntity(List<GroupMemberEntity> entity);
 	
 	/**
-	 * To get all applicant
-	 */
-	public List<JoinApplicantProject> getAllApplicant0();
-	
-	/**
-	 * To get all applicant
-	 */
-	public List<JoinApplicantProject> getAllApplicant13();
-	
-	/**
 	 * To get applicant by idPk
 	 * @param applicantIdPk
 	 * @return ApplicantEntity
@@ -69,4 +59,17 @@ public interface ApplicantLogic {
 	 * @param entity
 	 */
 	public List<ApplicantDetailsEntity> getApplicantDetailsByIdPk(int applicantIdPk);
+	
+	/**
+	 * To update the status of the applicant
+	 * @param status
+	 * @param idpks
+	 */
+	public void updateApplicantStatus(int status, List<Integer> idPks);
+	
+	/**
+	 * To get all applicant by status
+	 * @return List<JoinApplicantProject>
+	 */
+	public List<JoinApplicantProject> getAllApplicantByStatus(List<Integer> status);
 }

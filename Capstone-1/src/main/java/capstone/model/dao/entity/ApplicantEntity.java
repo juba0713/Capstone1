@@ -57,8 +57,8 @@ public class ApplicantEntity {
 	 * 1 - Accept
 	 * 2 - Reject
 	 * 3 - createdApplicantAccount
-	 * 4 - evaluated
-	 * 5 - createdIncubateACcount
+	 * 4 - Pending for evaluation
+	 * 5 - Evaluated
 	 */
 	private int status;
 	

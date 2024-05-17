@@ -532,6 +532,7 @@
 
         for (let row of rows) {
           row.addEventListener("click", function () {
+			
             let id = this.getAttribute("data-id");
             retrieveApplicantDetails(id);
             if (!rowBtnClicked) {
@@ -547,21 +548,19 @@
           btn.addEventListener("click", function () {
             rowBtnClicked = true;
             let idPk = this.getAttribute("data-id");
-            console.log(idPk);
-            if (this.innerHTML === "Accept") {
+            console.log(this.name);
+            if (this.name === "accept") {
               $("#accept-modal").modal("show");
               document
                 .getElementById("accept-applicant-id-pk")
                 .setAttribute("value", idPk);
-              rowBtnClicked = false;
-              console.log("accept");
-            } else {
+            } else if(this.name === 'reject'){
               document
                 .getElementById("reject-applicant-id-pk")
                 .setAttribute("value", idPk);
               $("#reject-modal").modal("show");
-              console.log("reject");
             }
+            setTimeout(() => { rowBtnClicked=false }, 100);
           });
         }
 

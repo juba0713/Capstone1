@@ -1,4 +1,4 @@
-package capstone.model.dto;
+package capstone.controller.webdto;
 
 import java.util.List;
 
@@ -6,17 +6,10 @@ import capstone.model.object.ApplicantObj;
 import lombok.Data;
 
 @Data
-public class ManagerInOutDto {
-	
+public class TbiBoardWebDto {
 	public List<ApplicantObj> listOfApplicants;
 	
 	public int applicantIdPk;
 	
-	public String feedback;
-	
-	public Boolean resubmitFlg;
-	
 	public List<Integer> chosenApplicant;
-	
-	public int status;
 }

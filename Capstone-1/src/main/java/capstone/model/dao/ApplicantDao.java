@@ -5,15 +5,17 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
+import jakarta.transaction.Transactional;
 
 public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 	
-	public final String GET_ALL_APPLICANTS_0 = "SELECT "
+	public final String GET_ALL_APPLICANTS_BY_STATUS = "SELECT "
 			+ "	a.id_pk,"
 			+ "	a.email,"
 			+ "	p.project_title,"
@@ -25,24 +27,9 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "FROM m_applicant a "
 			+ "JOIN t_project p ON p.applicant_id_pk = a.id_pk "
 			+ "JOIN m_group g ON g.applicant_id_pk = a.id_pk "
-			+ "WHERE a.status = 0 "
+			+ "WHERE a.status IN (:status) "
 			+ "AND a.delete_flg = false";
 	
-	
-	public final String GET_ALL_APPLICANTS_1_3 = "SELECT "
-			+ "	a.id_pk,"
-			+ "	a.email,"
-			+ "	p.project_title,"
-			+ "	p.project_description,"
-			+ "	a.agree_flg,"
-			+ "	p.teams,"
-			+ " a.status, "
-			+ " g.university "
-			+ "FROM m_applicant a "
-			+ "JOIN t_project p ON p.applicant_id_pk = a.id_pk "
-			+ "JOIN m_group g ON g.applicant_id_pk = a.id_pk "
-			+ "WHERE a.status = 1 OR a.status = 3 "
-			+ "AND a.delete_flg = false";
 	
 	public final String GET_APPLICANT_BY_ID_PK = "SELECT e"
 			+ " FROM ApplicantEntity e"
@@ -82,27 +69,15 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "JOIN t_group_member gm ON gm.group_id_pk = g.id_pk "
 			+ "WHERE a.id_pk = :applicantIdPk";
 
+	public final String UPDATE_APPLICANT_STATUS = "UPDATE ApplicantEntity a "
+			+ "SET a.status = :status "
+			+ "WHERE a.idPk IN (:idPks) ";
 	
-	@Query(value=GET_ALL_APPLICANTS_0, nativeQuery=true)
-	public List<Object[]> getAllApplicant0Raw() throws DataAccessException;
+	@Query(value=GET_ALL_APPLICANTS_BY_STATUS, nativeQuery=true)
+	public List<Object[]> getAllApplicantByStatusRaw(List<Integer> status) throws DataAccessException;
 	
-	default List<JoinApplicantProject> getAllApplicant0(){
-		List<Object[]> rawResults = getAllApplicant0Raw();
-	    List<JoinApplicantProject> applicants = new ArrayList<>();
-
-	    for (Object[] objects : rawResults) {
-	        JoinApplicantProject applicant = new JoinApplicantProject(objects);  
-	        applicants.add(applicant);
-	    }
-
-	    return applicants;
-	}
-	
-	@Query(value=GET_ALL_APPLICANTS_1_3, nativeQuery=true)
-	public List<Object[]> getAllApplicant13Raw() throws DataAccessException;
-	
-	default List<JoinApplicantProject> getAllApplicant13(){
-		List<Object[]> rawResults = getAllApplicant13Raw();
+	default List<JoinApplicantProject> getAllApplicantByStatus(List<Integer> status){
+		List<Object[]> rawResults = getAllApplicantByStatusRaw(status);
 	    List<JoinApplicantProject> applicants = new ArrayList<>();
 
 	    for (Object[] objects : rawResults) {
@@ -130,5 +105,10 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 
 	    return applicants;
 	}
+	
+	@Modifying
+	@Transactional
+	@Query(value=UPDATE_APPLICANT_STATUS)
+	public void updateApplicantStatus(int status, List<Integer> idPks) throws DataAccessException;
 	
 }
