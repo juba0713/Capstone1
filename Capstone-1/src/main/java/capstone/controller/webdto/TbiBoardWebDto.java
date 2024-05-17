@@ -12,4 +12,8 @@ public class TbiBoardWebDto {
 	public int applicantIdPk;
 	
 	public List<Integer> chosenApplicant;
+	
+	public int score;
+	
+	public String feedback;
 }

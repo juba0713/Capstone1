@@ -24,4 +24,8 @@ public class ApplicantObj {
 	public int status;
 	
 	public String university;
+	
+	public int score;
+	
+	public String feedback;
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
+import capstone.model.dao.entity.EvaluatedApplicantEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
@@ -72,4 +73,10 @@ public interface ApplicantLogic {
 	 * @return List<JoinApplicantProject>
 	 */
 	public List<JoinApplicantProject> getAllApplicantByStatus(List<Integer> status);
+	
+	/**
+	 * TO save the evaluated applicant
+	 * @param entity
+	 */
+	public void saveEvaluateedApplicant(EvaluatedApplicantEntity entity);
 }

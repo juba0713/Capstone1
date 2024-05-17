@@ -92,8 +92,9 @@
               </td>
               <td
                 class="whitespace-nowrap max-w-0 truncate hidden sm:table-cell"
+                th:text="${app.university}"
               >
-                <!-- <div th:each="mem : ${app.team}" th:text="${mem}"></div> -->
+                
                 test/NA if walay university
               </td>
               <td class="w-auto flex justify-center gap-2 whitespace-nowrap">
@@ -127,82 +128,62 @@
       </div>
     </div>
 
-    <!-- accept modal -->
-    <div class="modal" tabindex="-1" role="dialog" id="accept-modal">
+    <!-- evaluate modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="evaluate-modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Applicant Details asdf</h5>
-            <button
-              type="button"
-              class="close"s
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
           <div class="modal-body" id="modal-body">
-            <form th:action="@{/officer/action}" method="POST">
-              <div>Do you want to accept this application?</div>
-              <input
-                type="hidden"
-                name="applicantIdPk"
-                id="reject-applicant-id-pk"
-                value=""
-              />
-              <button type="button">Cancel</button>
-              <button name="accept">Send to manager</button>
+            <form th:action="@{/tbi-board/evaluate}" method="POST">
+				<input type="hidden" name="applicantIdPk" id="evaluate-applicant-id-pk" />
+              	<div>
+					<input type="radio" name="score" value="1"/>
+					<label>1</label>	  
+				</div>
+				<div>
+					<input type="radio" name="score" value="2"/>
+					<label>2</label>	  
+				</div>
+				<div>
+					<input type="radio" name="score" value="3"/>
+					<label>3</label>	  
+				</div>
+				<div>
+					<input type="radio" name="score" value="4"/>
+					<label>4</label>	  
+				</div>
+				<div>
+					<input type="radio" name="score" value="5"/>
+					<label>5</label>	  
+				</div>
+				<div>
+					<input type="radio" name="score" value="6"/>
+					<label>6</label>	  
+				</div>
+				<div>
+					<input type="radio" name="score" value="7"/>
+					<label>7</label>	  
+				</div>
+				<div>
+					<input type="radio" name="score" value="8"/>
+					<label>8</label>	  
+				</div>
+				<div>
+					<input type="radio" name="score" value="9"/>
+					<label>9</label>	  
+				</div>
+				<div>
+					<input type="radio" name="score" value="10"/>
+					<label>10</label>	  
+				</div>
+				<div>Feedback</div>
+				<textarea name="feedback"></textarea>
+				<button>Submit</button>
             </form>
           </div>
         </div>
       </div>
     </div>
-    <!-- reject modal -->
-    <div class="modal" tabindex="-1" role="dialog" id="reject-modal">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Applicant Details test</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body" id="modal-body">
-            <form th:action="@{/officer/action}" method="POST">
-              <input
-                type="hidden"
-                name="applicantIdPk"
-                id="reject-applicant-id-pk"
-                value=""
-              />
-              <label>Input Feedback</label>
-              <textarea name="feedback"></textarea>
-              <div>
-                <div>Qualified for Reapplication?</div>
-                <div>
-                  <input type="radio" name="resubmitFlg" />
-                  <label>Yes</label>
-                </div>
-                <div>
-                  <input type="radio" name="resubmitFlg" />
-                  <label>No</label>
-                </div>
-              </div>
-              <button type="button">Cancel</button>
-              <button name="reject">Reject</button>
-              <!-- once rejected, send info to applicant email the feedback -->
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
+   
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -234,7 +215,8 @@
 
         let rows = document.getElementsByClassName("row-btn");
         let btnRows = document.getElementsByClassName("btn-row");
-
+	
+		console.log(btnRows);
         var rowBtnClicked = false;
 
         for (let row of rows) {
@@ -254,18 +236,13 @@
           btn.addEventListener("click", function () {
             rowBtnClicked = true;
             let idPk = this.getAttribute("data-id");
-            if (this.innerHTML === "Accept") {
-              $("#accept-modal").modal("show");
-              document
-                .getElementById("reject-applicant-id-pk")
-                .setAttribute("value", idPk);
-              rowBtnClicked = false;
-            } else {
-              document
-                .getElementById("reject-applicant-id-pk")
-                .setAttribute("value", idPk);
-              $("#reject-modal").modal("show");
+            if (this.name === "evaluate") {
+              $("#evaluate-modal").modal("show");
+              document.getElementById('evaluate-applicant-id-pk').setAttribute('value', idPk);
+              
             }
+            
+            setTimeout(() => { rowBtnClicked = false}, 100);
           });
         }
 

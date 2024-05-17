@@ -12,4 +12,10 @@ public interface TbiBoardService {
 	 * @return ManagerInOutDto
 	 */
 	public TbiBoardInOutDto getAllApplicants();
+	
+	/**
+	 * To evaluate applicant
+	 * @return
+	 */
+	public void evaluateApplicant(TbiBoardInOutDto inDto);
 }

@@ -9,4 +9,10 @@ import lombok.Data;
 public class TbiBoardInOutDto {
 
 	public List<ApplicantObj> listOfApplicants;
+	
+	public int score;
+	
+	public String feedback;
+	
+	public int applicantIdPk;
 }

@@ -33,8 +33,6 @@ public class ManagerController {
 	@PostMapping("/account/activate")
 	public String activateAccount(@ModelAttribute ManagerWebDto webDto) throws MessagingException{
 		
-		System.out.println("AW");
-		
 		ManagerInOutDto inDto = new ManagerInOutDto();
 		
 		inDto.setStatus(3);
@@ -59,5 +57,11 @@ public class ManagerController {
 		managerService.updateApplicantStatus(inDto);
 		
 		return "redirect:/manager/home";
+	}
+	
+	@GetMapping("/evaluated-result")
+	public String showEvaluatedApplication(@ModelAttribute ManagerWebDto webDto) {
+		
+		return "manager/evaluatedapplicants";
 	}
 }

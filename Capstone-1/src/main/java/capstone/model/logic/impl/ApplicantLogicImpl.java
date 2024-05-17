@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import capstone.model.dao.ApplicantDao;
+import capstone.model.dao.EvaluatedApplicantDao;
 import capstone.model.dao.GroupDao;
 import capstone.model.dao.GroupMemberDao;
 import capstone.model.dao.ProjectDao;
 import capstone.model.dao.RejectedApplicantDao;
 import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
+import capstone.model.dao.entity.EvaluatedApplicantEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
@@ -36,6 +38,9 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	
 	@Autowired
 	private RejectedApplicantDao rejectedApplicantDao;
+	
+	@Autowired
+	private EvaluatedApplicantDao evaluatedApplicantDao;
 
 	@Override
 	public int saveApplicantEntity(ApplicantEntity entity) {
@@ -95,6 +100,13 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	public List<JoinApplicantProject> getAllApplicantByStatus(List<Integer> status) {
 			
 		return applicantDao.getAllApplicantByStatus(status);
+	}
+
+	@Override
+	public void saveEvaluateedApplicant(EvaluatedApplicantEntity entity) {
+		
+		evaluatedApplicantDao.save(entity);
+		
 	}
 	
 
