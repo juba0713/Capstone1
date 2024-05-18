@@ -1485,10 +1485,10 @@
         for (let row of rows) {
           row.addEventListener("click", function () {
             let id = this.getAttribute("data-id");
-            retrieveApplicantDetails(id);
+            
             if (!rowBtnClicked) {
               $("#details-modal").modal("show");
-
+				retrieveApplicantDetails(id);
               // getApplicantDetails();
               // ako ge comment kay di ko kita sako ge add na html hahahah
             }

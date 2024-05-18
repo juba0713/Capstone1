@@ -234,7 +234,7 @@
 
             if (!rowBtnClicked) {
               $("#details-modal").modal("show");
-
+				retrieveApplicantDetails(id);
               // getApplicantDetails();
               // ako ge comment kay di ko kita sako ge add na html hahahah
             }
@@ -260,7 +260,7 @@
 
         async function getApplicantDetails() {
           try {
-            const response = await fetch("/officer/retrieve-all");
+            const response = await fetch("/tbi-board/retrieve-all");
 
             document.getElementById("modal-body").innerHTML =
               '<div class="loader"></div>';
@@ -271,11 +271,188 @@
             }
 
             const data = await response.json();
-            console.log(data);
+            
+            
           } catch (error) {
             console.error("Error:", error);
           }
         }
+        
+        async function retrieveApplicantDetails(applicantIdPk) {
+	        const url = `/tbi-board/retrieve/details?applicantIdPk=${applicantIdPk}`;
+	        const response = await fetch(url, { method: "GET" });
+	
+	        if (!response.ok) {
+	          const errorData = await response.json();
+	          throw new Error(`Server Error: ${errorData.message || "Unknown"}`);
+	        }
+	
+	        const data = await response.json();
+	        
+	        console.log(data);
+	        
+	        document.querySelector('.overflow-auto').scrollTo({
+		        top: 0,
+		    });
+	
+	        let applicant = data.applicantDetailsObj;
+	        let email = document.querySelector(".email");       
+	        console.log(email);
+	        let agreeFlgs = document.querySelectorAll(".agreeFlg");      
+	        let projectTitle = document.querySelector('.projectTitle');		
+	        let projectDescription = document.querySelector('.projectDescription');
+			let memberOne = document.querySelectorAll('.member-1');
+			let memberTwo = document.querySelectorAll('.member-2');
+			let memberThree = document.querySelectorAll('.member-3');
+			let problemStatement = document.querySelector('.problemStatement');
+			let targetMarket = document.querySelector('.targetMarket');
+			let solutionDescription = document.querySelector('.solutionDescription');
+			let historicalTimelineOne = document.querySelectorAll('.historicalTimeline-1');
+			let historicalTimelineTwo = document.querySelectorAll('.historicalTimeline-2');
+			let historicalTimelineThree = document.querySelectorAll('.historicalTimeline-3');
+			let historicalTimelineFour = document.querySelectorAll('.historicalTimeline-4');
+			let historicalTimelineFive = document.querySelectorAll('.historicalTimeline-5');
+			let productServiceOffering = document.querySelectorAll('.productServiceOffering');
+			let pricingStrategy = document.querySelectorAll('.pricingStrategy');
+			let intPropertyStatus = document.querySelector('.intPropertyStatus');
+			let objectives = document.querySelector('.objectives');
+			let scopeProposal = document.querySelector('.scopeProposal');
+			let methodology = document.querySelector('.methodology');
+			//let vitaeFile = document.querySelector('.vitaeFile');
+			let supportLink = document.querySelector('.supportLink'); 
+			let groupName = document.querySelector('.groupName');
+			let groupLeader = document.querySelector('.groupLeader');
+			let leaderNumber = document.querySelector('.leaderNumber');
+			let leaderEmail = document.querySelector('.leaderEmail');
+			let members = document.querySelectorAll('.members');
+			let university = document.querySelector('.university');
+			let technologyAns = document.querySelectorAll('.technologyAns');
+			let productDevelopmentAns = document.querySelectorAll('.productDevelopmentAns');
+			let competitiveLandscapeAns = document.querySelectorAll('.competitiveLandscapeAns');
+			let productDesignAns = document.querySelectorAll('.productDesignAns');
+			let teamAns = document.querySelectorAll('.teamAns');
+			let goToMarketAns = document.querySelectorAll('.goToMarketAns');
+			let manufacturingAns = document.querySelectorAll('.manufacturingAns');
+			let eligibilityAgreeFlg = document.querySelectorAll('.eligibilityAgreeFlg');
+			let commitmentOneFlg = document.querySelectorAll('.commitmentOneFlg');
+			let commitmentTwoFlg = document.querySelectorAll('.commitmentTwoFlg');
+			let commitmentThreeFlg = document.querySelectorAll('.commitmentThreeFlg');
+			let commitmentFourFlg = document.querySelectorAll('.commitmentFourFlg');
+			
+			//Email
+			email.value = applicant.email;
+			//Project Title
+			projectTitle.value = applicant.projectTitle;	
+			//Project Description
+			projectDescription.textContent = applicant.projectDescription;	
+			//AgreeF;g
+	        if(applicant.agreeFlg){
+				agreeFlgs[0].checked = true;
+			}else{
+				agreeFlgs[1].checked = true;
+			}	
+			//Teams
+			memberOne[0].value = applicant.teams[0][0];
+			memberOne[1].value = applicant.teams[0][1];
+			memberTwo[0].value = applicant.teams[1][0];
+			memberTwo[1].value = applicant.teams[1][1];
+			memberThree[0].value = applicant.teams[2][0];
+			memberThree[1].value = applicant.teams[2][1];
+			//Problem Statement
+			problemStatement.textContent = applicant.problemStatement;
+			//Target Market
+			targetMarket.textContent = applicant.targetMarket;
+			//Solution Description
+			solutionDescription.textContent = applicant.solutionDescription;
+			//HistoricalTimeline
+			historicalTimelineOne[0].value = applicant.historicalTimeline[0][0];
+			historicalTimelineOne[1].value = applicant.historicalTimeline[0][1];
+			historicalTimelineTwo[0].value = applicant.historicalTimeline[1][0];
+			historicalTimelineTwo[1].value = applicant.historicalTimeline[1][1];
+			historicalTimelineThree[0].value = applicant.historicalTimeline[2][0];
+			historicalTimelineThree[1].value = applicant.historicalTimeline[2][1];
+			historicalTimelineFour[0].value = applicant.historicalTimeline[3][0];
+			historicalTimelineFour[1].value = applicant.historicalTimeline[3][1];
+			historicalTimelineFive[0].value = applicant.historicalTimeline[4][0];
+			historicalTimelineFive[1].value = applicant.historicalTimeline[4][1];
+			//Product Service Offering
+			productServiceOffering[0].value = applicant.productServiceOffering[0];
+			productServiceOffering[1].value = applicant.productServiceOffering[1];
+			productServiceOffering[2].value = applicant.productServiceOffering[2];
+			productServiceOffering[3].value = applicant.productServiceOffering[3];
+			//Pricing Strategy
+			pricingStrategy[0].value = applicant.pricingStrategy[0];
+			pricingStrategy[1].value = applicant.pricingStrategy[1];
+			pricingStrategy[2].value = applicant.pricingStrategy[2];
+			pricingStrategy[3].value = applicant.pricingStrategy[3];
+			//Intellectual Property Status
+			intPropertyStatus.value = applicant.intPropertyStatus;
+			//Objectives
+			objectives.textContent = applicant.objectives;
+			//Scope of the proposal
+			scopeProposal.textContent = applicant.scopeProposal;
+			//Methodology
+			methodology.textContent = applicant.methodology;
+			//Supporting Link
+			supportLink.value = applicant.supportLink;
+			//Group Name
+			groupName.value = applicant.groupName;
+			//Group Leader
+			groupLeader.value = applicant.leaderLastName + ", " + applicant.leaderFirstName;
+			//Leader Mobile Number
+			leaderNumber.value = applicant.mobileNumber;
+			//Leader Email
+			leaderEmail.value = applicant.emailAddress;
+			//Members
+			members[0].value = applicant.members[0];
+			members[1].value = applicant.members[1];
+			members[2].value = applicant.members[2];
+			members[3].value = applicant.members[3];
+			//University
+			university.value = applicant.university;
+	        //Technology Answer
+	        technologyAns[applicant.technologyAns-1].checked = true; 
+	        //Product Development Answer
+	        productDevelopmentAns[applicant.productDevelopmentAns-1].checked = true;
+	        //Competitive Landscape Answer
+	        competitiveLandscapeAns[applicant.competitiveLandscapeAns-1].checked = true;
+	        //Product Design Answer
+	        productDesignAns[applicant.productDesignAns-1].checked = true;
+	        //Teams Answer
+	        teamAns[applicant.teamAns-1].checked = true;
+	        //Go To market Answer
+	        goToMarketAns[applicant.goToMarketAns-1].checked = true;
+	        //Manufacturing Answer
+	        manufacturingAns[applicant.manufacturingAns-1].checked = true;
+	        //eligibilityAgreeFlg
+	        if(applicant.eligibilityAgreeFlg){
+				eligibilityAgreeFlg[0].checked = true;
+			}else{
+				eligibilityAgreeFlg[1].checked = true;
+			}
+			//CommmitFlg
+	        if(applicant.commitmentOneFlg){
+				commitmentOneFlg[0].checked = true;
+			}else{
+				commitmentOneFlg[1].checked = true;
+			}
+			if(applicant.commitmentTwoFlg){
+				commitmentTwoFlg[0].checked = true;
+			}else{
+				commitmentTwoFlg[1].checked = true;
+			}
+			if(applicant.commitmentThreeFlg){
+				commitmentThreeFlg[0].checked = true;
+			}else{
+				commitmentThreeFlg[1].checked = true;
+			}
+			if(applicant.commitmentFourFlg){
+				commitmentFourFlg[0].checked = true;
+			}else{
+				commitmentFourFlg[1].checked = true;
+			}
+		    console.log(applicant);
+	      }
       });
     </script>
   </body>
