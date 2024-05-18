@@ -44,6 +44,8 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 	            String username = authentication.getName();
 	            
 	            UserInformationEntity user = loggedInUserService.getUserInformation();
+	            
+	            request.getSession().setAttribute("fullname", user.getFirstName() + " " + user.getLastName());
 	    
 	            request.getSession().setAttribute("username", username);
 	      

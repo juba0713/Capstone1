@@ -37,7 +37,7 @@
       <div sec:authorize="isAuthenticated()">
         <div class="flex place-items-end flex-col ml-60">
           <div class="font-primary text-5xl">
-            Welcome, <span th:text="${session.username}"></span>!
+            Welcome, <span th:text="${session.fullname}"></span>!
           </div>
           <div>ID: <span th:text="${session.id}"></span></div>
         </div>
