@@ -105,7 +105,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		applicantEntity.setAgreeFlg(inDto.getAgreeFlg());
 		
-		applicantEntity.setTechnologyAns(inDto.getTechonologyAns());
+		applicantEntity.setTechnologyAns(inDto.getTechnologyAns());
 		
 		applicantEntity.setProductDevelopmentAns(inDto.getProductDevelopmentAns());
 		

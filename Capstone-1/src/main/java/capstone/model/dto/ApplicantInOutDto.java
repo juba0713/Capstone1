@@ -85,7 +85,7 @@ public class ApplicantInOutDto {
 	public String university;
 	
 	//Technology Answer
-	public int techonologyAns;
+	public int technologyAns;
 	
 	//Product Development
 	public int productDevelopmentAns;

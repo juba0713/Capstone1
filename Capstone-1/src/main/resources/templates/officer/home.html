@@ -116,6 +116,7 @@
                   type="button"
                   th:data-id="${app.applicantIdPk}"
                   name="accept"
+                  
                 >
                   Accept
                 </button>
@@ -203,7 +204,7 @@
                         type="text"
                         name="email"
                         placeholder="Enter your email here"
-                        class="text-black h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
+                        class="text-black email h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                       />
                     </div>
                   </div>
@@ -270,11 +271,11 @@
                     </p>
                     <div class="text-black text-justify mt-8 mb-8 ml-6 mr-8">
                       <div class="items-center mb-8">
-                        <input type="radio" name="agreeFlg" value="true" />
+                        <input type="radio" name="agreeFlg" value="true" class="agreeFlg"/>
                         <label class="ml-2">I AGREE</label>
                       </div>
                       <div>
-                        <input type="radio" name="agreeFlg" value="false" />
+                        <input type="radio" name="agreeFlg" value="false" class="agreeFlg"/>
                         <label class="ml-2">I DO NOT AGREE</label>
                       </div>
                     </div>
@@ -288,7 +289,7 @@
                     <input
                       placeholder="Enter Project title"
                       name="projectTitle"
-                      class="font-secondary text-black h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
+                      class="font-secondary projectTitle text-black h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                     />
                   </div>
 
@@ -304,7 +305,7 @@
                         type="text"
                         placeholder="Type something here..."
                         name="projectDescription"
-                        class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32 z-10"
+                        class="resize-none mt-2 projectDescription bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32 z-10"
                       ></textarea>
                     </div>
                     <div class="mt-14">
@@ -316,12 +317,12 @@
                           type="text"
                           placeholder="Member name"
                           name="teams[0][0]"
-                          class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
+                          class="border-b member-1 bg-transparent focus-within:border-blue-600 focus:outline-none"
                         /><input
                           type="text"
                           placeholder="Input role"
                           name="teams[0][1]"
-                          class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
+                          class="border-b member-1 bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                         />
                       </div>
                       <div class="mb-6">
@@ -329,12 +330,12 @@
                           type="text"
                           placeholder="Member name"
                           name="teams[1][0]"
-                          class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
+                          class="border-b member-2 bg-transparent focus-within:border-blue-600 focus:outline-none"
                         /><input
                           type="text"
                           placeholder="Input role"
                           name="teams[1][1]"
-                          class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
+                          class="border-b member-2 bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                         />
                       </div>
                       <div>
@@ -342,12 +343,12 @@
                           type="text"
                           placeholder="Member name"
                           name="teams[2][0]"
-                          class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
+                          class="border-b member-3 bg-transparent focus-within:border-blue-600 focus:outline-none"
                         /><input
                           type="text"
                           placeholder="Input role"
                           name="teams[2][1]"
-                          class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
+                          class="border-b member-3 bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                         />
                       </div>
                     </div>
@@ -359,7 +360,7 @@
                       <textarea
                         placeholder="Type something here..."
                         name="problemStatement"
-                        class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                        class="resize-none problemStatement mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                       ></textarea>
                     </div>
                     <div class="mt-10 flex flex-col">
@@ -367,7 +368,7 @@
                       <textarea
                         placeholder="Type something here..."
                         name="targetMarket"
-                        class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                        class="resize-none mt-2 targetMarket bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                       ></textarea>
                     </div>
                     <div class="mt-10 flex flex-col">
@@ -377,7 +378,7 @@
                       <textarea
                         placeholder="Type something here..."
                         name="solutionDescription"
-                        class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                        class="resize-none mt-2 solutionDescription bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                       ></textarea>
                     </div>
                     <div class="mt-10 mb-8 overflow-x-auto">
@@ -410,7 +411,7 @@
                                 type="text"
                                 name="historicalTimeline[0][0]"
                                 placeholder="mm/yy"
-                                class="w-full h-20 focus:outline-none"
+                                class="w-full h-20 focus:outline-none historicalTimeline-1"
                               />
                             </td>
                             <td class="border border-gray-500 px-4 py-2">
@@ -418,7 +419,7 @@
                                 type="text"
                                 name="historicalTimeline[0][1]"
                                 placeholder="Enter key activities or milestones here"
-                                class="w-full focus:outline-none"
+                                class="w-full focus:outline-none historicalTimeline-1"
                               />
                             </td>
                           </tr>
@@ -428,7 +429,7 @@
                                 type="text"
                                 name="historicalTimeline[1][0]"
                                 placeholder="mm/yy"
-                                class="w-full h-20 focus:outline-none"
+                                class="w-full h-20 focus:outline-none historicalTimeline-2"
                               />
                             </td>
                             <td class="border border-gray-500 px-4 py-2">
@@ -436,7 +437,7 @@
                                 type="text"
                                 name="historicalTimeline[1][1]"
                                 placeholder="Enter key activities or milestones here"
-                                class="w-full focus:outline-none"
+                                class="w-full focus:outline-none historicalTimeline-2"
                               />
                             </td>
                           </tr>
@@ -446,7 +447,7 @@
                                 type="text"
                                 name="historicalTimeline[2][0]"
                                 placeholder="mm/yy"
-                                class="w-full h-20 focus:outline-none"
+                                class="w-full h-20 focus:outline-none historicalTimeline-3"
                               />
                             </td>
                             <td class="border border-gray-500 px-4 py-2">
@@ -454,7 +455,7 @@
                                 type="text"
                                 name="historicalTimeline[2][1]"
                                 placeholder="Enter key activities or milestones here"
-                                class="w-full focus:outline-none"
+                                class="w-full focus:outline-none historicalTimeline-3"
                               />
                             </td>
                           </tr>
@@ -464,7 +465,7 @@
                                 type="text"
                                 name="historicalTimeline[3][0]"
                                 placeholder="mm/yy"
-                                class="w-full h-20 focus:outline-none"
+                                class="w-full h-20 focus:outline-none historicalTimeline-4"
                               />
                             </td>
                             <td class="border border-gray-500 px-4 py-2">
@@ -472,7 +473,7 @@
                                 type="text"
                                 name="historicalTimeline[3][1]"
                                 placeholder="Enter key activities or milestones here"
-                                class="w-full focus:outline-none"
+                                class="w-full focus:outline-none historicalTimeline-4"
                               />
                             </td>
                           </tr>
@@ -482,7 +483,7 @@
                                 type="text"
                                 name="historicalTimeline[4][0]"
                                 placeholder="mm/yy"
-                                class="w-full h-20 focus:outline-none"
+                                class="w-full h-20 focus:outline-none historicalTimeline-5"
                               />
                             </td>
                             <td class="border border-gray-500 px-4 py-2">
@@ -490,7 +491,7 @@
                                 type="text"
                                 name="historicalTimeline[4][1]"
                                 placeholder="Enter key activities or milestones here"
-                                class="w-full focus:outline-none"
+                                class="w-full focus:outline-none historicalTimeline-5"
                               />
                             </td>
                           </tr>
@@ -534,7 +535,7 @@
                                 type="text"
                                 name="productServiceOffering[0]"
                                 placeholder="Enter key activities or milestones here"
-                                class="w-full h-20 focus:outline-none"
+                                class="w-full h-20 focus:outline-none productServiceOffering"
                               />
                             </td>
                             <td class="border border-gray-500 px-2 py-2">
@@ -542,7 +543,7 @@
                                 type="text"
                                 name="productServiceOffering[1]"
                                 placeholder="Enter key activities or milestones here"
-                                class="focus:outline-none"
+                                class="focus:outline-none productServiceOffering"
                               />
                             </td>
                             <td class="border border-gray-500 px-2 py-2">
@@ -550,7 +551,7 @@
                                 type="text"
                                 name="productServiceOffering[2]"
                                 placeholder="Enter key activities or milestones here"
-                                class="focus:outline-none"
+                                class="focus:outline-none productServiceOffering"
                               />
                             </td>
                             <td class="border border-gray-500 px-2 py-2">
@@ -558,7 +559,7 @@
                                 type="text"
                                 name="productServiceOffering[3]"
                                 placeholder="Enter key activities or milestones here"
-                                class="focus:outline-none"
+                                class="focus:outline-none productServiceOffering"
                               />
                             </td>
                           </tr>
@@ -571,7 +572,7 @@
                                 type="text"
                                 name="pricingStrategy[0]"
                                 placeholder="Enter key activities or milestones here"
-                                class="w-full h-20 focus:outline-none"
+                                class="w-full h-20 focus:outline-none pricingStrategy"
                               />
                             </td>
                             <td class="border border-gray-500 px-2 py-2">
@@ -579,7 +580,7 @@
                                 type="text"
                                 name="pricingStrategy[1]"
                                 placeholder="Enter key activities or milestones here"
-                                class="focus:outline-none"
+                                class="focus:outline-none pricingStrategy"
                               />
                             </td>
                             <td class="border border-gray-500 px-2 py-2">
@@ -587,7 +588,7 @@
                                 type="text"
                                 name="pricingStrategy[2]"
                                 placeholder="Enter key activities or milestones here"
-                                class="focus:outline-none"
+                                class="focus:outline-none pricingStrategy"
                               />
                             </td>
                             <td class="border border-gray-500 px-2 py-2">
@@ -595,7 +596,7 @@
                                 type="text"
                                 name="pricingStrategy[3]"
                                 placeholder="Enter key activities or milestones here"
-                                class="focus:outline-none"
+                                class="focus:outline-none pricingStrategy"
                               />
                             </td>
                           </tr>
@@ -610,7 +611,7 @@
                       <textarea
                         placeholder="Type something here..."
                         name="intPropertyStatus"
-                        class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                        class="resize-none intPropertyStatus mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                       ></textarea>
                     </div>
                   </div>
@@ -625,7 +626,7 @@
                       <textarea
                         placeholder="Type something here..."
                         name="objectives"
-                        class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                        class="resize-none objectives mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                       ></textarea>
                     </div>
                     <div class="flex flex-col mt-6">
@@ -635,7 +636,7 @@
                       <textarea
                         placeholder="Type something here..."
                         name="scopeProposal"
-                        class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                        class="resize-none mt-2 scopeProposal bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                       ></textarea>
                     </div>
                     <div class="flex flex-col mt-6">
@@ -645,7 +646,7 @@
                       <textarea
                         placeholder="Type something here..."
                         name="methodology"
-                        class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                        class="resize-none mt-2 methodology bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                       ></textarea>
                     </div>
                   </div>
@@ -668,7 +669,7 @@
                         type="text"
                         placeholder="Input here"
                         name="supportLink"
-                        class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                        class="w-1/3 border-b supportLink border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                       />
                     </div>
                     <div class="flex flex-col mb-10">
@@ -677,7 +678,7 @@
                         type="text"
                         placeholder="Input here"
                         name="groupName"
-                        class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                        class="w-1/3 border-b groupName border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                       />
                     </div>
                     <div class="flex flex-col mb-10">
@@ -688,7 +689,7 @@
                         type="text"
                         placeholder="Input here"
                         name="groupLeader"
-                        class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                        class="w-1/3 border-b groupLeader border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                       />
                     </div>
                     <div class="flex flex-col mb-10">
@@ -699,7 +700,7 @@
                         type="text"
                         placeholder="Input here"
                         name="leaderNumber"
-                        class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                        class="w-1/3 border-b leaderNumber border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                       />
                     </div>
                     <div class="flex flex-col mb-10">
@@ -708,7 +709,7 @@
                         type="text"
                         placeholder="Input here"
                         name="leaderEmail"
-                        class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                        class="w-1/3 border-b leaderEmail border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                       />
                     </div>
                     <div class="flex flex-col mb-10">
@@ -717,7 +718,7 @@
                         type="text"
                         placeholder="Input here"
                         name="members[0]"
-                        class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                        class="w-1/3 border-b members border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                       />
                     </div>
                     <div class="flex flex-col mb-10">
@@ -726,7 +727,7 @@
                         type="text"
                         placeholder="Input here"
                         name="members[1]"
-                        class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                        class="w-1/3 border-b members border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                       />
                     </div>
                     <div class="flex flex-col mb-10">
@@ -735,7 +736,7 @@
                         type="text"
                         placeholder="Input here"
                         name="members[2]"
-                        class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                        class="w-1/3 border-b members border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                       />
                     </div>
                     <div class="flex flex-col mb-`0">
@@ -744,7 +745,7 @@
                         type="text"
                         placeholder="Input here"
                         name="members[3]"
-                        class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                        class="w-1/3 border-b members border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                       />
                     </div>
                     <div class="flex flex-col mt-14 mb-`0">
@@ -759,7 +760,7 @@
                         type="text"
                         placeholder="Input here"
                         name="university"
-                        class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                        class="w-1/3 border-b university border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                       />
                     </div>
                     <hr class="my-10 mr-6" />
@@ -791,29 +792,29 @@
                           <label>Technology</label>
                         </div>
                         <div class="mt-10 mb-4">
-                          <input type="radio" name="technologyAns" value="1" />
+                          <input type="radio" name="technologyAns" value="1" class="technologyAns"/>
 
                           >Project work is beyond basic research and technology
                           concept has been defined
                         </div>
                         <div class="mb-4">
-                          <input type="radio" name="technologyAns" value="2" />
+                          <input type="radio" name="technologyAns" value="2" class="technologyAns"/>
                           Applied research has begun and practical
                           application(s) have been identified
                         </div>
                         <div class="mb-4">
-                          <input type="radio" name="technologyAns" value="3" />
+                          <input type="radio" name="technologyAns" value="3" class="technologyAns"/>
                           Preliminary testing of technology components has
                           begun, and technical feasibility has been established
                           in a laboratory environment
                         </div>
                         <div class="mb-4">
-                          <input type="radio" name="technologyAns" value="4" />
+                          <input type="radio" name="technologyAns" value="4" class="technologyAns"/>
                           Initial testing of integrated product/system has been
                           completed in a laboratory environment
                         </div>
                         <div>
-                          <input type="radio" name="technologyAns" value="5" />
+                          <input type="radio" name="technologyAns" value="5" class="technologyAns"/>
                           Laboratory scale integrated product/system
                           demonstrates performance in the intended
                           application(s)
@@ -830,6 +831,7 @@
                           type="radio"
                           name="productDevelopmentAns"
                           value="1"
+                          class="productDevelopmentAns"
                         />
                         Initial product/market fit has been defined
                       </div>
@@ -838,6 +840,7 @@
                           type="radio"
                           name="productDevelopmentAns"
                           value="2"
+                          class="productDevelopmentAns"
                         />
                         Pilot scale product/system has been tested in the
                         intended application(s)
@@ -847,6 +850,7 @@
                           type="radio"
                           name="productDevelopmentAns"
                           value="3"
+                          class="productDevelopmentAns"
                         />
                         Demonstration of a full scale product/system prototype
                         has been completed in the intended application(s)
@@ -856,6 +860,7 @@
                           type="radio"
                           name="productDevelopmentAns"
                           value="4"
+                          class="productDevelopmentAns"
                         />
                         Actual product/system has been proven to work in its
                         near-final form under a representative set of expected
@@ -866,6 +871,7 @@
                           type="radio"
                           name="productDevelopmentAns"
                           value="5"
+                          class="productDevelopmentAns"
                         />
                         Product/system is in final form and has been operated
                         under the full range of operating conditions and
@@ -882,6 +888,7 @@
                           type="radio"
                           name="competitiveLandscapeAns"
                           value="1"
+                          class="competitiveLandscapeAns"
                         />
                         Secondary market research has been performed and basic
                         knowledge of potential applications and competitive
@@ -892,6 +899,7 @@
                           type="radio"
                           name="competitiveLandscapeAns"
                           value="2"
+                          class="competitiveLandscapeAns"
                         />
                         Primary market research to prove the product/system
                         commercial feasibility has been completed and basic
@@ -903,6 +911,7 @@
                           type="radio"
                           name="competitiveLandscapeAns"
                           value="3"
+                          class="competitiveLandscapeAns"
                         />
                         Comprehensive market research to prove the
                         product/system commercial feasibility has been completed
@@ -914,6 +923,7 @@
                           type="radio"
                           name="competitiveLandscapeAns"
                           value="4"
+                          class="competitiveLandscapeAns"
                         />
                         Competitive analysis to illustrate unique features and
                         advantages of the product/system compared to competitive
@@ -924,6 +934,7 @@
                           type="radio"
                           name="competitiveLandscapeAns"
                           value="5"
+                          class="competitiveLandscapeAns"
                         />
                         Full and complete understanding of the competitive
                         landscape, target application(s), competitive
@@ -935,29 +946,29 @@
                         <label>Product Development/Design</label>
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="productDesignAns" value="1" />
+                        <input type="radio" name="productDesignAns" value="1" class="productDesignAns"/>
                         One or more initial product hypotheses have been defined
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="productDesignAns" value="2" />
+                        <input type="radio" name="productDesignAns" value="2" class="productDesignAns"/>
                         Mapping product/system attributes against customer needs
                         has highlighted a clear value proposition
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="productDesignAns" value="3" />
+                        <input type="radio" name="productDesignAns" value="3" class="productDesignAns"/>
                         The product/system has been scaled from laboratory to
                         pilot scale and issues that may affect achieving full
                         scale have been identified
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="productDesignAns" value="4" />
+                        <input type="radio" name="productDesignAns" value="4" class="productDesignAns" />
                         Comprehensive customer value proposition model has been
                         developed, including a detailed understanding of
                         product/system design specifications, required
                         certifications, and trade-offs
                       </div>
                       <div>
-                        <input type="radio" name="productDesignAns" value="5" />
+                        <input type="radio" name="productDesignAns" value="5" class="productDesignAns" />
                         Product/system final design optimization has been
                         completed, required certifications have been obtained,
                         and product/system has incorporated detailed customer
@@ -969,29 +980,29 @@
                         <label>Team</label>
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="teamAns" value="1" />
+                        <input type="radio" name="teamAns" value="1" class="teamAns" />
                         No team or company in place (single individual, no legal
                         entity)
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="teamAns" value="2" />
+                        <input type="radio" name="teamAns" value="2" class="teamAns" />
                         Solely technical or non-technical founder(s) running the
                         company with no outside assistance
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="teamAns" value="3" />
+                        <input type="radio" name="teamAns" value="3" class="teamAns" />
                         Solely technical or non-technical founder(s) running the
                         company with assistance from outside advisors/mentors
                         and/or incubator/accelerator
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="teamAns" value="4" />
+                        <input type="radio" name="teamAns" value="4" class="teamAns" />
                         Balanced team with technical and business
                         development/commercialization experience running the
                         company with assistance from outside advisors/mentors
                       </div>
                       <div>
-                        <input type="radio" name="teamAns" value="5" />
+                        <input type="radio" name="teamAns" value="5" class="teamAns" />
                         Balanced team with all capabilities onboard (e.g.,
                         sales, marketing, customer service, operations, etc.)
                         running the company with assistance from outside
@@ -1003,34 +1014,34 @@
                         <label>Go-to-Market</label>
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="goToMarketAns" value="1" />
+                        <input type="radio" name="goToMarketAns" value="1" class="goToMarketAns" />
                         <label>
                           Initial business model and value proposition have been
                           defined
                         </label>
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="goToMarketAns" value="2" />
+                        <input type="radio" name="goToMarketAns" value="2" class="goToMarketAns" />
                         Customers/partners have been interviewed to understand
                         their pain points/needs, and business model and value
                         proposition have been refined based on customer/partner
                         feedback
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="goToMarketAns" value="3" />
+                        <input type="radio" name="goToMarketAns" value="3" class="goToMarketAns" />
                         Market and customer/partner needs and how those
                         translate to product requirements have been defined, and
                         initial relationships have been developed with key
                         stakeholders across the value chain
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="goToMarketAns" value="4" />
+                        <input type="radio" name="goToMarketAns" value="4" class="goToMarketAns" />
                         Partnerships have been formed with key stakeholders
                         across the value chain (e.g., suppliers, partners,
                         service providers, and customers)
                       </div>
                       <div>
-                        <input type="radio" name="goToMarketAns" value="5" />
+                        <input type="radio" name="goToMarketAns" value="5" class="goToMarketAns" />
                         Supply agreements with suppliers and partners are in
                         place and initial purchase orders from customers have
                         been received >
@@ -1041,29 +1052,29 @@
                         <label>Manufacturing/Supply Chain</label>
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="manufacturingAns" value="1" />
+                        <input type="radio" name="manufacturingAns" value="1" class="manufacturingAns"/>
                         Potential suppliers, partners, and customers have been
                         identified and mapped in an initial value chain analysis
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="manufacturingAns" value="2" />
+                        <input type="radio" name="manufacturingAns" value="2" class="manufacturingAns"/>
                         Relationships have been established with potential
                         suppliers, partners, service providers, and customers
                         and they have provided input on product and
                         manufacturability requirements
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="manufacturingAns" value="3" />
+                        <input type="radio" name="manufacturingAns" value="3" class="manufacturingAns"/>
                         Manufacturing process qualifications (e.g. QC/QA) have
                         been defined and are in progress
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="manufacturingAns" value="4" />
+                        <input type="radio" name="manufacturingAns" value="4" class="manufacturingAns" />
                         Products/systems have been pilot manufactured and sold
                         to initial customerss
                       </div>
                       <div>
-                        <input type="radio" name="manufacturingAns" value="5" />
+                        <input type="radio" name="manufacturingAns" value="5" class="manufacturingAns" />
                         Full scale manufacturing and widespread deployment of
                         product/system to customers and/or users has been
                         achieved
@@ -1083,6 +1094,7 @@
                           type="radio"
                           name="eligibilityAgreeFlg"
                           value="true"
+                          class="eligibilityAgreeFlg"
                         /><label class="ml-2">I AGREE</label>
                       </div>
                       <div class="items-center">
@@ -1090,6 +1102,7 @@
                           type="radio"
                           name="eligibilityAgreeFlg"
                           value="false"
+                          class="eligibilityAgreeFlg"
                         /><label class="ml-2">I DO NOT AGREE</label>
                       </div>
                     </div>
@@ -1115,6 +1128,7 @@
                           type="radio"
                           name="commitmentOneFlg"
                           value="true"
+                          class="commitmentOneFlg"
                         /><label class="ml-2">Yes</label>
                       </div>
                       <div class="items-center">
@@ -1122,6 +1136,7 @@
                           type="radio"
                           name="commitmentOneFlg"
                           value="false"
+                          class="commitmentOneFlg"
                         /><label class="ml-2">No</label>
                       </div>
                     </div>
@@ -1136,6 +1151,7 @@
                           type="radio"
                           name="commitmentTwoFlg"
                           value="true"
+                          class="commitmentTwoFlg"
                         /><label class="ml-2">Yes</label>
                       </div>
 
@@ -1144,6 +1160,7 @@
                           type="radio"
                           name="commitmentTwoFlg"
                           value="false"
+                          class="commitmentTwoFlg"
                         /><label class="ml-2">No</label>
                       </div>
                     </div>
@@ -1163,6 +1180,7 @@
                           type="radio"
                           name="commitmentThreeFlg"
                           value="true"
+                          class="commitmentThreeFlg"
                         /><label class="ml-2">Yes</label>
                       </div>
 
@@ -1171,6 +1189,7 @@
                           type="radio"
                           name="commitmentThreeFlg"
                           value="false"
+                          class="commitmentThreeFlg"
                         /><label class="ml-2">No</label>
                       </div>
                     </div>
@@ -1185,6 +1204,7 @@
                           type="radio"
                           name="commitmentFourFlg"
                           value="true"
+                          class="commitmentFourFlg"
                         /><label class="ml-2">Yes</label>
                       </div>
 
@@ -1193,6 +1213,7 @@
                           type="radio"
                           name="commitmentFourFlg"
                           value="false"
+                          class="commitmentFourFlg"
                         /><label class="ml-2">No</label>
                       </div>
                     </div>
@@ -1393,14 +1414,167 @@
         }
 
         const data = await response.json();
+        
+        document.querySelector('.overflow-auto').scrollTo({
+	        top: 0,
+	    });
 
         let applicant = data.applicantDetailsObj;
-
-        let email = document.getElementById("email-value");
-
-        email.innerHTML = applicant.email;
-
-        console.log(data);
+        let email = document.querySelector(".email");       
+        let agreeFlgs = document.querySelectorAll(".agreeFlg");      
+        let projectTitle = document.querySelector('.projectTitle');		
+        let projectDescription = document.querySelector('.projectDescription');
+		let memberOne = document.querySelectorAll('.member-1');
+		let memberTwo = document.querySelectorAll('.member-2');
+		let memberThree = document.querySelectorAll('.member-3');
+		let problemStatement = document.querySelector('.problemStatement');
+		let targetMarket = document.querySelector('.targetMarket');
+		let solutionDescription = document.querySelector('.solutionDescription');
+		let historicalTimelineOne = document.querySelectorAll('.historicalTimeline-1');
+		let historicalTimelineTwo = document.querySelectorAll('.historicalTimeline-2');
+		let historicalTimelineThree = document.querySelectorAll('.historicalTimeline-3');
+		let historicalTimelineFour = document.querySelectorAll('.historicalTimeline-4');
+		let historicalTimelineFive = document.querySelectorAll('.historicalTimeline-5');
+		let productServiceOffering = document.querySelectorAll('.productServiceOffering');
+		let pricingStrategy = document.querySelectorAll('.pricingStrategy');
+		let intPropertyStatus = document.querySelector('.intPropertyStatus');
+		let objectives = document.querySelector('.objectives');
+		let scopeProposal = document.querySelector('.scopeProposal');
+		let methodology = document.querySelector('.methodology');
+		//let vitaeFile = document.querySelector('.vitaeFile');
+		let supportLink = document.querySelector('.supportLink'); 
+		let groupName = document.querySelector('.groupName');
+		let groupLeader = document.querySelector('.groupLeader');
+		let leaderNumber = document.querySelector('.leaderNumber');
+		let leaderEmail = document.querySelector('.leaderEmail');
+		let members = document.querySelectorAll('.members');
+		let university = document.querySelector('.university');
+		let technologyAns = document.querySelectorAll('.technologyAns');
+		let productDevelopmentAns = document.querySelectorAll('.productDevelopmentAns');
+		let competitiveLandscapeAns = document.querySelectorAll('.competitiveLandscapeAns');
+		let productDesignAns = document.querySelectorAll('.productDesignAns');
+		let teamAns = document.querySelectorAll('.teamAns');
+		let goToMarketAns = document.querySelectorAll('.goToMarketAns');
+		let manufacturingAns = document.querySelectorAll('.manufacturingAns');
+		let eligibilityAgreeFlg = document.querySelectorAll('.eligibilityAgreeFlg');
+		let commitmentOneFlg = document.querySelectorAll('.commitmentOneFlg');
+		let commitmentTwoFlg = document.querySelectorAll('.commitmentTwoFlg');
+		let commitmentThreeFlg = document.querySelectorAll('.commitmentThreeFlg');
+		let commitmentFourFlg = document.querySelectorAll('.commitmentFourFlg');
+		
+		//Email
+		email.value = applicant.email;
+		//Project Title
+		projectTitle.value = applicant.projectTitle;	
+		//Project Description
+		projectDescription.textContent = applicant.projectDescription;	
+		//AgreeF;g
+        if(applicant.agreeFlg){
+			agreeFlgs[0].checked = true;
+		}else{
+			agreeFlgs[1].checked = true;
+		}	
+		//Teams
+		memberOne[0].value = applicant.teams[0][0];
+		memberOne[1].value = applicant.teams[0][1];
+		memberTwo[0].value = applicant.teams[1][0];
+		memberTwo[1].value = applicant.teams[1][1];
+		memberThree[0].value = applicant.teams[2][0];
+		memberThree[1].value = applicant.teams[2][1];
+		//Problem Statement
+		problemStatement.textContent = applicant.problemStatement;
+		//Target Market
+		targetMarket.textContent = applicant.targetMarket;
+		//Solution Description
+		solutionDescription.textContent = applicant.solutionDescription;
+		//HistoricalTimeline
+		historicalTimelineOne[0].value = applicant.historicalTimeline[0][0];
+		historicalTimelineOne[1].value = applicant.historicalTimeline[0][1];
+		historicalTimelineTwo[0].value = applicant.historicalTimeline[1][0];
+		historicalTimelineTwo[1].value = applicant.historicalTimeline[1][1];
+		historicalTimelineThree[0].value = applicant.historicalTimeline[2][0];
+		historicalTimelineThree[1].value = applicant.historicalTimeline[2][1];
+		historicalTimelineFour[0].value = applicant.historicalTimeline[3][0];
+		historicalTimelineFour[1].value = applicant.historicalTimeline[3][1];
+		historicalTimelineFive[0].value = applicant.historicalTimeline[4][0];
+		historicalTimelineFive[1].value = applicant.historicalTimeline[4][1];
+		//Product Service Offering
+		productServiceOffering[0].value = applicant.productServiceOffering[0];
+		productServiceOffering[1].value = applicant.productServiceOffering[1];
+		productServiceOffering[2].value = applicant.productServiceOffering[2];
+		productServiceOffering[3].value = applicant.productServiceOffering[3];
+		//Pricing Strategy
+		pricingStrategy[0].value = applicant.pricingStrategy[0];
+		pricingStrategy[1].value = applicant.pricingStrategy[1];
+		pricingStrategy[2].value = applicant.pricingStrategy[2];
+		pricingStrategy[3].value = applicant.pricingStrategy[3];
+		//Intellectual Property Status
+		intPropertyStatus.value = applicant.intPropertyStatus;
+		//Objectives
+		objectives.textContent = applicant.objectives;
+		//Scope of the proposal
+		scopeProposal.textContent = applicant.scopeProposal;
+		//Methodology
+		methodology.textContent = applicant.methodology;
+		//Supporting Link
+		supportLink.value = applicant.supportLink;
+		//Group Name
+		groupName.value = applicant.groupName;
+		//Group Leader
+		groupLeader.value = applicant.leaderLastName + ", " + applicant.leaderFirstName;
+		//Leader Mobile Number
+		leaderNumber.value = applicant.mobileNumber;
+		//Leader Email
+		leaderEmail.value = applicant.emailAddress;
+		//Members
+		members[0].value = applicant.members[0];
+		members[1].value = applicant.members[1];
+		members[2].value = applicant.members[2];
+		members[3].value = applicant.members[3];
+		//University
+		university.value = applicant.university;
+        //Technology Answer
+        technologyAns[applicant.technologyAns-1].checked = true; 
+        //Product Development Answer
+        productDevelopmentAns[applicant.productDevelopmentAns-1].checked = true;
+        //Competitive Landscape Answer
+        competitiveLandscapeAns[applicant.competitiveLandscapeAns-1].checked = true;
+        //Product Design Answer
+        productDesignAns[applicant.productDesignAns-1].checked = true;
+        //Teams Answer
+        teamAns[applicant.teamAns-1].checked = true;
+        //Go To market Answer
+        goToMarketAns[applicant.goToMarketAns-1].checked = true;
+        //Manufacturing Answer
+        manufacturingAns[applicant.manufacturingAns-1].checked = true;
+        //eligibilityAgreeFlg
+        if(applicant.eligibilityAgreeFlg){
+			eligibilityAgreeFlg[0].checked = true;
+		}else{
+			eligibilityAgreeFlg[1].checked = true;
+		}
+		//CommmitFlg
+        if(applicant.commitmentOneFlg){
+			commitmentOneFlg[0].checked = true;
+		}else{
+			commitmentOneFlg[1].checked = true;
+		}
+		if(applicant.commitmentTwoFlg){
+			commitmentTwoFlg[0].checked = true;
+		}else{
+			commitmentTwoFlg[1].checked = true;
+		}
+		if(applicant.commitmentThreeFlg){
+			commitmentThreeFlg[0].checked = true;
+		}else{
+			commitmentThreeFlg[1].checked = true;
+		}
+		if(applicant.commitmentFourFlg){
+			commitmentFourFlg[0].checked = true;
+		}else{
+			commitmentFourFlg[1].checked = true;
+		}
+	    console.log(applicant);
       }
     </script>
   </body>

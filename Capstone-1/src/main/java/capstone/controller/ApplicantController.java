@@ -87,7 +87,7 @@ public class ApplicantController {
 		
 		inDto.setUniversity(webDto.getUniversity());
 		
-		inDto.setTechonologyAns(webDto.getTechonologyAns());
+		inDto.setTechnologyAns(webDto.getTechnologyAns());
 		
 		inDto.setProductDevelopmentAns(webDto.getProductDevelopmentAns());
 		

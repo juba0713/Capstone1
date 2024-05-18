@@ -123,7 +123,7 @@ public class OfficerServiceImpl implements OfficerService{
 		
 		List<ApplicantDetailsEntity> applicant = applicantLogic.getApplicantDetailsByIdPk(inDto.getApplicantIdPk());
 		
-		ApplicantDetailsObj applicantDetailsObj = new ApplicantDetailsObj();
+ApplicantDetailsObj applicantDetailsObj = new ApplicantDetailsObj();
 		
 		String[] members = new String[4];
 		
@@ -137,6 +137,8 @@ public class OfficerServiceImpl implements OfficerService{
 				applicantDetailsObj.setEmail(app.getEmail());
 				
 				applicantDetailsObj.setAgreeFlg(app.getAgreeFlg());
+				
+				applicantDetailsObj.setProjectTitle(app.getProjectTitle());
 				
 				applicantDetailsObj.setProjectDescription(app.getProjectDescription());		
 				
@@ -170,6 +172,10 @@ public class OfficerServiceImpl implements OfficerService{
 				
 				applicantDetailsObj.setIntPropertyStatus(app.getIntPropertyStatus());
 				
+				applicantDetailsObj.setObjectives(app.getObjectives());
+				
+				applicantDetailsObj.setScopeProposal(app.getScopeProposal());
+				
 				applicantDetailsObj.setMethodology(app.getMethodology());
 				
 				applicantDetailsObj.setVitaeFile(app.getVitaeFile());
@@ -188,13 +194,43 @@ public class OfficerServiceImpl implements OfficerService{
 				
 				applicantDetailsObj.setUniversity(app.getUniversity());
 				
+				applicantDetailsObj.setTechnologyAns(app.getTechnologyAns());
+
+				applicantDetailsObj.setProductDesignAns(app.getProductDesignAns());
 				
+				applicantDetailsObj.setCompetitiveLandscapeAns(app.getCompetitiveLandscapeAns());
+				
+				applicantDetailsObj.setProductDevelopmentAns(app.getProductDevelopmentAns());
+				
+				applicantDetailsObj.setTeamAns(app.getTeamAns());
+				
+				applicantDetailsObj.setGoToMarketAns(app.getGoToMarketAns());
+				
+				applicantDetailsObj.setManufacturingAns(app.getManufacturingAns());
+				
+				applicantDetailsObj.setEligibilityAgreeFlg(app.getEligibilityAgreeFlg());
+				
+				applicantDetailsObj.setCommitmentOneFlg(app.getCommitmentOneFlg());
+				
+				applicantDetailsObj.setCommitmentTwoFlg(app.getCommitmentTwoFlg());
+				
+				applicantDetailsObj.setCommitmentThreeFlg(app.getCommitmentThreeFlg());
+				
+				applicantDetailsObj.setCommitmentFourFlg(app.getCommitmentFourFlg());
+				
+				applicantDetailsObj.setStatus(app.getStatus());
+				
+				applicantDetailsObj.setScore(app.getScore());
+				
+				applicantDetailsObj.setFeedback(app.getFeedback());
 			}
-			
+
 			members[firstRow] = app.getMemberLastName()+", "+app.getMemberFirstName();
 			
 			firstRow++;
 		}
+		
+		applicantDetailsObj.setMembers(members);
 		
 		outDto.setApplicantDetailsObj(applicantDetailsObj);
 		
