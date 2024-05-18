@@ -79,7 +79,7 @@
           </div>
         </div>
         <div
-          class="flex justify-center h-[470px] bg-white rounded-lg overflow-hidden"
+          class="flex justify-center h-[470px] bg-white rounded-lg overflow-hidden" th:object="${applicantWebDto}"
         >
           <div class="overflow-auto rounded-2xl">
             <form
@@ -120,7 +120,7 @@
                   <input
                     type="text"
                     name="email"
-                    th:value="*{email}"
+                    th:value="*{applicantDetailsObj.email}"
                     placeholder="Enter your email here"
                     class="text-black h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                   />
@@ -187,11 +187,11 @@
                 </p>
                 <div class="text-black text-justify mt-8 mb-8 ml-6 mr-8">
                   <div class="items-center mb-8">
-                    <input type="radio" name="agreeFlg" value="true" />
+                    <input type="radio" name="agreeFlg" value="true" th:checked="*{applicantDetailsObj.agreeFlg}"/>
                     <label class="ml-2">I AGREE</label>
                   </div>
                   <div>
-                    <input type="radio" name="agreeFlg" value="false" />
+                    <input type="radio" name="agreeFlg" value="false"th:checked="*{!applicantDetailsObj.agreeFlg}" />
                     <label class="ml-2">I DO NOT AGREE</label>
                   </div>
                 </div>
@@ -205,7 +205,7 @@
                 <input
                   placeholder="Enter Project title"
                   name="projectTitle"
-                  th:value="*{projectTitle}"
+                  th:value="*{applicantDetailsObj.projectTitle}"
                   class="font-secondary text-black h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                 />
               </div>
@@ -220,7 +220,7 @@
                     type="text"
                     placeholder="Type something here..."
                     name="projectDescription"
-                    th:value="*{projectDescription}"
+                    th:text="*{applicantDetailsObj.projectDescription}"
                     class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32 z-10"
                   ></textarea>
                 </div>
@@ -233,11 +233,13 @@
                       type="text"
                       placeholder="Member name"
                       name="teams[0][0]"
+                      th:value="*{applicantDetailsObj.teams[0][0]}"
                       class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
                     /><input
                       type="text"
                       placeholder="Input role"
                       name="teams[0][1]"
+                      th:value="*{applicantDetailsObj.teams[0][1]}"
                       class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                     />
                   </div>
@@ -246,11 +248,13 @@
                       type="text"
                       placeholder="Member name"
                       name="teams[1][0]"
+                      th:value="*{applicantDetailsObj.teams[1][0]}"
                       class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
                     /><input
                       type="text"
                       placeholder="Input role"
                       name="teams[1][1]"
+                      th:value="*{applicantDetailsObj.teams[1][1]}"
                       class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                     />
                   </div>
@@ -259,11 +263,13 @@
                       type="text"
                       placeholder="Member name"
                       name="teams[2][0]"
+                      th:value="*{applicantDetailsObj.teams[2][0]}"
                       class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
                     /><input
                       type="text"
                       placeholder="Input role"
                       name="teams[2][1]"
+                      th:value="*{applicantDetailsObj.teams[2][1]}"
                       class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                     />
                   </div>
@@ -277,6 +283,7 @@
                     placeholder="Type something here..."
                     name="problemStatement"
                     th:value="*{problemStatement}"
+                    th:text="*{applicantDetailsObj.problemStatement}"
                     class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
@@ -286,6 +293,7 @@
                     placeholder="Type something here..."
                     name="targetMarket"
                     th:value="*{targetMarket}"
+                    th:text="*{applicantDetailsObj.targetMarket}"
                     class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
@@ -295,6 +303,7 @@
                     placeholder="Type something here..."
                     name="solutionDescription"
                     th:value="*{solutionDescription}"
+                    th:text="*{applicantDetailsObj.solutionDescription}"
                     class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
@@ -327,6 +336,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[0][0]"
+                            th:value="*{applicantDetailsObj.historicalTimeline[0][0]}"
                             placeholder="mm/yy"
                             class="w-full h-20 focus:outline-none"
                           />
@@ -335,6 +345,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[0][1]"
+                            th:value="*{applicantDetailsObj.historicalTimeline[0][0]}"
                             placeholder="Enter key activities or milestones here"
                             class="w-full focus:outline-none"
                           />
@@ -345,6 +356,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[1][0]"
+                            
                             placeholder="mm/yy"
                             class="w-full h-20 focus:outline-none"
                           />
@@ -353,6 +365,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[1][1]"
+                            
                             placeholder="Enter key activities or milestones here"
                             class="w-full focus:outline-none"
                           />
@@ -363,6 +376,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[2][0]"
+                           
                             placeholder="mm/yy"
                             class="w-full h-20 focus:outline-none"
                           />
@@ -371,6 +385,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[2][1]"
+                            
                             placeholder="Enter key activities or milestones here"
                             class="w-full focus:outline-none"
                           />
@@ -381,6 +396,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[3][0]"
+                           
                             placeholder="mm/yy"
                             class="w-full h-20 focus:outline-none"
                           />
@@ -389,6 +405,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[3][1]"
+                           
                             placeholder="Enter key activities or milestones here"
                             class="w-full focus:outline-none"
                           />
@@ -399,6 +416,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[4][0]"
+                           
                             placeholder="mm/yy"
                             class="w-full h-20 focus:outline-none"
                           />
@@ -407,6 +425,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[4][1]"
+                            
                             placeholder="Enter key activities or milestones here"
                             class="w-full focus:outline-none"
                           />
@@ -1238,6 +1257,7 @@
       crossorigin="anonymous"
     ></script>
     <script th:inline="javascript">
+ 	  console.log(/*[[${applicantWebDto}]]*/'');
       if (/*[[${!session.initialChangePass}]]*/ "") {
         $(".modal").modal("show");
       } else {

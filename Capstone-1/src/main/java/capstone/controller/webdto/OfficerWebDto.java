@@ -18,4 +18,6 @@ public class OfficerWebDto {
 	public Boolean resubmitFlg;
 	
 	ApplicantDetailsObj applicantDetailsObj;
+	
+	public String email;
 }

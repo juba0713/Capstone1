@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import capstone.model.dto.ApplicantInOutDto;
 
+
 @Service
 public interface ApplicantService {
 	
@@ -34,4 +35,11 @@ public interface ApplicantService {
 	 * @return ApplicantInOutDto
 	 */
 	public void changePassword(ApplicantInOutDto inDto);
+	
+	/**
+	 * To get the details of the application by id pk
+	 * @param inDto
+	 * @return ApplicantInOutDto
+	 */
+	public ApplicantInOutDto getApplicantDetails(); 
 }

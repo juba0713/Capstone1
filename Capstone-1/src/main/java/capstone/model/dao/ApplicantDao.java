@@ -76,6 +76,11 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "SET a.status = :status "
 			+ "WHERE a.idPk IN (:idPks) ";
 	
+	public final String GET_APPLICANT_BY_CREATED_BY = "SELECT e"
+			+ " FROM ApplicantEntity e"
+			+ " WHERE e.createdBy = :createdBy"
+			+ " AND e.deleteFlg = false";
+	
 	@Query(value=GET_ALL_APPLICANTS_BY_STATUS, nativeQuery=true)
 	public List<Object[]> getAllApplicantByStatusRaw(List<Integer> status) throws DataAccessException;
 	
@@ -113,5 +118,8 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 	@Transactional
 	@Query(value=UPDATE_APPLICANT_STATUS)
 	public void updateApplicantStatus(int status, List<Integer> idPks) throws DataAccessException;
+	
+	@Query(value=GET_APPLICANT_BY_CREATED_BY)
+	public ApplicantEntity getApplicantByCreatedBy(int createdBy) throws DataAccessException;
 	
 }

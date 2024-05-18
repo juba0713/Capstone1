@@ -1,5 +1,7 @@
 package capstone.model.object;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -11,9 +13,11 @@ public class ApplicantDetailsObj {
 	
 	public Boolean agreeFlg;
 	
+	public String projectTitle;
+	
 	public String projectDescription;
 	
-	public String[] teams;
+	public List<String[]> teams;
 	
 	public String problemStatement;
 	
@@ -21,7 +25,7 @@ public class ApplicantDetailsObj {
 	
 	public String solutionDescription;
 	
-	public String[] historicalTimeline;
+	public List<String[]> historicalTimeline;
 	
 	public String[] productServiceOffering;
 	

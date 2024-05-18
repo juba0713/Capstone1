@@ -2,6 +2,7 @@ package capstone.model.dto;
 
 import java.util.List;
 
+import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ErrorObj;
 import lombok.Data;
 
@@ -132,4 +133,6 @@ public class ApplicantInOutDto {
 	//Confirm Password
 	public String confirmPassword;
 	
+	ApplicantDetailsObj applicantDetailsObj;
+
 }

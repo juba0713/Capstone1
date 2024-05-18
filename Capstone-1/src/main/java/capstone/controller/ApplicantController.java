@@ -125,7 +125,11 @@ public class ApplicantController {
 	
 	
 	@GetMapping("/home")
-	public String showApplicantHome() {
+	public String showApplicantHome(@ModelAttribute ApplicantWebDto webDto) {
+		
+		ApplicantInOutDto outDto = applicantService.getApplicantDetails();
+		
+		webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
 		
 		return "applicant/home";
 	}

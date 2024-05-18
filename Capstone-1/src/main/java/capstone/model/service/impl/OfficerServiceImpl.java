@@ -140,7 +140,13 @@ public class OfficerServiceImpl implements OfficerService{
 				
 				applicantDetailsObj.setProjectDescription(app.getProjectDescription());		
 				
-				applicantDetailsObj.setTeams(app.getTeams());
+				List<String[]> teams = new ArrayList<>();
+				
+				teams.add(app.getTeams()[0].split("-"));
+				teams.add(app.getTeams()[1].split("-"));
+				teams.add(app.getTeams()[2].split("-"));	
+				
+				applicantDetailsObj.setTeams(teams);
 				
 				applicantDetailsObj.setProblemStatement(app.getProblemStatement());
 				
@@ -148,7 +154,15 @@ public class OfficerServiceImpl implements OfficerService{
 				
 				applicantDetailsObj.setSolutionDescription(app.getSolutionDescription());
 				
-				applicantDetailsObj.setHistoricalTimeline(app.getHistoricalTimeline());
+				List<String[]> historicallTimelines = new ArrayList<>();
+				
+				historicallTimelines.add(app.getHistoricalTimeline()[0].split("-"));
+				historicallTimelines.add(app.getHistoricalTimeline()[1].split("-"));
+				historicallTimelines.add(app.getHistoricalTimeline()[2].split("-"));
+				historicallTimelines.add(app.getHistoricalTimeline()[3].split("-"));
+				historicallTimelines.add(app.getHistoricalTimeline()[4].split("-"));
+				
+				applicantDetailsObj.setHistoricalTimeline(historicallTimelines);
 				
 				applicantDetailsObj.setProductServiceOffering(app.getProductServiceOffering());
 				

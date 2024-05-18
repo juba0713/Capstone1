@@ -108,6 +108,12 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 		evaluatedApplicantDao.save(entity);
 		
 	}
+
+	@Override
+	public ApplicantEntity getApplicantByCreatedBy(int createdBy) {
+		
+		return applicantDao.getApplicantByCreatedBy(createdBy);
+	}
 	
 
 }

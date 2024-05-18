@@ -2,6 +2,7 @@ package capstone.controller.webdto;
 
 import java.util.List;
 
+import capstone.model.object.ApplicantDetailsObj;
 import lombok.Data;
 
 @Data
@@ -125,5 +126,7 @@ public class ApplicantWebDto {
 	
 	//Confirm Password
 	public String confirmPassword;
+	
+	ApplicantDetailsObj applicantDetailsObj;
 	
 }

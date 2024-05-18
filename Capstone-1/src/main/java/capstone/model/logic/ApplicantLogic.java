@@ -79,4 +79,10 @@ public interface ApplicantLogic {
 	 * @param entity
 	 */
 	public void saveEvaluateedApplicant(EvaluatedApplicantEntity entity);
+	
+	/**
+	 * TO get applicant by who created it
+	 * @param entity
+	 */
+	public ApplicantEntity getApplicantByCreatedBy(int createdBy);
 }
