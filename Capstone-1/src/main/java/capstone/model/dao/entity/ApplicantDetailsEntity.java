@@ -38,7 +38,19 @@ public class ApplicantDetailsEntity {
 				(String) objects[22],
 				(String) objects[23],
 				(String) objects[24],
-				(String) objects[25]
+				(String) objects[25],
+				(Integer) objects[26],
+				(Integer) objects[27],
+				(Integer) objects[28],
+				(Integer) objects[29],
+				(Integer) objects[30],
+				(Integer) objects[31],
+				(Integer) objects[32],
+				(Boolean) objects[33],
+				(Boolean) objects[34],
+				(Boolean) objects[35],
+				(Boolean) objects[36],
+				(Boolean) objects[37]
 		);	
 	}
 	
@@ -93,4 +105,28 @@ public class ApplicantDetailsEntity {
 	public String memberFirstName;
 	
 	public String memberLastName;
+	
+	public int technologyAns;
+	
+	public int productDevelopmentAns;
+	
+	public int competitiveLandscapeAns;
+	
+	public int productDesignAns;
+	
+	public int teamAns;
+	
+	public int goToMarketAns;
+	
+	public int manufacturingAns;
+	
+	public Boolean eligibilityAgreeFlg;
+	
+	public Boolean commitmentOneFlg;
+	
+	public Boolean commitmentTwoFlg;
+	
+	public Boolean commitmentThreeFlg;
+	
+	public Boolean commitmentFourFlg;
 }

@@ -33,6 +33,10 @@ public class ApplicantDetailsObj {
 	
 	public String intPropertyStatus;
 	
+	public String objectives;
+	
+	public String scopeProposal;
+	
 	public String methodology;
 	
 	public String vitaeFile;
@@ -52,4 +56,28 @@ public class ApplicantDetailsObj {
 	public String university;
 	
 	public String[] members;
+	
+	public int technologyAns;
+	
+	public int productDevelopmentAns;
+	
+	public int competitiveLandscapeAns;
+	
+	public int productDesignAns;
+	
+	public int teamAns;
+	
+	public int goToMarketAns;
+	
+	public int manufacturingAns;
+	
+	public Boolean eligibilityAgreeFlg;
+	
+	public Boolean commitmentOneFlg;
+	
+	public Boolean commitmentTwoFlg;
+	
+	public Boolean commitmentThreeFlg;
+	
+	public Boolean commitmentFourFlg;
 }

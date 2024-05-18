@@ -50,7 +50,7 @@ public class ProjectEntity {
 	
 	@Column(columnDefinition = "text")
 	private String objectives;
-	
+	 
 	@Column(columnDefinition = "text")
 	private String scopeProposal;
 	
