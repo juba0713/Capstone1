@@ -50,7 +50,8 @@ public class ApplicantDetailsEntity {
 				(Boolean) objects[34],
 				(Boolean) objects[35],
 				(Boolean) objects[36],
-				(Boolean) objects[37]
+				(Boolean) objects[37],
+				(Integer) objects[38]
 		);	
 	}
 	
@@ -129,4 +130,6 @@ public class ApplicantDetailsEntity {
 	public Boolean commitmentThreeFlg;
 	
 	public Boolean commitmentFourFlg;
+	
+	public int status;
 }

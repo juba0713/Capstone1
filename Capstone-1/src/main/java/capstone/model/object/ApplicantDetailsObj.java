@@ -80,4 +80,6 @@ public class ApplicantDetailsObj {
 	public Boolean commitmentThreeFlg;
 	
 	public Boolean commitmentFourFlg;
+	
+	public int status;
 }
