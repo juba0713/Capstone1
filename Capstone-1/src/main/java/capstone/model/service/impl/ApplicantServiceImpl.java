@@ -424,7 +424,11 @@ public class ApplicantServiceImpl implements ApplicantService {
 				
 				applicantDetailsObj.setCommitmentFourFlg(app.getCommitmentFourFlg());
 				
-				applicantDetailsObj.setStatus(app.getStatus());;
+				applicantDetailsObj.setStatus(app.getStatus());
+				
+				applicantDetailsObj.setScore(app.getScore());
+				
+				applicantDetailsObj.setFeedback(app.getFeedback());;
 			}
 
 			members[firstRow] = app.getMemberLastName()+", "+app.getMemberFirstName();

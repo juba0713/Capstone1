@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Insert title here</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -25,6 +26,7 @@
   </head>
   <body>
     <div class="bg-slate-300 p-2 h-screen" th:object="${applicantWebDto}">
+		
       <!-- <div th:if="${!session.initialChangePass}" class="bg-red-700">
         <p>Hello</p>
       </div> -->
@@ -38,7 +40,7 @@
 
         <div class="w-40">
           <div class="font-primary text-xl">Application Status:</div>
-          <div class="rounded-xl w-3/5 bg-rose-600 text-center">
+          <div class="rounded-xl w-3/5 bg-rose-600 text-center" th:text="*{applicantDetailsObj.score} >= 6 ? 'Passed' : 'Rejected'" th:style="*{applicantDetailsObj.score} >= 6 ? 'background: green;' : 'background: red;'">
             Rejected
             <!--  pending
                   accepted
@@ -48,12 +50,25 @@
                   completed
             -->
           </div>
-          <div
-            class="rounded-lg hover:text-white hover:cursor-pointer border-black hover:bg-black border p-2 mt-1 w-[68%] font-secondary text-xs"
+          <Button
+            class="rounded-lg hover:text-white hover:cursor-pointer border-black hover:bg-black border p-2 mt-1 w-[68%] font-secondary text-xs" data-toggle="modal" data-target="#feedback-modal"
           >
             View Feedback
-          </div>
+          </Button>
+          <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div>
+  				  <div th:text="'Score: ' + *{applicantDetailsObj.score}"></div>
+  				  <div th:text="'Feedback: ' + *{applicantDetailsObj.feedback}">
+						
+				   </div>
+			  </div>	       
+		    </div>
+		  </div>
+		</div>
         </div>
+        
         <div class="progress-container flex justify-center h-20 flex-col" >
           <!-- <img
             th:src="@{/icons/inoffice.svg}"
@@ -1189,6 +1204,7 @@
       role="dialog"
       class="modal flex w-full backdrop-blur-sm"
       style="backdrop-filter: blur(3px)"
+      id="changepassword-modal"
     >
       <div
         class="modal-dialog modal-lg h-3/5 self-center flex w-full"
@@ -1270,7 +1286,18 @@
         </div>
       </div>
     </div>
-    <script
+    <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div>
+			  <div id="score"></div>
+		  </div>
+	       
+	    </div>
+	  </div>
+	</div>
+  </body>
+     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
       crossorigin="anonymous"
@@ -1291,12 +1318,13 @@
       crossorigin="anonymous"
     ></script>
     <script th:inline="javascript">
- 	  console.log(/*[[${applicantWebDto}]]*/'');
+ 	  
+ 	  const webDto = /*[[${applicantWebDto}]]*/'';
+ 	  
       if (/*[[${!session.initialChangePass}]]*/ "") {
-        $(".modal").modal("show");
+        $("#changepassword-modal").modal("show");
       } else {
-        $(".modal").remove();
+        $("#changepassword-modal").remove();
       }
     </script>
-  </body>
 </html>

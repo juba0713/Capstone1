@@ -51,7 +51,9 @@ public class ApplicantDetailsEntity {
 				(Boolean) objects[35],
 				(Boolean) objects[36],
 				(Boolean) objects[37],
-				(Integer) objects[38]
+				(Integer) objects[38],
+				(Integer) objects[39],
+				(String) objects[40]
 		);	
 	}
 	
@@ -132,4 +134,8 @@ public class ApplicantDetailsEntity {
 	public Boolean commitmentFourFlg;
 	
 	public int status;
+	
+	public int score;
+	
+	public String feedback;
 }

@@ -82,4 +82,8 @@ public class ApplicantDetailsObj {
 	public Boolean commitmentFourFlg;
 	
 	public int status;
+	
+	public int score;
+	
+	public String feedback;
 }

@@ -78,11 +78,14 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "	a.commitment_two_flg,"
 			+ "	a.commitment_three_flg,"
 			+ "	a.commitment_four_flg,"
-			+ " a.status "
+			+ " a.status, "
+			+ " COALESCE(ea.score, 0) AS score, "
+			+ " COALESCE(ea.feedback, '') AS feedback "
 			+ "FROM m_applicant a "
 			+ "JOIN t_project p ON p.applicant_id_pk = a.id_pk "
 			+ "JOIN m_group g ON g.applicant_id_pk = a.id_pk "
 			+ "JOIN t_group_member gm ON gm.group_id_pk = g.id_pk "
+			+ "LEFT JOIN t_evaluated_applicant ea ON ea.applicant_id_pk = a.id_pk "
 			+ "WHERE a.id_pk = :applicantIdPk";
 
 	public final String UPDATE_APPLICANT_STATUS = "UPDATE ApplicantEntity a "
