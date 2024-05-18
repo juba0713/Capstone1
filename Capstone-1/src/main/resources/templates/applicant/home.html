@@ -59,6 +59,16 @@
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div>
+				  <div class="rounded-xl w-3/5 bg-rose-600 text-center" th:text="*{applicantDetailsObj.score} >= 6 ? 'Passed' : 'Rejected'" th:style="*{applicantDetailsObj.score} >= 6 ? 'background: green;' : 'background: red;'">
+            Rejected
+            <!--  pending
+                  accepted
+                  rejected : display feedback btn
+                  in office
+                  in tbi board
+                  completed
+            -->
+          </div>
   				  <div th:text="'Score: ' + *{applicantDetailsObj.score}"></div>
   				  <div th:text="'Feedback: ' + *{applicantDetailsObj.feedback}">
 						
