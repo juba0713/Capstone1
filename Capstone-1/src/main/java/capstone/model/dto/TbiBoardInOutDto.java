@@ -2,6 +2,7 @@ package capstone.model.dto;
 
 import java.util.List;
 
+import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantObj;
 import lombok.Data;
 
@@ -15,4 +16,6 @@ public class TbiBoardInOutDto {
 	public String feedback;
 	
 	public int applicantIdPk;
+	
+	ApplicantDetailsObj applicantDetailsObj;
 }

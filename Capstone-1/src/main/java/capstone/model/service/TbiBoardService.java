@@ -18,4 +18,11 @@ public interface TbiBoardService {
 	 * @return
 	 */
 	public void evaluateApplicant(TbiBoardInOutDto inDto);
+	
+	/**
+	 * To get the details of the application by id pk
+	 * @param inDto
+	 * @return ApplicantInOutDto
+	 */
+	public TbiBoardInOutDto getApplicantDetails(TbiBoardInOutDto inDto); 
 }

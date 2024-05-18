@@ -123,7 +123,7 @@ public class OfficerServiceImpl implements OfficerService{
 		
 		List<ApplicantDetailsEntity> applicant = applicantLogic.getApplicantDetailsByIdPk(inDto.getApplicantIdPk());
 		
-ApplicantDetailsObj applicantDetailsObj = new ApplicantDetailsObj();
+		ApplicantDetailsObj applicantDetailsObj = new ApplicantDetailsObj();
 		
 		String[] members = new String[4];
 		

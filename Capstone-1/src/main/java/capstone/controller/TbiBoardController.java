@@ -1,13 +1,17 @@
 package capstone.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import capstone.controller.webdto.OfficerWebDto;
 import capstone.controller.webdto.TbiBoardWebDto;
+import capstone.model.dto.OfficerInOutDto;
 import capstone.model.dto.TbiBoardInOutDto;
 import capstone.model.service.TbiBoardService;
 
@@ -42,5 +46,27 @@ public class TbiBoardController {
 		tbiBoardService.evaluateApplicant(inDto);
 		
 		return "redirect:/tbi-board/home";
+	}
+	
+	@GetMapping("/retrieve/details")
+	public ResponseEntity<TbiBoardWebDto> getApplicantDetails(@RequestParam("applicantIdPk") String applicantIdPk) {
+
+		
+		TbiBoardInOutDto inDto = new TbiBoardInOutDto();
+  
+		inDto.setApplicantIdPk(Integer.parseInt(applicantIdPk));
+ 
+		TbiBoardInOutDto outDto = tbiBoardService.getApplicantDetails(inDto);
+  
+		if(outDto.getApplicantDetailsObj() == null) {
+  
+		}
+  
+		TbiBoardWebDto returnWebDto = new TbiBoardWebDto();
+		
+		returnWebDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
+		 
+
+		return ResponseEntity.ok(returnWebDto);
 	}
 }

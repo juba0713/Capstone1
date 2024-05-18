@@ -2,6 +2,7 @@ package capstone.controller.webdto;
 
 import java.util.List;
 
+import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantObj;
 import lombok.Data;
 
@@ -16,4 +17,6 @@ public class TbiBoardWebDto {
 	public int score;
 	
 	public String feedback;
+	
+	ApplicantDetailsObj applicantDetailsObj;
 }
