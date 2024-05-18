@@ -171,3 +171,13 @@
 .imageLogo:focus {
   outline: 0;
 }
+.bodyrowhover tr:hover {
+  background: #fff;
+}
+
+.rounded-top-left {
+  border-top-left-radius: 10px;
+}
+.rounded-top-right {
+  border-top-right-radius: 10px;
+}

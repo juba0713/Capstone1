@@ -26,14 +26,3 @@
     transform: rotate(360deg);
   }
 }
-
-.rounded-top-left {
-  border-top-left-radius: 10px;
-}
-.rounded-top-right {
-  border-top-right-radius: 10px;
-}
-
-.bodyrowhover tr:hover {
-  background: #fff;
-}

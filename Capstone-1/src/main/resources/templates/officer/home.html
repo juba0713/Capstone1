@@ -57,11 +57,13 @@
 
           <thead class="font-secondary text-sm bg-customyellow">
             <tr>
-              <th class="text-left rounded-top-left">Email</th>
+              <th class="text-center rounded-top-left">Email</th>
               <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
-              <th class="text-left w-3/12">Project Title</th>
-              <th class="text-left w-1/5 hidden sm:table-cell">Description</th>
-              <th class="text-left w-1/5 hidden sm:table-cell">University</th>
+              <th class="text-center w-3/12">Project Title</th>
+              <th class="text-center w-1/5 hidden sm:table-cell">
+                Description
+              </th>
+              <th class="text-center w-1/5 hidden sm:table-cell">University</th>
               <th class="text-center rounded-top-right">Actions</th>
             </tr>
           </thead>
@@ -116,7 +118,6 @@
                   type="button"
                   th:data-id="${app.applicantIdPk}"
                   name="accept"
-                  
                 >
                   Accept
                 </button>
@@ -271,11 +272,21 @@
                     </p>
                     <div class="text-black text-justify mt-8 mb-8 ml-6 mr-8">
                       <div class="items-center mb-8">
-                        <input type="radio" name="agreeFlg" value="true" class="agreeFlg"/>
+                        <input
+                          type="radio"
+                          name="agreeFlg"
+                          value="true"
+                          class="agreeFlg"
+                        />
                         <label class="ml-2">I AGREE</label>
                       </div>
                       <div>
-                        <input type="radio" name="agreeFlg" value="false" class="agreeFlg"/>
+                        <input
+                          type="radio"
+                          name="agreeFlg"
+                          value="false"
+                          class="agreeFlg"
+                        />
                         <label class="ml-2">I DO NOT AGREE</label>
                       </div>
                     </div>
@@ -656,10 +667,7 @@
                       <p class="font-semibold mb-10">
                         III. Curriculum Vitae of the Project Leader
                       </p>
-                      <input
-                        type="file"
-                        name="vitaeFile"
-                      />
+                      <input type="file" name="vitaeFile" />
                     </div>
                     <hr class="my-10" />
 
@@ -792,29 +800,54 @@
                           <label>Technology</label>
                         </div>
                         <div class="mt-10 mb-4">
-                          <input type="radio" name="technologyAns" value="1" class="technologyAns"/>
+                          <input
+                            type="radio"
+                            name="technologyAns"
+                            value="1"
+                            class="technologyAns"
+                          />
 
                           >Project work is beyond basic research and technology
                           concept has been defined
                         </div>
                         <div class="mb-4">
-                          <input type="radio" name="technologyAns" value="2" class="technologyAns"/>
+                          <input
+                            type="radio"
+                            name="technologyAns"
+                            value="2"
+                            class="technologyAns"
+                          />
                           Applied research has begun and practical
                           application(s) have been identified
                         </div>
                         <div class="mb-4">
-                          <input type="radio" name="technologyAns" value="3" class="technologyAns"/>
+                          <input
+                            type="radio"
+                            name="technologyAns"
+                            value="3"
+                            class="technologyAns"
+                          />
                           Preliminary testing of technology components has
                           begun, and technical feasibility has been established
                           in a laboratory environment
                         </div>
                         <div class="mb-4">
-                          <input type="radio" name="technologyAns" value="4" class="technologyAns"/>
+                          <input
+                            type="radio"
+                            name="technologyAns"
+                            value="4"
+                            class="technologyAns"
+                          />
                           Initial testing of integrated product/system has been
                           completed in a laboratory environment
                         </div>
                         <div>
-                          <input type="radio" name="technologyAns" value="5" class="technologyAns"/>
+                          <input
+                            type="radio"
+                            name="technologyAns"
+                            value="5"
+                            class="technologyAns"
+                          />
                           Laboratory scale integrated product/system
                           demonstrates performance in the intended
                           application(s)
@@ -946,29 +979,54 @@
                         <label>Product Development/Design</label>
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="productDesignAns" value="1" class="productDesignAns"/>
+                        <input
+                          type="radio"
+                          name="productDesignAns"
+                          value="1"
+                          class="productDesignAns"
+                        />
                         One or more initial product hypotheses have been defined
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="productDesignAns" value="2" class="productDesignAns"/>
+                        <input
+                          type="radio"
+                          name="productDesignAns"
+                          value="2"
+                          class="productDesignAns"
+                        />
                         Mapping product/system attributes against customer needs
                         has highlighted a clear value proposition
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="productDesignAns" value="3" class="productDesignAns"/>
+                        <input
+                          type="radio"
+                          name="productDesignAns"
+                          value="3"
+                          class="productDesignAns"
+                        />
                         The product/system has been scaled from laboratory to
                         pilot scale and issues that may affect achieving full
                         scale have been identified
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="productDesignAns" value="4" class="productDesignAns" />
+                        <input
+                          type="radio"
+                          name="productDesignAns"
+                          value="4"
+                          class="productDesignAns"
+                        />
                         Comprehensive customer value proposition model has been
                         developed, including a detailed understanding of
                         product/system design specifications, required
                         certifications, and trade-offs
                       </div>
                       <div>
-                        <input type="radio" name="productDesignAns" value="5" class="productDesignAns" />
+                        <input
+                          type="radio"
+                          name="productDesignAns"
+                          value="5"
+                          class="productDesignAns"
+                        />
                         Product/system final design optimization has been
                         completed, required certifications have been obtained,
                         and product/system has incorporated detailed customer
@@ -980,29 +1038,54 @@
                         <label>Team</label>
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="teamAns" value="1" class="teamAns" />
+                        <input
+                          type="radio"
+                          name="teamAns"
+                          value="1"
+                          class="teamAns"
+                        />
                         No team or company in place (single individual, no legal
                         entity)
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="teamAns" value="2" class="teamAns" />
+                        <input
+                          type="radio"
+                          name="teamAns"
+                          value="2"
+                          class="teamAns"
+                        />
                         Solely technical or non-technical founder(s) running the
                         company with no outside assistance
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="teamAns" value="3" class="teamAns" />
+                        <input
+                          type="radio"
+                          name="teamAns"
+                          value="3"
+                          class="teamAns"
+                        />
                         Solely technical or non-technical founder(s) running the
                         company with assistance from outside advisors/mentors
                         and/or incubator/accelerator
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="teamAns" value="4" class="teamAns" />
+                        <input
+                          type="radio"
+                          name="teamAns"
+                          value="4"
+                          class="teamAns"
+                        />
                         Balanced team with technical and business
                         development/commercialization experience running the
                         company with assistance from outside advisors/mentors
                       </div>
                       <div>
-                        <input type="radio" name="teamAns" value="5" class="teamAns" />
+                        <input
+                          type="radio"
+                          name="teamAns"
+                          value="5"
+                          class="teamAns"
+                        />
                         Balanced team with all capabilities onboard (e.g.,
                         sales, marketing, customer service, operations, etc.)
                         running the company with assistance from outside
@@ -1014,34 +1097,59 @@
                         <label>Go-to-Market</label>
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="goToMarketAns" value="1" class="goToMarketAns" />
+                        <input
+                          type="radio"
+                          name="goToMarketAns"
+                          value="1"
+                          class="goToMarketAns"
+                        />
                         <label>
                           Initial business model and value proposition have been
                           defined
                         </label>
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="goToMarketAns" value="2" class="goToMarketAns" />
+                        <input
+                          type="radio"
+                          name="goToMarketAns"
+                          value="2"
+                          class="goToMarketAns"
+                        />
                         Customers/partners have been interviewed to understand
                         their pain points/needs, and business model and value
                         proposition have been refined based on customer/partner
                         feedback
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="goToMarketAns" value="3" class="goToMarketAns" />
+                        <input
+                          type="radio"
+                          name="goToMarketAns"
+                          value="3"
+                          class="goToMarketAns"
+                        />
                         Market and customer/partner needs and how those
                         translate to product requirements have been defined, and
                         initial relationships have been developed with key
                         stakeholders across the value chain
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="goToMarketAns" value="4" class="goToMarketAns" />
+                        <input
+                          type="radio"
+                          name="goToMarketAns"
+                          value="4"
+                          class="goToMarketAns"
+                        />
                         Partnerships have been formed with key stakeholders
                         across the value chain (e.g., suppliers, partners,
                         service providers, and customers)
                       </div>
                       <div>
-                        <input type="radio" name="goToMarketAns" value="5" class="goToMarketAns" />
+                        <input
+                          type="radio"
+                          name="goToMarketAns"
+                          value="5"
+                          class="goToMarketAns"
+                        />
                         Supply agreements with suppliers and partners are in
                         place and initial purchase orders from customers have
                         been received >
@@ -1052,29 +1160,54 @@
                         <label>Manufacturing/Supply Chain</label>
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="manufacturingAns" value="1" class="manufacturingAns"/>
+                        <input
+                          type="radio"
+                          name="manufacturingAns"
+                          value="1"
+                          class="manufacturingAns"
+                        />
                         Potential suppliers, partners, and customers have been
                         identified and mapped in an initial value chain analysis
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="manufacturingAns" value="2" class="manufacturingAns"/>
+                        <input
+                          type="radio"
+                          name="manufacturingAns"
+                          value="2"
+                          class="manufacturingAns"
+                        />
                         Relationships have been established with potential
                         suppliers, partners, service providers, and customers
                         and they have provided input on product and
                         manufacturability requirements
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="manufacturingAns" value="3" class="manufacturingAns"/>
+                        <input
+                          type="radio"
+                          name="manufacturingAns"
+                          value="3"
+                          class="manufacturingAns"
+                        />
                         Manufacturing process qualifications (e.g. QC/QA) have
                         been defined and are in progress
                       </div>
                       <div class="mb-4">
-                        <input type="radio" name="manufacturingAns" value="4" class="manufacturingAns" />
+                        <input
+                          type="radio"
+                          name="manufacturingAns"
+                          value="4"
+                          class="manufacturingAns"
+                        />
                         Products/systems have been pilot manufactured and sold
                         to initial customerss
                       </div>
                       <div>
-                        <input type="radio" name="manufacturingAns" value="5" class="manufacturingAns" />
+                        <input
+                          type="radio"
+                          name="manufacturingAns"
+                          value="5"
+                          class="manufacturingAns"
+                        />
                         Full scale manufacturing and widespread deployment of
                         product/system to customers and/or users has been
                         achieved
@@ -1414,167 +1547,194 @@
         }
 
         const data = await response.json();
-        
-        document.querySelector('.overflow-auto').scrollTo({
-	        top: 0,
-	    });
+
+        document.querySelector(".overflow-auto").scrollTo({
+          top: 0,
+        });
 
         let applicant = data.applicantDetailsObj;
-        let email = document.querySelector(".email");       
-        let agreeFlgs = document.querySelectorAll(".agreeFlg");      
-        let projectTitle = document.querySelector('.projectTitle');		
-        let projectDescription = document.querySelector('.projectDescription');
-		let memberOne = document.querySelectorAll('.member-1');
-		let memberTwo = document.querySelectorAll('.member-2');
-		let memberThree = document.querySelectorAll('.member-3');
-		let problemStatement = document.querySelector('.problemStatement');
-		let targetMarket = document.querySelector('.targetMarket');
-		let solutionDescription = document.querySelector('.solutionDescription');
-		let historicalTimelineOne = document.querySelectorAll('.historicalTimeline-1');
-		let historicalTimelineTwo = document.querySelectorAll('.historicalTimeline-2');
-		let historicalTimelineThree = document.querySelectorAll('.historicalTimeline-3');
-		let historicalTimelineFour = document.querySelectorAll('.historicalTimeline-4');
-		let historicalTimelineFive = document.querySelectorAll('.historicalTimeline-5');
-		let productServiceOffering = document.querySelectorAll('.productServiceOffering');
-		let pricingStrategy = document.querySelectorAll('.pricingStrategy');
-		let intPropertyStatus = document.querySelector('.intPropertyStatus');
-		let objectives = document.querySelector('.objectives');
-		let scopeProposal = document.querySelector('.scopeProposal');
-		let methodology = document.querySelector('.methodology');
-		//let vitaeFile = document.querySelector('.vitaeFile');
-		let supportLink = document.querySelector('.supportLink'); 
-		let groupName = document.querySelector('.groupName');
-		let groupLeader = document.querySelector('.groupLeader');
-		let leaderNumber = document.querySelector('.leaderNumber');
-		let leaderEmail = document.querySelector('.leaderEmail');
-		let members = document.querySelectorAll('.members');
-		let university = document.querySelector('.university');
-		let technologyAns = document.querySelectorAll('.technologyAns');
-		let productDevelopmentAns = document.querySelectorAll('.productDevelopmentAns');
-		let competitiveLandscapeAns = document.querySelectorAll('.competitiveLandscapeAns');
-		let productDesignAns = document.querySelectorAll('.productDesignAns');
-		let teamAns = document.querySelectorAll('.teamAns');
-		let goToMarketAns = document.querySelectorAll('.goToMarketAns');
-		let manufacturingAns = document.querySelectorAll('.manufacturingAns');
-		let eligibilityAgreeFlg = document.querySelectorAll('.eligibilityAgreeFlg');
-		let commitmentOneFlg = document.querySelectorAll('.commitmentOneFlg');
-		let commitmentTwoFlg = document.querySelectorAll('.commitmentTwoFlg');
-		let commitmentThreeFlg = document.querySelectorAll('.commitmentThreeFlg');
-		let commitmentFourFlg = document.querySelectorAll('.commitmentFourFlg');
-		
-		//Email
-		email.value = applicant.email;
-		//Project Title
-		projectTitle.value = applicant.projectTitle;	
-		//Project Description
-		projectDescription.textContent = applicant.projectDescription;	
-		//AgreeF;g
-        if(applicant.agreeFlg){
-			agreeFlgs[0].checked = true;
-		}else{
-			agreeFlgs[1].checked = true;
-		}	
-		//Teams
-		memberOne[0].value = applicant.teams[0][0];
-		memberOne[1].value = applicant.teams[0][1];
-		memberTwo[0].value = applicant.teams[1][0];
-		memberTwo[1].value = applicant.teams[1][1];
-		memberThree[0].value = applicant.teams[2][0];
-		memberThree[1].value = applicant.teams[2][1];
-		//Problem Statement
-		problemStatement.textContent = applicant.problemStatement;
-		//Target Market
-		targetMarket.textContent = applicant.targetMarket;
-		//Solution Description
-		solutionDescription.textContent = applicant.solutionDescription;
-		//HistoricalTimeline
-		historicalTimelineOne[0].value = applicant.historicalTimeline[0][0];
-		historicalTimelineOne[1].value = applicant.historicalTimeline[0][1];
-		historicalTimelineTwo[0].value = applicant.historicalTimeline[1][0];
-		historicalTimelineTwo[1].value = applicant.historicalTimeline[1][1];
-		historicalTimelineThree[0].value = applicant.historicalTimeline[2][0];
-		historicalTimelineThree[1].value = applicant.historicalTimeline[2][1];
-		historicalTimelineFour[0].value = applicant.historicalTimeline[3][0];
-		historicalTimelineFour[1].value = applicant.historicalTimeline[3][1];
-		historicalTimelineFive[0].value = applicant.historicalTimeline[4][0];
-		historicalTimelineFive[1].value = applicant.historicalTimeline[4][1];
-		//Product Service Offering
-		productServiceOffering[0].value = applicant.productServiceOffering[0];
-		productServiceOffering[1].value = applicant.productServiceOffering[1];
-		productServiceOffering[2].value = applicant.productServiceOffering[2];
-		productServiceOffering[3].value = applicant.productServiceOffering[3];
-		//Pricing Strategy
-		pricingStrategy[0].value = applicant.pricingStrategy[0];
-		pricingStrategy[1].value = applicant.pricingStrategy[1];
-		pricingStrategy[2].value = applicant.pricingStrategy[2];
-		pricingStrategy[3].value = applicant.pricingStrategy[3];
-		//Intellectual Property Status
-		intPropertyStatus.value = applicant.intPropertyStatus;
-		//Objectives
-		objectives.textContent = applicant.objectives;
-		//Scope of the proposal
-		scopeProposal.textContent = applicant.scopeProposal;
-		//Methodology
-		methodology.textContent = applicant.methodology;
-		//Supporting Link
-		supportLink.value = applicant.supportLink;
-		//Group Name
-		groupName.value = applicant.groupName;
-		//Group Leader
-		groupLeader.value = applicant.leaderLastName + ", " + applicant.leaderFirstName;
-		//Leader Mobile Number
-		leaderNumber.value = applicant.mobileNumber;
-		//Leader Email
-		leaderEmail.value = applicant.emailAddress;
-		//Members
-		members[0].value = applicant.members[0];
-		members[1].value = applicant.members[1];
-		members[2].value = applicant.members[2];
-		members[3].value = applicant.members[3];
-		//University
-		university.value = applicant.university;
+        let email = document.querySelector(".email");
+        let agreeFlgs = document.querySelectorAll(".agreeFlg");
+        let projectTitle = document.querySelector(".projectTitle");
+        let projectDescription = document.querySelector(".projectDescription");
+        let memberOne = document.querySelectorAll(".member-1");
+        let memberTwo = document.querySelectorAll(".member-2");
+        let memberThree = document.querySelectorAll(".member-3");
+        let problemStatement = document.querySelector(".problemStatement");
+        let targetMarket = document.querySelector(".targetMarket");
+        let solutionDescription = document.querySelector(
+          ".solutionDescription"
+        );
+        let historicalTimelineOne = document.querySelectorAll(
+          ".historicalTimeline-1"
+        );
+        let historicalTimelineTwo = document.querySelectorAll(
+          ".historicalTimeline-2"
+        );
+        let historicalTimelineThree = document.querySelectorAll(
+          ".historicalTimeline-3"
+        );
+        let historicalTimelineFour = document.querySelectorAll(
+          ".historicalTimeline-4"
+        );
+        let historicalTimelineFive = document.querySelectorAll(
+          ".historicalTimeline-5"
+        );
+        let productServiceOffering = document.querySelectorAll(
+          ".productServiceOffering"
+        );
+        let pricingStrategy = document.querySelectorAll(".pricingStrategy");
+        let intPropertyStatus = document.querySelector(".intPropertyStatus");
+        let objectives = document.querySelector(".objectives");
+        let scopeProposal = document.querySelector(".scopeProposal");
+        let methodology = document.querySelector(".methodology");
+        //let vitaeFile = document.querySelector('.vitaeFile');
+        let supportLink = document.querySelector(".supportLink");
+        let groupName = document.querySelector(".groupName");
+        let groupLeader = document.querySelector(".groupLeader");
+        let leaderNumber = document.querySelector(".leaderNumber");
+        let leaderEmail = document.querySelector(".leaderEmail");
+        let members = document.querySelectorAll(".members");
+        let university = document.querySelector(".university");
+        let technologyAns = document.querySelectorAll(".technologyAns");
+        let productDevelopmentAns = document.querySelectorAll(
+          ".productDevelopmentAns"
+        );
+        let competitiveLandscapeAns = document.querySelectorAll(
+          ".competitiveLandscapeAns"
+        );
+        let productDesignAns = document.querySelectorAll(".productDesignAns");
+        let teamAns = document.querySelectorAll(".teamAns");
+        let goToMarketAns = document.querySelectorAll(".goToMarketAns");
+        let manufacturingAns = document.querySelectorAll(".manufacturingAns");
+        let eligibilityAgreeFlg = document.querySelectorAll(
+          ".eligibilityAgreeFlg"
+        );
+        let commitmentOneFlg = document.querySelectorAll(".commitmentOneFlg");
+        let commitmentTwoFlg = document.querySelectorAll(".commitmentTwoFlg");
+        let commitmentThreeFlg = document.querySelectorAll(
+          ".commitmentThreeFlg"
+        );
+        let commitmentFourFlg = document.querySelectorAll(".commitmentFourFlg");
+
+        //Email
+        email.value = applicant.email;
+        //Project Title
+        projectTitle.value = applicant.projectTitle;
+        //Project Description
+        projectDescription.textContent = applicant.projectDescription;
+        //AgreeF;g
+        if (applicant.agreeFlg) {
+          agreeFlgs[0].checked = true;
+        } else {
+          agreeFlgs[1].checked = true;
+        }
+        //Teams
+        memberOne[0].value = applicant.teams[0][0];
+        memberOne[1].value = applicant.teams[0][1];
+        memberTwo[0].value = applicant.teams[1][0];
+        memberTwo[1].value = applicant.teams[1][1];
+        memberThree[0].value = applicant.teams[2][0];
+        memberThree[1].value = applicant.teams[2][1];
+        //Problem Statement
+        problemStatement.textContent = applicant.problemStatement;
+        //Target Market
+        targetMarket.textContent = applicant.targetMarket;
+        //Solution Description
+        solutionDescription.textContent = applicant.solutionDescription;
+        //HistoricalTimeline
+        historicalTimelineOne[0].value = applicant.historicalTimeline[0][0];
+        historicalTimelineOne[1].value = applicant.historicalTimeline[0][1];
+        historicalTimelineTwo[0].value = applicant.historicalTimeline[1][0];
+        historicalTimelineTwo[1].value = applicant.historicalTimeline[1][1];
+        historicalTimelineThree[0].value = applicant.historicalTimeline[2][0];
+        historicalTimelineThree[1].value = applicant.historicalTimeline[2][1];
+        historicalTimelineFour[0].value = applicant.historicalTimeline[3][0];
+        historicalTimelineFour[1].value = applicant.historicalTimeline[3][1];
+        historicalTimelineFive[0].value = applicant.historicalTimeline[4][0];
+        historicalTimelineFive[1].value = applicant.historicalTimeline[4][1];
+        //Product Service Offering
+        productServiceOffering[0].value = applicant.productServiceOffering[0];
+        productServiceOffering[1].value = applicant.productServiceOffering[1];
+        productServiceOffering[2].value = applicant.productServiceOffering[2];
+        productServiceOffering[3].value = applicant.productServiceOffering[3];
+        //Pricing Strategy
+        pricingStrategy[0].value = applicant.pricingStrategy[0];
+        pricingStrategy[1].value = applicant.pricingStrategy[1];
+        pricingStrategy[2].value = applicant.pricingStrategy[2];
+        pricingStrategy[3].value = applicant.pricingStrategy[3];
+        //Intellectual Property Status
+        intPropertyStatus.value = applicant.intPropertyStatus;
+        //Objectives
+        objectives.textContent = applicant.objectives;
+        //Scope of the proposal
+        scopeProposal.textContent = applicant.scopeProposal;
+        //Methodology
+        methodology.textContent = applicant.methodology;
+        //Supporting Link
+        supportLink.value = applicant.supportLink;
+        //Group Name
+        groupName.value = applicant.groupName;
+        //Group Leader
+        groupLeader.value =
+          applicant.leaderLastName + ", " + applicant.leaderFirstName;
+        //Leader Mobile Number
+        leaderNumber.value = applicant.mobileNumber;
+        //Leader Email
+        leaderEmail.value = applicant.emailAddress;
+        //Members
+        members[0].value = applicant.members[0];
+        members[1].value = applicant.members[1];
+        members[2].value = applicant.members[2];
+        members[3].value = applicant.members[3];
+        //University
+        university.value = applicant.university;
         //Technology Answer
-        technologyAns[applicant.technologyAns-1].checked = true; 
+        technologyAns[applicant.technologyAns - 1].checked = true;
         //Product Development Answer
-        productDevelopmentAns[applicant.productDevelopmentAns-1].checked = true;
+        productDevelopmentAns[
+          applicant.productDevelopmentAns - 1
+        ].checked = true;
         //Competitive Landscape Answer
-        competitiveLandscapeAns[applicant.competitiveLandscapeAns-1].checked = true;
+        competitiveLandscapeAns[
+          applicant.competitiveLandscapeAns - 1
+        ].checked = true;
         //Product Design Answer
-        productDesignAns[applicant.productDesignAns-1].checked = true;
+        productDesignAns[applicant.productDesignAns - 1].checked = true;
         //Teams Answer
-        teamAns[applicant.teamAns-1].checked = true;
+        teamAns[applicant.teamAns - 1].checked = true;
         //Go To market Answer
-        goToMarketAns[applicant.goToMarketAns-1].checked = true;
+        goToMarketAns[applicant.goToMarketAns - 1].checked = true;
         //Manufacturing Answer
-        manufacturingAns[applicant.manufacturingAns-1].checked = true;
+        manufacturingAns[applicant.manufacturingAns - 1].checked = true;
         //eligibilityAgreeFlg
-        if(applicant.eligibilityAgreeFlg){
-			eligibilityAgreeFlg[0].checked = true;
-		}else{
-			eligibilityAgreeFlg[1].checked = true;
-		}
-		//CommmitFlg
-        if(applicant.commitmentOneFlg){
-			commitmentOneFlg[0].checked = true;
-		}else{
-			commitmentOneFlg[1].checked = true;
-		}
-		if(applicant.commitmentTwoFlg){
-			commitmentTwoFlg[0].checked = true;
-		}else{
-			commitmentTwoFlg[1].checked = true;
-		}
-		if(applicant.commitmentThreeFlg){
-			commitmentThreeFlg[0].checked = true;
-		}else{
-			commitmentThreeFlg[1].checked = true;
-		}
-		if(applicant.commitmentFourFlg){
-			commitmentFourFlg[0].checked = true;
-		}else{
-			commitmentFourFlg[1].checked = true;
-		}
-	    console.log(applicant);
+        if (applicant.eligibilityAgreeFlg) {
+          eligibilityAgreeFlg[0].checked = true;
+        } else {
+          eligibilityAgreeFlg[1].checked = true;
+        }
+        //CommmitFlg
+        if (applicant.commitmentOneFlg) {
+          commitmentOneFlg[0].checked = true;
+        } else {
+          commitmentOneFlg[1].checked = true;
+        }
+        if (applicant.commitmentTwoFlg) {
+          commitmentTwoFlg[0].checked = true;
+        } else {
+          commitmentTwoFlg[1].checked = true;
+        }
+        if (applicant.commitmentThreeFlg) {
+          commitmentThreeFlg[0].checked = true;
+        } else {
+          commitmentThreeFlg[1].checked = true;
+        }
+        if (applicant.commitmentFourFlg) {
+          commitmentFourFlg[0].checked = true;
+        } else {
+          commitmentFourFlg[1].checked = true;
+        }
+        console.log(applicant);
       }
     </script>
   </body>

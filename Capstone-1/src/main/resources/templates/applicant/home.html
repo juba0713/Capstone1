@@ -99,9 +99,27 @@
             src="/Capstone1/Capstone-1/src/main/resources/static/icons/inoffice.svg"
           /> -->
           <div class="flex flex-wrap justify-evenly">
-            <div class="border-2">in officer icon/text</div>
-            <div class="border-2">in tbiboard icon/text</div>
-            <div class="border-2">completed icon/text</div>
+            <div>
+              <img
+                th:src="@{/icons/operationsOfficer.svg}"
+                alt="Example SVG"
+                class="h-10"
+              />
+            </div>
+            <div>
+              <img
+                th:src="@{/icons/tbiBoard.svg}"
+                alt="Example SVG"
+                class="h-10"
+              />
+            </div>
+            <div>
+              <img
+                th:src="@{/icons/completed.svg}"
+                alt="Example SVG"
+                class="h-10"
+              />
+            </div>
           </div>
 
           <div class="progress w-w70 place-self-center">
@@ -121,7 +139,7 @@
 
         <!-- form -->
         <div
-          class="flex justify-center h-[470px] bg-white rounded-lg overflow-hidden"
+          class="flex justify-center h-[430px] bg-white rounded-lg overflow-hidden"
         >
           <div class="overflow-auto rounded-2xl">
             <form

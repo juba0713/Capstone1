@@ -14,17 +14,13 @@
       href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" th:href="@{/css/officer/officer.css}" />
     <link rel="stylesheet" th:href="@{/css/output.css}" />
     <!-- for live server[no springboot running] -->
     <link
       rel="stylesheet"
       href="/Capstone1/Capstone-1/src/main/resources/static/css/output.css"
     />
-    <link
-      rel="stylesheet"
-      href="/Capstone1/Capstone-1/src/main/resources/static/css/officer/officer.css"
-    />
+
     <style>
       .dt-input {
         margin-right: 10px;
@@ -50,15 +46,17 @@
 
           <thead class="font-secondary text-sm bg-customyellow">
             <tr>
-              <th class="text-left rounded-top-left">Email</th>
+              <th class="text-center rounded-top-left">Email</th>
               <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
-              <th class="text-left w-3/12">Project Title</th>
-              <th class="text-left w-1/5 hidden sm:table-cell">Description</th>
-              <th class="text-left w-1/5 hidden sm:table-cell">University</th>
+              <th class="text-center w-3/12">Project Title</th>
+              <th class="text-center w-1/5 hidden sm:table-cell">
+                Description
+              </th>
+              <th class="text-center w-1/5 hidden sm:table-cell">University</th>
               <th class="text-center rounded-top-right">Actions</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-red-500">
+          <tbody class="divide-y divide-red-500 bodyrowhover">
             <tr
               th:each="app : *{listOfApplicants}"
               class="row-btn overflow-hidden text-sm"
