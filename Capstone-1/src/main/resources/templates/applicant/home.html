@@ -3,7 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <title>Insert title here</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -26,7 +31,6 @@
   </head>
   <body>
     <div class="bg-slate-300 p-2 h-screen" th:object="${applicantWebDto}">
-		
       <!-- <div th:if="${!session.initialChangePass}" class="bg-red-700">
         <p>Hello</p>
       </div> -->
@@ -40,7 +44,11 @@
 
         <div class="w-40" th:if="*{applicantDetailsObj.status >= 5}">
           <div class="font-primary text-xl">Application Status:</div>
-          <div class="rounded-xl w-3/5 bg-rose-600 text-center" th:text="*{applicantDetailsObj.score} >= 6 ? 'Passed' : 'Rejected'" th:style="*{applicantDetailsObj.score} >= 6 ? 'background: green;' : 'background: red;'">
+          <div
+            class="rounded-xl w-3/5 bg-rose-600 text-center"
+            th:text="*{applicantDetailsObj.score} >= 6 ? 'Passed' : 'Rejected'"
+            th:style="*{applicantDetailsObj.score} >= 6 ? 'background: green;' : 'background: red;'"
+          >
             Rejected
             <!--  pending
                   accepted
@@ -50,36 +58,42 @@
                   completed
             -->
           </div>
-          <Button
-            class="rounded-lg hover:text-white hover:cursor-pointer border-black hover:bg-black border p-2 mt-1 w-[68%] font-secondary text-xs" data-toggle="modal" data-target="#feedback-modal"
+          <button
+            class="rounded-lg hover:text-white hover:cursor-pointer border-black hover:bg-black border p-2 mt-1 w-[68%] font-secondary text-xs"
+            data-toggle="modal"
+            data-target="#feedback-modal"
           >
             View Feedback
-          </Button>
+          </button>
           <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div>
-				  <div class="rounded-xl w-3/5 bg-rose-600 text-center" th:text="*{applicantDetailsObj.score} >= 6 ? 'Passed' : 'Rejected'" th:style="*{applicantDetailsObj.score} >= 6 ? 'background: green;' : 'background: red;'">
-            Rejected
-            <!--  pending
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div>
+                  <div
+                    class="rounded-xl w-3/5 bg-rose-600 text-center"
+                    th:text="*{applicantDetailsObj.score} >= 6 ? 'Passed' : 'Rejected'"
+                    th:style="*{applicantDetailsObj.score} >= 6 ? 'background: green;' : 'background: red;'"
+                  >
+                    Rejected
+                    <!--  pending
                   accepted
                   rejected : display feedback btn
                   in office
                   in tbi board
                   completed
             -->
+                  </div>
+                  <div th:text="'Score: ' + *{applicantDetailsObj.score}"></div>
+                  <div
+                    th:text="'Feedback: ' + *{applicantDetailsObj.feedback}"
+                  ></div>
+                </div>
+              </div>
+            </div>
           </div>
-  				  <div th:text="'Score: ' + *{applicantDetailsObj.score}"></div>
-  				  <div th:text="'Feedback: ' + *{applicantDetailsObj.feedback}">
-						
-				   </div>
-			  </div>	       
-		    </div>
-		  </div>
-		</div>
         </div>
-        
-        <div class="progress-container flex justify-center h-20 flex-col" >
+
+        <div class="progress-container flex justify-center h-20 flex-col">
           <!-- <img
             th:src="@{/icons/inoffice.svg}"
             src="/Capstone1/Capstone-1/src/main/resources/static/icons/inoffice.svg"
@@ -93,8 +107,8 @@
           <div class="progress w-w70 place-self-center">
             <div
               class="progress-bar"
-              role="progressbar"             
-			  th:style="*{applicantDetailsObj.status == 1 OR applicantDetailsObj == 3 ? 'width: 33%;' : applicantDetailsObj.status == 4 ? 'width: 66%;' : 'width: 100%;'}"
+              role="progressbar"
+              th:style="*{applicantDetailsObj.status == 1 OR applicantDetailsObj == 3 ? 'width: 33%;' : applicantDetailsObj.status == 4 ? 'width: 66%;' : 'width: 100%;'}"
               aria-valuenow="33"
               aria-valuemin="0"
               aria-valuemax="100"
@@ -105,7 +119,7 @@
           </div>
         </div>
         <div
-          class="flex justify-center h-[470px] bg-white rounded-lg overflow-hidden" 
+          class="flex justify-center h-[470px] bg-white rounded-lg overflow-hidden"
         >
           <div class="overflow-auto rounded-2xl">
             <form
@@ -148,7 +162,7 @@
                     name="email"
                     th:value="*{applicantDetailsObj.email}"
                     placeholder="Enter your email here"
-                    class="text-black h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
+                    class="pointer-events-none text-black h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                   />
                 </div>
               </div>
@@ -211,13 +225,25 @@
                   complaint, suit, or damages which any party may file or claim
                   in relation to my consent.
                 </p>
-                <div class="text-black text-justify mt-8 mb-8 ml-6 mr-8">
+                <div
+                  class="pointer-events-none text-black text-justify mt-8 mb-8 ml-6 mr-8"
+                >
                   <div class="items-center mb-8">
-                    <input type="radio" name="agreeFlg" value="true" th:checked="*{applicantDetailsObj.agreeFlg}"/>
+                    <input
+                      type="radio"
+                      name="agreeFlg"
+                      value="true"
+                      th:checked="*{applicantDetailsObj.agreeFlg}"
+                    />
                     <label class="ml-2">I AGREE</label>
                   </div>
                   <div>
-                    <input type="radio" name="agreeFlg" value="false"th:checked="*{!applicantDetailsObj.agreeFlg}" />
+                    <input
+                      type="radio"
+                      name="agreeFlg"
+                      value="false"
+                      th:checked="*{!applicantDetailsObj.agreeFlg}"
+                    />
                     <label class="ml-2">I DO NOT AGREE</label>
                   </div>
                 </div>
@@ -232,7 +258,7 @@
                   placeholder="Enter Project title"
                   name="projectTitle"
                   th:value="*{applicantDetailsObj.projectTitle}"
-                  class="font-secondary text-black h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
+                  class="pointer-events-none font-secondary text-black h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                 />
               </div>
 
@@ -247,7 +273,7 @@
                     placeholder="Type something here..."
                     name="projectDescription"
                     th:text="*{applicantDetailsObj.projectDescription}"
-                    class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32 z-10"
+                    class="pointer-events-none resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32 z-10"
                   ></textarea>
                 </div>
                 <div class="mt-14">
@@ -260,13 +286,13 @@
                       placeholder="Member name"
                       name="teams[0][0]"
                       th:value="*{applicantDetailsObj.teams[0][0]}"
-                      class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
+                      class="pointer-events-none border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
                     /><input
                       type="text"
                       placeholder="Input role"
                       name="teams[0][1]"
                       th:value="*{applicantDetailsObj.teams[0][1]}"
-                      class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
+                      class="pointer-events-none border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                     />
                   </div>
                   <div class="mb-6">
@@ -275,13 +301,13 @@
                       placeholder="Member name"
                       name="teams[1][0]"
                       th:value="*{applicantDetailsObj.teams[1][0]}"
-                      class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
+                      class="pointer-events-none border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
                     /><input
                       type="text"
                       placeholder="Input role"
                       name="teams[1][1]"
                       th:value="*{applicantDetailsObj.teams[1][1]}"
-                      class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
+                      class="pointer-events-none border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                     />
                   </div>
                   <div>
@@ -290,13 +316,13 @@
                       placeholder="Member name"
                       name="teams[2][0]"
                       th:value="*{applicantDetailsObj.teams[2][0]}"
-                      class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
+                      class="pointer-events-none border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
                     /><input
                       type="text"
                       placeholder="Input role"
                       name="teams[2][1]"
                       th:value="*{applicantDetailsObj.teams[2][1]}"
-                      class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
+                      class="pointer-events-none border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -310,7 +336,7 @@
                     name="problemStatement"
                     th:value="*{problemStatement}"
                     th:text="*{applicantDetailsObj.problemStatement}"
-                    class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                    class="pointer-events-none resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
                 <div class="mt-10 flex flex-col">
@@ -320,7 +346,7 @@
                     name="targetMarket"
                     th:value="*{targetMarket}"
                     th:text="*{applicantDetailsObj.targetMarket}"
-                    class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                    class="pointer-events-none resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
                 <div class="mt-10 flex flex-col">
@@ -330,7 +356,7 @@
                     name="solutionDescription"
                     th:value="*{solutionDescription}"
                     th:text="*{applicantDetailsObj.solutionDescription}"
-                    class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                    class="pointer-events-none resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
                 <div class="mt-10 mb-8 overflow-x-auto">
@@ -364,7 +390,7 @@
                             name="historicalTimeline[0][0]"
                             th:value="*{applicantDetailsObj.historicalTimeline[0][0]}"
                             placeholder="mm/yy"
-                            class="w-full h-20 focus:outline-none"
+                            class="pointer-events-none w-full h-20 focus:outline-none"
                           />
                         </td>
                         <td class="border border-gray-500 px-4 py-2">
@@ -373,7 +399,7 @@
                             name="historicalTimeline[0][1]"
                             th:value="*{applicantDetailsObj.historicalTimeline[0][1]}"
                             placeholder="Enter key activities or milestones here"
-                            class="w-full focus:outline-none"
+                            class="pointer-events-none w-full focus:outline-none"
                           />
                         </td>
                       </tr>
@@ -384,16 +410,16 @@
                             name="historicalTimeline[1][0]"
                             th:value="*{applicantDetailsObj.historicalTimeline[1][0]}"
                             placeholder="mm/yy"
-                            class="w-full h-20 focus:outline-none"
+                            class="pointer-events-none w-full h-20 focus:outline-none"
                           />
                         </td>
                         <td class="border border-gray-500 px-4 py-2">
                           <input
                             type="text"
                             name="historicalTimeline[1][1]"
-                             th:value="*{applicantDetailsObj.historicalTimeline[1][1]}"
+                            th:value="*{applicantDetailsObj.historicalTimeline[1][1]}"
                             placeholder="Enter key activities or milestones here"
-                            class="w-full focus:outline-none"
+                            class="pointer-events-none w-full focus:outline-none"
                           />
                         </td>
                       </tr>
@@ -402,18 +428,18 @@
                           <input
                             type="text"
                             name="historicalTimeline[2][0]"
-                             th:value="*{applicantDetailsObj.historicalTimeline[2][0]}"
+                            th:value="*{applicantDetailsObj.historicalTimeline[2][0]}"
                             placeholder="mm/yy"
-                            class="w-full h-20 focus:outline-none"
+                            class="pointer-events-none w-full h-20 focus:outline-none"
                           />
                         </td>
                         <td class="border border-gray-500 px-4 py-2">
                           <input
                             type="text"
                             name="historicalTimeline[2][1]"
-                             th:value="*{applicantDetailsObj.historicalTimeline[2][1]}"
+                            th:value="*{applicantDetailsObj.historicalTimeline[2][1]}"
                             placeholder="Enter key activities or milestones here"
-                            class="w-full focus:outline-none"
+                            class="pointer-events-none w-full focus:outline-none"
                           />
                         </td>
                       </tr>
@@ -424,7 +450,7 @@
                             name="historicalTimeline[3][0]"
                             th:value="*{applicantDetailsObj.historicalTimeline[3][0]}"
                             placeholder="mm/yy"
-                            class="w-full h-20 focus:outline-none"
+                            class="pointer-events-none w-full h-20 focus:outline-none"
                           />
                         </td>
                         <td class="border border-gray-500 px-4 py-2">
@@ -433,7 +459,7 @@
                             name="historicalTimeline[3][1]"
                             th:value="*{applicantDetailsObj.historicalTimeline[3][1]}"
                             placeholder="Enter key activities or milestones here"
-                            class="w-full focus:outline-none"
+                            class="pointer-events-none w-full focus:outline-none"
                           />
                         </td>
                       </tr>
@@ -444,16 +470,16 @@
                             name="historicalTimeline[4][0]"
                             th:value="*{applicantDetailsObj.historicalTimeline[4][0]}"
                             placeholder="mm/yy"
-                            class="w-full h-20 focus:outline-none"
+                            class="pointer-events-none w-full h-20 focus:outline-none"
                           />
                         </td>
                         <td class="border border-gray-500 px-4 py-2">
                           <input
                             type="text"
                             name="historicalTimeline[4][1]"
-                             th:value="*{applicantDetailsObj.historicalTimeline[4][1]}"
+                            th:value="*{applicantDetailsObj.historicalTimeline[4][1]}"
                             placeholder="Enter key activities or milestones here"
-                            class="w-full focus:outline-none"
+                            class="pointer-events-none w-full focus:outline-none"
                           />
                         </td>
                       </tr>
@@ -498,7 +524,7 @@
                             name="productServiceOffering[0]"
                             th:value="*{applicantDetailsObj.productServiceOffering[0]}"
                             placeholder="Enter key activities or milestones here"
-                            class="w-full h-20 focus:outline-none"
+                            class="pointer-events-none w-full h-20 focus:outline-none"
                           />
                         </td>
                         <td class="border border-gray-500 px-2 py-2">
@@ -507,7 +533,7 @@
                             name="productServiceOffering[1]"
                             th:value="*{applicantDetailsObj.productServiceOffering[1]}"
                             placeholder="Enter key activities or milestones here"
-                            class="focus:outline-none"
+                            class="pointer-events-none focus:outline-none"
                           />
                         </td>
                         <td class="border border-gray-500 px-2 py-2">
@@ -516,7 +542,7 @@
                             name="productServiceOffering[2]"
                             th:value="*{applicantDetailsObj.productServiceOffering[2]}"
                             placeholder="Enter key activities or milestones here"
-                            class="focus:outline-none"
+                            class="pointer-events-none focus:outline-none"
                           />
                         </td>
                         <td class="border border-gray-500 px-2 py-2">
@@ -525,7 +551,7 @@
                             name="productServiceOffering[3]"
                             th:value="*{applicantDetailsObj.productServiceOffering[3]}"
                             placeholder="Enter key activities or milestones here"
-                            class="focus:outline-none"
+                            class="pointer-events-none focus:outline-none"
                           />
                         </td>
                       </tr>
@@ -539,7 +565,7 @@
                             name="pricingStrategy[0]"
                             th:value="*{applicantDetailsObj.pricingStrategy[0]}"
                             placeholder="Enter key activities or milestones here"
-                            class="w-full h-20 focus:outline-none"
+                            class="pointer-events-none w-full h-20 focus:outline-none"
                           />
                         </td>
                         <td class="border border-gray-500 px-2 py-2">
@@ -548,7 +574,7 @@
                             name="pricingStrategy[1]"
                             th:value="*{applicantDetailsObj.pricingStrategy[1]}"
                             placeholder="Enter key activities or milestones here"
-                            class="focus:outline-none"
+                            class="pointer-events-none focus:outline-none"
                           />
                         </td>
                         <td class="border border-gray-500 px-2 py-2">
@@ -557,7 +583,7 @@
                             name="pricingStrategy[2]"
                             th:value="*{applicantDetailsObj.pricingStrategy[2]}"
                             placeholder="Enter key activities or milestones here"
-                            class="focus:outline-none"
+                            class="pointer-events-none focus:outline-none"
                           />
                         </td>
                         <td class="border border-gray-500 px-2 py-2">
@@ -566,7 +592,7 @@
                             name="pricingStrategy[3]"
                             th:value="*{applicantDetailsObj.pricingStrategy[3]}"
                             placeholder="Enter key activities or milestones here"
-                            class="focus:outline-none"
+                            class="pointer-events-none focus:outline-none"
                           />
                         </td>
                       </tr>
@@ -582,7 +608,7 @@
                     placeholder="Type something here..."
                     name="intPropertyStatus"
                     th:text="*{applicantDetailsObj.intPropertyStatus}"
-                    class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                    class="pointer-events-none resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
               </div>
@@ -598,7 +624,7 @@
                     placeholder="Type something here..."
                     name="objectives"
                     th:text="*{applicantDetailsObj.objectives}"
-                    class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                    class="pointer-events-none resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
                 <div class="flex flex-col mt-6">
@@ -607,7 +633,7 @@
                     placeholder="Type something here..."
                     name="scopeProposal"
                     th:text="*{applicantDetailsObj.scopeProposal}"
-                    class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                    class="pointer-events-none resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
                 <div class="flex flex-col mt-6">
@@ -618,7 +644,7 @@
                     placeholder="Type something here..."
                     name="methodology"
                     th:text="*{applicantDetailsObj.methodology}"
-                    class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                    class="pointer-events-none resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
               </div>
@@ -639,7 +665,7 @@
                     placeholder="Input here"
                     name="supportLink"
                     th:value="*{applicantDetailsObj.supportLink}"
-                    class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                    class="pointer-events-none w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                   />
                 </div>
                 <div class="flex flex-col mb-10">
@@ -649,7 +675,7 @@
                     placeholder="Input here"
                     name="groupName"
                     th:value="*{applicantDetailsObj.groupName}"
-                    class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                    class="pointer-events-none w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                   />
                 </div>
                 <div class="flex flex-col mb-10">
@@ -659,7 +685,7 @@
                     placeholder="Input here"
                     name="groupLeader"
                     th:value="*{applicantDetailsObj.leaderLastName + ', ' + applicantDetailsObj.leaderFirstName}"
-                    class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                    class="pointer-events-none w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                   />
                 </div>
                 <div class="flex flex-col mb-10">
@@ -669,7 +695,7 @@
                     placeholder="Input here"
                     name="leaderNumber"
                     th:value="*{applicantDetailsObj.mobileNumber}"
-                    class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                    class="pointer-events-none w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                   />
                 </div>
                 <div class="flex flex-col mb-10">
@@ -679,7 +705,7 @@
                     placeholder="Input here"
                     name="leaderEmail"
                     th:value="*{applicantDetailsObj.emailAddress}"
-                    class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                    class="pointer-events-none w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                   />
                 </div>
                 <div class="flex flex-col mb-10">
@@ -689,7 +715,7 @@
                     placeholder="Input here"
                     name="members[0]"
                     th:value="*{applicantDetailsObj.members[0]}"
-                    class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                    class="pointer-events-none w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                   />
                 </div>
                 <div class="flex flex-col mb-10">
@@ -699,7 +725,7 @@
                     placeholder="Input here"
                     name="members[1]"
                     th:value="*{applicantDetailsObj.members[1]}"
-                    class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                    class="pointer-events-none w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                   />
                 </div>
                 <div class="flex flex-col mb-10">
@@ -709,7 +735,7 @@
                     placeholder="Input here"
                     name="members[2]"
                     th:value="*{applicantDetailsObj.members[2]}"
-                    class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                    class="pointer-events-none w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                   />
                 </div>
                 <div class="flex flex-col mb-`0">
@@ -719,7 +745,7 @@
                     placeholder="Input here"
                     name="members[3]"
                     th:value="*{applicantDetailsObj.members[3]}"
-                    class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                    class="pointer-events-none w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                   />
                 </div>
                 <div class="flex flex-col mt-14 mb-`0">
@@ -734,7 +760,7 @@
                     placeholder="Input here"
                     name="university"
                     th:value="*{applicantDetailsObj.university}"
-                    class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                    class="pointer-events-none w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                   />
                 </div>
                 <hr class="my-10 mr-6" />
@@ -765,30 +791,60 @@
                     <div class="mt-14 mb-4">
                       <label>Technology</label>
                     </div>
-                    <div class="mt-10 mb-4">
-                      <input type="radio" name="technologyAns" value="1" th:checked="*{applicantDetailsObj.technologyAns == 1}" />
+                    <div class="pointer-events-none mt-10 mb-4">
+                      <input
+                        class="pointer-events-none"
+                        type="radio"
+                        name="technologyAns"
+                        value="1"
+                        th:checked="*{applicantDetailsObj.technologyAns == 1}"
+                      />
 
-                      >Project work is beyond basic research and technology
+                      Project work is beyond basic research and technology
                       concept has been defined
                     </div>
                     <div class="mb-4">
-                      <input type="radio" name="technologyAns" value="2" th:checked="*{applicantDetailsObj.technologyAns == 2}" />
+                      <input
+                        class="pointer-events-none"
+                        type="radio"
+                        name="technologyAns"
+                        value="2"
+                        th:checked="*{applicantDetailsObj.technologyAns == 2}"
+                      />
                       Applied research has begun and practical application(s)
                       have been identified
                     </div>
                     <div class="mb-4">
-                      <input type="radio" name="technologyAns" value="3" th:checked="*{applicantDetailsObj.technologyAns == 3}" />
+                      <input
+                        class="pointer-events-none"
+                        type="radio"
+                        name="technologyAns"
+                        value="3"
+                        th:checked="*{applicantDetailsObj.technologyAns == 3}"
+                      />
                       Preliminary testing of technology components has begun,
                       and technical feasibility has been established in a
                       laboratory environment
                     </div>
                     <div class="mb-4">
-                      <input type="radio" name="technologyAns" value="4" th:checked="*{applicantDetailsObj.technologyAns == 4}" />
+                      <input
+                        class="pointer-events-none"
+                        type="radio"
+                        name="technologyAns"
+                        value="4"
+                        th:checked="*{applicantDetailsObj.technologyAns == 4}"
+                      />
                       Initial testing of integrated product/system has been
                       completed in a laboratory environment
                     </div>
                     <div>
-                      <input type="radio" name="technologyAns" value="5" th:checked="*{applicantDetailsObj.technologyAns == 5}" />
+                      <input
+                        class="pointer-events-none"
+                        type="radio"
+                        name="technologyAns"
+                        value="5"
+                        th:checked="*{applicantDetailsObj.technologyAns == 5}"
+                      />
                       Laboratory scale integrated product/system demonstrates
                       performance in the intended application(s)
                     </div>
@@ -801,6 +857,7 @@
                   </div>
                   <div class="mb-4">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="productDevelopmentAns"
                       value="1"
@@ -810,6 +867,7 @@
                   </div>
                   <div class="mb-4">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="productDevelopmentAns"
                       value="2"
@@ -820,6 +878,7 @@
                   </div>
                   <div class="mb-4">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="productDevelopmentAns"
                       value="3"
@@ -830,6 +889,7 @@
                   </div>
                   <div class="mb-4">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="productDevelopmentAns"
                       value="4"
@@ -841,6 +901,7 @@
                   </div>
                   <div>
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="productDevelopmentAns"
                       value="5"
@@ -857,6 +918,7 @@
                   </div>
                   <div class="mb-4">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="competitiveLandscapeAns"
                       value="1"
@@ -868,6 +930,7 @@
                   </div>
                   <div class="mb-4">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="competitiveLandscapeAns"
                       value="2"
@@ -880,6 +943,7 @@
                   </div>
                   <div class="mb-4">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="competitiveLandscapeAns"
                       value="3"
@@ -892,6 +956,7 @@
                   </div>
                   <div class="mb-4">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="competitiveLandscapeAns"
                       value="4"
@@ -903,6 +968,7 @@
                   </div>
                   <div>
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="competitiveLandscapeAns"
                       value="5"
@@ -918,29 +984,59 @@
                     <label>Product Development/Design</label>
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="productDesignAns" value="1" th:checked="*{applicantDetailsObj.productDesignAns == 1}"/>
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="productDesignAns"
+                      value="1"
+                      th:checked="*{applicantDetailsObj.productDesignAns == 1}"
+                    />
                     One or more initial product hypotheses have been defined
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="productDesignAns" value="2" th:checked="*{applicantDetailsObj.productDesignAns == 2}"/>
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="productDesignAns"
+                      value="2"
+                      th:checked="*{applicantDetailsObj.productDesignAns == 2}"
+                    />
                     Mapping product/system attributes against customer needs has
                     highlighted a clear value proposition
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="productDesignAns" value="3" th:checked="*{applicantDetailsObj.productDesignAns == 3}"/>
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="productDesignAns"
+                      value="3"
+                      th:checked="*{applicantDetailsObj.productDesignAns == 3}"
+                    />
                     The product/system has been scaled from laboratory to pilot
                     scale and issues that may affect achieving full scale have
                     been identified
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="productDesignAns" value="4" th:checked="*{applicantDetailsObj.productDesignAns == 4}"/>
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="productDesignAns"
+                      value="4"
+                      th:checked="*{applicantDetailsObj.productDesignAns == 4}"
+                    />
                     Comprehensive customer value proposition model has been
                     developed, including a detailed understanding of
                     product/system design specifications, required
                     certifications, and trade-offs
                   </div>
                   <div>
-                    <input type="radio" name="productDesignAns" value="5" th:checked="*{applicantDetailsObj.productDesignAns == 5}"/>
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="productDesignAns"
+                      value="5"
+                      th:checked="*{applicantDetailsObj.productDesignAns == 5}"
+                    />
                     Product/system final design optimization has been completed,
                     required certifications have been obtained, and
                     product/system has incorporated detailed customer and
@@ -952,29 +1048,59 @@
                     <label>Team</label>
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="teamAns" value="1" th:checked="*{applicantDetailsObj.teamAns == 1}"/>
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="teamAns"
+                      value="1"
+                      th:checked="*{applicantDetailsObj.teamAns == 1}"
+                    />
                     No team or company in place (single individual, no legal
                     entity)
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="teamAns" value="2" th:checked="*{applicantDetailsObj.teamAns == 2}"/>
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="teamAns"
+                      value="2"
+                      th:checked="*{applicantDetailsObj.teamAns == 2}"
+                    />
                     Solely technical or non-technical founder(s) running the
                     company with no outside assistance
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="teamAns" value="3" th:checked="*{applicantDetailsObj.teamAns == 3}"/>
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="teamAns"
+                      value="3"
+                      th:checked="*{applicantDetailsObj.teamAns == 3}"
+                    />
                     Solely technical or non-technical founder(s) running the
                     company with assistance from outside advisors/mentors and/or
                     incubator/accelerator
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="teamAns" value="4" th:checked="*{applicantDetailsObj.teamAns == 4}"/>
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="teamAns"
+                      value="4"
+                      th:checked="*{applicantDetailsObj.teamAns == 4}"
+                    />
                     Balanced team with technical and business
                     development/commercialization experience running the company
                     with assistance from outside advisors/mentors
                   </div>
                   <div>
-                    <input type="radio" name="teamAns" value="5" th:checked="*{applicantDetailsObj.teamAns == 5}"/>
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="teamAns"
+                      value="5"
+                      th:checked="*{applicantDetailsObj.teamAns == 5}"
+                    />
                     Balanced team with all capabilities onboard (e.g., sales,
                     marketing, customer service, operations, etc.) running the
                     company with assistance from outside advisors/mentors
@@ -985,33 +1111,63 @@
                     <label>Go-to-Market</label>
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="goToMarketAns" value="1" th:checked="*{applicantDetailsObj.goToMarketAns == 1}" />
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="goToMarketAns"
+                      value="1"
+                      th:checked="*{applicantDetailsObj.goToMarketAns == 1}"
+                    />
                     <label>
                       Initial business model and value proposition have been
                       defined
                     </label>
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="goToMarketAns" value="2" th:checked="*{applicantDetailsObj.goToMarketAns == 2}" />
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="goToMarketAns"
+                      value="2"
+                      th:checked="*{applicantDetailsObj.goToMarketAns == 2}"
+                    />
                     Customers/partners have been interviewed to understand their
                     pain points/needs, and business model and value proposition
                     have been refined based on customer/partner feedback
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="goToMarketAns" value="3" th:checked="*{applicantDetailsObj.goToMarketAns == 3}" />
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="goToMarketAns"
+                      value="3"
+                      th:checked="*{applicantDetailsObj.goToMarketAns == 3}"
+                    />
                     Market and customer/partner needs and how those translate to
                     product requirements have been defined, and initial
                     relationships have been developed with key stakeholders
                     across the value chain
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="goToMarketAns" value="4" th:checked="*{applicantDetailsObj.goToMarketAns == 4}" />
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="goToMarketAns"
+                      value="4"
+                      th:checked="*{applicantDetailsObj.goToMarketAns == 4}"
+                    />
                     Partnerships have been formed with key stakeholders across
                     the value chain (e.g., suppliers, partners, service
                     providers, and customers)
                   </div>
                   <div>
-                    <input type="radio" name="goToMarketAns" value="5" th:checked="*{applicantDetailsObj.goToMarketAns == 5}" />
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="goToMarketAns"
+                      value="5"
+                      th:checked="*{applicantDetailsObj.goToMarketAns == 5}"
+                    />
                     Supply agreements with suppliers and partners are in place
                     and initial purchase orders from customers have been
                     received >
@@ -1022,29 +1178,59 @@
                     <label>Manufacturing/Supply Chain</label>
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="manufacturingAns" value="1" th:checked="*{applicantDetailsObj.manufacturingAns == 1}" />
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="manufacturingAns"
+                      value="1"
+                      th:checked="*{applicantDetailsObj.manufacturingAns == 1}"
+                    />
                     Potential suppliers, partners, and customers have been
                     identified and mapped in an initial value chain analysis
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="manufacturingAns" value="2" th:checked="*{applicantDetailsObj.manufacturingAns == 2}" />
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="manufacturingAns"
+                      value="2"
+                      th:checked="*{applicantDetailsObj.manufacturingAns == 2}"
+                    />
                     Relationships have been established with potential
                     suppliers, partners, service providers, and customers and
                     they have provided input on product and manufacturability
                     requirements
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="manufacturingAns" value="3" th:checked="*{applicantDetailsObj.manufacturingAns == 3}" />
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="manufacturingAns"
+                      value="3"
+                      th:checked="*{applicantDetailsObj.manufacturingAns == 3}"
+                    />
                     Manufacturing process qualifications (e.g. QC/QA) have been
                     defined and are in progress
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="manufacturingAns" value="4" th:checked="*{applicantDetailsObj.manufacturingAns == 4}" />
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="manufacturingAns"
+                      value="4"
+                      th:checked="*{applicantDetailsObj.manufacturingAns == 4}"
+                    />
                     Products/systems have been pilot manufactured and sold to
                     initial customerss
                   </div>
                   <div>
-                    <input type="radio" name="manufacturingAns" value="5" th:checked="*{applicantDetailsObj.manufacturingAns == 5}" />
+                    <input
+                      class="pointer-events-none"
+                      type="radio"
+                      name="manufacturingAns"
+                      value="5"
+                      th:checked="*{applicantDetailsObj.manufacturingAns == 5}"
+                    />
                     Full scale manufacturing and widespread deployment of
                     product/system to customers and/or users has been achieved
                   </div>
@@ -1060,18 +1246,20 @@
                   </p>
                   <div class="items-center mb-4">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="eligibilityAgreeFlg"
                       value="true"
-                      th:checked="*{applicantDetailsObj.eligibilityAgreeFlg}" 
+                      th:checked="*{applicantDetailsObj.eligibilityAgreeFlg}"
                     /><label class="ml-2">I AGREE</label>
                   </div>
                   <div class="items-center">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="eligibilityAgreeFlg"
                       value="false"
-                      th:checked="*{!applicantDetailsObj.eligibilityAgreeFlg}" 
+                      th:checked="*{!applicantDetailsObj.eligibilityAgreeFlg}"
                     /><label class="ml-2">I DO NOT AGREE</label>
                   </div>
                 </div>
@@ -1092,18 +1280,20 @@
                   >
                   <div class="items-center mt-4 mb-4">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="commitmentOneFlg"
                       value="true"
-                      th:checked="*{applicantDetailsObj.commitmentOneFlg}" 
+                      th:checked="*{applicantDetailsObj.commitmentOneFlg}"
                     /><label class="ml-2">Yes</label>
                   </div>
                   <div class="items-center">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="commitmentOneFlg"
                       value="false"
-                      th:checked="*{!applicantDetailsObj.commitmentOneFlg}" 
+                      th:checked="*{!applicantDetailsObj.commitmentOneFlg}"
                     /><label class="ml-2">No</label>
                   </div>
                 </div>
@@ -1114,19 +1304,21 @@
                   </label>
                   <div class="items-center mt-4 mb-4">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="commitmentTwoFlg"
                       value="true"
-                      th:checked="*{applicantDetailsObj.commitmentTwoFlg}" 
+                      th:checked="*{applicantDetailsObj.commitmentTwoFlg}"
                     /><label class="ml-2">Yes</label>
                   </div>
 
                   <div class="items-center">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="commitmentTwoFlg"
                       value="false"
-                      th:checked="*{!applicantDetailsObj.commitmentTwoFlg}" 
+                      th:checked="*{!applicantDetailsObj.commitmentTwoFlg}"
                     /><label class="ml-2">No</label>
                   </div>
                 </div>
@@ -1142,19 +1334,21 @@
                   </label>
                   <div class="items-center mt-4 mb-4">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="commitmentThreeFlg"
                       value="true"
-                      th:checked="*{applicantDetailsObj.commitmentThreeFlg}" 
+                      th:checked="*{applicantDetailsObj.commitmentThreeFlg}"
                     /><label class="ml-2">Yes</label>
                   </div>
 
                   <div class="items-center">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="commitmentThreeFlg"
                       value="false"
-                      th:checked="*{!applicantDetailsObj.commitmentThreeFlg}" 
+                      th:checked="*{!applicantDetailsObj.commitmentThreeFlg}"
                     /><label class="ml-2">No</label>
                   </div>
                 </div>
@@ -1166,15 +1360,17 @@
                   >
                   <div class="items-center mt-4 mb-4">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="commitmentFourFlg"
                       value="true"
-                      th:checked="*{applicantDetailsObj.commitmentFourFlg}" 
+                      th:checked="*{applicantDetailsObj.commitmentFourFlg}"
                     /><label class="ml-2">Yes</label>
                   </div>
 
                   <div class="items-center">
                     <input
+                      class="pointer-events-none"
                       type="radio"
                       name="commitmentFourFlg"
                       value="false"
@@ -1297,44 +1493,42 @@
       </div>
     </div>
     <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div>
-			  <div id="score"></div>
-		  </div>
-	       
-	    </div>
-	  </div>
-	</div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div>
+            <div id="score"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
-     <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-    <script th:inline="javascript">
- 	  
- 	  const webDto = /*[[${applicantWebDto}]]*/'';
- 	  
-      if (/*[[${!session.initialChangePass}]]*/ "") {
-        $("#changepassword-modal").modal("show");
-      } else {
-        $("#changepassword-modal").remove();
-      }
-    </script>
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+  <script th:inline="javascript">
+    const webDto = /*[[${applicantWebDto}]]*/ "";
+
+    if (/*[[${!session.initialChangePass}]]*/ "") {
+      $("#changepassword-modal").modal("show");
+    } else {
+      $("#changepassword-modal").remove();
+    }
+  </script>
 </html>

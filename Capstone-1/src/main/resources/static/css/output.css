@@ -836,10 +836,6 @@ video {
   width: 3rem;
 }
 
-.w-28{
-  width: 7rem;
-}
-
 .w-3\/12{
   width: 25%;
 }
@@ -1124,11 +1120,6 @@ video {
 .border-gray-500{
   --tw-border-opacity: 1;
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
-}
-
-.border-green-400{
-  --tw-border-opacity: 1;
-  border-color: rgb(74 222 128 / var(--tw-border-opacity));
 }
 
 .border-slate-300{
