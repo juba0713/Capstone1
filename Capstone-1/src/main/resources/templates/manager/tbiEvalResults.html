@@ -17,44 +17,44 @@
     <link rel="stylesheet" th:href="@{/css/officer/officer.css}" />
   </head>
   <body th:object="${managerWebDto}">
-    <p>Officer Home</p>
+    <p>tbievalresults</p>
     <div>
-		<form th:action="@{/manager/proceed}" method="POST">
-      <table id="applicants-table">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Email</th>
-            <th>Consent</th>
-            <th>Project Title</th>
-            <th>Description</th>
-            <th>Team</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            th:each="app : *{listOfApplicants}"
-            class="row-btn"
-            
-          >
-          <!--
+      <form th:action="@{/manager/proceed}" method="POST">
+        <table id="applicants-table">
+          <thead>
+            <tr>
+              <th><input type="checkbox" /></th>
+              <th>Email</th>
+              <th>Project Title</th>
+              <th>Description</th>
+              <th>University</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="app : *{listOfApplicants}" class="row-btn">
+              <!--
 			  th:data-id="${app.applicantIdPk}"
 			  -->
-            <td><input type="checkbox" name="chosenApplicant" th:value="${app.applicantIdPk}" th:if="${app.status == 3}"/></td>
-            <td th:text="${app.email}"></td>
-            <td th:text="${app.consent ? 'Yes' : 'No'}"></td>
-            <td th:text="${app.projectTitle}"></td>
-            <td th:text="${app.description}"></td>
-            <td>
-              <div th:each="mem : ${app.team}" th:text="${mem}"></div>
-            </td>
-            <td
-              th:text="${app.status == 0 ? 'Pending' : app.status != 2 OR app.status != 0 ? 'Passed' : 'Failed'}"
-              th:style="${app.status != 1 OR app.status != 0 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"
-            ></td>
-            <td>      
+              <td>
+                <input
+                  type="checkbox"
+                  name="chosenApplicant"
+                  th:value="${app.applicantIdPk}"
+                  th:if="${app.status == 3}"
+                />
+              </td>
+              <td th:text="${app.email}"></td>
+              <td th:text="${app.projectTitle}"></td>
+              <td th:text="${app.description}"></td>
+              <td th:text="${app.university}"></td>
+
+              <td
+                th:text="${app.status == 0 ? 'Pending' : app.status != 2 OR app.status != 0 ? 'Passed' : 'Failed'}"
+                th:style="${app.status != 1 OR app.status != 0 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"
+              ></td>
+              <td>
                 <button
                   class="btn-row"
                   type="button"
@@ -63,17 +63,12 @@
                 >
                   View Feedback
                 </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <button>Proceed to TBI</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button>delete</button>
       </form>
-      <div>
-        <form th:action="@{/logout}" method="POST">
-          <button>Logout</button>
-        </form>
-      </div>
     </div>
     <div class="modal" tabindex="-1" role="dialog" id="details-modal">
       <div class="modal-dialog" role="document">
@@ -95,19 +90,18 @@
         </div>
       </div>
     </div>
-    
+
     <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div>
-			  <div id="score"></div>
-			  <div id="feedback"></div>
-		  </div>
+            <div id="score"></div>
+            <div id="feedback"></div>
+          </div>
         </div>
       </div>
     </div>
-    
-  
+
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -125,11 +119,10 @@
     ></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
     <script th:inline="javascript">
-		
       const webDto = /*[[${managerWebDto}]]*/ "";
-      
+
       console.log(webDto);
-      
+
       $(document).ready(function () {
         new DataTable("#applicants-table");
 
@@ -155,24 +148,23 @@
             rowBtnClicked = true;
             let idPk = this.getAttribute("data-id");
             if (this.name === "feedback") {
-			  
-			  let score = document.getElementById('score');
-			  let feedback = document.getElementById('feedback');
-			  
-			  if(webDto.listOfApplicants.length != 0){
-				  webDto.listOfApplicants.forEach((applicant, index) => {
-			    	if(applicant.applicantIdPk == idPk){
-						score.innerHTML = applicant.score;
-						feedback.innerHTML = applicant.feedback;
-					}
-				});
-			  }
-			  
-			  	
-			  	
+              let score = document.getElementById("score");
+              let feedback = document.getElementById("feedback");
+
+              if (webDto.listOfApplicants.length != 0) {
+                webDto.listOfApplicants.forEach((applicant, index) => {
+                  if (applicant.applicantIdPk == idPk) {
+                    score.innerHTML = applicant.score;
+                    feedback.innerHTML = applicant.feedback;
+                  }
+                });
+              }
+
               $("#feedback-modal").modal("show");
-            }             
-            setTimeout(() => { rowBtnClicked = false}, 100);
+            }
+            setTimeout(() => {
+              rowBtnClicked = false;
+            }, 100);
           });
         }
 

@@ -17,65 +17,58 @@
     <link rel="stylesheet" th:href="@{/css/officer/officer.css}" />
   </head>
   <body th:object="${managerWebDto}">
-    <p>Officer Home</p>
+    <p>listOfAllPassedApplicants</p>
     <div>
-		<form th:action="@{/manager/proceed}" method="POST">
-      <table id="applicants-table">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Email</th>
-            <th>Consent</th>
-            <th>Project Title</th>
-            <th>Description</th>
-            <th>Team</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            th:each="app : *{listOfApplicants}"
-            class="row-btn"
-            
-          >
-          <!--
-			  th:data-id="${app.applicantIdPk}"
-			  -->
-            <td><input type="checkbox" name="chosenApplicant" th:value="${app.applicantIdPk}" th:if="${app.status == 3}"/></td>
-            <td th:text="${app.email}"></td>
-            <td th:text="${app.consent ? 'Yes' : 'No'}"></td>
-            <td th:text="${app.projectTitle}"></td>
-            <td th:text="${app.description}"></td>
-            <td>
-              <div th:each="mem : ${app.team}" th:text="${mem}"></div>
-            </td>
-            <td
-              th:text="${app.status == 0 ? 'Pending' : app.status != 2 OR app.status != 0 ? 'Passed' : 'Failed'}"
-              th:style="${app.status != 1 OR app.status != 0 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"
-            ></td>
-            <td>      
+      <form th:action="@{/manager/proceed}" method="POST">
+        <table id="applicants-table">
+          <thead>
+            <tr>
+              <th><input type="checkbox" /></th>
+              <th>Email</th>
+              <th>Project Title</th>
+              <th>Description</th>
+              <th>University</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="app : *{listOfApplicants}" class="row-btn">
+              <!--
+                th:data-id="${app.applicantIdPk}"
+                -->
+              <td>
+                <input
+                  type="checkbox"
+                  name="chosenApplicant"
+                  th:value="${app.applicantIdPk}"
+                  th:if="${app.status == 3}"
+                />
+              </td>
+              <td th:text="${app.email}"></td>
+              <td th:text="${app.projectTitle}"></td>
+              <td th:text="${app.description}"></td>
+              <td th:text="${app.university}"></td>
+
+              <td
+                th:text="${app.status == 0 ? 'Pending' : app.status != 2 OR app.status != 0 ? 'Passed' : 'Failed'}"
+                th:style="${app.status != 1 OR app.status != 0 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"
+              ></td>
+              <td>
                 <button
                   class="btn-row"
                   type="button"
                   th:data-id="${app.applicantIdPk}"
-                  name="activate"
-                  th:if="${app.status == 1}"
+                  name="createIncubateeAccount"
                 >
-                  Activate Account
+                  Create Incubatee Account
                 </button>
-              <span th:if="${app.status == 3}">Activated</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <button>Proceed to TBI</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button>send certificate</button>
       </form>
-      <div>
-        <form th:action="@{/logout}" method="POST">
-          <button>Logout</button>
-        </form>
-      </div>
     </div>
     <div class="modal" tabindex="-1" role="dialog" id="details-modal">
       <div class="modal-dialog" role="document">
@@ -97,34 +90,24 @@
         </div>
       </div>
     </div>
-    
-       <div class="modal" tabindex="-1" role="dialog" id="activate-account-modal">
+
+    <div class="modal" tabindex="-1" role="dialog" id="activate-account-modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <form
-                th:action="@{/manager/account/activate}"
-                method="POST"
-              >
-                <input
-                  type="hidden"
-                  name="applicantIdPk"
-                  id="activate-applicant-id-pk"
-                  value="0"
-                />
-                <div>
-					Activate this account?
-				</div>
-                <button
-                  type="submit"
-                  name="activate"
-                >
-                  Activate Account
-                </button>
-              </form>
+          <form th:action="@{/manager/account/activate}" method="POST">
+            <input
+              type="hidden"
+              name="applicantIdPk"
+              id="activate-applicant-id-pk"
+              value="0"
+            />
+            <div>Activate this account?</div>
+            <button type="submit" name="activate">Activate Account</button>
+          </form>
         </div>
       </div>
     </div>
-    
+
     <div class="modal" tabindex="-1" role="dialog" id="proceed-to-tbi-modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -163,9 +146,8 @@
     ></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
     <script th:inline="javascript">
-		
       console.log(/*[[${managerWebDto}]]*/ "");
-      
+
       $(document).ready(function () {
         new DataTable("#applicants-table");
 
@@ -191,13 +173,15 @@
             rowBtnClicked = true;
             let idPk = this.getAttribute("data-id");
             if (this.name === "activate") {
-				
-			  let hiddenApplicantIdPk = document.getElementById('activate-applicant-id-pk').setAttribute('value', this.getAttribute('data-id'));
-			  
-			  	
+              let hiddenApplicantIdPk = document
+                .getElementById("activate-applicant-id-pk")
+                .setAttribute("value", this.getAttribute("data-id"));
+
               $("#activate-account-modal").modal("show");
-            }             
-            setTimeout(() => { rowBtnClicked = false}, 100);
+            }
+            setTimeout(() => {
+              rowBtnClicked = false;
+            }, 100);
           });
         }
 
