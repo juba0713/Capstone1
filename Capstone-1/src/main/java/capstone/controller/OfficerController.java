@@ -79,10 +79,9 @@ public class OfficerController {
 		}
   
 		OfficerWebDto returnWebDto = new OfficerWebDto();
-		
+				
 		returnWebDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
 		 
-
 		return ResponseEntity.ok(returnWebDto);
 	}
 }

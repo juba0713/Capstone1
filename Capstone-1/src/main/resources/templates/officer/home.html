@@ -1547,7 +1547,7 @@
         }
 
         const data = await response.json();
-
+        
         document.querySelector(".overflow-auto").scrollTo({
           top: 0,
         });
@@ -1643,28 +1643,89 @@
         //Solution Description
         solutionDescription.textContent = applicant.solutionDescription;
         //HistoricalTimeline
-        historicalTimelineOne[0].value = applicant.historicalTimeline[0][0];
-        historicalTimelineOne[1].value = applicant.historicalTimeline[0][1];
-        historicalTimelineTwo[0].value = applicant.historicalTimeline[1][0];
-        historicalTimelineTwo[1].value = applicant.historicalTimeline[1][1];
-        historicalTimelineThree[0].value = applicant.historicalTimeline[2][0];
-        historicalTimelineThree[1].value = applicant.historicalTimeline[2][1];
-        historicalTimelineFour[0].value = applicant.historicalTimeline[3][0];
-        historicalTimelineFour[1].value = applicant.historicalTimeline[3][1];
-        historicalTimelineFive[0].value = applicant.historicalTimeline[4][0];
-        historicalTimelineFive[1].value = applicant.historicalTimeline[4][1];
+        if(applicant.historicalTimeline[0].length != 0){
+			historicalTimelineOne[0].value = applicant.historicalTimeline[0][0];
+        	historicalTimelineOne[1].value = applicant.historicalTimeline[0][1];
+		}else{
+			historicalTimelineOne[0].value = 'NA';
+        	historicalTimelineOne[1].value = 'NA';
+		}
+		if(applicant.historicalTimeline[1].length != 0){
+			historicalTimelineTwo[0].value = applicant.historicalTimeline[0][0];
+        	historicalTimelineTwo[1].value = applicant.historicalTimeline[0][1];
+		}else{
+			historicalTimelineTwo[0].value = 'NA';
+        	historicalTimelineTwo[1].value = 'NA';
+		}
         //Product Service Offering
-        productServiceOffering[0].value = applicant.productServiceOffering[0];
-        productServiceOffering[1].value = applicant.productServiceOffering[1];
-        productServiceOffering[2].value = applicant.productServiceOffering[2];
-        productServiceOffering[3].value = applicant.productServiceOffering[3];
+		if(applicant.historicalTimeline[2].length != 0){
+			historicalTimelineThree[0].value = applicant.historicalTimeline[0][0];
+        	historicalTimelineThree[1].value = applicant.historicalTimeline[0][1];
+		}else{
+			historicalTimelineThree[0].value = 'NA';
+        	historicalTimelineThree[1].value = 'NA';
+		}
+		if(applicant.historicalTimeline[3].length != 0){
+			historicalTimelineFour[0].value = applicant.historicalTimeline[0][0];
+        	historicalTimelineFour[1].value = applicant.historicalTimeline[0][1];
+		}else{
+			historicalTimelineFour[0].value = 'NA';
+        	historicalTimelineFour[1].value = 'NA';
+		}
+		if(applicant.historicalTimeline[4].length != 0){
+			historicalTimelineFive[0].value = applicant.historicalTimeline[0][0];
+        	historicalTimelineFive[1].value = applicant.historicalTimeline[0][1];
+		}else{
+			historicalTimelineFive[0].value = 'NA';
+        	historicalTimelineFive[1].value = 'NA';
+		}
+		if(applicant.productServiceOffering[0] != ''){
+			productServiceOffering[0].value = applicant.productServiceOffering[0];
+		}else{
+			productServiceOffering[0].value = 'NA';
+		}
+		if(applicant.productServiceOffering[1] != ''){
+			productServiceOffering[1].value = applicant.productServiceOffering[0];
+		}else{
+			productServiceOffering[1].value = 'NA';
+		}
+		if(applicant.productServiceOffering[2] != ''){
+			productServiceOffering[2].value = applicant.productServiceOffering[0];
+		}else{
+			productServiceOffering[2].value = 'NA';
+		}
+		if(applicant.productServiceOffering[3] != ''){
+			productServiceOffering[3].value = applicant.productServiceOffering[0];
+		}else{
+			productServiceOffering[3].value = 'NA';
+		}
         //Pricing Strategy
-        pricingStrategy[0].value = applicant.pricingStrategy[0];
-        pricingStrategy[1].value = applicant.pricingStrategy[1];
-        pricingStrategy[2].value = applicant.pricingStrategy[2];
-        pricingStrategy[3].value = applicant.pricingStrategy[3];
+        if(applicant.pricingStrategy[0] != ''){
+			pricingStrategy[0].value = applicant.pricingStrategy[0];
+		}else{
+			pricingStrategy[0].value = 'NA';
+		}
+		if(applicant.pricingStrategy[1] != ''){
+			pricingStrategy[1].value = applicant.pricingStrategy[1];
+		}else{
+			pricingStrategy[1].value = 'NA';
+		}
+		if(applicant.pricingStrategy[2] != ''){
+			pricingStrategy[2].value = applicant.pricingStrategy[2];
+		}else{
+			pricingStrategy[2].value = 'NA';
+		}
+		if(applicant.pricingStrategy[3] != ''){
+			pricingStrategy[3].value = applicant.pricingStrategy[3];
+		}else{
+			pricingStrategy[3].value = 'NA';
+		}
         //Intellectual Property Status
-        intPropertyStatus.value = applicant.intPropertyStatus;
+		if(applicant.intPropertyStatus != ''){
+			intPropertyStatus.value = applicant.intPropertyStatus;
+		}else{
+			intPropertyStatus.value = 'NA';
+		}
         //Objectives
         objectives.textContent = applicant.objectives;
         //Scope of the proposal
@@ -1672,7 +1733,11 @@
         //Methodology
         methodology.textContent = applicant.methodology;
         //Supporting Link
-        supportLink.value = applicant.supportLink;
+        if(applicant.supportLink != ''){
+        	supportLink.value = applicant.supportLink;			
+		}else{
+			supportLink.value = 'NA';
+		}
         //Group Name
         groupName.value = applicant.groupName;
         //Group Leader
@@ -1683,12 +1748,32 @@
         //Leader Email
         leaderEmail.value = applicant.emailAddress;
         //Members
-        members[0].value = applicant.members[0];
-        members[1].value = applicant.members[1];
-        members[2].value = applicant.members[2];
-        members[3].value = applicant.members[3];
+        if(applicant.members[0] != undefined && !applicant.members[0].includes("null")){	
+			members[0].value = applicant.members[0];
+		}else{
+			members[0].value = 'NA';
+		}
+		if(applicant.members[1] != undefined && !applicant.members[1].includes("null")){	
+			members[1].value = applicant.members[1];
+		}else{
+			members[1].value = 'NA';
+		}
+		if(applicant.members[2] != undefined && !applicant.members[2].includes("null")){	
+			members[2].value = applicant.members[2];
+		}else{
+			members[2].value = 'NA';
+		}
+		if(applicant.members[3] != undefined && !applicant.members[3].includes("null")){	
+			members[3].value = applicant.members[3];
+		}else{
+			members[3].value = 'NA';
+		}
         //University
-        university.value = applicant.university;
+        if(applicant.university != ''){
+			university.value = applicant.university;
+		}else{
+			university.value = 'NA';
+		}
         //Technology Answer
         technologyAns[applicant.technologyAns - 1].checked = true;
         //Product Development Answer
@@ -1708,6 +1793,7 @@
         //Manufacturing Answer
         manufacturingAns[applicant.manufacturingAns - 1].checked = true;
         //eligibilityAgreeFlg
+        
         if (applicant.eligibilityAgreeFlg) {
           eligibilityAgreeFlg[0].checked = true;
         } else {

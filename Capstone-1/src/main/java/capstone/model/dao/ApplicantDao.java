@@ -82,9 +82,9 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ " COALESCE(ea.score, 0) AS score, "
 			+ " COALESCE(ea.feedback, '') AS feedback "
 			+ "FROM m_applicant a "
-			+ "JOIN t_project p ON p.applicant_id_pk = a.id_pk "
-			+ "JOIN m_group g ON g.applicant_id_pk = a.id_pk "
-			+ "JOIN t_group_member gm ON gm.group_id_pk = g.id_pk "
+			+ "LEFT JOIN t_project p ON p.applicant_id_pk = a.id_pk "
+			+ "LEFT JOIN m_group g ON g.applicant_id_pk = a.id_pk "
+			+ "LEFT JOIN t_group_member gm ON gm.group_id_pk = g.id_pk "
 			+ "LEFT JOIN t_evaluated_applicant ea ON ea.applicant_id_pk = a.id_pk "
 			+ "WHERE a.id_pk = :applicantIdPk";
 

@@ -142,11 +142,12 @@ public class OfficerServiceImpl implements OfficerService{
 				
 				applicantDetailsObj.setProjectDescription(app.getProjectDescription());		
 				
-				List<String[]> teams = new ArrayList<>();
 				
+				List<String[]> teams = new ArrayList<>();
+				 
 				teams.add(app.getTeams()[0].split("-"));
 				teams.add(app.getTeams()[1].split("-"));
-				teams.add(app.getTeams()[2].split("-"));	
+				teams.add(app.getTeams()[2].split("-"));			 
 				
 				applicantDetailsObj.setTeams(teams);
 				
