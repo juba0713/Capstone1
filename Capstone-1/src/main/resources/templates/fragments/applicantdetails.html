@@ -84,7 +84,7 @@
                     type="text"
                     name="email"
                     placeholder="Enter your email here"
-                    class="text-black h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm email"
+                    class="text-black email h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                   />
                 </div>
               </div>
@@ -149,11 +149,21 @@
                 </p>
                 <div class="text-black text-justify mt-8 mb-8 ml-6 mr-8">
                   <div class="items-center mb-8">
-                    <input type="radio" name="agreeFlg" value="true" class="agreeFlg" />
+                    <input
+                      type="radio"
+                      name="agreeFlg"
+                      value="true"
+                      class="agreeFlg"
+                    />
                     <label class="ml-2">I AGREE</label>
                   </div>
                   <div>
-                    <input type="radio" name="agreeFlg" value="false" class="agreeFlg" />
+                    <input
+                      type="radio"
+                      name="agreeFlg"
+                      value="false"
+                      class="agreeFlg"
+                    />
                     <label class="ml-2">I DO NOT AGREE</label>
                   </div>
                 </div>
@@ -193,12 +203,12 @@
                       type="text"
                       placeholder="Member name"
                       name="teams[0][0]"
-                      class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none member-1"
+                      class="border-b member-1 bg-transparent focus-within:border-blue-600 focus:outline-none"
                     /><input
                       type="text"
                       placeholder="Input role"
                       name="teams[0][1]"
-                      class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none member-1"
+                      class="border-b member-1 bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                     />
                   </div>
                   <div class="mb-6">
@@ -206,12 +216,12 @@
                       type="text"
                       placeholder="Member name"
                       name="teams[1][0]"
-                      class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none member-2"
+                      class="border-b member-2 bg-transparent focus-within:border-blue-600 focus:outline-none"
                     /><input
                       type="text"
                       placeholder="Input role"
                       name="teams[1][1]"
-                      class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none member-2"
+                      class="border-b member-2 bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                     />
                   </div>
                   <div>
@@ -219,19 +229,19 @@
                       type="text"
                       placeholder="Member name"
                       name="teams[2][0]"
-                      class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none member-3"
+                      class="border-b member-3 bg-transparent focus-within:border-blue-600 focus:outline-none"
                     /><input
                       type="text"
                       placeholder="Input role"
                       name="teams[2][1]"
-                      class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none member-3"
+                      class="border-b member-3 bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                     />
                   </div>
                 </div>
                 <div class="mt-14 flex flex-col">
                   <p class="font-semibold">C. About the Product/Solution</p>
                   <label class="mt-10 font-semibold"
-                    >1. Problem Statement</label 
+                    >1. Problem Statement</label
                   >
                   <textarea
                     placeholder="Type something here..."
@@ -244,7 +254,7 @@
                   <textarea
                     placeholder="Type something here..."
                     name="targetMarket"
-                    class="resize-none targetMarket mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                    class="resize-none mt-2 targetMarket bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
                 <div class="mt-10 flex flex-col">
@@ -252,7 +262,7 @@
                   <textarea
                     placeholder="Type something here..."
                     name="solutionDescription"
-                    class="resize-none solutionDescription mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                    class="resize-none mt-2 solutionDescription bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
                 <div class="mt-10 mb-8 overflow-x-auto">
@@ -508,7 +518,7 @@
                   <textarea
                     placeholder="Type something here..."
                     name="scopeProposal"
-                    class="resize-none scopeProposal mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                    class="resize-none mt-2 scopeProposal bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
                 <div class="flex flex-col mt-6">
@@ -518,7 +528,7 @@
                   <textarea
                     placeholder="Type something here..."
                     name="methodology"
-                    class="resize-none methodology mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                    class="resize-none mt-2 methodology bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
               </div>
@@ -656,29 +666,54 @@
                       <label>Technology</label>
                     </div>
                     <div class="mt-10 mb-4">
-                      <input type="radio" name="technologyAns" value="1" class="technologyAns" />
+                      <input
+                        type="radio"
+                        name="technologyAns"
+                        value="1"
+                        class="technologyAns"
+                      />
 
                       >Project work is beyond basic research and technology
                       concept has been defined
                     </div>
                     <div class="mb-4">
-                      <input type="radio" name="technologyAns" value="2" class="technologyAns" />
+                      <input
+                        type="radio"
+                        name="technologyAns"
+                        value="2"
+                        class="technologyAns"
+                      />
                       Applied research has begun and practical application(s)
                       have been identified
                     </div>
                     <div class="mb-4">
-                      <input type="radio" name="technologyAns" value="3" class="technologyAns" />
+                      <input
+                        type="radio"
+                        name="technologyAns"
+                        value="3"
+                        class="technologyAns"
+                      />
                       Preliminary testing of technology components has begun,
                       and technical feasibility has been established in a
                       laboratory environment
                     </div>
                     <div class="mb-4">
-                      <input type="radio" name="technologyAns" value="4" class="technologyAns" />
+                      <input
+                        type="radio"
+                        name="technologyAns"
+                        value="4"
+                        class="technologyAns"
+                      />
                       Initial testing of integrated product/system has been
                       completed in a laboratory environment
                     </div>
                     <div>
-                      <input type="radio" name="technologyAns" value="5" class="technologyAns" />
+                      <input
+                        type="radio"
+                        name="technologyAns"
+                        value="5"
+                        class="technologyAns"
+                      />
                       Laboratory scale integrated product/system demonstrates
                       performance in the intended application(s)
                     </div>
@@ -694,7 +729,7 @@
                       type="radio"
                       name="productDevelopmentAns"
                       value="1"
-                      class="productDevelopmentAns" 
+                      class="productDevelopmentAns"
                     />
                     Initial product/market fit has been defined
                   </div>
@@ -703,7 +738,7 @@
                       type="radio"
                       name="productDevelopmentAns"
                       value="2"
-                      class="productDevelopmentAns" 
+                      class="productDevelopmentAns"
                     />
                     Pilot scale product/system has been tested in the intended
                     application(s)
@@ -713,7 +748,7 @@
                       type="radio"
                       name="productDevelopmentAns"
                       value="3"
-                      class="productDevelopmentAns" 
+                      class="productDevelopmentAns"
                     />
                     Demonstration of a full scale product/system prototype has
                     been completed in the intended application(s)
@@ -723,7 +758,7 @@
                       type="radio"
                       name="productDevelopmentAns"
                       value="4"
-                      class="productDevelopmentAns" 
+                      class="productDevelopmentAns"
                     />
                     Actual product/system has been proven to work in its
                     near-final form under a representative set of expected
@@ -734,7 +769,7 @@
                       type="radio"
                       name="productDevelopmentAns"
                       value="5"
-                      class="productDevelopmentAns" 
+                      class="productDevelopmentAns"
                     />
                     Product/system is in final form and has been operated under
                     the full range of operating conditions and environments
@@ -750,7 +785,7 @@
                       type="radio"
                       name="competitiveLandscapeAns"
                       value="1"
-                      class="competitiveLandscapeAns" 
+                      class="competitiveLandscapeAns"
                     />
                     Secondary market research has been performed and basic
                     knowledge of potential applications and competitive
@@ -761,7 +796,7 @@
                       type="radio"
                       name="competitiveLandscapeAns"
                       value="2"
-                      class="competitiveLandscapeAns" 
+                      class="competitiveLandscapeAns"
                     />
                     Primary market research to prove the product/system
                     commercial feasibility has been completed and basic
@@ -773,7 +808,7 @@
                       type="radio"
                       name="competitiveLandscapeAns"
                       value="3"
-                      class="competitiveLandscapeAns" 
+                      class="competitiveLandscapeAns"
                     />
                     Comprehensive market research to prove the product/system
                     commercial feasibility has been completed and intermediate
@@ -785,7 +820,7 @@
                       type="radio"
                       name="competitiveLandscapeAns"
                       value="4"
-                      class="competitiveLandscapeAns" 
+                      class="competitiveLandscapeAns"
                     />
                     Competitive analysis to illustrate unique features and
                     advantages of the product/system compared to competitive
@@ -796,7 +831,7 @@
                       type="radio"
                       name="competitiveLandscapeAns"
                       value="5"
-                      class="competitiveLandscapeAns" 
+                      class="competitiveLandscapeAns"
                     />
                     Full and complete understanding of the competitive
                     landscape, target application(s), competitive
@@ -808,29 +843,54 @@
                     <label>Product Development/Design</label>
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="productDesignAns" value="1" class="productDesignAns"/>
+                    <input
+                      type="radio"
+                      name="productDesignAns"
+                      value="1"
+                      class="productDesignAns"
+                    />
                     One or more initial product hypotheses have been defined
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="productDesignAns" value="2" class="productDesignAns"/>
+                    <input
+                      type="radio"
+                      name="productDesignAns"
+                      value="2"
+                      class="productDesignAns"
+                    />
                     Mapping product/system attributes against customer needs has
                     highlighted a clear value proposition
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="productDesignAns" value="3" class="productDesignAns"/>
+                    <input
+                      type="radio"
+                      name="productDesignAns"
+                      value="3"
+                      class="productDesignAns"
+                    />
                     The product/system has been scaled from laboratory to pilot
                     scale and issues that may affect achieving full scale have
                     been identified
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="productDesignAns" value="4" class="productDesignAns"/>
+                    <input
+                      type="radio"
+                      name="productDesignAns"
+                      value="4"
+                      class="productDesignAns"
+                    />
                     Comprehensive customer value proposition model has been
                     developed, including a detailed understanding of
                     product/system design specifications, required
                     certifications, and trade-offs
                   </div>
                   <div>
-                    <input type="radio" name="productDesignAns" value="5" class="productDesignAns"/>
+                    <input
+                      type="radio"
+                      name="productDesignAns"
+                      value="5"
+                      class="productDesignAns"
+                    />
                     Product/system final design optimization has been completed,
                     required certifications have been obtained, and
                     product/system has incorporated detailed customer and
@@ -842,29 +902,54 @@
                     <label>Team</label>
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="teamAns" value="1" class="teamAns" />
+                    <input
+                      type="radio"
+                      name="teamAns"
+                      value="1"
+                      class="teamAns"
+                    />
                     No team or company in place (single individual, no legal
                     entity)
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="teamAns" value="2" class="teamAns" />
+                    <input
+                      type="radio"
+                      name="teamAns"
+                      value="2"
+                      class="teamAns"
+                    />
                     Solely technical or non-technical founder(s) running the
                     company with no outside assistance
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="teamAns" value="3" class="teamAns" />
+                    <input
+                      type="radio"
+                      name="teamAns"
+                      value="3"
+                      class="teamAns"
+                    />
                     Solely technical or non-technical founder(s) running the
                     company with assistance from outside advisors/mentors and/or
                     incubator/accelerator
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="teamAns" value="4" class="teamAns"  />
+                    <input
+                      type="radio"
+                      name="teamAns"
+                      value="4"
+                      class="teamAns"
+                    />
                     Balanced team with technical and business
                     development/commercialization experience running the company
                     with assistance from outside advisors/mentors
                   </div>
                   <div>
-                    <input type="radio" name="teamAns" value="5" class="teamAns" />
+                    <input
+                      type="radio"
+                      name="teamAns"
+                      value="5"
+                      class="teamAns"
+                    />
                     Balanced team with all capabilities onboard (e.g., sales,
                     marketing, customer service, operations, etc.) running the
                     company with assistance from outside advisors/mentors
@@ -875,33 +960,58 @@
                     <label>Go-to-Market</label>
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="goToMarketAns" value="1" class="goToMarketAns"  />
+                    <input
+                      type="radio"
+                      name="goToMarketAns"
+                      value="1"
+                      class="goToMarketAns"
+                    />
                     <label>
                       Initial business model and value proposition have been
                       defined
                     </label>
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="goToMarketAns" value="2" class="goToMarketAns" />
+                    <input
+                      type="radio"
+                      name="goToMarketAns"
+                      value="2"
+                      class="goToMarketAns"
+                    />
                     Customers/partners have been interviewed to understand their
                     pain points/needs, and business model and value proposition
                     have been refined based on customer/partner feedback
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="goToMarketAns" value="3" class="goToMarketAns" />
+                    <input
+                      type="radio"
+                      name="goToMarketAns"
+                      value="3"
+                      class="goToMarketAns"
+                    />
                     Market and customer/partner needs and how those translate to
                     product requirements have been defined, and initial
                     relationships have been developed with key stakeholders
                     across the value chain
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="goToMarketAns" value="4" class="goToMarketAns" />
+                    <input
+                      type="radio"
+                      name="goToMarketAns"
+                      value="4"
+                      class="goToMarketAns"
+                    />
                     Partnerships have been formed with key stakeholders across
                     the value chain (e.g., suppliers, partners, service
                     providers, and customers)
                   </div>
                   <div>
-                    <input type="radio" name="goToMarketAns" value="5" class="goToMarketAns" />
+                    <input
+                      type="radio"
+                      name="goToMarketAns"
+                      value="5"
+                      class="goToMarketAns"
+                    />
                     Supply agreements with suppliers and partners are in place
                     and initial purchase orders from customers have been
                     received >
@@ -912,29 +1022,54 @@
                     <label>Manufacturing/Supply Chain</label>
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="manufacturingAns" value="1" class="manufacturingAns" />
+                    <input
+                      type="radio"
+                      name="manufacturingAns"
+                      value="1"
+                      class="manufacturingAns"
+                    />
                     Potential suppliers, partners, and customers have been
                     identified and mapped in an initial value chain analysis
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="manufacturingAns" value="2" class="manufacturingAns" />
+                    <input
+                      type="radio"
+                      name="manufacturingAns"
+                      value="2"
+                      class="manufacturingAns"
+                    />
                     Relationships have been established with potential
                     suppliers, partners, service providers, and customers and
                     they have provided input on product and manufacturability
                     requirements
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="manufacturingAns" value="3" class="manufacturingAns" />
+                    <input
+                      type="radio"
+                      name="manufacturingAns"
+                      value="3"
+                      class="manufacturingAns"
+                    />
                     Manufacturing process qualifications (e.g. QC/QA) have been
                     defined and are in progress
                   </div>
                   <div class="mb-4">
-                    <input type="radio" name="manufacturingAns" value="4" class="manufacturingAns" />
+                    <input
+                      type="radio"
+                      name="manufacturingAns"
+                      value="4"
+                      class="manufacturingAns"
+                    />
                     Products/systems have been pilot manufactured and sold to
                     initial customerss
                   </div>
                   <div>
-                    <input type="radio" name="manufacturingAns" value="5" class="manufacturingAns" />
+                    <input
+                      type="radio"
+                      name="manufacturingAns"
+                      value="5"
+                      class="manufacturingAns"
+                    />
                     Full scale manufacturing and widespread deployment of
                     product/system to customers and/or users has been achieved
                   </div>

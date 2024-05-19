@@ -16,30 +16,32 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/officer/officer.css}" />
     <style>
-		.dt-end:nth-child(2){
-			display: flex !important;
-			justify-content: space-between !important;
-		}
-		
-		.dt-end:nth-child(3){
-			float: left !important;
-		}
-		
-		.dt-end button:first-child{
-			font-size: 10px !important;
-		}
-		
-		
-	</style>
+      .dt-end:nth-child(2) {
+        display: flex !important;
+        justify-content: space-between !important;
+      }
+
+      .dt-end:nth-child(3) {
+        float: left !important;
+      }
+
+      .dt-end button:first-child {
+        font-size: 10px !important;
+      }
+    </style>
   </head>
   <body th:object="${managerWebDto}">
     <div class="sidebar">
-		<a th:href="@{/manager/home}">Home</a>
-		<a th:href="@{/manager/accepted-result}">Accepted Applications</a>
-		<a th:href="@{/manager/evaluated-result}">Evaluated Appications</a>
-	</div>
+      <a th:href="@{/manager/home}">Home</a>
+      <a th:href="@{/manager/accepted-result}">Accepted Applications</a>
+      <a th:href="@{/manager/evaluated-result}">Evaluated Appications</a>
+    </div>
     <div>
-      <form th:action="@{/manager/proceed}" method="POST" class="table table-striped">
+      <form
+        th:action="@{/manager/proceed}"
+        method="POST"
+        class="table table-striped"
+      >
         <table id="applicants-table">
           <thead>
             <tr>
@@ -50,7 +52,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr th:each="app : *{listOfApplicants}" class="row-btn"> 
+            <tr th:each="app : *{listOfApplicants}" class="row-btn">
               <td th:text="${app.projectTitle}"></td>
               <td th:text="${app.university}"></td>
               <!--td
@@ -81,24 +83,13 @@
         <!--<button>Proceed to TBI</button>-->
       </form>
     </div>
+    <!-- applicant details -->
     <div class="modal" tabindex="-1" role="dialog" id="details-modal">
       <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Applicant Details</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body" id="modal-body">
-            <p>Hello</p>
-          </div>
-        </div>
+        <div
+          th:replace="~{fragments/applicantdetails :: applicantDetailsFragment}"
+          class="modal-content"
+        ></div>
       </div>
     </div>
 
@@ -160,21 +151,23 @@
       console.log(/*[[${managerWebDto}]]*/ "");
 
       $(document).ready(function () {
-        $('#applicants-table').dataTable( {
-		        "columnDefs": [{
-		          "targets": 'no-sort',
-		          "orderable": false	        
-		    	}],
-			    "searching": true,   
-				"ordering": false,   				
-				"info": true,    				
-				"lengthChange": false,
-				initComplete: function(){
-			      $(".dt-end:first")
-			         .prepend('<button type="submit" >Send to TbiBoard</button>');           
-			   }
-				
-		} );
+        $("#applicants-table").dataTable({
+          columnDefs: [
+            {
+              targets: "no-sort",
+              orderable: false,
+            },
+          ],
+          searching: true,
+          ordering: false,
+          info: true,
+          lengthChange: false,
+          initComplete: function () {
+            $(".dt-end:first").prepend(
+              '<button type="submit" >Send to TbiBoard</button>'
+            );
+          },
+        });
 
         let rows = document.getElementsByClassName("row-btn");
         let btnRows = document.getElementsByClassName("btn-row");
