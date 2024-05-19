@@ -21,25 +21,27 @@ public class GroupEntity {
 	
 	private int applicantIdPk;
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(columnDefinition = "varchar(255)", nullable = false)
 	private String groupName;
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(columnDefinition = "varchar(255)", nullable = false)
 	private String firstName;
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(columnDefinition = "varchar(255)", nullable = false)
 	private String lastName;
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(columnDefinition = "varchar(255)", nullable = false)
 	private String mobileNumber; 
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(columnDefinition = "varchar(255)", nullable = false)
 	private String emailAddress; 
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(columnDefinition = "varchar(255)", nullable = false)
 	private String university;
 	
+	@Column(nullable = false)
 	private Timestamp createdDate;
 	
+	@Column(nullable = false)
 	private Boolean deleteFlg;
 }

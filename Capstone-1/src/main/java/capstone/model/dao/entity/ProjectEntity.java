@@ -20,49 +20,55 @@ public class ProjectEntity {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int idPk;
 	
+	@Column(nullable = false)
 	private int applicantIdPk;
 	
-	@Column(columnDefinition = "text")
+	@Column(columnDefinition = "text", nullable = false)
 	private String projectTitle;
 	
-	@Column(columnDefinition = "text")
+	@Column(columnDefinition = "text", nullable = false)
 	private String projectDescription;
 	
 	private List<String> teams;
 	
-	@Column(columnDefinition = "text")
+	@Column(columnDefinition = "text", nullable = false)
 	private String problemStatement;
 	
-	@Column(columnDefinition = "text")
+	@Column(columnDefinition = "text", nullable = false)
 	private String targetMarket;
 	
-	@Column(columnDefinition = "text")
+	@Column(columnDefinition = "text", nullable = false)
 	private String solutionDescription;
 	
+	@Column(nullable = false)
 	private List<String> historicalTimeline;
 	
+	@Column(nullable = false)
 	private List<String> productServiceOffering;
 	
+	@Column(nullable = false)
 	private List<String> pricingStrategy;
 	
-	@Column(columnDefinition = "text")
+	@Column(columnDefinition = "text", nullable = false)
 	private String intPropertyStatus;
 	
-	@Column(columnDefinition = "text")
+	@Column(columnDefinition = "text", nullable = false)
 	private String objectives;
 	 
-	@Column(columnDefinition = "text")
+	@Column(columnDefinition = "text", nullable = false)
 	private String scopeProposal;
 	
-	@Column(columnDefinition = "text")
+	@Column(columnDefinition = "text", nullable = false)
 	private String methodology;
 	
 	private String vitaeFile;
 	
-	@Column(columnDefinition = "text")
+	@Column(columnDefinition = "text", nullable = false)
 	private String supportLink;
 	
+	@Column(nullable = false)
 	private Timestamp createdDate;
 	
+	@Column(nullable = false)
 	private Boolean deleteFlg;
 }

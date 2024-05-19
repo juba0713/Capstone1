@@ -22,34 +22,49 @@ public class ApplicantEntity {
 	@Column(columnDefinition = "varchar(255)")
 	private String email;
 	
+	@Column(nullable = false)
 	private Boolean agreeFlg;
 	
+	@Column(nullable = false)
 	private int technologyAns;
 	
+	@Column(nullable = false)
 	private int productDevelopmentAns;
 	
+	@Column(nullable = false)
 	private int competitiveLandscapeAns;
 	
+	@Column(nullable = false)
 	private int productDesignAns;
 	
+	@Column(nullable = false)
 	private int teamAns;
 	
+	@Column(nullable = false)
 	private int goToMarketAns;
 	
+	@Column(nullable = false)
 	private int manufacturingAns;
 	
+	@Column(nullable = false)
 	private Boolean eligibilityAgreeFlg;
 	
+	@Column(nullable = false)
 	private Boolean commitmentOneFlg;
 	
+	@Column(nullable = false)
 	private Boolean commitmentTwoFlg;
 	
+	@Column(nullable = false)
 	private Boolean commitmentThreeFlg;
 	
+	@Column(nullable = false)
 	private Boolean commitmentFourFlg;
 	
+	@Column(nullable = false)
 	private Timestamp createdDate;
 	
+	@Column(nullable = false)
 	private Boolean deleteFlg;
 	
 	/*
@@ -60,7 +75,9 @@ public class ApplicantEntity {
 	 * 4 - Pending for evaluation
 	 * 5 - Evaluated
 	 */
+	@Column(nullable = false)
 	private int status;
 	
+	@Column(nullable = false)
 	private int createdBy;
 }

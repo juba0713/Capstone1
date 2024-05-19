@@ -19,15 +19,18 @@ public class GroupMemberEntity {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int idPk;
 	
+	@Column(nullable = false)
 	private int groupIdPk;
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(columnDefinition = "varchar(255)", nullable = false)
 	private String firstName;
 	
-	@Column(columnDefinition = "varchar(255)")
+	@Column(columnDefinition = "varchar(255)", nullable = false)
 	private String lastName;
 	
+	@Column(nullable = false)
 	private Timestamp createdDate;
 	
+	@Column(nullable = false)
 	private Boolean deleteFlg;
 }
