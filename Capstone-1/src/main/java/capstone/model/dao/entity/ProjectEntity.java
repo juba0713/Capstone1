@@ -17,7 +17,7 @@ import lombok.Data;
 public class ProjectEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idPk;
 	
 	@Column(nullable = false)

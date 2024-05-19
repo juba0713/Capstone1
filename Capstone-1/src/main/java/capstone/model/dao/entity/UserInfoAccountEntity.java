@@ -16,7 +16,6 @@ public class UserInfoAccountEntity {
 	@Id
 	private int userIdPk;
 	
-	@Column(nullable = false)
 	private String password;
 	
 	@Column(nullable = false)

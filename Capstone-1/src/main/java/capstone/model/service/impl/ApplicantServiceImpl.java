@@ -487,7 +487,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		for(String member : inDto.getMembers()) {
 			
-			if(member != null) {
+			if(member != null && !CommonConstant.BLANK.equals(member)) {
 				
 				GroupMemberEntity groupMemberEntity = new GroupMemberEntity();
 				

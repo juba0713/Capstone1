@@ -15,7 +15,7 @@ import lombok.Data;
 public class RejectedApplicantEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idPk;
 	
 	private int applicantIdPk;

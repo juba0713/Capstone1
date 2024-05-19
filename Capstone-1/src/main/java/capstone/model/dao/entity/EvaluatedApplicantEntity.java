@@ -15,7 +15,7 @@ import lombok.Data;
 public class EvaluatedApplicantEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int idPk;
 	
 	public int applicantIdPk;

@@ -42,7 +42,7 @@ public class ApplicantWebDto {
 	public List<String> productServiceOffering = new ArrayList<>(Arrays.asList("", "", "", "")); 
 	
 	//Pricing Strategy
-	public List<String> pricingStrategy = new ArrayList<>(Arrays.asList("", "", "", "")); ;
+	public List<String> pricingStrategy = new ArrayList<>(Arrays.asList("", "", "", "")); 
 	
 	//Intellectual Property Status
 	public String intPropertyStatus;
@@ -75,7 +75,7 @@ public class ApplicantWebDto {
 	public String leaderEmail;
 	
 	//Members;
-	public List<String> members;
+	public List<String> members = new ArrayList<>(Arrays.asList("", "", "", "", ""));
 	
 	//University
 	public String university;
