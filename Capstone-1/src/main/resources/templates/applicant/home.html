@@ -43,9 +43,9 @@
         </div>
 
         <div class="w-40" th:if="*{applicantDetailsObj.status >= 5}">
-          <div class="font-primary text-xl">Application Status:</div>
+          <div class="font-primary text-2xl">Application Status:</div>
           <div
-            class="rounded-xl w-3/5 bg-rose-600 text-center"
+            class="z-50 rounded-xl w-full text-center"
             th:text="*{applicantDetailsObj.score} >= 6 ? 'Passed' : 'Rejected'"
             th:style="*{applicantDetailsObj.score} >= 6 ? 'background: green;' : 'background: red;'"
           >
@@ -59,7 +59,7 @@
             -->
           </div>
           <button
-            class="rounded-lg hover:text-white hover:cursor-pointer border-black hover:bg-black border p-2 mt-1 w-[68%] font-secondary text-xs"
+            class="z-50 rounded-lg hover:text-white hover:cursor-pointer border-black hover:bg-black border p-2 mt-1 w-full font-secondary text-xs"
             data-toggle="modal"
             data-target="#feedback-modal"
           >
@@ -67,10 +67,10 @@
           </button>
           <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
             <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div>
+              <div class="modal-content p-2">
+                <div class="font-secondary">
                   <div
-                    class="rounded-xl w-3/5 bg-rose-600 text-center"
+                    class="w-full text-center font-bold rounded-sm p-2"
                     th:text="*{applicantDetailsObj.score} >= 6 ? 'Passed' : 'Rejected'"
                     th:style="*{applicantDetailsObj.score} >= 6 ? 'background: green;' : 'background: red;'"
                   >
@@ -83,9 +83,12 @@
                   completed
             -->
                   </div>
-                  <div th:text="'Score: ' + *{applicantDetailsObj.score}"></div>
+                  <p class="font-semibold">Score:</p>
+                  <div th:text="*{applicantDetailsObj.score}"></div>
+                  <p class="font-semibold">Feedback:</p>
                   <div
-                    th:text="'Feedback: ' + *{applicantDetailsObj.feedback}"
+                    class="flex flex-col"
+                    th:text="*{applicantDetailsObj.feedback}"
                   ></div>
                 </div>
               </div>
@@ -93,11 +96,9 @@
           </div>
         </div>
 
-        <div class="progress-container flex justify-center h-20 flex-col">
-          <!-- <img
-            th:src="@{/icons/inoffice.svg}"
-            src="/Capstone1/Capstone-1/src/main/resources/static/icons/inoffice.svg"
-          /> -->
+        <div
+          class="progress-container flex justify-center h-20 flex-col mt-[-70px]"
+        >
           <div class="flex flex-wrap justify-evenly">
             <div>
               <img
@@ -117,7 +118,7 @@
               <img
                 th:src="@{/icons/completed.svg}"
                 alt="Example SVG"
-                class="h-10"
+                class="h-8"
               />
             </div>
           </div>
@@ -126,11 +127,11 @@
             <div
               class="progress-bar"
               role="progressbar"
-              th:style="*{applicantDetailsObj.status == 1 OR applicantDetailsObj == 3 ? 'width: 33%;' : applicantDetailsObj.status == 4 ? 'width: 66%;' : 'width: 100%;'}"
+              th:style="*{applicantDetailsObj.status == 1 OR applicantDetailsObj == 3 ? 'width: 33%;' : applicantDetailsObj.status == 4 ? 'width: 66%;' : 'width: 100%; '}"
               aria-valuenow="33"
               aria-valuemin="0"
               aria-valuemax="100"
-              th:text="*{applicantDetailsObj.status == 1 OR applicantDetailsObj == 3 ? 'In officer' : applicantDetailsObj.status == 4 ? 'In board' : 'Evaluated'}"
+              th:text="*{applicantDetailsObj.status == 1 OR applicantDetailsObj == 3 ? 'In officer' : applicantDetailsObj.status == 4 ? 'In board' : 'Completed'}"
             >
               [in officer]
             </div>
@@ -139,7 +140,7 @@
 
         <!-- form -->
         <div
-          class="flex justify-center h-[430px] bg-white rounded-lg overflow-hidden"
+          class="flex justify-center h-[480px] bg-white rounded-lg overflow-hidden"
         >
           <div class="overflow-auto rounded-2xl">
             <form
@@ -417,7 +418,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[0][1]"
-                     		th:value="*{applicantDetailsObj.historicalTimeline[0].length != 0 ? applicantDetailsObj.historicalTimeline[0][1] : 'NA'}"
+                            th:value="*{applicantDetailsObj.historicalTimeline[0].length != 0 ? applicantDetailsObj.historicalTimeline[0][1] : 'NA'}"
                             placeholder="Enter key activities or milestones here"
                             class="pointer-events-none w-full focus:outline-none"
                           />
@@ -428,7 +429,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[1][0]"
-              				th:value="*{applicantDetailsObj.historicalTimeline[1].length != 0 ? applicantDetailsObj.historicalTimeline[1][0] : 'NA'}"
+                            th:value="*{applicantDetailsObj.historicalTimeline[1].length != 0 ? applicantDetailsObj.historicalTimeline[1][0] : 'NA'}"
                             placeholder="mm/yy"
                             class="pointer-events-none w-full h-20 focus:outline-none"
                           />
@@ -437,7 +438,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[1][1]"
-   							th:value="*{applicantDetailsObj.historicalTimeline[1].length != 0 ? applicantDetailsObj.historicalTimeline[1][1] : 'NA'}"
+                            th:value="*{applicantDetailsObj.historicalTimeline[1].length != 0 ? applicantDetailsObj.historicalTimeline[1][1] : 'NA'}"
                             placeholder="Enter key activities or milestones here"
                             class="pointer-events-none w-full focus:outline-none"
                           />
@@ -448,7 +449,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[2][0]"
-                       		th:value="*{applicantDetailsObj.historicalTimeline[2].length != 0 ? applicantDetailsObj.historicalTimeline[2][0] : 'NA'}"
+                            th:value="*{applicantDetailsObj.historicalTimeline[2].length != 0 ? applicantDetailsObj.historicalTimeline[2][0] : 'NA'}"
                             placeholder="mm/yy"
                             class="pointer-events-none w-full h-20 focus:outline-none"
                           />
@@ -457,7 +458,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[2][1]"
-                 			th:value="*{applicantDetailsObj.historicalTimeline[2].length != 0 ? applicantDetailsObj.historicalTimeline[2][1] : 'NA'}"
+                            th:value="*{applicantDetailsObj.historicalTimeline[2].length != 0 ? applicantDetailsObj.historicalTimeline[2][1] : 'NA'}"
                             placeholder="Enter key activities or milestones here"
                             class="pointer-events-none w-full focus:outline-none"
                           />
@@ -468,7 +469,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[3][0]"
-               				th:value="*{applicantDetailsObj.historicalTimeline[3].length != 0 ? applicantDetailsObj.historicalTimeline[3][0] : 'NA'}"
+                            th:value="*{applicantDetailsObj.historicalTimeline[3].length != 0 ? applicantDetailsObj.historicalTimeline[3][0] : 'NA'}"
                             placeholder="mm/yy"
                             class="pointer-events-none w-full h-20 focus:outline-none"
                           />
@@ -477,7 +478,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[3][1]"
- 							th:value="*{applicantDetailsObj.historicalTimeline[3].length != 0 ? applicantDetailsObj.historicalTimeline[3][1] : 'NA'}"
+                            th:value="*{applicantDetailsObj.historicalTimeline[3].length != 0 ? applicantDetailsObj.historicalTimeline[3][1] : 'NA'}"
                             placeholder="Enter key activities or milestones here"
                             class="pointer-events-none w-full focus:outline-none"
                           />
@@ -488,7 +489,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[4][0]"
-          					th:value="*{applicantDetailsObj.historicalTimeline[4].length != 0 ? applicantDetailsObj.historicalTimeline[4][0] : 'NA'}"
+                            th:value="*{applicantDetailsObj.historicalTimeline[4].length != 0 ? applicantDetailsObj.historicalTimeline[4][0] : 'NA'}"
                             placeholder="mm/yy"
                             class="pointer-events-none w-full h-20 focus:outline-none"
                           />
@@ -497,7 +498,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[4][1]"
-                      		th:value="*{applicantDetailsObj.historicalTimeline[4].length != 0 ? applicantDetailsObj.historicalTimeline[4][1] : 'NA'}"
+                            th:value="*{applicantDetailsObj.historicalTimeline[4].length != 0 ? applicantDetailsObj.historicalTimeline[4][1] : 'NA'}"
                             placeholder="Enter key activities or milestones here"
                             class="pointer-events-none w-full focus:outline-none"
                           />
@@ -542,7 +543,7 @@
                           <input
                             type="text"
                             name="productServiceOffering[0]"
-           					th:value="*{applicantDetailsObj.productServiceOffering[0] != '' ? applicantDetailsObj.productServiceOffering[0] : 'NA'}"
+                            th:value="*{applicantDetailsObj.productServiceOffering[0] != '' ? applicantDetailsObj.productServiceOffering[0] : 'NA'}"
                             placeholder="Enter key activities or milestones here"
                             class="pointer-events-none w-full h-20 focus:outline-none"
                           />
@@ -551,7 +552,7 @@
                           <input
                             type="text"
                             name="productServiceOffering[1]"
-                   			th:value="*{applicantDetailsObj.productServiceOffering[1] != '' ? applicantDetailsObj.productServiceOffering[1] : 'NA'}"
+                            th:value="*{applicantDetailsObj.productServiceOffering[1] != '' ? applicantDetailsObj.productServiceOffering[1] : 'NA'}"
                             placeholder="Enter key activities or milestones here"
                             class="pointer-events-none focus:outline-none"
                           />
@@ -560,7 +561,7 @@
                           <input
                             type="text"
                             name="productServiceOffering[2]"
-         					th:value="*{applicantDetailsObj.productServiceOffering[2] != '' ? applicantDetailsObj.productServiceOffering[2] : 'NA'}"
+                            th:value="*{applicantDetailsObj.productServiceOffering[2] != '' ? applicantDetailsObj.productServiceOffering[2] : 'NA'}"
                             placeholder="Enter key activities or milestones here"
                             class="pointer-events-none focus:outline-none"
                           />
@@ -569,7 +570,7 @@
                           <input
                             type="text"
                             name="productServiceOffering[3]"
-							th:value="*{applicantDetailsObj.productServiceOffering[3] != '' ? applicantDetailsObj.productServiceOffering[3] : 'NA'}"
+                            th:value="*{applicantDetailsObj.productServiceOffering[3] != '' ? applicantDetailsObj.productServiceOffering[3] : 'NA'}"
                             placeholder="Enter key activities or milestones here"
                             class="pointer-events-none focus:outline-none"
                           />
@@ -583,7 +584,7 @@
                           <input
                             type="text"
                             name="pricingStrategy[0]"
-                        	th:value="*{applicantDetailsObj.pricingStrategy[0] != '' ? applicantDetailsObj.pricingStrategy[0] : 'NA'}"
+                            th:value="*{applicantDetailsObj.pricingStrategy[0] != '' ? applicantDetailsObj.pricingStrategy[0] : 'NA'}"
                             placeholder="Enter key activities or milestones here"
                             class="pointer-events-none w-full h-20 focus:outline-none"
                           />
@@ -592,7 +593,7 @@
                           <input
                             type="text"
                             name="pricingStrategy[1]"
-                       		th:value="*{applicantDetailsObj.pricingStrategy[1] != '' ? applicantDetailsObj.pricingStrategy[1] : 'NA'}"
+                            th:value="*{applicantDetailsObj.pricingStrategy[1] != '' ? applicantDetailsObj.pricingStrategy[1] : 'NA'}"
                             placeholder="Enter key activities or milestones here"
                             class="pointer-events-none focus:outline-none"
                           />
@@ -601,7 +602,7 @@
                           <input
                             type="text"
                             name="pricingStrategy[2]"
-                  			th:value="*{applicantDetailsObj.pricingStrategy[2] != '' ? applicantDetailsObj.pricingStrategy[2] : 'NA'}"
+                            th:value="*{applicantDetailsObj.pricingStrategy[2] != '' ? applicantDetailsObj.pricingStrategy[2] : 'NA'}"
                             placeholder="Enter key activities or milestones here"
                             class="pointer-events-none focus:outline-none"
                           />
@@ -610,7 +611,7 @@
                           <input
                             type="text"
                             name="pricingStrategy[3]"
-             				th:value="*{applicantDetailsObj.pricingStrategy[3] != '' ? applicantDetailsObj.pricingStrategy[3] : 'NA'}"
+                            th:value="*{applicantDetailsObj.pricingStrategy[3] != '' ? applicantDetailsObj.pricingStrategy[3] : 'NA'}"
                             placeholder="Enter key activities or milestones here"
                             class="pointer-events-none focus:outline-none"
                           />
@@ -734,7 +735,6 @@
                     type="text"
                     placeholder="Input here"
                     name="members[0]"
-                   
                     class="pointer-events-none w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                   />
                 </div>
@@ -744,7 +744,6 @@
                     type="text"
                     placeholder="Input here"
                     name="members[1]"
-                   
                     class="pointer-events-none w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                   />
                 </div>
@@ -754,7 +753,6 @@
                     type="text"
                     placeholder="Input here"
                     name="members[2]"
-                  
                     class="pointer-events-none w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                   />
                 </div>
@@ -764,7 +762,6 @@
                     type="text"
                     placeholder="Input here"
                     name="members[3]"
-                  
                     class="pointer-events-none w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
                   />
                 </div>
@@ -1463,41 +1460,43 @@
             />
             <form th:action="@{/applicant/change-password}" method="POST">
               <div>
-                <input
-                  type="password"
-                  placeholder="Enter current password"
-                  name="currentPassword"
-                  class="indent-2 rounded-md h-12 w-80 mb-6"
-                />
-                <div th:if="*{error != null}">
-                  <div
-                    th:each="err : *{error.currentPasswordError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
-                <input
-                  type="password"
-                  placeholder="Enter new password"
-                  name="newPassword"
-                  class="indent-2 rounded-md h-12 w-80 mb-6"
-                />
-                <div th:if="*{error != null}">
-                  <div
-                    th:each="err : *{error.newPasswordError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
-                <input
-                  type="password"
-                  placeholder="Enter confirm password"
-                  name="confirmPassword"
-                  class="indent-2 rounded-md h-12 w-80 mb-6"
-                />
-                <div th:if="*{error != null}">
-                  <div
-                    th:each="err : *{error.confirmPasswordError}"
-                    th:text="${err}"
-                  ></div>
+                <div class="flex flex-col">
+                  <input
+                    type="password"
+                    placeholder="Enter current password"
+                    name="currentPassword"
+                    class="indent-2 rounded-md h-12 w-80 mb-6"
+                  />
+                  <div th:if="*{error != null}">
+                    <div
+                      th:each="err : *{error.currentPasswordError}"
+                      th:text="${err}"
+                    ></div>
+                  </div>
+                  <input
+                    type="password"
+                    placeholder="Enter new password"
+                    name="newPassword"
+                    class="indent-2 rounded-md h-12 w-80 mb-6"
+                  />
+                  <div th:if="*{error != null}">
+                    <div
+                      th:each="err : *{error.newPasswordError}"
+                      th:text="${err}"
+                    ></div>
+                  </div>
+                  <input
+                    type="password"
+                    placeholder="Enter confirm password"
+                    name="confirmPassword"
+                    class="indent-2 rounded-md h-12 w-80 mb-6"
+                  />
+                  <div th:if="*{error != null}">
+                    <div
+                      th:each="err : *{error.confirmPasswordError}"
+                      th:text="${err}"
+                    ></div>
+                  </div>
                 </div>
                 <div class="rounded-3xl w-60 m-auto">
                   <button
@@ -1544,7 +1543,7 @@
   ></script>
   <script th:inline="javascript">
     const webDto = /*[[${applicantWebDto}]]*/ "";
-	console.log(webDto);
+    console.log(webDto);
     if (/*[[${!session.initialChangePass}]]*/ "") {
       $("#changepassword-modal").modal("show");
     } else {
