@@ -1,15 +1,19 @@
 package capstone.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import capstone.controller.webdto.ManagerWebDto;
+import capstone.controller.webdto.TbiBoardWebDto;
 import capstone.model.dto.ManagerInOutDto;
 import capstone.model.dto.OfficerInOutDto;
+import capstone.model.dto.TbiBoardInOutDto;
 import capstone.model.service.ManagerService;
 import jakarta.mail.MessagingException;
 
@@ -77,6 +81,28 @@ public class ManagerController {
 		managerService.updateApplicantStatus(inDto);
 		
 		return "redirect:/manager/home";
+	}
+	
+	@GetMapping("/retrieve/details")
+	public ResponseEntity<ManagerWebDto> getApplicantDetails(@RequestParam("applicantIdPk") String applicantIdPk) {
+
+		
+		ManagerInOutDto inDto = new ManagerInOutDto();
+  
+		inDto.setApplicantIdPk(Integer.parseInt(applicantIdPk));
+ 
+		ManagerInOutDto outDto = managerService.getApplicantDetails(inDto);
+  
+		if(outDto.getApplicantDetailsObj() == null) {
+  
+		}
+  
+		ManagerWebDto returnWebDto = new ManagerWebDto();
+		
+		returnWebDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
+		 
+
+		return ResponseEntity.ok(returnWebDto);
 	}
 	
 	

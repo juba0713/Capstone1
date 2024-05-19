@@ -40,5 +40,12 @@ public interface ManagerService {
 	 */
 	public ManagerInOutDto getAllAcceptedApplicants();
 	
+	/**
+	 * To get the details of the application by id pk
+	 * @param inDto
+	 * @return ApplicantInOutDto
+	 */
+	public ManagerInOutDto getApplicantDetails(ManagerInOutDto inDto); 
+	
 
 }
