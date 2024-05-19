@@ -126,7 +126,7 @@ public class ApplicantController {
 		
 		applicantService.saveApplicant(inDto);
 		
-		return "applicant/form";
+		return "redirect:/";
 	}
 	
 	
