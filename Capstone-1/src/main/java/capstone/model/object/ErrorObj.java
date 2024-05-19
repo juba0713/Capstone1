@@ -41,6 +41,8 @@ public class ErrorObj {
 	
 	public List<String> leaderEmailError;
 	
+	public List<String> membersError;
+	
 	public String agreeFlgError;
 	
 	public String technologyAnsError;

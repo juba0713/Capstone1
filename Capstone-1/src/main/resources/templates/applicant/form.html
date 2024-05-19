@@ -193,11 +193,11 @@
             </p>
             <div class="text-black text-justify mt-8 mb-8 ml-6 mr-8">
               <div class="items-center mb-8">
-                <input type="radio" name="agreeFlg" value="true" />
+                <input type="radio" name="agreeFlg" value="true" th:checked="*{agreeFlg != null AND agreeFlg}"/>
                 <label class="ml-2">I AGREE</label>
               </div>
               <div>
-                <input type="radio" name="agreeFlg" value="false" />
+                <input type="radio" name="agreeFlg" value="false" th:checked="*{agreeFlg != null AND !agreeFlg}"/>
                 <label class="ml-2">I DO NOT AGREE</label>
               </div>
             </div>
@@ -232,7 +232,7 @@
                 type="text"
                 placeholder="Type something here..."
                 name="projectDescription"
-                th:value="*{projectDescription}"
+                th:text="*{projectDescription}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32 z-10"
               ></textarea>
               <div class="error no-pad" th:if="*{error != null} AND *{error.projectDescriptionError != null}">
@@ -298,7 +298,7 @@
               <textarea
                 placeholder="Type something here..."
                 name="problemStatement"
-                th:value="*{problemStatement}"
+                th:text="*{problemStatement}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
               ></textarea>
               <div class="error no-pad" th:if="*{error != null} AND *{error.problemStatementError != null}">
@@ -310,7 +310,7 @@
               <textarea
                 placeholder="Type something here..."
                 name="targetMarket"
-                th:value="*{targetMarket}"
+                th:text="*{targetMarket}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
               ></textarea>
               <div class="error no-pad" th:if="*{error != null} AND *{error.targetMarketError != null}">
@@ -322,7 +322,7 @@
               <textarea
                 placeholder="Type something here..."
                 name="solutionDescription"
-                th:value="*{solutionDescription}"
+                th:text="*{solutionDescription}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
               ></textarea>
               <div class="error no-pad" th:if="*{error != null} AND *{error.solutionDescriptionError != null}">
@@ -354,6 +354,7 @@
                         name="historicalTimeline[0][0]"
                         placeholder="mm/yy"
                         class="w-full h-20 focus:outline-none"
+                        th:value="*{historicalTimeline[0][0]}"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
@@ -362,6 +363,7 @@
                         name="historicalTimeline[0][1]"
                         placeholder="Enter key activities or milestones here"
                         class="w-full focus:outline-none"
+                        th:value="*{historicalTimeline[0][1]}"
                       />
                     </td>
                   </tr>
@@ -372,6 +374,7 @@
                         name="historicalTimeline[1][0]"
                         placeholder="mm/yy"
                         class="w-full h-20 focus:outline-none"
+                        th:value="*{historicalTimeline[1][0]}"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
@@ -380,6 +383,7 @@
                         name="historicalTimeline[1][1]"
                         placeholder="Enter key activities or milestones here"
                         class="w-full focus:outline-none"
+                        th:value="*{historicalTimeline[1][1]}"
                       />
                     </td>
                   </tr>
@@ -390,6 +394,7 @@
                         name="historicalTimeline[2][0]"
                         placeholder="mm/yy"
                         class="w-full h-20 focus:outline-none"
+                        th:value="*{historicalTimeline[2][0]}"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
@@ -398,6 +403,7 @@
                         name="historicalTimeline[2][1]"
                         placeholder="Enter key activities or milestones here"
                         class="w-full focus:outline-none"
+                        th:value="*{historicalTimeline[2][1]}"
                       />
                     </td>
                   </tr>
@@ -408,6 +414,7 @@
                         name="historicalTimeline[3][0]"
                         placeholder="mm/yy"
                         class="w-full h-20 focus:outline-none"
+                        th:value="*{historicalTimeline[3][0]}"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
@@ -416,6 +423,7 @@
                         name="historicalTimeline[3][1]"
                         placeholder="Enter key activities or milestones here"
                         class="w-full focus:outline-none"
+                        th:value="*{historicalTimeline[3][1]}"
                       />
                     </td>
                   </tr>
@@ -426,6 +434,7 @@
                         name="historicalTimeline[4][0]"
                         placeholder="mm/yy"
                         class="w-full h-20 focus:outline-none"
+                        th:value="*{historicalTimeline[4][0]}"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
@@ -434,6 +443,7 @@
                         name="historicalTimeline[4][1]"
                         placeholder="Enter key activities or milestones here"
                         class="w-full focus:outline-none"
+                        th:value="*{historicalTimeline[4][1]}"
                       />
                     </td>
                   </tr>
@@ -488,7 +498,7 @@
                       <input
                         type="text"
                         name="productServiceOffering[1]"
-                        
+                        th:value="*{productServiceOffering[1]}"
                         placeholder="Enter key activities or milestones here"
                         class="focus:outline-none"
                       />
@@ -497,7 +507,7 @@
                       <input
                         type="text"
                         name="productServiceOffering[2]"
-                        
+                        th:value="*{productServiceOffering[2]}"
                         placeholder="Enter key activities or milestones here"
                         class="focus:outline-none"
                       />
@@ -506,7 +516,7 @@
                       <input
                         type="text"
                         name="productServiceOffering[3]"
-                        
+                        th:value="*{productServiceOffering[3]}"
                         placeholder="Enter key activities or milestones here"
                         class="focus:outline-none"
                       />
@@ -520,7 +530,7 @@
                       <input
                         type="text"
                         name="pricingStrategy[0]"
-                       
+                        th:value="*{pricingStrategy[0]}"
                         placeholder="Enter key activities or milestones here"
                         class="w-full h-20 focus:outline-none"
                       />
@@ -529,7 +539,7 @@
                       <input
                         type="text"
                         name="pricingStrategy[1]"
-                        
+                         th:value="*{pricingStrategy[1]}"
                         placeholder="Enter key activities or milestones here"
                         class="focus:outline-none"
                       />
@@ -538,7 +548,7 @@
                       <input
                         type="text"
                         name="pricingStrategy[2]"
-                        
+                         th:value="*{pricingStrategy[2]}"
                         placeholder="Enter key activities or milestones here"
                         class="focus:outline-none"
                       />
@@ -547,7 +557,7 @@
                       <input
                         type="text"
                         name="pricingStrategy[3]"
-                        
+                         th:value="*{pricingStrategy[3]}"
                         placeholder="Enter key activities or milestones here"
                         class="focus:outline-none"
                       />
@@ -583,7 +593,7 @@
               <textarea
                 placeholder="Type something here..."
                 name="objectives"
-                th:value="*{objectives}"
+                th:text="*{objectives}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
               ></textarea>
               <div class="error no-pad" th:if="*{error != null} AND *{error.ObjectivesError != null}">
@@ -595,7 +605,7 @@
               <textarea
                 placeholder="Type something here..."
                 name="scopeProposal"
-                th:value="*{scopeProposal}"
+                th:text="*{scopeProposal}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
               ></textarea>
                <div class="error no-pad" th:if="*{error != null} AND *{error.scopeProposalError != null}">
@@ -609,7 +619,7 @@
               <textarea
                 placeholder="Type something here..."
                 name="methodology"
-                th:value="*{methodology}"
+                th:text="*{methodology}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
               ></textarea>
               <div class="error no-pad" th:if="*{error != null} AND *{error.methodologyError != null}">
@@ -725,6 +735,9 @@
                 class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
               />
             </div>
+            <div class="error no-pad" th:if="*{error != null} AND *{error.membersError != null}">
+				  <div th:each="err : *{error.membersError}" th:text="${err}"></div>
+			  </div>
             <div class="flex flex-col mt-14 mb-`0">
               <label>University</label>
               <p>
@@ -767,21 +780,21 @@
                 </div>
                 
                 <div class="mt-10 mb-4">
-                  <input type="radio" name="technologyAns" value="1" />
+                  <input type="radio" name="technologyAns" value="1" th:checked="*{technologyAns==1}"/>
                   <label
                     >Project work is beyond basic research and technology
                     concept has been defined</label
                   >
                 </div>
                 <div class="mb-4">
-                  <input type="radio" name="technologyAns" value="2" />
+                  <input type="radio" name="technologyAns" value="2" th:checked="*{technologyAns==2}"/>
                   <label
                     >Applied research has begun and practical application(s)
                     have been identified</label
                   >
                 </div>
                 <div class="mb-4">
-                  <input type="radio" name="technologyAns" value="3" />
+                  <input type="radio" name="technologyAns" value="3" th:checked="*{technologyAns==3}"/>
                   <label
                     >Preliminary testing of technology components has begun, and
                     technical feasibility has been established in a laboratory
@@ -789,14 +802,14 @@
                   >
                 </div>
                 <div class="mb-4">
-                  <input type="radio" name="technologyAns" value="4" />
+                  <input type="radio" name="technologyAns" value="4" th:checked="*{technologyAns==4}"/>
                   <label
                     >Initial testing of integrated product/system has been
                     completed in a laboratory environment
                   </label>
                 </div>
                 <div>
-                  <input type="radio" name="technologyAns" value="5" />
+                  <input type="radio" name="technologyAns" value="5" th:checked="*{technologyAns==5}"/>
                   <label
                     >Laboratory scale integrated product/system demonstrates
                     performance in the intended application(s)
@@ -813,25 +826,25 @@
                 <label>Product Development</label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="productDevelopmentAns" value="1" />
+                <input type="radio" name="productDevelopmentAns" value="1" th:checked="*{productDevelopmentAns==5}"/>
                 <label>Initial product/market fit has been defined</label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="productDevelopmentAns" value="2" />
+                <input type="radio" name="productDevelopmentAns" value="2" th:checked="*{productDevelopmentAns==2}"/>
                 <label
                   >Pilot scale product/system has been tested in the intended
                   application(s)</label
                 >
               </div>
               <div class="mb-4">
-                <input type="radio" name="productDevelopmentAns" value="3" />
+                <input type="radio" name="productDevelopmentAns" value="3" th:checked="*{productDevelopmentAns==3}"/>
                 <label
                   >Demonstration of a full scale product/system prototype has
                   been completed in the intended application(s)
                 </label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="productDevelopmentAns" value="4" />
+                <input type="radio" name="productDevelopmentAns" value="4" th:checked="*{productDevelopmentAns==4}"/>
                 <label
                   >Actual product/system has been proven to work in its
                   near-final form under a representative set of expected
@@ -839,7 +852,7 @@
                 </label>
               </div>
               <div>
-                <input type="radio" name="productDevelopmentAns" value="5" />
+                <input type="radio" name="productDevelopmentAns" value="5" th:checked="*{productDevelopmentAns==5}"/>
                 <label
                   >Product/system is in final form and has been operated under
                   the full range of operating conditions and environments
@@ -855,7 +868,7 @@
                 <label>Competitive Landscape</label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="competitiveLandscapeAns" value="1" />
+                <input type="radio" name="competitiveLandscapeAns" value="1" th:checked="*{competitiveLandscapeAns==1}"/>
                 <label
                   >Secondary market research has been performed and basic
                   knowledge of potential applications and competitive landscape
@@ -863,7 +876,7 @@
                 </label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="competitiveLandscapeAns" value="2" />
+                <input type="radio" name="competitiveLandscapeAns" value="2" th:checked="*{competitiveLandscapeAns==2}"/>
                 <label
                   >Primary market research to prove the product/system
                   commercial feasibility has been completed and basic
@@ -872,7 +885,7 @@
                 </label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="competitiveLandscapeAns" value="3" />
+                <input type="radio" name="competitiveLandscapeAns" value="3" th:checked="*{competitiveLandscapeAns==3}"/>
                 <label
                   >Comprehensive market research to prove the product/system
                   commercial feasibility has been completed and intermediate
@@ -881,7 +894,7 @@
                 </label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="competitiveLandscapeAns" value="4" />
+                <input type="radio" name="competitiveLandscapeAns" value="4" th:checked="*{competitiveLandscapeAns==4}"/>
                 <label
                   >Competitive analysis to illustrate unique features and
                   advantages of the product/system compared to competitive
@@ -889,7 +902,7 @@
                 </label>
               </div>
               <div>
-                <input type="radio" name="competitiveLandscapeAns" value="5" />
+                <input type="radio" name="competitiveLandscapeAns" value="5" th:checked="*{competitiveLandscapeAns==5}"/>
                 <label
                   >Full and complete understanding of the competitive landscape,
                   target application(s), competitive products/systems, and
@@ -905,20 +918,20 @@
                 <label>Product Development/Design</label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="productDesignAns" value="1" />
+                <input type="radio" name="productDesignAns" value="1" th:checked="*{productDesignAns==1}"/>
                 <label
                   >One or more initial product hypotheses have been defined
                 </label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="productDesignAns" value="2" />
+                <input type="radio" name="productDesignAns" value="2" th:checked="*{productDesignAns==2}"/>
                 <label
                   >Mapping product/system attributes against customer needs has
                   highlighted a clear value proposition
                 </label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="productDesignAns" value="3" />
+                <input type="radio" name="productDesignAns" value="3" th:checked="*{productDesignAns==3}"/>
                 <label
                   >The product/system has been scaled from laboratory to pilot
                   scale and issues that may affect achieving full scale have
@@ -926,7 +939,7 @@
                 </label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="productDesignAns" value="4" />
+                <input type="radio" name="productDesignAns" value="4" th:checked="*{productDesignAns==4}"/>
                 <label
                   >Comprehensive customer value proposition model has been
                   developed, including a detailed understanding of
@@ -935,7 +948,7 @@
                 </label>
               </div>
               <div>
-                <input type="radio" name="productDesignAns" value="5" />
+                <input type="radio" name="productDesignAns" value="5" th:checked="*{productDesignAns==5}"/>
                 <label
                   >Product/system final design optimization has been completed,
                   required certifications have been obtained, and product/system
@@ -951,21 +964,21 @@
                 <label>Team</label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="teamAns" value="1" />
+                <input type="radio" name="teamAns" value="1" th:checked="*{teamAns==5}"/>
                 <label
                   >No team or company in place (single individual, no legal
                   entity)
                 </label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="teamAns" value="2" />
+                <input type="radio" name="teamAns" value="2" th:checked="*{teamAns==2}"/>
                 <label
                   >Solely technical or non-technical founder(s) running the
                   company with no outside assistance
                 </label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="teamAns" value="3" />
+                <input type="radio" name="teamAns" value="3" th:checked="*{teamAns==3}"/>
                 <label
                   >Solely technical or non-technical founder(s) running the
                   company with assistance from outside advisors/mentors and/or
@@ -973,7 +986,7 @@
                 </label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="teamAns" value="4" />
+                <input type="radio" name="teamAns" value="4" th:checked="*{teamAns==4}"/>
                 <label
                   >Balanced team with technical and business
                   development/commercialization experience running the company
@@ -981,7 +994,7 @@
                 </label>
               </div>
               <div>
-                <input type="radio" name="teamAns" value="5" />
+                <input type="radio" name="teamAns" value="5" th:checked="*{teamAns==5}"/>
                 <label
                   >Balanced team with all capabilities onboard (e.g., sales,
                   marketing, customer service, operations, etc.) running the
@@ -997,13 +1010,13 @@
                 <label>Go-to-Market</label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="goToMarketAns" value="1" />
+                <input type="radio" name="goToMarketAns" value="1" th:checked="*{goToMarketAns==1}"/>
                 <label>
                   Initial business model and value proposition have been defined
                 </label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="goToMarketAns" value="2" />
+                <input type="radio" name="goToMarketAns" value="2" th:checked="*{goToMarketAns==2}"/>
                 <label
                   >Customers/partners have been interviewed to understand their
                   pain points/needs, and business model and value proposition
@@ -1011,7 +1024,7 @@
                 </label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="goToMarketAns" value="3" />
+                <input type="radio" name="goToMarketAns" value="3" th:checked="*{goToMarketAns==3}"/>
                 <label>
                   Market and customer/partner needs and how those translate to
                   product requirements have been defined, and initial
@@ -1020,7 +1033,7 @@
                 </label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="goToMarketAns" value="4" />
+                <input type="radio" name="goToMarketAns" value="4" th:checked="*{goToMarketAns==4}"/>
                 <label
                   >Partnerships have been formed with key stakeholders across
                   the value chain (e.g., suppliers, partners, service providers,
@@ -1028,7 +1041,7 @@
                 </label>
               </div>
               <div>
-                <input type="radio" name="goToMarketAns" value="5" />
+                <input type="radio" name="goToMarketAns" value="5" th:checked="*{goToMarketAns==5}"/>
                 <label
                   >Supply agreements with suppliers and partners are in place
                   and initial purchase orders from customers have been received
@@ -1044,14 +1057,14 @@
                 <label>Manufacturing/Supply Chain</label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="manufacturingAns" value="1" />
+                <input type="radio" name="manufacturingAns" value="1" th:checked="*{manufacturingAns==1}"/>
                 <label>
                   Potential suppliers, partners, and customers have been
                   identified and mapped in an initial value chain analysis
                 </label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="manufacturingAns" value="2" />
+                <input type="radio" name="manufacturingAns" value="2" th:checked="*{manufacturingAns==2}"/>
                 <label
                   >Relationships have been established with potential suppliers,
                   partners, service providers, and customers and they have
@@ -1059,21 +1072,21 @@
                 </label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="manufacturingAns" value="3" />
+                <input type="radio" name="manufacturingAns" value="3" th:checked="*{manufacturingAns==3}"/>
                 <label>
                   Manufacturing process qualifications (e.g. QC/QA) have been
                   defined and are in progress
                 </label>
               </div>
               <div class="mb-4">
-                <input type="radio" name="manufacturingAns" value="4" />
+                <input type="radio" name="manufacturingAns" value="4" th:checked="*{manufacturingAns==4}"/>
                 <label>
                   Products/systems have been pilot manufactured and sold to
                   initial customerss
                 </label>
               </div>
               <div>
-                <input type="radio" name="manufacturingAns" value="5" />
+                <input type="radio" name="manufacturingAns" value="5" th:checked="*{manufacturingAns==5}"/>
                 <label>
                   Full scale manufacturing and widespread deployment of
                   product/system to customers and/or users has been achieved
@@ -1096,6 +1109,7 @@
                   type="radio"
                   name="eligibilityAgreeFlg"
                   value="true"
+                  th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}"
                 /><label class="ml-2">I AGREE</label>
               </div>
               <div class="items-center">
@@ -1103,6 +1117,7 @@
                   type="radio"
                   name="eligibilityAgreeFlg"
                   value="false"
+                  th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}"
                 /><label class="ml-2">I DO NOT AGREE</label>
               </div>
               <div class="error no-pad" th:if="*{error != null} AND *{error.eligibilityAgreeFlgError != null}">
@@ -1129,6 +1144,7 @@
                   type="radio"
                   name="commitmentOneFlg"
                   value="true"
+                  th:checked="*{commitmentOneFlg!=null AND commitmentOneFlg}"
                 /><label class="ml-2">Yes</label>
               </div>
               <div class="items-center">
@@ -1136,6 +1152,7 @@
                   type="radio"
                   name="commitmentOneFlg"
                   value="false"
+                  th:checked="*{commitmentOneFlg!=null AND !commitmentOneFlg}"
                 /><label class="ml-2">No</label>
               </div>
               <div class="error no-pad" th:if="*{error != null} AND *{error.commitmentOneFlgError != null}">
@@ -1152,6 +1169,7 @@
                   type="radio"
                   name="commitmentTwoFlg"
                   value="true"
+                  th:checked="*{commitmentTwoFlg!=null AND commitmentTwoFlg}"
                 /><label class="ml-2">Yes</label>
               </div>
 
@@ -1160,6 +1178,7 @@
                   type="radio"
                   name="commitmentTwoFlg"
                   value="false"
+                  th:checked="*{commitmentTwoFlg!=null AND !commitmentTwoFlg}"
                 /><label class="ml-2">No</label>
               </div>
               <div class="error no-pad" th:if="*{error != null} AND *{error.commitmentTwoFlgError != null}">
@@ -1181,6 +1200,7 @@
                   type="radio"
                   name="commitmentThreeFlg"
                   value="true"
+                  th:checked="*{commitmentThreeFlg!=null AND commitmentThreeFlg}"
                 /><label class="ml-2">Yes</label>
               </div>
 
@@ -1189,6 +1209,7 @@
                   type="radio"
                   name="commitmentThreeFlg"
                   value="false"
+                  th:checked="*{commitmentThreeFlg!=null AND !commitmentThreeFlg}"
                 /><label class="ml-2">No</label>
               </div>
               <div class="error no-pad" th:if="*{error != null} AND *{error.commitmentThreeFlgError != null}">
@@ -1206,6 +1227,7 @@
                   type="radio"
                   name="commitmentFourFlg"
                   value="true"
+                  th:checked="*{commitmentFourFlg!=null AND commitmentFourFlg}"
                 /><label class="ml-2">Yes</label>
               </div>
 
@@ -1214,6 +1236,7 @@
                   type="radio"
                   name="commitmentFourFlg"
                   value="false"
+                  th:checked="*{commitmentFourFlg!=null AND !commitmentFourFlg}"
                 /><label class="ml-2">No</label>
               </div>
               <div class="error no-pad" th:if="*{error != null} AND *{error.commitmentFourFlgError != null}">

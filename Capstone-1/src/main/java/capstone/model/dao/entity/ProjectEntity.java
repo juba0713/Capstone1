@@ -49,7 +49,7 @@ public class ProjectEntity {
 	@Column(nullable = false)
 	private List<String> pricingStrategy;
 	
-	@Column(columnDefinition = "text", nullable = false)
+	@Column(columnDefinition = "text")
 	private String intPropertyStatus;
 	
 	@Column(columnDefinition = "text", nullable = false)
@@ -63,7 +63,7 @@ public class ProjectEntity {
 	
 	private String vitaeFile;
 	
-	@Column(columnDefinition = "text", nullable = false)
+	@Column(columnDefinition = "text")
 	private String supportLink;
 	
 	@Column(nullable = false)

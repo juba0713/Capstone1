@@ -76,6 +76,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		List<String> groupLeaderError = new ArrayList<>();
 		List<String> leaderNumberError = new ArrayList<>();
 		List<String> leaderEmailError = new ArrayList<>();
+		List<String> membersError = new ArrayList<>();
 		String agreeFlgError = "";		
 		String technologyAnsError = "";	
 		String productDevelopmentAnsError = "";	
@@ -106,7 +107,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 			hasError=true;
 		}
 		
-		if(CommonConstant.BLANK.equals(inDto.getProjectTitle())){
+		if(CommonConstant.BLANK.equals(inDto.getProjectDescription())){
 			projectDescriptionError.add("Project Description is required!");
 			hasError=true;
 		}
@@ -135,8 +136,8 @@ public class ApplicantServiceImpl implements ApplicantService {
 		}
 		
 		for(String[] time : inDto.getHistoricalTimeline()){
-			if(time[0].length() == 0 || time[1].length() == 0) {
-				historicalTimelineError.add("Please ensure all key activities or milestones are filled in, starting with the most recent!");
+			if(!time[0].isEmpty() && time[1].isEmpty() || time[0].isEmpty() && !time[1].isEmpty()) {
+				historicalTimelineError.add("Please ensure month and year and the key activities are filled in!");
 				hasError=true;
 				break;
 			}	
@@ -179,6 +180,11 @@ public class ApplicantServiceImpl implements ApplicantService {
 			hasError=true;
 		}
 		
+		if(inDto.getGroupLeader().split(",").length != 2){
+			groupLeaderError.add("Incorrect Format! (Lastname, Firstname)");
+			hasError=true;
+		}
+		
 		if(CommonConstant.BLANK.equals(inDto.getLeaderNumber())){
 			leaderNumberError.add("Mobile Number is required!");
 			hasError=true;
@@ -187,6 +193,14 @@ public class ApplicantServiceImpl implements ApplicantService {
 		if(CommonConstant.BLANK.equals(inDto.getLeaderEmail())){
 			leaderEmailError.add("Email is required!");
 			hasError=true;
+		}
+		
+		for(String member : inDto.getMembers()) {
+			if(member.split(",").length!=2 && !CommonConstant.BLANK.equals(member)) {
+				membersError.add("Incorrect Format! (Lastname, Firstname)");
+				hasError = true;
+				break;
+			}
 		}
 		
 		if(inDto.getAgreeFlg()== null) {
@@ -313,7 +327,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 			errorObj.setCommitmentThreeFlgError(commitmentThreeFlgError);
 			
 			errorObj.setCommitmentFourFlgError(commitmentFourFlgError);
-					
+			
+			errorObj.setMembersError(membersError);
+			
 			outDto.setError(errorObj);
 		
 			outDto.setResult(CommonConstant.INVALID);

@@ -36,7 +36,7 @@ public class GroupEntity {
 	@Column(columnDefinition = "varchar(255)", nullable = false)
 	private String emailAddress; 
 	
-	@Column(columnDefinition = "varchar(255)", nullable = false)
+	@Column(columnDefinition = "varchar(255)")
 	private String university;
 	
 	@Column(nullable = false)
