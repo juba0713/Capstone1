@@ -126,6 +126,8 @@ public class ApplicantController {
 		
 		applicantService.saveApplicant(inDto);
 		
+		ra.addFlashAttribute("success", "You have sucessfully registered! Wait for the email that will be sent to you!");
+		
 		return "redirect:/";
 	}
 	

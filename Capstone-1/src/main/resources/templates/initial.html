@@ -9,8 +9,29 @@
       rel="stylesheet"
       href="/Capstone1/Capstone-1/src/main/resources/static/css/output.css"
     />
+    <style>
+		.message-success{
+			position: absolute;
+			top:160px;
+			left:0;
+			width: 100%;
+			background: transparent;
+			z-index: 1000;
+			display: flex;
+			justify-content: center;
+		}
+		
+		.message-success div{
+			background: #fff;
+			padding: 20px;
+			border-radius: 20px;
+		}
+	</style>
   </head>
   <body>
+	  <div class="message-success" th:if="${success != null}">
+		  <div th:text="${success}"></div>
+	  </div>
     <!-- <div class="bg-green-500 h-screen"> -->
     <div>
       <div>
