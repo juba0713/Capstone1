@@ -16,7 +16,7 @@ import lombok.Data;
 public class GroupEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int idPk;
 	
 	private int applicantIdPk;

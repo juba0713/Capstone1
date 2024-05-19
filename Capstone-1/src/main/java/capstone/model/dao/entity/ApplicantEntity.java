@@ -16,7 +16,7 @@ import lombok.Data;
 public class ApplicantEntity {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int idPk;
 	
 	@Column(columnDefinition = "varchar(255)")

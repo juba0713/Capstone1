@@ -15,7 +15,7 @@ import lombok.Data;
 public class UserInformationEntity {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int idPk;
 	
 	private String email;
