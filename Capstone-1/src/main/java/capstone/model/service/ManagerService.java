@@ -34,5 +34,11 @@ public interface ManagerService {
 	 */
 	public ManagerInOutDto getAllEvaluatedApplicants();
 	
+	/**
+	 * TO get all accepted applicants for manager
+	 * @return ManagerInOutDto
+	 */
+	public ManagerInOutDto getAllAcceptedApplicants();
+	
 
 }

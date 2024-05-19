@@ -50,7 +50,7 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		ManagerInOutDto outDto = new ManagerInOutDto();
 		
-		List<Integer> status = List.of(1,3);
+		List<Integer> status = List.of(0,1,2,3,4,5,6);
 		
 		List<JoinApplicantProject> listOfApplicant = applicantLogic.getAllApplicantByStatus(status);
 		
@@ -73,6 +73,12 @@ public class ManagerServiceImpl implements ManagerService {
 			obj.setTeam(commonService.convertToList(app.getTeam()));
 			
 			obj.setStatus(app.getStatus());
+			
+			obj.setUniversity(app.getUniversity());
+			
+			obj.setScore(app.getScore());
+			
+			obj.setFeedback(app.getFeedback());
 			
 			listOfAppObj.add(obj);
 			
@@ -141,6 +147,52 @@ public class ManagerServiceImpl implements ManagerService {
 			obj.setTeam(commonService.convertToList(app.getTeam()));
 			
 			obj.setStatus(app.getStatus());
+			
+			obj.setUniversity(app.getUniversity());
+			
+			obj.setScore(app.getScore());
+			
+			obj.setFeedback(app.getFeedback());
+					
+			listOfAppObj.add(obj);
+			
+		}
+		
+		outDto.setListOfApplicants(listOfAppObj);
+		
+		return outDto;
+	}
+
+	@Override
+	public ManagerInOutDto getAllAcceptedApplicants() {
+		
+		ManagerInOutDto outDto = new ManagerInOutDto();
+		
+		List<Integer> status = List.of(1,3);
+		
+		List<JoinApplicantProject> listOfApplicant = applicantLogic.getAllApplicantByStatus(status);
+		
+		List<ApplicantObj> listOfAppObj = new ArrayList<>();
+		
+		for(JoinApplicantProject app : listOfApplicant) {
+			
+			ApplicantObj obj = new ApplicantObj();
+			
+			obj.setApplicantIdPk(app.getApplicantIdPk());
+			
+			obj.setEmail(app.getEmail());
+			
+			obj.setProjectTitle(app.getProjectTitle());
+			
+			obj.setDescription(app.getDescription());
+			
+			obj.setConsent(app.getConsent());
+			
+			obj.setTeam(commonService.convertToList(app.getTeam()));
+			
+			obj.setStatus(app.getStatus());
+			
+			obj.setUniversity(app.getUniversity());
 			
 			obj.setScore(app.getScore());
 			

@@ -17,39 +17,37 @@
     <link rel="stylesheet" th:href="@{/css/officer/officer.css}" />
   </head>
   <body th:object="${managerWebDto}">
-    <p>tbievalresults</p>
+        <div class="sidebar">
+		<a th:href="@{/manager/home}">Home</a>
+		<a th:href="@{/manager/accepted-result}">Accepted Applications</a>
+		<a th:href="@{/manager/evaluated-result}">Evaluated Appications</a>
+	</div>
     <div>
       <form th:action="@{/manager/proceed}" method="POST">
         <table id="applicants-table">
           <thead>
             <tr>
-              <th><input type="checkbox" /></th>
-              <th>Email</th>
               <th>Project Title</th>
-              <th>Description</th>
               <th>University</th>
+              <th>Email</th>
               <th>Status</th>
-              <th>Actions</th>
+              <th>Feedback</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             <tr th:each="app : *{listOfApplicants}" class="row-btn">
-              <!--
-			  th:data-id="${app.applicantIdPk}"
-			  -->
-              <td>
+              <!--<td>
                 <input
                   type="checkbox"
                   name="chosenApplicant"
                   th:value="${app.applicantIdPk}"
                   th:if="${app.status == 3}"
                 />
-              </td>
-              <td th:text="${app.email}"></td>
+              </td>-->
               <td th:text="${app.projectTitle}"></td>
-              <td th:text="${app.description}"></td>
               <td th:text="${app.university}"></td>
-
+			  <td th:text="${app.email}"></td>
               <td
                 th:text="${app.status == 0 ? 'Pending' : app.status != 2 OR app.status != 0 ? 'Passed' : 'Failed'}"
                 th:style="${app.status != 1 OR app.status != 0 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"
@@ -64,10 +62,18 @@
                   View Feedback
                 </button>
               </td>
+              <td>
+				  <button
+                  type="button"
+                  th:data-id="${app.applicantIdPk}"
+                  name="incubate"
+                >
+                  Create Incubate Account
+                </button>
+			  </td>
             </tr>
           </tbody>
         </table>
-        <button>delete</button>
       </form>
     </div>
     <div class="modal" tabindex="-1" role="dialog" id="details-modal">
@@ -124,7 +130,16 @@
       console.log(webDto);
 
       $(document).ready(function () {
-        new DataTable("#applicants-table");
+        $('#applicants-table').dataTable( {
+		        "columnDefs": [{
+		          "targets": 'no-sort',
+		          "orderable": false	        
+		    	}],
+			    "searching": true,   
+				"ordering": false,   				
+				"info": true,    				
+				"lengthChange": false
+		} );
 
         let rows = document.getElementsByClassName("row-btn");
         let btnRows = document.getElementsByClassName("btn-row");
@@ -154,6 +169,7 @@
               if (webDto.listOfApplicants.length != 0) {
                 webDto.listOfApplicants.forEach((applicant, index) => {
                   if (applicant.applicantIdPk == idPk) {
+					console.log("AW");
                     score.innerHTML = applicant.score;
                     feedback.innerHTML = applicant.feedback;
                   }

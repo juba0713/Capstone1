@@ -27,7 +27,27 @@ public class ManagerController {
 		
 		webDto.setListOfApplicants(outDto.getListOfApplicants());
 		
-		return "manager/home";
+		return "manager/listOfAllPassedApplicants";
+	}
+	
+	@GetMapping("/evaluated-result")
+	public String showEvaluatedApplication(@ModelAttribute ManagerWebDto webDto) {
+		
+		ManagerInOutDto outDto = managerService.getAllEvaluatedApplicants();
+		
+		webDto.setListOfApplicants(outDto.getListOfApplicants());
+		
+		return "manager/tbiEvalResults";
+	}
+	
+	@GetMapping("/accepted-result")
+	public String showOfficerAcceptedApplication(@ModelAttribute ManagerWebDto webDto) {
+		
+		ManagerInOutDto outDto = managerService.getAllAcceptedApplicants();
+		
+		webDto.setListOfApplicants(outDto.getListOfApplicants());
+		
+		return "manager/officerEvalResults";
 	}
 	
 	@PostMapping("/account/activate")
@@ -37,7 +57,7 @@ public class ManagerController {
 		
 		inDto.setStatus(3);
 		
-		inDto.setApplicantIdPk(9);
+		inDto.setApplicantIdPk(webDto.getApplicantIdPk());
 		
 		managerService.activateApplicantAccount(inDto);
 		
@@ -59,13 +79,5 @@ public class ManagerController {
 		return "redirect:/manager/home";
 	}
 	
-	@GetMapping("/evaluated-result")
-	public String showEvaluatedApplication(@ModelAttribute ManagerWebDto webDto) {
-		
-		ManagerInOutDto outDto = managerService.getAllEvaluatedApplicants();
-		
-		webDto.setListOfApplicants(outDto.getListOfApplicants());
-		
-		return "manager/evaluatedapplicants";
-	}
+	
 }
