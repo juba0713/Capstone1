@@ -35,7 +35,7 @@ public class ApplicantController {
 	 * @return String
 	 */
 	@PostMapping("/form")
-	public String processApplicantForm(@ModelAttribute ApplicantWebDto webDto) {
+	public String processApplicantForm(@ModelAttribute ApplicantWebDto webDto, RedirectAttributes ra) {
 		
 		System.out.println("Agree Flg: " + webDto.getAgreeFlg());
 		
@@ -113,7 +113,13 @@ public class ApplicantController {
 		
 		ApplicantInOutDto outDto = applicantService.validateApplicant(inDto);
 		
+		System.out.println(webDto.getAgreeFlg());
+		
 		if(CommonConstant.INVALID.equals(outDto.getResult())) {
+			
+			webDto.setError(outDto.getError());
+			
+			ra.addFlashAttribute("applicantWebDto", webDto);
 			
 			return "redirect:/applicant/form";
 		}

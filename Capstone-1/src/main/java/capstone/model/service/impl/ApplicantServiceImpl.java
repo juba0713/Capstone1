@@ -3,6 +3,7 @@ package capstone.model.service.impl;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -54,6 +55,271 @@ public class ApplicantServiceImpl implements ApplicantService {
 	public ApplicantInOutDto validateApplicant(ApplicantInOutDto inDto) {
 		
 		ApplicantInOutDto outDto = new ApplicantInOutDto();
+		
+		ErrorObj errorObj = new ErrorObj();
+		
+		Pattern EMAIL_PATTERN = Pattern.compile("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
+		
+		List<String> emailError = new ArrayList<>();
+		List<String> projectTitleError = new ArrayList<>();
+		List<String> projectDescriptionError = new ArrayList<>();
+		List<String> teamsError = new ArrayList<>();
+		List<String> problemStatementError = new ArrayList<>();
+		List<String> targetMarketError = new ArrayList<>();
+		List<String> solutionDecriptionError = new ArrayList<>();
+		List<String> historicalTimelineError = new ArrayList<>();
+		List<String> productServiceOfferingError = new ArrayList<>();
+		List<String> objectivesError = new ArrayList<>();
+		List<String> scopeProposalError = new ArrayList<>();
+		List<String> methodologyError = new ArrayList<>();
+		List<String> groupNameError = new ArrayList<>();
+		List<String> groupLeaderError = new ArrayList<>();
+		List<String> leaderNumberError = new ArrayList<>();
+		List<String> leaderEmailError = new ArrayList<>();
+		String agreeFlgError = "";		
+		String technologyAnsError = "";	
+		String productDevelopmentAnsError = "";	
+		String CompetitiveLandscapeAnsError = "";	
+		String productDesignAnsError = "";	
+		String teamAnsError = "";	 
+		String goToMarketAnsError = "";	
+		String manufacturingAnsError = "";	
+		String eligibilityAgreeFlgError = "";	
+		String commitmentOneFlgError = "";	
+		String commitmentTwoFlgError = "";	
+		String commitmentThreeFlgError = "";	
+		String commitmentFourFlgError = "";			
+		
+		boolean hasError = false;
+		
+		if(CommonConstant.BLANK.equals(inDto.getEmail())) {
+			emailError.add("Email is required!");
+			hasError=true;
+		}
+		if(!EMAIL_PATTERN.matcher(inDto.getEmail()).matches()) {
+			emailError.add("Email is incorrect format!");
+			hasError=true;
+		}
+		
+		if(CommonConstant.BLANK.equals(inDto.getProjectTitle())){
+			projectTitleError.add("Project Title is required!");
+			hasError=true;
+		}
+		
+		if(CommonConstant.BLANK.equals(inDto.getProjectTitle())){
+			projectDescriptionError.add("Project Description is required!");
+			hasError=true;
+		}
+
+		for(String[] team : inDto.getTeams()){
+			if(team[0].length() == 0 || team[1].length() == 0) {
+				teamsError.add("Member name and Input role cannot be empty!");
+				hasError=true;
+				break;
+			}	
+		}
+		
+		if(CommonConstant.BLANK.equals(inDto.getProblemStatement())) {
+			problemStatementError.add("Problem Statement is required!");
+			hasError=true;
+		}
+		
+		if(CommonConstant.BLANK.equals(inDto.getTargetMarket())) {
+			targetMarketError.add("Problem Statement is required!");
+			hasError=true;
+		}
+		
+		if(CommonConstant.BLANK.equals(inDto.getSolutionDescription())) {
+			solutionDecriptionError.add("Problem Statement is required!");
+			hasError=true;
+		}
+		
+		for(String[] time : inDto.getHistoricalTimeline()){
+			if(time[0].length() == 0 || time[1].length() == 0) {
+				historicalTimelineError.add("Please ensure all key activities or milestones are filled in, starting with the most recent!");
+				hasError=true;
+				break;
+			}	
+		}
+		
+		if(inDto.getProductServiceOffering().get(0).isEmpty() &&
+			inDto.getProductServiceOffering().get(1).isEmpty() &&
+			inDto.getProductServiceOffering().get(2).isEmpty() &&
+			inDto.getProductServiceOffering().get(3).isEmpty()&&
+			inDto.getPricingStrategy().get(0).isEmpty() &&
+			inDto.getPricingStrategy().get(1).isEmpty() &&
+			inDto.getPricingStrategy().get(2).isEmpty() &&
+			inDto.getPricingStrategy().get(3).isEmpty()) {
+ 			productServiceOfferingError.add("Please describe the key activities or milestones for your product/service offering and pricing strategy for at least one competitor or alternative!");
+			hasError=true;
+		}
+		
+		if(CommonConstant.BLANK.equals(inDto.getObjectives())){
+			objectivesError.add("Objectives is required!");
+			hasError=true;
+		}
+		
+		if(CommonConstant.BLANK.equals(inDto.getScopeProposal())){
+			scopeProposalError.add("Scope of the Proposal is required!");
+			hasError=true;
+		}
+		
+		if(CommonConstant.BLANK.equals(inDto.getObjectives())){
+			methodologyError.add("Methodology and Expected Outputs is required!");
+			hasError=true;
+		}
+		
+		if(CommonConstant.BLANK.equals(inDto.getGroupName())){
+			groupNameError.add("Group Name is required!");
+			hasError=true;
+		}
+		
+		if(CommonConstant.BLANK.equals(inDto.getGroupLeader())){
+			groupLeaderError.add("Group Leader is required!");
+			hasError=true;
+		}
+		
+		if(CommonConstant.BLANK.equals(inDto.getLeaderNumber())){
+			leaderNumberError.add("Mobile Number is required!");
+			hasError=true;
+		}
+		
+		if(CommonConstant.BLANK.equals(inDto.getLeaderEmail())){
+			leaderEmailError.add("Email is required!");
+			hasError=true;
+		}
+		
+		if(inDto.getAgreeFlg()== null) {
+			agreeFlgError = "Please select whether you agree or disagree to the terms!";
+			hasError=true;
+		}
+		
+		if(inDto.getTechnologyAns() == 0) {
+			technologyAnsError = "Please select an option!";
+			hasError=true;
+		}
+		
+		if(inDto.getProductDevelopmentAns() == 0) {
+			productDevelopmentAnsError = "Please select an option!";
+			hasError=true;
+		}
+		
+		if(inDto.getCompetitiveLandscapeAns() == 0) {
+			CompetitiveLandscapeAnsError = "Please select an option!";
+			hasError=true;
+		}
+		
+		if(inDto.getProductDesignAns() == 0) {
+			productDesignAnsError = "Please select an option!";
+			hasError=true;
+		}
+		
+		if(inDto.getTeamAns() == 0) {
+			teamAnsError = "Please select an option!";
+			hasError=true;
+		}
+		
+		if(inDto.getGoToMarketAns() == 0) {
+			goToMarketAnsError = "Please select an option!";
+			hasError=true;
+		}
+		
+		if(inDto.getManufacturingAns() == 0) {
+			manufacturingAnsError = "Please select an option!";
+			hasError=true;
+		}
+		
+		if(inDto.getEligibilityAgreeFlg()== null) {
+			eligibilityAgreeFlgError = "Please select whether you agree or disagree to the Egilibility Agreement!";
+			hasError=true;
+		}
+		
+		if(inDto.getCommitmentOneFlg()== null) {
+			commitmentOneFlgError = "Please select an option!";
+			hasError=true;
+		}
+		
+		if(inDto.getCommitmentTwoFlg()== null) {
+			commitmentTwoFlgError = "Please select an option!";
+			hasError=true;
+		}
+		
+		if(inDto.getCommitmentThreeFlg() == null) {
+			commitmentThreeFlgError = "Please select an option!";
+			hasError=true;
+		}
+		
+		if(inDto.getCommitmentFourFlg()== null) {
+			commitmentFourFlgError = "Please select an option!";
+			hasError=true;
+		}
+		
+		if(hasError) {
+			
+			errorObj.setEmailError(emailError);
+			
+			errorObj.setProjectTitleError(projectTitleError);
+			
+			errorObj.setProjectDescriptionError(projectDescriptionError);
+			
+			errorObj.setTeamsError(teamsError);
+			
+			errorObj.setProblemStatementError(problemStatementError);
+			
+			errorObj.setTargetMarketError(targetMarketError);
+			
+			errorObj.setSolutionDescriptionError(solutionDecriptionError);
+			
+			errorObj.setHistoricalTimelineError(historicalTimelineError);
+			
+			errorObj.setProductServiceOfferingError(productServiceOfferingError);
+			
+			errorObj.setObjectivesError(objectivesError);
+			
+			errorObj.setScopeProposalError(scopeProposalError);
+			
+			errorObj.setMethodologyError(methodologyError);
+			
+			errorObj.setGroupNameError(groupNameError);
+			
+			errorObj.setGroupLeaderError(groupLeaderError);
+			
+			errorObj.setLeaderNumberError(leaderNumberError);
+			
+			errorObj.setLeaderEmailError(leaderEmailError);
+			
+			errorObj.setAgreeFlgError(agreeFlgError);
+			
+			errorObj.setTechnologyAnsError(technologyAnsError);
+			
+			errorObj.setProductDevelopmentAnsError(productDevelopmentAnsError);
+			
+			errorObj.setCompetitiveLandscapeAnsError(CompetitiveLandscapeAnsError);
+			
+			errorObj.setProductDesignAnsError(productDesignAnsError);
+			
+			errorObj.setTeamAnsError(teamAnsError);
+			
+			errorObj.setGoToMarketAnsError(goToMarketAnsError);
+			
+			errorObj.setManufacturingAnsError(manufacturingAnsError);
+			
+			errorObj.setEligibilityAgreeFlgError(eligibilityAgreeFlgError);
+			
+			errorObj.setCommitmentOneFlgError(commitmentOneFlgError);
+			
+			errorObj.setCommitmentTwoFlgError(commitmentTwoFlgError);
+			
+			errorObj.setCommitmentThreeFlgError(commitmentThreeFlgError);
+			
+			errorObj.setCommitmentFourFlgError(commitmentFourFlgError);
+					
+			outDto.setError(errorObj);
+		
+			outDto.setResult(CommonConstant.INVALID);
+			
+			return outDto;
+		}
 		
 		outDto.setResult(CommonConstant.VALID);
 		

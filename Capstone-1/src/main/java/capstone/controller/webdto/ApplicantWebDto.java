@@ -1,8 +1,11 @@
 package capstone.controller.webdto;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import capstone.model.object.ApplicantDetailsObj;
+import capstone.model.object.ErrorObj;
 import lombok.Data;
 
 @Data
@@ -21,7 +24,7 @@ public class ApplicantWebDto {
 	public String projectDescription;
 	
 	//Teams
-	public List<String[]> teams;
+	public List<String[]> teams = List.of(new String[] {"",""}, new String[] {"",""}, new String[] {"",""});
 	
 	//Problem Statement
 	public String problemStatement;
@@ -33,13 +36,13 @@ public class ApplicantWebDto {
 	public String solutionDescription;
 	
 	//Historical Timeline
-	public List<String[]> historicalTimeline;
+	public List<String[]> historicalTimeline = List.of(new String[] {"",""}, new String[] {"",""}, new String[] {"",""}, new String[] {"",""}, new String[] {"",""});
 	
 	//Product Service Offering
-	public List<String> productServiceOffering;
+	public List<String> productServiceOffering = new ArrayList<>(Arrays.asList("", "", "", "")); 
 	
 	//Pricing Strategy
-	public List<String> pricingStrategy;
+	public List<String> pricingStrategy = new ArrayList<>(Arrays.asList("", "", "", "")); ;
 	
 	//Intellectual Property Status
 	public String intPropertyStatus;
@@ -127,6 +130,8 @@ public class ApplicantWebDto {
 	//Confirm Password
 	public String confirmPassword;
 	
-	ApplicantDetailsObj applicantDetailsObj;
+	public ApplicantDetailsObj applicantDetailsObj;
+	
+	public ErrorObj error;
 	
 }

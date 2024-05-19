@@ -14,6 +14,18 @@
       .scroll-to-top {
         display: none;
       }
+      
+      .error{
+		  padding-left: 20px;
+		  font-size: 15px;
+		  font-weight: 600;
+		  color: #DC143C;
+	  }
+	  
+	  .no-pad{
+		  padding: 0;
+	  }
+	  
     </style>
     <!-- 
       !!!READ!!!
@@ -115,8 +127,11 @@
                 th:value="*{email}"
                 placeholder="Enter your email here"
                 class="text-black h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-              />
+              />            
             </div>
+             <div class="error" th:if="*{error != null} AND *{error.emailError != null}">
+				  <div th:each="err : *{error.emailError}" th:text="${err}"></div>
+			  </div>
           </div>
           <hr class="ml-6 mr-6 my-10" />
           <div class="">
@@ -187,6 +202,9 @@
               </div>
             </div>
           </div>
+          <div class="error" th:if="*{error != null} AND *{error.agreeFlgError != null}">
+			  <div th:text="*{error.agreeFlgError}"></div>
+		  </div>
           <hr class="my-10 ml-6 mr-6" />
 
           <div
@@ -200,6 +218,9 @@
               class="font-secondary text-black h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
             />
           </div>
+          <div class="error" th:if="*{error != null} AND *{error.projectTitleError != null}">
+			  <div th:each="err : *{error.projectTitleError}" th:text="${err}"></div>
+		  </div>
 
           <div class="ml-6 mr-6" id="capsuleProposal">
             <div class="flex flex-col mt-16 mb-8">
@@ -214,6 +235,9 @@
                 th:value="*{projectDescription}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32 z-10"
               ></textarea>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.projectDescriptionError != null}">
+				  <div th:each="err : *{error.projectDescriptionError}" th:text="${err}"></div>
+			  </div>
             </div>
             <div class="mt-14">
               <label class="font-semibold">B. Team Composition</label>
@@ -224,11 +248,13 @@
                   type="text"
                   placeholder="Member name"
                   name="teams[0][0]"
+                  th:value="*{teams[0][0]}"
                   class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
                 /><input
                   type="text"
                   placeholder="Input role"
                   name="teams[0][1]"
+                  th:value="*{teams[0][1]}"
                   class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                 />
               </div>
@@ -237,11 +263,13 @@
                   type="text"
                   placeholder="Member name"
                   name="teams[1][0]"
+                  th:value="*{teams[1][0]}"
                   class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
                 /><input
                   type="text"
                   placeholder="Input role"
                   name="teams[1][1]"
+                  th:value="*{teams[1][1]}"
                   class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                 />
               </div>
@@ -250,14 +278,19 @@
                   type="text"
                   placeholder="Member name"
                   name="teams[2][0]"
+                  th:value="*{teams[2][0]}"
                   class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
                 /><input
                   type="text"
                   placeholder="Input role"
                   name="teams[2][1]"
+                  th:value="*{teams[2][1]}"
                   class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                 />
               </div>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.teamsError != null}">
+				  <div th:each="err : *{error.teamsError}" th:text="${err}"></div>
+			  </div>
             </div>
             <div class="mt-14 flex flex-col">
               <p class="font-semibold">C. About the Product/Solution</p>
@@ -268,6 +301,9 @@
                 th:value="*{problemStatement}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
               ></textarea>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.problemStatementError != null}">
+				  <div th:each="err : *{error.problemStatementError}" th:text="${err}"></div>
+			  </div>
             </div>
             <div class="mt-10 flex flex-col">
               <label class="font-semibold">2. Target Market</label>
@@ -277,6 +313,9 @@
                 th:value="*{targetMarket}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
               ></textarea>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.targetMarketError != null}">
+				  <div th:each="err : *{error.targetMarketError}" th:text="${err}"></div>
+			  </div>
             </div>
             <div class="mt-10 flex flex-col">
               <label class="font-semibold">3. Solution Description</label>
@@ -286,6 +325,9 @@
                 th:value="*{solutionDescription}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
               ></textarea>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.solutionDescriptionError != null}">
+				  <div th:each="err : *{error.solutionDescriptionError}" th:text="${err}"></div>
+			  </div>
             </div>
             <div class="mt-10 mb-8 overflow-x-auto">
               <label class="font-semibold"
@@ -397,6 +439,9 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.historicalTimelineError != null}">
+				  <div th:each="err : *{error.historicalTimelineError}" th:text="${err}"></div>
+			  </div>
             </div>
             <div class="mb-8 overflow-x-auto">
               <p class="font-semibold mb-6 mt-10">
@@ -434,6 +479,7 @@
                       <input
                         type="text"
                         name="productServiceOffering[0]"
+                        th:value="*{productServiceOffering[0]}"
                         placeholder="Enter key activities or milestones here"
                         class="w-full h-20 focus:outline-none"
                       />
@@ -442,6 +488,7 @@
                       <input
                         type="text"
                         name="productServiceOffering[1]"
+                        
                         placeholder="Enter key activities or milestones here"
                         class="focus:outline-none"
                       />
@@ -450,6 +497,7 @@
                       <input
                         type="text"
                         name="productServiceOffering[2]"
+                        
                         placeholder="Enter key activities or milestones here"
                         class="focus:outline-none"
                       />
@@ -458,6 +506,7 @@
                       <input
                         type="text"
                         name="productServiceOffering[3]"
+                        
                         placeholder="Enter key activities or milestones here"
                         class="focus:outline-none"
                       />
@@ -471,6 +520,7 @@
                       <input
                         type="text"
                         name="pricingStrategy[0]"
+                       
                         placeholder="Enter key activities or milestones here"
                         class="w-full h-20 focus:outline-none"
                       />
@@ -479,6 +529,7 @@
                       <input
                         type="text"
                         name="pricingStrategy[1]"
+                        
                         placeholder="Enter key activities or milestones here"
                         class="focus:outline-none"
                       />
@@ -487,6 +538,7 @@
                       <input
                         type="text"
                         name="pricingStrategy[2]"
+                        
                         placeholder="Enter key activities or milestones here"
                         class="focus:outline-none"
                       />
@@ -495,6 +547,7 @@
                       <input
                         type="text"
                         name="pricingStrategy[3]"
+                        
                         placeholder="Enter key activities or milestones here"
                         class="focus:outline-none"
                       />
@@ -502,6 +555,9 @@
                   </tr>
                 </tbody>
               </table>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.productServiceOfferingError != null}">
+				  <div th:each="err : *{error.productServiceOfferingError}" th:text="${err}"></div>
+			  </div>
             </div>
 
             <div class="flex flex-col">
@@ -530,6 +586,9 @@
                 th:value="*{objectives}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
               ></textarea>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.ObjectivesError != null}">
+				  <div th:each="err : *{error.ObjectivesError}" th:text="${err}"></div>
+			  </div>
             </div>
             <div class="flex flex-col mt-6">
               <label class="font-semibold">B. Scope of the proposal</label>
@@ -539,6 +598,9 @@
                 th:value="*{scopeProposal}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
               ></textarea>
+               <div class="error no-pad" th:if="*{error != null} AND *{error.scopeProposalError != null}">
+				  <div th:each="err : *{error.scopeProposalError}" th:text="${err}"></div>
+			  </div>
             </div>
             <div class="flex flex-col mt-6">
               <label class="font-semibold"
@@ -550,6 +612,9 @@
                 th:value="*{methodology}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
               ></textarea>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.methodologyError != null}">
+				  <div th:each="err : *{error.methodologyError}" th:text="${err}"></div>
+			  </div>
             </div>
           </div>
           <hr class="my-14 ml-6 mr-6" />
@@ -581,6 +646,9 @@
                 th:value="*{groupName}"
                 class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
               />
+              <div class="error no-pad" th:if="*{error != null} AND *{error.groupNameError != null}">
+				  <div th:each="err : *{error.groupNameError}" th:text="${err}"></div>
+			  </div>
             </div>
             <div class="flex flex-col mb-10">
               <label>Team Leader - Team Member1(LastName, FirstName)</label>
@@ -591,6 +659,9 @@
                 th:value="*{groupLeader}"
                 class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
               />
+              <div class="error no-pad" th:if="*{error != null} AND *{error.groupLeaderError != null}">
+				  <div th:each="err : *{error.groupLeaderError}" th:text="${err}"></div>
+			  </div>
             </div>
             <div class="flex flex-col mb-10">
               <label>Team Leader's <strong>Mobile Number</strong></label>
@@ -601,6 +672,9 @@
                 th:value="*{leaderNumber}"
                 class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
               />
+              <div class="error no-pad" th:if="*{error != null} AND *{error.leaderNumberError != null}">
+				  <div th:each="err : *{error.leaderNumberError}" th:text="${err}"></div>
+			  </div>
             </div>
             <div class="flex flex-col mb-10">
               <label>Team Leader's <strong>Address</strong></label>
@@ -611,6 +685,9 @@
                 th:value="*{leaderEmail}"
                 class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
               />
+              <div class="error no-pad" th:if="*{error != null} AND *{error.leaderEmailError != null}">
+				  <div th:each="err : *{error.leaderEmailError}" th:text="${err}"></div>
+			  </div>
             </div>
             <div class="flex flex-col mb-10">
               <label>Team Leader - Member2(LastName, FirstName)</label>
@@ -688,6 +765,7 @@
                 <div class="mt-14 mb-4">
                   <label>Technology</label>
                 </div>
+                
                 <div class="mt-10 mb-4">
                   <input type="radio" name="technologyAns" value="1" />
                   <label
@@ -725,6 +803,9 @@
                   </label>
                 </div>
               </div>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.technologyAnsError != null}">
+				  <div th:text="*{error.technologyAnsError}"></div>
+			  </div>
             </div>
 
             <div class="mr-6">
@@ -764,6 +845,9 @@
                   the full range of operating conditions and environments
                 </label>
               </div>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.productDevelopmentAnsError != null}">
+				  <div th:text="*{error.productDevelopmentAnsError}"></div>
+			  </div>
             </div>
 
             <div class="mr-6">
@@ -812,6 +896,9 @@
                   market has been achieved
                 </label>
               </div>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.competitiveLandscapeAnsError != null}">
+				  <div th:text="*{error.competitiveLandscapeAnsError}"></div>
+			  </div>
             </div>
             <div class="mr-6">
               <div class="mt-14 mb-8">
@@ -855,6 +942,9 @@
                   has incorporated detailed customer and product requirements
                 </label>
               </div>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.productDesignAnsError != null}">
+				  <div th:text="*{error.productDesignAnsError}"></div>
+			  </div>
             </div>
             <div class="mr-6">
               <div class="mt-14 mb-8">
@@ -898,6 +988,9 @@
                   company with assistance from outside advisors/mentors</label
                 >
               </div>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.teamAnsError != null}">
+				  <div th:text="*{error.teamAnsError}"></div>
+			  </div>
             </div>
             <div class="mr-6">
               <div class="mt-14 mb-8">
@@ -942,6 +1035,9 @@
                   >
                 </label>
               </div>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.goToMarketAnsError != null}">
+				  <div th:text="*{error.goToMarketAnsError}"></div>
+			  </div>
             </div>
             <div class="mr-6">
               <div class="mt-14 mb-8">
@@ -983,6 +1079,9 @@
                   product/system to customers and/or users has been achieved
                 </label>
               </div>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.manufacturingAnsError != null}">
+				  <div th:text="*{error.manufacturingAnsError}"></div>
+			  </div>
             </div>
             <hr class="my-10 mr-6" />
 
@@ -1006,6 +1105,9 @@
                   value="false"
                 /><label class="ml-2">I DO NOT AGREE</label>
               </div>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.eligibilityAgreeFlgError != null}">
+				  <div th:text="*{error.eligibilityAgreeFlgError}"></div>
+			  </div>
             </div>
             <hr class="my-10" />
 
@@ -1036,6 +1138,9 @@
                   value="false"
                 /><label class="ml-2">No</label>
               </div>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.commitmentOneFlgError != null}">
+				  <div th:text="*{error.commitmentOneFlgError}"></div>
+			  </div>
             </div>
             <div class="mb-8 mr-6 text-justify">
               <label
@@ -1057,6 +1162,9 @@
                   value="false"
                 /><label class="ml-2">No</label>
               </div>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.commitmentTwoFlgError != null}">
+				  <div th:text="*{error.commitmentTwoFlgError}"></div>
+			  </div>
             </div>
 
             <div class="mb-8 mr-6 text-justify">
@@ -1083,6 +1191,9 @@
                   value="false"
                 /><label class="ml-2">No</label>
               </div>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.commitmentThreeFlgError != null}">
+				  <div th:text="*{error.commitmentThreeFlgError}"></div>
+			  </div>
             </div>
             <div class="mb-8 mr-6 text-justify">
               <label
@@ -1105,6 +1216,9 @@
                   value="false"
                 /><label class="ml-2">No</label>
               </div>
+              <div class="error no-pad" th:if="*{error != null} AND *{error.commitmentFourFlgError != null}">
+				  <div th:text="*{error.commitmentFourFlgError}"></div>
+			  </div>
             </div>
             <div class="mt-10 mb-8 mr-6 text-justify">
               <p>
@@ -1165,7 +1279,9 @@
       </button>
     </div>
 
-    <script>
+    <script th:inline="javascript">
+		console.log(/*[[${applicantWebDto}]]*/'');
+		
       window.addEventListener("scroll", function () {
         var button = document.querySelector(".scroll-to-top");
         // If the user has scrolled around 200px, show the button, otherwise hide it
