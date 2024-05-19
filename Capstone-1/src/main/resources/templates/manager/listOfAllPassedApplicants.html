@@ -40,7 +40,7 @@
 				<!-- th:text="${app.status == 0 ? 'In Officer' : app.status == 2 OR app.status != 0 ? 'Passed' : 'Failed'}"-->
 				<!--th:style="${app.status == 0 OR app.status == 1 OR app.status == 5 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"-->
               <td
-                th:text="${app.status == 0 ? 'In Officer' : app.status == 2 ? 'Rejected' : app.status == 1 OR app.status == 3? 'In Manager' : app.status == 4 ? 'In Board' : app.status == 5 AND app.score >=6 ? 'Passed'  : 'Not Passed'}"
+                th:text="${app.status == 0 ? 'In Officer' : app.status == 2 ? 'Rejected' : app.status == 1 OR app.status == 3? 'In Manager' : app.status == 4 ? 'In Board' : app.status == 5 AND app.score >=6 ? 'Passed'  : 'Failed'}"
                 th:style="${app.status == 0 OR app.status == 1 OR app.status==3 OR app.status == 4  ? 'color:#000000; font-weight: bold;' : app.status == 2 OR (app.status == 5 AND app.score <= 5) ? 'color:#FF0000; font-weight: bold;' : 'color:#008000; font-weight: bold;'}"
               ></td>
               <td>
