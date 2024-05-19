@@ -340,117 +340,208 @@
 			let commitmentFourFlg = document.querySelectorAll('.commitmentFourFlg');
 			
 			//Email
-			email.value = applicant.email;
-			//Project Title
-			projectTitle.value = applicant.projectTitle;	
-			//Project Description
-			projectDescription.textContent = applicant.projectDescription;	
-			//AgreeF;g
-	        if(applicant.agreeFlg){
-				agreeFlgs[0].checked = true;
+	        email.value = applicant.email;
+	        //Project Title
+	        projectTitle.value = applicant.projectTitle;
+	        //Project Description
+	        projectDescription.textContent = applicant.projectDescription;
+	        //AgreeF;g
+	        if (applicant.agreeFlg) {
+	          agreeFlgs[0].checked = true;
+	        } else {
+	          agreeFlgs[1].checked = true;
+	        }
+	        //Teams
+	        memberOne[0].value = applicant.teams[0][0];
+	        memberOne[1].value = applicant.teams[0][1];
+	        memberTwo[0].value = applicant.teams[1][0];
+	        memberTwo[1].value = applicant.teams[1][1];
+	        memberThree[0].value = applicant.teams[2][0];
+	        memberThree[1].value = applicant.teams[2][1];
+	        //Problem Statement
+	        problemStatement.textContent = applicant.problemStatement;
+	        //Target Market
+	        targetMarket.textContent = applicant.targetMarket;
+	        //Solution Description
+	        solutionDescription.textContent = applicant.solutionDescription;
+	        //HistoricalTimeline
+	        if(applicant.historicalTimeline[0].length != 0){
+				historicalTimelineOne[0].value = applicant.historicalTimeline[0][0];
+	        	historicalTimelineOne[1].value = applicant.historicalTimeline[0][1];
 			}else{
-				agreeFlgs[1].checked = true;
-			}	
-			//Teams
-			memberOne[0].value = applicant.teams[0][0];
-			memberOne[1].value = applicant.teams[0][1];
-			memberTwo[0].value = applicant.teams[1][0];
-			memberTwo[1].value = applicant.teams[1][1];
-			memberThree[0].value = applicant.teams[2][0];
-			memberThree[1].value = applicant.teams[2][1];
-			//Problem Statement
-			problemStatement.textContent = applicant.problemStatement;
-			//Target Market
-			targetMarket.textContent = applicant.targetMarket;
-			//Solution Description
-			solutionDescription.textContent = applicant.solutionDescription;
-			//HistoricalTimeline
-			historicalTimelineOne[0].value = applicant.historicalTimeline[0][0];
-			historicalTimelineOne[1].value = applicant.historicalTimeline[0][1];
-			historicalTimelineTwo[0].value = applicant.historicalTimeline[1][0];
-			historicalTimelineTwo[1].value = applicant.historicalTimeline[1][1];
-			historicalTimelineThree[0].value = applicant.historicalTimeline[2][0];
-			historicalTimelineThree[1].value = applicant.historicalTimeline[2][1];
-			historicalTimelineFour[0].value = applicant.historicalTimeline[3][0];
-			historicalTimelineFour[1].value = applicant.historicalTimeline[3][1];
-			historicalTimelineFive[0].value = applicant.historicalTimeline[4][0];
-			historicalTimelineFive[1].value = applicant.historicalTimeline[4][1];
-			//Product Service Offering
-			productServiceOffering[0].value = applicant.productServiceOffering[0];
-			productServiceOffering[1].value = applicant.productServiceOffering[1];
-			productServiceOffering[2].value = applicant.productServiceOffering[2];
-			productServiceOffering[3].value = applicant.productServiceOffering[3];
-			//Pricing Strategy
-			pricingStrategy[0].value = applicant.pricingStrategy[0];
-			pricingStrategy[1].value = applicant.pricingStrategy[1];
-			pricingStrategy[2].value = applicant.pricingStrategy[2];
-			pricingStrategy[3].value = applicant.pricingStrategy[3];
-			//Intellectual Property Status
-			intPropertyStatus.value = applicant.intPropertyStatus;
-			//Objectives
-			objectives.textContent = applicant.objectives;
-			//Scope of the proposal
-			scopeProposal.textContent = applicant.scopeProposal;
-			//Methodology
-			methodology.textContent = applicant.methodology;
-			//Supporting Link
-			supportLink.value = applicant.supportLink;
-			//Group Name
-			groupName.value = applicant.groupName;
-			//Group Leader
-			groupLeader.value = applicant.leaderLastName + ", " + applicant.leaderFirstName;
-			//Leader Mobile Number
-			leaderNumber.value = applicant.mobileNumber;
-			//Leader Email
-			leaderEmail.value = applicant.emailAddress;
-			//Members
-			members[0].value = applicant.members[0];
-			members[1].value = applicant.members[1];
-			members[2].value = applicant.members[2];
-			members[3].value = applicant.members[3];
-			//University
-			university.value = applicant.university;
+				historicalTimelineOne[0].value = 'NA';
+	        	historicalTimelineOne[1].value = 'NA';
+			}
+			if(applicant.historicalTimeline[1].length != 0){
+				historicalTimelineTwo[0].value = applicant.historicalTimeline[0][0];
+	        	historicalTimelineTwo[1].value = applicant.historicalTimeline[0][1];
+			}else{
+				historicalTimelineTwo[0].value = 'NA';
+	        	historicalTimelineTwo[1].value = 'NA';
+			}
+	        //Product Service Offering
+			if(applicant.historicalTimeline[2].length != 0){
+				historicalTimelineThree[0].value = applicant.historicalTimeline[0][0];
+	        	historicalTimelineThree[1].value = applicant.historicalTimeline[0][1];
+			}else{
+				historicalTimelineThree[0].value = 'NA';
+	        	historicalTimelineThree[1].value = 'NA';
+			}
+			if(applicant.historicalTimeline[3].length != 0){
+				historicalTimelineFour[0].value = applicant.historicalTimeline[0][0];
+	        	historicalTimelineFour[1].value = applicant.historicalTimeline[0][1];
+			}else{
+				historicalTimelineFour[0].value = 'NA';
+	        	historicalTimelineFour[1].value = 'NA';
+			}
+			if(applicant.historicalTimeline[4].length != 0){
+				historicalTimelineFive[0].value = applicant.historicalTimeline[0][0];
+	        	historicalTimelineFive[1].value = applicant.historicalTimeline[0][1];
+			}else{
+				historicalTimelineFive[0].value = 'NA';
+	        	historicalTimelineFive[1].value = 'NA';
+			}
+			if(applicant.productServiceOffering[0] != ''){
+				productServiceOffering[0].value = applicant.productServiceOffering[0];
+			}else{
+				productServiceOffering[0].value = 'NA';
+			}
+			if(applicant.productServiceOffering[1] != ''){
+				productServiceOffering[1].value = applicant.productServiceOffering[0];
+			}else{
+				productServiceOffering[1].value = 'NA';
+			}
+			if(applicant.productServiceOffering[2] != ''){
+				productServiceOffering[2].value = applicant.productServiceOffering[0];
+			}else{
+				productServiceOffering[2].value = 'NA';
+			}
+			if(applicant.productServiceOffering[3] != ''){
+				productServiceOffering[3].value = applicant.productServiceOffering[0];
+			}else{
+				productServiceOffering[3].value = 'NA';
+			}
+	        //Pricing Strategy
+	        if(applicant.pricingStrategy[0] != ''){
+				pricingStrategy[0].value = applicant.pricingStrategy[0];
+			}else{
+				pricingStrategy[0].value = 'NA';
+			}
+			if(applicant.pricingStrategy[1] != ''){
+				pricingStrategy[1].value = applicant.pricingStrategy[1];
+			}else{
+				pricingStrategy[1].value = 'NA';
+			}
+			if(applicant.pricingStrategy[2] != ''){
+				pricingStrategy[2].value = applicant.pricingStrategy[2];
+			}else{
+				pricingStrategy[2].value = 'NA';
+			}
+			if(applicant.pricingStrategy[3] != ''){
+				pricingStrategy[3].value = applicant.pricingStrategy[3];
+			}else{
+				pricingStrategy[3].value = 'NA';
+			}
+	        //Intellectual Property Status
+			if(applicant.intPropertyStatus != ''){
+				intPropertyStatus.value = applicant.intPropertyStatus;
+			}else{
+				intPropertyStatus.value = 'NA';
+			}
+	        //Objectives
+	        objectives.textContent = applicant.objectives;
+	        //Scope of the proposal
+	        scopeProposal.textContent = applicant.scopeProposal;
+	        //Methodology
+	        methodology.textContent = applicant.methodology;
+	        //Supporting Link
+	        if(applicant.supportLink != ''){
+	        	supportLink.value = applicant.supportLink;			
+			}else{
+				supportLink.value = 'NA';
+			}
+	        //Group Name
+	        groupName.value = applicant.groupName;
+	        //Group Leader
+	        groupLeader.value =
+	          applicant.leaderLastName + ", " + applicant.leaderFirstName;
+	        //Leader Mobile Number
+	        leaderNumber.value = applicant.mobileNumber;
+	        //Leader Email
+	        leaderEmail.value = applicant.emailAddress;
+	        //Members
+	        if(applicant.members[0] != undefined && !applicant.members[0].includes("null")){	
+				members[0].value = applicant.members[0];
+			}else{
+				members[0].value = 'NA';
+			}
+			if(applicant.members[1] != undefined && !applicant.members[1].includes("null")){	
+				members[1].value = applicant.members[1];
+			}else{
+				members[1].value = 'NA';
+			}
+			if(applicant.members[2] != undefined && !applicant.members[2].includes("null")){	
+				members[2].value = applicant.members[2];
+			}else{
+				members[2].value = 'NA';
+			}
+			if(applicant.members[3] != undefined && !applicant.members[3].includes("null")){	
+				members[3].value = applicant.members[3];
+			}else{
+				members[3].value = 'NA';
+			}
+	        //University
+	        if(applicant.university != ''){
+				university.value = applicant.university;
+			}else{
+				university.value = 'NA';
+			}
 	        //Technology Answer
-	        technologyAns[applicant.technologyAns-1].checked = true; 
+	        technologyAns[applicant.technologyAns - 1].checked = true;
 	        //Product Development Answer
-	        productDevelopmentAns[applicant.productDevelopmentAns-1].checked = true;
+	        productDevelopmentAns[
+	          applicant.productDevelopmentAns - 1
+	        ].checked = true;
 	        //Competitive Landscape Answer
-	        competitiveLandscapeAns[applicant.competitiveLandscapeAns-1].checked = true;
+	        competitiveLandscapeAns[
+	          applicant.competitiveLandscapeAns - 1
+	        ].checked = true;
 	        //Product Design Answer
-	        productDesignAns[applicant.productDesignAns-1].checked = true;
+	        productDesignAns[applicant.productDesignAns - 1].checked = true;
 	        //Teams Answer
-	        teamAns[applicant.teamAns-1].checked = true;
+	        teamAns[applicant.teamAns - 1].checked = true;
 	        //Go To market Answer
-	        goToMarketAns[applicant.goToMarketAns-1].checked = true;
+	        goToMarketAns[applicant.goToMarketAns - 1].checked = true;
 	        //Manufacturing Answer
-	        manufacturingAns[applicant.manufacturingAns-1].checked = true;
+	        manufacturingAns[applicant.manufacturingAns - 1].checked = true;
 	        //eligibilityAgreeFlg
-	        if(applicant.eligibilityAgreeFlg){
-				eligibilityAgreeFlg[0].checked = true;
-			}else{
-				eligibilityAgreeFlg[1].checked = true;
-			}
-			//CommmitFlg
-	        if(applicant.commitmentOneFlg){
-				commitmentOneFlg[0].checked = true;
-			}else{
-				commitmentOneFlg[1].checked = true;
-			}
-			if(applicant.commitmentTwoFlg){
-				commitmentTwoFlg[0].checked = true;
-			}else{
-				commitmentTwoFlg[1].checked = true;
-			}
-			if(applicant.commitmentThreeFlg){
-				commitmentThreeFlg[0].checked = true;
-			}else{
-				commitmentThreeFlg[1].checked = true;
-			}
-			if(applicant.commitmentFourFlg){
-				commitmentFourFlg[0].checked = true;
-			}else{
-				commitmentFourFlg[1].checked = true;
-			}
+	        
+	        if (applicant.eligibilityAgreeFlg) {
+	          eligibilityAgreeFlg[0].checked = true;
+	        } else {
+	          eligibilityAgreeFlg[1].checked = true;
+	        }
+	        //CommmitFlg
+	        if (applicant.commitmentOneFlg) {
+	          commitmentOneFlg[0].checked = true;
+	        } else {
+	          commitmentOneFlg[1].checked = true;
+	        }
+	        if (applicant.commitmentTwoFlg) {
+	          commitmentTwoFlg[0].checked = true;
+	        } else {
+	          commitmentTwoFlg[1].checked = true;
+	        }
+	        if (applicant.commitmentThreeFlg) {
+	          commitmentThreeFlg[0].checked = true;
+	        } else {
+	          commitmentThreeFlg[1].checked = true;
+	        }
+	        if (applicant.commitmentFourFlg) {
+	          commitmentFourFlg[0].checked = true;
+	        } else {
+	          commitmentFourFlg[1].checked = true;
+	        }
 		    console.log(applicant);
 	      }
       });
