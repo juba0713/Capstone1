@@ -92,7 +92,7 @@
                 <th class="text-center rounded-top-right">Actions</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="bodyrowhover">
               <tr th:each="app : *{listOfApplicants}" class="row-btn">
                 <td th:text="${app.email}"></td>
                 <td th:text="${app.projectTitle}"></td>
