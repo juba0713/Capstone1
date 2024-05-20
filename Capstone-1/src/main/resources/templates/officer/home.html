@@ -39,18 +39,15 @@
     </style>
   </head>
   <body th:object="${officerWebDto}">
-    <!-- <p>Officer Home</p> -->
-
-    <div class="h-screen bg-slate-300 p-2">
-      <!-- <div class="bg-white h-full"> -->
-      <div class="flex place-items-end flex-col ml-60">
+    <div class="h-screen bg-tanglow p-2">
+      <div class="flex place-items-end flex-col ml-60 pr-10 pt-3">
         <div class="font-primary text-5xl">
           Welcome, <span th:text="${session.fullname}"></span>!
         </div>
         <div>ID: <span th:text="${session.id}"></span></div>
       </div>
       <div
-        class="sm:overflow-x-auto overflow-hidden sm:w-auto p-10 ml-2 sm:ml-0"
+        class="rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden sm:w-auto p-2 ml-2 sm:ml-0"
       >
         <table id="applicants-table" class="w-screen h-4/5">
           <!-- class="border-collapse table-auto border-4 border-violet-600 h-full border-spacing-0 w-fit" -->
@@ -138,7 +135,7 @@
       <!-- </div> -->
 
       <div
-        class="bottom-0 right-0 p-2 flex justify-end text-xl font-primary absolute hover:text-white"
+        class="bottom-0 right-0 px-2 mr-2 flex justify-end text-xl font-primary absolute hover:text-white"
       >
         <form th:action="@{/logout}" method="POST">
           <button>Logout</button>

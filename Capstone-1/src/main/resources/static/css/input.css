@@ -172,7 +172,7 @@
   outline: 0;
 }
 .bodyrowhover tr:hover {
-  background: #fff;
+  background-color: hsl(48, 12%, 89%);
 }
 
 .rounded-top-left {

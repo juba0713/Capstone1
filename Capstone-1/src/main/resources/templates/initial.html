@@ -10,28 +10,28 @@
       href="/Capstone1/Capstone-1/src/main/resources/static/css/output.css"
     />
     <style>
-		.message-success{
-			position: absolute;
-			top:160px;
-			left:0;
-			width: 100%;
-			background: transparent;
-			z-index: 1000;
-			display: flex;
-			justify-content: center;
-		}
-		
-		.message-success div{
-			background: #fff;
-			padding: 20px;
-			border-radius: 20px;
-		}
-	</style>
+      .message-success {
+        position: absolute;
+        top: 160px;
+        left: 0;
+        width: 100%;
+        background: transparent;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+      }
+
+      .message-success div {
+        background: #fff;
+        padding: 20px;
+        border-radius: 20px;
+      }
+    </style>
   </head>
   <body>
-	  <div class="message-success" th:if="${success != null}">
-		  <div th:text="${success}"></div>
-	  </div>
+    <div class="message-success" th:if="${success != null}" id="flash-message">
+      <div th:text="${success}"></div>
+    </div>
     <!-- <div class="bg-green-500 h-screen"> -->
     <div>
       <div>
@@ -106,5 +106,19 @@
         </div>
       </div>
     </div>
+    <script>
+      // JavaScript function to remove the flash message after a specified time
+      function hideFlashMessage() {
+        const flashMessage = document.getElementById("flash-message");
+        if (flashMessage) {
+          setTimeout(() => {
+            flashMessage.style.display = "none";
+          }, 5000); // 5000 milliseconds = 5 seconds
+        }
+      }
+
+      // Call the function on page load
+      window.onload = hideFlashMessage;
+    </script>
   </body>
 </html>
