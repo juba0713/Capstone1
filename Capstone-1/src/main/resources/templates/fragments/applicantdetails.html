@@ -48,7 +48,7 @@
             <form
               th:action="@{/applicant/form}"
               method="POST"
-              class="font-secondary border-transparent"
+              class="pointer-events-none font-secondary border-transparent"
             >
               <div>
                 <div class="flex justify-between">
@@ -84,7 +84,7 @@
                     type="text"
                     name="email"
                     placeholder="Enter your email here"
-                    class="text-black email h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
+                    class="pointer-events-none text-black email h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                   />
                 </div>
               </div>
@@ -147,7 +147,9 @@
                   complaint, suit, or damages which any party may file or claim
                   in relation to my consent.
                 </p>
-                <div class="text-black text-justify mt-8 mb-8 ml-6 mr-8">
+                <div
+                  class="pointer-events-none text-black text-justify mt-8 mb-8 ml-6 mr-8"
+                >
                   <div class="items-center mb-8">
                     <input
                       type="radio"
@@ -171,7 +173,7 @@
               <hr class="my-10 ml-6 mr-6" />
 
               <div
-                class="flex flex-col ml-6 w-1/4 relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
+                class="pointer-events-none flex flex-col ml-6 w-1/4 relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
               >
                 <h2 class="mb-6">Project Title/Startup Name</h2>
                 <input
@@ -211,7 +213,7 @@
                       class="border-b member-1 bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                     />
                   </div>
-                  <div class="mb-6">
+                  <div class="mb-6 pointer-events-none">
                     <input
                       type="text"
                       placeholder="Member name"
@@ -224,7 +226,7 @@
                       class="border-b member-2 bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
                     />
                   </div>
-                  <div>
+                  <div class="pointer-events-none">
                     <input
                       type="text"
                       placeholder="Member name"
@@ -246,7 +248,7 @@
                   <textarea
                     placeholder="Type something here..."
                     name="problemStatement"
-                    class="resize-none problemStatement mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                    class="pointer-events-none resize-none problemStatement mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
                 <div class="mt-10 flex flex-col">
@@ -254,7 +256,7 @@
                   <textarea
                     placeholder="Type something here..."
                     name="targetMarket"
-                    class="resize-none mt-2 targetMarket bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                    class="pointer-events-none resize-none mt-2 targetMarket bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
                 <div class="mt-10 flex flex-col">
@@ -262,7 +264,7 @@
                   <textarea
                     placeholder="Type something here..."
                     name="solutionDescription"
-                    class="resize-none mt-2 solutionDescription bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+                    class="pointer-events-none resize-none mt-2 solutionDescription bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
                   ></textarea>
                 </div>
                 <div class="mt-10 mb-8 overflow-x-auto">
@@ -294,7 +296,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[0][0]"
-                            placeholder="mm/yy"
+                            placeholder="00/0000"
                             class="w-full h-20 focus:outline-none historicalTimeline-1"
                           />
                         </td>
@@ -312,7 +314,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[1][0]"
-                            placeholder="mm/yy"
+                            placeholder="00/0000"
                             class="w-full h-20 focus:outline-none historicalTimeline-2"
                           />
                         </td>
@@ -330,7 +332,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[2][0]"
-                            placeholder="mm/yy"
+                            placeholder="00/0000"
                             class="w-full h-20 focus:outline-none historicalTimeline-3"
                           />
                         </td>
@@ -348,7 +350,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[3][0]"
-                            placeholder="mm/yy"
+                            placeholder="00/0000"
                             class="w-full h-20 focus:outline-none historicalTimeline-4"
                           />
                         </td>
@@ -366,7 +368,7 @@
                           <input
                             type="text"
                             name="historicalTimeline[4][0]"
-                            placeholder="mm/yy"
+                            placeholder="00/0000"
                             class="w-full h-20 focus:outline-none historicalTimeline-5"
                           />
                         </td>
@@ -672,8 +674,7 @@
                         value="1"
                         class="technologyAns"
                       />
-
-                      >Project work is beyond basic research and technology
+                      Project work is beyond basic research and technology
                       concept has been defined
                     </div>
                     <div class="mb-4">

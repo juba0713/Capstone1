@@ -78,57 +78,59 @@
         <div
           class="ml-[250px] rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
         >
-          <table id="applicants-table" class="w-screen h-4/5">
-            <!-- class="border-collapse table-auto border-4 border-violet-600 h-full border-spacing-0 w-fit" -->
+          <form th:action="@{/manager/proceed}" method="POST">
+            <table id="applicants-table" class="w-screen h-4/5">
+              <!-- class="border-collapse table-auto border-4 border-violet-600 h-full border-spacing-0 w-fit" -->
 
-            <thead class="font-secondary text-sm bg-customyellow">
-              <tr>
-                <th class="text-center rounded-top-left">Email</th>
-                <th class="text-center w-3/12">Project Title</th>
+              <thead class="font-secondary text-sm bg-customyellow">
+                <tr>
+                  <th class="text-center rounded-top-left">Email</th>
+                  <th class="text-center w-3/12">Project Title</th>
 
-                <th class="text-center w-1/5 hidden sm:table-cell">
-                  University
-                </th>
-                <th class="text-center rounded-top-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody class="bodyrowhover">
-              <tr th:each="app : *{listOfApplicants}" class="row-btn">
-                <td th:text="${app.email}"></td>
-                <td th:text="${app.projectTitle}"></td>
-                <td th:text="${app.university}"></td>
+                  <th class="text-center w-1/5 hidden sm:table-cell">
+                    University
+                  </th>
+                  <th class="text-center rounded-top-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="bodyrowhover">
+                <tr th:each="app : *{listOfApplicants}" class="row-btn">
+                  <td th:text="${app.email}"></td>
+                  <td th:text="${app.projectTitle}"></td>
+                  <td th:text="${app.university}"></td>
 
-                <td>
-                  <button
-                    class="btn-row"
-                    type="button"
-                    th:data-id="${app.applicantIdPk}"
-                    name="activate"
-                    th:if="${app.status == 1}"
-                  >
-                    Activate Account
-                  </button>
-                  <input
-                    type="checkbox"
-                    name="chosenApplicant"
-                    th:value="${app.applicantIdPk}"
-                    th:if="${app.status == 3}"
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                  <td>
+                    <button
+                      class="btn-row"
+                      type="button"
+                      th:data-id="${app.applicantIdPk}"
+                      name="activate"
+                      th:if="${app.status == 1}"
+                    >
+                      Activate Account
+                    </button>
+                    <input
+                      type="checkbox"
+                      name="chosenApplicant"
+                      th:value="${app.applicantIdPk}"
+                      th:if="${app.status == 3}"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
         </div>
       </div>
       <!-- applicant details modal -->
-      <div class="modal" tabindex="-1" role="dialog" id="details-modal">
+      <!-- <div class="modal" tabindex="-1" role="dialog" id="details-modal">
         <div class="modal-dialog" role="document">
           <div
             th:replace="~{fragments/applicantdetails :: applicantDetailsFragment}"
             class="modal-content"
           ></div>
         </div>
-      </div>
+      </div> -->
 
       <div
         class="modal"
