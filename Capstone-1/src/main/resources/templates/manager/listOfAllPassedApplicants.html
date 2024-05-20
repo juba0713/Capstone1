@@ -15,11 +15,6 @@
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/output.css}" />
-    <!-- for live server[no springboot running] -->
-    <link
-      rel="stylesheet"
-      href="/Capstone1/Capstone-1/src/main/resources/static/css/output.css"
-    />
 
     <style>
       .dt-input {
@@ -35,72 +30,121 @@
     </style>
   </head>
   <body th:object="${managerWebDto}">
-    <div class="sidebar">
-      <a th:href="@{/manager/home}">Home</a>
-      <a th:href="@{/manager/accepted-result}">Accepted Applications</a>
-      <a th:href="@{/manager/evaluated-result}">Evaluated Appications</a>
-    </div>
     <div>
-      <form th:action="@{/manager/proceed}" method="POST">
-        <table id="applicants-table" class="table table-striped">
-          <thead>
-            <tr>
-              <th>Project Title</th>
-              <th>University</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="app : *{listOfApplicants}" class="row-btn" th:data-id="${app.applicantIdPk}">
-              <td th:text="${app.projectTitle}"></td>
-              <td th:text="${app.university}"></td>
-              <!-- th:text="${app.status == 0 ? 'In Officer' : app.status == 2 OR app.status != 0 ? 'Passed' : 'Failed'}"-->
-              <!--th:style="${app.status == 0 OR app.status == 1 OR app.status == 5 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"-->
-              <td
-                th:text="${app.status == 0 ? 'In Officer' : app.status == 2 ? 'Rejected' : app.status == 1 OR app.status == 3? 'In Manager' : app.status == 4 ? 'In Board' : app.status == 5 AND app.score >=6 ? 'Passed'  : 'Failed'}"
-                th:style="${app.status == 0 OR app.status == 1 OR app.status==3 OR app.status == 4  ? 'color:#000000; font-weight: bold;' : app.status == 2 OR (app.status == 5 AND app.score <= 5) ? 'color:#FF0000; font-weight: bold;' : 'color:#008000; font-weight: bold;'}"
-              ></td>
-              <td>
-                <button
-                  class="btn-row"
-                  type="button"
-                  th:data-id="${app.applicantIdPk}"
-                  name="feedback"
-                  th:if="${app.status == 2 OR app.status == 5}"
-                >
-                  View Feedback
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-    </div>
-    <form th:action="@{/logout}" method="POST">
-      <button>Logout</button>
-    </form>
-    <!-- applicant details -->
-    <div class="modal" tabindex="-1" role="dialog" id="details-modal">
-      <div class="modal-dialog" role="document">
-        <div
-          th:replace="~{fragments/applicantdetails :: applicantDetailsFragment}"
-          class="modal-content"
-        ></div>
+      <div
+        class="h-full flex flex-col w-[250px] absolute bg-black z-10 justify-between text-customyellow"
+      >
+        <div class="pt-2">
+          <img
+            class="pointer-events-none h-16 w-52 flex justify-center mx-auto border-2 border-blue-500 mb-2"
+            src="/Capstone1/Capstone-1/src/main/resources/static/images/yellowLogo.png"
+            th:src="@{/images/yellowLogo.png}"
+          />
+          <div class="flex flex-col font-secondary font-semibold p-2">
+            <a
+              th:href="@{/manager/home}"
+              class="hover:bg-tanglow hover:text-black hover:no-underline pl-2 mb-2"
+              >Home</a
+            >
+            <a
+              th:href="@{/manager/accepted-result}"
+              class="hover:bg-tanglow hover:text-black hover:no-underline pl-2 mb-2"
+              >Accepted Applications</a
+            >
+            <a
+              th:href="@{/manager/evaluated-result}"
+              class="hover:bg-tanglow hover:text-black hover:no-underline pl-2"
+              >Evaluated Appications</a
+            >
+          </div>
+        </div>
+        <div class="pl-3 text-xl font-primary hover:text-white w-full">
+          <form th:action="@{/logout}" method="POST">
+            <button>Logout</button>
+          </form>
+        </div>
       </div>
-    </div>
-    <!-- feedback modal -->
-    <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div>
-            <div class="rejected">
-              <div class="resubmitFlg"></div>
-              <div class="rejected-feedback"></div>
-            </div>
-            <div class="evaluated">
-              <div class="score"></div>
-              <div class="evaluated-feedback"></div>
+      <!-- applicant details -->
+      <div class="h-screen bg-tanglow p-2">
+        <div class="flex place-items-end flex-col ml-60 pr-10 pt-3">
+          <div class="font-primary text-5xl">
+            Welcome, <span th:text="${session.fullname}"></span>!
+          </div>
+          <div>ID: <span th:text="${session.id}"></span></div>
+        </div>
+        <div
+          class="ml-[250px] rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
+        >
+          <table id="applicants-table" class="w-screen h-4/5">
+            <!-- class="border-collapse table-auto border-4 border-violet-600 h-full border-spacing-0 w-fit" -->
+
+            <thead class="font-secondary text-sm bg-customyellow">
+              <tr>
+                <th class="text-center rounded-top-left">Email</th>
+                <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
+                <th class="text-center w-3/12">Project Title</th>
+
+                <th class="text-center w-1/5 hidden sm:table-cell">
+                  University
+                </th>
+                <th class="text-center w-1/5 hidden sm:table-cell">Status</th>
+                <th class="text-center rounded-top-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                th:each="app : *{listOfApplicants}"
+                class="row-btn"
+                th:data-id="${app.applicantIdPk}"
+              >
+                <td th:text="${app.email}"></td>
+
+                <td th:text="${app.projectTitle}"></td>
+                <td th:text="${app.university}"></td>
+                <!-- th:text="${app.status == 0 ? 'In Officer' : app.status == 2 OR app.status != 0 ? 'Passed' : 'Failed'}"-->
+                <!--th:style="${app.status == 0 OR app.status == 1 OR app.status == 5 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"-->
+                <td
+                  th:text="${app.status == 0 ? 'In Officer' : app.status == 2 ? 'Rejected' : app.status == 1 OR app.status == 3? 'In Manager' : app.status == 4 ? 'In Board' : app.status == 5 AND app.score >=6 ? 'Passed'  : 'Failed'}"
+                  th:style="${app.status == 0 OR app.status == 1 OR app.status==3 OR app.status == 4  ? 'color:#000000; font-weight: bold;' : app.status == 2 OR (app.status == 5 AND app.score <= 5) ? 'color:#FF0000; font-weight: bold;' : 'color:#008000; font-weight: bold;'}"
+                ></td>
+                <td>
+                  <button
+                    class="btn-row"
+                    type="button"
+                    th:data-id="${app.applicantIdPk}"
+                    name="feedback"
+                    th:if="${app.status == 2 OR app.status == 5}"
+                  >
+                    View Feedback
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- applicant details -->
+      <div class="modal" tabindex="-1" role="dialog" id="details-modal">
+        <div class="modal-dialog" role="document">
+          <div
+            th:replace="~{fragments/applicantdetails :: applicantDetailsFragment}"
+            class="modal-content"
+          ></div>
+        </div>
+      </div>
+      <!-- feedback modal -->
+      <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div>
+              <div class="rejected">
+                <div class="resubmitFlg"></div>
+                <div class="rejected-feedback"></div>
+              </div>
+              <div class="evaluated">
+                <div class="score"></div>
+                <div class="evaluated-feedback"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -150,9 +194,9 @@
             let id = this.getAttribute("data-id");
 
             if (!rowBtnClicked) {
-				retrieveApplicantDetails(id);
+              retrieveApplicantDetails(id);
               $("#details-modal").modal("show");
-            }	
+            }
           });
         }
 
@@ -191,272 +235,319 @@
           });
         }
 
-      async function retrieveApplicantDetails(applicantIdPk) {
-        const url = `/manager/retrieve/details?applicantIdPk=${applicantIdPk}`;
-        const response = await fetch(url, { method: "GET" });
+        async function retrieveApplicantDetails(applicantIdPk) {
+          const url = `/manager/retrieve/details?applicantIdPk=${applicantIdPk}`;
+          const response = await fetch(url, { method: "GET" });
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(`Server Error: ${errorData.message || "Unknown"}`);
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(`Server Error: ${errorData.message || "Unknown"}`);
+          }
+
+          const data = await response.json();
+
+          console.log(data);
+
+          document.querySelector(".overflow-auto").scrollTo({
+            top: 0,
+          });
+
+          let applicant = data.applicantDetailsObj;
+          let email = document.querySelector(".email");
+          console.log(email);
+          let agreeFlgs = document.querySelectorAll(".agreeFlg");
+          let projectTitle = document.querySelector(".projectTitle");
+          let projectDescription = document.querySelector(
+            ".projectDescription"
+          );
+          let memberOne = document.querySelectorAll(".member-1");
+          let memberTwo = document.querySelectorAll(".member-2");
+          let memberThree = document.querySelectorAll(".member-3");
+          let problemStatement = document.querySelector(".problemStatement");
+          let targetMarket = document.querySelector(".targetMarket");
+          let solutionDescription = document.querySelector(
+            ".solutionDescription"
+          );
+          let historicalTimelineOne = document.querySelectorAll(
+            ".historicalTimeline-1"
+          );
+          let historicalTimelineTwo = document.querySelectorAll(
+            ".historicalTimeline-2"
+          );
+          let historicalTimelineThree = document.querySelectorAll(
+            ".historicalTimeline-3"
+          );
+          let historicalTimelineFour = document.querySelectorAll(
+            ".historicalTimeline-4"
+          );
+          let historicalTimelineFive = document.querySelectorAll(
+            ".historicalTimeline-5"
+          );
+          let productServiceOffering = document.querySelectorAll(
+            ".productServiceOffering"
+          );
+          let pricingStrategy = document.querySelectorAll(".pricingStrategy");
+          let intPropertyStatus = document.querySelector(".intPropertyStatus");
+          let objectives = document.querySelector(".objectives");
+          let scopeProposal = document.querySelector(".scopeProposal");
+          let methodology = document.querySelector(".methodology");
+          //let vitaeFile = document.querySelector('.vitaeFile');
+          let supportLink = document.querySelector(".supportLink");
+          let groupName = document.querySelector(".groupName");
+          let groupLeader = document.querySelector(".groupLeader");
+          let leaderNumber = document.querySelector(".leaderNumber");
+          let leaderEmail = document.querySelector(".leaderEmail");
+          let members = document.querySelectorAll(".members");
+          let university = document.querySelector(".university");
+          let technologyAns = document.querySelectorAll(".technologyAns");
+          let productDevelopmentAns = document.querySelectorAll(
+            ".productDevelopmentAns"
+          );
+          let competitiveLandscapeAns = document.querySelectorAll(
+            ".competitiveLandscapeAns"
+          );
+          let productDesignAns = document.querySelectorAll(".productDesignAns");
+          let teamAns = document.querySelectorAll(".teamAns");
+          let goToMarketAns = document.querySelectorAll(".goToMarketAns");
+          let manufacturingAns = document.querySelectorAll(".manufacturingAns");
+          let eligibilityAgreeFlg = document.querySelectorAll(
+            ".eligibilityAgreeFlg"
+          );
+          let commitmentOneFlg = document.querySelectorAll(".commitmentOneFlg");
+          let commitmentTwoFlg = document.querySelectorAll(".commitmentTwoFlg");
+          let commitmentThreeFlg = document.querySelectorAll(
+            ".commitmentThreeFlg"
+          );
+          let commitmentFourFlg =
+            document.querySelectorAll(".commitmentFourFlg");
+
+          //Email
+          email.value = applicant.email;
+          //Project Title
+          projectTitle.value = applicant.projectTitle;
+          //Project Description
+          projectDescription.textContent = applicant.projectDescription;
+          //AgreeF;g
+          if (applicant.agreeFlg) {
+            agreeFlgs[0].checked = true;
+          } else {
+            agreeFlgs[1].checked = true;
+          }
+          //Teams
+          memberOne[0].value = applicant.teams[0][0];
+          memberOne[1].value = applicant.teams[0][1];
+          memberTwo[0].value = applicant.teams[1][0];
+          memberTwo[1].value = applicant.teams[1][1];
+          memberThree[0].value = applicant.teams[2][0];
+          memberThree[1].value = applicant.teams[2][1];
+          //Problem Statement
+          problemStatement.textContent = applicant.problemStatement;
+          //Target Market
+          targetMarket.textContent = applicant.targetMarket;
+          //Solution Description
+          solutionDescription.textContent = applicant.solutionDescription;
+          //HistoricalTimeline
+          if (applicant.historicalTimeline[0].length != 0) {
+            historicalTimelineOne[0].value = applicant.historicalTimeline[0][0];
+            historicalTimelineOne[1].value = applicant.historicalTimeline[0][1];
+          } else {
+            historicalTimelineOne[0].value = "NA";
+            historicalTimelineOne[1].value = "NA";
+          }
+          if (applicant.historicalTimeline[1].length != 0) {
+            historicalTimelineTwo[0].value = applicant.historicalTimeline[0][0];
+            historicalTimelineTwo[1].value = applicant.historicalTimeline[0][1];
+          } else {
+            historicalTimelineTwo[0].value = "NA";
+            historicalTimelineTwo[1].value = "NA";
+          }
+          //Product Service Offering
+          if (applicant.historicalTimeline[2].length != 0) {
+            historicalTimelineThree[0].value =
+              applicant.historicalTimeline[0][0];
+            historicalTimelineThree[1].value =
+              applicant.historicalTimeline[0][1];
+          } else {
+            historicalTimelineThree[0].value = "NA";
+            historicalTimelineThree[1].value = "NA";
+          }
+          if (applicant.historicalTimeline[3].length != 0) {
+            historicalTimelineFour[0].value =
+              applicant.historicalTimeline[0][0];
+            historicalTimelineFour[1].value =
+              applicant.historicalTimeline[0][1];
+          } else {
+            historicalTimelineFour[0].value = "NA";
+            historicalTimelineFour[1].value = "NA";
+          }
+          if (applicant.historicalTimeline[4].length != 0) {
+            historicalTimelineFive[0].value =
+              applicant.historicalTimeline[0][0];
+            historicalTimelineFive[1].value =
+              applicant.historicalTimeline[0][1];
+          } else {
+            historicalTimelineFive[0].value = "NA";
+            historicalTimelineFive[1].value = "NA";
+          }
+          if (applicant.productServiceOffering[0] != "") {
+            productServiceOffering[0].value =
+              applicant.productServiceOffering[0];
+          } else {
+            productServiceOffering[0].value = "NA";
+          }
+          if (applicant.productServiceOffering[1] != "") {
+            productServiceOffering[1].value =
+              applicant.productServiceOffering[0];
+          } else {
+            productServiceOffering[1].value = "NA";
+          }
+          if (applicant.productServiceOffering[2] != "") {
+            productServiceOffering[2].value =
+              applicant.productServiceOffering[0];
+          } else {
+            productServiceOffering[2].value = "NA";
+          }
+          if (applicant.productServiceOffering[3] != "") {
+            productServiceOffering[3].value =
+              applicant.productServiceOffering[0];
+          } else {
+            productServiceOffering[3].value = "NA";
+          }
+          //Pricing Strategy
+          if (applicant.pricingStrategy[0] != "") {
+            pricingStrategy[0].value = applicant.pricingStrategy[0];
+          } else {
+            pricingStrategy[0].value = "NA";
+          }
+          if (applicant.pricingStrategy[1] != "") {
+            pricingStrategy[1].value = applicant.pricingStrategy[1];
+          } else {
+            pricingStrategy[1].value = "NA";
+          }
+          if (applicant.pricingStrategy[2] != "") {
+            pricingStrategy[2].value = applicant.pricingStrategy[2];
+          } else {
+            pricingStrategy[2].value = "NA";
+          }
+          if (applicant.pricingStrategy[3] != "") {
+            pricingStrategy[3].value = applicant.pricingStrategy[3];
+          } else {
+            pricingStrategy[3].value = "NA";
+          }
+          //Intellectual Property Status
+          if (applicant.intPropertyStatus != "") {
+            intPropertyStatus.value = applicant.intPropertyStatus;
+          } else {
+            intPropertyStatus.value = "NA";
+          }
+          //Objectives
+          objectives.textContent = applicant.objectives;
+          //Scope of the proposal
+          scopeProposal.textContent = applicant.scopeProposal;
+          //Methodology
+          methodology.textContent = applicant.methodology;
+          //Supporting Link
+          if (applicant.supportLink != "") {
+            supportLink.value = applicant.supportLink;
+          } else {
+            supportLink.value = "NA";
+          }
+          //Group Name
+          groupName.value = applicant.groupName;
+          //Group Leader
+          groupLeader.value =
+            applicant.leaderLastName + ", " + applicant.leaderFirstName;
+          //Leader Mobile Number
+          leaderNumber.value = applicant.mobileNumber;
+          //Leader Email
+          leaderEmail.value = applicant.emailAddress;
+          //Members
+          if (
+            applicant.members[0] != undefined &&
+            !applicant.members[0].includes("null")
+          ) {
+            members[0].value = applicant.members[0];
+          } else {
+            members[0].value = "NA";
+          }
+          if (
+            applicant.members[1] != undefined &&
+            !applicant.members[1].includes("null")
+          ) {
+            members[1].value = applicant.members[1];
+          } else {
+            members[1].value = "NA";
+          }
+          if (
+            applicant.members[2] != undefined &&
+            !applicant.members[2].includes("null")
+          ) {
+            members[2].value = applicant.members[2];
+          } else {
+            members[2].value = "NA";
+          }
+          if (
+            applicant.members[3] != undefined &&
+            !applicant.members[3].includes("null")
+          ) {
+            members[3].value = applicant.members[3];
+          } else {
+            members[3].value = "NA";
+          }
+          //University
+          if (applicant.university != "") {
+            university.value = applicant.university;
+          } else {
+            university.value = "NA";
+          }
+          //Technology Answer
+          technologyAns[applicant.technologyAns - 1].checked = true;
+          //Product Development Answer
+          productDevelopmentAns[
+            applicant.productDevelopmentAns - 1
+          ].checked = true;
+          //Competitive Landscape Answer
+          competitiveLandscapeAns[
+            applicant.competitiveLandscapeAns - 1
+          ].checked = true;
+          //Product Design Answer
+          productDesignAns[applicant.productDesignAns - 1].checked = true;
+          //Teams Answer
+          teamAns[applicant.teamAns - 1].checked = true;
+          //Go To market Answer
+          goToMarketAns[applicant.goToMarketAns - 1].checked = true;
+          //Manufacturing Answer
+          manufacturingAns[applicant.manufacturingAns - 1].checked = true;
+          //eligibilityAgreeFlg
+
+          if (applicant.eligibilityAgreeFlg) {
+            eligibilityAgreeFlg[0].checked = true;
+          } else {
+            eligibilityAgreeFlg[1].checked = true;
+          }
+          //CommmitFlg
+          if (applicant.commitmentOneFlg) {
+            commitmentOneFlg[0].checked = true;
+          } else {
+            commitmentOneFlg[1].checked = true;
+          }
+          if (applicant.commitmentTwoFlg) {
+            commitmentTwoFlg[0].checked = true;
+          } else {
+            commitmentTwoFlg[1].checked = true;
+          }
+          if (applicant.commitmentThreeFlg) {
+            commitmentThreeFlg[0].checked = true;
+          } else {
+            commitmentThreeFlg[1].checked = true;
+          }
+          if (applicant.commitmentFourFlg) {
+            commitmentFourFlg[0].checked = true;
+          } else {
+            commitmentFourFlg[1].checked = true;
+          }
+          console.log(applicant);
         }
-
-        const data = await response.json();
-        
-        console.log(data);
-
-        document.querySelector(".overflow-auto").scrollTo({
-          top: 0,
-        });
-
-        let applicant = data.applicantDetailsObj;
-	        let email = document.querySelector(".email");       
-	        console.log(email);
-	        let agreeFlgs = document.querySelectorAll(".agreeFlg");      
-	        let projectTitle = document.querySelector('.projectTitle');		
-	        let projectDescription = document.querySelector('.projectDescription');
-			let memberOne = document.querySelectorAll('.member-1');
-			let memberTwo = document.querySelectorAll('.member-2');
-			let memberThree = document.querySelectorAll('.member-3');
-			let problemStatement = document.querySelector('.problemStatement');
-			let targetMarket = document.querySelector('.targetMarket');
-			let solutionDescription = document.querySelector('.solutionDescription');
-			let historicalTimelineOne = document.querySelectorAll('.historicalTimeline-1');
-			let historicalTimelineTwo = document.querySelectorAll('.historicalTimeline-2');
-			let historicalTimelineThree = document.querySelectorAll('.historicalTimeline-3');
-			let historicalTimelineFour = document.querySelectorAll('.historicalTimeline-4');
-			let historicalTimelineFive = document.querySelectorAll('.historicalTimeline-5');
-			let productServiceOffering = document.querySelectorAll('.productServiceOffering');
-			let pricingStrategy = document.querySelectorAll('.pricingStrategy');
-			let intPropertyStatus = document.querySelector('.intPropertyStatus');
-			let objectives = document.querySelector('.objectives');
-			let scopeProposal = document.querySelector('.scopeProposal');
-			let methodology = document.querySelector('.methodology');
-			//let vitaeFile = document.querySelector('.vitaeFile');
-			let supportLink = document.querySelector('.supportLink'); 
-			let groupName = document.querySelector('.groupName');
-			let groupLeader = document.querySelector('.groupLeader');
-			let leaderNumber = document.querySelector('.leaderNumber');
-			let leaderEmail = document.querySelector('.leaderEmail');
-			let members = document.querySelectorAll('.members');
-			let university = document.querySelector('.university');
-			let technologyAns = document.querySelectorAll('.technologyAns');
-			let productDevelopmentAns = document.querySelectorAll('.productDevelopmentAns');
-			let competitiveLandscapeAns = document.querySelectorAll('.competitiveLandscapeAns');
-			let productDesignAns = document.querySelectorAll('.productDesignAns');
-			let teamAns = document.querySelectorAll('.teamAns');
-			let goToMarketAns = document.querySelectorAll('.goToMarketAns');
-			let manufacturingAns = document.querySelectorAll('.manufacturingAns');
-			let eligibilityAgreeFlg = document.querySelectorAll('.eligibilityAgreeFlg');
-			let commitmentOneFlg = document.querySelectorAll('.commitmentOneFlg');
-			let commitmentTwoFlg = document.querySelectorAll('.commitmentTwoFlg');
-			let commitmentThreeFlg = document.querySelectorAll('.commitmentThreeFlg');
-			let commitmentFourFlg = document.querySelectorAll('.commitmentFourFlg');
-			
-			//Email
-	        email.value = applicant.email;
-	        //Project Title
-	        projectTitle.value = applicant.projectTitle;
-	        //Project Description
-	        projectDescription.textContent = applicant.projectDescription;
-	        //AgreeF;g
-	        if (applicant.agreeFlg) {
-	          agreeFlgs[0].checked = true;
-	        } else {
-	          agreeFlgs[1].checked = true;
-	        }
-	        //Teams
-	        memberOne[0].value = applicant.teams[0][0];
-	        memberOne[1].value = applicant.teams[0][1];
-	        memberTwo[0].value = applicant.teams[1][0];
-	        memberTwo[1].value = applicant.teams[1][1];
-	        memberThree[0].value = applicant.teams[2][0];
-	        memberThree[1].value = applicant.teams[2][1];
-	        //Problem Statement
-	        problemStatement.textContent = applicant.problemStatement;
-	        //Target Market
-	        targetMarket.textContent = applicant.targetMarket;
-	        //Solution Description
-	        solutionDescription.textContent = applicant.solutionDescription;
-	        //HistoricalTimeline
-	        if(applicant.historicalTimeline[0].length != 0){
-				historicalTimelineOne[0].value = applicant.historicalTimeline[0][0];
-	        	historicalTimelineOne[1].value = applicant.historicalTimeline[0][1];
-			}else{
-				historicalTimelineOne[0].value = 'NA';
-	        	historicalTimelineOne[1].value = 'NA';
-			}
-			if(applicant.historicalTimeline[1].length != 0){
-				historicalTimelineTwo[0].value = applicant.historicalTimeline[0][0];
-	        	historicalTimelineTwo[1].value = applicant.historicalTimeline[0][1];
-			}else{
-				historicalTimelineTwo[0].value = 'NA';
-	        	historicalTimelineTwo[1].value = 'NA';
-			}
-	        //Product Service Offering
-			if(applicant.historicalTimeline[2].length != 0){
-				historicalTimelineThree[0].value = applicant.historicalTimeline[0][0];
-	        	historicalTimelineThree[1].value = applicant.historicalTimeline[0][1];
-			}else{
-				historicalTimelineThree[0].value = 'NA';
-	        	historicalTimelineThree[1].value = 'NA';
-			}
-			if(applicant.historicalTimeline[3].length != 0){
-				historicalTimelineFour[0].value = applicant.historicalTimeline[0][0];
-	        	historicalTimelineFour[1].value = applicant.historicalTimeline[0][1];
-			}else{
-				historicalTimelineFour[0].value = 'NA';
-	        	historicalTimelineFour[1].value = 'NA';
-			}
-			if(applicant.historicalTimeline[4].length != 0){
-				historicalTimelineFive[0].value = applicant.historicalTimeline[0][0];
-	        	historicalTimelineFive[1].value = applicant.historicalTimeline[0][1];
-			}else{
-				historicalTimelineFive[0].value = 'NA';
-	        	historicalTimelineFive[1].value = 'NA';
-			}
-			if(applicant.productServiceOffering[0] != ''){
-				productServiceOffering[0].value = applicant.productServiceOffering[0];
-			}else{
-				productServiceOffering[0].value = 'NA';
-			}
-			if(applicant.productServiceOffering[1] != ''){
-				productServiceOffering[1].value = applicant.productServiceOffering[0];
-			}else{
-				productServiceOffering[1].value = 'NA';
-			}
-			if(applicant.productServiceOffering[2] != ''){
-				productServiceOffering[2].value = applicant.productServiceOffering[0];
-			}else{
-				productServiceOffering[2].value = 'NA';
-			}
-			if(applicant.productServiceOffering[3] != ''){
-				productServiceOffering[3].value = applicant.productServiceOffering[0];
-			}else{
-				productServiceOffering[3].value = 'NA';
-			}
-	        //Pricing Strategy
-	        if(applicant.pricingStrategy[0] != ''){
-				pricingStrategy[0].value = applicant.pricingStrategy[0];
-			}else{
-				pricingStrategy[0].value = 'NA';
-			}
-			if(applicant.pricingStrategy[1] != ''){
-				pricingStrategy[1].value = applicant.pricingStrategy[1];
-			}else{
-				pricingStrategy[1].value = 'NA';
-			}
-			if(applicant.pricingStrategy[2] != ''){
-				pricingStrategy[2].value = applicant.pricingStrategy[2];
-			}else{
-				pricingStrategy[2].value = 'NA';
-			}
-			if(applicant.pricingStrategy[3] != ''){
-				pricingStrategy[3].value = applicant.pricingStrategy[3];
-			}else{
-				pricingStrategy[3].value = 'NA';
-			}
-	        //Intellectual Property Status
-			if(applicant.intPropertyStatus != ''){
-				intPropertyStatus.value = applicant.intPropertyStatus;
-			}else{
-				intPropertyStatus.value = 'NA';
-			}
-	        //Objectives
-	        objectives.textContent = applicant.objectives;
-	        //Scope of the proposal
-	        scopeProposal.textContent = applicant.scopeProposal;
-	        //Methodology
-	        methodology.textContent = applicant.methodology;
-	        //Supporting Link
-	        if(applicant.supportLink != ''){
-	        	supportLink.value = applicant.supportLink;			
-			}else{
-				supportLink.value = 'NA';
-			}
-	        //Group Name
-	        groupName.value = applicant.groupName;
-	        //Group Leader
-	        groupLeader.value =
-	          applicant.leaderLastName + ", " + applicant.leaderFirstName;
-	        //Leader Mobile Number
-	        leaderNumber.value = applicant.mobileNumber;
-	        //Leader Email
-	        leaderEmail.value = applicant.emailAddress;
-	        //Members
-	        if(applicant.members[0] != undefined && !applicant.members[0].includes("null")){	
-				members[0].value = applicant.members[0];
-			}else{
-				members[0].value = 'NA';
-			}
-			if(applicant.members[1] != undefined && !applicant.members[1].includes("null")){	
-				members[1].value = applicant.members[1];
-			}else{
-				members[1].value = 'NA';
-			}
-			if(applicant.members[2] != undefined && !applicant.members[2].includes("null")){	
-				members[2].value = applicant.members[2];
-			}else{
-				members[2].value = 'NA';
-			}
-			if(applicant.members[3] != undefined && !applicant.members[3].includes("null")){	
-				members[3].value = applicant.members[3];
-			}else{
-				members[3].value = 'NA';
-			}
-	        //University
-	        if(applicant.university != ''){
-				university.value = applicant.university;
-			}else{
-				university.value = 'NA';
-			}
-	        //Technology Answer
-	        technologyAns[applicant.technologyAns - 1].checked = true;
-	        //Product Development Answer
-	        productDevelopmentAns[
-	          applicant.productDevelopmentAns - 1
-	        ].checked = true;
-	        //Competitive Landscape Answer
-	        competitiveLandscapeAns[
-	          applicant.competitiveLandscapeAns - 1
-	        ].checked = true;
-	        //Product Design Answer
-	        productDesignAns[applicant.productDesignAns - 1].checked = true;
-	        //Teams Answer
-	        teamAns[applicant.teamAns - 1].checked = true;
-	        //Go To market Answer
-	        goToMarketAns[applicant.goToMarketAns - 1].checked = true;
-	        //Manufacturing Answer
-	        manufacturingAns[applicant.manufacturingAns - 1].checked = true;
-	        //eligibilityAgreeFlg
-	        
-	        if (applicant.eligibilityAgreeFlg) {
-	          eligibilityAgreeFlg[0].checked = true;
-	        } else {
-	          eligibilityAgreeFlg[1].checked = true;
-	        }
-	        //CommmitFlg
-	        if (applicant.commitmentOneFlg) {
-	          commitmentOneFlg[0].checked = true;
-	        } else {
-	          commitmentOneFlg[1].checked = true;
-	        }
-	        if (applicant.commitmentTwoFlg) {
-	          commitmentTwoFlg[0].checked = true;
-	        } else {
-	          commitmentTwoFlg[1].checked = true;
-	        }
-	        if (applicant.commitmentThreeFlg) {
-	          commitmentThreeFlg[0].checked = true;
-	        } else {
-	          commitmentThreeFlg[1].checked = true;
-	        }
-	        if (applicant.commitmentFourFlg) {
-	          commitmentFourFlg[0].checked = true;
-	        } else {
-	          commitmentFourFlg[1].checked = true;
-	        }
-        console.log(applicant);
-       	}
       });
     </script>
   </body>

@@ -15,29 +15,76 @@
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/officer/officer.css}" />
+    <link rel="stylesheet" th:href="@{/css/output.css}" />
   </head>
   <body th:object="${managerWebDto}">
-    <div class="sidebar">
-      <a th:href="@{/manager/home}">Home</a>
-      <a th:href="@{/manager/accepted-result}">Accepted Applications</a>
-      <a th:href="@{/manager/evaluated-result}">Evaluated Appications</a>
-    </div>
     <div>
-      <form th:action="@{/manager/proceed}" method="POST">
-        <table id="applicants-table">
-          <thead>
-            <tr>
-              <th>Project Title</th>
-              <th>University</th>
-              <th>Email</th>
-              <th>Status</th>
-              <th>Feedback</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="app : *{listOfApplicants}" class="row-btn">
-              <!--<td>
+      <div
+        class="h-full flex flex-col w-[250px] absolute bg-black z-10 justify-between text-customyellow"
+      >
+        <div class="pt-2">
+          <img
+            class="pointer-events-none h-16 w-52 flex justify-center mx-auto border-2 border-blue-500 mb-2"
+            src="/Capstone1/Capstone-1/src/main/resources/static/images/yellowLogo.png"
+            th:src="@{/images/yellowLogo.png}"
+          />
+          <div class="flex flex-col font-secondary font-semibold p-2">
+            <a
+              th:href="@{/manager/home}"
+              class="hover:bg-tanglow hover:text-black hover:no-underline pl-2 mb-2"
+              >Home</a
+            >
+            <a
+              th:href="@{/manager/accepted-result}"
+              class="hover:bg-tanglow hover:text-black hover:no-underline pl-2 mb-2"
+              >Accepted Applications</a
+            >
+            <a
+              th:href="@{/manager/evaluated-result}"
+              class="hover:bg-tanglow hover:text-black hover:no-underline pl-2"
+              >Evaluated Appications</a
+            >
+          </div>
+        </div>
+        <div class="pl-3 text-xl font-primary hover:text-white w-full">
+          <form th:action="@{/logout}" method="POST">
+            <button>Logout</button>
+          </form>
+        </div>
+      </div>
+      <!-- applicant details -->
+      <div class="h-screen bg-tanglow p-2">
+        <div class="flex place-items-end flex-col ml-60 pr-10 pt-3">
+          <div class="font-primary text-5xl">
+            Welcome, <span th:text="${session.fullname}"></span>!
+          </div>
+          <div>ID: <span th:text="${session.id}"></span></div>
+        </div>
+        <div
+          class="ml-[250px] rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
+        >
+          <table id="applicants-table" class="w-screen h-4/5">
+            <thead class="font-secondary text-sm bg-customyellow">
+              <tr>
+                <th class="text-center rounded-top-left">Email</th>
+                <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
+                <th class="text-center w-3/12">Project Title</th>
+
+                <th class="text-center w-1/5 hidden sm:table-cell">
+                  University
+                </th>
+                <th class="text-center w-1/5 hidden sm:table-cell">Status</th>
+                <th class="text-center w-1/5 hidden sm:table-cell">Feedback</th>
+                <th class="text-center rounded-top-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                th:each="app : *{listOfApplicants}"
+                class="row-btn"
+                th:data-id="${app.applicantIdPk}"
+              >
+                <!--<td>
                 <input
                   type="checkbox"
                   name="chosenApplicant"
@@ -45,54 +92,55 @@
                   th:if="${app.status == 3}"
                 />
               </td>-->
-              <td th:text="${app.projectTitle}"></td>
-              <td th:text="${app.university}"></td>
-              <td th:text="${app.email}"></td>
-              <td
-                th:text="${app.score >= 6 ? 'Passed' : 'Failed'}"
-                th:style="${app.score >= 6 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"
-              ></td>
-              <td>
-                <button
-                  class="btn-row"
-                  type="button"
-                  th:data-id="${app.applicantIdPk}"
-                  name="feedback"
-                >
-                  View Feedback
-                </button>
-              </td>
-              <td>
-                <button
-                  type="button"
-                  th:data-id="${app.applicantIdPk}"
-                  name="incubate"
-                  th:if="${app.score} >= 6"
-                >
-                  Create Incubate Account
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-    </div>
-    <!-- applicant details -->
-    <div class="modal" tabindex="-1" role="dialog" id="details-modal">
-      <div class="modal-dialog" role="document">
-        <div
-          th:replace="~{fragments/applicantdetails :: applicantDetailsFragment}"
-          class="modal-content"
-        ></div>
+                <td th:text="${app.email}"></td>
+                <td th:text="${app.projectTitle}"></td>
+                <td th:text="${app.university}"></td>
+                <td
+                  th:text="${app.score >= 6 ? 'Passed' : 'Failed'}"
+                  th:style="${app.score >= 6 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"
+                ></td>
+                <td>
+                  <button
+                    class="btn-row"
+                    type="button"
+                    th:data-id="${app.applicantIdPk}"
+                    name="feedback"
+                  >
+                    View Feedback
+                  </button>
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    th:data-id="${app.applicantIdPk}"
+                    name="incubate"
+                    th:if="${app.score} >= 6"
+                  >
+                    Create Incubate Account
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+      <!-- applicant details modal -->
+      <div class="modal" tabindex="-1" role="dialog" id="details-modal">
+        <div class="modal-dialog" role="document">
+          <div
+            th:replace="~{fragments/applicantdetails :: applicantDetailsFragment}"
+            class="modal-content"
+          ></div>
+        </div>
+      </div>
 
-    <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div>
-            <div id="score"></div>
-            <div id="feedback"></div>
+      <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div>
+              <div id="score"></div>
+              <div id="feedback"></div>
+            </div>
           </div>
         </div>
       </div>
