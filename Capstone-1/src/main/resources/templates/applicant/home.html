@@ -23,11 +23,6 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" th:href="@{/css/output.css}" />
-    <!-- for live server[no springboot running] -->
-    <link
-      rel="stylesheet"
-      href="/Capstone1/Capstone-1/src/main/resources/static/css/output.css"
-    />
   </head>
   <body>
     <div class="bg-tanglow p-2 h-screen" th:object="${applicantWebDto}">
@@ -64,6 +59,8 @@
               >
                 View Feedback
               </button>
+
+              <!-- feedback modal result -->
               <div
                 class="modal"
                 tabindex="-1"
@@ -78,7 +75,6 @@
                         th:text="*{applicantDetailsObj.score} >= 6 ? 'Passed' : 'Rejected'"
                         th:style="*{applicantDetailsObj.score} >= 6 ? 'background: green;' : 'background: red;'"
                       >
-                        Rejected
                         <!--  pending
                   accepted
                   rejected : display feedback btn
@@ -100,6 +96,7 @@
               </div>
             </div>
           </div>
+          <!-- progress bar -->
           <div class="w-full pr-44 mt-8">
             <div class="progress-container flex justify-center h-20 flex-col">
               <div class="flex flex-wrap justify-evenly">

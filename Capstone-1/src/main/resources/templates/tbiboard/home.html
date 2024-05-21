@@ -15,12 +15,6 @@
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/output.css}" />
-    <!-- for live server[no springboot running] -->
-    <link
-      rel="stylesheet"
-      href="/Capstone1/Capstone-1/src/main/resources/static/css/output.css"
-    />
-
     <style>
       .dt-input {
         margin-right: 10px;
@@ -148,49 +142,116 @@
                 name="applicantIdPk"
                 id="evaluate-applicant-id-pk"
               />
-              <div>
-                <input type="radio" name="score" value="1" />
-                <label>1</label>
+              <div class="font-secondary">
+                <div class="flex justify-between">
+                  <div class="mt-20 mb-6 h-20 flex text-center items-center">
+                    <img
+                      th:src="@{/images/launchlab.png}"
+                      class="h-20 pointer-events-none"
+                    />
+                    <div class="font-semibold text-xl">Registration Form</div>
+                  </div>
+                  <img
+                    th:src="@{/images/wilBlackBox.png}"
+                    class="h-20 mr-4 pointer-events-none"
+                  />
+                </div>
+                <div class="font-secondary">
+                  <div class="font-semibold pl-4 text-lg">Rating</div>
+                  <div class="px-10">
+                    <strong class="font-medium">1. Strongly Disagree:</strong>
+                    Completely disagree with the statement; the proposal does
+                    not meet the criterion at all.<br />
+                    <strong class="font-medium"
+                      >2. Disagree Significantly:</strong
+                    >
+                    Major issues exist, showing significant disagreement with
+                    the statement.
+                    <br />
+                    <strong class="font-medium"
+                      >3. Disagree Considerably:</strong
+                    >
+                    Clear disagreement, though not as severe as the lower
+                    levels.<br />
+                    <strong class="font-medium">4. Somewhat Disagree: </strong>
+                    Some aspects are disagreeable, but not entirely.<br />
+                    <strong class="font-medium">5. Slightly Disagree:</strong>
+                    Mild disagreement, with some elements still aligning with
+                    the statement. <br />
+                    <strong class="font-medium">6. Slightly Agree:</strong> Mild
+                    agreement, but with noticeable areas of improvement
+                    needed.<br />
+                    <strong class="font-medium">7. Somewhat Agree:</strong>
+                    Generally agree, but with some reservations or minor
+                    issues.<br />
+                    <strong class="font-medium">8. Agree Considerably:</strong>
+                    Strong agreement, though not perfect, with most criteria
+                    met.<br />
+                    <strong class="font-medium">9. Agree Significantly:</strong>
+                    Almost complete agreement, with very minor issues if any.<br />
+                    <strong class="font-medium">10. Strongly Agree:</strong>
+                    Full agreement, indicating that the proposal excellently
+                    meets the criterion.
+                  </div>
+                </div>
+                <div class="flex flex-row w-full justify-between px-52">
+                  <div class="flex-col flex gap-2">
+                    <label>1</label>
+                    <input type="radio" name="score" value="1" />
+                  </div>
+                  <div class="flex-col flex gap-2">
+                    <label>2</label>
+                    <input type="radio" name="score" value="2" />
+                  </div>
+                  <div class="flex-col flex gap-2">
+                    <label>3</label>
+                    <input type="radio" name="score" value="3" />
+                  </div>
+                  <div class="flex-col flex gap-2">
+                    <label>4</label>
+                    <input type="radio" name="score" value="4" />
+                  </div>
+                  <div class="flex-col flex gap-2">
+                    <label>5</label>
+                    <input type="radio" name="score" value="5" />
+                  </div>
+                  <div class="flex-col flex gap-2">
+                    <label>6</label>
+                    <input type="radio" name="score" value="6" />
+                  </div>
+                  <div class="flex-col flex gap-2">
+                    <label>7</label>
+                    <input type="radio" name="score" value="7" />
+                  </div>
+                  <div class="flex-col flex gap-2">
+                    <label>8</label>
+                    <input type="radio" name="score" value="8" />
+                  </div>
+                  <div class="flex-col flex gap-2">
+                    <label>9</label>
+                    <input type="radio" name="score" value="9" />
+                  </div>
+                  <div class="flex-col flex gap-2">
+                    <label>10</label>
+                    <input type="radio" name="score" value="10" />
+                  </div>
+                </div>
+                <div class="font-secondary mb-2">
+                  <div class="font-semibold pl-4 text-lg">Feedback</div>
+                  <textarea
+                    name="feedback"
+                    class="border w-[93%] resize-none h-[100px] indent-2 mx-10"
+                    placeholder="Enter your feedback here"
+                  ></textarea>
+                  <div class="flex justify-end pr-11">
+                    <button
+                      class="bg-tanglow text-black text-sm hover:bg-black hover:text-white font-secondary font-medium right-0 rounded btn-neutral border-b-2 border-black border-solid border-opacity-100 w-36 h-10"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div>
-                <input type="radio" name="score" value="2" />
-                <label>2</label>
-              </div>
-              <div>
-                <input type="radio" name="score" value="3" />
-                <label>3</label>
-              </div>
-              <div>
-                <input type="radio" name="score" value="4" />
-                <label>4</label>
-              </div>
-              <div>
-                <input type="radio" name="score" value="5" />
-                <label>5</label>
-              </div>
-              <div>
-                <input type="radio" name="score" value="6" />
-                <label>6</label>
-              </div>
-              <div>
-                <input type="radio" name="score" value="7" />
-                <label>7</label>
-              </div>
-              <div>
-                <input type="radio" name="score" value="8" />
-                <label>8</label>
-              </div>
-              <div>
-                <input type="radio" name="score" value="9" />
-                <label>9</label>
-              </div>
-              <div>
-                <input type="radio" name="score" value="10" />
-                <label>10</label>
-              </div>
-              <div>Feedback</div>
-              <textarea name="feedback"></textarea>
-              <button>Submit</button>
             </form>
           </div>
         </div>

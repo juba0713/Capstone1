@@ -4,11 +4,6 @@
     <meta charset="UTF-8" />
     <title>Insert title here</title>
     <link rel="stylesheet" th:href="@{/css/output.css}" />
-    <!-- for live server[no springboot running] -->
-    <link
-      rel="stylesheet"
-      href="/Capstone1/Capstone-1/src/main/resources/static/css/output.css"
-    />
     <style>
       .message-success {
         position: absolute;
@@ -38,7 +33,6 @@
         <!-- class="border-2 border-yellow-300 h-screen w-screen md:bg-center md:bg-cover md:bg-local absolute md:h-560 md:min-w-full" -->
         <div>
           <img
-            src="/Capstone1/Capstone-1/src/main/resources/static/images/darkenlandingpageImg.png"
             th:src="@{/images/darkenlandingpageImg.png}"
             class="pointer-events-none absolute bg-no-repeat bg-center bg-local inset-0 w-full h-full object-cover"
           />
@@ -52,7 +46,6 @@
           <div>
             <img
               class="pointer-events-none h-20 p-3 md:ml-20"
-              src="/Capstone1/Capstone-1/src/main/resources/static/images/yellowLogo.png"
               th:src="@{/images/yellowLogo.png}"
             />
           </div>

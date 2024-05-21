@@ -21,11 +21,19 @@
         margin-right: 10px;
       }
       .modal-dialog {
-        max-width: 80%; /* Adjust the width as needed */
+        max-width: 80%;
       }
       .modal-content {
         width: 100%;
         height: 92vh;
+      }
+      .feedback-modal-dialog {
+        max-width: 30%;
+        text-align: center;
+        max-height: 50px;
+      }
+      .feedback-modal-content {
+        height: 50vh;
       }
     </style>
   </head>
@@ -109,7 +117,7 @@
                 ></td>
                 <td>
                   <button
-                    class="btn-row"
+                    class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                     type="button"
                     th:data-id="${app.applicantIdPk}"
                     name="feedback"
@@ -132,11 +140,11 @@
           ></div>
         </div>
       </div>
-      <!-- feedback modal -->
+      <!-- feedback modal result-->
       <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div>
+        <div class="modal-dialog feedback-modal-dialog" role="document">
+          <div class="modal-content feedback-modal-content">
+            <div class="p-2">
               <div class="rejected">
                 <div class="resubmitFlg"></div>
                 <div class="rejected-feedback"></div>

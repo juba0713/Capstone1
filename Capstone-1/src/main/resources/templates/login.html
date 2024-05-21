@@ -4,22 +4,21 @@
     <meta charset="UTF-8" />
     <title>Insert title here</title>
     <link rel="stylesheet" th:href="@{/css/output.css}" />
-    <!-- for live server[no springboot running] -->
-    <link
-      rel="stylesheet"
-      href="/Capstone1/Capstone-1/src/main/resources/static/css/output.css"
-    />
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
   </head>
+
   <body>
     <img
       th:src="@{/images/halfball.png}"
-      src="/Capstone1/Capstone-1/src/main/resources/static/images/halfcircle.png"
       class="mix-blend-overlay w-40 h-40 absolute bottom-0 md:fixed pointer-events-none z-50"
       style="right: 2rem"
     />
     <img
       th:src="@{/images/halfball.png}"
-      src="/Capstone1/Capstone-1/src/main/resources/static/images/halfball.png"
       class="mix-blend-overlay w-40 h-40 absolute top-10 right-0 md:fixed pointer-events-none z-50"
       style="right: 9rem"
     />
@@ -28,7 +27,6 @@
       <div class="w-1/2 h-screen">
         <img
           class="w-full h-full object-cover"
-          src="/Capstone1/Capstone-1/src/main/resources/static/images/geometricBg.png"
           th:src="@{/images/geometricBg.png}"
         />
       </div>
@@ -41,7 +39,6 @@
         <a th:href="@{/}" class="z-50 hover:scale-105">
           <img
             class="cursor-pointer hover:invert"
-            src="/Capstone1/Capstone-1/src/main/resources/static/images/wilBlackBox.png"
             th:src="@{/images/wilBlackBox.png}"
           />
         </a>
@@ -55,8 +52,6 @@
           </div>
           <div class="flex flex-col items-center">
             <div>
-              <!-- <label>Username</label>
-            <input type="text" name="email" /> -->
               <label
                 htmlFor="Username"
                 class="relative block rounded-md border border-black shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 mb-6"
@@ -77,8 +72,6 @@
               </label>
             </div>
             <div>
-              <!-- <label>Password</label>
-            <input type="password" name="password" /> -->
               <label
                 htmlFor="Password"
                 class="relative block rounded-md border border-black shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 mb-6"
@@ -96,6 +89,24 @@
                 >
                   Password
                 </span>
+                <button
+                  type="button"
+                  id="togglePassword"
+                  class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600"
+                >
+                  <img
+                    id="eyeIcon"
+                    src="/icons/eye-show.svg"
+                    alt="Show Password"
+                    class="h-6 w-6"
+                  />
+                  <img
+                    id="eyeSlashIcon"
+                    src="/icons/eye-hide.svg"
+                    alt="Hide Password"
+                    class="h-6 w-6 hidden"
+                  />
+                </button>
               </label>
             </div>
             <button
@@ -112,5 +123,22 @@
         </form>
       </div>
     </div>
+    <script>
+      const togglePassword = document.querySelector("#togglePassword");
+      const password = document.querySelector("#Password");
+
+      togglePassword.addEventListener("click", function () {
+        // toggle the type attribute
+        const type =
+          password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+
+        // toggle the icons
+        const eyeIcon = document.getElementById("eyeIcon");
+        const eyeSlashIcon = document.getElementById("eyeSlashIcon");
+        eyeIcon.classList.toggle("hidden");
+        eyeSlashIcon.classList.toggle("hidden");
+      });
+    </script>
   </body>
 </html>

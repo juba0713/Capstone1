@@ -16,6 +16,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/officer/officer.css}" />
     <link rel="stylesheet" th:href="@{/css/output.css}" />
+    <style>
+      .feedback-modal-dialog {
+        max-width: 30%;
+        text-align: center;
+        max-height: 50px;
+      }
+      .feedback-modal-content {
+        height: 50vh;
+      }
+    </style>
   </head>
   <body th:object="${managerWebDto}">
     <div>
@@ -75,10 +85,10 @@
                     University
                   </th>
                   <th class="text-center w-1/5 hidden sm:table-cell">Status</th>
-                  <th class="text-center w-1/5 hidden sm:table-cell">
+                  <th class="text-center w-2/12 hidden sm:table-cell">
                     Feedback
                   </th>
-                  <th class="text-center rounded-top-right">Actions</th>
+                  <th class="text-center w-1/4 rounded-top-right">Actions</th>
                 </tr>
               </thead>
               <tbody class="bodyrowhover">
@@ -104,7 +114,7 @@
                   ></td>
                   <td>
                     <button
-                      class="btn-row"
+                      class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                       type="button"
                       th:data-id="${app.applicantIdPk}"
                       name="feedback"
@@ -114,6 +124,7 @@
                   </td>
                   <td>
                     <button
+                      class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                       type="button"
                       th:data-id="${app.applicantIdPk}"
                       name="incubate"
@@ -139,10 +150,13 @@
       </div>
 
       <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
+        <div class="modal-dialog feedback-modal-dialog" role="document">
+          <div class="modal-content feedback-modal-content">
             <div>
+              <p class="font-semibold">Score:</p>
+
               <div id="score"></div>
+              <p class="font-semibold">Feedback:</p>
               <div id="feedback"></div>
             </div>
           </div>
