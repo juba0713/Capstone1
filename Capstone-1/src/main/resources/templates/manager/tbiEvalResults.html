@@ -17,9 +17,18 @@
     <link rel="stylesheet" th:href="@{/css/officer/officer.css}" />
     <link rel="stylesheet" th:href="@{/css/output.css}" />
     <style>
+      .dt-search {
+        font-family: Poppins;
+        width: 60%;
+        margin-left: auto;
+        padding-right: 10px;
+      }
+      .dt-end {
+        font-size: smaller;
+        position: relative;
+      }
       .feedback-modal-dialog {
         max-width: 30%;
-        text-align: center;
         max-height: 50px;
       }
       .feedback-modal-content {
@@ -35,7 +44,6 @@
         <div class="pt-2">
           <img
             class="pointer-events-none h-16 w-52 flex justify-center mx-auto border-2 border-blue-500 mb-2"
-            src="/Capstone1/Capstone-1/src/main/resources/static/images/yellowLogo.png"
             th:src="@{/images/yellowLogo.png}"
           />
           <div class="flex flex-col font-secondary font-semibold p-2">
@@ -91,7 +99,7 @@
                   <th class="text-center w-1/4 rounded-top-right">Actions</th>
                 </tr>
               </thead>
-              <tbody class="bodyrowhover">
+              <tbody class="divide-y divide-grey-500 bodyrowhover">
                 <tr
                   th:each="app : *{listOfApplicants}"
                   class="row-btn"
@@ -152,7 +160,7 @@
       <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
         <div class="modal-dialog feedback-modal-dialog" role="document">
           <div class="modal-content feedback-modal-content">
-            <div>
+            <div class="p-2">
               <p class="font-semibold">Score:</p>
 
               <div id="score"></div>

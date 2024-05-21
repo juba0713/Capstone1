@@ -17,6 +17,15 @@
     <link rel="stylesheet" th:href="@{/css/output.css}" />
 
     <style>
+      .dt-search {
+        font-family: Poppins;
+        width: 60%;
+        margin-left: auto;
+      }
+      .dt-end {
+        font-size: smaller;
+        position: relative;
+      }
       .dt-input {
         margin-right: 10px;
       }
@@ -90,28 +99,38 @@
               <tr>
                 <th class="text-center rounded-top-left">Email</th>
                 <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
-                <th class="text-center w-3/12">Project Title</th>
+                <th class="text-center">Project Title</th>
 
                 <th class="text-center w-1/5 hidden sm:table-cell">
                   University
                 </th>
-                <th class="text-center w-1/5 hidden sm:table-cell">Status</th>
+                <th class="text-center w-1/6 hidden sm:table-cell">Status</th>
                 <th class="text-center rounded-top-right">Actions</th>
               </tr>
             </thead>
-            <tbody class="bodyrowhover">
+            <tbody class="divide-y divide-grey-500 bodyrowhover">
               <tr
                 th:each="app : *{listOfApplicants}"
                 class="row-btn"
                 th:data-id="${app.applicantIdPk}"
               >
-                <td th:text="${app.email}"></td>
+                <td
+                  th:text="${app.email}"
+                  class="whitespace-nowrap max-w-0 truncate"
+                ></td>
 
-                <td th:text="${app.projectTitle}"></td>
-                <td th:text="${app.university}"></td>
+                <td
+                  th:text="${app.projectTitle}"
+                  class="whitespace-nowrap max-w-0 truncate"
+                ></td>
+                <td
+                  th:text="${app.university}"
+                  class="whitespace-nowrap max-w-0 truncate"
+                ></td>
                 <!-- th:text="${app.status == 0 ? 'In Officer' : app.status == 2 OR app.status != 0 ? 'Passed' : 'Failed'}"-->
                 <!--th:style="${app.status == 0 OR app.status == 1 OR app.status == 5 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"-->
                 <td
+                  class="whitespace-nowrap max-w-0 truncate"
                   th:text="${app.status == 0 ? 'In Officer' : app.status == 2 ? 'Rejected' : app.status == 1 OR app.status == 3? 'In Manager' : app.status == 4 ? 'In Board' : app.status == 5 AND app.score >=6 ? 'Passed'  : 'Failed'}"
                   th:style="${app.status == 0 OR app.status == 1 OR app.status==3 OR app.status == 4  ? 'color:#000000; font-weight: bold;' : app.status == 2 OR (app.status == 5 AND app.score <= 5) ? 'color:#FF0000; font-weight: bold;' : 'color:#008000; font-weight: bold;'}"
                 ></td>

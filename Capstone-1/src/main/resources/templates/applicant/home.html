@@ -154,7 +154,6 @@
                 <div class="flex justify-between">
                   <div class="mt-20 mb-6 h-20 flex text-center items-center">
                     <img
-                      src="/Capstone1/Capstone-1/src/main/resources/static/images/launchlab.png"
                       th:src="@{/images/launchlab.png}"
                       class="h-20 pointer-events-none"
                     />
@@ -163,7 +162,6 @@
                     </div>
                   </div>
                   <img
-                    src="/Capstone1/Capstone-1/src/main/resources/static/images/wilBlackBox.png"
                     th:src="@{/images/wilBlackBox.png}"
                     class="h-20 mr-4 mt-4 pointer-events-none"
                   />
@@ -1432,7 +1430,7 @@
       id="changepassword-modal"
     >
       <div
-        class="modal-dialog modal-lg h-3/5 self-center flex w-full"
+        class="modal-dialog modal-lg h-3/4 self-center flex w-full"
         role="document"
       >
         <div class="modal-content bg-customyellow">
@@ -1455,52 +1453,132 @@
             </h5>
           </div>
           <div class="modal-body flex justify-center relative">
-            <img
+            <!-- <img
               th:src="@{/images/plane.png}"
-              src="/Capstone1/Capstone-1/src/main/resources/static/images/plane.png"
               class="fixed mix-blend-overlay h-64 bottom-0 sm:fixed pointer-events-none top-72 right-1/4 mr-6 mt-16"
-            />
+            /> -->
             <form th:action="@{/applicant/change-password}" method="POST">
-              <div>
-                <div class="flex flex-col">
-                  <input
-                    type="password"
-                    placeholder="Enter current password"
-                    name="currentPassword"
-                    class="indent-2 rounded-md h-12 w-80 mb-6"
-                  />
-                  <div th:if="*{error != null}">
-                    <div
-                      th:each="err : *{error.currentPasswordError}"
-                      th:text="${err}"
-                    ></div>
+              <div class="flex justify-between flex-col">
+                <div class="flex flex-col justify-between h-60">
+                  <!-- Current Password -->
+                  <div>
+                    <div class="relative w-80 h-12">
+                      <input
+                        type="password"
+                        placeholder="Enter current password"
+                        name="currentPassword"
+                        id="currentPassword"
+                        class="indent-2 rounded-md h-12 w-full mb-6"
+                      />
+
+                      <button
+                        type="button"
+                        id="toggleCurrentPassword"
+                        class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600"
+                        onclick="togglePasswordVisibility()"
+                      >
+                        <img
+                          id="eyeIconCurrent"
+                          src="/icons/eye-show.svg"
+                          alt="Show Password"
+                          class="h-6 w-6"
+                        />
+                        <img
+                          id="eyeSlashIconCurrent"
+                          src="/icons/eye-hide.svg"
+                          alt="Hide Password"
+                          class="h-6 w-6 hidden"
+                        />
+                      </button>
+                    </div>
+                    <div th:if="*{error != null}" class="h-6">
+                      <div
+                        th:each="err : *{error.currentPasswordError}"
+                        th:text="${err}"
+                        class="text-red-600 text-xs"
+                      ></div>
+                    </div>
                   </div>
-                  <input
-                    type="password"
-                    placeholder="Enter new password"
-                    name="newPassword"
-                    class="indent-2 rounded-md h-12 w-80 mb-6"
-                  />
-                  <div th:if="*{error != null}">
-                    <div
-                      th:each="err : *{error.newPasswordError}"
-                      th:text="${err}"
-                    ></div>
+
+                  <!-- New Password -->
+                  <div>
+                    <div class="relative w-80 h-12">
+                      <input
+                        type="password"
+                        placeholder="Enter new password"
+                        name="newPassword"
+                        id="newPassword"
+                        class="indent-2 rounded-md h-12 w-full mb-6"
+                      />
+                      <button
+                        type="button"
+                        id="toggleNewPassword"
+                        class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600"
+                        onclick="toggleNewPasswordVisibility()"
+                      >
+                        <img
+                          id="eyeIconNew"
+                          src="/icons/eye-show.svg"
+                          alt="Show Password"
+                          class="h-6 w-6"
+                        />
+                        <img
+                          id="eyeSlashIconNew"
+                          src="/icons/eye-hide.svg"
+                          alt="Hide Password"
+                          class="h-6 w-6 hidden"
+                        />
+                      </button>
+                    </div>
+                    <div th:if="*{error != null}" class="h-6">
+                      <div
+                        th:each="err : *{error.newPasswordError}"
+                        th:text="${err}"
+                        class="text-red-600 text-xs"
+                      ></div>
+                    </div>
                   </div>
-                  <input
-                    type="password"
-                    placeholder="Enter confirm password"
-                    name="confirmPassword"
-                    class="indent-2 rounded-md h-12 w-80 mb-6"
-                  />
-                  <div th:if="*{error != null}">
+
+                  <!-- Confirm Password -->
+                  <div>
+                    <div class="relative w-80 h-12">
+                      <input
+                        type="password"
+                        placeholder="Enter confirm password"
+                        name="confirmPassword"
+                        id="confirmPassword"
+                        class="indent-2 rounded-md h-12 w-full mb-6"
+                      />
+                      <button
+                        type="button"
+                        id="toggleConfirmPassword"
+                        class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600"
+                        onclick="toggleConfirmPasswordVisibility()"
+                      >
+                        <img
+                          id="eyeIconConfirm"
+                          src="/icons/eye-show.svg"
+                          alt="Show Password"
+                          class="h-6 w-6"
+                        />
+                        <img
+                          id="eyeSlashIconConfirm"
+                          src="/icons/eye-hide.svg"
+                          alt="Hide Password"
+                          class="h-6 w-6 hidden"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                  <div th:if="*{error != null}" class="h-6">
                     <div
                       th:each="err : *{error.confirmPasswordError}"
                       th:text="${err}"
+                      class="text-red-600 text-xs"
                     ></div>
                   </div>
                 </div>
-                <div class="rounded-3xl w-60 m-auto">
+                <div class="rounded-3xl w-60 m-auto mt-5">
                   <button
                     class="hover:text-black text-gray-50 border-black font-secondary h-12 w-60 rounded-3xl hover:bg-[#FEE902] bg-gray-950"
                   >
@@ -1551,5 +1629,50 @@
     } else {
       $("#changepassword-modal").remove();
     }
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const togglePasswordVisibility = (inputId, eyeIconId, eyeSlashIconId) => {
+        const input = document.getElementById(inputId);
+        const eyeIcon = document.getElementById(eyeIconId);
+        const eyeSlashIcon = document.getElementById(eyeSlashIconId);
+
+        eyeIcon.addEventListener("click", () => {
+          if (input.type === "password") {
+            input.type = "text";
+            eyeIcon.classList.add("hidden");
+            eyeSlashIcon.classList.remove("hidden");
+          } else {
+            input.type = "password";
+            eyeIcon.classList.remove("hidden");
+            eyeSlashIcon.classList.add("hidden");
+          }
+        });
+
+        eyeSlashIcon.addEventListener("click", () => {
+          if (input.type === "text") {
+            input.type = "password";
+            eyeIcon.classList.remove("hidden");
+            eyeSlashIcon.classList.add("hidden");
+          } else {
+            input.type = "text";
+            eyeIcon.classList.add("hidden");
+            eyeSlashIcon.classList.remove("hidden");
+          }
+        });
+      };
+
+      togglePasswordVisibility(
+        "currentPassword",
+        "eyeIconCurrent",
+        "eyeSlashIconCurrent"
+      );
+      togglePasswordVisibility("newPassword", "eyeIconNew", "eyeSlashIconNew");
+      togglePasswordVisibility(
+        "confirmPassword",
+        "eyeIconConfirm",
+        "eyeSlashIconConfirm"
+      );
+    });
   </script>
 </html>

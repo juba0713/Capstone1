@@ -18,17 +18,34 @@
     <link rel="stylesheet" th:href="@{/css/output.css}" />
 
     <style>
-      .dt-end:nth-child(2) {
-        display: flex !important;
-        justify-content: space-between !important;
+      .dt-search {
+        font-family: Poppins;
+        width: 60%;
+        margin-left: auto;
+      }
+      .dt-end {
+        font-size: smaller;
+        position: relative;
+      }
+      .dt-end > button {
+        /* Your styles here */
+        margin-left: 0;
+        position: absolute;
+        left: 0%;
+        top: 2px;
+        font-family: Poppins;
+      }
+      .dt-input {
+        margin-right: 10px;
       }
 
-      .dt-end:nth-child(3) {
-        float: left !important;
+      .activation-modal-dialog {
+        margin-left: 35%;
+        max-width: 30%;
+        max-height: 50px;
       }
-
-      .dt-end button:first-child {
-        font-size: 10px !important;
+      .activation-modal-content {
+        height: 22vh;
       }
     </style>
   </head>
@@ -93,15 +110,24 @@
                   <th class="text-center rounded-top-right">Actions</th>
                 </tr>
               </thead>
-              <tbody class="bodyrowhover">
+              <tbody class="divide-y divide-grey-500 bodyrowhover">
                 <tr th:each="app : *{listOfApplicants}" class="row-btn">
-                  <td th:text="${app.email}"></td>
-                  <td th:text="${app.projectTitle}"></td>
-                  <td th:text="${app.university}"></td>
+                  <td
+                    th:text="${app.email}"
+                    class="whitespace-nowrap max-w-0 truncate"
+                  ></td>
+                  <td
+                    th:text="${app.projectTitle}"
+                    class="whitespace-nowrap max-w-0 truncate"
+                  ></td>
+                  <td
+                    th:text="${app.university}"
+                    class="whitespace-nowrap max-w-0 truncate"
+                  ></td>
 
                   <td>
                     <button
-                      class="btn-row"
+                      class="px-3 h-8 btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                       type="button"
                       th:data-id="${app.applicantIdPk}"
                       name="activate"
@@ -132,24 +158,47 @@
         </div>
       </div> -->
 
+      <!-- activation modal -->
       <div
-        class="modal"
+        class="modal font-secondary"
         tabindex="-1"
         role="dialog"
         id="activate-account-modal"
       >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <form th:action="@{/manager/account/activate}" method="POST">
-              <input
-                type="hidden"
-                name="applicantIdPk"
-                id="activate-applicant-id-pk"
-                value="0"
-              />
-              <div>Activate this account?</div>
-              <button type="submit" name="activate">Activate Account</button>
-            </form>
+        <div class="modal-dialog activation-modal-dialog" role="document">
+          <div class="modal-content activation-modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title font-bold text-customyellow">
+                Activation
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+              <form th:action="@{/manager/account/activate}" method="POST">
+                <div class="mb-3">Activate this account?</div>
+
+                <input
+                  type="hidden"
+                  name="applicantIdPk"
+                  id="activate-applicant-id-pk"
+                  value="0"
+                />
+                <button
+                  type="submit"
+                  name="activate"
+                  class="px-3 h-8 border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                >
+                  Activate Account
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

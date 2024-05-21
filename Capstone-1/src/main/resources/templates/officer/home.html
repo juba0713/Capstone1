@@ -30,11 +30,25 @@
         margin-right: 10px;
       }
       .modal-dialog {
-        max-width: 80%; /* Adjust the width as needed */
+        max-width: 80%;
       }
       .modal-content {
         width: 100%;
         height: 92vh;
+      }
+      .rejected-modal-dialog {
+        max-width: 50%;
+        max-height: 50px;
+      }
+      .rejected-modal-content {
+        height: 50vh;
+      }
+      .accepted-modal-dialog {
+        max-width: 50%;
+        max-height: 50px;
+      }
+      .accepted-modal-content {
+        height: 22vh;
       }
     </style>
   </head>
@@ -152,11 +166,16 @@
       </div>
     </div>
     <!-- accept modal -->
-    <div class="modal" tabindex="-1" role="dialog" id="accept-modal">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div
+      class="modal font-secondary"
+      tabindex="-1"
+      role="dialog"
+      id="accept-modal"
+    >
+      <div class="modal-dialog accepted-modal-dialog" role="document">
+        <div class="modal-content accepted-modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Confirmation</h5>
+            <h5 class="modal-title font-bold text-green-700">Confirmation</h5>
             <button
               type="button"
               class="close"
@@ -168,26 +187,41 @@
           </div>
           <div class="modal-body" id="modal-body">
             <form th:action="@{/officer/action}" method="POST">
-              <div>Do you want to accept this application?</div>
+              <div class="mb-3">Do you want to accept this application?</div>
               <input
                 type="hidden"
                 name="applicantIdPk"
                 id="accept-applicant-id-pk"
                 value=""
               />
-              <button type="button">Cancel</button>
-              <button name="accept">Send to manager</button>
+              <button
+                type="button"
+                class="h-8 border-black hover:bg-[#FEE902] bg-black rounded-lg w-32 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+              >
+                Cancel
+              </button>
+              <button
+                name="accept"
+                class="px-3 h-8 border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+              >
+                Send to manager
+              </button>
             </form>
           </div>
         </div>
       </div>
     </div>
     <!-- reject modal -->
-    <div class="modal" tabindex="-1" role="dialog" id="reject-modal">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div
+      class="modal font-secondary"
+      tabindex="-1"
+      role="dialog"
+      id="reject-modal"
+    >
+      <div class="modal-dialog rejected-modal-dialog" role="document">
+        <div class="modal-content rejected-modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Rejected</h5>
+            <h5 class="modal-title font-bold text-red-700">Rejected</h5>
             <button
               type="button"
               class="close"
@@ -208,7 +242,7 @@
               <label>Input Feedback</label>
               <textarea name="feedback"></textarea>
               <div>
-                <div>Qualified for Reapplication?</div>
+                <div class="font-medium mb-2">Qualified for Reapplication?</div>
                 <div>
                   <input type="radio" name="resubmitFlg" />
                   <label>Yes</label>
@@ -218,8 +252,13 @@
                   <label>No</label>
                 </div>
               </div>
-              <button type="button">Cancel</button>
-              <button name="reject">Reject</button>
+              <button type="button" btn-row>Cancel</button>
+              <button
+                name="reject"
+                class="h-8 border-black hover:bg-[#FEE902] bg-black rounded-lg w-32 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+              >
+                Reject
+              </button>
               <!-- once rejected, send info to applicant email the feedback -->
             </form>
           </div>
