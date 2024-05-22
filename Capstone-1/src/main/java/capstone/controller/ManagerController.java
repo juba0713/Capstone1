@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import capstone.controller.webdto.ManagerWebDto;
 import capstone.controller.webdto.TbiBoardWebDto;
@@ -69,10 +70,17 @@ public class ManagerController {
 	}
 	
 	@PostMapping("/proceed")
-	public String proceedApplicationToTBI(@ModelAttribute ManagerWebDto webDto) {
+	public String proceedApplicationToTBI(@ModelAttribute ManagerWebDto webDto, RedirectAttributes ra) {
 		
 		ManagerInOutDto inDto = new ManagerInOutDto();
 		
+		if(webDto.getChosenApplicant() == null) {	
+			
+			ra.addFlashAttribute("errorMsg", "Please select at least one application to send to the TbiBoard!");
+			
+			return "redirect:/manager/accepted-result";
+		}
+	
 		//4 - Pending for evaluation
 		inDto.setStatus(4);
 		
@@ -80,7 +88,9 @@ public class ManagerController {
 		
 		managerService.updateApplicantStatus(inDto);
 		
-		return "redirect:/manager/home";
+		ra.addFlashAttribute("succMsg", "The application/s has been sent to the TbiBoard!");
+		
+		return "redirect:/manager/accepted-result";
 	}
 	
 	@GetMapping("/retrieve/details")

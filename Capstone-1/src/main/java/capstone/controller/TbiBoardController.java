@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import capstone.controller.webdto.OfficerWebDto;
 import capstone.controller.webdto.TbiBoardWebDto;
@@ -33,7 +34,7 @@ public class TbiBoardController {
 	}
 	
 	@PostMapping("/evaluate")
-	public String evaluateApplication(@ModelAttribute TbiBoardWebDto webDto) {
+	public String evaluateApplication(@ModelAttribute TbiBoardWebDto webDto, RedirectAttributes ra) {
 		
 		TbiBoardInOutDto inDto = new TbiBoardInOutDto();
 		
@@ -44,6 +45,8 @@ public class TbiBoardController {
 		inDto.setFeedback(webDto.getFeedback());
 		
 		tbiBoardService.evaluateApplicant(inDto);
+		
+		ra.addFlashAttribute("succMsg", "The application has been evaluated!");
 		
 		return "redirect:/tbi-board/home";
 	}

@@ -47,6 +47,31 @@
       .activation-modal-content {
         height: 22vh;
       }
+      
+      .error-container,
+       .success-container{
+		  position: absolute;
+		  top: 50px;
+		  left: 250px;
+		  width: 90%;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+	  }
+	  
+	  .error-container div, 
+	  .success-container div{
+		  background: green;
+		  color: #fff;
+		  font-size: 20px;
+		  font-weight: 600;
+		  padding: 10px;
+		  border-radius: 10px;
+	  }
+	  
+	  .error-container div{
+		  background: red;
+	  }
     </style>
   </head>
   <body th:object="${managerWebDto}">
@@ -78,12 +103,19 @@
             >
           </div>
         </div>
+        
         <div class="pl-3 text-xl font-primary hover:text-white w-full">
           <form th:action="@{/logout}" method="POST">
             <button>Logout</button>
           </form>
         </div>
       </div>
+      <div class="error-container" th:if="${errorMsg != null}">
+		  <div th:text="${errorMsg}"></div>
+	  </div>
+	  <div class="success-container" th:if="${succMsg != null}">
+		  <div th:text="${succMsg}"></div>
+	  </div>
       <!-- applicant details -->
       <div class="h-screen bg-tanglow p-2">
         <div class="flex place-items-end flex-col ml-60 pr-10 pt-3">
