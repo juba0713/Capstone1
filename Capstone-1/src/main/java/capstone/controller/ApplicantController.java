@@ -158,16 +158,10 @@ public class ApplicantController {
 		if(CommonConstant.INVALID.equals(outDto.getResult())) {
 			
 			ra.addFlashAttribute("error", outDto.getError());
-			
-			System.out.println("ERROR");
-			
+					
 			return "redirect:/applicant/home";
 		}
-		
-		System.out.println(webDto.getCurrentPassword());
-		
-		System.out.println("NO ERROR");
-		
+			
 		applicantService.changePassword(inDto);
 		
 		return "redirect:/applicant/home";
