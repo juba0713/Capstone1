@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 
@@ -53,6 +54,11 @@ public class SecurityConfig{
 	protected AuthenticationSuccessHandler authenticationSuccessHandler() {
         return new CustomSuccessHandler();
 	}
+	
+	@Bean
+	protected AuthenticationFailureHandler authenticationFailureHandler() {
+        return new CustomerFailureHandler();
+	}
 		
 	@Bean
 	protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -76,7 +82,8 @@ public class SecurityConfig{
 			.formLogin((form) -> form
 				.loginPage("/login/")
 				.permitAll()
-				.failureUrl("/")
+				//.failureUrl("/")
+				.failureHandler(authenticationFailureHandler())
 				.usernameParameter("email")
 				.passwordParameter("password")
 				//.defaultSuccessUrl("/applicant/home")

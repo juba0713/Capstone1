@@ -8,6 +8,34 @@
       .hidden {
         display: none;
       }
+      
+      form{
+		  position: relative;
+	  }
+	  .error-container,
+       .success-container{
+		  position: absolute;
+		  top: 50px;
+		  left: 0;
+		  width: 100%;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+	  }
+	  
+	  .error-container div, 
+	  .success-container div{
+		  background: green;
+		  color: #fff;
+		  font-size: 15px;
+		  font-weight: 600;
+		  padding: 10px;
+		  border-radius: 10px;
+	  }
+	  
+	  .error-container div{
+		  background: red;
+	  }
     </style>
   </head>
 
@@ -31,7 +59,7 @@
         />
       </div>
     </div>
-
+	
     <div class="z-40 relative flex justify-center h-screen items-center">
       <div
         class="h-520 w-642 bg-tanglow flex items-center justify-center p-32 rounded-l-lg"
@@ -45,6 +73,9 @@
       </div>
       <div class="h-520 w-642 bg-white rounded-r-lg">
         <form th:action="@{/login/}" method="POST">
+		<div class="error-container" th:if="${session.errorMessageLogin != null}"> 
+			<div th:text="${session.errorMessageLogin}"></div>
+		</div>
           <div
             class="font-primary text-black text-3xl m-20 flex justify-center"
           >
