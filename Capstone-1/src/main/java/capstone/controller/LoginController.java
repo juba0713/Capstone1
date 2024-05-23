@@ -30,6 +30,14 @@ public class LoginController {
 			return "redirect:/";
 		}
 		
+		
+		String error = (String)request.getSession().getAttribute("errorMessageLogin");
+		
+		if(error != null) {
+			model.addAttribute("errorMessageLogin", error);
+			request.getSession().setAttribute("errorMessageLogin", null);
+		}
+		
 		if(role.equals("applicant")) {
 			request.getSession().setAttribute("fromLogin", "applicant");
 		}else if(role.equals("officer")) {
