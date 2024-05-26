@@ -43,9 +43,6 @@
       .feedback-modal-content {
         height: 50vh;
       }
-      .widthremove {
-        width: 25px !important;
-      }
     </style>
   </head>
   <body th:object="${managerWebDto}">
@@ -106,23 +103,16 @@
             <table id="applicants-table" class="w-screen h-4/5">
               <thead class="font-secondary text-sm bg-customyellow">
                 <tr>
-                  <th class="text-center w-[20%] rounded-top-left">Email</th>
+                  <th class="text-center rounded-top-left">Email</th>
                   <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
-                  <th class="text-center w-3/12">Project Title</th>
+                  <th class="text-center">Project Title</th>
 
-                  <th class="text-center w-1/5 hidden sm:table-cell">
-                    University
-                  </th>
-                  <th class="text-center w-[5%] hidden sm:table-cell">
-                    Status
-                  </th>
-                  <th class="text-center w-[12%] hidden sm:table-cell">
-                    Feedback
-                  </th>
-                  <th class="text-center w-[5%] hidden sm:table-cell">
-                    <!-- <th class="text-center rounded-top-right widthremove"></th> -->
-                    Actions
-                  </th>
+                  <th class="text-center hidden sm:table-cell">University</th>
+                  <th class="text-center hidden sm:table-cell">Status</th>
+                  <th class="text-center hidden sm:table-cell">Feedback</th>
+                  <th
+                    class="text-center hidden sm:table-cell rounded-top-right w-[5%]"
+                  ></th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-grey-500 bodyrowhover">
@@ -177,7 +167,7 @@
                     </button> -->
                     <img
                       th:src="@{/icons/remove.svg}"
-                      class="h-6 hover:cursor-pointer"
+                      class="h-6 hover:cursor-pointer hover:invert-[.25]"
                     />
                   </td>
                 </tr>
@@ -236,12 +226,13 @@
         $("#applicants-table").dataTable({
           columnDefs: [
             {
-              targets: "no-sort",
+              // targets: "no-sort",
+              targets: -1,
               orderable: false,
             },
           ],
           searching: true,
-          ordering: false,
+          // ordering: false,
           info: true,
           lengthChange: false,
         });

@@ -209,12 +209,13 @@
         $("#applicants-table").dataTable({
           columnDefs: [
             {
-              targets: "no-sort",
+              // targets: "no-sort",
+              targets: -1,
               orderable: false,
             },
           ],
           searching: true,
-          ordering: false,
+          // ordering: false,
           info: true,
           lengthChange: false,
         });
@@ -326,7 +327,7 @@
           let objectives = document.querySelector(".objectives");
           let scopeProposal = document.querySelector(".scopeProposal");
           let methodology = document.querySelector(".methodology");
-          let vitaeFile = document.querySelector('.vitaeFile');
+          let vitaeFile = document.querySelector(".vitaeFile");
           let supportLink = document.querySelector(".supportLink");
           let groupName = document.querySelector(".groupName");
           let groupLeader = document.querySelector(".groupLeader");
@@ -535,7 +536,7 @@
           } else {
             university.value = "NA";
           }
-          vitaeFile.setAttribute('href', "/view/" + applicant.vitaeFile);
+          vitaeFile.setAttribute("href", "/view/" + applicant.vitaeFile);
           //Technology Answer
           technologyAns[applicant.technologyAns - 1].checked = true;
           //Product Development Answer

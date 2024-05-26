@@ -272,12 +272,13 @@
         $("#applicants-table").dataTable({
           columnDefs: [
             {
-              targets: "no-sort",
+              // targets: "no-sort",
+              targets: -1,
               orderable: false,
             },
           ],
           searching: true,
-          ordering: false,
+          // ordering: false,
           info: true,
           lengthChange: false,
           initComplete: function () {
