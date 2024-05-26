@@ -483,8 +483,8 @@ public class ApplicantServiceImpl implements ApplicantService {
 		}
 
 		MultipartFile vitaeFile = inDto.getVitaeFile(); 
-
-		String originalFilename = vitaeFile.getName();
+		System.out.println(vitaeFile.getName());
+		String originalFilename = vitaeFile.getOriginalFilename().split(".")[0];
 		String filename = originalFilename + "_" + userIdPk+".pdf"; 
 
 		Path filePath = uploadPath.resolve(filename); 
