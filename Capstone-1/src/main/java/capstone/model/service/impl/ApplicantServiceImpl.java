@@ -483,15 +483,17 @@ public class ApplicantServiceImpl implements ApplicantService {
 		}
 
 		MultipartFile vitaeFile = inDto.getVitaeFile(); 
-		System.out.println(vitaeFile.getName());
-		String originalFilename = vitaeFile.getOriginalFilename().split(".")[0];
-		String filename = originalFilename + "_" + userIdPk+".pdf"; 
+		
+		int lastDotIndex = vitaeFile.getOriginalFilename().lastIndexOf('.');
 
-		Path filePath = uploadPath.resolve(filename); 
+		String fileName = vitaeFile.getOriginalFilename().substring(0, lastDotIndex) + "_" + userIdPk 
+		                     + vitaeFile.getOriginalFilename().substring(lastDotIndex);
+
+		Path filePath = uploadPath.resolve(fileName); 
 
 		Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-		projectEntity.setVitaeFile(filename);
+		projectEntity.setVitaeFile(fileName);
 		
 		projectEntity.setSupportLink(inDto.getSupportLink());
 		
