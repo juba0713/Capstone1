@@ -43,6 +43,9 @@
       .feedback-modal-content {
         height: 50vh;
       }
+      .widthremove {
+        width: 25px !important;
+      }
     </style>
   </head>
   <body th:object="${managerWebDto}">
@@ -116,7 +119,10 @@
                   <th class="text-center w-[12%] hidden sm:table-cell">
                     Feedback
                   </th>
-                  <th class="text-center w-[15%] rounded-top-right">Actions</th>
+                  <th class="text-center w-[5%] hidden sm:table-cell">
+                    <!-- <th class="text-center rounded-top-right widthremove"></th> -->
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-grey-500 bodyrowhover">
@@ -169,7 +175,10 @@
                     >
                       Create Incubate Account
                     </button> -->
-                    <div>trash</div>
+                    <img
+                      th:src="@{/icons/remove.svg}"
+                      class="h-6 hover:cursor-pointer"
+                    />
                   </td>
                 </tr>
               </tbody>
