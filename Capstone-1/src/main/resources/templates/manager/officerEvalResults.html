@@ -48,10 +48,9 @@
       .activation-modal-dialog {
         margin-left: 35%;
         max-width: 30%;
-        max-height: 50px;
       }
       .activation-modal-content {
-        height: 22vh;
+        height: 20%;
       }
 
       .error-container,
@@ -85,34 +84,42 @@
       <div
         class="h-full flex flex-col w-[250px] absolute bg-black z-10 justify-between text-customyellow"
       >
-        <div class="pt-2">
+        <div class="pt-4">
           <img
-            class="pointer-events-none h-16 w-52 flex justify-center mx-auto border-2 border-blue-500 mb-2"
+            class="filter-logo pointer-events-none h-16 w-52 flex justify-center mx-auto border-2 border-blue-500 mb-4"
             src="/Capstone1/Capstone-1/src/main/resources/static/images/yellowLogo.png"
             th:src="@{/images/yellowLogo.png}"
           />
-          <div class="flex flex-col font-secondary font-semibold p-2">
+          <div
+            class="gap-4 flex flex-col font-secondary font-normal p-2 text-center"
+          >
             <a
               th:href="@{/manager/home}"
-              class="hover:bg-tanglow hover:text-black hover:no-underline pl-2 mb-2"
+              class="hover:rounded-sm hover:bg-tanglow hover:text-black hover:no-underline p-2"
               >Home</a
             >
             <a
               th:href="@{/manager/accepted-result}"
-              class="hover:bg-tanglow hover:text-black hover:no-underline pl-2 mb-2"
+              class="hover:rounded-sm hover:bg-tanglow hover:text-black hover:no-underline p-2"
               >Accepted Applications</a
             >
             <a
               th:href="@{/manager/evaluated-result}"
-              class="hover:bg-tanglow hover:text-black hover:no-underline pl-2"
+              class="hover:rounded-sm hover:bg-tanglow hover:text-black hover:no-underline p-2"
               >Evaluated Appications</a
             >
           </div>
         </div>
 
-        <div class="pl-3 text-xl font-primary hover:text-white w-full">
+        <div
+          class="text-center p-2 text-xl font-primary hover:text-white w-full"
+        >
           <form th:action="@{/logout}" method="POST">
-            <button>Logout</button>
+            <button
+              class="hover:text-black hover:bg-customyellow w-full p-2 rounded-sm"
+            >
+              Logout
+            </button>
           </form>
         </div>
       </div>
@@ -123,15 +130,15 @@
         <div th:text="${succMsg}"></div>
       </div>
       <!-- applicant details -->
-      <div class="h-screen bg-tanglow p-2">
+      <div class="h-screen bg-[#F9F9F9] p-2">
         <div class="flex place-items-end flex-col ml-60 pr-10 pt-3">
-          <div class="font-primary text-5xl">
+          <div class="font-primary text-4xl">
             Welcome, <span th:text="${session.fullname}"></span>!
           </div>
           <div>ID: <span th:text="${session.id}"></span></div>
         </div>
         <div
-          class="ml-[250px] rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
+          class="ml-[270px] mr-6 rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
         >
           <form th:action="@{/manager/proceed}" method="POST">
             <table id="applicants-table" class="w-screen h-4/5">
@@ -205,20 +212,14 @@
       >
         <div class="modal-dialog activation-modal-dialog" role="document">
           <div class="modal-content activation-modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title font-bold text-customyellow">
-                Activation
-              </h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
+            <div class="mb-10">
+              <div
+                class="rounded-t-md flex items-center flex-col justify-items-center mx-auto absolute z-10 w-full py-2 border-b-2"
               >
-                <span aria-hidden="true">&times;</span>
-              </button>
+                <h5 class="modal-title font-bold text-green-700">Activation</h5>
+              </div>
             </div>
-            <div class="modal-body" id="modal-body">
+            <div class="modal-body justify-center flex" id="modal-body">
               <form th:action="@{/manager/account/activate}" method="POST">
                 <div class="mb-3">Activate this account?</div>
 
@@ -228,13 +229,15 @@
                   id="activate-applicant-id-pk"
                   value="0"
                 />
-                <button
-                  type="submit"
-                  name="activate"
-                  class="px-3 h-8 border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-                >
-                  Activate Account
-                </button>
+                <div class="justify-center flex">
+                  <button
+                    type="submit"
+                    name="activate"
+                    class="px-3 h-8 border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  >
+                    Activate Account
+                  </button>
+                </div>
               </form>
             </div>
           </div>

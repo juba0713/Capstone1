@@ -26,40 +26,51 @@
         width: 100%;
         height: 98vh;
       }
-      
+
       .error-container,
-       .success-container{
-		  position: absolute;
-		  top: 50px;
-		  left: 0;
-		  width: 100%;
-		  display: flex;
-		  justify-content: center;
-		  align-items: center;
-	  }
-	  
-	  .error-container div, 
-	  .success-container div{
-		  background: green;
-		  color: #fff;
-		  font-size: 20px;
-		  font-weight: 600;
-		  padding: 10px;
-		  border-radius: 10px;
-	  }
+      .success-container {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .error-container div,
+      .success-container div {
+        background: green;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 10px;
+      }
     </style>
   </head>
   <body th:object="${tbiBoardWebDto}">
-    <div class="h-screen bg-tanglow p-2">
-      <div class="flex place-items-end flex-col ml-60 pr-10 pt-3">
-        <div class="font-primary text-5xl">
-          Welcome, <span th:text="${session.fullname}"></span>!
+    <div class="px-12 pt-4 h-screen bg-[#F9F9F9]">
+      <div
+        class="h-20 flex flex-row justify-between bg-customyellow rounded-tr-3xl rounded-tl-3xl"
+      >
+        <div
+          class="flex text-center items-center p-4 text-3xl font-secondary font-semibold"
+        >
+          TBI BOARD DASHBOARD
         </div>
-        <div>ID: <span th:text="${session.id}"></span></div>
+        <div class="p-2 mr-4">
+          <div class="font-primary text-3xl">
+            Welcome, <span th:text="${session.fullname}"></span>!
+          </div>
+          <div class="flex justify-end">
+            ID: <span th:text="${session.id}"></span>
+          </div>
+        </div>
       </div>
-  	  <div class="success-container" th:if="${succMsg != null}">
-		  <div th:text="${succMsg}"></div>
-	  </div>
+      <div class="success-container" th:if="${succMsg != null}">
+        <div th:text="${succMsg}"></div>
+      </div>
       <div
         class="rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden sm:w-auto p-10 ml-2 sm:ml-0"
       >
@@ -122,7 +133,7 @@
               >
                 test/NA if walay university
               </td>
-              <td class="w-auto flex justify-center gap-2 whitespace-nowrap">
+              <td>
                 <button
                   class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                   type="button"
@@ -138,10 +149,10 @@
       </div>
 
       <div
-        class="bottom-0 right-0 px-2 mr-2 flex justify-end text-xl font-primary absolute hover:text-white"
+        class="bottom-0 right-0 px-2 mr-12 mb-1 flex justify-end text-base font-primary absolute bg-customyellow text-black rounded-sm"
       >
         <form th:action="@{/logout}" method="POST">
-          <button>Logout</button>
+          <button class="hover:text-white">Logout</button>
         </form>
       </div>
     </div>
@@ -169,11 +180,11 @@
               <div class="font-secondary">
                 <div class="flex justify-between">
                   <div class="mt-20 mb-6 h-20 flex text-center items-center">
-                    <img
-                      th:src="@{/images/launchlab.png}"
-                      class="h-20 pointer-events-none"
-                    />
-                    <div class="font-semibold text-xl">Registration Form</div>
+                    <!-- th:src="@{/images/launchlab.png}" -->
+                    <!-- <img alt="Logo here" class="h-20 pointer-events-none" /> -->
+                    <div class="font-semibold text-xl pl-4">
+                      Registration Form
+                    </div>
                   </div>
                   <img
                     th:src="@{/images/wilBlackBox.png}"
@@ -221,7 +232,7 @@
                 <div class="flex flex-row w-full justify-between px-52">
                   <div class="flex-col flex gap-2">
                     <label>1</label>
-                    <input type="radio" name="score" value="1" checked/>
+                    <input type="radio" name="score" value="1" checked />
                   </div>
                   <div class="flex-col flex gap-2">
                     <label>2</label>

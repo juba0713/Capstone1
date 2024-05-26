@@ -7,7 +7,7 @@ module.exports = {
         960: "960px",
         642: "542px",
         w45: "45%",
-        w70: "77%",
+        w50: "50%",
       },
       height: {
         520: "520px",
@@ -18,9 +18,6 @@ module.exports = {
         110: "110px",
         200: "200px",
         150: "170px",
-      },
-      padding: {
-        5: "0.345rem",
       },
       fontFamily: {
         primary: ["Bebas Neue", "sans-serif"],

@@ -50,62 +50,73 @@
       <div
         class="h-full flex flex-col w-[250px] absolute bg-black z-10 justify-between text-customyellow"
       >
-        <div class="pt-2">
+        <div class="pt-4">
           <img
-            class="pointer-events-none h-16 w-52 flex justify-center mx-auto border-2 border-blue-500 mb-2"
+            class="filter-logo pointer-events-none h-16 w-52 flex justify-center mx-auto border-2 border-blue-500 mb-4"
+            src="/Capstone1/Capstone-1/src/main/resources/static/images/yellowLogo.png"
             th:src="@{/images/yellowLogo.png}"
           />
-          <div class="flex flex-col font-secondary font-semibold p-2">
+          <div
+            class="gap-4 flex flex-col font-secondary font-normal p-2 text-center"
+          >
             <a
               th:href="@{/manager/home}"
-              class="hover:bg-tanglow hover:text-black hover:no-underline pl-2 mb-2"
+              class="hover:rounded-sm hover:bg-tanglow hover:text-black hover:no-underline p-2"
               >Home</a
             >
             <a
               th:href="@{/manager/accepted-result}"
-              class="hover:bg-tanglow hover:text-black hover:no-underline pl-2 mb-2"
+              class="hover:rounded-sm hover:bg-tanglow hover:text-black hover:no-underline p-2"
               >Accepted Applications</a
             >
             <a
               th:href="@{/manager/evaluated-result}"
-              class="hover:bg-tanglow hover:text-black hover:no-underline pl-2"
+              class="hover:rounded-sm hover:bg-tanglow hover:text-black hover:no-underline p-2"
               >Evaluated Appications</a
             >
           </div>
         </div>
-        <div class="pl-3 text-xl font-primary hover:text-white w-full">
+        <div
+          class="text-center p-2 text-xl font-primary hover:text-white w-full"
+        >
           <form th:action="@{/logout}" method="POST">
-            <button>Logout</button>
+            <button
+              class="hover:text-black hover:bg-customyellow w-full p-2 rounded-sm"
+            >
+              Logout
+            </button>
           </form>
         </div>
       </div>
       <!-- applicant details -->
-      <div class="h-screen bg-tanglow p-2">
+      <div class="h-screen bg-[#F9F9F9] p-2">
         <div class="flex place-items-end flex-col ml-60 pr-10 pt-3">
-          <div class="font-primary text-5xl">
+          <div class="font-primary text-4xl">
             Welcome, <span th:text="${session.fullname}"></span>!
           </div>
           <div>ID: <span th:text="${session.id}"></span></div>
         </div>
         <div
-          class="ml-[250px] rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
+          class="ml-[270px] mr-6 rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
         >
           <form th:action="@{/manager/proceed}" method="POST">
             <table id="applicants-table" class="w-screen h-4/5">
               <thead class="font-secondary text-sm bg-customyellow">
                 <tr>
-                  <th class="text-center rounded-top-left">Email</th>
+                  <th class="text-center w-[20%] rounded-top-left">Email</th>
                   <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
                   <th class="text-center w-3/12">Project Title</th>
 
                   <th class="text-center w-1/5 hidden sm:table-cell">
                     University
                   </th>
-                  <th class="text-center w-1/5 hidden sm:table-cell">Status</th>
-                  <th class="text-center w-2/12 hidden sm:table-cell">
+                  <th class="text-center w-[5%] hidden sm:table-cell">
+                    Status
+                  </th>
+                  <th class="text-center w-[12%] hidden sm:table-cell">
                     Feedback
                   </th>
-                  <th class="text-center w-1/4 rounded-top-right">Actions</th>
+                  <th class="text-center w-[15%] rounded-top-right">Actions</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-grey-500 bodyrowhover">
@@ -122,16 +133,25 @@
                   th:if="${app.status == 3}"
                 />
               </td>-->
-                  <td th:text="${app.email}"></td>
-                  <td th:text="${app.projectTitle}"></td>
-                  <td th:text="${app.university}"></td>
+                  <td
+                    th:text="${app.email}"
+                    class="whitespace-nowrap max-w-0 truncate"
+                  ></td>
+                  <td
+                    th:text="${app.projectTitle}"
+                    class="whitespace-nowrap max-w-0 truncate"
+                  ></td>
+                  <td
+                    th:text="${app.university}"
+                    class="whitespace-nowrap max-w-0 truncate"
+                  ></td>
                   <td
                     th:text="${app.score >= 6 ? 'Passed' : 'Failed'}"
                     th:style="${app.score >= 6 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"
                   ></td>
                   <td>
                     <button
-                      class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                      class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary text-sm sm:p-1"
                       type="button"
                       th:data-id="${app.applicantIdPk}"
                       name="feedback"
@@ -141,7 +161,7 @@
                   </td>
                   <td>
                     <button
-                      class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                      class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary text-sm sm:p-1"
                       type="button"
                       th:data-id="${app.applicantIdPk}"
                       name="incubate"

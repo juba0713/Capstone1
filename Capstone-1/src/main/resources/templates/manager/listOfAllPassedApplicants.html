@@ -51,46 +51,54 @@
       <div
         class="h-full flex flex-col w-[250px] absolute bg-black z-10 justify-between text-customyellow"
       >
-        <div class="pt-2">
+        <div class="pt-4">
           <img
-            class="pointer-events-none h-16 w-52 flex justify-center mx-auto border-2 border-blue-500 mb-2"
+            class="filter-logo pointer-events-none h-16 w-52 flex justify-center mx-auto border-2 border-blue-500 mb-4"
             src="/Capstone1/Capstone-1/src/main/resources/static/images/yellowLogo.png"
             th:src="@{/images/yellowLogo.png}"
           />
-          <div class="flex flex-col font-secondary font-semibold p-2">
+          <div
+            class="gap-4 flex flex-col font-secondary font-normal p-2 text-center"
+          >
             <a
               th:href="@{/manager/home}"
-              class="hover:bg-tanglow hover:text-black hover:no-underline pl-2 mb-2"
+              class="hover:rounded-sm hover:bg-tanglow hover:text-black hover:no-underline p-2"
               >Home</a
             >
             <a
               th:href="@{/manager/accepted-result}"
-              class="hover:bg-tanglow hover:text-black hover:no-underline pl-2 mb-2"
+              class="hover:rounded-sm hover:bg-tanglow hover:text-black hover:no-underline p-2"
               >Accepted Applications</a
             >
             <a
               th:href="@{/manager/evaluated-result}"
-              class="hover:bg-tanglow hover:text-black hover:no-underline pl-2"
+              class="hover:rounded-sm hover:bg-tanglow hover:text-black hover:no-underline p-2"
               >Evaluated Appications</a
             >
           </div>
         </div>
-        <div class="pl-3 text-xl font-primary hover:text-white w-full">
+        <div
+          class="text-center p-2 text-xl font-primary hover:text-white w-full"
+        >
           <form th:action="@{/logout}" method="POST">
-            <button>Logout</button>
+            <button
+              class="hover:text-black hover:bg-customyellow w-full p-2 rounded-sm"
+            >
+              Logout
+            </button>
           </form>
         </div>
       </div>
       <!-- applicant details -->
-      <div class="h-screen bg-tanglow p-2">
+      <div class="h-screen bg-[#F9F9F9] p-2">
         <div class="flex place-items-end flex-col ml-60 pr-10 pt-3">
-          <div class="font-primary text-5xl">
+          <div class="font-primary text-4xl">
             Welcome, <span th:text="${session.fullname}"></span>!
           </div>
           <div>ID: <span th:text="${session.id}"></span></div>
         </div>
         <div
-          class="ml-[250px] rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
+          class="ml-[270px] mr-6 rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
         >
           <table id="applicants-table" class="w-screen h-4/5">
             <!-- class="border-collapse table-auto border-4 border-violet-600 h-full border-spacing-0 w-fit" -->

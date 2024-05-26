@@ -62,7 +62,7 @@
 
     <div class="z-40 relative flex justify-center h-screen items-center">
       <div
-        class="h-520 w-642 bg-tanglow flex items-center justify-center p-32 rounded-l-lg"
+        class="h-520 w-642 bg-tanglow flex flex-col items-center justify-center p-32 rounded-l-lg"
       >
         <a th:href="@{/}" class="z-50 hover:scale-105">
           <img
@@ -70,30 +70,37 @@
             th:src="@{/images/wilBlackBox.png}"
           />
         </a>
+        <a th:href="@{/applicant/form}">
+          <button
+            class="border border-black hover:bg-black hover:text-white font-primary text-black bg-transparent w-60 py-3 rounded-md mt-8 text-2xl"
+          >
+            APPLY AS APPLICANT
+          </button>
+        </a>
       </div>
-      <div class="h-520 w-642 bg-white rounded-r-lg">
+      <div class="h-520 w-642 bg-white rounded-r-lg p-5">
         <form th:action="@{/login/}" method="POST">
           <div
             class="error-container"
             id="error-container"
             th:if="${errorMessageLogin != null}"
           >
-            <div
-              id="error-message"
-              th:text="${errorMessageLogin}"
-            ></div>
+            <div id="error-message" th:text="${errorMessageLogin}"></div>
           </div>
           <div
-            class="font-primary text-black text-3xl m-20 flex justify-center"
+            class="font-primary text-black text-7xl m-10 mt-16 flex justify-center"
           >
-            Welcome, <span th:text="${role} + '!'" class="ml-2"> </span>
+            Welcome
+            <!-- Welcome, <span th:text="${role} + '!'" class="ml-2"> </span> -->
           </div>
           <div class="flex flex-col items-center">
-            <div>
+            <div class="relative">
               <label
                 htmlFor="Username"
-                class="relative block rounded-md border border-black shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 mb-6"
+                class="hover:border-customyellow hover:focus-within:border-black relative block rounded-md border focus-within:border-black focus-within:ring-1 focus-within:ring-customyellow focus-within:ring-opacity-[.75] mb-6"
               >
+                <!-- <p class="absolute z-10 border-2 py-3">text</p> -->
+
                 <input
                   type="text"
                   name="email"
@@ -112,7 +119,7 @@
             <div>
               <label
                 htmlFor="Password"
-                class="relative block rounded-md border border-black shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 mb-6"
+                class="hover:border-customyellow hover:focus-within:border-black relative block rounded-md border focus-within:border-black focus-within:ring-1 focus-within:ring-customyellow focus-within:ring-opacity-[.75] mb-6"
               >
                 <input
                   type="password"
@@ -148,7 +155,7 @@
               </label>
             </div>
             <button
-              class="border border-black hover:bg-black hover:text-white font-secondary text-black bg-transparent h-12 w-60 mt-16 rounded-md"
+              class="border border-black hover:bg-black hover:text-white font-secondary text-black bg-transparent h-12 w-60 mt-10 rounded-md"
             >
               Login
             </button>

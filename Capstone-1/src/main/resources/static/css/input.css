@@ -183,3 +183,6 @@
 .rounded-top-right {
   border-top-right-radius: 10px;
 }
+.filter-logo {
+  @apply filter invert brightness-0 contrast-100;
+}
