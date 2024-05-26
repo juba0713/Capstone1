@@ -534,13 +534,19 @@
                   <p class="font-semibold mb-10">
                     III. Curriculum Vitae of the Project Leader
                   </p>
-                  <a   target="_blank" class="w-1/3 vitaeFile">View File</a>
+                  <a target="_blank" class="w-1/3 vitaeFile"
+                    ><p
+                      class="hover:underline text-blue-700 hover:cursor-pointer"
+                    >
+                      View File
+                    </p></a
+                  >
                 </div>
                 <hr class="my-10" />
 
                 <div class="flex flex-col mb-10">
                   <label>Links to any supporting materials</label>
-                  <a target="_blank" th:href="@{google.com}" class="w-1/3">
+                  <a target="_blank" th:href="@{/google.com}" class="w-1/3">
                     <input
                       type="text"
                       placeholder="Input here"

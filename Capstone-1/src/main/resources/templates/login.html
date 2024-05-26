@@ -64,15 +64,13 @@
       <div
         class="h-520 w-642 bg-tanglow flex flex-col items-center justify-center p-32 rounded-l-lg"
       >
-        <a th:href="@{/}" class="z-50 hover:scale-105">
-          <img
-            class="cursor-pointer hover:invert"
-            th:src="@{/images/wilBlackBox.png}"
-          />
+        <!--  hover:scale-105 hover:invert-->
+        <a th:href="@{/}" class="z-50 pointer-events-none">
+          <img th:src="@{/images/wilBlackBox.png}" />
         </a>
-        <a th:href="@{/applicant/form}">
+        <a th:href="@{/applicant/form}" class="mt-8">
           <button
-            class="border border-black hover:bg-black hover:text-white font-primary text-black bg-transparent w-60 py-3 rounded-md mt-8 text-2xl"
+            class="border border-black hover:bg-black hover:text-white font-primary text-black bg-transparent w-60 py-3 rounded-md text-2xl"
           >
             APPLY AS APPLICANT
           </button>

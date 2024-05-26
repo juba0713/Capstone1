@@ -21,25 +21,25 @@
       .no-pad {
         padding: 0;
       }
-      
-      .error-container{
-		  position: absolute;
-		  top: 50px;
-		  left: 0;
-		  width: 100%;
-		  display: flex;
-		  justify-content: center;
-		  align-items: center;
-	  }
-	  
-	  .error-container div{
-		  background: red;
-		  color: #fff;
-		  font-size: 20px;
-		  font-weight: 600;
-		  padding: 10px;
-		  border-radius: 10px;
-	  }
+
+      .error-container {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .error-container div {
+        background: red;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 10px;
+      }
     </style>
     <!-- 
       !!!READ!!!
@@ -99,8 +99,8 @@
         </ul>
       </div>
       <div class="error-container" th:if="*{error != null}">
-		  <div>Please fill out all required fields!</div>
-	  </div>
+        <div>Please fill out all required fields!</div>
+      </div>
 
       <div class="w-full p-20 mt-14 z-10">
         <form
@@ -730,8 +730,12 @@
               <p class="font-semibold mb-10">
                 III. Curriculum Vitae of the Project Leader
               </p>
-              <input type="file" name="vitaeFile"  />
-               <div
+              <input type="file" name="vitaeFile" placeholder="gwapo" />
+              <span class="text-xs"
+                >Submit your file in
+                <span class="font-bold"> PDF </span> format.</span
+              >
+              <div
                 class="error no-pad"
                 th:if="*{error != null} AND *{error.vitaeFileError != null}"
               >
