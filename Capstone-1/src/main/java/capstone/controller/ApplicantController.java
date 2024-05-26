@@ -1,11 +1,20 @@
 package capstone.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import capstone.common.constant.CommonConstant;
@@ -19,6 +28,9 @@ public class ApplicantController {
 	
 	@Autowired
 	private ApplicantService applicantService;
+	
+	@Autowired
+	private Environment env;
 
 	/**
 	 * To show the Applicant Form
@@ -35,9 +47,21 @@ public class ApplicantController {
 	 * @return String
 	 */
 	@PostMapping("/form")
-	public String processApplicantForm(@ModelAttribute ApplicantWebDto webDto, RedirectAttributes ra) {
+	public String processApplicantForm(@ModelAttribute ApplicantWebDto webDto, RedirectAttributes ra, @RequestParam("vitaeFile") MultipartFile file)  throws IOException{
 		
-		System.out.println("Agree Flg: " + webDto.getAgreeFlg());
+		
+		if(file != null && !file.isEmpty()) {
+		
+            Path uploadPath = Paths.get(env.getProperty("file.path"));
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+
+            String filename = file.getOriginalFilename();
+            Path filePath = uploadPath.resolve(filename);
+            Files.copy( file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+		}
 		
 		ApplicantInOutDto inDto = new ApplicantInOutDto();
 		
@@ -71,7 +95,7 @@ public class ApplicantController {
 		
 		inDto.setMethodology(webDto.getMethodology());
 		
-		inDto.setVitaeFile(webDto.getVitaeFile());
+		inDto.setVitaeFile(file);
 		
 		inDto.setSupportLink(webDto.getSupportLink());
 		
@@ -111,7 +135,7 @@ public class ApplicantController {
 		
 		inDto.setCommitmentFourFlg(webDto.getCommitmentFourFlg());
 		
-		ApplicantInOutDto outDto = applicantService.validateApplicant(inDto);
+		ApplicantInOutDto outDto = applicantService.validateApplication(inDto);
 		
 		System.out.println(webDto.getAgreeFlg());
 		
@@ -124,7 +148,7 @@ public class ApplicantController {
 			return "redirect:/applicant/form";
 		}
 		
-		applicantService.saveApplicant(inDto);
+		applicantService.saveApplication(inDto);
 		
 		ra.addFlashAttribute("success", "You have sucessfully registered! Wait for the email that will be sent to you!");
 		
@@ -166,4 +190,5 @@ public class ApplicantController {
 		
 		return "redirect:/applicant/home";
 	}
+	
 }

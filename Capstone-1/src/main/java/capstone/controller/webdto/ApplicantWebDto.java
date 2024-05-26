@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ErrorObj;
 import lombok.Data;
@@ -56,8 +58,8 @@ public class ApplicantWebDto {
 	//Methodlogy
 	public String methodology;
 	
-	//Curriculum Vitae
-	public String vitaeFile;
+//	//Curriculum Vitae
+//	public MultipartFile vitaeFile;
 	
 	//Support link
 	public String supportLink;

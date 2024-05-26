@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -47,6 +48,9 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	@Autowired
 	private PasswordEncoder encoder;
+	
+	@Autowired
+	private Environment env;
 
 	@Override
 	public ManagerInOutDto getAllApplicants() {

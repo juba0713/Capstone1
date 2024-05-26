@@ -1,13 +1,21 @@
 package capstone.model.service.impl;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import capstone.common.constant.CommonConstant;
 import capstone.common.constant.MessageConstant;
@@ -51,8 +59,11 @@ public class ApplicantServiceImpl implements ApplicantService {
 	@Autowired
 	private CommonService commonService;
 	
+	@Autowired
+	private Environment env;
+	
 	@Override
-	public ApplicantInOutDto validateApplicant(ApplicantInOutDto inDto) {
+	public ApplicantInOutDto validateApplication(ApplicantInOutDto inDto) {
 		
 		ApplicantInOutDto outDto = new ApplicantInOutDto();
 		
@@ -77,6 +88,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		List<String> leaderNumberError = new ArrayList<>();
 		List<String> leaderEmailError = new ArrayList<>();
 		List<String> membersError = new ArrayList<>();
+		List<String> vitaeFileError = new ArrayList<>();
 		String agreeFlgError = "";		
 		String technologyAnsError = "";	
 		String productDevelopmentAnsError = "";	
@@ -165,7 +177,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 			hasError=true;
 		}
 		
-		if(CommonConstant.BLANK.equals(inDto.getObjectives())){
+		if(CommonConstant.BLANK.equals(inDto.getMethodology())){
 			methodologyError.add("Methodology and Expected Outputs is required!");
 			hasError=true;
 		}
@@ -268,6 +280,17 @@ public class ApplicantServiceImpl implements ApplicantService {
 			hasError=true;
 		}
 		
+		if(inDto.getVitaeFile().isEmpty()) {
+			vitaeFileError.add("Please upload a Curriculum Vitae");
+			hasError=true;
+		}
+		
+		String extension = FilenameUtils.getExtension(inDto.getVitaeFile().getOriginalFilename()).toLowerCase();
+	    if (!extension.equals("pdf")) {
+	    	vitaeFileError.add("Please upload a PDF File");
+			hasError=true;
+	    }
+		
 		if(hasError) {
 			
 			errorObj.setEmailError(emailError);
@@ -330,6 +353,8 @@ public class ApplicantServiceImpl implements ApplicantService {
 			
 			errorObj.setMembersError(membersError);
 			
+			errorObj.setVitaeFileError(vitaeFileError);			
+			
 			outDto.setError(errorObj);
 		
 			outDto.setResult(CommonConstant.INVALID);
@@ -343,7 +368,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 	}
 
 	@Override
-	public ApplicantInOutDto saveApplicant(ApplicantInOutDto inDto) {
+	public ApplicantInOutDto saveApplication(ApplicantInOutDto inDto) throws IOException {
 		
 		Timestamp currentDateTime = new Timestamp(System.currentTimeMillis());
 		
@@ -451,7 +476,22 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		projectEntity.setMethodology(inDto.getMethodology());
 		
-		projectEntity.setVitaeFile("FIXED");
+		Path uploadPath = Paths.get(env.getProperty("file.path"));
+
+		if (!Files.exists(uploadPath)) {
+		    Files.createDirectories(uploadPath);
+		}
+
+		MultipartFile vitaeFile = inDto.getVitaeFile(); 
+
+		String originalFilename = vitaeFile.getOriginalFilename();
+		String filename = originalFilename + "_" + userIdPk; 
+
+		Path filePath = uploadPath.resolve(filename); 
+
+		Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+		projectEntity.setVitaeFile(filename);
 		
 		projectEntity.setSupportLink(inDto.getSupportLink());
 		

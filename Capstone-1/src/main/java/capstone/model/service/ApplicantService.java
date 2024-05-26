@@ -1,5 +1,7 @@
 package capstone.model.service;
 
+import java.io.IOException;
+
 import org.springframework.stereotype.Service;
 
 import capstone.model.dto.ApplicantInOutDto;
@@ -13,14 +15,14 @@ public interface ApplicantService {
 	 * @param inDto
 	 * @return ApplicantInOutDto
 	 */
-	public ApplicantInOutDto validateApplicant(ApplicantInOutDto inDto);
+	public ApplicantInOutDto validateApplication(ApplicantInOutDto inDto);
 
 	/**
 	 * To save applicant
 	 * @param inDto
 	 * @return ApplicantInOutDto
 	 */
-	public ApplicantInOutDto saveApplicant(ApplicantInOutDto inDto);
+	public ApplicantInOutDto saveApplication(ApplicantInOutDto inDto) throws IOException;
 	
 	/**
 	 * To validate the apssword

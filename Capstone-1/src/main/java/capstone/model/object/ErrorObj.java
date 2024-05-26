@@ -43,6 +43,8 @@ public class ErrorObj {
 	
 	public List<String> membersError;
 	
+	public List<String> vitaeFileError;
+	
 	public String agreeFlgError;
 	
 	public String technologyAnsError;

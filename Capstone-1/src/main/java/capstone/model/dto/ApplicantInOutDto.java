@@ -2,6 +2,8 @@ package capstone.model.dto;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ErrorObj;
 import lombok.Data;
@@ -61,7 +63,7 @@ public class ApplicantInOutDto {
 	public String methodology;
 	
 	//Curriculum Vitae
-	public String vitaeFile;
+	public MultipartFile vitaeFile;
 	
 	//Support link
 	public String supportLink;
