@@ -156,18 +156,22 @@
                 </tr>
               </thead>
               <tbody class="divide-y divide-grey-500 bodyrowhover">
-                <tr th:each="app : *{listOfApplicants}" class="row-btn">
+                <tr
+                  th:each="app : *{listOfApplicants}"
+                  class="row-btn"
+                  th:data-id="${app.applicantIdPk}"
+                >
                   <td
                     th:text="${app.email}"
-                    class="whitespace-nowrap max-w-0 truncate"
+                    class="row-btn whitespace-nowrap max-w-0 truncate"
                   ></td>
                   <td
                     th:text="${app.projectTitle}"
-                    class="whitespace-nowrap max-w-0 truncate"
+                    class="row-btn whitespace-nowrap max-w-0 truncate"
                   ></td>
                   <td
                     th:text="${app.university}"
-                    class="whitespace-nowrap max-w-0 truncate"
+                    class="row-btn whitespace-nowrap max-w-0 truncate"
                   ></td>
 
                   <td>
@@ -194,14 +198,14 @@
         </div>
       </div>
       <!-- applicant details modal -->
-      <!-- <div class="modal" tabindex="-1" role="dialog" id="details-modal">
+      <div class="modal" tabindex="-1" role="dialog" id="details-modal">
         <div class="modal-dialog" role="document">
           <div
             th:replace="~{fragments/applicantdetails :: applicantDetailsFragment}"
             class="modal-content"
           ></div>
         </div>
-      </div> -->
+      </div>
 
       <!-- activation modal -->
       <div
