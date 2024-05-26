@@ -49,19 +49,7 @@ public class ApplicantController {
 	@PostMapping("/form")
 	public String processApplicantForm(@ModelAttribute ApplicantWebDto webDto, RedirectAttributes ra, @RequestParam("vitaeFile") MultipartFile file)  throws IOException{
 		
-		
-		if(file != null && !file.isEmpty()) {
-		
-            Path uploadPath = Paths.get(env.getProperty("file.path"));
-            if (!Files.exists(uploadPath)) {
-                Files.createDirectories(uploadPath);
-            }
-
-            String filename = file.getOriginalFilename();
-            Path filePath = uploadPath.resolve(filename);
-            Files.copy( file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-		}
+		System.out.println(file.getName());
 		
 		ApplicantInOutDto inDto = new ApplicantInOutDto();
 		
@@ -148,7 +136,7 @@ public class ApplicantController {
 			return "redirect:/applicant/form";
 		}
 		
-		applicantService.saveApplication(inDto);
+		//applicantService.saveApplication(inDto);
 		
 		ra.addFlashAttribute("success", "You have sucessfully registered! Wait for the email that will be sent to you!");
 		
