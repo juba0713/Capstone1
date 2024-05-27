@@ -185,6 +185,7 @@
                       Activate Account
                     </button>
                     <input
+                     class="btn-row"
                       type="checkbox"
                       name="chosenApplicant"
                       th:value="${app.applicantIdPk}"
@@ -299,6 +300,7 @@
 
             if (!rowBtnClicked) {
               $("#details-modal").modal("show");
+              console.log("ID: " + id);
               retrieveApplicantDetails(id);
 
               // getApplicantDetails();
@@ -317,30 +319,15 @@
 
               $("#activate-account-modal").modal("show");
             }
+            if(this.name === 'chosenApplicant'){
+				console.log("YES");
+			}
             setTimeout(() => {
               rowBtnClicked = false;
             }, 100);
           });
         }
 
-        async function getApplicantDetails() {
-          try {
-            const response = await fetch("/officer/retrieve-all");
-
-            document.getElementById("modal-body").innerHTML =
-              '<div class="loader"></div>';
-
-            if (!response.ok) {
-              document.getElementById("modal-body").innerHTML =
-                '<div><div>Reload</div><a href="/officer/home">Reload</a></div>';
-            }
-
-            const data = await response.json();
-            console.log(data);
-          } catch (error) {
-            console.error("Error:", error);
-          }
-        }
         async function retrieveApplicantDetails(applicantIdPk) {
           const url = `/manager/retrieve/details?applicantIdPk=${applicantIdPk}`;
           const response = await fetch(url, { method: "GET" });
@@ -394,7 +381,7 @@
           let objectives = document.querySelector(".objectives");
           let scopeProposal = document.querySelector(".scopeProposal");
           let methodology = document.querySelector(".methodology");
-          //let vitaeFile = document.querySelector('.vitaeFile');
+          let vitaeFile = document.querySelector('.vitaeFile');
           let supportLink = document.querySelector(".supportLink");
           let groupName = document.querySelector(".groupName");
           let groupLeader = document.querySelector(".groupLeader");
@@ -549,6 +536,8 @@
           scopeProposal.textContent = applicant.scopeProposal;
           //Methodology
           methodology.textContent = applicant.methodology;
+          //Vitae File
+          vitaeFile.href = "/view/" + applicant.vitaeFile;
           //Supporting Link
           if (applicant.supportLink != "") {
             supportLink.value = applicant.supportLink;
@@ -649,7 +638,6 @@
           } else {
             commitmentFourFlg[1].checked = true;
           }
-          console.log(applicant);
         }
       });
     </script>

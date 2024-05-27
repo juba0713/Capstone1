@@ -98,6 +98,8 @@ public class ManagerController {
 
 		
 		ManagerInOutDto inDto = new ManagerInOutDto();
+		
+		System.out.println("ID: " + applicantIdPk);
   
 		inDto.setApplicantIdPk(Integer.parseInt(applicantIdPk));
  

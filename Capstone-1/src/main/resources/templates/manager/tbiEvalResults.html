@@ -281,24 +281,7 @@
           });
         }
 
-        async function getApplicantDetails() {
-          try {
-            const response = await fetch("/officer/retrieve-all");
-
-            document.getElementById("modal-body").innerHTML =
-              '<div class="loader"></div>';
-
-            if (!response.ok) {
-              document.getElementById("modal-body").innerHTML =
-                '<div><div>Reload</div><a href="/officer/home">Reload</a></div>';
-            }
-
-            const data = await response.json();
-            console.log(data);
-          } catch (error) {
-            console.error("Error:", error);
-          }
-        }
+       
         async function retrieveApplicantDetails(applicantIdPk) {
           const url = `/manager/retrieve/details?applicantIdPk=${applicantIdPk}`;
           const response = await fetch(url, { method: "GET" });

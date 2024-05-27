@@ -436,7 +436,7 @@
           let objectives = document.querySelector(".objectives");
           let scopeProposal = document.querySelector(".scopeProposal");
           let methodology = document.querySelector(".methodology");
-          //let vitaeFile = document.querySelector('.vitaeFile');
+          let vitaeFile = document.querySelector('.vitaeFile');
           let supportLink = document.querySelector(".supportLink");
           let groupName = document.querySelector(".groupName");
           let groupLeader = document.querySelector(".groupLeader");
@@ -591,6 +591,8 @@
           scopeProposal.textContent = applicant.scopeProposal;
           //Methodology
           methodology.textContent = applicant.methodology;
+          //Vitae File
+          vitaeFile.href = "/view/" + applicant.vitaeFile;
           //Supporting Link
           if (applicant.supportLink != "") {
             supportLink.value = applicant.supportLink;
