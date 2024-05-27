@@ -74,7 +74,7 @@ public class ApplicantWebDto {
 	public String leaderNumber;
 	
 	//Leader email address
-	public String leaderEmail;
+	public String leaderAddress;
 	
 	//Members;
 	public List<String> members = new ArrayList<>(Arrays.asList("", "", "", "", ""));

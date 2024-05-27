@@ -39,7 +39,7 @@ public class ErrorObj {
 	
 	public List<String> leaderNumberError;
 	
-	public List<String> leaderEmailError;
+	public List<String> leaderAddressError;
 	
 	public List<String> membersError;
 	

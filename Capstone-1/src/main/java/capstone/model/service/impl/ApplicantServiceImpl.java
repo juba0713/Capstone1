@@ -87,7 +87,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		List<String> groupNameError = new ArrayList<>();
 		List<String> groupLeaderError = new ArrayList<>();
 		List<String> leaderNumberError = new ArrayList<>();
-		List<String> leaderEmailError = new ArrayList<>();
+		List<String> leaderAddressError = new ArrayList<>();
 		List<String> membersError = new ArrayList<>();
 		List<String> vitaeFileError = new ArrayList<>();
 		String agreeFlgError = "";
@@ -204,8 +204,8 @@ public class ApplicantServiceImpl implements ApplicantService {
 			hasError = true;
 		}
 
-		if (CommonConstant.BLANK.equals(inDto.getLeaderEmail())) {
-			leaderEmailError.add("Address is required!");
+		if (CommonConstant.BLANK.equals(inDto.getLeaderAddress())) {
+			leaderAddressError.add("Address is required!");
 			hasError = true;
 		}
 
@@ -325,7 +325,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 			errorObj.setLeaderNumberError(leaderNumberError);
 
-			errorObj.setLeaderEmailError(leaderEmailError);
+			errorObj.setLeaderAddressError(leaderAddressError);
 
 			errorObj.setAgreeFlgError(agreeFlgError);
 
@@ -517,7 +517,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 		groupEntity.setMobileNumber(inDto.getLeaderNumber());
 
-		groupEntity.setEmailAddress(inDto.getEmail());
+		groupEntity.setAddress(inDto.getLeaderAddress());
 
 		groupEntity.setUniversity(inDto.getUniversity());
 
@@ -723,7 +723,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 				applicantDetailsObj.setMobileNumber(app.getMobileNumber());
 
-				applicantDetailsObj.setEmailAddress(app.getEmailAddress());
+				applicantDetailsObj.setAddress(app.getAddress());
 
 				applicantDetailsObj.setUniversity(app.getUniversity());
 

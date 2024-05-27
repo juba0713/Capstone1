@@ -101,7 +101,7 @@ public class ApplicantDetailsEntity {
 	
 	public String mobileNumber;
 	
-	public String emailAddress;
+	public String address;
 	
 	public String university;
 	

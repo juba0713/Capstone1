@@ -51,7 +51,7 @@ public class ApplicantDetailsObj {
 	
 	public String mobileNumber;
 	
-	public String emailAddress;
+	public String address;
 	
 	public String university;
 	

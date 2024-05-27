@@ -62,7 +62,7 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "	g.first_name AS leader_first_name,"
 			+ "	g.last_name AS leader_last_name,"
 			+ "	g.mobile_number,"
-			+ "	g.email_address,"
+			+ "	g.address,"
 			+ "	g.university,"
 			+ "	gm.first_name AS member_first_name,"
 			+ "	gm.last_name AS member_last_name,"

@@ -191,7 +191,7 @@ public class OfficerServiceImpl implements OfficerService{
 				
 				applicantDetailsObj.setMobileNumber(app.getMobileNumber());
 				
-				applicantDetailsObj.setEmailAddress(app.getEmailAddress());
+				applicantDetailsObj.setAddress(app.getAddress());
 				
 				applicantDetailsObj.setUniversity(app.getUniversity());
 				

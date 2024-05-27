@@ -819,16 +819,16 @@
               <input
                 type="text"
                 placeholder="Input here"
-                name="leaderEmail"
-                th:value="*{leaderEmail}"
+                name="leaderAddress"
+                th:value="*{leaderAddress}"
                 class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
               />
               <div
                 class="error no-pad"
-                th:if="*{error != null} AND *{error.leaderEmailError != null}"
+                th:if="*{error != null} AND *{error.leaderAddressError != null}"
               >
                 <div
-                  th:each="err : *{error.leaderEmailError}"
+                  th:each="err : *{error.leaderAddressError}"
                   th:text="${err}"
                 ></div>
               </div>

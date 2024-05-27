@@ -91,7 +91,7 @@ public class ApplicantController {
 		
 		inDto.setLeaderNumber(webDto.getLeaderNumber());
 		
-		inDto.setLeaderEmail(webDto.getLeaderEmail());
+		inDto.setLeaderAddress(webDto.getLeaderAddress());
 		
 		inDto.setMembers(webDto.getMembers());
 		

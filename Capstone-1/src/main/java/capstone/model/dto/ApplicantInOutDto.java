@@ -78,7 +78,7 @@ public class ApplicantInOutDto {
 	public String leaderNumber;
 	
 	//Leader email address
-	public String leaderEmail;
+	public String leaderAddress;
 	
 	//Members;
 	public List<String> members;
