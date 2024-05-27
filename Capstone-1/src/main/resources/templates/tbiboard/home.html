@@ -50,6 +50,10 @@
     </style>
   </head>
   <body th:object="${tbiBoardWebDto}">
+    <img
+      th:src="@{/images/blocks.png}"
+      class="w-3/5 h-4/5 bottom-0 absolute right-0 md:fixed pointer-events-none z-0"
+    />
     <div class="px-12 pt-4 h-screen bg-[#F9F9F9]">
       <div
         class="h-20 flex flex-row justify-between bg-customyellow rounded-tr-3xl rounded-tl-3xl"
@@ -149,10 +153,10 @@
       </div>
 
       <div
-        class="bottom-0 right-0 px-2 mr-12 mb-1 flex justify-end text-base font-primary absolute bg-customyellow text-black rounded-sm"
+        class="bottom-0 right-0 mr-12 mb-1 flex justify-end text-base font-primary absolute bg-customyellow text-black rounded-sm"
       >
         <form th:action="@{/logout}" method="POST">
-          <button class="hover:text-white">Logout</button>
+          <button class="hover:text-white px-2">Logout</button>
         </form>
       </div>
     </div>

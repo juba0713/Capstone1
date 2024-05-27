@@ -16,15 +16,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/officer/officer.css}" />
     <link rel="stylesheet" th:href="@{/css/output.css}" />
-    <!-- for live server[no springboot running] -->
-    <link
-      rel="stylesheet"
-      href="/Capstone1/Capstone-1/src/main/resources/static/css/output.css"
-    />
-    <link
-      rel="stylesheet"
-      href="/Capstone1/Capstone-1/src/main/resources/static/css/officer/officer.css"
-    />
     <style>
       .dt-input {
         margin-right: 10px;
@@ -52,6 +43,10 @@
     </style>
   </head>
   <body th:object="${officerWebDto}">
+    <img
+      th:src="@{/images/blocks.png}"
+      class="w-3/5 h-4/5 bottom-0 absolute right-0 md:fixed pointer-events-none z-0"
+    />
     <div class="h-screen px-12 pt-4 bg-[#F9F9F9]">
       <div
         class="h-20 flex flex-row justify-between bg-customyellow rounded-tr-3xl rounded-tl-3xl"
@@ -141,10 +136,10 @@
       <!-- </div> -->
 
       <div
-        class="bottom-0 right-0 px-2 mr-12 mb-1 flex justify-end text-base font-primary absolute bg-customyellow text-black rounded-sm"
+        class="bottom-0 right-0 mr-12 mb-1 flex justify-end text-base font-primary absolute bg-customyellow text-black rounded-sm"
       >
         <form th:action="@{/logout}" method="POST">
-          <button class="hover:text-white">Logout</button>
+          <button class="hover:text-white px-2">Logout</button>
         </form>
       </div>
     </div>
@@ -170,7 +165,7 @@
             <div
               class="rounded-t-md flex items-center flex-col justify-items-center mx-auto absolute z-10 w-full py-2 border-b-2"
             >
-              <img th:src="@{/images/check.png}" />
+              <img th:src="@{/icons/check.png}" />
 
               <h5 class="modal-title font-bold text-green-700">Confirmation</h5>
             </div>
@@ -186,8 +181,10 @@
               />
               <div class="justify-between flex">
                 <button
+                  data-dismiss="modal"
+                  aria-label="Close"
                   type="button"
-                  class="h-8 border-black hover:bg-[#F9F9F9] rounded-lg w-32 hover:text-black text-black border font-secondary sm:text-sm text-xs sm:p-1"
+                  class="close h-8 border-black hover:bg-[#F9F9F9] rounded-lg w-32 hover:text-black text-black border font-secondary sm:text-sm text-xs sm:p-1"
                 >
                   Cancel
                 </button>
@@ -247,8 +244,10 @@
               </div>
               <div class="justify-between flex mx-16">
                 <button
+                  data-dismiss="modal"
+                  aria-label="Close"
                   type="button"
-                  class="h-8 border-black hover:bg-[#F9F9F9] rounded-lg w-32 hover:text-black text-black border font-secondary sm:text-sm text-xs sm:p-1"
+                  class="close h-8 border-black hover:bg-[#F9F9F9] rounded-lg w-32 hover:text-black text-black border font-secondary sm:text-sm text-xs sm:p-1"
                 >
                   Cancel
                 </button>
