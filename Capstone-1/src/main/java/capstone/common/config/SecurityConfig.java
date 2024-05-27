@@ -64,7 +64,6 @@ public class SecurityConfig{
 	protected SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/").permitAll()
 				.requestMatchers("/login/**").permitAll()
 				.requestMatchers("/css/**").permitAll()
 				.requestMatchers("/js/**").permitAll()
@@ -81,10 +80,10 @@ public class SecurityConfig{
 				.requestMatchers("/tbi-board/**").hasAnyAuthority("TBIBOARD")
 			)
 			.formLogin((form) -> form
-				.loginPage("/login/")
+				.loginPage("/login")
 				.permitAll()
-				//.failureUrl("/")
-				.failureHandler(authenticationFailureHandler())
+				.failureUrl("/login")
+				//.failureHandler(authenticationFailureHandler())
 				.usernameParameter("email")
 				.passwordParameter("password")
 				//.defaultSuccessUrl("/applicant/home")

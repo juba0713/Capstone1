@@ -10,11 +10,11 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class InitialController {
 
-	@GetMapping()
-	public String showInitial(Model model, RedirectAttributes ra) {
-					
-
-        
-		return "initial";
-	}
+//	@GetMapping()
+//	public String showInitial(Model model, RedirectAttributes ra) {
+//					
+//
+//        
+//		return "initial";
+//	}
 }

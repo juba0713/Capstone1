@@ -18,46 +18,45 @@ import jakarta.servlet.http.HttpSession;
 public class LoginController {
 
 
-	@GetMapping("/login/{role}")
-	public String showLoginPage(Model model, @PathVariable("role") String role, HttpServletRequest request) {
-			
-		if(!role.equals("applicant") && 
-			!role.equals("officer") &&
-			!role.equals("tbi-board") && 
-			!role.equals("manager") &&
-			role.equals("")){
-			
-			return "redirect:/";
-		}
-		
-		
-		String error = (String)request.getSession().getAttribute("errorMessageLogin");
-		
-		if(error != null) {
-			model.addAttribute("errorMessageLogin", error);
-			request.getSession().setAttribute("errorMessageLogin", null);
-		}
-		
-		if(role.equals("applicant")) {
-			request.getSession().setAttribute("fromLogin", "applicant");
-		}else if(role.equals("officer")) {
-			request.getSession().setAttribute("fromLogin", "officer");
-		}else if(role.equals("tbi-board")) {
-			request.getSession().setAttribute("fromLogin", "tbi-board");
-		}else if(role.equals("manager")) {
-			request.getSession().setAttribute("fromLogin", "manager");
-		}
-		
-		model.addAttribute("role", role);
+//	@GetMapping("/login/{role}")
+//	public String showLoginPage(Model model, @PathVariable("role") String role, HttpServletRequest request) {
+//			
+//		if(!role.equals("applicant") && 
+//			!role.equals("officer") &&
+//			!role.equals("tbi-board") && 
+//			!role.equals("manager") &&
+//			role.equals("")){
+//			
+//			return "redirect:/";
+//		}
+//		
+//		
+//		String error = (String)request.getSession().getAttribute("errorMessageLogin");
+//		
+//		if(error != null) {
+//			model.addAttribute("errorMessageLogin", error);
+//			request.getSession().setAttribute("errorMessageLogin", null);
+//		}
+//		
+//		if(role.equals("applicant")) {
+//			request.getSession().setAttribute("fromLogin", "applicant");
+//		}else if(role.equals("officer")) {
+//			request.getSession().setAttribute("fromLogin", "officer");
+//		}else if(role.equals("tbi-board")) {
+//			request.getSession().setAttribute("fromLogin", "tbi-board");
+//		}else if(role.equals("manager")) {
+//			request.getSession().setAttribute("fromLogin", "manager");
+//		}
+//		
+//		model.addAttribute("role", role);
+//		
+//		return "login";
+//	}
+	
+	@GetMapping("/login")
+	public String showLoginPage() {
 		
 		return "login";
 	}
 	
-	@PostMapping("/login/{role}")
-	public String processLoginPage() {
-		
-		System.out.println("AW");
-		
-		return "login";
-	}
 }
