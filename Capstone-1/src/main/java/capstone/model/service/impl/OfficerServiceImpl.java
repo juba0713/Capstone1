@@ -3,6 +3,7 @@ package capstone.model.service.impl;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,7 +72,9 @@ public class OfficerServiceImpl implements OfficerService{
 
 	@Override
 	public OfficerInOutDto rejectApplicant(OfficerInOutDto inDto) throws MessagingException {
-		
+		       
+        String token = UUID.randomUUID().toString().replace("-", "");
+
 		OfficerInOutDto outDto = new OfficerInOutDto();
 		
 		Timestamp timeNow = new Timestamp(System.currentTimeMillis());
@@ -92,9 +95,14 @@ public class OfficerServiceImpl implements OfficerService{
 		
 		rejectedApplicantEntity.setDeleteFlg(false);
 		
+		rejectedApplicantEntity.setToken(token);
+		
 		applicantLogic.saveRejectedApplicantEntity(rejectedApplicantEntity);
 		
-		emailService.sendRejectionMail(inDto.getFeedback(), inDto.getResubmitFlg(), userLogic.getUserByIdPk(applicantEntity.getCreatedBy()).getEmail());
+		emailService.sendRejectionMail(inDto.getFeedback(), 
+															inDto.getResubmitFlg(), 
+															userLogic.getUserByIdPk(applicantEntity.getCreatedBy()).getEmail(),
+															token);
 		
 		return outDto;
 	}

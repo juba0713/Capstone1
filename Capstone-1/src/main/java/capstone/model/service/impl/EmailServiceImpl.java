@@ -17,7 +17,7 @@ public class EmailServiceImpl implements EmailService {
     private JavaMailSender emailSender;
 
 	@Override
-	public void sendRejectionMail(String feedback, boolean resubmitFlg, String email) throws MessagingException {
+	public void sendRejectionMail(String feedback, boolean resubmitFlg, String email, String token) throws MessagingException {
 		
 		MimeMessage message = emailSender.createMimeMessage();
 	     
@@ -30,6 +30,11 @@ public class EmailServiceImpl implements EmailService {
 	    String htmlText = "<h1>Feedback:</h1>" +
                 "<p>" + feedback + "</p>" +
                 "<p>" + "Reapplication: " + (resubmitFlg ? "Yes" : "No") + "</p>"; 
+	    
+	    if(resubmitFlg) {
+	    	htmlText += "<a href='http://localhost:8080/applicant/form/resubmit?token=" + token + "'>"
+	    	          + "resubmit</a>"; 	    
+	    }
 
 	    helper.setText(htmlText, true); 
 		

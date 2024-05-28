@@ -72,6 +72,7 @@ public class SecurityConfig{
 				.requestMatchers("/images/**").permitAll()
 				.requestMatchers("/fonts/**").permitAll()
 				.requestMatchers("/design/**").permitAll()
+				.requestMatchers("/applicant/form/resubmit").permitAll()
 				.requestMatchers("/applicant/form").permitAll()
 				.requestMatchers("/view/**").permitAll()
 				.requestMatchers("/applicant/**").hasAnyAuthority("APPLICANT")

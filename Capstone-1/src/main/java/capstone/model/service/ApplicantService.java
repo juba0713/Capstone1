@@ -44,4 +44,11 @@ public interface ApplicantService {
 	 * @return ApplicantInOutDto
 	 */
 	public ApplicantInOutDto getApplicantDetails(); 
+	
+	/**
+	 * To get the details of the application by token
+	 * @param inDto
+	 * @return ApplicantInOutDto
+	 */
+	public ApplicantInOutDto getApplicantDetailsByToken(ApplicantInOutDto inDto); 
 }

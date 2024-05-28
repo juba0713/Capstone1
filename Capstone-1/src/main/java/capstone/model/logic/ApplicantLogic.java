@@ -85,4 +85,12 @@ public interface ApplicantLogic {
 	 * @param entity
 	 */
 	public ApplicantEntity getApplicantByCreatedBy(int createdBy);
+	
+	/**
+	 * To get rejetced applicant by token
+	 * @param token
+	 * @return RejectedApplicantEntity
+	 */
+	public RejectedApplicantEntity getRejectedApplicantByToken(String token);
+	
 }

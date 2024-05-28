@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}" />
+
+    <style>
+      /* Style to hide the button by default */
+      .scroll-to-top {
+        display: none;
+      }
+
+      .error {
+        padding-left: 20px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #dc143c;
+      }
+
+      .no-pad {
+        padding: 0;
+      }
+
+      .error-container {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .error-container div {
+        background: red;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 10px;
+      }
+    </style>
+    <!-- 
+      !!!READ!!!
+      to finalize:
+      -placeholder size needs to be adjusted
+      -make the yes to be selected; require so that no's will not be saved
+     -->
+  </head>
+  <body th:object="${applicantWebDto}">
+    <img
+      th:src="@{/images/honeycomb.png}"
+      src="/Capstone1/Capstone-1/src/main/resources/static/images/honeycomb.png"
+      class="mix-blend-overlay absolute top-0 right-0 md:fixed pointer-events-none z-0"
+    />
+    <img
+      th:src="@{/images/circle.png}"
+      src="/Capstone1/Capstone-1/src/main/resources/static/images/circle.png"
+      class="mix-blend-overlay w-40 h-40 absolute md:fixed pointer-events-none ml-6 mt-16 z-0"
+    />
+    <img
+      th:src="@{/images/cone.png}"
+      src="/Capstone1/Capstone-1/src/main/resources/static/images/cone.png"
+      class="mix-blend-overlay w-40 h-40 absolute top-4 md:fixed pointer-events-none z-0"
+      style="left: 50%"
+    />
+    <img
+      th:src="@{/images/cylinder.png}"
+      src="/Capstone1/Capstone-1/src/main/resources/static/images/cylinder.png"
+      class="mix-blend-overlay w-40 h-40 absolute bottom-0 mb-10 md:fixed pointer-events-none z-0"
+      style="left: 4rem"
+    />
+    <img
+      th:src="@{/images/curl.png}"
+      src="/Capstone1/Capstone-1/src/main/resources/static/images/curl.png"
+      class="mix-blend-overlay w-40 h-32 absolute bottom-0 md:fixed pointer-events-none z-0"
+      style="left: 50%"
+    />
+    <div
+      class="bg-gradient-to-r from-formbg-dark to-formbg-light flex w-full md:flex-row-reverse"
+    >
+      <div
+        class="z-50 font-secondary font-normal text-black pt-20 mt-14 md:w-3/12 md:fixed md:block hidden"
+      >
+        <div class="mb-4 font-semibold">Registration Form</div>
+        <ul class="w-4/5">
+          <li class="mb-4 ml-2 hover:text-white">
+            <a href="#capsuleProposal"> I. Launchlab Capsule Proposal </a>
+          </li>
+          <li class="mb-4 ml-2 hover:text-white">
+            <a href="#aboutProposedAcceleration">
+              II. About the Proposed Acceleration
+            </a>
+          </li>
+          <li class="mb-4 ml-2 hover:text-white">
+            <a href="#cvProjectLeader"> III. Curriculum Vitae </a>
+          </li>
+        </ul>
+      </div>
+      <div class="error-container" th:if="*{error != null}">
+        <div>Please fill out all required fields!</div>
+      </div>
+
+      <div class="w-full p-20 mt-14 z-10">
+        <form
+          th:action="@{/applicant/form}"
+          method="POST"
+          class="border font-secondary rounded-lg border-black bg-white md:w-9/12"
+          enctype="multipart/form-data"
+        >
+          <div>
+            <div class="flex justify-between">
+              <div class="mt-20 mb-6 h-20 flex text-center items-center">
+                <img
+                  src="/Capstone1/Capstone-1/src/main/resources/static/images/launchlab.png"
+                  th:src="@{/images/launchlab.png}"
+                  class="h-20 pointer-events-none"
+                />
+                <div class="mt-4 font-semibold text-xl">Registration Form</div>
+              </div>
+              <a th:href="@{/}" class="h-24">
+                <img
+                  src="/Capstone1/Capstone-1/src/main/resources/static/images/wilBlackBox.png"
+                  th:src="@{/images/wilBlackBox.png}"
+                  class="h-20 mr-4 mt-4 pointer-events-none"
+                />
+              </a>
+            </div>
+
+            <p class="mb-10 ml-6 mr-6 text-justify">
+              Thank you for your interest in participating the LaunchLab Program
+              of DASIG. This program is spearheaded by CIT-U Wildcat Innovation
+              Labs. Please complete the following form to submit your capsule
+              proposal for consideration.
+            </p>
+            <hr class="ml-6 mr-6 my-10" />
+            <div
+              class="flex flex-col ml-6 w-1/4 relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
+            >
+              <h2 class="text-black mb-6">Email</h2>
+              <input
+                type="text"
+                name="email"
+                th:value="*{email}"
+                placeholder="Enter your email here"
+                class="text-black h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
+              />
+            </div>
+            <div
+              class="error"
+              th:if="*{error != null} AND *{error.emailError != null}"
+            >
+              <div th:each="err : *{error.emailError}" th:text="${err}"></div>
+            </div>
+          </div>
+          <hr class="ml-6 mr-6 my-10" />
+          <div class="">
+            <p class="text-black text-justify mt-10 mb-8 ml-6 mr-6">
+              By accomplishing this form, the following personal information
+              will be collected including, startup team members names, personal
+              email address, mobile phone number and other relevant information.
+              The personal information you will provide in this form will be
+              used within LaunchLab Program, DASIG consortium committee and will
+              not be shared with any outside parties unless you have prior
+              written consent. Development and Acceleration Support for
+              Innovation Growth (DASIG) respects your rights as a data subject
+              under the Data Privacy Act.
+            </p>
+            <p class="text-black text-justify mt-8 mb-8 ml-6 mr-8">
+              If you have further questions and concerns regarding the
+              processing of your personal information, you are welcome to
+              contact our team, Engr. Ralph Laviste at
+              <a
+                href="mailto:ralph.laviste@cit.edu"
+                class="font-semibold text-blue-700"
+              >
+                ralph.laviste@cit.edu
+              </a>
+              and
+              <a
+                href="mailto:rlaviste@gmail.com"
+                class="font-semibold text-blue-700"
+              >
+                rlaviste@gmail.com
+              </a>
+              , and Engr. Jurydel Rama at
+              <a
+                href="mailto:jurydel.rama@cit.edu"
+                class="font-semibold text-blue-700"
+              >
+                jurydel.rama@cit.edu
+              </a>
+              and
+              <a
+                href="mailto:jurydelrama@gmail.com"
+                class="font-semibold text-blue-700"
+              >
+                jurydelrama@gmail.com
+              </a>
+              .
+            </p>
+            <p class="text-black text-justify mt-8 mb-8 ml-6 mr-8">
+              In compliance with the Data Privacy Act (DPA) of 2012, also known
+              as the Republic Act of 10173 (RA 10173), I agree and authorize the
+              Development and Acceleration Support for Innovation Growth (DASIG)
+              consortium members to use the personal information for the purpose
+              of LaunchLab programs and initiatives. I also acknowledge and
+              warrant that I have acquired the consent from all parties relevant
+              to this consent and hold free and harmless and indemnify
+              Development and Acceleration Support for Innovation Growth (DASIG)
+              from any complaint, suit, or damages which any party may file or
+              claim in relation to my consent.
+            </p>
+            <div class="text-black text-justify mt-8 mb-8 ml-6 mr-8">
+              <div class="items-center mb-8">
+                <input
+                  type="radio"
+                  name="agreeFlg"
+                  value="true"
+                  th:checked="*{agreeFlg != null AND agreeFlg}"
+                />
+                <label class="ml-2">I AGREE</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="agreeFlg"
+                  value="false"
+                  th:checked="*{agreeFlg != null AND !agreeFlg}"
+                />
+                <label class="ml-2">I DO NOT AGREE</label>
+              </div>
+            </div>
+          </div>
+          <div
+            class="error"
+            th:if="*{error != null} AND *{error.agreeFlgError != null}"
+          >
+            <div th:text="*{error.agreeFlgError}"></div>
+          </div>
+          <hr class="my-10 ml-6 mr-6" />
+
+          <div
+            class="flex flex-col ml-6 w-1/4 relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
+          >
+            <h2 class="mb-6">Project Title/Startup Name</h2>
+            <input
+              placeholder="Enter Project title"
+              name="projectTitle"
+              th:value="*{projectTitle}"
+              class="font-secondary text-black h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
+            />
+          </div>
+          <div
+            class="error"
+            th:if="*{error != null} AND *{error.projectTitleError != null}"
+          >
+            <div
+              th:each="err : *{error.projectTitleError}"
+              th:text="${err}"
+            ></div>
+          </div>
+
+          <div class="ml-6 mr-6" id="capsuleProposal">
+            <div class="flex flex-col mt-16 mb-8">
+              <p class="mb-6 font-semibold">
+                I. Fill up Launchlab Capsule Proposal
+              </p>
+              <label class="font-semibold">A. Project Description</label>
+              <textarea
+                type="text"
+                placeholder="Type something here..."
+                name="projectDescription"
+                th:text="*{projectDescription}"
+                class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32 z-10"
+              ></textarea>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.projectDescriptionError != null}"
+              >
+                <div
+                  th:each="err : *{error.projectDescriptionError}"
+                  th:text="${err}"
+                ></div>
+              </div>
+            </div>
+            <div class="mt-14">
+              <label class="font-semibold">B. Team Composition</label>
+              <h2 class="mt-4 mb-8">Name</h2>
+
+              <div class="mb-6 mt-6">
+                <input
+                  type="text"
+                  placeholder="Member name"
+                  name="teams[0][0]"
+                  th:value="*{teams[0][0]}"
+                  class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
+                /><input
+                  type="text"
+                  placeholder="Input role"
+                  name="teams[0][1]"
+                  th:value="*{teams[0][1]}"
+                  class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
+                />
+              </div>
+              <div class="mb-6">
+                <input
+                  type="text"
+                  placeholder="Member name"
+                  name="teams[1][0]"
+                  th:value="*{teams[1][0]}"
+                  class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
+                /><input
+                  type="text"
+                  placeholder="Input role"
+                  name="teams[1][1]"
+                  th:value="*{teams[1][1]}"
+                  class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Member name"
+                  name="teams[2][0]"
+                  th:value="*{teams[2][0]}"
+                  class="border-b bg-transparent focus-within:border-blue-600 focus:outline-none"
+                /><input
+                  type="text"
+                  placeholder="Input role"
+                  name="teams[2][1]"
+                  th:value="*{teams[2][1]}"
+                  class="border-b bg-transparent ml-6 focus-within:border-blue-600 focus:outline-none"
+                />
+              </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.teamsError != null}"
+              >
+                <div th:each="err : *{error.teamsError}" th:text="${err}"></div>
+              </div>
+            </div>
+            <div class="mt-14 flex flex-col">
+              <p class="font-semibold">C. About the Product/Solution</p>
+              <label class="mt-10 font-semibold">1. Problem Statement</label>
+              <textarea
+                placeholder="Type something here..."
+                name="problemStatement"
+                th:text="*{problemStatement}"
+                class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+              ></textarea>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.problemStatementError != null}"
+              >
+                <div
+                  th:each="err : *{error.problemStatementError}"
+                  th:text="${err}"
+                ></div>
+              </div>
+            </div>
+            <div class="mt-10 flex flex-col">
+              <label class="font-semibold">2. Target Market</label>
+              <textarea
+                placeholder="Type something here..."
+                name="targetMarket"
+                th:text="*{targetMarket}"
+                class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+              ></textarea>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.targetMarketError != null}"
+              >
+                <div
+                  th:each="err : *{error.targetMarketError}"
+                  th:text="${err}"
+                ></div>
+              </div>
+            </div>
+            <div class="mt-10 flex flex-col">
+              <label class="font-semibold">3. Solution Description</label>
+              <textarea
+                placeholder="Type something here..."
+                name="solutionDescription"
+                th:text="*{solutionDescription}"
+                class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+              ></textarea>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.solutionDescriptionError != null}"
+              >
+                <div
+                  th:each="err : *{error.solutionDescriptionError}"
+                  th:text="${err}"
+                ></div>
+              </div>
+            </div>
+            <div class="mt-10 mb-8 overflow-x-auto">
+              <label class="font-semibold"
+                >D. Historical Timeline of the Product/Project
+                Development</label
+              >
+              <p class="mt-6 mb-6 text-gray-500">Start from the most recent</p>
+              <table class="w-full">
+                <thead>
+                  <tr>
+                    <th class="font-semibold border border-gray-500 px-4 py-2">
+                      Month-Year
+                    </th>
+                    <th class="font-semibold border border-gray-500 px-4 py-2">
+                      Key Activities or Milestones
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-gray-500 px-4 py-2">
+                      <input
+                        type="text"
+                        name="historicalTimeline[0][0]"
+                        placeholder="mm/yyyy"
+                        class="w-full h-20 focus:outline-none"
+                        th:value="*{historicalTimeline[0][0]}"
+                      />
+                    </td>
+                    <td class="border border-gray-500 px-4 py-2">
+                      <input
+                        type="text"
+                        name="historicalTimeline[0][1]"
+                        placeholder="Enter key activities or milestones here"
+                        class="w-full focus:outline-none"
+                        th:value="*{historicalTimeline[0][1]}"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-500 px-4 py-2">
+                      <input
+                        type="text"
+                        name="historicalTimeline[1][0]"
+                        placeholder="mm/yyyy"
+                        class="w-full h-20 focus:outline-none"
+                        th:value="*{historicalTimeline[1][0]}"
+                      />
+                    </td>
+                    <td class="border border-gray-500 px-4 py-2">
+                      <input
+                        type="text"
+                        name="historicalTimeline[1][1]"
+                        placeholder="Enter key activities or milestones here"
+                        class="w-full focus:outline-none"
+                        th:value="*{historicalTimeline[1][1]}"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-500 px-4 py-2">
+                      <input
+                        type="text"
+                        name="historicalTimeline[2][0]"
+                        placeholder="mm/yyyy"
+                        class="w-full h-20 focus:outline-none"
+                        th:value="*{historicalTimeline[2][0]}"
+                      />
+                    </td>
+                    <td class="border border-gray-500 px-4 py-2">
+                      <input
+                        type="text"
+                        name="historicalTimeline[2][1]"
+                        placeholder="Enter key activities or milestones here"
+                        class="w-full focus:outline-none"
+                        th:value="*{historicalTimeline[2][1]}"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-500 px-4 py-2">
+                      <input
+                        type="text"
+                        name="historicalTimeline[3][0]"
+                        placeholder="mm/yyyy"
+                        class="w-full h-20 focus:outline-none"
+                        th:value="*{historicalTimeline[3][0]}"
+                      />
+                    </td>
+                    <td class="border border-gray-500 px-4 py-2">
+                      <input
+                        type="text"
+                        name="historicalTimeline[3][1]"
+                        placeholder="Enter key activities or milestones here"
+                        class="w-full focus:outline-none"
+                        th:value="*{historicalTimeline[3][1]}"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="border border-gray-500 px-4 py-2">
+                      <input
+                        type="text"
+                        name="historicalTimeline[4][0]"
+                        placeholder="mm/yyyy"
+                        class="w-full h-20 focus:outline-none"
+                        th:value="*{historicalTimeline[4][0]}"
+                      />
+                    </td>
+                    <td class="border border-gray-500 px-4 py-2">
+                      <input
+                        type="text"
+                        name="historicalTimeline[4][1]"
+                        placeholder="Enter key activities or milestones here"
+                        class="w-full focus:outline-none"
+                        th:value="*{historicalTimeline[4][1]}"
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.historicalTimelineError != null}"
+              >
+                <div
+                  th:each="err : *{error.historicalTimelineError}"
+                  th:text="${err}"
+                ></div>
+              </div>
+            </div>
+            <div class="mb-8 overflow-x-auto">
+              <p class="font-semibold mb-6 mt-10">
+                E. Competitive Advantage Analysis
+              </p>
+              <p class="mb-6 text-gray-500">
+                Add more applicable competitive factors
+              </p>
+              <table class="w-full table-auto">
+                <thead>
+                  <tr>
+                    <th class="border border-gray-500 px-2 py-2 w-1/5">
+                      Competitive Factors
+                    </th>
+                    <th class="border border-gray-500 px-2 py-2 w-1/5">
+                      Name of Competition 1/ Alternative 1
+                    </th>
+                    <th class="border border-gray-500 px-2 py-2 w-1/5">
+                      Name of Competition 2/ Alternative 2
+                    </th>
+                    <th class="border border-gray-500 px-2 py-2 w-1/5">
+                      Name of Competition 3/ Alternative 3
+                    </th>
+                    <th class="border border-gray-500 px-2 py-2 w-1/5">
+                      Your Startup/Project Name
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th class="border border-gray-500 px-2 py-2">
+                      Product/Service Offering
+                    </th>
+                    <td class="border border-gray-500 px-2 py-2">
+                      <input
+                        type="text"
+                        name="productServiceOffering[0]"
+                        th:value="*{productServiceOffering[0]}"
+                        placeholder="Enter key activities or milestones here"
+                        class="w-full h-20 focus:outline-none"
+                      />
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      <input
+                        type="text"
+                        name="productServiceOffering[1]"
+                        th:value="*{productServiceOffering[1]}"
+                        placeholder="Enter key activities or milestones here"
+                        class="focus:outline-none"
+                      />
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      <input
+                        type="text"
+                        name="productServiceOffering[2]"
+                        th:value="*{productServiceOffering[2]}"
+                        placeholder="Enter key activities or milestones here"
+                        class="focus:outline-none"
+                      />
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      <input
+                        type="text"
+                        name="productServiceOffering[3]"
+                        th:value="*{productServiceOffering[3]}"
+                        placeholder="Enter key activities or milestones here"
+                        class="focus:outline-none"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="border border-gray-500 px-2 py-2">
+                      Pricing Strategy
+                    </th>
+                    <td class="border border-gray-500 px-2 py-2">
+                      <input
+                        type="text"
+                        name="pricingStrategy[0]"
+                        th:value="*{pricingStrategy[0]}"
+                        placeholder="Enter key activities or milestones here"
+                        class="w-full h-20 focus:outline-none"
+                      />
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      <input
+                        type="text"
+                        name="pricingStrategy[1]"
+                        th:value="*{pricingStrategy[1]}"
+                        placeholder="Enter key activities or milestones here"
+                        class="focus:outline-none"
+                      />
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      <input
+                        type="text"
+                        name="pricingStrategy[2]"
+                        th:value="*{pricingStrategy[2]}"
+                        placeholder="Enter key activities or milestones here"
+                        class="focus:outline-none"
+                      />
+                    </td>
+                    <td class="border border-gray-500 px-2 py-2">
+                      <input
+                        type="text"
+                        name="pricingStrategy[3]"
+                        th:value="*{pricingStrategy[3]}"
+                        placeholder="Enter key activities or milestones here"
+                        class="focus:outline-none"
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.productServiceOfferingError != null}"
+              >
+                <div
+                  th:each="err : *{error.productServiceOfferingError}"
+                  th:text="${err}"
+                ></div>
+              </div>
+            </div>
+
+            <div class="flex flex-col">
+              <label class="mt-10 font-semibold"
+                >F. Intellectual Property Status (If applicable)</label
+              >
+              <textarea
+                placeholder="Type something here..."
+                name="intPropertyStatus"
+                th:value="*{intPropertyStatus}"
+                class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+              ></textarea>
+            </div>
+          </div>
+          <hr class="my-10" />
+
+          <div class="ml-6 mr-6" id="aboutProposedAcceleration">
+            <div class="flex flex-col">
+              <p class="font-semibold mb-6">
+                II. About the Proposed Acceleration
+              </p>
+              <label class="font-semibold">A. Objectives</label>
+              <textarea
+                placeholder="Type something here..."
+                name="objectives"
+                th:text="*{objectives}"
+                class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+              ></textarea>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.ObjectivesError != null}"
+              >
+                <div
+                  th:each="err : *{error.ObjectivesError}"
+                  th:text="${err}"
+                ></div>
+              </div>
+            </div>
+            <div class="flex flex-col mt-6">
+              <label class="font-semibold">B. Scope of the proposal</label>
+              <textarea
+                placeholder="Type something here..."
+                name="scopeProposal"
+                th:text="*{scopeProposal}"
+                class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+              ></textarea>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.scopeProposalError != null}"
+              >
+                <div
+                  th:each="err : *{error.scopeProposalError}"
+                  th:text="${err}"
+                ></div>
+              </div>
+            </div>
+            <div class="flex flex-col mt-6">
+              <label class="font-semibold"
+                >C. Methodology and Expected Outputs</label
+              >
+              <textarea
+                placeholder="Type something here..."
+                name="methodology"
+                th:text="*{methodology}"
+                class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-32"
+              ></textarea>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.methodologyError != null}"
+              >
+                <div
+                  th:each="err : *{error.methodologyError}"
+                  th:text="${err}"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <hr class="my-14 ml-6 mr-6" />
+          <div class="ml-6 mr-6" id="cvProjectLeader">
+            <div class="mt-10 mb-8 flex flex-col">
+              <p class="font-semibold mb-10">
+                III. Curriculum Vitae of the Project Leader
+              </p>
+              <input type="file" name="vitaeFile" />
+              <span class="text-xs"
+                >Submit your file in
+                <span class="font-bold"> PDF </span> format.</span
+              >
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.vitaeFileError != null}"
+              >
+                <div
+                  th:each="err : *{error.vitaeFileError}"
+                  th:text="${err}"
+                ></div>
+              </div>
+            </div>
+            <hr class="my-10" />
+
+            <div class="flex flex-col mb-10">
+              <label>Links to any supporting materials</label>
+              <input
+                type="text"
+                placeholder="Input here"
+                name="supportLink"
+                th:value="*{supportLink}"
+                class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+              />
+            </div>
+            <div class="flex flex-col mb-10">
+              <label>Group name</label>
+              <input
+                type="text"
+                placeholder="Input here"
+                name="groupName"
+                th:value="*{groupName}"
+                class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+              />
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.groupNameError != null}"
+              >
+                <div
+                  th:each="err : *{error.groupNameError}"
+                  th:text="${err}"
+                ></div>
+              </div>
+            </div>
+            <div class="flex flex-col mb-10">
+              <label>Team Leader - Team Member1(LastName, FirstName)</label>
+              <input
+                type="text"
+                placeholder="Input here"
+                name="groupLeader"
+                th:value="*{groupLeader}"
+                class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+              />
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.groupLeaderError != null}"
+              >
+                <div
+                  th:each="err : *{error.groupLeaderError}"
+                  th:text="${err}"
+                ></div>
+              </div>
+            </div>
+            <div class="flex flex-col mb-10">
+              <label>Team Leader's <strong>Mobile Number</strong></label>
+              <input
+                type="text"
+                placeholder="Input here"
+                name="leaderNumber"
+                th:value="*{leaderNumber}"
+                class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+              />
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.leaderNumberError != null}"
+              >
+                <div
+                  th:each="err : *{error.leaderNumberError}"
+                  th:text="${err}"
+                ></div>
+              </div>
+            </div>
+            <div class="flex flex-col mb-10">
+              <label>Team Leader's <strong>Address</strong></label>
+              <input
+                type="text"
+                placeholder="Input here"
+                name="leaderAddress"
+                th:value="*{leaderAddress}"
+                class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+              />
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.leaderAddressError != null}"
+              >
+                <div
+                  th:each="err : *{error.leaderAddressError}"
+                  th:text="${err}"
+                ></div>
+              </div>
+            </div>
+            <div class="flex flex-col mb-10">
+              <label>Team Leader - Member2(LastName, FirstName)</label>
+              <input
+                type="text"
+                placeholder="Input here"
+                name="members[0]"
+                class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+              />
+            </div>
+            <div class="flex flex-col mb-10">
+              <label>Team Leader - Member3(LastName, FirstName)</label>
+              <input
+                type="text"
+                placeholder="Input here"
+                name="members[1]"
+                class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+              />
+            </div>
+            <div class="flex flex-col mb-10">
+              <label>Team Leader - Member4(LastName, FirstName)</label>
+              <input
+                type="text"
+                placeholder="Input here"
+                name="members[2]"
+                class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+              />
+            </div>
+            <div class="flex flex-col mb-`0">
+              <label>Team Leader - Member5(LastName, FirstName)</label>
+              <input
+                type="text"
+                placeholder="Input here"
+                name="members[3]"
+                class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+              />
+            </div>
+            <div
+              class="error no-pad"
+              th:if="*{error != null} AND *{error.membersError != null}"
+            >
+              <div th:each="err : *{error.membersError}" th:text="${err}"></div>
+            </div>
+            <div class="flex flex-col mt-14 mb-`0">
+              <label>University</label>
+              <p>
+                If this is a school project, please provide the full name of
+                your organization. Do not use acronyms. Otherwise, put
+                <strong>NA</strong>
+              </p>
+              <input
+                type="text"
+                placeholder="Input here"
+                name="university"
+                th:value="*{university}"
+                class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+              />
+            </div>
+            <hr class="my-10 mr-6" />
+
+            <div>
+              <p class="font-semibold">
+                Technology and Commercialization Readiness Level
+              </p>
+              <p class="text-black text-justify mt-8 mr-6">
+                This form, adopted from NYSERDA, assists emerging and growing
+                companies in determining the technical and commercial maturity
+                of their products or innovations. It utilizes a customized and
+                integrated tool that measures both the Technology Readiness
+                Level (TRL) and Commercial Readiness Level (CRL). This TRL/CRL
+                tool is based on systems developed by NASA, DOE, and ARPA-E.
+                Although it has been specifically designed for ventures in the
+                clean energy industry, it has also been widely used in solutions
+                and ventures across various other industries.
+              </p>
+
+              <p class="text-justify mt-8 mr-6">
+                For each category, please select the option that best describes
+                the current status of your product, solution, or innovation.
+              </p>
+              <div class="mr-6">
+                <div class="mt-14 mb-4">
+                  <label>Technology</label>
+                </div>
+
+                <div class="mt-10 mb-4">
+                  <input
+                    type="radio"
+                    name="technologyAns"
+                    value="1"
+                    th:checked="*{technologyAns==1}"
+                  />
+                  <label
+                    >Project work is beyond basic research and technology
+                    concept has been defined</label
+                  >
+                </div>
+                <div class="mb-4">
+                  <input
+                    type="radio"
+                    name="technologyAns"
+                    value="2"
+                    th:checked="*{technologyAns==2}"
+                  />
+                  <label
+                    >Applied research has begun and practical application(s)
+                    have been identified</label
+                  >
+                </div>
+                <div class="mb-4">
+                  <input
+                    type="radio"
+                    name="technologyAns"
+                    value="3"
+                    th:checked="*{technologyAns==3}"
+                  />
+                  <label
+                    >Preliminary testing of technology components has begun, and
+                    technical feasibility has been established in a laboratory
+                    environment</label
+                  >
+                </div>
+                <div class="mb-4">
+                  <input
+                    type="radio"
+                    name="technologyAns"
+                    value="4"
+                    th:checked="*{technologyAns==4}"
+                  />
+                  <label
+                    >Initial testing of integrated product/system has been
+                    completed in a laboratory environment
+                  </label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    name="technologyAns"
+                    value="5"
+                    th:checked="*{technologyAns==5}"
+                  />
+                  <label
+                    >Laboratory scale integrated product/system demonstrates
+                    performance in the intended application(s)
+                  </label>
+                </div>
+              </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.technologyAnsError != null}"
+              >
+                <div th:text="*{error.technologyAnsError}"></div>
+              </div>
+            </div>
+
+            <div class="mr-6">
+              <div class="mt-14 mb-8">
+                <label>Product Development</label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="productDevelopmentAns"
+                  value="1"
+                  th:checked="*{productDevelopmentAns==1}"
+                />
+                <label>Initial product/market fit has been defined</label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="productDevelopmentAns"
+                  value="2"
+                  th:checked="*{productDevelopmentAns==2}"
+                />
+                <label
+                  >Pilot scale product/system has been tested in the intended
+                  application(s)</label
+                >
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="productDevelopmentAns"
+                  value="3"
+                  th:checked="*{productDevelopmentAns==3}"
+                />
+                <label
+                  >Demonstration of a full scale product/system prototype has
+                  been completed in the intended application(s)
+                </label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="productDevelopmentAns"
+                  value="4"
+                  th:checked="*{productDevelopmentAns==4}"
+                />
+                <label
+                  >Actual product/system has been proven to work in its
+                  near-final form under a representative set of expected
+                  conditions and environments
+                </label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="productDevelopmentAns"
+                  value="5"
+                  th:checked="*{productDevelopmentAns==5}"
+                />
+                <label
+                  >Product/system is in final form and has been operated under
+                  the full range of operating conditions and environments
+                </label>
+              </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.productDevelopmentAnsError != null}"
+              >
+                <div th:text="*{error.productDevelopmentAnsError}"></div>
+              </div>
+            </div>
+
+            <div class="mr-6">
+              <div class="mt-14 mb-8">
+                <label>Competitive Landscape</label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="competitiveLandscapeAns"
+                  value="1"
+                  th:checked="*{competitiveLandscapeAns==1}"
+                />
+                <label
+                  >Secondary market research has been performed and basic
+                  knowledge of potential applications and competitive landscape
+                  have been identified
+                </label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="competitiveLandscapeAns"
+                  value="2"
+                  th:checked="*{competitiveLandscapeAns==2}"
+                />
+                <label
+                  >Primary market research to prove the product/system
+                  commercial feasibility has been completed and basic
+                  understanding of competitive products/systems has been
+                  demonstrated
+                </label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="competitiveLandscapeAns"
+                  value="3"
+                  th:checked="*{competitiveLandscapeAns==3}"
+                />
+                <label
+                  >Comprehensive market research to prove the product/system
+                  commercial feasibility has been completed and intermediate
+                  understanding of competitive products/systems has been
+                  demonstrated
+                </label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="competitiveLandscapeAns"
+                  value="4"
+                  th:checked="*{competitiveLandscapeAns==4}"
+                />
+                <label
+                  >Competitive analysis to illustrate unique features and
+                  advantages of the product/system compared to competitive
+                  products/systems has been completed
+                </label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="competitiveLandscapeAns"
+                  value="5"
+                  th:checked="*{competitiveLandscapeAns==5}"
+                />
+                <label
+                  >Full and complete understanding of the competitive landscape,
+                  target application(s), competitive products/systems, and
+                  market has been achieved
+                </label>
+              </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.competitiveLandscapeAnsError != null}"
+              >
+                <div th:text="*{error.competitiveLandscapeAnsError}"></div>
+              </div>
+            </div>
+            <div class="mr-6">
+              <div class="mt-14 mb-8">
+                <label>Product Development/Design</label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="productDesignAns"
+                  value="1"
+                  th:checked="*{productDesignAns==1}"
+                />
+                <label
+                  >One or more initial product hypotheses have been defined
+                </label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="productDesignAns"
+                  value="2"
+                  th:checked="*{productDesignAns==2}"
+                />
+                <label
+                  >Mapping product/system attributes against customer needs has
+                  highlighted a clear value proposition
+                </label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="productDesignAns"
+                  value="3"
+                  th:checked="*{productDesignAns==3}"
+                />
+                <label
+                  >The product/system has been scaled from laboratory to pilot
+                  scale and issues that may affect achieving full scale have
+                  been identified
+                </label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="productDesignAns"
+                  value="4"
+                  th:checked="*{productDesignAns==4}"
+                />
+                <label
+                  >Comprehensive customer value proposition model has been
+                  developed, including a detailed understanding of
+                  product/system design specifications, required certifications,
+                  and trade-offs
+                </label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="productDesignAns"
+                  value="5"
+                  th:checked="*{productDesignAns==5}"
+                />
+                <label
+                  >Product/system final design optimization has been completed,
+                  required certifications have been obtained, and product/system
+                  has incorporated detailed customer and product requirements
+                </label>
+              </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.productDesignAnsError != null}"
+              >
+                <div th:text="*{error.productDesignAnsError}"></div>
+              </div>
+            </div>
+            <div class="mr-6">
+              <div class="mt-14 mb-8">
+                <label>Team</label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="teamAns"
+                  value="1"
+                  th:checked="*{teamAns==1}"
+                />
+                <label
+                  >No team or company in place (single individual, no legal
+                  entity)
+                </label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="teamAns"
+                  value="2"
+                  th:checked="*{teamAns==2}"
+                />
+                <label
+                  >Solely technical or non-technical founder(s) running the
+                  company with no outside assistance
+                </label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="teamAns"
+                  value="3"
+                  th:checked="*{teamAns==3}"
+                />
+                <label
+                  >Solely technical or non-technical founder(s) running the
+                  company with assistance from outside advisors/mentors and/or
+                  incubator/accelerator
+                </label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="teamAns"
+                  value="4"
+                  th:checked="*{teamAns==4}"
+                />
+                <label
+                  >Balanced team with technical and business
+                  development/commercialization experience running the company
+                  with assistance from outside advisors/mentors
+                </label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="teamAns"
+                  value="5"
+                  th:checked="*{teamAns==5}"
+                />
+                <label
+                  >Balanced team with all capabilities onboard (e.g., sales,
+                  marketing, customer service, operations, etc.) running the
+                  company with assistance from outside advisors/mentors</label
+                >
+              </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.teamAnsError != null}"
+              >
+                <div th:text="*{error.teamAnsError}"></div>
+              </div>
+            </div>
+            <div class="mr-6">
+              <div class="mt-14 mb-8">
+                <label>Go-to-Market</label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="goToMarketAns"
+                  value="1"
+                  th:checked="*{goToMarketAns==1}"
+                />
+                <label>
+                  Initial business model and value proposition have been defined
+                </label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="goToMarketAns"
+                  value="2"
+                  th:checked="*{goToMarketAns==2}"
+                />
+                <label
+                  >Customers/partners have been interviewed to understand their
+                  pain points/needs, and business model and value proposition
+                  have been refined based on customer/partner feedback
+                </label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="goToMarketAns"
+                  value="3"
+                  th:checked="*{goToMarketAns==3}"
+                />
+                <label>
+                  Market and customer/partner needs and how those translate to
+                  product requirements have been defined, and initial
+                  relationships have been developed with key stakeholders across
+                  the value chain
+                </label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="goToMarketAns"
+                  value="4"
+                  th:checked="*{goToMarketAns==4}"
+                />
+                <label
+                  >Partnerships have been formed with key stakeholders across
+                  the value chain (e.g., suppliers, partners, service providers,
+                  and customers)
+                </label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="goToMarketAns"
+                  value="5"
+                  th:checked="*{goToMarketAns==5}"
+                />
+                <label
+                  >Supply agreements with suppliers and partners are in place
+                  and initial purchase orders from customers have been received
+                </label>
+              </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.goToMarketAnsError != null}"
+              >
+                <div th:text="*{error.goToMarketAnsError}"></div>
+              </div>
+            </div>
+            <div class="mr-6">
+              <div class="mt-14 mb-8">
+                <label>Manufacturing/Supply Chain</label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="manufacturingAns"
+                  value="1"
+                  th:checked="*{manufacturingAns==1}"
+                />
+                <label>
+                  Potential suppliers, partners, and customers have been
+                  identified and mapped in an initial value chain analysis
+                </label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="manufacturingAns"
+                  value="2"
+                  th:checked="*{manufacturingAns==2}"
+                />
+                <label
+                  >Relationships have been established with potential suppliers,
+                  partners, service providers, and customers and they have
+                  provided input on product and manufacturability requirements
+                </label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="manufacturingAns"
+                  value="3"
+                  th:checked="*{manufacturingAns==3}"
+                />
+                <label>
+                  Manufacturing process qualifications (e.g. QC/QA) have been
+                  defined and are in progress
+                </label>
+              </div>
+              <div class="mb-4">
+                <input
+                  type="radio"
+                  name="manufacturingAns"
+                  value="4"
+                  th:checked="*{manufacturingAns==4}"
+                />
+                <label>
+                  Products/systems have been pilot manufactured and sold to
+                  initial customerss
+                </label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  name="manufacturingAns"
+                  value="5"
+                  th:checked="*{manufacturingAns==5}"
+                />
+                <label>
+                  Full scale manufacturing and widespread deployment of
+                  product/system to customers and/or users has been achieved
+                </label>
+              </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.manufacturingAnsError != null}"
+              >
+                <div th:text="*{error.manufacturingAnsError}"></div>
+              </div>
+            </div>
+            <hr class="my-10 mr-6" />
+
+            <div class="mr-6">
+              <p class="font-semibold">Egilibility Agreement</p>
+              <p class="text-black text-justify mt-4 mb-8">
+                I confirm that I have read, understood, and agree to comply with
+                the eligibility criteria and rules of LaunchLab program.
+              </p>
+              <div class="items-center mb-4">
+                <input
+                  type="radio"
+                  name="eligibilityAgreeFlg"
+                  value="true"
+                  th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}"
+                /><label class="ml-2">I AGREE</label>
+              </div>
+              <div class="items-center">
+                <input
+                  type="radio"
+                  name="eligibilityAgreeFlg"
+                  value="false"
+                  th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}"
+                /><label class="ml-2">I DO NOT AGREE</label>
+              </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.eligibilityAgreeFlgError != null}"
+              >
+                <div th:text="*{error.eligibilityAgreeFlgError}"></div>
+              </div>
+            </div>
+            <hr class="my-10" />
+
+            <div class="mb-8 mr-6">
+              <p class="font-semibold">
+                Applicant Commitment Verification Form
+              </p>
+              <p class="text-black text-justify mt-4 mb-8">
+                To ensure your commitment to the LaunchLab Program, please
+                respond to the following questions with a Yes or No.
+              </p>
+              <label
+                >Do you commit to complete and actively cooperate in all
+                scheduled activities, workshops, and mentorship sessions during
+                the 4-month program of the LaunchLab Program?</label
+              >
+              <div class="items-center mt-4 mb-4">
+                <input
+                  type="radio"
+                  name="commitmentOneFlg"
+                  value="true"
+                  th:checked="*{commitmentOneFlg!=null AND commitmentOneFlg}"
+                /><label class="ml-2">Yes</label>
+              </div>
+              <div class="items-center">
+                <input
+                  type="radio"
+                  name="commitmentOneFlg"
+                  value="false"
+                  th:checked="*{commitmentOneFlg!=null AND !commitmentOneFlg}"
+                /><label class="ml-2">No</label>
+              </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.commitmentOneFlgError != null}"
+              >
+                <div th:text="*{error.commitmentOneFlgError}"></div>
+              </div>
+            </div>
+            <div class="mb-8 mr-6 text-justify">
+              <label
+                >Do you commit to diligently working towards executing your
+                startup’s approved growth plan as outlined in the program?
+              </label>
+              <div class="items-center mt-4 mb-4">
+                <input
+                  type="radio"
+                  name="commitmentTwoFlg"
+                  value="true"
+                  th:checked="*{commitmentTwoFlg!=null AND commitmentTwoFlg}"
+                /><label class="ml-2">Yes</label>
+              </div>
+
+              <div class="items-center">
+                <input
+                  type="radio"
+                  name="commitmentTwoFlg"
+                  value="false"
+                  th:checked="*{commitmentTwoFlg!=null AND !commitmentTwoFlg}"
+                /><label class="ml-2">No</label>
+              </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.commitmentTwoFlgError != null}"
+              >
+                <div th:text="*{error.commitmentTwoFlgError}"></div>
+              </div>
+            </div>
+
+            <div class="mb-8 mr-6 text-justify">
+              <label
+                >If the founder is not always available, will you assign at
+                least one dedicated personnel, directly involved in the aspect
+                of the startup being accelerated, to be consistently involved in
+                all program activities and deliverables, understanding that
+                changing personnel frequently can adversely affect the progress
+                of the acceleration?
+              </label>
+              <div class="items-center mt-4 mb-4">
+                <input
+                  type="radio"
+                  name="commitmentThreeFlg"
+                  value="true"
+                  th:checked="*{commitmentThreeFlg!=null AND commitmentThreeFlg}"
+                /><label class="ml-2">Yes</label>
+              </div>
+
+              <div class="items-center">
+                <input
+                  type="radio"
+                  name="commitmentThreeFlg"
+                  value="false"
+                  th:checked="*{commitmentThreeFlg!=null AND !commitmentThreeFlg}"
+                /><label class="ml-2">No</label>
+              </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.commitmentThreeFlgError != null}"
+              >
+                <div th:text="*{error.commitmentThreeFlgError}"></div>
+              </div>
+            </div>
+            <div class="mb-8 mr-6 text-justify">
+              <label
+                >Do you understand and agree that your evaluation results and
+                performance reports will be shared with DOST as part of the
+                program’s accomplishment reports?</label
+              >
+              <div class="items-center mt-4 mb-4">
+                <input
+                  type="radio"
+                  name="commitmentFourFlg"
+                  value="true"
+                  th:checked="*{commitmentFourFlg!=null AND commitmentFourFlg}"
+                /><label class="ml-2">Yes</label>
+              </div>
+
+              <div class="items-center">
+                <input
+                  type="radio"
+                  name="commitmentFourFlg"
+                  value="false"
+                  th:checked="*{commitmentFourFlg!=null AND !commitmentFourFlg}"
+                /><label class="ml-2">No</label>
+              </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.commitmentFourFlgError != null}"
+              >
+                <div th:text="*{error.commitmentFourFlgError}"></div>
+              </div>
+            </div>
+            <div class="mt-10 mb-8 mr-6 text-justify">
+              <p>
+                Thank you for taking the time to complete the registration. We
+                understand and respect your concerns. If you have further
+                questions and concerns , you are welcome to contact our project
+                lead, Engr. Jurydel Rama, at
+                <a
+                  href="mailto:jurydel.rama@cit.edu"
+                  class="font-semibold text-blue-700"
+                >
+                  jurydel.rama@cit.edu
+                </a>
+              </p>
+            </div>
+            <div class="relative z-10 justify-end flex mt-16 mb-6 mr-6">
+              <button
+                type="submit"
+                class="bg-tanglow text-black hover:bg-black hover:text-white font-secondary font-medium right-0 rounded btn-neutral border-b-2 border-black border-solid border-opacity-100 w-36 h-12"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <div class="flex justify-center mr-96 mt-8">
+          <div class="font-secondary text-black bottom-0">
+            Already applied?
+            <span class="font-semibold hover:text-white cursor-pointer"
+              ><a th:href="@{/login/applicant}"> Login </a></span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Scroll to top button -->
+    <div
+      class="bg-transparent text-white py-4 px-8 flex justify-end fixed bottom-0 w-full z-50"
+    >
+      <button
+        class="hover:text-yellow-400 scroll-to-top bg-tanglow hover:bg-black font-bold w-12 h-12 rounded focus:outline-none focus:shadow-outline flex border-b-2 border-black"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-8 w-8 ml-2"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M5 10l7-7m0 0l7 7m-7-7v18"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <script th:inline="javascript">
+      console.log(/*[[${applicantWebDto}]]*/ "");
+
+      window.addEventListener("scroll", function () {
+        var button = document.querySelector(".scroll-to-top");
+        // If the user has scrolled around 1150px, show the button, otherwise hide it
+        if (window.scrollY > 1150) {
+          button.style.display = "block";
+        } else {
+          button.style.display = "none";
+        }
+      });
+
+      // Smooth scroll to top when the button is clicked
+      document
+        .querySelector(".scroll-to-top")
+        .addEventListener("click", function () {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+    </script>
+  </body>
+</html>

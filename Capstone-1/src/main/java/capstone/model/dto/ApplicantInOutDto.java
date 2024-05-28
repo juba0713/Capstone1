@@ -11,6 +11,9 @@ import lombok.Data;
 @Data
 public class ApplicantInOutDto {
 	
+	//Applicant Id Pk
+	public int applicantIdPk;
+	
 	//Result
 	public String result;
 	
@@ -64,6 +67,7 @@ public class ApplicantInOutDto {
 	
 	//Curriculum Vitae
 	public MultipartFile vitaeFile;
+	public String vitaeFileName;
 	
 	//Support link
 	public String supportLink;
@@ -135,6 +139,20 @@ public class ApplicantInOutDto {
 	//Confirm Password
 	public String confirmPassword;
 	
+	/*
+	 * Details
+	 */
+	
 	ApplicantDetailsObj applicantDetailsObj;
-
+	
+	/*
+	 * Resubmission
+	 */
+	public String token;
+	
+	public String feedback;
+	
+	public int status;
+	
+	public int score;
 }

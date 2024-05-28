@@ -9,6 +9,7 @@ import java.nio.file.StandardCopyOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -139,7 +140,11 @@ public class ApplicantController {
 		return "redirect:/login";
 	}
 	
-	
+	/**
+	 * Showing applicant home page
+	 * @param webDto
+	 * @return String
+	 */
 	@GetMapping("/home")
 	public String showApplicantHome(@ModelAttribute ApplicantWebDto webDto) {
 		
@@ -150,6 +155,12 @@ public class ApplicantController {
 		return "applicant/home";
 	}
 	
+	/**
+	 * Change Password
+	 * @param webDto
+	 * @param ra
+	 * @return String
+	 */
 	@PostMapping("/change-password")
 	public String processChangePassword(@ModelAttribute ApplicantWebDto webDto, RedirectAttributes ra) {
 		
@@ -175,4 +186,101 @@ public class ApplicantController {
 		return "redirect:/applicant/home";
 	}
 	
+	/**
+	 * To show the Applicant Form
+	 * @return String
+	 */
+	@GetMapping("/form/resubmit")
+	public String showResubmission(Model model, @ModelAttribute ApplicantWebDto webDto, @RequestParam("token") String token) {
+		
+		ApplicantInOutDto inDto = new ApplicantInOutDto();
+		
+		inDto.setToken(token);
+		
+		ApplicantInOutDto outDto = applicantService.getApplicantDetailsByToken(inDto);
+			
+		webDto.setEmail(outDto.getEmail());
+		
+		webDto.setAgreeFlg(outDto.getAgreeFlg());
+		
+		webDto.setProjectTitle(outDto.getProjectTitle());
+		
+		webDto.setProjectDescription(outDto.getProjectDescription());
+		
+		webDto.setTeams(outDto.getTeams());
+		
+		webDto.setProblemStatement(outDto.getProblemStatement());
+		
+		webDto.setTargetMarket(outDto.getTargetMarket());
+		
+		webDto.setSolutionDescription(outDto.getSolutionDescription());
+		
+		webDto.setHistoricalTimeline(outDto.getHistoricalTimeline());
+		
+		webDto.setProductServiceOffering(outDto.getProductServiceOffering());
+		
+		webDto.setPricingStrategy(outDto.getPricingStrategy());
+		
+		webDto.setIntPropertyStatus(outDto.getIntPropertyStatus());
+		
+		webDto.setObjectives(outDto.getObjectives());
+		
+		webDto.setScopeProposal(outDto.getScopeProposal());
+		
+		webDto.setMethodology(outDto.getMethodology());
+		
+		webDto.setVitaeFileName(outDto.getVitaeFileName());
+		
+		webDto.setSupportLink(outDto.getSupportLink());
+		
+		webDto.setGroupName(outDto.getGroupName());
+		
+		webDto.setGroupLeader(outDto.getGroupLeader());
+		
+		webDto.setLeaderNumber(outDto.getLeaderNumber());
+		
+		webDto.setLeaderAddress(outDto.getLeaderAddress());
+		
+		webDto.setMembers(outDto.getMembers());
+		
+		webDto.setUniversity(outDto.getUniversity());
+		
+		webDto.setTechnologyAns(outDto.getTechnologyAns());
+		
+		webDto.setProductDevelopmentAns(outDto.getProductDevelopmentAns());
+		
+		webDto.setCompetitiveLandscapeAns(outDto.getCompetitiveLandscapeAns());
+		
+		webDto.setProductDesignAns(outDto.getProductDesignAns());
+		
+		webDto.setTeamAns(outDto.getTeamAns());
+		
+		webDto.setGoToMarketAns(outDto.getGoToMarketAns());
+		
+		webDto.setManufacturingAns(outDto.getManufacturingAns());
+		
+		webDto.setEligibilityAgreeFlg(outDto.getEligibilityAgreeFlg());
+		
+		webDto.setCommitmentOneFlg(outDto.getCommitmentOneFlg());
+		
+		webDto.setCommitmentTwoFlg(outDto.getCommitmentTwoFlg());
+		
+		webDto.setCommitmentThreeFlg(outDto.getCommitmentThreeFlg());
+		
+		webDto.setCommitmentFourFlg(outDto.getCommitmentFourFlg());
+		
+		model.addAttribute("applicantWebDto", webDto);
+		
+		return "applicant/resubmitform";
+	}
+	
+	/**
+	 * To show the Applicant Form
+	 * @return String
+	 */
+	@PostMapping("/form/resubmit")
+	public String postResubmission(@ModelAttribute ApplicantWebDto webDto) {
+		
+		return "applicant/resubmitform";
+	}
 }

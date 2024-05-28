@@ -114,6 +114,12 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 		
 		return applicantDao.getApplicantByCreatedBy(createdBy);
 	}
+
+	@Override
+	public RejectedApplicantEntity getRejectedApplicantByToken(String token) {
+
+		return rejectedApplicantDao.getRejectedApplicantByToken(token);
+	}
 	
 
 }

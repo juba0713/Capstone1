@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -24,6 +25,7 @@ import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
 import capstone.model.dao.entity.ProjectEntity;
+import capstone.model.dao.entity.RejectedApplicantEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
 import capstone.model.dao.entity.UserInformationEntity;
 import capstone.model.dto.ApplicantInOutDto;
@@ -770,5 +772,127 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 		return outDto;
 	}
+
+	@Override
+	public ApplicantInOutDto getApplicantDetailsByToken(ApplicantInOutDto inDto) {
+		
+		ApplicantInOutDto outDto = new ApplicantInOutDto();
+
+		RejectedApplicantEntity rejectedApplicant = applicantLogic.getRejectedApplicantByToken(inDto.getToken());
+
+		ApplicantEntity createdApplicant = applicantLogic.getApplicantByIdPk(rejectedApplicant.getApplicantIdPk());
+		
+		List<ApplicantDetailsEntity> applicant = applicantLogic.getApplicantDetailsByIdPk(createdApplicant.getIdPk());
+
+		//ApplicantDetailsObj applicantDetailsObj = new ApplicantDetailsObj();
+
+		String[] members = new String[4];
+
+		int firstRow = 0;
+		for (ApplicantDetailsEntity app : applicant) {
+
+			if (firstRow == 0) {
+
+				outDto.setApplicantIdPk(app.getApplicantIdPk());
+
+				outDto.setEmail(app.getEmail());
+
+				outDto.setAgreeFlg(app.getAgreeFlg());
+
+				outDto.setProjectTitle(app.getProjectTitle());
+
+				outDto.setProjectDescription(app.getProjectDescription());
+
+				List<String[]> teams = new ArrayList<>();
+
+				teams.add(app.getTeams()[0].split("\\|"));
+				teams.add(app.getTeams()[1].split("\\|"));
+				teams.add(app.getTeams()[2].split("\\|"));
+
+				outDto.setTeams(teams);
+
+				outDto.setProblemStatement(app.getProblemStatement());
+
+				outDto.setTargetMarket(app.getTargetMarket());
+
+				outDto.setSolutionDescription(app.getSolutionDescription());
+
+				List<String[]> historicallTimelines = new ArrayList<>();
+
+				historicallTimelines.add(app.getHistoricalTimeline()[0].split("\\|"));
+				historicallTimelines.add(app.getHistoricalTimeline()[1].split("\\|"));
+				historicallTimelines.add(app.getHistoricalTimeline()[2].split("\\|"));
+				historicallTimelines.add(app.getHistoricalTimeline()[3].split("\\|"));
+				historicallTimelines.add(app.getHistoricalTimeline()[4].split("\\|"));
+
+				outDto.setHistoricalTimeline(historicallTimelines);
+
+				outDto.setProductServiceOffering(Arrays.asList(app.getProductServiceOffering()));
+
+				outDto.setPricingStrategy(Arrays.asList(app.getPricingStrategy()));
+
+				outDto.setIntPropertyStatus(app.getIntPropertyStatus());
+
+				outDto.setObjectives(app.getObjectives());
+
+				outDto.setScopeProposal(app.getScopeProposal());
+
+				outDto.setMethodology(app.getMethodology());
+
+				outDto.setVitaeFileName(app.getVitaeFile());
+
+				outDto.setSupportLink(app.getSupportLink());
+
+				outDto.setGroupName(app.getGroupName());
+
+				outDto.setGroupLeader(app.getLeaderFirstName() + ", " + app.getLeaderLastName());
+
+				outDto.setLeaderNumber(app.getMobileNumber());
+
+				outDto.setLeaderAddress(app.getAddress());
+
+				outDto.setUniversity(app.getUniversity());
+
+				outDto.setTechnologyAns(app.getTechnologyAns());
+
+				outDto.setProductDesignAns(app.getProductDesignAns());
+
+				outDto.setCompetitiveLandscapeAns(app.getCompetitiveLandscapeAns());
+
+				outDto.setProductDevelopmentAns(app.getProductDevelopmentAns());
+
+				outDto.setTeamAns(app.getTeamAns());
+
+				outDto.setGoToMarketAns(app.getGoToMarketAns());
+
+				outDto.setManufacturingAns(app.getManufacturingAns());
+
+				outDto.setEligibilityAgreeFlg(app.getEligibilityAgreeFlg());
+
+				outDto.setCommitmentOneFlg(app.getCommitmentOneFlg());
+
+				outDto.setCommitmentTwoFlg(app.getCommitmentTwoFlg());
+
+				outDto.setCommitmentThreeFlg(app.getCommitmentThreeFlg());
+
+				outDto.setCommitmentFourFlg(app.getCommitmentFourFlg());
+
+				outDto.setStatus(app.getStatus());
+
+				outDto.setScore(app.getScore());
+
+				outDto.setFeedback(app.getFeedback());
+				;
+			}
+
+			members[firstRow] = app.getMemberLastName() + ", " + app.getMemberFirstName();
+
+			firstRow++;
+		}
+
+		return outDto;
+	}
+	
+	
 
 }

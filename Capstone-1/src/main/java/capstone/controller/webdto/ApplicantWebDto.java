@@ -59,7 +59,7 @@ public class ApplicantWebDto {
 	public String methodology;
 	
 //	//Curriculum Vitae
-//	public MultipartFile vitaeFile;
+	public String vitaeFileName;
 	
 	//Support link
 	public String supportLink;

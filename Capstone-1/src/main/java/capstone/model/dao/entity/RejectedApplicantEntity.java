@@ -27,4 +27,6 @@ public class RejectedApplicantEntity {
 	private Timestamp createDate;
 	
 	private Boolean deleteFlg;
+	
+	private String token;
 }
