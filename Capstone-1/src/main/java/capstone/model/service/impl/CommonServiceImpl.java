@@ -17,7 +17,7 @@ public class CommonServiceImpl implements CommonService {
 	List<String> newList = new ArrayList<>();
 		
 		for(String v : val) {
-			String[] splitV = v.split("-");
+			String[] splitV = v.split("|");
 			
 			newList.add(splitV[0]+"("+splitV[1]+")");
 			
@@ -35,7 +35,7 @@ public class CommonServiceImpl implements CommonService {
 			
 			for(String[] value : var) {
 				
-				String stringValue = String.join("-", value);
+				String stringValue = String.join("|", value);
 				
 				convertedValue.add(stringValue);
 			}	

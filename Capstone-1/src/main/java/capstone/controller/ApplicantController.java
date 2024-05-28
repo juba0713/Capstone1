@@ -122,9 +122,7 @@ public class ApplicantController {
 		inDto.setCommitmentFourFlg(webDto.getCommitmentFourFlg());
 		
 		ApplicantInOutDto outDto = applicantService.validateApplication(inDto);
-		
-		System.out.println(webDto.getAgreeFlg());
-		
+			
 		if(CommonConstant.INVALID.equals(outDto.getResult())) {
 			
 			webDto.setError(outDto.getError());
@@ -134,11 +132,11 @@ public class ApplicantController {
 			return "redirect:/applicant/form";
 		}
 		
-		//applicantService.saveApplication(inDto);
+		applicantService.saveApplication(inDto);
 		
 		ra.addFlashAttribute("success", "You have sucessfully registered! Wait for the email that will be sent to you!");
 		
-		return "redirect:/";
+		return "redirect:/login";
 	}
 	
 	

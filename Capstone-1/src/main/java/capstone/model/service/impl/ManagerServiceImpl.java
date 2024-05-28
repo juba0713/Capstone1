@@ -72,13 +72,7 @@ public class ManagerServiceImpl implements ManagerService {
 			obj.setEmail(app.getEmail());
 			
 			obj.setProjectTitle(app.getProjectTitle());
-			
-			obj.setDescription(app.getDescription());
-			
-			obj.setConsent(app.getConsent());
-			
-			obj.setTeam(commonService.convertToList(app.getTeam()));
-			
+					
 			obj.setStatus(app.getStatus());
 			
 			obj.setUniversity(app.getUniversity());
@@ -146,13 +140,7 @@ public class ManagerServiceImpl implements ManagerService {
 			obj.setEmail(app.getEmail());
 			
 			obj.setProjectTitle(app.getProjectTitle());
-			
-			obj.setDescription(app.getDescription());
-			
-			obj.setConsent(app.getConsent());
-			
-			obj.setTeam(commonService.convertToList(app.getTeam()));
-			
+					
 			obj.setStatus(app.getStatus());
 			
 			obj.setUniversity(app.getUniversity());
@@ -190,12 +178,6 @@ public class ManagerServiceImpl implements ManagerService {
 			obj.setEmail(app.getEmail());
 			
 			obj.setProjectTitle(app.getProjectTitle());
-			
-			obj.setDescription(app.getDescription());
-			
-			obj.setConsent(app.getConsent());
-			
-			obj.setTeam(commonService.convertToList(app.getTeam()));
 			
 			obj.setStatus(app.getStatus());
 			
@@ -242,9 +224,9 @@ public class ManagerServiceImpl implements ManagerService {
 				
 				List<String[]> teams = new ArrayList<>();
 				
-				teams.add(app.getTeams()[0].split("-"));
-				teams.add(app.getTeams()[1].split("-"));
-				teams.add(app.getTeams()[2].split("-"));	
+				teams.add(app.getTeams()[0].split("\\|"));
+				teams.add(app.getTeams()[1].split("\\|"));
+				teams.add(app.getTeams()[2].split("\\|"));	
 				
 				applicantDetailsObj.setTeams(teams);
 				
@@ -256,11 +238,11 @@ public class ManagerServiceImpl implements ManagerService {
 				
 				List<String[]> historicallTimelines = new ArrayList<>();
 				
-				historicallTimelines.add(app.getHistoricalTimeline()[0].split("-"));
-				historicallTimelines.add(app.getHistoricalTimeline()[1].split("-"));
-				historicallTimelines.add(app.getHistoricalTimeline()[2].split("-"));
-				historicallTimelines.add(app.getHistoricalTimeline()[3].split("-"));
-				historicallTimelines.add(app.getHistoricalTimeline()[4].split("-"));
+				historicallTimelines.add(app.getHistoricalTimeline()[0].split("\\|"));
+				historicallTimelines.add(app.getHistoricalTimeline()[1].split("\\|"));
+				historicallTimelines.add(app.getHistoricalTimeline()[2].split("\\|"));
+				historicallTimelines.add(app.getHistoricalTimeline()[3].split("\\|"));
+				historicallTimelines.add(app.getHistoricalTimeline()[4].split("\\|"));
 				
 				applicantDetailsObj.setHistoricalTimeline(historicallTimelines);
 				

@@ -15,13 +15,10 @@ public class JoinApplicantProject {
 			(Integer) objects[0],
 			(String) objects[1],
 			(String) objects[2],
-			(String) objects[3],
-			(Boolean) objects[4],
-			(String[]) objects[5],
-			(Integer) objects[6],
-			(String) objects[7],
-			(Integer) objects[8],
-			(String) objects[9]
+			(Integer) objects[3],
+			(String) objects[4],
+			(Integer) objects[5],
+			(String) objects[6]
 		);
 	}
 	
@@ -30,13 +27,7 @@ public class JoinApplicantProject {
 	public String email;
 	
 	public String projectTitle;
-	
-	public String description;
-	
-	public Boolean consent;
-	
-	public String[] team;
-	
+
 	public int status;
 	
 	public String university;

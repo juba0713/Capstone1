@@ -86,9 +86,9 @@
               <th class="text-center rounded-top-left">Email</th>
               <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
               <th class="text-center w-3/12">Project Title</th>
-              <th class="text-center w-1/5 hidden sm:table-cell">
+              <!--<th class="text-center w-1/5 hidden sm:table-cell">
                 Description
-              </th>
+              </th>-->
               <th class="text-center w-1/5 hidden sm:table-cell">University</th>
               <th class="text-center rounded-top-right">Actions</th>
             </tr>
@@ -119,7 +119,7 @@
                 Eligendi quaerat officia exercitationem. Voluptatum velit
                 asperiores reiciendis saepe soluta hic in!
               </td>
-              <td
+              <!--<td
                 th:text="${app.description}"
                 class="whitespace-nowrap max-w-0 truncate hidden sm:table-cell"
               >
@@ -130,7 +130,7 @@
                 Eligendi consectetur ad molestias perspiciatis officia debitis
                 nesciunt, praesentium cum tempore earum error delectus in est
                 odio. Necessitatibus, voluptatibus.
-              </td>
+              </td>-->
               <td
                 class="whitespace-nowrap max-w-0 truncate hidden sm:table-cell"
                 th:text="${app.university}"
@@ -595,9 +595,10 @@
           vitaeFile.href = "/view/" + applicant.vitaeFile;
           //Supporting Link
           if (applicant.supportLink != "") {
-            supportLink.value = applicant.supportLink;
+            supportLink.innerHTML = applicant.supportLink;
+            supportLink.href = applicant.supportLink;
           } else {
-            supportLink.value = "NA";
+            supportLink.innerHTML = "NA";
           }
           //Group Name
           groupName.value = applicant.groupName;
