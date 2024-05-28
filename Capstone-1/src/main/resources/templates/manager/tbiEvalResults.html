@@ -110,7 +110,7 @@
                   <th class="text-center hidden sm:table-cell">University</th>
                   <th class="text-center hidden sm:table-cell">Status</th>
                   <th class="text-center hidden sm:table-cell"></th>
-                 <!-- <th
+                  <!-- <th
                     class="text-center hidden sm:table-cell rounded-top-right w-[5%]"
                   ></th>-->
                 </tr>
@@ -146,7 +146,7 @@
                     th:style="${app.score >= 6 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"
                   ></td>
                   <td>
-                    <button 
+                    <button
                       class="border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary text-sm sm:p-1"
                       type="button"
                       th:data-id="${app.applicantIdPk}"
@@ -155,7 +155,7 @@
                     >
                       Create Incubate Account
                     </button>
-                    <button 
+                    <button
                       class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary text-sm sm:p-1"
                       type="button"
                       th:data-id="${app.applicantIdPk}"
@@ -165,7 +165,7 @@
                       View Feedback
                     </button>
                   </td>
-                 <!-- <td>
+                  <!-- <td>
                      <button
                       class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary text-sm sm:p-1"
                       type="button"
@@ -205,6 +205,19 @@
               <div id="score"></div>
               <p class="font-semibold">Feedback:</p>
               <div id="feedback"></div>
+              <div>
+                <p>qualified for reapplication?</p>
+                <button
+                  class="btn-row border-black hover:bg-red-500 bg-red-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                >
+                  No
+                </button>
+                <button
+                  class="btn-row border-black hover:bg-green-500 bg-green-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                >
+                  Yes
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -291,7 +304,6 @@
           });
         }
 
-       	
         async function retrieveApplicantDetails(applicantIdPk) {
           const url = `/manager/retrieve/details?applicantIdPk=${applicantIdPk}`;
           const response = await fetch(url, { method: "GET" });

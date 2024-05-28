@@ -97,6 +97,13 @@
             <a href="#cvProjectLeader"> III. Curriculum Vitae </a>
           </li>
         </ul>
+        <div
+          class="relative min-h-[360px] mb-10 font-secondary mr-[20%] bg-white mt-8 p-2 rounded-md"
+        >
+          <p class="font-bold w-full flex justify-center">Feedback</p>
+          <hr />
+          <p class="py-2">feedback diri ni idol</p>
+        </div>
       </div>
       <div class="error-container" th:if="*{error != null}">
         <div>Please fill out all required fields!</div>
@@ -112,20 +119,20 @@
           <div>
             <div class="flex justify-between">
               <div class="mt-20 mb-6 h-20 flex text-center items-center">
-                <img
+                <!-- <img
                   src="/Capstone1/Capstone-1/src/main/resources/static/images/launchlab.png"
                   th:src="@{/images/launchlab.png}"
                   class="h-20 pointer-events-none"
-                />
-                <div class="mt-4 font-semibold text-xl">Registration Form</div>
+                /> -->
+                <div class="mt-4 font-semibold text-xl ml-6">
+                  Registration Form
+                </div>
               </div>
-              <a th:href="@{/}" class="h-24">
-                <img
-                  src="/Capstone1/Capstone-1/src/main/resources/static/images/wilBlackBox.png"
-                  th:src="@{/images/wilBlackBox.png}"
-                  class="h-20 mr-4 mt-4 pointer-events-none"
-                />
-              </a>
+              <img
+                src="/Capstone1/Capstone-1/src/main/resources/static/images/wilBlackBox.png"
+                th:src="@{/images/wilBlackBox.png}"
+                class="h-20 mr-4 mt-4 pointer-events-none"
+              />
             </div>
 
             <p class="mb-10 ml-6 mr-6 text-justify">
@@ -1610,20 +1617,11 @@
                 type="submit"
                 class="bg-tanglow text-black hover:bg-black hover:text-white font-secondary font-medium right-0 rounded btn-neutral border-b-2 border-black border-solid border-opacity-100 w-36 h-12"
               >
-                Submit
+                Resubmit
               </button>
             </div>
           </div>
         </form>
-
-        <div class="flex justify-center mr-96 mt-8">
-          <div class="font-secondary text-black bottom-0">
-            Already applied?
-            <span class="font-semibold hover:text-white cursor-pointer"
-              ><a th:href="@{/login/applicant}"> Login </a></span
-            >
-          </div>
-        </div>
       </div>
     </div>
     <!-- Scroll to top button -->

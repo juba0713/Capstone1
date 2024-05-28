@@ -7,36 +7,43 @@ import capstone.model.dao.entity.UserInformationEntity;
 
 @Service
 public interface UserLogic {
-
+	// interface defines several methods related to user operations:
+	// interface abstracts the operations related to user management, such as
+	// retrieving and saving user information.
 	/**
 	 * To get user by email
+	 * 
 	 * @param username
 	 * @return UserInformationEntity
 	 */
 	public UserInformationEntity getUserByEmail(String email);
-	
+
 	/**
 	 * To get user by id pk
+	 * 
 	 * @param username
 	 * @return UserInformationEntity
 	 */
 	public UserInformationEntity getUserByIdPk(int idPk);
-	
+
 	/**
 	 * To get user account by user id pk
+	 * 
 	 * @param userIdPk
 	 * @return UserInfoAccountEntity
 	 */
 	public UserInfoAccountEntity getUserAccountByUserIdPk(int userIdPk);
-	
+
 	/**
 	 * TO save user account
+	 * 
 	 * @param entity
 	 */
 	public void saveUserAccount(UserInfoAccountEntity entity);
-	
+
 	/**
 	 * To save user
+	 * 
 	 * @param entity
 	 * @return int
 	 */
