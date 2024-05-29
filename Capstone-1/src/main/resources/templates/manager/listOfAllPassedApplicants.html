@@ -42,7 +42,7 @@
         max-height: 50px;
       }
       .feedback-modal-content {
-        height: 50vh;
+        height: 30%;
       }
     </style>
   </head>
@@ -54,7 +54,6 @@
         <div class="pt-4">
           <img
             class="filter-logo pointer-events-none h-16 w-52 flex justify-center mx-auto border-2 border-blue-500 mb-4"
-            src="/Capstone1/Capstone-1/src/main/resources/static/images/yellowLogo.png"
             th:src="@{/images/yellowLogo.png}"
           />
           <div
@@ -177,8 +176,16 @@
                 <div class="rejected-feedback"></div>
               </div>
               <div class="evaluated">
-                <div class="score"></div>
-                <div class="evaluated-feedback"></div>
+                <div
+                  class="rounded-sm w-full text-center font-bold p-2 bg-customyellow"
+                >
+                  Feedback
+                </div>
+                <div class="text-left">
+                  <p class="score mb-2"></p>
+                  <p class="evaluated-feedback"></p>
+                  <!-- <hr class="my-4" /> -->
+                </div>
               </div>
             </div>
           </div>
@@ -210,7 +217,7 @@
           columnDefs: [
             {
               // targets: "no-sort",
-              targets: -1,
+              targets: [-1, -2],
               orderable: false,
             },
           ],
@@ -254,8 +261,12 @@
                       ".evaluated-feedback"
                     );
 
-                    score.innerHTML = "Score: " + applicant.score;
-                    feedback.innerHTML = "Feedback: " + applicant.feedback;
+                    score.innerHTML =
+                      "<p style='font-weight: 600; '>Score: </p>" +
+                      applicant.score;
+                    feedback.innerHTML =
+                      "<p style='font-weight: 600; '>Feedback: </p>" +
+                      applicant.feedback;
                   } else {
                     evaluated.style.display = "inline";
                     rejected.style.display = "none";

@@ -41,7 +41,7 @@
         max-height: 50px;
       }
       .feedback-modal-content {
-        height: 50vh;
+        height: 30%;
       }
     </style>
   </head>
@@ -52,8 +52,7 @@
       >
         <div class="pt-4">
           <img
-            class="filter-logo pointer-events-none h-16 w-52 flex justify-center mx-auto border-2 border-blue-500 mb-4"
-            src="/Capstone1/Capstone-1/src/main/resources/static/images/yellowLogo.png"
+            class="filter-logo pointer-events-none h-16 w-52 flex justify-center mx-auto border-blue-500 mb-4"
             th:src="@{/images/yellowLogo.png}"
           />
           <div
@@ -200,23 +199,33 @@
         <div class="modal-dialog feedback-modal-dialog" role="document">
           <div class="modal-content feedback-modal-content">
             <div class="p-2">
-              <p class="font-semibold">Score:</p>
+              <div
+                class="rounded-sm w-full text-center font-bold p-2 bg-customyellow"
+              >
+                Feedback
+              </div>
+              <div class="flex justify-center flex-col">
+                <p class="font-semibold">Score:</p>
 
-              <div id="score"></div>
-              <p class="font-semibold">Feedback:</p>
-              <div id="feedback"></div>
+                <div id="score" class="mb-2"></div>
+                <p class="font-semibold">Feedback:</p>
+                <div id="feedback"></div>
+              </div>
+              <hr class="my-4" />
               <div>
-                <p>qualified for reapplication?</p>
-                <button
-                  class="btn-row border-black hover:bg-red-500 bg-red-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-                >
-                  No
-                </button>
-                <button
-                  class="btn-row border-black hover:bg-green-500 bg-green-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-                >
-                  Yes
-                </button>
+                <p class="mb-4">Qualified for reapplication?</p>
+                <div class="w-full justify-between flex">
+                  <button
+                    class="btn-row p-2 border-black hover:bg-red-500 bg-red-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  >
+                    No
+                  </button>
+                  <button
+                    class="btn-row p-2 border-black hover:bg-green-500 bg-green-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  >
+                    Yes
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -250,7 +259,7 @@
           columnDefs: [
             {
               // targets: "no-sort",
-              targets: -1,
+              targets: [-1, -2],
               orderable: false,
             },
           ],

@@ -12,57 +12,58 @@ import jakarta.mail.internet.MimeMessage;
 
 @Service
 public class EmailServiceImpl implements EmailService {
-	
+
 	@Autowired
-    private JavaMailSender emailSender;
+	private JavaMailSender emailSender;
 
 	@Override
-	public void sendRejectionMail(String feedback, boolean resubmitFlg, String email, String token) throws MessagingException {
-		
-		MimeMessage message = emailSender.createMimeMessage();
-	     
-	    MimeMessageHelper helper = new MimeMessageHelper(message, true);
-	    
-	    helper.setFrom(CommonConstant.EMAIL);
-	    helper.setTo(email);
-	    helper.setSubject("Application Denied");
-	    
-	    String htmlText = "<h1>Feedback:</h1>" +
-                "<p>" + feedback + "</p>" +
-                "<p>" + "Reapplication: " + (resubmitFlg ? "Yes" : "No") + "</p>"; 
-	    
-	    if(resubmitFlg) {
-	    	htmlText += "<a href='http://localhost:8080/applicant/form/resubmit?token=" + token + "'>"
-	    	          + "resubmit</a>"; 	    
-	    }
+	public void sendRejectionMail(String feedback, boolean resubmitFlg, String email, String token)
+			throws MessagingException {
 
-	    helper.setText(htmlText, true); 
-		
-	    emailSender.send(message);
-		
+		MimeMessage message = emailSender.createMimeMessage();
+
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+		helper.setFrom(CommonConstant.EMAIL);
+		helper.setTo(email);
+		helper.setSubject("Application Denied");
+
+		String htmlText = "<h1>Feedback:</h1>" +
+				"<p>" + feedback + "</p>" +
+				"<p>" + "Reapplication: " + (resubmitFlg ? "Yes" : "No") + "</p>";
+
+		if (resubmitFlg) {
+			htmlText += "<a href='http://localhost:8080/applicant/form/resubmit?token=" + token + "'>"
+					+ "resubmit</a>";
+		}
+
+		helper.setText(htmlText, true);
+
+		emailSender.send(message);
+
 	}
 
 	@Override
-	public void sendActivationMail(String password, String email) throws MessagingException{
-		
-		MimeMessage message = emailSender.createMimeMessage();
-	     
-	    MimeMessageHelper helper = new MimeMessageHelper(message, true);
-	    
-	    helper.setFrom(CommonConstant.EMAIL);
-	    helper.setTo(email);
-	    helper.setSubject("Account Activated");
-	    
-	    String htmlText = "<h1>Welcome!</h1>" +
-                "<p>Your account has been activated.</p>" +
-                "<p>Your email: </p>" + email + "</p>" +
-                "<p>Your password: " + password + "</p>" +
-                "<div><a href='http://your-website.com/login'>Login Now</a></div>"; 
+	public void sendActivationMail(String password, String email) throws MessagingException {
 
-	    helper.setText(htmlText, true); 
-		
-	    emailSender.send(message);
-	    		
+		MimeMessage message = emailSender.createMimeMessage();
+
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+		helper.setFrom(CommonConstant.EMAIL);
+		helper.setTo(email);
+		helper.setSubject("Account Activated");
+
+		String htmlText = "<h1>Welcome!</h1>" +
+				"<p>Your account has been activated.</p>" +
+				"<p>Your email: </p>" + email + "</p>" +
+				"<p>Your password: " + password + "</p>" +
+				"<div><a href='http://localhost:8080/login'>Login Now</a></div>";
+
+		helper.setText(htmlText, true);
+
+		emailSender.send(message);
+
 	}
 
 }
