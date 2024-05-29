@@ -793,14 +793,6 @@ video {
   margin-top: 2rem;
 }
 
-.mt-\[-100px\]{
-  margin-top: -100px;
-}
-
-.mt-\[-20px\]{
-  margin-top: -20px;
-}
-
 .block{
   display: block;
 }
@@ -899,34 +891,6 @@ video {
 
 .h-screen{
   height: 100vh;
-}
-
-.h-\[10\%\]{
-  height: 10%;
-}
-
-.h-\[10px\]{
-  height: 10px;
-}
-
-.h-\[5\%\]{
-  height: 5%;
-}
-
-.h-\[200px\]{
-  height: 200px;
-}
-
-.h-\[50px\]{
-  height: 50px;
-}
-
-.h-\[30px\]{
-  height: 30px;
-}
-
-.h-\[40px\]{
-  height: 40px;
 }
 
 .min-h-32{
@@ -1260,10 +1224,6 @@ video {
   border-bottom-width: 2px;
 }
 
-.border-e-2{
-  border-inline-end-width: 2px;
-}
-
 .border-solid{
   border-style: solid;
 }
@@ -1311,16 +1271,6 @@ video {
   border-color: rgb(253 224 71 / var(--tw-border-opacity));
 }
 
-.border-green-600{
-  --tw-border-opacity: 1;
-  border-color: rgb(22 163 74 / var(--tw-border-opacity));
-}
-
-.border-violet-700{
-  --tw-border-opacity: 1;
-  border-color: rgb(109 40 217 / var(--tw-border-opacity));
-}
-
 .border-opacity-100{
   --tw-border-opacity: 1;
 }
@@ -1360,6 +1310,11 @@ video {
   background-color: rgb(22 163 74 / var(--tw-bg-opacity));
 }
 
+.bg-red-50{
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 242 242 / var(--tw-bg-opacity));
+}
+
 .bg-red-600{
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
@@ -1379,19 +1334,34 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-red-50{
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 242 242 / var(--tw-bg-opacity));
-}
-
 .bg-gradient-to-r{
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
+
+.from-\[\#E7BA05\]{
+  --tw-gradient-from: #E7BA05 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(231 186 5 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.from-customyellow{
+  --tw-gradient-from: #FDCC01 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(253 204 1 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
 .from-formbg-dark{
   --tw-gradient-from: #D3AC09 var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(211 172 9 / 0) var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+.to-\[\#E7BA05\]{
+  --tw-gradient-to: #E7BA05 var(--tw-gradient-to-position);
+}
+
+.to-customyellow{
+  --tw-gradient-to: #FDCC01 var(--tw-gradient-to-position);
 }
 
 .to-formbg-light{
@@ -1548,10 +1518,6 @@ video {
 
 .pt-4{
   padding-top: 1rem;
-}
-
-.pt-\[-100px\]{
-  padding-top: -100px;
 }
 
 .text-left{
