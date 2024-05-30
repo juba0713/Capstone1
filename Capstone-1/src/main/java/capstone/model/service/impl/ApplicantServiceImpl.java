@@ -1025,7 +1025,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 				
 			}
 			 
-			members.add(app.getMemberLastName() .trim() + ", " + app.getMemberFirstName().trim());
+			members.add(app.getMemberLastName()  + ", " + app.getMemberFirstName());
 			
 			firstRow++;
 		}
