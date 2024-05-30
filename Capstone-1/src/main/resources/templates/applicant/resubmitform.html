@@ -754,7 +754,7 @@
               </div>
             </div>
             <div>Current File</div>
-            <a th:href="@{/view/} + *{vitaeFileName}" target="_blank">View File</a>
+            <a th:href="@{/view/} + *{vitaeFileName}" target="_blank" th:text="*{vitaeFileName}"></a>
             <input type="hidden" name="vitaeFileName" th:value="*{vitaeFileName}" />
             <hr class="my-10" />
 
