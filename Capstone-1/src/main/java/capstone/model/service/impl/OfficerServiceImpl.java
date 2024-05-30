@@ -12,6 +12,7 @@ import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
 import capstone.model.dao.entity.RejectedApplicantEntity;
+import capstone.model.dao.entity.UserInfoAccountEntity;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.logic.ApplicantLogic;
 import capstone.model.logic.UserLogic;
@@ -111,9 +112,16 @@ public class OfficerServiceImpl implements OfficerService{
 	public OfficerInOutDto acceptApplicant(OfficerInOutDto inDto) {
 		
 		OfficerInOutDto outDto = new OfficerInOutDto();
-			
-		applicantLogic.updateApplicantStatus(1, List.of(inDto.getApplicantIdPk()));
 		
+		ApplicantEntity applicantEntity = applicantLogic.getApplicantByIdPk(inDto.getApplicantIdPk());
+		
+		UserInfoAccountEntity account = userLogic.getUserAccountByUserIdPk(applicantEntity.getCreatedBy());
+		
+		if(account.getPassword() == null) {
+			applicantLogic.updateApplicantStatus(1, List.of(inDto.getApplicantIdPk()));
+		}else {
+			applicantLogic.updateApplicantStatus(3, List.of(inDto.getApplicantIdPk()));
+		}
 		return outDto;
 	}
 
