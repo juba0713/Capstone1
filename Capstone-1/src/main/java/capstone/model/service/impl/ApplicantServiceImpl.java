@@ -22,6 +22,7 @@ import capstone.common.constant.CommonConstant;
 import capstone.common.constant.MessageConstant;
 import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
+import capstone.model.dao.entity.EvaluatedApplicantEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
 import capstone.model.dao.entity.ProjectEntity;
@@ -559,17 +560,36 @@ public class ApplicantServiceImpl implements ApplicantService {
 			applicantLogic.saveGroupMemberEntity(members);
 		}else {
 			
-			System.out.println("VITAE: " + inDto.getVitaeFileName());
+			int status = 0;
 			
-			RejectedApplicantEntity rejectedApplicant = applicantLogic.getRejectedApplicantByToken(inDto.getToken());
+			int applicantIdPk = 0;
 			
-			ApplicantEntity applicant = applicantLogic.getApplicantByIdPk(rejectedApplicant.getApplicantIdPk());
+			if(inDto.getToken().charAt(0)=='F') {
+				status = 4;
+				
+				EvaluatedApplicantEntity evaluatedApplicant = applicantLogic.getEvaluatedApplicantByToken(inDto.getToken());
+				
+				evaluatedApplicant.setIdPk(evaluatedApplicant.getIdPk());
+				
+				evaluatedApplicant.setDeleteFlg(true);
+				
+				applicantLogic.saveEvaluateedApplicant(evaluatedApplicant);
+				
+				applicantIdPk = evaluatedApplicant.getApplicantIdPk();
+				
+			}else {
+				RejectedApplicantEntity rejectedApplicant = applicantLogic.getRejectedApplicantByToken(inDto.getToken());
+					
+				rejectedApplicant.setIdPk(rejectedApplicant.getIdPk());
+				
+				rejectedApplicant.setDeleteFlg(true);
+				
+				applicantLogic.saveRejectedApplicantEntity(rejectedApplicant);
+				
+				applicantIdPk = rejectedApplicant.getApplicantIdPk();
+			}
 			
-			rejectedApplicant.setIdPk(rejectedApplicant.getIdPk());
-			
-			rejectedApplicant.setDeleteFlg(true);
-			
-			applicantLogic.saveRejectedApplicantEntity(rejectedApplicant);
+			ApplicantEntity applicant = applicantLogic.getApplicantByIdPk(applicantIdPk);
 			
 			applicantLogic.updateApplicant(inDto.getAgreeFlg(),
 					inDto.getTechnologyAns(), 
@@ -584,6 +604,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 					inDto.getCommitmentTwoFlg(),
 					inDto.getCommitmentThreeFlg(),
 					inDto.getCommitmentFourFlg(),
+					status,
 					applicant.getIdPk());
 			
 			String fileName = "";
@@ -883,12 +904,27 @@ public class ApplicantServiceImpl implements ApplicantService {
 	public ApplicantInOutDto getApplicantDetailsByToken(ApplicantInOutDto inDto) {
 		
 		ApplicantInOutDto outDto = new ApplicantInOutDto();
-
-		RejectedApplicantEntity rejectedApplicant = applicantLogic.getRejectedApplicantByToken(inDto.getToken());
-
-		ApplicantEntity createdApplicant = applicantLogic.getApplicantByIdPk(rejectedApplicant.getApplicantIdPk());
 		
-		List<ApplicantDetailsEntity> applicant = applicantLogic.getApplicantDetailsByIdPk(createdApplicant.getIdPk());
+		int applicantIdPk = 0;
+		
+		if(inDto.getToken().charAt(0)=='R') {
+			
+			RejectedApplicantEntity rejectedApplicant = applicantLogic.getRejectedApplicantByToken(inDto.getToken());
+			
+			applicantIdPk = rejectedApplicant.getApplicantIdPk();
+			
+			outDto.setFeedback(rejectedApplicant.getFeedback());
+			
+		}else if(inDto.getToken().charAt(0)=='F') {
+			
+			EvaluatedApplicantEntity evaluatedApplicant = applicantLogic.getEvaluatedApplicantByToken(inDto.getToken());
+			
+			applicantIdPk = evaluatedApplicant.getApplicantIdPk();
+			
+			outDto.setFeedback(evaluatedApplicant.getFeedback());
+		}
+		
+		List<ApplicantDetailsEntity> applicant = applicantLogic.getApplicantDetailsByIdPk(applicantIdPk);
 
 		List<String> members = new ArrayList<>();
 
@@ -996,7 +1032,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		outDto.setMembers(members);
 		
-		outDto.setFeedback(rejectedApplicant.getFeedback());
 		
 		return outDto;
 	}

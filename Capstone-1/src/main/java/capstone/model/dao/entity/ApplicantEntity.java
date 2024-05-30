@@ -74,6 +74,8 @@ public class ApplicantEntity {
 	 * 3 - createdApplicantAccount
 	 * 4 - Pending for evaluation
 	 * 5 - Evaluated
+	 * 6 - Qualified for Resubmission
+	 * 7 - Not Qualified for Resubmission
 	 */
 	@Column(nullable = false)
 	private int status;

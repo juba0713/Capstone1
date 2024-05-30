@@ -143,7 +143,7 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	public void updateApplicant(Boolean agreeFlg, int technologyAns, int productDevelopmentAns,
 			int competitiveLandscapeAns, int productDesignAns, int teamAns, int goToMarketAns, int manufacturingAns,
 			Boolean eligibilityAgreeFlg, Boolean commitmentOneFlg, Boolean commitmentTwoFlg, Boolean commitmentThreeFlg,
-			Boolean commitmentFourFlg, int idPk) {
+			Boolean commitmentFourFlg, int status, int idPk) {
 		
 		applicantDao.updateApplicant(agreeFlg, 
 				technologyAns, 
@@ -158,6 +158,7 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 				commitmentTwoFlg, 
 				commitmentThreeFlg, 
 				commitmentFourFlg, 
+				status,
 				idPk);
 		
 	}
@@ -215,6 +216,18 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 				university, 
 				applicantIdPk);
 		
+	}
+
+	@Override
+	public void updateEvaluatedApplicant(String token, int applicantIdPk) {
+		
+		evaluatedApplicantDao.updateEvaluatedApplicant(token, applicantIdPk);
+	}
+
+	@Override
+	public EvaluatedApplicantEntity getEvaluatedApplicantByToken(String token) {
+		
+		return evaluatedApplicantDao.getEvaluatedApplicantByToken(token);
 	}
 	
 }

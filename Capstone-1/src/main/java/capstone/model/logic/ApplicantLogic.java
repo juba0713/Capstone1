@@ -163,6 +163,7 @@ public interface ApplicantLogic {
 			Boolean commitmentTwoFlg,
 			Boolean commitmentThreeFlg,
 			Boolean commitmentFourFlg,
+			int status,
 			int idPk
 			);
 	
@@ -219,4 +220,19 @@ public interface ApplicantLogic {
 			String address,
 			String university,
 			int applicantIdPk);
+	
+	/**
+	 * To update evaluate applicant table
+	 * @param token
+	 * @param applicantIdPk
+	 */
+	public void updateEvaluatedApplicant(String token, int applicantIdPk);
+	
+	/**
+	 * To get evaluated applicant by token
+	 * 
+	 * @param token
+	 * @return EvaluatedApplicantEntity
+	 */
+	public EvaluatedApplicantEntity getEvaluatedApplicantByToken(String token);
 }

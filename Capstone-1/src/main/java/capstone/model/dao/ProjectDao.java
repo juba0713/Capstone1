@@ -37,7 +37,9 @@ public interface ProjectDao extends JpaRepository<ProjectEntity, Integer>{
 			+ "	vitae_file = :vitaeFile,"
 			+ "	support_link = :supportLink "
 			+ "WHERE "
-			+ "	applicant_id_pk = :applicantIdPk";
+			+ "	applicant_id_pk = :applicantIdPk"
+			+ "AND "
+			+ "	delete_flg = false";
 	
 	@Modifying
 	@Query(value=UPDATE_PROJECT, nativeQuery=true)

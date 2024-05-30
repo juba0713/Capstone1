@@ -73,7 +73,7 @@ public class OfficerServiceImpl implements OfficerService{
 	@Override
 	public OfficerInOutDto rejectApplicant(OfficerInOutDto inDto) throws MessagingException {
 		       
-        String token = UUID.randomUUID().toString().replace("-", "");
+        String token = "R"+UUID.randomUUID().toString().replace("-", "");
 
 		OfficerInOutDto outDto = new OfficerInOutDto();
 		

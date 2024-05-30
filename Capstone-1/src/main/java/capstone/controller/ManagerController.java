@@ -1,5 +1,7 @@
 package capstone.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import capstone.controller.webdto.TbiBoardWebDto;
 import capstone.model.dto.ManagerInOutDto;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.dto.TbiBoardInOutDto;
+import capstone.model.service.EmailService;
 import capstone.model.service.ManagerService;
 import jakarta.mail.MessagingException;
 
@@ -24,6 +27,9 @@ public class ManagerController {
 	
 	@Autowired
 	private ManagerService managerService;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@GetMapping("/home")
 	public String showManagerHome(@ModelAttribute ManagerWebDto webDto) {
@@ -117,10 +123,30 @@ public class ManagerController {
 		return ResponseEntity.ok(returnWebDto);
 	}
 	
-	@PostMapping("/qualified")
-	public String qualifiedResubmission() {
+	@PostMapping(value="/qualified", params="yes")
+	public String qualifiedResubmissionYes(@ModelAttribute ManagerWebDto webDto) throws MessagingException {
 		
-		System.out.println("HELLO");
+		ManagerInOutDto inDto = new ManagerInOutDto();
+		
+		inDto.setApplicantIdPk(webDto.getApplicantIdPk());
+		
+		inDto.setStatus(6);
+		
+		managerService.sendResubmissionMail(inDto);
+		
+		return "redirect:/manager/evaluated-result";
+	}
+	
+	@PostMapping(value="/qualified", params="no")
+	public String qualifiedResubmissionNo(@ModelAttribute ManagerWebDto webDto) throws MessagingException {
+		
+		ManagerInOutDto inDto = new ManagerInOutDto();
+		
+		inDto.setApplicantIdPk(webDto.getApplicantIdPk());
+		
+		inDto.setStatus(7);
+		
+		managerService.sendResubmissionMail(inDto);
 		
 		return "redirect:/manager/evaluated-result";
 	}

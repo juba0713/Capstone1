@@ -29,4 +29,7 @@ public class EvaluatedApplicantEntity {
 	public Timestamp createdDate;
 	
 	public Boolean deleteFlg;
+	
+	private String token;
+
 }

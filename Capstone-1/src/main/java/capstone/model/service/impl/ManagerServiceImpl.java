@@ -2,6 +2,7 @@ package capstone.model.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
 import capstone.model.dao.entity.UserInfoAccountEntity;
+import capstone.model.dao.entity.UserInformationEntity;
 import capstone.model.dto.ManagerInOutDto;
 import capstone.model.dto.TbiBoardInOutDto;
 import capstone.model.logic.ApplicantLogic;
@@ -125,7 +127,7 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		ManagerInOutDto outDto = new ManagerInOutDto();
 		
-		List<Integer> status = List.of(5);
+		List<Integer> status = List.of(5,6,7);
 		
 		List<JoinApplicantProject> listOfApplicant = applicantLogic.getAllApplicantByStatus(status);
 		
@@ -313,6 +315,30 @@ public class ManagerServiceImpl implements ManagerService {
 		applicantDetailsObj.setMembers(members);
 		
 		outDto.setApplicantDetailsObj(applicantDetailsObj);
+		
+		return outDto;
+	}
+
+	@Override
+	public ManagerInOutDto sendResubmissionMail(ManagerInOutDto inDto) throws MessagingException {
+		
+		String token = "F"+UUID.randomUUID().toString().replace("-", "");
+		
+		ApplicantEntity applicant = applicantLogic.getApplicantByIdPk(inDto.getApplicantIdPk());
+		
+		UserInformationEntity user = userLogic.getUserByIdPk(applicant.getCreatedBy());
+		
+		ManagerInOutDto outDto = new ManagerInOutDto();
+		
+		if(inDto.getStatus() == 6) {
+			applicantLogic.updateApplicantStatus(inDto.getStatus(), List.of(inDto.getApplicantIdPk()));
+			emailService.sendFailedMail(true,user.getEmail(), token);
+		}else {
+			applicantLogic.updateApplicantStatus(inDto.getStatus(), List.of(inDto.getApplicantIdPk()));
+			emailService.sendFailedMail(false,user.getEmail(), token);
+		}
+		
+		applicantLogic.updateEvaluatedApplicant(token, inDto.getApplicantIdPk());
 		
 		return outDto;
 	}

@@ -26,9 +26,9 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ " COALESCE(e.score, 0) AS score, "
 			+ " COALESCE(e.feedback, '') AS feedback "
 			+ "FROM m_applicant a "
-			+ "JOIN t_project p ON p.applicant_id_pk = a.id_pk "
-			+ "JOIN m_group g ON g.applicant_id_pk = a.id_pk "
-			+ "LEFT JOIN t_evaluated_applicant e ON e.applicant_id_pk = a.id_pk "
+			+ "JOIN t_project p ON p.applicant_id_pk = a.id_pk AND p.delete_flg = false "
+			+ "JOIN m_group g ON g.applicant_id_pk = a.id_pk AND g.delete_flg = false "
+			+ "LEFT JOIN t_evaluated_applicant e ON e.applicant_id_pk = a.id_pk AND e.delete_flg = false "
 			+ "WHERE a.status IN (:status) "
 			+ "AND a.delete_flg = false";
 	
@@ -112,9 +112,11 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "	commitment_two_flg = :commitmentTwoFlg,"
 			+ "	commitment_three_flg = :commitmentThreeFlg,"
 			+ "	commitment_four_flg = :commitmentFourFlg,"
-			+ "	status = 0 "
+			+ "	status = :status "
 			+ "WHERE"
-			+ "	id_pk = :idPk";
+			+ "	id_pk = :idPk "
+			+ "AND "
+			+ "	delete_flg = false";
 	
 	@Modifying
 	@Query(value=UPDATE_APPLICANT, nativeQuery=true)
@@ -131,6 +133,7 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 				@Param("commitmentTwoFlg") Boolean commitmentTwoFlg,
 				@Param("commitmentThreeFlg") Boolean commitmentThreeFlg,
 				@Param("commitmentFourFlg") Boolean commitmentFourFlg,
+				@Param("status") int status,
 				@Param("idPk") int idPk
 			) throws DataAccessException;
 	

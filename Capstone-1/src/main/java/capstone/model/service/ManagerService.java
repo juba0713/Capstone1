@@ -1,5 +1,7 @@
 package capstone.model.service;
 
+import java.util.UUID;
+
 import org.springframework.stereotype.Service;
 
 import capstone.model.dto.ManagerInOutDto;
@@ -47,5 +49,11 @@ public interface ManagerService {
 	 */
 	public ManagerInOutDto getApplicantDetails(ManagerInOutDto inDto); 
 	
-
+	/**
+	 * To esnd a resubmission mail
+	 * @param inDto
+	 * @return
+	 */
+	public ManagerInOutDto sendResubmissionMail(ManagerInOutDto inDto)  throws MessagingException;
+	
 }
