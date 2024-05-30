@@ -48,7 +48,10 @@ public class ApplicantController {
 	 * @return String
 	 */
 	@PostMapping("/form")
-	public String processApplicantForm(@ModelAttribute ApplicantWebDto webDto, RedirectAttributes ra, @RequestParam("vitaeFile") MultipartFile file)  throws IOException{
+	public String processApplicantForm(@ModelAttribute ApplicantWebDto webDto, 
+			RedirectAttributes ra,
+			@RequestParam("button") String button,
+			@RequestParam("vitaeFile") MultipartFile file)  throws IOException{
 		
 		ApplicantInOutDto inDto = new ApplicantInOutDto();
 		
@@ -122,6 +125,10 @@ public class ApplicantController {
 		
 		inDto.setCommitmentFourFlg(webDto.getCommitmentFourFlg());
 		
+		inDto.setToken(webDto.getToken());
+		
+		inDto.setVitaeFileName(webDto.getVitaeFileName());
+		
 		ApplicantInOutDto outDto = applicantService.validateApplication(inDto);
 			
 		if(CommonConstant.INVALID.equals(outDto.getResult())) {
@@ -130,7 +137,11 @@ public class ApplicantController {
 			
 			ra.addFlashAttribute("applicantWebDto", webDto);
 			
-			return "redirect:/applicant/form";
+			if(!button.equals("resubmit")) {
+				return "redirect:/applicant/form";
+			}else {
+				return "redirect:/applicant/form/resubmit?token=" + webDto.getToken();
+			}
 		}
 		
 		applicantService.saveApplication(inDto);
@@ -191,12 +202,14 @@ public class ApplicantController {
 	 * @return String
 	 */
 	@GetMapping("/form/resubmit")
-	public String showResubmission(Model model, @ModelAttribute ApplicantWebDto webDto, @RequestParam("token") String token) {
-		
+	public String showResubmission(Model model, 
+			@ModelAttribute ApplicantWebDto webDto, 
+			@RequestParam("token") String token) {
+			
 		ApplicantInOutDto inDto = new ApplicantInOutDto();
 		
 		inDto.setToken(token);
-		
+	
 		ApplicantInOutDto outDto = applicantService.getApplicantDetailsByToken(inDto);
 			
 		webDto.setEmail(outDto.getEmail());
@@ -269,18 +282,28 @@ public class ApplicantController {
 		
 		webDto.setCommitmentFourFlg(outDto.getCommitmentFourFlg());
 		
+		webDto.setFeedback(outDto.getFeedback());
+		
 		model.addAttribute("applicantWebDto", webDto);
+		
+		model.addAttribute("token", token);
 		
 		return "applicant/resubmitform";
 	}
 	
-	/**
-	 * To show the Applicant Form
-	 * @return String
-	 */
-	@PostMapping("/form/resubmit")
-	public String postResubmission(@ModelAttribute ApplicantWebDto webDto) {
-		
-		return "applicant/resubmitform";
-	}
+//	/**
+//	 * To show the Applicant Form
+//	 * @return String
+//	 */
+//	@PostMapping(value="/form/resubmit")
+//	public String postResubmission(@ModelAttribute ApplicantWebDto webDto, 
+//			@RequestParam("button") String button,
+//			RedirectAttributes ra) {
+//		
+//		System.out.println("TOKEN: " + button);
+//		
+//		ra.addFlashAttribute("success", "You have sucessfully registered! Wait for the email that will be sent to you!");
+//		
+//		return "redirect:/login";
+//	}
 }

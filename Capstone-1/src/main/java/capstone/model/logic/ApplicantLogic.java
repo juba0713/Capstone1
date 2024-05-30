@@ -2,6 +2,7 @@ package capstone.model.logic;
 
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import capstone.model.dao.entity.ApplicantDetailsEntity;
@@ -111,5 +112,111 @@ public interface ApplicantLogic {
 	 * @return RejectedApplicantEntity
 	 */
 	public RejectedApplicantEntity getRejectedApplicantByToken(String token);
-
+	
+	/**
+	 * To get project by applicant id
+	 * @param applicantIdPk
+	 * @return ProjectEntity
+	 */
+	public ProjectEntity getProjectByApplicantId(int applicantIdPk);
+	
+	/**
+	 * To get group by applicant id
+	 * @param applicantIdPk
+	 * @return ProjectEntity
+	 */
+	public GroupEntity getGroupByApplicantId(int applicantIdPk);
+	
+	/**
+	 * TO delete all previous group member
+	 * @param groupIdPk
+	 */
+	public void deleteAllPreviousMember(int groupIdPk);
+	
+	/**
+	 * To update applicant by id 
+	 * @param agreeFlg
+	 * @param technologyAns
+	 * @param productDevelopmentAns
+	 * @param competitiveLandscapeAns
+	 * @param productDesignAns
+	 * @param teamAns
+	 * @param goToMarketAns
+	 * @param manufacturingAns
+	 * @param eligibilityAgreeFlg
+	 * @param commitmentOneFlg
+	 * @param commitmentTwoFlg
+	 * @param commitmentThreeFlg
+	 * @param commitmentFourFlg
+	 * @param idPk
+	 */
+	public void updateApplicant(Boolean agreeFlg,
+			int technologyAns,
+			int productDevelopmentAns,
+			int competitiveLandscapeAns,
+			int productDesignAns,
+			int teamAns,
+			int goToMarketAns,
+			int manufacturingAns,
+			Boolean eligibilityAgreeFlg,
+			Boolean commitmentOneFlg,
+			Boolean commitmentTwoFlg,
+			Boolean commitmentThreeFlg,
+			Boolean commitmentFourFlg,
+			int idPk
+			);
+	
+	/**
+	 * To update project
+	 * @param projectTitle
+	 * @param projectDescription
+	 * @param teams
+	 * @param problemStatement
+	 * @param targetMarket
+	 * @param solutionDescription
+	 * @param historicalTimeline
+	 * @param productServiceOffering
+	 * @param pricingStrategy
+	 * @param intPropertyStatus
+	 * @param objectives
+	 * @param scopeProposal
+	 * @param methodology
+	 * @param vitaeFile
+	 * @param supportLink
+	 * @param applicantIdPk
+	 */
+	public void updateProject(String projectTitle,
+			String projectDescription,
+			String[] teams,
+			String problemStatement,
+			String targetMarket,
+			String solutionDescription,
+			String[] historicalTimeline,
+			String[] productServiceOffering,
+			String[] pricingStrategy,
+			String intPropertyStatus,
+			String objectives,
+			String scopeProposal,
+			String methodology,
+			String vitaeFile,
+			String supportLink,
+			int applicantIdPk);
+	
+	/**
+	 * To update group
+	 * @param groupName
+	 * @param firstName
+	 * @param lastName
+	 * @param mobileNumber
+	 * @param address
+	 * @param university
+	 * @param applicantIdPk
+	 */
+	public void updateGroup(String groupName,
+			String firstName,
+			String lastName,
+			String mobileNumber,
+			String address,
+			String university,
+			int applicantIdPk);
 }

@@ -284,13 +284,13 @@ public class ApplicantServiceImpl implements ApplicantService {
 			hasError = true;
 		}
 
-		if (inDto.getVitaeFile().isEmpty()) {
+		if (inDto.getToken() == null &&  inDto.getVitaeFile().isEmpty()) {
 			vitaeFileError.add("Please upload a Curriculum Vitae");
 			hasError = true;
 		}
 
 		String extension = FilenameUtils.getExtension(inDto.getVitaeFile().getOriginalFilename()).toLowerCase();
-		if (!extension.equals("pdf")) {
+		if (inDto.getToken() == null && !extension.equals("pdf")) {
 			vitaeFileError.add("Please upload a PDF File");
 			hasError = true;
 		}
@@ -377,183 +377,289 @@ public class ApplicantServiceImpl implements ApplicantService {
 		Timestamp currentDateTime = new Timestamp(System.currentTimeMillis());
 
 		ApplicantInOutDto outDto = new ApplicantInOutDto();
-
+		
 		String[] leaderNames = commonService.splitArray(inDto.getGroupLeader());
-
-		UserInformationEntity newUser = new UserInformationEntity();
-
-		newUser.setEmail(inDto.getEmail());
-
-		newUser.setFirstName(leaderNames[0]);
-
-		newUser.setLastName(leaderNames[1]);
-
-		newUser.setMobileNumber(inDto.getLeaderNumber());
-
-		newUser.setRole("APPLICANT");
-
-		newUser.setInitialChangePass(false);
-
-		newUser.setCreatedDate(currentDateTime);
-
-		newUser.setDeleteFlg(false);
-
-		int userIdPk = userLogic.saveUser(newUser);
-
-		UserInfoAccountEntity newUserAccount = new UserInfoAccountEntity();
-
-		newUserAccount.setUserIdPk(userIdPk);
-
-		newUserAccount.setCreatedDate(currentDateTime);
-
-		newUserAccount.setDeleteFlg(false);
-
-		userLogic.saveUserAccount(newUserAccount);
-
-		ApplicantEntity applicantEntity = new ApplicantEntity();
-
-		applicantEntity.setEmail(inDto.getEmail());
-
-		applicantEntity.setAgreeFlg(inDto.getAgreeFlg());
-
-		applicantEntity.setTechnologyAns(inDto.getTechnologyAns());
-
-		applicantEntity.setProductDevelopmentAns(inDto.getProductDevelopmentAns());
-
-		applicantEntity.setCompetitiveLandscapeAns(inDto.getCompetitiveLandscapeAns());
-
-		applicantEntity.setProductDesignAns(inDto.getProductDesignAns());
-
-		applicantEntity.setTeamAns(inDto.getTeamAns());
-
-		applicantEntity.setGoToMarketAns(inDto.getGoToMarketAns());
-
-		applicantEntity.setManufacturingAns(inDto.getManufacturingAns());
-
-		applicantEntity.setEligibilityAgreeFlg(inDto.getEligibilityAgreeFlg());
-
-		applicantEntity.setCommitmentOneFlg(inDto.getCommitmentOneFlg());
-
-		applicantEntity.setCommitmentTwoFlg(inDto.getCommitmentTwoFlg());
-
-		applicantEntity.setCommitmentThreeFlg(inDto.getCommitmentThreeFlg());
-
-		applicantEntity.setCommitmentFourFlg(inDto.getCommitmentFourFlg());
-
-		applicantEntity.setCreatedDate(currentDateTime);
-
-		applicantEntity.setDeleteFlg(false);
-
-		applicantEntity.setStatus(0);
-
-		applicantEntity.setCreatedBy(userIdPk);
-
-		int applicantIdPk = applicantLogic.saveApplicantEntity(applicantEntity);
-
-		ProjectEntity projectEntity = new ProjectEntity();
-
-		projectEntity.setApplicantIdPk(applicantIdPk);
-
-		projectEntity.setProjectTitle(inDto.getProjectTitle());
-
-		projectEntity.setProjectDescription(inDto.getProjectDescription());
-
-		projectEntity.setTeams(commonService.convertToArray(inDto.getTeams()));
-
-		projectEntity.setProblemStatement(inDto.getProblemStatement());
-
-		projectEntity.setTargetMarket(inDto.getTargetMarket());
-
-		projectEntity.setSolutionDescription(inDto.getSolutionDescription());
-
-		projectEntity.setHistoricalTimeline(commonService.convertToArray(inDto.getHistoricalTimeline()));
-
-		projectEntity.setProductServiceOffering(inDto.getProductServiceOffering());
-
-		projectEntity.setPricingStrategy(inDto.getPricingStrategy());
-
-		projectEntity.setIntPropertyStatus(inDto.getIntPropertyStatus());
-
-		projectEntity.setObjectives(inDto.getObjectives());
-
-		projectEntity.setScopeProposal(inDto.getScopeProposal());
-
-		projectEntity.setMethodology(inDto.getMethodology());
-
+		
 		Path uploadPath = Paths.get(env.getProperty("file.path"));
-
+		
 		if (!Files.exists(uploadPath)) {
 			Files.createDirectories(uploadPath);
 		}
+		
+		//If token is not null means resubmission
+		if(inDto.getToken() == null) {
 
-		MultipartFile vitaeFile = inDto.getVitaeFile();
+			UserInformationEntity newUser = new UserInformationEntity();
+	
+			newUser.setEmail(inDto.getEmail());
+	
+			newUser.setFirstName(leaderNames[0]);
+	
+			newUser.setLastName(leaderNames[1]);
+	
+			newUser.setMobileNumber(inDto.getLeaderNumber());
+	
+			newUser.setRole("APPLICANT");
+	
+			newUser.setInitialChangePass(false);
+	
+			newUser.setCreatedDate(currentDateTime);
+	
+			newUser.setDeleteFlg(false);
+	
+			int userIdPk = userLogic.saveUser(newUser);
+	
+			UserInfoAccountEntity newUserAccount = new UserInfoAccountEntity();
+	
+			newUserAccount.setUserIdPk(userIdPk);
+	
+			newUserAccount.setCreatedDate(currentDateTime);
+	
+			newUserAccount.setDeleteFlg(false);
+	
+			userLogic.saveUserAccount(newUserAccount);
+	
+			ApplicantEntity applicantEntity = new ApplicantEntity();
+	
+			applicantEntity.setEmail(inDto.getEmail());
+	
+			applicantEntity.setAgreeFlg(inDto.getAgreeFlg());
+	
+			applicantEntity.setTechnologyAns(inDto.getTechnologyAns());
+	
+			applicantEntity.setProductDevelopmentAns(inDto.getProductDevelopmentAns());
+	
+			applicantEntity.setCompetitiveLandscapeAns(inDto.getCompetitiveLandscapeAns());
+	
+			applicantEntity.setProductDesignAns(inDto.getProductDesignAns());
+	
+			applicantEntity.setTeamAns(inDto.getTeamAns());
+	
+			applicantEntity.setGoToMarketAns(inDto.getGoToMarketAns());
+	
+			applicantEntity.setManufacturingAns(inDto.getManufacturingAns());
+	
+			applicantEntity.setEligibilityAgreeFlg(inDto.getEligibilityAgreeFlg());
+	
+			applicantEntity.setCommitmentOneFlg(inDto.getCommitmentOneFlg());
+	
+			applicantEntity.setCommitmentTwoFlg(inDto.getCommitmentTwoFlg());
+	
+			applicantEntity.setCommitmentThreeFlg(inDto.getCommitmentThreeFlg());
+	
+			applicantEntity.setCommitmentFourFlg(inDto.getCommitmentFourFlg());
+	
+			applicantEntity.setCreatedDate(currentDateTime);
+	
+			applicantEntity.setDeleteFlg(false);
+	
+			applicantEntity.setStatus(0);
+	
+			applicantEntity.setCreatedBy(userIdPk);
+	
+			int applicantIdPk = applicantLogic.saveApplicantEntity(applicantEntity);
+	
+			ProjectEntity projectEntity = new ProjectEntity();
+	
+			projectEntity.setApplicantIdPk(applicantIdPk);
+	
+			projectEntity.setProjectTitle(inDto.getProjectTitle());
+	
+			projectEntity.setProjectDescription(inDto.getProjectDescription());
+	
+			projectEntity.setTeams(commonService.convertToArray(inDto.getTeams()));
+	
+			projectEntity.setProblemStatement(inDto.getProblemStatement());
+	
+			projectEntity.setTargetMarket(inDto.getTargetMarket());
+	
+			projectEntity.setSolutionDescription(inDto.getSolutionDescription());
+	
+			projectEntity.setHistoricalTimeline(commonService.convertToArray(inDto.getHistoricalTimeline()));
+	
+			projectEntity.setProductServiceOffering(inDto.getProductServiceOffering());
+	
+			projectEntity.setPricingStrategy(inDto.getPricingStrategy());
+	
+			projectEntity.setIntPropertyStatus(inDto.getIntPropertyStatus());
+	
+			projectEntity.setObjectives(inDto.getObjectives());
+	
+			projectEntity.setScopeProposal(inDto.getScopeProposal());
+	
+			projectEntity.setMethodology(inDto.getMethodology());
 
-		int lastDotIndex = vitaeFile.getOriginalFilename().lastIndexOf('.');
-
-		String fileName = vitaeFile.getOriginalFilename().substring(0, lastDotIndex) + "_" + userIdPk
-				+ vitaeFile.getOriginalFilename().substring(lastDotIndex);
-
-		Path filePath = uploadPath.resolve(fileName);
-
-		Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-		projectEntity.setVitaeFile(fileName);
-
-		projectEntity.setSupportLink(inDto.getSupportLink());
-
-		projectEntity.setCreatedDate(currentDateTime);
-
-		projectEntity.setDeleteFlg(false);
-
-		applicantLogic.saveProjectEntity(projectEntity);
-
-		GroupEntity groupEntity = new GroupEntity();
-
-		groupEntity.setApplicantIdPk(applicantIdPk);
-
-		groupEntity.setGroupName(inDto.getGroupName());
-
-		groupEntity.setFirstName(leaderNames[0]);
-
-		groupEntity.setLastName(leaderNames[1]);
-
-		groupEntity.setMobileNumber(inDto.getLeaderNumber());
-
-		groupEntity.setAddress(inDto.getLeaderAddress());
-
-		groupEntity.setUniversity(inDto.getUniversity());
-
-		groupEntity.setCreatedDate(currentDateTime);
-
-		groupEntity.setDeleteFlg(false);
-
-		int groupIdPk = applicantLogic.saveGroupEntity(groupEntity);
-
-		List<GroupMemberEntity> members = new ArrayList<>();
-
-		for (String member : inDto.getMembers()) {
-
-			if (!CommonConstant.BLANK.equals(member)) {
-
-				GroupMemberEntity groupMemberEntity = new GroupMemberEntity();
-
-				groupMemberEntity.setGroupIdPk(groupIdPk);
-
-				String[] memberNames = commonService.splitArray(member);
-
-				groupMemberEntity.setFirstName(memberNames[0]);
-
-				groupMemberEntity.setLastName(memberNames[1]);
-
-				groupMemberEntity.setCreatedDate(currentDateTime);
-
-				groupMemberEntity.setDeleteFlg(false);
-
-				members.add(groupMemberEntity);
+		   MultipartFile vitaeFile = inDto.getVitaeFile();
+	
+			int lastDotIndex = vitaeFile.getOriginalFilename().lastIndexOf('.');
+	
+			String fileName = vitaeFile.getOriginalFilename().substring(0, lastDotIndex) + "_" + userIdPk
+					+ vitaeFile.getOriginalFilename().substring(lastDotIndex);
+	
+			Path filePath = uploadPath.resolve(fileName);
+	
+			Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+	
+			projectEntity.setVitaeFile(fileName);
+	
+			projectEntity.setSupportLink(inDto.getSupportLink());
+	
+			projectEntity.setCreatedDate(currentDateTime);
+	
+			projectEntity.setDeleteFlg(false);
+	
+			applicantLogic.saveProjectEntity(projectEntity);
+	
+			GroupEntity groupEntity = new GroupEntity();
+	
+			groupEntity.setApplicantIdPk(applicantIdPk);
+	
+			groupEntity.setGroupName(inDto.getGroupName());
+	
+			groupEntity.setFirstName(leaderNames[0]);
+	
+			groupEntity.setLastName(leaderNames[1]);
+	
+			groupEntity.setMobileNumber(inDto.getLeaderNumber());
+	
+			groupEntity.setAddress(inDto.getLeaderAddress());
+	
+			groupEntity.setUniversity(inDto.getUniversity());
+	
+			groupEntity.setCreatedDate(currentDateTime);
+	
+			groupEntity.setDeleteFlg(false);
+	
+			int groupIdPk = applicantLogic.saveGroupEntity(groupEntity);
+	
+			List<GroupMemberEntity> members = new ArrayList<>();
+	
+			for (String member : inDto.getMembers()) {
+	
+				if (!CommonConstant.BLANK.equals(member)) {
+	
+					GroupMemberEntity groupMemberEntity = new GroupMemberEntity();
+	
+					groupMemberEntity.setGroupIdPk(groupIdPk);
+	
+					String[] memberNames = commonService.splitArray(member);
+	
+					groupMemberEntity.setFirstName(memberNames[0]);
+	
+					groupMemberEntity.setLastName(memberNames[1]);
+	
+					groupMemberEntity.setCreatedDate(currentDateTime);
+	
+					groupMemberEntity.setDeleteFlg(false);
+	
+					members.add(groupMemberEntity);
+				}
 			}
-		}
+	
+			applicantLogic.saveGroupMemberEntity(members);
+		}else {
+			
+			System.out.println("VITAE: " + inDto.getVitaeFileName());
+			
+			RejectedApplicantEntity rejectedApplicant = applicantLogic.getRejectedApplicantByToken(inDto.getToken());
+			
+			ApplicantEntity applicant = applicantLogic.getApplicantByIdPk(rejectedApplicant.getApplicantIdPk());
+			
+			rejectedApplicant.setIdPk(rejectedApplicant.getIdPk());
+			
+			rejectedApplicant.setDeleteFlg(true);
+			
+			applicantLogic.saveRejectedApplicantEntity(rejectedApplicant);
+			
+			applicantLogic.updateApplicant(inDto.getAgreeFlg(),
+					inDto.getTechnologyAns(), 
+					inDto.getProductDevelopmentAns(), 
+					inDto.getCompetitiveLandscapeAns(), 
+					inDto.getProductDesignAns(), 
+					inDto.getTeamAns(), 
+					inDto.getGoToMarketAns(), 
+					inDto.getManufacturingAns(), 
+					inDto.getEligibilityAgreeFlg(), 
+					inDto.getCommitmentOneFlg(),
+					inDto.getCommitmentTwoFlg(),
+					inDto.getCommitmentThreeFlg(),
+					inDto.getCommitmentFourFlg(),
+					applicant.getIdPk());
+			
+			String fileName = "";
+			
+			if(!inDto.getVitaeFile().isEmpty()) {
+				MultipartFile vitaeFile = inDto.getVitaeFile();
+				
+				int lastDotIndex = vitaeFile.getOriginalFilename().lastIndexOf('.');
+		
+				fileName = vitaeFile.getOriginalFilename().substring(0, lastDotIndex) + "_" + applicant.getCreatedBy()
+						+ vitaeFile.getOriginalFilename().substring(lastDotIndex);
+		
+				Path filePath = uploadPath.resolve(fileName);
+		
+				Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-		applicantLogic.saveGroupMemberEntity(members);
+			}else {
+				fileName = inDto.getVitaeFileName();
+			}
+			
+			
+			applicantLogic.updateProject(inDto.getProjectTitle(), 
+					inDto.getProjectDescription(), 
+					commonService.listToArray(commonService.convertToArray(inDto.getTeams())),
+					inDto.getProblemStatement(), 
+					inDto.getTargetMarket(), 
+					inDto.getSolutionDescription(), 
+					commonService.listToArray(commonService.convertToArray(inDto.getHistoricalTimeline())),
+					commonService.listToArray(inDto.getProductServiceOffering()),
+					commonService.listToArray(inDto.getPricingStrategy()),
+					inDto.getIntPropertyStatus(), 
+					inDto.getObjectives(), 
+					inDto.getScopeProposal(), 
+					inDto.getMethodology(), 
+					fileName, 
+					inDto.getSupportLink(), 
+					applicant.getIdPk());
+			
+			GroupEntity group = applicantLogic.getGroupByApplicantId(applicant.getIdPk());
+			
+			applicantLogic.updateGroup(inDto.getGroupName(), 
+					leaderNames[0], 
+					leaderNames[1], 
+					inDto.getLeaderNumber(), 
+					inDto.getLeaderAddress(),
+					inDto.getUniversity(),
+					applicant.getIdPk());
+			
+			applicantLogic.deleteAllPreviousMember(group.getIdPk());
+			
+			List<GroupMemberEntity> members = new ArrayList<>();
+			
+			for (String member : inDto.getMembers()) {
+	
+				if (!CommonConstant.BLANK.equals(member)) {
+	
+					GroupMemberEntity groupMemberEntity = new GroupMemberEntity();
+	
+					groupMemberEntity.setGroupIdPk(group.getIdPk());
+	
+					String[] memberNames = commonService.splitArray(member);
+	
+					groupMemberEntity.setFirstName(memberNames[0]);
+	
+					groupMemberEntity.setLastName(memberNames[1]);
+	
+					groupMemberEntity.setCreatedDate(currentDateTime);
+	
+					groupMemberEntity.setDeleteFlg(false);
+	
+					members.add(groupMemberEntity);
+				}
+			}
+	
+			applicantLogic.saveGroupMemberEntity(members);
+		}
 
 		return outDto;
 	}
@@ -762,7 +868,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 			}
 
 			members[firstRow] = app.getMemberLastName() + ", " + app.getMemberFirstName();
-
+			
 			firstRow++;
 		}
 
@@ -784,9 +890,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		List<ApplicantDetailsEntity> applicant = applicantLogic.getApplicantDetailsByIdPk(createdApplicant.getIdPk());
 
-		//ApplicantDetailsObj applicantDetailsObj = new ApplicantDetailsObj();
-
-		String[] members = new String[4];
+		List<String> members = new ArrayList<>();
 
 		int firstRow = 0;
 		for (ApplicantDetailsEntity app : applicant) {
@@ -882,14 +986,18 @@ public class ApplicantServiceImpl implements ApplicantService {
 				outDto.setScore(app.getScore());
 
 				outDto.setFeedback(app.getFeedback());
-				;
+				
 			}
-
-			members[firstRow] = app.getMemberLastName() + ", " + app.getMemberFirstName();
-
+			 
+			members.add(app.getMemberLastName() .trim() + ", " + app.getMemberFirstName().trim());
+			
 			firstRow++;
 		}
-
+		
+		outDto.setMembers(members);
+		
+		outDto.setFeedback(rejectedApplicant.getFeedback());
+		
 		return outDto;
 	}
 	

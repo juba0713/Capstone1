@@ -102,7 +102,7 @@
         >
           <p class="font-bold w-full flex justify-center">Feedback</p>
           <hr />
-          <p class="py-2">feedback diri ni idol</p>
+          <p class="py-2" th:text="*{feedback}"></p>
         </div>
       </div>
       <div class="error-container" th:if="*{error != null}">
@@ -116,6 +116,7 @@
           class="border font-secondary rounded-lg border-black bg-white md:w-9/12"
           enctype="multipart/form-data"
         >
+          <input type="hidden" name="token" th:value="${token}" />
           <div>
             <div class="flex justify-between">
               <div class="mt-20 mb-6 h-20 flex text-center items-center">
@@ -428,7 +429,7 @@
                         name="historicalTimeline[0][0]"
                         placeholder="mm/yyyy"
                         class="w-full h-20 focus:outline-none"
-                        th:value="*{historicalTimeline[0][0]}"
+                        th:value="*{historicalTimeline[0].length != 0 ? historicalTimeline[0][0] : ''}"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
@@ -437,7 +438,7 @@
                         name="historicalTimeline[0][1]"
                         placeholder="Enter key activities or milestones here"
                         class="w-full focus:outline-none"
-                        th:value="*{historicalTimeline[0][1]}"
+                       th:value="*{historicalTimeline[0].length != 0 ? historicalTimeline[0][1] : ''}"
                       />
                     </td>
                   </tr>
@@ -448,7 +449,7 @@
                         name="historicalTimeline[1][0]"
                         placeholder="mm/yyyy"
                         class="w-full h-20 focus:outline-none"
-                        th:value="*{historicalTimeline[1][0]}"
+                       th:value="*{historicalTimeline[1].length != 0 ? historicalTimeline[1][0] : ''}"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
@@ -457,7 +458,7 @@
                         name="historicalTimeline[1][1]"
                         placeholder="Enter key activities or milestones here"
                         class="w-full focus:outline-none"
-                        th:value="*{historicalTimeline[1][1]}"
+                        th:value="*{historicalTimeline[1].length != 0 ? historicalTimeline[1][1] : ''}"
                       />
                     </td>
                   </tr>
@@ -468,7 +469,7 @@
                         name="historicalTimeline[2][0]"
                         placeholder="mm/yyyy"
                         class="w-full h-20 focus:outline-none"
-                        th:value="*{historicalTimeline[2][0]}"
+                        th:value="*{historicalTimeline[2].length != 0 ? historicalTimeline[2][0] : ''}"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
@@ -477,7 +478,7 @@
                         name="historicalTimeline[2][1]"
                         placeholder="Enter key activities or milestones here"
                         class="w-full focus:outline-none"
-                        th:value="*{historicalTimeline[2][1]}"
+                        th:value="*{historicalTimeline[2].length != 0 ? historicalTimeline[2][1] : ''}"
                       />
                     </td>
                   </tr>
@@ -488,7 +489,7 @@
                         name="historicalTimeline[3][0]"
                         placeholder="mm/yyyy"
                         class="w-full h-20 focus:outline-none"
-                        th:value="*{historicalTimeline[3][0]}"
+                       th:value="*{historicalTimeline[3].length != 0 ? historicalTimeline[3][0] : ''}"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
@@ -497,7 +498,7 @@
                         name="historicalTimeline[3][1]"
                         placeholder="Enter key activities or milestones here"
                         class="w-full focus:outline-none"
-                        th:value="*{historicalTimeline[3][1]}"
+                        th:value="*{historicalTimeline[3].length != 0 ? historicalTimeline[3][1] : ''}"
                       />
                     </td>
                   </tr>
@@ -508,7 +509,7 @@
                         name="historicalTimeline[4][0]"
                         placeholder="mm/yyyy"
                         class="w-full h-20 focus:outline-none"
-                        th:value="*{historicalTimeline[4][0]}"
+                        th:value="*{historicalTimeline[4].length != 0 ? historicalTimeline[4][0] : ''}"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
@@ -517,7 +518,7 @@
                         name="historicalTimeline[4][1]"
                         placeholder="Enter key activities or milestones here"
                         class="w-full focus:outline-none"
-                        th:value="*{historicalTimeline[4][1]}"
+                        th:value="*{historicalTimeline[4].length != 0 ? historicalTimeline[4][1] : ''}"
                       />
                     </td>
                   </tr>
@@ -752,6 +753,9 @@
                 ></div>
               </div>
             </div>
+            <div>Current File</div>
+            <a th:href="@{/view/} + *{vitaeFileName}" target="_blank">View File</a>
+            <input type="hidden" name="vitaeFileName" th:value="*{vitaeFileName}" />
             <hr class="my-10" />
 
             <div class="flex flex-col mb-10">
@@ -846,6 +850,7 @@
                 type="text"
                 placeholder="Input here"
                 name="members[0]"
+                th:value="*{#lists.size(members) >= 1 ? members[0] : ''}"
                 class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
               />
             </div>
@@ -855,6 +860,7 @@
                 type="text"
                 placeholder="Input here"
                 name="members[1]"
+                th:value="*{#lists.size(members) >= 2 ? members[1] : ''}"
                 class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
               />
             </div>
@@ -864,6 +870,7 @@
                 type="text"
                 placeholder="Input here"
                 name="members[2]"
+				th:value="*{#lists.size(members) >= 3 ? members[2] : ''}"
                 class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
               />
             </div>
@@ -873,6 +880,7 @@
                 type="text"
                 placeholder="Input here"
                 name="members[3]"
+                th:value="*{#lists.size(members) == 4 ? members[3] : ''}"
                 class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
               />
             </div>
@@ -1615,6 +1623,8 @@
             <div class="relative z-10 justify-end flex mt-16 mb-6 mr-6">
               <button
                 type="submit"
+                name="button"
+                value="resubmit"
                 class="bg-tanglow text-black hover:bg-black hover:text-white font-secondary font-medium right-0 rounded btn-neutral border-b-2 border-black border-solid border-opacity-100 w-36 h-12"
               >
                 Resubmit

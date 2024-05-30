@@ -120,6 +120,101 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 
 		return rejectedApplicantDao.getRejectedApplicantByToken(token);
 	}
-	
 
+	@Override
+	public ProjectEntity getProjectByApplicantId(int applicantIdPk) {
+		
+		return projectDao.getProjectByApplicantId(applicantIdPk);
+	}
+
+	@Override
+	public GroupEntity getGroupByApplicantId(int applicantIdPk) {
+
+		return groupDao.getGroupByApplicantId(applicantIdPk);
+	}
+
+	@Override
+	public void deleteAllPreviousMember(int groupIdPk) {
+		
+		groupMemberDao.deleteAllGroupMemberByGroupId(groupIdPk);
+	}
+
+	@Override
+	public void updateApplicant(Boolean agreeFlg, int technologyAns, int productDevelopmentAns,
+			int competitiveLandscapeAns, int productDesignAns, int teamAns, int goToMarketAns, int manufacturingAns,
+			Boolean eligibilityAgreeFlg, Boolean commitmentOneFlg, Boolean commitmentTwoFlg, Boolean commitmentThreeFlg,
+			Boolean commitmentFourFlg, int idPk) {
+		
+		applicantDao.updateApplicant(agreeFlg, 
+				technologyAns, 
+				productDevelopmentAns, 
+				competitiveLandscapeAns,
+				productDesignAns, 
+				teamAns, 
+				goToMarketAns, 
+				manufacturingAns, 
+				eligibilityAgreeFlg, 
+				commitmentOneFlg, 
+				commitmentTwoFlg, 
+				commitmentThreeFlg, 
+				commitmentFourFlg, 
+				idPk);
+		
+	}
+
+	@Override
+	public void updateProject(String projectTitle, 
+			String projectDescription, 
+			String[] teams,
+			String problemStatement, 
+			String targetMarket, 
+			String solutionDescription, 
+			String[] historicalTimeline,
+			String[] productServiceOffering, 
+			String[] pricingStrategy, 
+			String intPropertyStatus,
+			String objectives, 
+			String scopeProposal, 
+			String methodology, 
+			String vitaeFile, 
+			String supportLink,
+			int applicantIdPk) {
+		
+			projectDao.updateProject(projectTitle, 
+					projectDescription, 
+					teams, 
+					problemStatement, 
+					targetMarket, 
+					solutionDescription, 
+					historicalTimeline, 
+					productServiceOffering, 
+					pricingStrategy, 
+					intPropertyStatus, 
+					objectives,
+					scopeProposal, 
+					methodology, 
+					vitaeFile, 
+					supportLink, 
+					applicantIdPk);
+	}
+
+	@Override
+	public void updateGroup(String groupName, 
+			String firstName, 
+			String lastName, 
+			String mobileNumber, 
+			String address,
+			String university,
+			int applicantIdPk) {
+		
+		groupDao.updateGroupByApplicantId(groupName, 
+				firstName, 
+				lastName, 
+				mobileNumber, 
+				address,
+				university, 
+				applicantIdPk);
+		
+	}
+	
 }

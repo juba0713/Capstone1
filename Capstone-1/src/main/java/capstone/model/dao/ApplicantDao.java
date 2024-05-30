@@ -7,12 +7,14 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
 import jakarta.transaction.Transactional;
 
+@Transactional
 public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 	
 	public final String GET_ALL_APPLICANTS_BY_STATUS = "SELECT "
@@ -79,11 +81,12 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ " COALESCE(ea.score, 0) AS score, "
 			+ " COALESCE(ea.feedback, '') AS feedback "
 			+ "FROM m_applicant a "
-			+ "LEFT JOIN t_project p ON p.applicant_id_pk = a.id_pk "
-			+ "LEFT JOIN m_group g ON g.applicant_id_pk = a.id_pk "
-			+ "LEFT JOIN t_group_member gm ON gm.group_id_pk = g.id_pk "
-			+ "LEFT JOIN t_evaluated_applicant ea ON ea.applicant_id_pk = a.id_pk "
-			+ "WHERE a.id_pk = :applicantIdPk";
+			+ "LEFT JOIN t_project p ON p.applicant_id_pk = a.id_pk AND p.delete_flg = false "
+			+ "LEFT JOIN m_group g ON g.applicant_id_pk = a.id_pk AND g.delete_flg = false "
+			+ "LEFT JOIN t_group_member gm ON gm.group_id_pk = g.id_pk AND gm.delete_flg = false "
+			+ "LEFT JOIN t_evaluated_applicant ea ON ea.applicant_id_pk = a.id_pk AND ea.delete_flg = false "
+			+ "WHERE a.id_pk = :applicantIdPk "
+			+ "AND a.delete_flg = false";
 
 	public final String UPDATE_APPLICANT_STATUS = "UPDATE ApplicantEntity a "
 			+ "SET a.status = :status "
@@ -93,6 +96,43 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ " FROM ApplicantEntity e"
 			+ " WHERE e.createdBy = :createdBy"
 			+ " AND e.deleteFlg = false";
+	
+	public final String UPDATE_APPLICANT = "UPDATE m_applicant "
+			+ "SET "
+			+ "	agree_flg = :agreeFlg,"
+			+ "	technology_ans = :technologyAns,"
+			+ "	product_development_ans = :productDevelopmentAns,"
+			+ "	competitive_landscape_ans = :competitiveLandscapeAns,"
+			+ "	product_design_ans = :productDesignAns,"
+			+ "	team_ans = :teamAns,"
+			+ "	go_to_market_ans = :goToMarketAns,"
+			+ "	manufacturing_ans = :manufacturingAns,"
+			+ "	eligibility_agree_flg = :eligibilityAgreeFlg,"
+			+ "	commitment_one_flg = :commitmentOneFlg,"
+			+ "	commitment_two_flg = :commitmentTwoFlg,"
+			+ "	commitment_three_flg = :commitmentThreeFlg,"
+			+ "	commitment_four_flg = :commitmentFourFlg,"
+			+ "	status = 0 "
+			+ "WHERE"
+			+ "	id_pk = :idPk";
+	
+	@Modifying
+	@Query(value=UPDATE_APPLICANT, nativeQuery=true)
+	public void updateApplicant(@Param("agreeFlg") Boolean agreeFlg,
+				@Param("technologyAns") int technologyAns,
+				@Param("productDevelopmentAns") int productDevelopmentAns,
+				@Param("competitiveLandscapeAns") int competitiveLandscapeAns,
+				@Param("productDesignAns") int productDesignAns,
+				@Param("teamAns") int teamAns,
+				@Param("goToMarketAns") int goToMarketAns,
+				@Param("manufacturingAns") int manufacturingAns,
+				@Param("eligibilityAgreeFlg") Boolean eligibilityAgreeFlg,
+				@Param("commitmentOneFlg") Boolean commitmentOneFlg,
+				@Param("commitmentTwoFlg") Boolean commitmentTwoFlg,
+				@Param("commitmentThreeFlg") Boolean commitmentThreeFlg,
+				@Param("commitmentFourFlg") Boolean commitmentFourFlg,
+				@Param("idPk") int idPk
+			) throws DataAccessException;
 	
 	@Query(value=GET_ALL_APPLICANTS_BY_STATUS, nativeQuery=true)
 	public List<Object[]> getAllApplicantByStatusRaw(List<Integer> status) throws DataAccessException;

@@ -11,6 +11,8 @@ public interface CommonService {
 	
 	public List<String> convertToArray(List<String[]> var);
 	
+	public String[] listToArray(List<String> var);
+	
 	public String[] splitArray(String var);
 	
 	public String generateRandomPass();

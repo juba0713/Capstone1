@@ -64,4 +64,21 @@ public class CommonServiceImpl implements CommonService {
         return result.toString();
 	}
 
+	@Override
+	public String[] listToArray(List<String> var) {
+		String[] converteValue = new String[var.size()];
+		
+		if(var != null && !var.isEmpty()) {
+			
+			int i = 0;
+			for(String value : var) {
+								
+				converteValue[i] = value;
+				i++;
+			}	
+		}
+			
+		return converteValue;
+	}
+
 }

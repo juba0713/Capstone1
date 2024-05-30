@@ -12,7 +12,7 @@ public interface RejectedApplicantDao extends JpaRepository<RejectedApplicantEnt
 			+ " FROM RejectedApplicantEntity e"
 			+ " WHERE e.token = :token"
 			+ " AND e.deleteFlg = false";
-	
+		
 	@Query(value=GET_REJECTED_APPLICANT_BY_TOKEN)
 	public RejectedApplicantEntity getRejectedApplicantByToken(String token) throws DataAccessException;
 }

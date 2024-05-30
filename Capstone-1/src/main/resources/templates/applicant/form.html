@@ -836,6 +836,7 @@
                 type="text"
                 placeholder="Input here"
                 name="members[0]"
+                th:value="*{members[0] != '' ? members[0] : ''}"
                 class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
               />
             </div>
@@ -845,6 +846,7 @@
                 type="text"
                 placeholder="Input here"
                 name="members[1]"
+                th:value="*{members[1] != '' ? members[1] : ''}"
                 class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
               />
             </div>
@@ -854,6 +856,7 @@
                 type="text"
                 placeholder="Input here"
                 name="members[2]"
+                th:value="*{members[2] != '' ? members[2] : ''}"
                 class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
               />
             </div>
@@ -863,6 +866,7 @@
                 type="text"
                 placeholder="Input here"
                 name="members[3]"
+                th:value="*{members[3] != '' ? members[3] : ''}"
                 class="w-1/3 border-b border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
               />
             </div>
@@ -1605,6 +1609,8 @@
             <div class="relative z-10 justify-end flex mt-16 mb-6 mr-6">
               <button
                 type="submit"
+                name="button"
+                value="submit"
                 class="bg-tanglow text-black hover:bg-black hover:text-white font-secondary font-medium right-0 rounded btn-neutral border-b-2 border-black border-solid border-opacity-100 w-36 h-12"
               >
                 Submit
