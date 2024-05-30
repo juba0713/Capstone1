@@ -16,6 +16,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/officer/officer.css}" />
     <link rel="stylesheet" th:href="@{/css/output.css}" />
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}" />
     <style>
       .dt-search {
         font-family: Poppins;
@@ -151,7 +153,7 @@
                       class="border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary text-sm sm:p-1"
                       type="button"
                       th:data-id="${app.applicantIdPk}"
-                      name="feedback"
+                      name="create"
                       th:if="${app.score >= 6}"
                     >
                       Create Incubate Account
@@ -218,12 +220,14 @@
                 <p class="mb-4">Qualified for reapplication?</p>
                 <div class="w-full justify-between flex">
                   <button
-                    class="btn-row p-2 border-black hover:bg-red-500 bg-red-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                    name="no"
+                    class="qualified-btn p-2 border-black hover:bg-red-500 bg-red-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                   >
                     No
                   </button>
                   <button
-                    class="btn-row p-2 border-black hover:bg-green-500 bg-green-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                    name="yes"
+                    class="qualified-btn p-2 border-black hover:bg-green-500 bg-green-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                   >
                     Yes
                   </button>
@@ -283,8 +287,6 @@
             if (!rowBtnClicked) {
               $("#details-modal").modal("show");
               retrieveApplicantDetails(id);
-
-              // getApplicantDetails();
             }
           });
         }
@@ -308,10 +310,41 @@
               }
 
               $("#feedback-modal").modal("show");
+              
+              let qualifiedBtns = document.querySelectorAll(".qualified-btn");
+              for(let btn of qualifiedBtns){
+				  btn.addEventListener('click', function(){
+					 	let form = document.createElement('form');
+					 	form.method = 'POST';
+					 	form.action = '/manager/qualified';
+					 	
+					 	let inputId = document.createElement('input');
+					 	inputId.type = 'hidden';
+					 	inputId.name = 'applicantIdPk';
+					 	inputId.value = idPk;
+					 	
+					 	form.appendChild(inputId);
+					 	
+					 	var csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
+					 	var csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
+					 	
+					 	var csrfInput = document.createElement('input');
+					 	csrfInput.type = 'hidden';
+					 	csrfInput.name = '_csrf';
+					 	csrfInput.value = csrfToken;
+					 	
+					 	form.appendChild(csrfInput);
+					 	
+					 	form.submit();
+				  });
+			  }
             }
+            if(this.name === "create"){
+				console.log("AW");
+			}
             setTimeout(() => {
               rowBtnClicked = false;
-            }, 100);
+            }, 500);
           });
         }
 
@@ -525,9 +558,10 @@
           methodology.textContent = applicant.methodology;
           //Supporting Link
           if (applicant.supportLink != "") {
-            supportLink.value = applicant.supportLink;
+            supportLink.href = applicant.supportLink;
+            supportLink.innerHTML = applicant.supportLink;
           } else {
-            supportLink.value = "NA";
+            supportLink.innerHTML = 'NA';
           }
           //Group Name
           groupName.value = applicant.groupName;

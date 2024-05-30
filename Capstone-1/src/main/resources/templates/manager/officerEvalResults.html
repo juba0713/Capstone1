@@ -543,9 +543,10 @@
           vitaeFile.href = "/view/" + applicant.vitaeFile;
           //Supporting Link
           if (applicant.supportLink != "") {
-            supportLink.value = applicant.supportLink;
+            supportLink.href = applicant.supportLink;
+            supportLink.innerHTML = applicant.supportLink;
           } else {
-            supportLink.value = "NA";
+            supportLink.innerHTML = 'NA';
           }
           //Group Name
           groupName.value = applicant.groupName;

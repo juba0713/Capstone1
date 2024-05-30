@@ -117,5 +117,12 @@ public class ManagerController {
 		return ResponseEntity.ok(returnWebDto);
 	}
 	
+	@PostMapping("/qualified")
+	public String qualifiedResubmission() {
+		
+		System.out.println("HELLO");
+		
+		return "redirect:/manager/evaluated-result";
+	}
 	
 }
