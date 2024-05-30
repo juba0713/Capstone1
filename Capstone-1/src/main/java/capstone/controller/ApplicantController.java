@@ -152,7 +152,7 @@ public class ApplicantController {
 			
 			ra.addFlashAttribute("applicantWebDto", webDto);
 			
-			if(!button.equals("resubmit")) {
+			if(!button.equals("resubmit") && webDto.getReApplyToken().isEmpty()) {
 				return "redirect:/applicant/form";
 			}else {
 				return "redirect:/applicant/form/resubmit?token=" + webDto.getToken();

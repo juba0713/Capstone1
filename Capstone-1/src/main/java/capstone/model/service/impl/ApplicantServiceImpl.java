@@ -434,7 +434,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 					
 					userIdPk = user.getIdPk();
 				}
-						
+				
+				System.out.println(userIdPk);
+				
 				applicantLogic.deleteApplicantByCreatedBy(userIdPk);
 			}
 
