@@ -235,4 +235,10 @@ public interface ApplicantLogic {
 	 * @return EvaluatedApplicantEntity
 	 */
 	public EvaluatedApplicantEntity getEvaluatedApplicantByToken(String token);
+	
+	/**
+	 * To delete an applicant by created by
+	 * @param createdBy
+	 */
+	public void deleteApplicantByCreatedBy(int createdBy);
 }

@@ -229,5 +229,12 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 		
 		return evaluatedApplicantDao.getEvaluatedApplicantByToken(token);
 	}
+
+	@Override
+	public void deleteApplicantByCreatedBy(int createdBy) {
+		
+		applicantDao.deleteApplicantByCreatedBy(createdBy);
+		
+	}
 	
 }

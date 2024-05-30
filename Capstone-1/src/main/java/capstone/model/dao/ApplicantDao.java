@@ -118,6 +118,14 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "AND "
 			+ "	delete_flg = false";
 	
+	public final String DELETE_APPLICANT_BY_CREATED_BY = "UPDATE m_applicant "
+			+ "SET "
+			+ "	delete_flg = true "
+			+ "WHERE"
+			+ "	created_by = :createdBy "
+			+ "AND "
+			+ "	delete_flg = false";
+	
 	@Modifying
 	@Query(value=UPDATE_APPLICANT, nativeQuery=true)
 	public void updateApplicant(@Param("agreeFlg") Boolean agreeFlg,
@@ -136,6 +144,11 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 				@Param("status") int status,
 				@Param("idPk") int idPk
 			) throws DataAccessException;
+	
+
+	@Modifying
+	@Query(value=DELETE_APPLICANT_BY_CREATED_BY, nativeQuery=true)
+	public void deleteApplicantByCreatedBy(@Param("createdBy") int createdBy);
 	
 	@Query(value=GET_ALL_APPLICANTS_BY_STATUS, nativeQuery=true)
 	public List<Object[]> getAllApplicantByStatusRaw(List<Integer> status) throws DataAccessException;

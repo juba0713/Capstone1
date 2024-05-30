@@ -48,4 +48,11 @@ public interface UserLogic {
 	 * @return int
 	 */
 	public int saveUser(UserInformationEntity entity);
+	
+	/**
+	 * To get user by evaluated token
+	 * @param token
+	 * @return UserInformationEntity
+	 */
+	public UserInformationEntity getUserByEvaluatedToken(String token);
 }

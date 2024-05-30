@@ -217,7 +217,7 @@
               </div>
               <hr class="my-4" />
               <div>
-                <p class="mb-4 qualified">Qualified for reapplication? <span class="is-qualified" style="font-weight: 600; color:green"></span></p>
+                <p class="mb-4 qualified">Qualified for reapplication? <span class="is-qualified" style="font-weight: bold;"></span></p>
                 <div class="w-full justify-between flex qualified-btns" >
                   <button
                     name="no"
@@ -307,9 +307,11 @@
                     	
    					if(applicant.status == 6){
 						   document.querySelector(".is-qualified").innerHTML = " Yes";
+						   document.querySelector(".is-qualified").style.color = 'green';
 						   document.querySelector(".qualified-btns").style.display = 'none';
 					}else if(applicant.status == 7){
 						 document.querySelector(".is-qualified").innerHTML = " No";
+						  document.querySelector(".is-qualified").style.color = 'red';
 						  document.querySelector(".qualified-btns").style.display = 'none';
 					}else{
 						document.querySelector(".is-qualified").innerHTML = "";

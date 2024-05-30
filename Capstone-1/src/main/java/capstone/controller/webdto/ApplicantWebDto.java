@@ -124,6 +124,9 @@ public class ApplicantWebDto {
 	//Token
 	public String token;
 	
+	//Re apply token
+	public String reApplyToken;
+	
 	
 	/*
 	 * Change Password

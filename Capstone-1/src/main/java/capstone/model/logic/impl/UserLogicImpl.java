@@ -50,4 +50,10 @@ public class UserLogicImpl implements UserLogic {
 		return userInformationDao.getUserByIdPk(idPk);
 	}
 
+	@Override
+	public UserInformationEntity getUserByEvaluatedToken(String token) {
+		
+		return userInformationDao.getUserByEvaluatedtoken(token);
+	}
+
 }

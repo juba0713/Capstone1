@@ -387,39 +387,50 @@ public class ApplicantServiceImpl implements ApplicantService {
 			Files.createDirectories(uploadPath);
 		}
 		
+		int userIdPk = 0;
+		
 		//If token is not null means resubmission
-		if(inDto.getToken() == null) {
+		if(inDto.getToken() == null || inDto.getReApplyToken() != null) {
+			
+			if(inDto.getReApplyToken()==null || inDto.getReApplyToken().isEmpty()) {
+				
+				UserInformationEntity newUser = new UserInformationEntity();
+				
+				newUser.setEmail(inDto.getEmail());
+		
+				newUser.setFirstName(leaderNames[0]);
+		
+				newUser.setLastName(leaderNames[1]);
+		
+				newUser.setMobileNumber(inDto.getLeaderNumber());
+		
+				newUser.setRole("APPLICANT");
+		
+				newUser.setInitialChangePass(false);
+		
+				newUser.setCreatedDate(currentDateTime);
+		
+				newUser.setDeleteFlg(false);
+		
+				userIdPk = userLogic.saveUser(newUser);
+		
+				UserInfoAccountEntity newUserAccount = new UserInfoAccountEntity();
+		
+				newUserAccount.setUserIdPk(userIdPk);
+		
+				newUserAccount.setCreatedDate(currentDateTime);
+		
+				newUserAccount.setDeleteFlg(false);
+		
+				userLogic.saveUserAccount(newUserAccount);
+			}else {
+				UserInformationEntity user = userLogic.getUserByEvaluatedToken(inDto.getReApplyToken());
+				
+				userIdPk = user.getIdPk();
+				
+				applicantLogic.deleteApplicantByCreatedBy(userIdPk);
+			}
 
-			UserInformationEntity newUser = new UserInformationEntity();
-	
-			newUser.setEmail(inDto.getEmail());
-	
-			newUser.setFirstName(leaderNames[0]);
-	
-			newUser.setLastName(leaderNames[1]);
-	
-			newUser.setMobileNumber(inDto.getLeaderNumber());
-	
-			newUser.setRole("APPLICANT");
-	
-			newUser.setInitialChangePass(false);
-	
-			newUser.setCreatedDate(currentDateTime);
-	
-			newUser.setDeleteFlg(false);
-	
-			int userIdPk = userLogic.saveUser(newUser);
-	
-			UserInfoAccountEntity newUserAccount = new UserInfoAccountEntity();
-	
-			newUserAccount.setUserIdPk(userIdPk);
-	
-			newUserAccount.setCreatedDate(currentDateTime);
-	
-			newUserAccount.setDeleteFlg(false);
-	
-			userLogic.saveUserAccount(newUserAccount);
-	
 			ApplicantEntity applicantEntity = new ApplicantEntity();
 	
 			applicantEntity.setEmail(inDto.getEmail());
@@ -1032,6 +1043,24 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		outDto.setMembers(members);
 		
+		
+		return outDto;
+	}
+
+	@Override
+	public ApplicantInOutDto getUserReapply(ApplicantInOutDto inDto) {
+		
+		ApplicantInOutDto outDto = new ApplicantInOutDto();
+		
+		UserInformationEntity user = userLogic.getUserByEvaluatedToken(inDto.getToken());
+		
+		if(user == null) {
+			return outDto;
+		}
+		
+		outDto.setApplicantIdPk(user.getIdPk());
+		
+		outDto.setEmail(user.getEmail());
 		
 		return outDto;
 	}

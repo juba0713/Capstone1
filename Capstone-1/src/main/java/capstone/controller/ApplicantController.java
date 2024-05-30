@@ -38,7 +38,20 @@ public class ApplicantController {
 	 * @return String
 	 */
 	@GetMapping("/form")
-	public String showApplicantForm(@ModelAttribute ApplicantWebDto webDto) {
+	public String showApplicantForm(@ModelAttribute ApplicantWebDto webDto,
+			@RequestParam(name="token", required = false) String token) {
+		
+		if(token != null) {
+			ApplicantInOutDto inDto = new ApplicantInOutDto();
+			
+			inDto.setToken(token);
+			
+			ApplicantInOutDto outDto = applicantService.getUserReapply(inDto);
+			
+			webDto.setEmail(outDto.getEmail());
+			
+			webDto.setToken(token);
+		}
 		
 		return "applicant/form";
 	}
@@ -126,6 +139,8 @@ public class ApplicantController {
 		inDto.setCommitmentFourFlg(webDto.getCommitmentFourFlg());
 		
 		inDto.setToken(webDto.getToken());
+		
+		inDto.setReApplyToken(webDto.getReApplyToken());
 		
 		inDto.setVitaeFileName(webDto.getVitaeFileName());
 		

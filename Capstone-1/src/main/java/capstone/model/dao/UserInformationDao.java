@@ -18,6 +18,16 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 			+ " WHERE e.idPk = :idPk"
 			+ " AND e.deleteFlg = false";
 	
+	public final String GET_USER_BY_EVALUATED_TOKEN = "SELECT u "
+			+ "FROM EvaluatedApplicantEntity e "
+			+ "JOIN ApplicantEntity a ON a.idPk = e.applicantIdPk "
+			+ "JOIN UserInformationEntity u ON u.idPk = a.createdBy "
+			+ "WHERE e.token = :token "
+			+ "AND e.deleteFlg = false";
+	
+	@Query(value=GET_USER_BY_EVALUATED_TOKEN)
+	public UserInformationEntity getUserByEvaluatedtoken(String token) throws DataAccessException;
+	
 	@Query(value=GET_USER_BY_USERNAME)
 	public UserInformationEntity getUserByUsername(String email) throws DataAccessException;
 	

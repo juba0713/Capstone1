@@ -155,4 +155,10 @@ public class ApplicantInOutDto {
 	public int status;
 	
 	public int score;
+	
+	
+	/*
+	 * Reapply
+	 */
+	public String reApplyToken;
 }

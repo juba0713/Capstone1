@@ -51,4 +51,11 @@ public interface ApplicantService {
 	 * @return ApplicantInOutDto
 	 */
 	public ApplicantInOutDto getApplicantDetailsByToken(ApplicantInOutDto inDto); 
+	
+	/**
+	 * To get the user who will reapply
+	 * @param inDto
+	 * @return ApplicantInOutDto
+	 */
+	public ApplicantInOutDto getUserReapply(ApplicantInOutDto inDto); 
 }
