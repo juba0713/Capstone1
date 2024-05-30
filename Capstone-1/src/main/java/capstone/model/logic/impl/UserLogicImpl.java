@@ -56,4 +56,10 @@ public class UserLogicImpl implements UserLogic {
 		return userInformationDao.getUserByEvaluatedtoken(token);
 	}
 
+	@Override
+	public UserInformationEntity getUserByRejectedToken(String token) {
+		
+		return userInformationDao.getUserByRejectedtoken(token);
+	}
+
 }

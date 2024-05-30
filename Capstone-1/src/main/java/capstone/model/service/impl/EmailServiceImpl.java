@@ -33,8 +33,13 @@ public class EmailServiceImpl implements EmailService {
 				"<p>" + "Reapplication: " + (resubmitFlg ? "Yes" : "No") + "</p>";
 
 		if (resubmitFlg) {
-			htmlText += "<a href='http://localhost:8080/applicant/form/resubmit?token=" + token + "'>"
+			htmlText += "<div>Please review the feedback and consider resubmitting a revised application.</div>"
+					+ "<a href='http://localhost:8080/applicant/form/resubmit?token=" + token + "'>"
 					+ "resubmit</a>";
+		}else {
+			htmlText += "<div>You are not qualified to resubmit this application. Please consider submitting a new application if you wish to reapply.</div>"
+					+ "<a href='http://localhost:8080/applicant/form?token=" + token + "'>"
+					+ "reapply</a>";
 		}
 
 		helper.setText(htmlText, true);

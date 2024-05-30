@@ -424,10 +424,17 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 				userLogic.saveUserAccount(newUserAccount);
 			}else {
-				UserInformationEntity user = userLogic.getUserByEvaluatedToken(inDto.getReApplyToken());
 				
-				userIdPk = user.getIdPk();
-				
+				if(inDto.getReApplyToken().charAt(0)=='F') {
+					UserInformationEntity user = userLogic.getUserByEvaluatedToken(inDto.getReApplyToken());
+					
+					userIdPk = user.getIdPk();
+				}else {
+					UserInformationEntity user = userLogic.getUserByRejectedToken(inDto.getReApplyToken());
+					
+					userIdPk = user.getIdPk();
+				}
+						
 				applicantLogic.deleteApplicantByCreatedBy(userIdPk);
 			}
 
@@ -1045,15 +1052,28 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		ApplicantInOutDto outDto = new ApplicantInOutDto();
 		
-		UserInformationEntity user = userLogic.getUserByEvaluatedToken(inDto.getToken());
+		int userIdPk = 0;
 		
-		if(user == null) {
-			return outDto;
+		String email = "";
+		
+		if(inDto.getToken().charAt(0)=='F') {	
+			UserInformationEntity eUser = userLogic.getUserByEvaluatedToken(inDto.getToken());
+			
+			userIdPk = eUser.getIdPk();
+			
+			email = eUser.getEmail();
+			
+		}else {
+			UserInformationEntity rUser = userLogic.getUserByRejectedToken(inDto.getToken());
+			
+			userIdPk = rUser.getIdPk();
+			
+			email = rUser.getEmail();
 		}
+	
+		outDto.setApplicantIdPk(userIdPk);
 		
-		outDto.setApplicantIdPk(user.getIdPk());
-		
-		outDto.setEmail(user.getEmail());
+		outDto.setEmail(email);
 		
 		return outDto;
 	}

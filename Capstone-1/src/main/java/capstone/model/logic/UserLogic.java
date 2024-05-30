@@ -55,4 +55,11 @@ public interface UserLogic {
 	 * @return UserInformationEntity
 	 */
 	public UserInformationEntity getUserByEvaluatedToken(String token);
+	
+	/**
+	 * To get user by rejected token
+	 * @param token
+	 * @return UserInformationEntity
+	 */
+	public UserInformationEntity getUserByRejectedToken(String token);
 }
