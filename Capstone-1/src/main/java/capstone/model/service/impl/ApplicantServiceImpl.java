@@ -919,7 +919,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 		int applicantIdPk = 0;
 		
 		if(inDto.getToken().charAt(0)=='R') {
-			
 			RejectedApplicantEntity rejectedApplicant = applicantLogic.getRejectedApplicantByToken(inDto.getToken());
 			
 			applicantIdPk = rejectedApplicant.getApplicantIdPk();
@@ -1027,12 +1026,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 				outDto.setCommitmentThreeFlg(app.getCommitmentThreeFlg());
 
 				outDto.setCommitmentFourFlg(app.getCommitmentFourFlg());
-
-				outDto.setStatus(app.getStatus());
-
-				outDto.setScore(app.getScore());
-
-				outDto.setFeedback(app.getFeedback());
 				
 			}
 			 
