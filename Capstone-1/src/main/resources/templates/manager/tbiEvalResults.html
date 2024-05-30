@@ -217,8 +217,8 @@
               </div>
               <hr class="my-4" />
               <div>
-                <p class="mb-4">Qualified for reapplication?</p>
-                <div class="w-full justify-between flex" >
+                <p class="mb-4 qualified">Qualified for reapplication? <span class="is-qualified" style="font-weight: 600; color:green"></span></p>
+                <div class="w-full justify-between flex qualified-btns" >
                   <button
                     name="no"
                     class="qualified-btn p-2 border-black hover:bg-red-500 bg-red-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
@@ -302,9 +302,19 @@
               if (webDto.listOfApplicants.length != 0) {
                 webDto.listOfApplicants.forEach((applicant, index) => {
                   if (applicant.applicantIdPk == idPk) {
-                    console.log("AW");
                     score.innerHTML = applicant.score;
                     feedback.innerHTML = applicant.feedback;
+                    	
+   					if(applicant.status == 6){
+						   document.querySelector(".is-qualified").innerHTML = " Yes";
+						   document.querySelector(".qualified-btns").style.display = 'none';
+					}else if(applicant.status == 7){
+						 document.querySelector(".is-qualified").innerHTML = " No";
+						  document.querySelector(".qualified-btns").style.display = 'none';
+					}else{
+						document.querySelector(".is-qualified").innerHTML = "";
+						 document.querySelector(".qualified-btns").style.display = 'flex';
+					}
                   }
                 });
               }
