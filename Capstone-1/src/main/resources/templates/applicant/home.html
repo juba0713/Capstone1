@@ -172,8 +172,9 @@
                       <div class="border-2 w-full bg-red-50 mt-4" th:if="*{applicantDetailsObj.score} >= 6 ">
   							<div>Click to view</div>
                             <div class="images">
-								<img th:src="@{/view/image/} + *{applicantDetailsObj.certificateName}" alt="certificate" height="200">
+								<img  id="myImage" th:src="@{/view/image/} + *{applicantDetailsObj.certificateName}" alt="certificate" height="200">
 							</div>
+							<button id="downloadButton">Download as PDF</button>
                       </div>
                     </div>
                   </div>
@@ -1698,6 +1699,32 @@
         </div>
       </div>
     </div>
+	<script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+	<script>
+	    // Wait for the DOM to load before accessing elements
+	    document.addEventListener("DOMContentLoaded", () => {
+			
+	        const downloadButton = document.getElementById("downloadButton");
+	        const image = document.getElementById("myImage");
+			
+			if(downloadButton && image){
+		        downloadButton.addEventListener("click", () => {
+		            const img = new Image();
+			        img.src = image.src;
+			        img.onload = function() {
+			            const { jsPDF } = window.jspdf;
+			            let doc = new jsPDF({
+			                orientation: 'l',  // Force landscape orientation
+			                unit: 'px',
+			                format: [this.width, this.height] 
+			            });
+			            doc.addImage(this, 'JPEG', 0, 0, this.width, this.height);
+			            doc.save("downloaded-image.pdf");
+			        };
+	       		 });
+	       	};
+	    });
+	</script>
   </body>
   <script
     src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -1719,6 +1746,7 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"
   ></script>
+	
   <script th:inline="javascript">
     const webDto = /*[[${applicantWebDto}]]*/ "";
     console.log(webDto);
@@ -1736,6 +1764,8 @@
 		$("#image-viewer .close").click(function(){
 		  $('#image-viewer').hide();
 		});
+		
+	
   </script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
