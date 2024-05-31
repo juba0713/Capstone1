@@ -164,8 +164,15 @@ public class ApplicantController {
 		
 		applicantService.saveApplication(inDto);
 		
-		ra.addFlashAttribute("success", "You have sucessfully registered! Wait for the email that will be sent to you!");
-		
+		if(!button.equals("resubmit")) {
+			if(webDto.getReApplyToken() != null && !webDto.getReApplyToken().isEmpty()) {
+		        ra.addFlashAttribute("success", "Your reapplication was successful! We'll notify you of the outcome soon.");
+			}
+			ra.addFlashAttribute("success", "You have sucessfully registered! Wait for the email that will be sent to you!");
+		}else {
+		    ra.addFlashAttribute("success", "Resubmission successful! You'll receive an update shortly.");
+		}
+
 		return "redirect:/login";
 	}
 	
