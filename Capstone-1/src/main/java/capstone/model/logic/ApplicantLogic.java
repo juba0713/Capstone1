@@ -241,4 +241,11 @@ public interface ApplicantLogic {
 	 * @param createdBy
 	 */
 	public void deleteApplicantByCreatedBy(int createdBy);
+	
+	/**
+	 * to update applicant certificate
+	 * @param certificateName
+	 * @param applicantIdPk
+	 */
+	public void updateApplicantCeritificate(String certificateName, int applicantIdPk);
 }

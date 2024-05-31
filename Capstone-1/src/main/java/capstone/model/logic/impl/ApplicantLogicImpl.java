@@ -236,5 +236,11 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 		applicantDao.deleteApplicantByCreatedBy(createdBy);
 		
 	}
+
+	@Override
+	public void updateApplicantCeritificate(String certificateName, int applicantIdPk) {
+		
+		applicantDao.updateApplicantCertificate(certificateName, applicantIdPk);
+	}
 	
 }

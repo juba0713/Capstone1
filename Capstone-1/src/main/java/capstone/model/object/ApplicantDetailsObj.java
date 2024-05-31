@@ -86,4 +86,6 @@ public class ApplicantDetailsObj {
 	public int score;
 	
 	public String feedback;
+	
+	public String certificateName;
 }

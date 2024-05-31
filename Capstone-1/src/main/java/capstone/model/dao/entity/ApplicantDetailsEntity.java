@@ -53,7 +53,8 @@ public class ApplicantDetailsEntity {
 				(Boolean) objects[37],
 				(Integer) objects[38],
 				(Integer) objects[39],
-				(String) objects[40]
+				(String) objects[40],
+				(String) objects[41]
 		);	
 	}
 	
@@ -138,4 +139,6 @@ public class ApplicantDetailsEntity {
 	public int score;
 	
 	public String feedback;
+	
+	public String certificateName;
 }

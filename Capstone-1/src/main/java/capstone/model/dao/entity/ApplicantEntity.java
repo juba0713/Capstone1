@@ -82,4 +82,6 @@ public class ApplicantEntity {
 	
 	@Column(nullable = false)
 	private int createdBy;
+	
+	private String certificateName;
 }

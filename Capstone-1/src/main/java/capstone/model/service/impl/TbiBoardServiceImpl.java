@@ -1,10 +1,19 @@
 package capstone.model.service.impl;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import capstone.model.dao.entity.ApplicantDetailsEntity;
@@ -14,6 +23,7 @@ import capstone.model.dao.entity.UserInformationEntity;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.dto.TbiBoardInOutDto;
 import capstone.model.logic.ApplicantLogic;
+import capstone.model.logic.UserLogic;
 import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantObj;
 import capstone.model.service.CommonService;
@@ -31,6 +41,12 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 	
 	@Autowired
 	private LoggedInUserService loggedInUserService;
+	
+	@Autowired
+	private UserLogic userLogic;
+	
+	@Autowired
+	private Environment env;
 
 	@Override
 	public TbiBoardInOutDto getAllApplicants() {
@@ -87,6 +103,40 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 		evaluatedApplicantEntity.setCreatedDate(timeNow);
 		
 		evaluatedApplicantEntity.setDeleteFlg(false);
+		
+		if(inDto.getScore() > 5) {
+			
+			UserInformationEntity user = userLogic.getUserByApplicantIdPk(inDto.getApplicantIdPk());
+			
+			String folderPath = env.getProperty("certificate.path").toString();
+			
+			 try {
+		            // Load the image
+		            File imageFile = new File(folderPath+"base_certificate.png"); 
+		            BufferedImage image = ImageIO.read(imageFile);
+
+		            Graphics g = image.getGraphics();
+
+		            g.setFont(new Font("Brush Script MT", Font.BOLD, 130)); 
+		            g.setColor(Color.BLACK);
+
+		            String fullName = user.getFirstName() + " " + user.getLastName();
+		            int x = 350; 
+		            int y = 700;
+		            g.drawString(fullName, x, y);
+
+		            g.dispose();
+
+		            String fileName = "certificate_" + user.getIdPk();
+		            File outputFile = new File(folderPath+fileName+".png"); 
+		            ImageIO.write(image, "png", outputFile);
+		            
+		            applicantLogic.updateApplicantCeritificate(fileName, inDto.getApplicantIdPk());;
+
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		}
 		
 		applicantLogic.saveEvaluateedApplicant(evaluatedApplicantEntity);
 

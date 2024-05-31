@@ -44,4 +44,27 @@ public class FileController {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); 
 	    }
 	}
+	
+	@GetMapping(value = "/view/image/{imageName}", produces = MediaType.IMAGE_PNG_VALUE)
+    public @ResponseBody byte[] responseImageJpg(@PathVariable String imageName) {
+    	
+		String fileDirectory = env.getProperty("certificate.path");
+		
+		String fileName = fileDirectory + imageName + ".png";
+        
+        String noImgFileName = fileDirectory + "no_image.png";
+
+        try {
+            if (imageName == null || !Files.exists(Paths.get(fileName))) {
+                return Files.readAllBytes(Paths.get(noImgFileName));
+            } else {
+                return Files.readAllBytes(Paths.get(fileName));
+            }
+        } catch (IOException e) {
+        	
+            e.printStackTrace();
+            
+            return new byte[0]; 
+        }
+    }
 }

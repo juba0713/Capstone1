@@ -79,7 +79,8 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "	a.commitment_four_flg,"
 			+ " a.status, "
 			+ " COALESCE(ea.score, 0) AS score, "
-			+ " COALESCE(ea.feedback, '') AS feedback "
+			+ " COALESCE(ea.feedback, '') AS feedback, "
+			+ " a.certificate_name "
 			+ "FROM m_applicant a "
 			+ "LEFT JOIN t_project p ON p.applicant_id_pk = a.id_pk AND p.delete_flg = false "
 			+ "LEFT JOIN m_group g ON g.applicant_id_pk = a.id_pk AND g.delete_flg = false "
@@ -126,6 +127,14 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "AND "
 			+ "	delete_flg = false";
 	
+	public final String UPDATE_APPLICANT_CERTIFICATE = "UPDATE m_applicant "
+			+ "SET "
+			+ "	certificate_name = :certificateName "
+			+ "WHERE"
+			+ "	id_pk = :applicantIdPk "
+			+ "AND "
+			+ "	delete_flg = false";
+	
 	@Modifying
 	@Query(value=UPDATE_APPLICANT, nativeQuery=true)
 	public void updateApplicant(@Param("agreeFlg") Boolean agreeFlg,
@@ -148,7 +157,13 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 
 	@Modifying
 	@Query(value=DELETE_APPLICANT_BY_CREATED_BY, nativeQuery=true)
-	public void deleteApplicantByCreatedBy(@Param("createdBy") int createdBy);
+	public void deleteApplicantByCreatedBy(@Param("createdBy") int createdBy) throws DataAccessException;;
+	
+	@Modifying
+	@Query(value=UPDATE_APPLICANT_CERTIFICATE, nativeQuery=true)
+	public void updateApplicantCertificate(@Param("certificateName") String certificateName,
+			@Param("applicantIdPk") int applicantIdPk
+			) throws DataAccessException;
 	
 	@Query(value=GET_ALL_APPLICANTS_BY_STATUS, nativeQuery=true)
 	public List<Object[]> getAllApplicantByStatusRaw(List<Integer> status) throws DataAccessException;

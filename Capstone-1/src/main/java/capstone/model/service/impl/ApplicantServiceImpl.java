@@ -398,9 +398,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 				
 				newUser.setEmail(inDto.getEmail());
 		
-				newUser.setFirstName(leaderNames[0]);
+				newUser.setFirstName(leaderNames[1]);
 		
-				newUser.setLastName(leaderNames[1]);
+				newUser.setLastName(leaderNames[0]);
 		
 				newUser.setMobileNumber(inDto.getLeaderNumber());
 		
@@ -537,9 +537,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 	
 			groupEntity.setGroupName(inDto.getGroupName());
 	
-			groupEntity.setFirstName(leaderNames[0]);
+			groupEntity.setFirstName(leaderNames[1]);
 	
-			groupEntity.setLastName(leaderNames[1]);
+			groupEntity.setLastName(leaderNames[0]);
 	
 			groupEntity.setMobileNumber(inDto.getLeaderNumber());
 	
@@ -565,9 +565,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 	
 					String[] memberNames = commonService.splitArray(member);
 	
-					groupMemberEntity.setFirstName(memberNames[0]);
+					groupMemberEntity.setFirstName(memberNames[1]);
 	
-					groupMemberEntity.setLastName(memberNames[1]);
+					groupMemberEntity.setLastName(memberNames[0]);
 	
 					groupMemberEntity.setCreatedDate(currentDateTime);
 	
@@ -687,9 +687,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 	
 					String[] memberNames = commonService.splitArray(member);
 	
-					groupMemberEntity.setFirstName(memberNames[0]);
+					groupMemberEntity.setFirstName(memberNames[1]);
 	
-					groupMemberEntity.setLastName(memberNames[1]);
+					groupMemberEntity.setLastName(memberNames[0]);
 	
 					groupMemberEntity.setCreatedDate(currentDateTime);
 	
@@ -905,7 +905,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 				applicantDetailsObj.setScore(app.getScore());
 
 				applicantDetailsObj.setFeedback(app.getFeedback());
-				;
+				
+				applicantDetailsObj.setCertificateName(app.getCertificateName());				
+				
 			}
 
 			members[firstRow] = app.getMemberLastName() + ", " + app.getMemberFirstName();

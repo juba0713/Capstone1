@@ -62,4 +62,11 @@ public interface UserLogic {
 	 * @return UserInformationEntity
 	 */
 	public UserInformationEntity getUserByRejectedToken(String token);
+	
+	/**
+	 * To get user by applicant id pk
+	 * @param token
+	 * @return UserInformationEntity
+	 */
+	public UserInformationEntity getUserByApplicantIdPk(int applicantIdPk);
 }

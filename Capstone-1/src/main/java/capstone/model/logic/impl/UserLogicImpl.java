@@ -62,4 +62,10 @@ public class UserLogicImpl implements UserLogic {
 		return userInformationDao.getUserByRejectedtoken(token);
 	}
 
+	@Override
+	public UserInformationEntity getUserByApplicantIdPk(int applicantIdPk) {
+
+		return userInformationDao.getUserByApplicantIdPk(applicantIdPk);
+	}
+
 }
