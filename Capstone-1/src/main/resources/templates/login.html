@@ -12,7 +12,6 @@
       form {
         position: relative;
       }
-      .error-container,
       .success-container {
         position: absolute;
         top: 50px;
@@ -22,15 +21,25 @@
         justify-content: center;
         align-items: center;
       }
+      .error-container {
+        position: absolute;
+        top: 246px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+      }
 
       .error-container div,
       .success-container div {
         background: green;
         color: #fff;
-        font-size: 15px;
-        font-weight: 600;
-        padding: 10px;
-        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 8px;
+        border-radius: 6px;
       }
 
       .error-container div {
@@ -38,7 +47,7 @@
       }
       .message-success {
         position: absolute;
-        top: 100px;
+        top: 5px;
         left: 0;
         width: 100%;
         background: transparent;
@@ -49,8 +58,10 @@
 
       .message-success div {
         background: #fff;
-        padding: 20px;
-        border-radius: 20px;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 8px;
+        border-radius: 6px;
       }
     </style>
   </head>
