@@ -54,7 +54,13 @@ public class LoginController {
 //	}
 	
 	@GetMapping("/login")
-	public String showLoginPage() {
+	public String showLoginPage(Model model, HttpServletRequest request) {
+		String error = (String)request.getSession().getAttribute("errorMessageLogin");
+		
+		if(error != null) {
+			model.addAttribute("errorMessageLogin", error);
+			request.getSession().setAttribute("errorMessageLogin", null);
+		}
 		
 		return "login";
 	}

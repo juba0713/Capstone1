@@ -100,9 +100,9 @@
           <div
             class="error-container"
             id="error-container"
-            th:if="${session.errorMessageLogin != null}"
+            th:if="${errorMessageLogin != null}"
           >
-            <div id="error-message" th:text="${session.errorMessageLogin}"></div>
+            <div id="error-message" th:text="${errorMessageLogin}"></div>
           </div>
           <div
             class="font-primary text-black text-7xl m-10 mt-16 flex justify-center"
