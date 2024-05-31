@@ -30,7 +30,7 @@
       .error-container,
       .success-container {
         position: absolute;
-        top: 50px;
+        top: 5px;
         left: 0;
         width: 100%;
         display: flex;
@@ -42,10 +42,10 @@
       .success-container div {
         background: green;
         color: #fff;
-        font-size: 20px;
-        font-weight: 600;
-        padding: 10px;
-        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 8px;
+        border-radius: 6px;
       }
     </style>
   </head>
@@ -72,7 +72,12 @@
           </div>
         </div>
       </div>
-      <div class="success-container" th:if="${succMsg != null}">
+
+      <div
+        class="success-container"
+        th:if="${succMsg != null}"
+        id="flash-message"
+      >
         <div th:text="${succMsg}"></div>
       </div>
       <div
@@ -697,6 +702,20 @@
           console.log(applicant);
         }
       });
+    </script>
+    <script>
+      // JavaScript function to remove the flash message after a specified time
+      function hideFlashMessage() {
+        const flashMessage = document.getElementById("flash-message");
+        if (flashMessage) {
+          setTimeout(() => {
+            flashMessage.style.display = "none";
+          }, 5000); // 5000 milliseconds = 5 seconds
+        }
+      }
+
+      // Call the function on page load
+      window.onload = hideFlashMessage;
     </script>
   </body>
 </html>

@@ -16,7 +16,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/officer/officer.css}" />
     <link rel="stylesheet" th:href="@{/css/output.css}" />
-    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf" th:content="${_csrf.token}" />
     <meta name="_csrf_header" th:content="${_csrf.headerName}" />
     <style>
       .dt-search {
@@ -114,7 +114,7 @@
                     class="text-center hidden sm:table-cell rounded-top-right"
                   ></th>
                   <!-- <th
-                    class="text-center hidden sm:table-cell rounded-top-right w-[5%]"
+                    class="text-center hidden sm:table-cell rounded-top-right "
                   ></th>-->
                 </tr>
               </thead>
@@ -217,8 +217,11 @@
               </div>
               <hr class="my-4" />
               <div>
-                <p class="mb-4 qualified">Qualified for reapplication? <span class="is-qualified" style="font-weight: bold;"></span></p>
-                <div class="w-full justify-between flex qualified-btns" >
+                <p class="mb-4 qualified">
+                  Qualified for reapplication?
+                  <span class="is-qualified" style="font-weight: bold"></span>
+                </p>
+                <div class="w-full justify-between flex qualified-btns">
                   <button
                     name="no"
                     class="qualified-btn p-2 border-black hover:bg-red-500 bg-red-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
@@ -304,56 +307,66 @@
                   if (applicant.applicantIdPk == idPk) {
                     score.innerHTML = applicant.score;
                     feedback.innerHTML = applicant.feedback;
-                    	
-   					if(applicant.status == 6){
-						   document.querySelector(".is-qualified").innerHTML = " Yes";
-						   document.querySelector(".is-qualified").style.color = 'green';
-						   document.querySelector(".qualified-btns").style.display = 'none';
-					}else if(applicant.status == 7){
-						 document.querySelector(".is-qualified").innerHTML = " No";
-						  document.querySelector(".is-qualified").style.color = 'red';
-						  document.querySelector(".qualified-btns").style.display = 'none';
-					}else{
-						document.querySelector(".is-qualified").innerHTML = "";
-						 document.querySelector(".qualified-btns").style.display = 'flex';
-					}
+
+                    if (applicant.status == 6) {
+                      document.querySelector(".is-qualified").innerHTML =
+                        " Yes";
+                      document.querySelector(".is-qualified").style.color =
+                        "green";
+                      document.querySelector(".qualified-btns").style.display =
+                        "none";
+                    } else if (applicant.status == 7) {
+                      document.querySelector(".is-qualified").innerHTML = " No";
+                      document.querySelector(".is-qualified").style.color =
+                        "red";
+                      document.querySelector(".qualified-btns").style.display =
+                        "none";
+                    } else {
+                      document.querySelector(".is-qualified").innerHTML = "";
+                      document.querySelector(".qualified-btns").style.display =
+                        "flex";
+                    }
                   }
                 });
               }
 
               $("#feedback-modal").modal("show");
-              
+
               let qualifiedBtns = document.querySelectorAll(".qualified-btn");
-              for(let btn of qualifiedBtns){
-				  btn.addEventListener('click', function(){
-					 	let form = document.createElement('form');
-					 	form.method = 'POST';
-					 	form.action = '/manager/qualified?' + this.name;
-					 	
-					 	let inputId = document.createElement('input');
-					 	inputId.type = 'hidden';
-					 	inputId.name = 'applicantIdPk';
-					 	inputId.value = idPk;
-					 	
-					 	form.appendChild(inputId);
-					 	
-					 	var csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-					 	var csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
-					 	
-					 	var csrfInput = document.createElement('input');
-					 	csrfInput.type = 'hidden';
-					 	csrfInput.name = '_csrf';
-					 	csrfInput.value = csrfToken;
-					 	
-					 	form.appendChild(csrfInput);
-					 	document.body.appendChild(form);
-					 	form.submit();
-				  });
-			  }
+              for (let btn of qualifiedBtns) {
+                btn.addEventListener("click", function () {
+                  let form = document.createElement("form");
+                  form.method = "POST";
+                  form.action = "/manager/qualified?" + this.name;
+
+                  let inputId = document.createElement("input");
+                  inputId.type = "hidden";
+                  inputId.name = "applicantIdPk";
+                  inputId.value = idPk;
+
+                  form.appendChild(inputId);
+
+                  var csrfToken = document
+                    .querySelector('meta[name="_csrf"]')
+                    .getAttribute("content");
+                  var csrfHeader = document
+                    .querySelector('meta[name="_csrf_header"]')
+                    .getAttribute("content");
+
+                  var csrfInput = document.createElement("input");
+                  csrfInput.type = "hidden";
+                  csrfInput.name = "_csrf";
+                  csrfInput.value = csrfToken;
+
+                  form.appendChild(csrfInput);
+                  document.body.appendChild(form);
+                  form.submit();
+                });
+              }
             }
-            if(this.name === "create"){
-				console.log("AW");
-			}
+            if (this.name === "create") {
+              console.log("AW");
+            }
             setTimeout(() => {
               rowBtnClicked = false;
             }, 500);
@@ -573,7 +586,7 @@
             supportLink.href = applicant.supportLink;
             supportLink.innerHTML = applicant.supportLink;
           } else {
-            supportLink.innerHTML = 'NA';
+            supportLink.innerHTML = "NA";
           }
           //Group Name
           groupName.value = applicant.groupName;

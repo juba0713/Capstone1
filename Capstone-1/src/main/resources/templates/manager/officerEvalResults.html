@@ -56,10 +56,11 @@
       .error-container,
       .success-container {
         position: absolute;
-        top: 50px;
-        left: 250px;
-        width: 90%;
+        top: 5px;
+        left: 10px;
+        width: 67%;
         display: flex;
+        margin-left: 245px;
         justify-content: center;
         align-items: center;
       }
@@ -68,10 +69,10 @@
       .success-container div {
         background: green;
         color: #fff;
-        font-size: 20px;
-        font-weight: 600;
-        padding: 10px;
-        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 8px;
+        border-radius: 6px;
       }
 
       .error-container div {
@@ -123,10 +124,19 @@
           </form>
         </div>
       </div>
-      <div class="error-container" th:if="${errorMsg != null}">
+
+      <div
+        class="error-container"
+        th:if="${errorMsg != null}"
+        id="flash-message"
+      >
         <div th:text="${errorMsg}"></div>
       </div>
-      <div class="success-container" th:if="${succMsg != null}">
+      <div
+        class="success-container"
+        th:if="${succMsg != null}"
+        id="flash-message"
+      >
         <div th:text="${succMsg}"></div>
       </div>
       <!-- applicant details -->
@@ -185,7 +195,7 @@
                       Activate Account
                     </button>
                     <input
-                     class="btn-row"
+                      class="btn-row"
                       type="checkbox"
                       name="chosenApplicant"
                       th:value="${app.applicantIdPk}"
@@ -296,14 +306,13 @@
 
         for (let row of rows) {
           row.addEventListener("click", function () {
-			  console.log("HELLO");
-            
+            console.log("HELLO");
 
             if (!rowBtnClicked) {
               $("#details-modal").modal("show");
               let id = this.getAttribute("data-id");
               console.log("ID: " + id);
-              
+
               retrieveApplicantDetails(id);
 
               // getApplicantDetails();
@@ -322,9 +331,9 @@
 
               $("#activate-account-modal").modal("show");
             }
-            if(this.name === 'chosenApplicant'){
-				console.log("YES");
-			}
+            if (this.name === "chosenApplicant") {
+              console.log("YES");
+            }
             setTimeout(() => {
               rowBtnClicked = false;
             }, 100);
@@ -384,7 +393,7 @@
           let objectives = document.querySelector(".objectives");
           let scopeProposal = document.querySelector(".scopeProposal");
           let methodology = document.querySelector(".methodology");
-          let vitaeFile = document.querySelector('.vitaeFile');
+          let vitaeFile = document.querySelector(".vitaeFile");
           let supportLink = document.querySelector(".supportLink");
           let groupName = document.querySelector(".groupName");
           let groupLeader = document.querySelector(".groupLeader");
@@ -546,7 +555,7 @@
             supportLink.href = applicant.supportLink;
             supportLink.innerHTML = applicant.supportLink;
           } else {
-            supportLink.innerHTML = 'NA';
+            supportLink.innerHTML = "NA";
           }
           //Group Name
           groupName.value = applicant.groupName;
@@ -644,6 +653,20 @@
           }
         }
       });
+    </script>
+    <script>
+      // JavaScript function to remove the flash message after a specified time
+      function hideFlashMessage() {
+        const flashMessage = document.getElementById("flash-message");
+        if (flashMessage) {
+          setTimeout(() => {
+            flashMessage.style.display = "none";
+          }, 5000); // 5000 milliseconds = 5 seconds
+        }
+      }
+
+      // Call the function on page load
+      window.onload = hideFlashMessage;
     </script>
   </body>
 </html>
