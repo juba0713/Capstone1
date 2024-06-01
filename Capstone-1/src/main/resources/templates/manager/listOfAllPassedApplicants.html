@@ -112,7 +112,7 @@
                   University
                 </th>
                 <th class="text-center w-1/6 hidden sm:table-cell">Status</th>
-                <th class="text-center rounded-top-right">Actions</th>
+                <th class="text-center rounded-top-right"></th>
               </tr>
             </thead>
             <tbody class="divide-y divide-grey-500 bodyrowhover">
@@ -495,11 +495,11 @@
           methodology.textContent = applicant.methodology;
           //Supporting Link
           if (applicant.supportLink != "") {
-			  console.log("EMPTY LINK");
+            console.log("EMPTY LINK");
             supportLink.href = applicant.supportLink;
             supportLink.innerHTML = applicant.supportLink;
           } else {
-            supportLink.innerHTML = 'NA';
+            supportLink.innerHTML = "NA";
           }
           //Group Name
           groupName.value = applicant.groupName;
