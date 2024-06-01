@@ -28,7 +28,13 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "FROM m_applicant a "
 			+ "JOIN t_project p ON p.applicant_id_pk = a.id_pk AND p.delete_flg = false "
 			+ "JOIN m_group g ON g.applicant_id_pk = a.id_pk AND g.delete_flg = false "
-			+ "LEFT JOIN t_evaluated_applicant e ON e.applicant_id_pk = a.id_pk AND e.delete_flg = false "
+			+ "LEFT JOIN ("
+			+ " SELECT e2.applicant_id_pk, e2.score, e2.feedback "
+			+ " FROM t_evaluated_applicant e2 WHERE e2.delete_flg = false "
+			+ " UNION ALL "
+			+ " SELECT r2.applicant_id_pk, null AS score, feedback "
+			+ " FROM t_rejected_applicant r2 WHERE r2.delete_flg = false "
+			+ ") AS e ON e.applicant_id_pk = a.id_pk "
 			+ "WHERE a.status IN (:status) "
 			+ "AND a.delete_flg = false";
 	

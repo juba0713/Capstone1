@@ -59,7 +59,7 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		ManagerInOutDto outDto = new ManagerInOutDto();
 		
-		List<Integer> status = List.of(0,1,2,3,4,5,6);
+		List<Integer> status = List.of(0,1,2,3,4,5,6,7);
 		
 		List<JoinApplicantProject> listOfApplicant = applicantLogic.getAllApplicantByStatus(status);
 		

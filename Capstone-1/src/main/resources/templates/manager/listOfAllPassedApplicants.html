@@ -253,24 +253,26 @@
 
               webDto.listOfApplicants.forEach((applicant) => {
                 if (applicant.applicantIdPk == idPk) {
-                  if (applicant.status == 5) {
+
                     evaluated.style.display = "inline";
                     rejected.style.display = "none";
                     let score = document.querySelector(".score");
                     let feedback = document.querySelector(
                       ".evaluated-feedback"
                     );
-
-                    score.innerHTML =
-                      "<p style='font-weight: 600; '>Score: </p>" +
+					
+					if(applicant.status == 5){
+                      score.innerHTML = "<p style='font-weight: 600; '>Score: </p>" +
                       applicant.score;
+					}else{
+						score.innerHTML = "";
+					}
+
                     feedback.innerHTML =
                       "<p style='font-weight: 600; '>Feedback: </p>" +
                       applicant.feedback;
-                  } else {
-                    evaluated.style.display = "inline";
-                    rejected.style.display = "none";
-                  }
+
+                  
                 }
               });
 
