@@ -269,7 +269,7 @@
                       ></textarea>
                     </div>
                   </div>
-                  <div id="second-page-content">
+                  <div id="second-page-content" class="pointer-events-none">
                     <div>
                       <div class="mt-10 flex flex-col">
                         <label class="font-semibold"
@@ -595,719 +595,733 @@
                               >
                               </a>
                             </div>
-                            <div class="flex flex-col mb-10">
-                              <label>Group name</label>
-                              <input
-                                type="text"
-                                placeholder="Input here"
-                                name="groupName"
-                                class="w-1/3 border-b groupName border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
-                              />
-                            </div>
-                            <div class="flex flex-col mb-10">
-                              <label
-                                >Team Leader - Team Member1(LastName,
-                                FirstName)</label
-                              >
-                              <input
-                                type="text"
-                                placeholder="Input here"
-                                name="groupLeader"
-                                class="w-1/3 border-b groupLeader border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
-                              />
-                            </div>
-                            <div class="flex flex-col mb-10">
-                              <label
-                                >Team Leader's
-                                <strong>Mobile Number</strong></label
-                              >
-                              <input
-                                type="text"
-                                placeholder="Input here"
-                                name="leaderNumber"
-                                class="w-1/3 border-b leaderNumber border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
-                              />
-                            </div>
-                            <div class="flex flex-col mb-10">
-                              <label
-                                >Team Leader's <strong>Address</strong></label
-                              >
-                              <input
-                                type="text"
-                                placeholder="Input here"
-                                name="leaderAddress"
-                                class="w-1/3 border-b leaderAddress border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
-                              />
-                            </div>
-                            <div class="flex flex-col mb-10">
-                              <label
-                                >Team Leader - Member2(LastName,
-                                FirstName)</label
-                              >
-                              <input
-                                type="text"
-                                placeholder="Input here"
-                                name="members[0]"
-                                class="w-1/3 border-b members border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
-                              />
-                            </div>
-                            <div class="flex flex-col mb-10">
-                              <label
-                                >Team Leader - Member3(LastName,
-                                FirstName)</label
-                              >
-                              <input
-                                type="text"
-                                placeholder="Input here"
-                                name="members[1]"
-                                class="w-1/3 border-b members border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
-                              />
-                            </div>
-                            <div class="flex flex-col mb-10">
-                              <label
-                                >Team Leader - Member4(LastName,
-                                FirstName)</label
-                              >
-                              <input
-                                type="text"
-                                placeholder="Input here"
-                                name="members[2]"
-                                class="w-1/3 border-b members border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
-                              />
-                            </div>
-                            <div class="flex flex-col mb-`0">
-                              <label
-                                >Team Leader - Member5(LastName,
-                                FirstName)</label
-                              >
-                              <input
-                                type="text"
-                                placeholder="Input here"
-                                name="members[3]"
-                                class="w-1/3 border-b members border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
-                              />
-                            </div>
-                            <div class="flex flex-col mt-14 mb-`0">
-                              <label>University</label>
-                              <p>
-                                If this is a school project, please provide the
-                                full name of your organization. Do not use
-                                acronyms. Otherwise, put
-                                <strong>NA</strong>
-                              </p>
-                              <input
-                                type="text"
-                                placeholder="Input here"
-                                name="university"
-                                class="w-1/3 border-b university border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
-                              />
-                            </div>
-                            <hr class="my-10" />
+                            <div class="pointer-events-none">
+                              <div class="flex flex-col mb-10">
+                                <label>Group name</label>
+                                <input
+                                  type="text"
+                                  placeholder="Input here"
+                                  name="groupName"
+                                  class="w-1/3 border-b groupName border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                                />
+                              </div>
+                              <div class="flex flex-col mb-10">
+                                <label
+                                  >Team Leader - Team Member1(LastName,
+                                  FirstName)</label
+                                >
+                                <input
+                                  type="text"
+                                  placeholder="Input here"
+                                  name="groupLeader"
+                                  class="w-1/3 border-b groupLeader border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                                />
+                              </div>
+                              <div class="flex flex-col mb-10">
+                                <label
+                                  >Team Leader's
+                                  <strong>Mobile Number</strong></label
+                                >
+                                <input
+                                  type="text"
+                                  placeholder="Input here"
+                                  name="leaderNumber"
+                                  class="w-1/3 border-b leaderNumber border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                                />
+                              </div>
+                              <div class="flex flex-col mb-10">
+                                <label
+                                  >Team Leader's <strong>Address</strong></label
+                                >
+                                <input
+                                  type="text"
+                                  placeholder="Input here"
+                                  name="leaderAddress"
+                                  class="w-1/3 border-b leaderAddress border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                                />
+                              </div>
+                              <div class="flex flex-col mb-10">
+                                <label
+                                  >Team Leader - Member2(LastName,
+                                  FirstName)</label
+                                >
+                                <input
+                                  type="text"
+                                  placeholder="Input here"
+                                  name="members[0]"
+                                  class="w-1/3 border-b members border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                                />
+                              </div>
+                              <div class="flex flex-col mb-10">
+                                <label
+                                  >Team Leader - Member3(LastName,
+                                  FirstName)</label
+                                >
+                                <input
+                                  type="text"
+                                  placeholder="Input here"
+                                  name="members[1]"
+                                  class="w-1/3 border-b members border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                                />
+                              </div>
+                              <div class="flex flex-col mb-10">
+                                <label
+                                  >Team Leader - Member4(LastName,
+                                  FirstName)</label
+                                >
+                                <input
+                                  type="text"
+                                  placeholder="Input here"
+                                  name="members[2]"
+                                  class="w-1/3 border-b members border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                                />
+                              </div>
+                              <div class="flex flex-col mb-`0">
+                                <label
+                                  >Team Leader - Member5(LastName,
+                                  FirstName)</label
+                                >
+                                <input
+                                  type="text"
+                                  placeholder="Input here"
+                                  name="members[3]"
+                                  class="w-1/3 border-b members border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                                />
+                              </div>
+                              <div class="flex flex-col mt-14 mb-`0">
+                                <label>University</label>
+                                <p>
+                                  If this is a school project, please provide
+                                  the full name of your organization. Do not use
+                                  acronyms. Otherwise, put
+                                  <strong>NA</strong>
+                                </p>
+                                <input
+                                  type="text"
+                                  placeholder="Input here"
+                                  name="university"
+                                  class="w-1/3 border-b university border-gray-200 bg-transparent pt-3 pr-3 focus:outline-none focus-within:border-blue-600"
+                                />
+                              </div>
+                              <hr class="my-10" />
 
-                            <div>
-                              <p class="font-semibold">
-                                Technology and Commercialization Readiness Level
-                              </p>
-                              <p class="text-black text-justify mt-8">
-                                This form, adopted from NYSERDA, assists
-                                emerging and growing companies in determining
-                                the technical and commercial maturity of their
-                                products or innovations. It utilizes a
-                                customized and integrated tool that measures
-                                both the Technology Readiness Level (TRL) and
-                                Commercial Readiness Level (CRL). This TRL/CRL
-                                tool is based on systems developed by NASA, DOE,
-                                and ARPA-E. Although it has been specifically
-                                designed for ventures in the clean energy
-                                industry, it has also been widely used in
-                                solutions and ventures across various other
-                                industries.
-                              </p>
+                              <div>
+                                <p class="font-semibold">
+                                  Technology and Commercialization Readiness
+                                  Level
+                                </p>
+                                <p class="text-black text-justify mt-8">
+                                  This form, adopted from NYSERDA, assists
+                                  emerging and growing companies in determining
+                                  the technical and commercial maturity of their
+                                  products or innovations. It utilizes a
+                                  customized and integrated tool that measures
+                                  both the Technology Readiness Level (TRL) and
+                                  Commercial Readiness Level (CRL). This TRL/CRL
+                                  tool is based on systems developed by NASA,
+                                  DOE, and ARPA-E. Although it has been
+                                  specifically designed for ventures in the
+                                  clean energy industry, it has also been widely
+                                  used in solutions and ventures across various
+                                  other industries.
+                                </p>
 
-                              <p class="text-justify mt-8">
-                                For each category, please select the option that
-                                best describes the current status of your
-                                product, solution, or innovation.
-                              </p>
-                              <div class="">
-                                <div class="mt-14 mb-4">
-                                  <label>Technology</label>
-                                </div>
-                                <div class="mt-10 mb-4">
-                                  <input
-                                    type="radio"
-                                    name="technologyAns"
-                                    value="1"
-                                    class="technologyAns"
-                                  />
-                                  Project work is beyond basic research and
-                                  technology concept has been defined
-                                </div>
-                                <div class="mb-4">
-                                  <input
-                                    type="radio"
-                                    name="technologyAns"
-                                    value="2"
-                                    class="technologyAns"
-                                  />
-                                  Applied research has begun and practical
-                                  application(s) have been identified
-                                </div>
-                                <div class="mb-4">
-                                  <input
-                                    type="radio"
-                                    name="technologyAns"
-                                    value="3"
-                                    class="technologyAns"
-                                  />
-                                  Preliminary testing of technology components
-                                  has begun, and technical feasibility has been
-                                  established in a laboratory environment
-                                </div>
-                                <div class="mb-4">
-                                  <input
-                                    type="radio"
-                                    name="technologyAns"
-                                    value="4"
-                                    class="technologyAns"
-                                  />
-                                  Initial testing of integrated product/system
-                                  has been completed in a laboratory environment
-                                </div>
-                                <div>
-                                  <input
-                                    type="radio"
-                                    name="technologyAns"
-                                    value="5"
-                                    class="technologyAns"
-                                  />
-                                  Laboratory scale integrated product/system
-                                  demonstrates performance in the intended
-                                  application(s)
+                                <p class="text-justify mt-8">
+                                  For each category, please select the option
+                                  that best describes the current status of your
+                                  product, solution, or innovation.
+                                </p>
+                                <div class="">
+                                  <div class="mt-14 mb-4">
+                                    <label>Technology</label>
+                                  </div>
+                                  <div class="mt-10 mb-4">
+                                    <input
+                                      type="radio"
+                                      name="technologyAns"
+                                      value="1"
+                                      class="technologyAns"
+                                    />
+                                    Project work is beyond basic research and
+                                    technology concept has been defined
+                                  </div>
+                                  <div class="mb-4">
+                                    <input
+                                      type="radio"
+                                      name="technologyAns"
+                                      value="2"
+                                      class="technologyAns"
+                                    />
+                                    Applied research has begun and practical
+                                    application(s) have been identified
+                                  </div>
+                                  <div class="mb-4">
+                                    <input
+                                      type="radio"
+                                      name="technologyAns"
+                                      value="3"
+                                      class="technologyAns"
+                                    />
+                                    Preliminary testing of technology components
+                                    has begun, and technical feasibility has
+                                    been established in a laboratory environment
+                                  </div>
+                                  <div class="mb-4">
+                                    <input
+                                      type="radio"
+                                      name="technologyAns"
+                                      value="4"
+                                      class="technologyAns"
+                                    />
+                                    Initial testing of integrated product/system
+                                    has been completed in a laboratory
+                                    environment
+                                  </div>
+                                  <div>
+                                    <input
+                                      type="radio"
+                                      name="technologyAns"
+                                      value="5"
+                                      class="technologyAns"
+                                    />
+                                    Laboratory scale integrated product/system
+                                    demonstrates performance in the intended
+                                    application(s)
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div id="forth-page-content">
-                          <div>
-                            <div class="mt-14 mb-8">
-                              <label>Product Development</label>
+                        <div class="pointer-events-none">
+                          <div id="forth-page-content">
+                            <div>
+                              <div class="mt-14 mb-8">
+                                <label>Product Development</label>
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="productDevelopmentAns"
+                                  value="1"
+                                  class="productDevelopmentAns"
+                                />
+                                Initial product/market fit has been defined
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="productDevelopmentAns"
+                                  value="2"
+                                  class="productDevelopmentAns"
+                                />
+                                Pilot scale product/system has been tested in
+                                the intended application(s)
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="productDevelopmentAns"
+                                  value="3"
+                                  class="productDevelopmentAns"
+                                />
+                                Demonstration of a full scale product/system
+                                prototype has been completed in the intended
+                                application(s)
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="productDevelopmentAns"
+                                  value="4"
+                                  class="productDevelopmentAns"
+                                />
+                                Actual product/system has been proven to work in
+                                its near-final form under a representative set
+                                of expected conditions and environments
+                              </div>
+                              <div>
+                                <input
+                                  type="radio"
+                                  name="productDevelopmentAns"
+                                  value="5"
+                                  class="productDevelopmentAns"
+                                />
+                                Product/system is in final form and has been
+                                operated under the full range of operating
+                                conditions and environments
+                              </div>
                             </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="productDevelopmentAns"
-                                value="1"
-                                class="productDevelopmentAns"
-                              />
-                              Initial product/market fit has been defined
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="productDevelopmentAns"
-                                value="2"
-                                class="productDevelopmentAns"
-                              />
-                              Pilot scale product/system has been tested in the
-                              intended application(s)
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="productDevelopmentAns"
-                                value="3"
-                                class="productDevelopmentAns"
-                              />
-                              Demonstration of a full scale product/system
-                              prototype has been completed in the intended
-                              application(s)
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="productDevelopmentAns"
-                                value="4"
-                                class="productDevelopmentAns"
-                              />
-                              Actual product/system has been proven to work in
-                              its near-final form under a representative set of
-                              expected conditions and environments
+
+                            <div>
+                              <div class="mt-14 mb-8">
+                                <label>Competitive Landscape</label>
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="competitiveLandscapeAns"
+                                  value="1"
+                                  class="competitiveLandscapeAns"
+                                />
+                                Secondary market research has been performed and
+                                basic knowledge of potential applications and
+                                competitive landscape have been identified
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="competitiveLandscapeAns"
+                                  value="2"
+                                  class="competitiveLandscapeAns"
+                                />
+                                Primary market research to prove the
+                                product/system commercial feasibility has been
+                                completed and basic understanding of competitive
+                                products/systems has been demonstrated
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="competitiveLandscapeAns"
+                                  value="3"
+                                  class="competitiveLandscapeAns"
+                                />
+                                Comprehensive market research to prove the
+                                product/system commercial feasibility has been
+                                completed and intermediate understanding of
+                                competitive products/systems has been
+                                demonstrated
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="competitiveLandscapeAns"
+                                  value="4"
+                                  class="competitiveLandscapeAns"
+                                />
+                                Competitive analysis to illustrate unique
+                                features and advantages of the product/system
+                                compared to competitive products/systems has
+                                been completed
+                              </div>
+                              <div>
+                                <input
+                                  type="radio"
+                                  name="competitiveLandscapeAns"
+                                  value="5"
+                                  class="competitiveLandscapeAns"
+                                />
+                                Full and complete understanding of the
+                                competitive landscape, target application(s),
+                                competitive products/systems, and market has
+                                been achieved
+                              </div>
                             </div>
                             <div>
-                              <input
-                                type="radio"
-                                name="productDevelopmentAns"
-                                value="5"
-                                class="productDevelopmentAns"
-                              />
-                              Product/system is in final form and has been
-                              operated under the full range of operating
-                              conditions and environments
+                              <div class="mt-14 mb-8">
+                                <label>Product Development/Design</label>
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="productDesignAns"
+                                  value="1"
+                                  class="productDesignAns"
+                                />
+                                One or more initial product hypotheses have been
+                                defined
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="productDesignAns"
+                                  value="2"
+                                  class="productDesignAns"
+                                />
+                                Mapping product/system attributes against
+                                customer needs has highlighted a clear value
+                                proposition
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="productDesignAns"
+                                  value="3"
+                                  class="productDesignAns"
+                                />
+                                The product/system has been scaled from
+                                laboratory to pilot scale and issues that may
+                                affect achieving full scale have been identified
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="productDesignAns"
+                                  value="4"
+                                  class="productDesignAns"
+                                />
+                                Comprehensive customer value proposition model
+                                has been developed, including a detailed
+                                understanding of product/system design
+                                specifications, required certifications, and
+                                trade-offs
+                              </div>
+                              <div>
+                                <input
+                                  type="radio"
+                                  name="productDesignAns"
+                                  value="5"
+                                  class="productDesignAns"
+                                />
+                                Product/system final design optimization has
+                                been completed, required certifications have
+                                been obtained, and product/system has
+                                incorporated detailed customer and product
+                                requirements
+                              </div>
+                            </div>
+                            <div>
+                              <div class="mt-14 mb-8">
+                                <label>Team</label>
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="teamAns"
+                                  value="1"
+                                  class="teamAns"
+                                />
+                                No team or company in place (single individual,
+                                no legal entity)
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="teamAns"
+                                  value="2"
+                                  class="teamAns"
+                                />
+                                Solely technical or non-technical founder(s)
+                                running the company with no outside assistance
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="teamAns"
+                                  value="3"
+                                  class="teamAns"
+                                />
+                                Solely technical or non-technical founder(s)
+                                running the company with assistance from outside
+                                advisors/mentors and/or incubator/accelerator
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="teamAns"
+                                  value="4"
+                                  class="teamAns"
+                                />
+                                Balanced team with technical and business
+                                development/commercialization experience running
+                                the company with assistance from outside
+                                advisors/mentors
+                              </div>
+                              <div>
+                                <input
+                                  type="radio"
+                                  name="teamAns"
+                                  value="5"
+                                  class="teamAns"
+                                />
+                                Balanced team with all capabilities onboard
+                                (e.g., sales, marketing, customer service,
+                                operations, etc.) running the company with
+                                assistance from outside advisors/mentors
+                              </div>
+                            </div>
+                            <div>
+                              <div class="mt-14 mb-8">
+                                <label>Go-to-Market</label>
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="goToMarketAns"
+                                  value="1"
+                                  class="goToMarketAns"
+                                />
+                                <label>
+                                  Initial business model and value proposition
+                                  have been defined
+                                </label>
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="goToMarketAns"
+                                  value="2"
+                                  class="goToMarketAns"
+                                />
+                                Customers/partners have been interviewed to
+                                understand their pain points/needs, and business
+                                model and value proposition have been refined
+                                based on customer/partner feedback
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="goToMarketAns"
+                                  value="3"
+                                  class="goToMarketAns"
+                                />
+                                Market and customer/partner needs and how those
+                                translate to product requirements have been
+                                defined, and initial relationships have been
+                                developed with key stakeholders across the value
+                                chain
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="goToMarketAns"
+                                  value="4"
+                                  class="goToMarketAns"
+                                />
+                                Partnerships have been formed with key
+                                stakeholders across the value chain (e.g.,
+                                suppliers, partners, service providers, and
+                                customers)
+                              </div>
+                              <div>
+                                <input
+                                  type="radio"
+                                  name="goToMarketAns"
+                                  value="5"
+                                  class="goToMarketAns"
+                                />
+                                Supply agreements with suppliers and partners
+                                are in place and initial purchase orders from
+                                customers have been received >
+                              </div>
+                            </div>
+                            <div>
+                              <div class="mt-14 mb-8">
+                                <label>Manufacturing/Supply Chain</label>
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="manufacturingAns"
+                                  value="1"
+                                  class="manufacturingAns"
+                                />
+                                Potential suppliers, partners, and customers
+                                have been identified and mapped in an initial
+                                value chain analysis
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="manufacturingAns"
+                                  value="2"
+                                  class="manufacturingAns"
+                                />
+                                Relationships have been established with
+                                potential suppliers, partners, service
+                                providers, and customers and they have provided
+                                input on product and manufacturability
+                                requirements
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="manufacturingAns"
+                                  value="3"
+                                  class="manufacturingAns"
+                                />
+                                Manufacturing process qualifications (e.g.
+                                QC/QA) have been defined and are in progress
+                              </div>
+                              <div class="mb-4">
+                                <input
+                                  type="radio"
+                                  name="manufacturingAns"
+                                  value="4"
+                                  class="manufacturingAns"
+                                />
+                                Products/systems have been pilot manufactured
+                                and sold to initial customerss
+                              </div>
+                              <div>
+                                <input
+                                  type="radio"
+                                  name="manufacturingAns"
+                                  value="5"
+                                  class="manufacturingAns"
+                                />
+                                Full scale manufacturing and widespread
+                                deployment of product/system to customers and/or
+                                users has been achieved
+                              </div>
                             </div>
                           </div>
 
-                          <div>
-                            <div class="mt-14 mb-8">
-                              <label>Competitive Landscape</label>
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="competitiveLandscapeAns"
-                                value="1"
-                                class="competitiveLandscapeAns"
-                              />
-                              Secondary market research has been performed and
-                              basic knowledge of potential applications and
-                              competitive landscape have been identified
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="competitiveLandscapeAns"
-                                value="2"
-                                class="competitiveLandscapeAns"
-                              />
-                              Primary market research to prove the
-                              product/system commercial feasibility has been
-                              completed and basic understanding of competitive
-                              products/systems has been demonstrated
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="competitiveLandscapeAns"
-                                value="3"
-                                class="competitiveLandscapeAns"
-                              />
-                              Comprehensive market research to prove the
-                              product/system commercial feasibility has been
-                              completed and intermediate understanding of
-                              competitive products/systems has been demonstrated
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="competitiveLandscapeAns"
-                                value="4"
-                                class="competitiveLandscapeAns"
-                              />
-                              Competitive analysis to illustrate unique features
-                              and advantages of the product/system compared to
-                              competitive products/systems has been completed
-                            </div>
-                            <div>
-                              <input
-                                type="radio"
-                                name="competitiveLandscapeAns"
-                                value="5"
-                                class="competitiveLandscapeAns"
-                              />
-                              Full and complete understanding of the competitive
-                              landscape, target application(s), competitive
-                              products/systems, and market has been achieved
-                            </div>
-                          </div>
-                          <div>
-                            <div class="mt-14 mb-8">
-                              <label>Product Development/Design</label>
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="productDesignAns"
-                                value="1"
-                                class="productDesignAns"
-                              />
-                              One or more initial product hypotheses have been
-                              defined
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="productDesignAns"
-                                value="2"
-                                class="productDesignAns"
-                              />
-                              Mapping product/system attributes against customer
-                              needs has highlighted a clear value proposition
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="productDesignAns"
-                                value="3"
-                                class="productDesignAns"
-                              />
-                              The product/system has been scaled from laboratory
-                              to pilot scale and issues that may affect
-                              achieving full scale have been identified
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="productDesignAns"
-                                value="4"
-                                class="productDesignAns"
-                              />
-                              Comprehensive customer value proposition model has
-                              been developed, including a detailed understanding
-                              of product/system design specifications, required
-                              certifications, and trade-offs
-                            </div>
-                            <div>
-                              <input
-                                type="radio"
-                                name="productDesignAns"
-                                value="5"
-                                class="productDesignAns"
-                              />
-                              Product/system final design optimization has been
-                              completed, required certifications have been
-                              obtained, and product/system has incorporated
-                              detailed customer and product requirements
-                            </div>
-                          </div>
-                          <div>
-                            <div class="mt-14 mb-8">
-                              <label>Team</label>
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="teamAns"
-                                value="1"
-                                class="teamAns"
-                              />
-                              No team or company in place (single individual, no
-                              legal entity)
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="teamAns"
-                                value="2"
-                                class="teamAns"
-                              />
-                              Solely technical or non-technical founder(s)
-                              running the company with no outside assistance
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="teamAns"
-                                value="3"
-                                class="teamAns"
-                              />
-                              Solely technical or non-technical founder(s)
-                              running the company with assistance from outside
-                              advisors/mentors and/or incubator/accelerator
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="teamAns"
-                                value="4"
-                                class="teamAns"
-                              />
-                              Balanced team with technical and business
-                              development/commercialization experience running
-                              the company with assistance from outside
-                              advisors/mentors
-                            </div>
-                            <div>
-                              <input
-                                type="radio"
-                                name="teamAns"
-                                value="5"
-                                class="teamAns"
-                              />
-                              Balanced team with all capabilities onboard (e.g.,
-                              sales, marketing, customer service, operations,
-                              etc.) running the company with assistance from
-                              outside advisors/mentors
-                            </div>
-                          </div>
-                          <div>
-                            <div class="mt-14 mb-8">
-                              <label>Go-to-Market</label>
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="goToMarketAns"
-                                value="1"
-                                class="goToMarketAns"
-                              />
-                              <label>
-                                Initial business model and value proposition
-                                have been defined
-                              </label>
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="goToMarketAns"
-                                value="2"
-                                class="goToMarketAns"
-                              />
-                              Customers/partners have been interviewed to
-                              understand their pain points/needs, and business
-                              model and value proposition have been refined
-                              based on customer/partner feedback
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="goToMarketAns"
-                                value="3"
-                                class="goToMarketAns"
-                              />
-                              Market and customer/partner needs and how those
-                              translate to product requirements have been
-                              defined, and initial relationships have been
-                              developed with key stakeholders across the value
-                              chain
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="goToMarketAns"
-                                value="4"
-                                class="goToMarketAns"
-                              />
-                              Partnerships have been formed with key
-                              stakeholders across the value chain (e.g.,
-                              suppliers, partners, service providers, and
-                              customers)
-                            </div>
-                            <div>
-                              <input
-                                type="radio"
-                                name="goToMarketAns"
-                                value="5"
-                                class="goToMarketAns"
-                              />
-                              Supply agreements with suppliers and partners are
-                              in place and initial purchase orders from
-                              customers have been received >
-                            </div>
-                          </div>
-                          <div>
-                            <div class="mt-14 mb-8">
-                              <label>Manufacturing/Supply Chain</label>
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="manufacturingAns"
-                                value="1"
-                                class="manufacturingAns"
-                              />
-                              Potential suppliers, partners, and customers have
-                              been identified and mapped in an initial value
-                              chain analysis
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="manufacturingAns"
-                                value="2"
-                                class="manufacturingAns"
-                              />
-                              Relationships have been established with potential
-                              suppliers, partners, service providers, and
-                              customers and they have provided input on product
-                              and manufacturability requirements
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="manufacturingAns"
-                                value="3"
-                                class="manufacturingAns"
-                              />
-                              Manufacturing process qualifications (e.g. QC/QA)
-                              have been defined and are in progress
-                            </div>
-                            <div class="mb-4">
-                              <input
-                                type="radio"
-                                name="manufacturingAns"
-                                value="4"
-                                class="manufacturingAns"
-                              />
-                              Products/systems have been pilot manufactured and
-                              sold to initial customerss
-                            </div>
-                            <div>
-                              <input
-                                type="radio"
-                                name="manufacturingAns"
-                                value="5"
-                                class="manufacturingAns"
-                              />
-                              Full scale manufacturing and widespread deployment
-                              of product/system to customers and/or users has
-                              been achieved
-                            </div>
-                          </div>
-                        </div>
-
-                        <hr class="my-10" />
-                        <div id="fifth-page-content">
-                          <div>
-                            <p class="font-semibold">Egilibility Agreement</p>
-                            <p class="text-black text-justify mt-4 mb-8">
-                              I confirm that I have read, understood, and agree
-                              to comply with the eligibility criteria and rules
-                              of LaunchLab program.
-                            </p>
-                            <div class="items-center mb-4">
-                              <input
-                                type="radio"
-                                name="eligibilityAgreeFlg"
-                                value="true"
-                                class="eligibilityAgreeFlg"
-                              /><label class="ml-2">I AGREE</label>
-                            </div>
-                            <div class="items-center">
-                              <input
-                                type="radio"
-                                name="eligibilityAgreeFlg"
-                                value="false"
-                                class="eligibilityAgreeFlg"
-                              /><label class="ml-2">I DO NOT AGREE</label>
-                            </div>
-                          </div>
                           <hr class="my-10" />
+                          <div id="fifth-page-content">
+                            <div>
+                              <p class="font-semibold">Egilibility Agreement</p>
+                              <p class="text-black text-justify mt-4 mb-8">
+                                I confirm that I have read, understood, and
+                                agree to comply with the eligibility criteria
+                                and rules of LaunchLab program.
+                              </p>
+                              <div class="items-center mb-4">
+                                <input
+                                  type="radio"
+                                  name="eligibilityAgreeFlg"
+                                  value="true"
+                                  class="eligibilityAgreeFlg"
+                                /><label class="ml-2">I AGREE</label>
+                              </div>
+                              <div class="items-center">
+                                <input
+                                  type="radio"
+                                  name="eligibilityAgreeFlg"
+                                  value="false"
+                                  class="eligibilityAgreeFlg"
+                                /><label class="ml-2">I DO NOT AGREE</label>
+                              </div>
+                            </div>
+                            <hr class="my-10" />
 
-                          <div class="mb-8">
-                            <p class="font-semibold">
-                              Applicant Commitment Verification Form
-                            </p>
-                            <p class="text-black text-justify mt-4 mb-8">
-                              To ensure your commitment to the LaunchLab
-                              Program, please respond to the following questions
-                              with a Yes or No.
-                            </p>
-                            <label
-                              >Do you commit to complete and actively cooperate
-                              in all scheduled activities, workshops, and
-                              mentorship sessions during the 4-month program of
-                              the LaunchLab Program?</label
-                            >
-                            <div class="items-center mt-4 mb-4">
-                              <input
-                                type="radio"
-                                name="commitmentOneFlg"
-                                value="true"
-                                class="commitmentOneFlg"
-                              /><label class="ml-2">Yes</label>
-                            </div>
-                            <div class="items-center">
-                              <input
-                                type="radio"
-                                name="commitmentOneFlg"
-                                value="false"
-                                class="commitmentOneFlg"
-                              /><label class="ml-2">No</label>
-                            </div>
-                          </div>
-                          <div class="mb-8 text-justify">
-                            <label
-                              >Do you commit to diligently working towards
-                              executing your startup’s approved growth plan as
-                              outlined in the program?
-                            </label>
-                            <div class="items-center mt-4 mb-4">
-                              <input
-                                type="radio"
-                                name="commitmentTwoFlg"
-                                value="true"
-                                class="commitmentTwoFlg"
-                              /><label class="ml-2">Yes</label>
-                            </div>
-
-                            <div class="items-center">
-                              <input
-                                type="radio"
-                                name="commitmentTwoFlg"
-                                value="false"
-                                class="commitmentTwoFlg"
-                              /><label class="ml-2">No</label>
-                            </div>
-                          </div>
-
-                          <div class="mb-8 text-justify">
-                            <label
-                              >If the founder is not always available, will you
-                              assign at least one dedicated personnel, directly
-                              involved in the aspect of the startup being
-                              accelerated, to be consistently involved in all
-                              program activities and deliverables, understanding
-                              that changing personnel frequently can adversely
-                              affect the progress of the acceleration?
-                            </label>
-                            <div class="items-center mt-4 mb-4">
-                              <input
-                                type="radio"
-                                name="commitmentThreeFlg"
-                                value="true"
-                                class="commitmentThreeFlg"
-                              /><label class="ml-2">Yes</label>
-                            </div>
-
-                            <div class="items-center">
-                              <input
-                                type="radio"
-                                name="commitmentThreeFlg"
-                                value="false"
-                                class="commitmentThreeFlg"
-                              /><label class="ml-2">No</label>
-                            </div>
-                          </div>
-                          <div class="mb-8 text-justify">
-                            <label
-                              >Do you understand and agree that your evaluation
-                              results and performance reports will be shared
-                              with DOST as part of the program’s accomplishment
-                              reports?</label
-                            >
-                            <div class="items-center mt-4 mb-4">
-                              <input
-                                type="radio"
-                                name="commitmentFourFlg"
-                                value="true"
-                                class="commitmentFourFlg"
-                              /><label class="ml-2">Yes</label>
-                            </div>
-
-                            <div class="items-center">
-                              <input
-                                type="radio"
-                                name="commitmentFourFlg"
-                                value="false"
-                                class="commitmentFourFlg"
-                              /><label class="ml-2">No</label>
-                            </div>
-                          </div>
-                          <div class="mt-10 mb-8 text-justify">
-                            <p>
-                              Thank you for taking the time to complete the
-                              registration. We understand and respect your
-                              concerns. If you have further questions and
-                              concerns , you are welcome to contact our project
-                              lead, Engr. Jurydel Rama, at
-                              <a
-                                href="mailto:jurydel.rama@cit.edu"
-                                class="font-semibold text-blue-700"
+                            <div class="mb-8">
+                              <p class="font-semibold">
+                                Applicant Commitment Verification Form
+                              </p>
+                              <p class="text-black text-justify mt-4 mb-8">
+                                To ensure your commitment to the LaunchLab
+                                Program, please respond to the following
+                                questions with a Yes or No.
+                              </p>
+                              <label
+                                >Do you commit to complete and actively
+                                cooperate in all scheduled activities,
+                                workshops, and mentorship sessions during the
+                                4-month program of the LaunchLab Program?</label
                               >
-                                jurydel.rama@cit.edu
-                              </a>
-                            </p>
+                              <div class="items-center mt-4 mb-4">
+                                <input
+                                  type="radio"
+                                  name="commitmentOneFlg"
+                                  value="true"
+                                  class="commitmentOneFlg"
+                                /><label class="ml-2">Yes</label>
+                              </div>
+                              <div class="items-center">
+                                <input
+                                  type="radio"
+                                  name="commitmentOneFlg"
+                                  value="false"
+                                  class="commitmentOneFlg"
+                                /><label class="ml-2">No</label>
+                              </div>
+                            </div>
+                            <div class="mb-8 text-justify">
+                              <label
+                                >Do you commit to diligently working towards
+                                executing your startup’s approved growth plan as
+                                outlined in the program?
+                              </label>
+                              <div class="items-center mt-4 mb-4">
+                                <input
+                                  type="radio"
+                                  name="commitmentTwoFlg"
+                                  value="true"
+                                  class="commitmentTwoFlg"
+                                /><label class="ml-2">Yes</label>
+                              </div>
+
+                              <div class="items-center">
+                                <input
+                                  type="radio"
+                                  name="commitmentTwoFlg"
+                                  value="false"
+                                  class="commitmentTwoFlg"
+                                /><label class="ml-2">No</label>
+                              </div>
+                            </div>
+
+                            <div class="mb-8 text-justify">
+                              <label
+                                >If the founder is not always available, will
+                                you assign at least one dedicated personnel,
+                                directly involved in the aspect of the startup
+                                being accelerated, to be consistently involved
+                                in all program activities and deliverables,
+                                understanding that changing personnel frequently
+                                can adversely affect the progress of the
+                                acceleration?
+                              </label>
+                              <div class="items-center mt-4 mb-4">
+                                <input
+                                  type="radio"
+                                  name="commitmentThreeFlg"
+                                  value="true"
+                                  class="commitmentThreeFlg"
+                                /><label class="ml-2">Yes</label>
+                              </div>
+
+                              <div class="items-center">
+                                <input
+                                  type="radio"
+                                  name="commitmentThreeFlg"
+                                  value="false"
+                                  class="commitmentThreeFlg"
+                                /><label class="ml-2">No</label>
+                              </div>
+                            </div>
+                            <div class="mb-8 text-justify">
+                              <label
+                                >Do you understand and agree that your
+                                evaluation results and performance reports will
+                                be shared with DOST as part of the program’s
+                                accomplishment reports?</label
+                              >
+                              <div class="items-center mt-4 mb-4">
+                                <input
+                                  type="radio"
+                                  name="commitmentFourFlg"
+                                  value="true"
+                                  class="commitmentFourFlg"
+                                /><label class="ml-2">Yes</label>
+                              </div>
+
+                              <div class="items-center">
+                                <input
+                                  type="radio"
+                                  name="commitmentFourFlg"
+                                  value="false"
+                                  class="commitmentFourFlg"
+                                /><label class="ml-2">No</label>
+                              </div>
+                            </div>
+                            <div class="mt-10 mb-8 text-justify">
+                              <p>
+                                Thank you for taking the time to complete the
+                                registration. We understand and respect your
+                                concerns. If you have further questions and
+                                concerns , you are welcome to contact our
+                                project lead, Engr. Jurydel Rama, at
+                                <a
+                                  href="mailto:jurydel.rama@cit.edu"
+                                  class="font-semibold text-blue-700"
+                                >
+                                  jurydel.rama@cit.edu
+                                </a>
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
