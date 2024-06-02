@@ -611,17 +611,55 @@
         console.log(downloadButton);
         downloadButton.addEventListener("click", function () {
           const { jsPDF } = window.jspdf;
-          const firstPageContent =
-            document.getElementById("first-page-content");
-          const secondPageContent = document.getElementById(
-            "second-page-content"
-          );
-          let secondPageContentClone = secondPageContent.cloneNode(true);
+          const firstPageContent = document.getElementById("first-page-content");
+          const secondPageContentOne = document.getElementById("second-page-content-one");
+          const secondPageContentTwo = document.getElementById("second-page-content-two");
+          
+          //Logo for all page
+		 const image = document.createElement('img');
+		 image.src = "/images/wilBlackBox.png";
+		 image.alt = "image";
+		 image.style.position = "absolute";
+		 image.style.top = "10px";
+		 image.style.right = "10px";
+          
+          //This is for first page content
+		 let firstPageContentClone = firstPageContent.cloneNode(true);	
+		 firstPageContentClone.style.position = "relative";	
 
-          secondPageContentClone.style.padding = "0px 20px";
+		 firstPageContentClone.appendChild(image);
+          
+          //This is for second page content
+          let secondPageContentOneClone = secondPageContentOne.cloneNode(true);
+          let secondPageContentTwoClone = secondPageContentTwo.cloneNode(true);
+
+          secondPageContentTwoClone.style.padding = "0px 20px";
+          secondPageContentTwoClone.style.fontSize = "50px";
+          
+          let problemStatement = secondPageContentTwoClone.querySelector(".problemStatement");
+          problemStatement.style.fontSize = "50px";
+          problemStatement.style.border = "none !important";
+		  problemStatement.style.outline = "none !important";
+		  
+		  const secondPageContentClone = document.createElement('div');
+		  secondPageContentClone.style.position = "relative";	
+		  
+		  
+		  
+		  secondPageContentClone.appendChild(image);
+		  secondPageContentClone.appendChild(secondPageContentOneClone);
+		  secondPageContentClone.appendChild(secondPageContentTwoClone);
+		  
+		  
+		  
+		  //This is for third page content
+		  
+          document.body.appendChild(firstPageContentClone);
+          document.body.appendChild(secondPageContentClone);
+          
           const doc = new jsPDF("p", "pt", "a4"); // 'l' for landscape, 'pt' for points (unit), 'a4' for A4 size
 
-          html2canvas(firstPageContent).then((canvas) => {
+          html2canvas(firstPageContentClone).then((canvas) => {
             const imgData = canvas.toDataURL("image/png");
 
             const imgProps = doc.getImageProperties(imgData);
@@ -641,6 +679,9 @@
 
               // Save the PDF after the second page is added
               doc.save("registration_form.pdf");
+              
+              firstPageContentClone.remove();
+              secondPageContentClone.remove();
             });
           });
         });
