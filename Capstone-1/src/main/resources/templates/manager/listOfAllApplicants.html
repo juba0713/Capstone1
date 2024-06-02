@@ -253,26 +253,22 @@
 
               webDto.listOfApplicants.forEach((applicant) => {
                 if (applicant.applicantIdPk == idPk) {
+                  evaluated.style.display = "inline";
+                  rejected.style.display = "none";
+                  let score = document.querySelector(".score");
+                  let feedback = document.querySelector(".evaluated-feedback");
 
-                    evaluated.style.display = "inline";
-                    rejected.style.display = "none";
-                    let score = document.querySelector(".score");
-                    let feedback = document.querySelector(
-                      ".evaluated-feedback"
-                    );
-					
-					if(applicant.status == 5){
-                      score.innerHTML = "<p style='font-weight: 600; '>Score: </p>" +
+                  if (applicant.status == 5) {
+                    score.innerHTML =
+                      "<p style='font-weight: 600; '>Score: </p>" +
                       applicant.score;
-					}else{
-						score.innerHTML = "";
-					}
+                  } else {
+                    score.innerHTML = "";
+                  }
 
-                    feedback.innerHTML =
-                      "<p style='font-weight: 600; '>Feedback: </p>" +
-                      applicant.feedback;
-
-                  
+                  feedback.innerHTML =
+                    "<p style='font-weight: 600; '>Feedback: </p>" +
+                    applicant.feedback;
                 }
               });
 
@@ -601,53 +597,53 @@
         }
       });
     </script>
-     <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+      integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script>
       // Wait for the DOM to load before accessing elements
       document.addEventListener("DOMContentLoaded", () => {
         const downloadButton = document.querySelector(".download-btn");
-    	console.log(downloadButton);
-        downloadButton.addEventListener("click", function(){
-				const { jsPDF } = window.jspdf;
-			    const firstPageContent = document.getElementById("first-page-content");
-			    const secondPageContent = document.getElementById("first-page-content");
+        console.log(downloadButton);
+        downloadButton.addEventListener("click", function () {
+          const { jsPDF } = window.jspdf;
+          const firstPageContent =
+            document.getElementById("first-page-content");
+          const secondPageContent = document.getElementById(
+            "second-page-content"
+          );
+          let secondPageContentClone = secondPageContent.cloneNode(true);
 
+          secondPageContentClone.style.padding = "0px 20px";
+          const doc = new jsPDF("p", "pt", "a4"); // 'l' for landscape, 'pt' for points (unit), 'a4' for A4 size
 
+          html2canvas(firstPageContent).then((canvas) => {
+            const imgData = canvas.toDataURL("image/png");
 
-			    const doc = new jsPDF('p', 'pt', 'a4'); // 'l' for landscape, 'pt' for points (unit), 'a4' for A4 size
+            const imgProps = doc.getImageProperties(imgData);
+            const pdfWidth = doc.internal.pageSize.getWidth();
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+            doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
 
+            // Add a new page before adding the second page content
+            doc.addPage();
 
-			    html2canvas(firstPageContent).then(canvas => {
+            html2canvas(secondPageContentClone).then((canvas) => {
+              const imgData = canvas.toDataURL("image/png");
+              const imgProps = doc.getImageProperties(imgData);
+              const pdfWidth = doc.internal.pageSize.getWidth();
+              const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+              doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
 
-			        const imgData = canvas.toDataURL('image/png');
-
-			        const imgProps= doc.getImageProperties(imgData);
-			        const pdfWidth = doc.internal.pageSize.getWidth();
-			        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-			        doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-			        
-			        // Add a new page before adding the second page content
-			        doc.addPage(); 
-			
-			        html2canvas(secondPageContent).then(canvas => {
-			            const imgData = canvas.toDataURL('image/png');
-			            const imgProps = doc.getImageProperties(imgData);
-			            const pdfWidth = doc.internal.pageSize.getWidth();
-			            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-			            doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-			
-			            // Save the PDF after the second page is added
-			            doc.save('registration_form.pdf'); 
-			        });
-
-			    });
-			
-		});
-        
-
-        
-        
+              // Save the PDF after the second page is added
+              doc.save("registration_form.pdf");
+            });
+          });
+        });
       });
     </script>
   </body>
