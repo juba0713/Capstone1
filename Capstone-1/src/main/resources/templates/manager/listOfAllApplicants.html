@@ -601,5 +601,54 @@
         }
       });
     </script>
+     <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+      // Wait for the DOM to load before accessing elements
+      document.addEventListener("DOMContentLoaded", () => {
+        const downloadButton = document.querySelector(".download-btn");
+    	console.log(downloadButton);
+        downloadButton.addEventListener("click", function(){
+				const { jsPDF } = window.jspdf;
+			    const firstPageContent = document.getElementById("first-page-content");
+			    const secondPageContent = document.getElementById("first-page-content");
+
+
+
+			    const doc = new jsPDF('p', 'pt', 'a4'); // 'l' for landscape, 'pt' for points (unit), 'a4' for A4 size
+
+
+			    html2canvas(firstPageContent).then(canvas => {
+
+			        const imgData = canvas.toDataURL('image/png');
+
+			        const imgProps= doc.getImageProperties(imgData);
+			        const pdfWidth = doc.internal.pageSize.getWidth();
+			        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+			        doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+			        
+			        // Add a new page before adding the second page content
+			        doc.addPage(); 
+			
+			        html2canvas(secondPageContent).then(canvas => {
+			            const imgData = canvas.toDataURL('image/png');
+			            const imgProps = doc.getImageProperties(imgData);
+			            const pdfWidth = doc.internal.pageSize.getWidth();
+			            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+			            doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+			
+			            // Save the PDF after the second page is added
+			            doc.save('registration_form.pdf'); 
+			        });
+
+			    });
+			
+		});
+        
+
+        
+        
+      });
+    </script>
   </body>
 </html>

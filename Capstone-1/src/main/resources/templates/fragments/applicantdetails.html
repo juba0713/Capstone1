@@ -22,6 +22,9 @@
     <div th:fragment="applicantDetailsFragment" class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Applicant Details</h5>
+        <button class="download-btn">
+			Download as PDF
+		</button>
         <button
           type="button"
           class="close"
@@ -40,8 +43,10 @@
               th:action="@{/applicant/form}"
               method="POST"
               class="font-secondary border-transparent"
+              id="form-content"
             >
-              <div>
+              <div id="first-page-content">
+				<div>
                 <div class="flex justify-between">
                   <div class="mt-20 mb-6 h-20 flex text-center items-center">
                     <!-- <img
@@ -159,6 +164,7 @@
                   </div>
                 </div>
               </div>
+               </div>
               <hr class="my-10 ml-6 mr-6" />
 
               <div
