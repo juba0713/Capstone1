@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/output.css}" />
+    <style>
+      .dt-end > button {
+        /* Your styles here */
+        margin-left: 0;
+        position: absolute;
+        left: 0%;
+        top: 2px;
+        font-family: Poppins;
+      }
+      .dt-end > button:hover {
+        text-decoration: underline;
+        color: white !important;
+      }
+      .dt-input {
+        margin-right: 10px;
+      }
+      .dt-search {
+        font-family: Poppins;
+        width: 60%;
+        margin-left: auto;
+      }
+      .dt-end {
+        font-size: smaller;
+        position: relative;
+      }
+      .dt-input {
+        margin-right: 10px;
+      }
+      .modal-dialog {
+        max-width: 80%;
+      }
+      .modal-content {
+        width: 100%;
+        height: 92vh;
+      }
+      .feedback-modal-dialog {
+        max-width: 30%;
+        text-align: center;
+        max-height: 50px;
+      }
+      .feedback-modal-content {
+        height: 30%;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="h-full flex flex-col w-[250px] absolute bg-black z-10 justify-between text-customyellow"
+    >
+      <div class="pt-4">
+        <img
+          class="filter-logo pointer-events-none h-16 w-52 flex justify-center mx-auto border-2 border-blue-500 mb-4"
+          th:src="@{/images/yellowLogo.png}"
+        />
+        <div
+          class="gap-4 flex flex-col font-secondary font-normal p-2 text-center"
+        >
+          <a
+            th:href="@{/admin/home}"
+            class="hover:cursor-pointer hover:rounded-sm hover:bg-tanglow hover:text-black hover:no-underline p-2"
+          >
+            Home
+          </a>
+          <a
+            th:href="@{/admin/users}"
+            class="hover:cursor-pointer hover:rounded-sm hover:bg-tanglow hover:text-black hover:no-underline p-2"
+          >
+            Users
+          </a>
+          <!-- th:href="@{/manager/evaluated-result}" -->
+          <!-- <p
+            class="hover:cursor-pointer hover:rounded-sm hover:bg-tanglow hover:text-black hover:no-underline p-2"
+          >
+            Roles
+          </p> -->
+        </div>
+      </div>
+      <div class="text-center p-2 text-xl font-primary hover:text-white w-full">
+        <form th:action="@{/logout}" method="POST">
+          <button
+            class="hover:text-black hover:bg-customyellow w-full p-2 rounded-sm"
+          >
+            Logout
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- applicant table -->
+    <div class="h-screen bg-[#F9F9F9] p-2">
+      <div class="flex place-items-end flex-col ml-60 pr-10 pt-3">
+        <div class="font-primary text-4xl w-full flex justify-end">
+          Welcome, <span th:text="${session.fullname}"></span>!
+        </div>
+        <!-- <div>ID: <span th:text="${session.id}"></span></div> -->
+      </div>
+
+      <div
+        class="ml-[270px] mr-6 rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
+      >
+        <table id="applicants-table" class="w-screen h-4/5">
+          <!-- class="border-collapse table-auto border-4 border-violet-600 h-full border-spacing-0 w-fit" -->
+
+          <thead class="font-secondary text-sm bg-customyellow">
+            <tr>
+              <th class="text-center rounded-top-left">id</th>
+              <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
+              <th class="text-center w-1/5">email</th>
+              <th class="text-center w-1/5">number</th>
+
+              <th class="text-center hidden sm:table-cell">role</th>
+              <th class="text-center hidden sm:table-cell">time-created</th>
+              <th class="text-center hidden sm:table-cell">time-modified</th>
+              <th class="text-center rounded-top-right"></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-grey-500 bodyrowhover">
+            <!-- th:each="app : *{listOfApplicants}"
+            th:data-id="${app.applicantIdPk}" -->
+
+            <tr class="row-btn">
+              <!-- th:text="${app.email}" -->
+              <td class="whitespace-nowrap max-w-0 truncate"></td>
+              <!-- th:text="${app.projectTitle}" -->
+              <td class="whitespace-nowrap max-w-0 truncate"></td>
+              <!-- th:text="${app.university}" -->
+              <td class="whitespace-nowrap max-w-0 truncate"></td>
+              <!-- th:text="${app.status == 0 ? 'In Officer' : app.status == 2 ? 'Rejected' : app.status == 1 OR app.status == 3? 'In Manager' : app.status == 4 ? 'In Board' : app.status == 5 AND app.score >=6 ? 'Passed'  : 'Failed'}"
+              th:style="${app.status == 0 OR app.status == 1 OR app.status==3 OR app.status == 4  ? 'color:#000000; font-weight: bold;' : app.status == 2 OR ((app.status == 5 OR app.status == 6 OR app.status == 7) AND app.score <= 5) ? 'color:#FF0000; font-weight: bold;' : 'color:#008000; font-weight: bold;'}"
+           -->
+              <td class="whitespace-nowrap max-w-0 truncate"></td>
+              <td class="whitespace-nowrap max-w-0 truncate"></td>
+              <td class="whitespace-nowrap max-w-0 truncate"></td>
+              <td class="w-[10%]">
+                <!-- th:data-id="${app.applicantIdPk}"
+                  name="feedback"
+                  th:if="${app.status == 2 OR app.status == 5}"
+                -->
+                <button
+                  class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  type="button"
+                >
+                  <img class="h-6" th:src="@{/icons/delete.svg}" />
+                </button>
+                <button
+                  class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  type="button"
+                >
+                  <img class="h-6" th:src="@{/icons/edit.svg}" />
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- applicant details -->
+    <div class="modal" tabindex="-1" role="dialog" id="details-modal">
+      <div class="modal-dialog" role="document">
+        <div
+          th:replace="~{fragments/applicantdetails :: applicantDetailsFragment}"
+          class="modal-content"
+        ></div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+    <script th:inline="javascript">
+      const webDto = /*[[${managerWebDto}]]*/ "";
+      console.log(webDto);
+      $(document).ready(function () {
+        $("#applicants-table").dataTable({
+          columnDefs: [
+            {
+              // targets: "no-sort",
+              targets: -1,
+              orderable: false,
+            },
+          ],
+          searching: true,
+          // ordering: false,
+          info: true,
+          lengthChange: false,
+          initComplete: function () {
+            $(".dt-end:first").prepend(
+              '<button type="submit" style="background-color: #FDCC01; color: black; padding: 10px; border-radius: 10px;">Create user</button>'
+            );
+          },
+        });
+
+        let rows = document.getElementsByClassName("row-btn");
+        let btnRows = document.getElementsByClassName("btn-row");
+
+        var rowBtnClicked = false;
+
+        for (let row of rows) {
+          row.addEventListener("click", function () {
+            let id = this.getAttribute("data-id");
+
+            if (!rowBtnClicked) {
+              retrieveApplicantDetails(id);
+              $("#details-modal").modal("show");
+            }
+          });
+        }
+
+        for (let btn of btnRows) {
+          btn.addEventListener("click", function () {
+            rowBtnClicked = true;
+            let idPk = this.getAttribute("data-id");
+            if (this.name === "feedback") {
+              let evaluated = document.querySelector(".evaluated");
+              let rejected = document.querySelector(".rejected");
+
+              webDto.listOfApplicants.forEach((applicant) => {
+                if (applicant.applicantIdPk == idPk) {
+                  evaluated.style.display = "inline";
+                  rejected.style.display = "none";
+                  let score = document.querySelector(".score");
+                  let feedback = document.querySelector(".evaluated-feedback");
+
+                  if (applicant.status == 5) {
+                    score.innerHTML =
+                      "<p style='font-weight: 600; '>Score: </p>" +
+                      applicant.score;
+                  } else {
+                    score.innerHTML = "";
+                  }
+
+                  feedback.innerHTML =
+                    "<p style='font-weight: 600; '>Feedback: </p>" +
+                    applicant.feedback;
+                }
+              });
+
+              $("#feedback-modal").modal("show");
+            }
+            setTimeout(() => {
+              rowBtnClicked = false;
+            }, 100);
+          });
+        }
+
+        async function retrieveApplicantDetails(applicantIdPk) {
+          const url = `/manager/retrieve/details?applicantIdPk=${applicantIdPk}`;
+          const response = await fetch(url, { method: "GET" });
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(`Server Error: ${errorData.message || "Unknown"}`);
+          }
+
+          const data = await response.json();
+
+          console.log(data);
+
+          document.querySelector(".overflow-auto").scrollTo({
+            top: 0,
+          });
+
+          let applicant = data.applicantDetailsObj;
+          let email = document.querySelector(".email");
+          console.log(email);
+          let agreeFlgs = document.querySelectorAll(".agreeFlg");
+          let projectTitle = document.querySelector(".projectTitle");
+          let projectDescription = document.querySelector(
+            ".projectDescription"
+          );
+          let memberOne = document.querySelectorAll(".member-1");
+          let memberTwo = document.querySelectorAll(".member-2");
+          let memberThree = document.querySelectorAll(".member-3");
+          let problemStatement = document.querySelector(".problemStatement");
+          let targetMarket = document.querySelector(".targetMarket");
+          let solutionDescription = document.querySelector(
+            ".solutionDescription"
+          );
+          let historicalTimelineOne = document.querySelectorAll(
+            ".historicalTimeline-1"
+          );
+          let historicalTimelineTwo = document.querySelectorAll(
+            ".historicalTimeline-2"
+          );
+          let historicalTimelineThree = document.querySelectorAll(
+            ".historicalTimeline-3"
+          );
+          let historicalTimelineFour = document.querySelectorAll(
+            ".historicalTimeline-4"
+          );
+          let historicalTimelineFive = document.querySelectorAll(
+            ".historicalTimeline-5"
+          );
+          let productServiceOffering = document.querySelectorAll(
+            ".productServiceOffering"
+          );
+          let pricingStrategy = document.querySelectorAll(".pricingStrategy");
+          let intPropertyStatus = document.querySelector(".intPropertyStatus");
+          let objectives = document.querySelector(".objectives");
+          let scopeProposal = document.querySelector(".scopeProposal");
+          let methodology = document.querySelector(".methodology");
+          let vitaeFile = document.querySelector(".vitaeFile");
+          let supportLink = document.querySelector(".supportLink");
+          let groupName = document.querySelector(".groupName");
+          let groupLeader = document.querySelector(".groupLeader");
+          let leaderNumber = document.querySelector(".leaderNumber");
+          let leaderAddress = document.querySelector(".leaderAddress");
+          let members = document.querySelectorAll(".members");
+          let university = document.querySelector(".university");
+          let technologyAns = document.querySelectorAll(".technologyAns");
+          let productDevelopmentAns = document.querySelectorAll(
+            ".productDevelopmentAns"
+          );
+          let competitiveLandscapeAns = document.querySelectorAll(
+            ".competitiveLandscapeAns"
+          );
+          let productDesignAns = document.querySelectorAll(".productDesignAns");
+          let teamAns = document.querySelectorAll(".teamAns");
+          let goToMarketAns = document.querySelectorAll(".goToMarketAns");
+          let manufacturingAns = document.querySelectorAll(".manufacturingAns");
+          let eligibilityAgreeFlg = document.querySelectorAll(
+            ".eligibilityAgreeFlg"
+          );
+          let commitmentOneFlg = document.querySelectorAll(".commitmentOneFlg");
+          let commitmentTwoFlg = document.querySelectorAll(".commitmentTwoFlg");
+          let commitmentThreeFlg = document.querySelectorAll(
+            ".commitmentThreeFlg"
+          );
+          let commitmentFourFlg =
+            document.querySelectorAll(".commitmentFourFlg");
+
+          //Email
+          email.value = applicant.email;
+          //Project Title
+          projectTitle.value = applicant.projectTitle;
+          //Project Description
+          projectDescription.textContent = applicant.projectDescription;
+          //AgreeF;g
+          if (applicant.agreeFlg) {
+            agreeFlgs[0].checked = true;
+          } else {
+            agreeFlgs[1].checked = true;
+          }
+          //Teams
+          memberOne[0].value = applicant.teams[0][0];
+          memberOne[1].value = applicant.teams[0][1];
+          memberTwo[0].value = applicant.teams[1][0];
+          memberTwo[1].value = applicant.teams[1][1];
+          memberThree[0].value = applicant.teams[2][0];
+          memberThree[1].value = applicant.teams[2][1];
+          //Problem Statement
+          problemStatement.textContent = applicant.problemStatement;
+          //Target Market
+          targetMarket.textContent = applicant.targetMarket;
+          //Solution Description
+          solutionDescription.textContent = applicant.solutionDescription;
+          //HistoricalTimeline
+          if (applicant.historicalTimeline[0].length != 0) {
+            historicalTimelineOne[0].value = applicant.historicalTimeline[0][0];
+            historicalTimelineOne[1].value = applicant.historicalTimeline[0][1];
+          } else {
+            historicalTimelineOne[0].value = "NA";
+            historicalTimelineOne[1].value = "NA";
+          }
+          if (applicant.historicalTimeline[1].length != 0) {
+            historicalTimelineTwo[0].value = applicant.historicalTimeline[0][0];
+            historicalTimelineTwo[1].value = applicant.historicalTimeline[0][1];
+          } else {
+            historicalTimelineTwo[0].value = "NA";
+            historicalTimelineTwo[1].value = "NA";
+          }
+          //Product Service Offering
+          if (applicant.historicalTimeline[2].length != 0) {
+            historicalTimelineThree[0].value =
+              applicant.historicalTimeline[0][0];
+            historicalTimelineThree[1].value =
+              applicant.historicalTimeline[0][1];
+          } else {
+            historicalTimelineThree[0].value = "NA";
+            historicalTimelineThree[1].value = "NA";
+          }
+          if (applicant.historicalTimeline[3].length != 0) {
+            historicalTimelineFour[0].value =
+              applicant.historicalTimeline[0][0];
+            historicalTimelineFour[1].value =
+              applicant.historicalTimeline[0][1];
+          } else {
+            historicalTimelineFour[0].value = "NA";
+            historicalTimelineFour[1].value = "NA";
+          }
+          if (applicant.historicalTimeline[4].length != 0) {
+            historicalTimelineFive[0].value =
+              applicant.historicalTimeline[0][0];
+            historicalTimelineFive[1].value =
+              applicant.historicalTimeline[0][1];
+          } else {
+            historicalTimelineFive[0].value = "NA";
+            historicalTimelineFive[1].value = "NA";
+          }
+          if (applicant.productServiceOffering[0] != "") {
+            productServiceOffering[0].value =
+              applicant.productServiceOffering[0];
+          } else {
+            productServiceOffering[0].value = "NA";
+          }
+          if (applicant.productServiceOffering[1] != "") {
+            productServiceOffering[1].value =
+              applicant.productServiceOffering[0];
+          } else {
+            productServiceOffering[1].value = "NA";
+          }
+          if (applicant.productServiceOffering[2] != "") {
+            productServiceOffering[2].value =
+              applicant.productServiceOffering[0];
+          } else {
+            productServiceOffering[2].value = "NA";
+          }
+          if (applicant.productServiceOffering[3] != "") {
+            productServiceOffering[3].value =
+              applicant.productServiceOffering[0];
+          } else {
+            productServiceOffering[3].value = "NA";
+          }
+          //Pricing Strategy
+          if (applicant.pricingStrategy[0] != "") {
+            pricingStrategy[0].value = applicant.pricingStrategy[0];
+          } else {
+            pricingStrategy[0].value = "NA";
+          }
+          if (applicant.pricingStrategy[1] != "") {
+            pricingStrategy[1].value = applicant.pricingStrategy[1];
+          } else {
+            pricingStrategy[1].value = "NA";
+          }
+          if (applicant.pricingStrategy[2] != "") {
+            pricingStrategy[2].value = applicant.pricingStrategy[2];
+          } else {
+            pricingStrategy[2].value = "NA";
+          }
+          if (applicant.pricingStrategy[3] != "") {
+            pricingStrategy[3].value = applicant.pricingStrategy[3];
+          } else {
+            pricingStrategy[3].value = "NA";
+          }
+          //Intellectual Property Status
+          if (applicant.intPropertyStatus != "") {
+            intPropertyStatus.value = applicant.intPropertyStatus;
+          } else {
+            intPropertyStatus.value = "NA";
+          }
+          //Objectives
+          objectives.textContent = applicant.objectives;
+          //Scope of the proposal
+          scopeProposal.textContent = applicant.scopeProposal;
+          //Methodology
+          methodology.textContent = applicant.methodology;
+          //Supporting Link
+          if (applicant.supportLink != "") {
+            console.log("EMPTY LINK");
+            supportLink.href = applicant.supportLink;
+            supportLink.innerHTML = applicant.supportLink;
+          } else {
+            supportLink.innerHTML = "NA";
+          }
+          //Group Name
+          groupName.value = applicant.groupName;
+          //Group Leader
+          groupLeader.value =
+            applicant.leaderLastName + ", " + applicant.leaderFirstName;
+          //Leader Mobile Number
+          leaderNumber.value = applicant.mobileNumber;
+          //Leader Email
+          leaderAddress.value = applicant.address;
+          //Members
+          if (
+            applicant.members[0] != undefined &&
+            !applicant.members[0].includes("null")
+          ) {
+            members[0].value = applicant.members[0];
+          } else {
+            members[0].value = "NA";
+          }
+          if (
+            applicant.members[1] != undefined &&
+            !applicant.members[1].includes("null")
+          ) {
+            members[1].value = applicant.members[1];
+          } else {
+            members[1].value = "NA";
+          }
+          if (
+            applicant.members[2] != undefined &&
+            !applicant.members[2].includes("null")
+          ) {
+            members[2].value = applicant.members[2];
+          } else {
+            members[2].value = "NA";
+          }
+          if (
+            applicant.members[3] != undefined &&
+            !applicant.members[3].includes("null")
+          ) {
+            members[3].value = applicant.members[3];
+          } else {
+            members[3].value = "NA";
+          }
+          //University
+          if (applicant.university != "") {
+            university.value = applicant.university;
+          } else {
+            university.value = "NA";
+          }
+          vitaeFile.setAttribute("href", "/view/" + applicant.vitaeFile);
+          //Technology Answer
+          technologyAns[applicant.technologyAns - 1].checked = true;
+          //Product Development Answer
+          productDevelopmentAns[
+            applicant.productDevelopmentAns - 1
+          ].checked = true;
+          //Competitive Landscape Answer
+          competitiveLandscapeAns[
+            applicant.competitiveLandscapeAns - 1
+          ].checked = true;
+          //Product Design Answer
+          productDesignAns[applicant.productDesignAns - 1].checked = true;
+          //Teams Answer
+          teamAns[applicant.teamAns - 1].checked = true;
+          //Go To market Answer
+          goToMarketAns[applicant.goToMarketAns - 1].checked = true;
+          //Manufacturing Answer
+          manufacturingAns[applicant.manufacturingAns - 1].checked = true;
+          //eligibilityAgreeFlg
+
+          if (applicant.eligibilityAgreeFlg) {
+            eligibilityAgreeFlg[0].checked = true;
+          } else {
+            eligibilityAgreeFlg[1].checked = true;
+          }
+          //CommmitFlg
+          if (applicant.commitmentOneFlg) {
+            commitmentOneFlg[0].checked = true;
+          } else {
+            commitmentOneFlg[1].checked = true;
+          }
+          if (applicant.commitmentTwoFlg) {
+            commitmentTwoFlg[0].checked = true;
+          } else {
+            commitmentTwoFlg[1].checked = true;
+          }
+          if (applicant.commitmentThreeFlg) {
+            commitmentThreeFlg[0].checked = true;
+          } else {
+            commitmentThreeFlg[1].checked = true;
+          }
+          if (applicant.commitmentFourFlg) {
+            commitmentFourFlg[0].checked = true;
+          } else {
+            commitmentFourFlg[1].checked = true;
+          }
+        }
+      });
+    </script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+      integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </body>
+</html>
