@@ -122,12 +122,14 @@
 
           <thead class="font-secondary text-sm bg-customyellow">
             <tr>
-              <th class="text-center rounded-top-left">Email</th>
+              <th class="text-center w-1/5 rounded-top-left">Email</th>
               <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
               <th class="text-center">Project Title</th>
 
               <th class="text-center w-1/5 hidden sm:table-cell">University</th>
-              <th class="text-center w-1/6 hidden sm:table-cell">Status</th>
+              <th class="text-center hidden sm:table-cell">Status</th>
+              <th class="text-center hidden sm:table-cell">accepted by</th>
+              <th class="text-center hidden sm:table-cell">evaluated by</th>
               <th class="text-center rounded-top-right"></th>
             </tr>
           </thead>
@@ -157,6 +159,10 @@
                 th:text="${app.status == 0 ? 'In Officer' : app.status == 2 ? 'Rejected' : app.status == 1 OR app.status == 3? 'In Manager' : app.status == 4 ? 'In Board' : app.status == 5 AND app.score >=6 ? 'Passed'  : 'Failed'}"
                 th:style="${app.status == 0 OR app.status == 1 OR app.status==3 OR app.status == 4  ? 'color:#000000; font-weight: bold;' : app.status == 2 OR ((app.status == 5 OR app.status == 6 OR app.status == 7) AND app.score <= 5) ? 'color:#FF0000; font-weight: bold;' : 'color:#008000; font-weight: bold;'}"
               ></td>
+              <!-- th:text="${app.university}" -->
+
+              <td class="whitespace-nowrap max-w-0 truncate"></td>
+              <td class="whitespace-nowrap max-w-0 truncate"></td>
               <td>
                 <button
                   class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
