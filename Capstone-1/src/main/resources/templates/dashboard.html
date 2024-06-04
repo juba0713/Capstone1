@@ -6,52 +6,152 @@
     <title>Document</title>
     <link rel="stylesheet" th:href="@{/css/output.css}" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      /* Dashboard */
+      .charts_orb {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-wrap: wrap;
+        font-family: arial;
+        color: black;
+      }
+
+      .orb {
+        padding: 20px;
+      }
+
+      .orb_graphic {
+        position: relative;
+      }
+
+      .orb_value {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5em;
+        font-weight: bold;
+      }
+
+      .orb_label {
+        text-transform: uppercase;
+        text-align: center;
+        margin-top: 1em;
+      }
+
+      svg {
+        width: 110px;
+        height: 110px;
+      }
+
+      svg circle {
+        transform: rotate(-90deg);
+        transform-origin: 50% 50%;
+        stroke-width: 2;
+        fill: transparent;
+        r: 50;
+        cx: 55;
+        cy: 55;
+      }
+
+      .fill {
+        /* stroke: #d3d3d3; */
+        stroke: red;
+      }
+
+      .progress {
+        stroke: #ff6b00;
+        stroke-dasharray: 314.16;
+        stroke-dashoffset: 214.16;
+        transition: stroke-dashoffset 0.35s;
+      }
+    </style>
   </head>
   <body>
-    <div class="flex flex-row flex-wrap justify-evenly">
-      <div class="h-[200px] border-2 shadow-lg w-[200px] text-center">
-        applicants
-        <p>[0]</p>
+    <div class="flex justify-between">
+      <!-- officer -->
+      <div class="w-full border-2 flex justify-center h-90">
+        <canvas
+          id="officer"
+          style="width: 50%; height: 50%"
+          class="border-2 w-40"
+        ></canvas>
       </div>
-      <div class="h-[200px] border-2 shadow-lg w-[200px] text-center">
-        <p class="font-bold">operations officer</p>
-        <div>
-          application pendings
-          <p>[0]</p>
-        </div>
-      </div>
-      <div class="h-[200px] border-2 shadow-lg w-[200px] text-center">
-        <p class="font-bold">tbi board</p>
-        <div>
-          application pendings
-          <p>[0]</p>
-        </div>
-      </div>
-      <div class="h-[200px] border-2 shadow-lg w-[200px] text-center">
-        <p class="font-bold">manager</p>
-        <div>
-          application pendings
-          <p>[0]</p>
-        </div>
+      <!-- tbiboard -->
+      <div class="w-full border-2 flex justify-center h-90">
+        <canvas
+          id="tbiBoard"
+          style="width: 50%; height: 50%"
+          class="border-2 w-40"
+        ></canvas>
       </div>
     </div>
-    <!-- //////////////////////////////////////////////
-    second part
-    -->
-    <div class="w-full border-2 flex justify-center h-90">
-      <canvas
-        id="myChart"
-        style="width: 50%; height: 50%"
-        class="border-2 w-40"
-      ></canvas>
+    <div class="charts_orb">
+      <div class="orb">
+        <div class="orb_graphic">
+          <svg>
+            <circle class="fill"></circle>
+            <!-- <circle class="progress"></circle> -->
+          </svg>
+          <div class="orb_value count">123</div>
+        </div>
+        <div class="orb_label text-sm">in officer</div>
+      </div>
+      <div class="orb">
+        <div class="orb_graphic">
+          <svg>
+            <circle class="fill"></circle>
+            <!-- <circle class="progress"></circle> -->
+          </svg>
+          <div class="orb_value count">123</div>
+        </div>
+        <div class="orb_label text-sm">in tbi board</div>
+      </div>
+      <div class="orb">
+        <div class="orb_graphic">
+          <svg>
+            <circle class="fill"></circle>
+            <!-- <circle class="progress"></circle> -->
+          </svg>
+          <div class="orb_value count">123</div>
+        </div>
+        <div class="orb_label text-sm">in manager</div>
+      </div>
+      <div class="orb">
+        <div class="orb_graphic">
+          <svg>
+            <circle class="fill"></circle>
+            <!-- <circle class="progress"></circle> -->
+          </svg>
+          <div class="orb_value count">123</div>
+        </div>
+        <div class="orb_label text-sm">activated <br />accounts</div>
+      </div>
+      <div class="orb">
+        <div class="orb_graphic">
+          <svg>
+            <circle class="fill"></circle>
+            <!-- <circle class="progress"></circle> -->
+          </svg>
+          <div class="orb_value count">123</div>
+        </div>
+        <div class="orb_label text-sm">reapplication</div>
+      </div>
     </div>
 
+    <!-- officer -->
     <script>
-      var xValues = ["test1", "test2", "test3"];
-      var yValues = [55, 49, 44];
-      var barColors = ["#b91d47", "#00aba9", "#2b5797"];
+      var xValues = ["passed", "failed"];
+      var yValues = [55, 49];
+      var barColors = ["#b91d47", "#00aba9"];
 
-      new Chart("myChart", {
+      new Chart("officer", {
         type: "doughnut",
         data: {
           labels: xValues,
@@ -65,7 +165,7 @@
         options: {
           title: {
             display: true,
-            text: "test",
+            text: "officer - passed and failed",
             position: "bottom",
           },
           borderWidth: 1,
@@ -75,6 +175,58 @@
             position: "bottom", // Position legend below the chart
           },
         },
+      });
+    </script>
+    <!-- tbiboard -->
+    <script>
+      var xValues2 = ["accepted", "rejected"];
+      var yValues2 = [55, 49];
+      var barColors2 = ["#b91d47", "#00aba9"];
+
+      new Chart("tbiBoard", {
+        type: "doughnut",
+        data: {
+          labels: xValues2,
+          datasets: [
+            {
+              backgroundColor: barColors2,
+              data: yValues2,
+            },
+          ],
+        },
+        options: {
+          title: {
+            display: true,
+            text: "tbi board - accepted and rejected",
+            position: "bottom",
+          },
+          borderWidth: 1,
+          backgroundColor: "red",
+          legend: {
+            display: true,
+            position: "bottom", // Position legend below the chart
+          },
+        },
+      });
+    </script>
+    <script>
+      $(document).ready(function () {
+        $(".count").each(function () {
+          $(this)
+            .prop("Counter", 0)
+            .animate(
+              {
+                Counter: $(this).text(),
+              },
+              {
+                duration: 1500,
+                easing: "linear",
+                step: function (now) {
+                  $(this).text(Math.ceil(now));
+                },
+              }
+            );
+        });
       });
     </script>
   </body>
