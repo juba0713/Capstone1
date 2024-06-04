@@ -8,13 +8,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+      .square_orb {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-wrap: wrap;
+        color: black;
+      }
+
+      .square_orb .orb_value {
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+      }
+
+      .square_orb .orb_label {
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      .square_orb svg {
+        border: 2px solid red;
+      }
+
       /* Dashboard */
       .charts_orb {
         display: flex;
         align-items: flex-start;
         justify-content: center;
         flex-wrap: wrap;
-        font-family: arial;
         color: black;
       }
 
@@ -144,7 +169,51 @@
         <div class="orb_label text-sm">reapplication</div>
       </div>
     </div>
+    <!-- squares -->
 
+    <div class="square_orb border-2 w-full">
+      <div class="orb">
+        <div class="orb_graphic">
+          <svg>
+            <rect class="fill"></rect>
+            <!-- <rect class="progress"></rect> -->
+          </svg>
+          <div class="orb_value count">123</div>
+        </div>
+        <div class="orb_label text-sm">officers</div>
+      </div>
+      <div class="orb">
+        <div class="orb_graphic">
+          <svg>
+            <rect class="fill"></rect>
+            <!-- <rect class="progress"></rect> -->
+          </svg>
+          <div class="orb_value count">123</div>
+        </div>
+        <div class="orb_label text-sm">tbi boards</div>
+      </div>
+      <div class="orb">
+        <div class="orb_graphic">
+          <svg>
+            <rect class="fill"></rect>
+            <!-- <rect class="progress"></rect> -->
+          </svg>
+          <div class="orb_value count">123</div>
+        </div>
+        <div class="orb_label text-sm">managers</div>
+      </div>
+      <!-- Add more square charts as needed -->
+    </div>
+    <div class="orb">
+      <div class="orb_graphic">
+        <svg>
+          <rect class="fill"></rect>
+          <!-- <rect class="progress"></rect> -->
+        </svg>
+        <div class="orb_value count">123</div>
+      </div>
+      <div class="orb_label text-sm">applicants</div>
+    </div>
     <!-- officer -->
     <script>
       var xValues = ["passed", "failed"];
