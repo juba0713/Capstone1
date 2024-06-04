@@ -118,7 +118,6 @@
               </div>
               <a th:href="@{/}" class="h-24">
                 <img
-                  src="/Capstone1/Capstone-1/src/main/resources/static/images/wilBlackBox.png"
                   th:src="@{/images/wilBlackBox.png}"
                   class="h-20 mr-4 mt-4 pointer-events-none"
                 />
@@ -142,7 +141,7 @@
                 th:value="*{email}"
                 placeholder="Enter your email here"
                 class="text-black h-8 border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-                 th:readonly="*{token != null}"  
+                th:readonly="*{token != null}"
               />
               <input type="hidden" name="reApplyToken" th:value="*{token}" />
             </div>

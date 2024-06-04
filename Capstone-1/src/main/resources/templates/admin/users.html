@@ -157,7 +157,7 @@
                   class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                   type="button"
                 >
-                  <img class="h-6" th:src="@{/icons/delete.svg}" />
+                  <img class="h-6" th:src="@{/icons/trash.svg}" />
                 </button>
                 <button
                   class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
@@ -180,7 +180,31 @@
         ></div>
       </div>
     </div>
-
+    <!-- modal test -->
+    <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
+      <div class="modal-dialog feedback-modal-dialog" role="document">
+        <div class="modal-content feedback-modal-content">
+          <div class="p-2">
+            <div class="rejected">
+              <div class="resubmitFlg"></div>
+              <div class="rejected-feedback"></div>
+            </div>
+            <div class="evaluated">
+              <div
+                class="rounded-sm w-full text-center font-bold p-2 bg-customyellow"
+              >
+                Feedback
+              </div>
+              <div class="text-left">
+                <p class="score mb-2"></p>
+                <p class="evaluated-feedback"></p>
+                <!-- <hr class="my-4" /> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
