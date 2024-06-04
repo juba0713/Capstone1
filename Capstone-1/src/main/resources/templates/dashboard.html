@@ -38,7 +38,13 @@
     <!-- //////////////////////////////////////////////
     second part
     -->
-    <canvas id="myChart" style="width: 100%; max-width: 600px"></canvas>
+    <div class="w-full border-2 flex justify-center h-90">
+      <canvas
+        id="myChart"
+        style="width: 50%; height: 50%"
+        class="border-2 w-40"
+      ></canvas>
+    </div>
 
     <script>
       var xValues = ["test1", "test2", "test3"];
@@ -60,6 +66,13 @@
           title: {
             display: true,
             text: "test",
+            position: "bottom",
+          },
+          borderWidth: 1,
+          backgroundColor: "red",
+          legend: {
+            display: true,
+            position: "bottom", // Position legend below the chart
           },
         },
       });
