@@ -17,21 +17,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/output.css}" />
     <style>
-      .dt-end > button {
-        /* Your styles here */
-        margin-left: 0;
-        position: absolute;
-        left: 0%;
-        top: 2px;
-        font-family: Poppins;
-      }
-      .dt-end > button:hover {
-        text-decoration: underline;
-        color: white !important;
-      }
-      .dt-input {
-        margin-right: 10px;
-      }
       .dt-search {
         font-family: Poppins;
         width: 60%;
@@ -126,52 +111,48 @@
 
           <thead class="font-secondary text-sm bg-customyellow">
             <tr>
-              <th class="text-center rounded-top-left">id</th>
+              <th class="text-center w-1/5 rounded-top-left">Email</th>
               <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
-              <th class="text-center w-1/5">email</th>
-              <th class="text-center w-1/5">number</th>
+              <th class="text-center">Project Title</th>
 
-              <th class="text-center hidden sm:table-cell">role</th>
-              <th class="text-center hidden sm:table-cell">time-created</th>
-              <th class="text-center hidden sm:table-cell">time-modified</th>
+              <th class="text-center w-1/5 hidden sm:table-cell">University</th>
+              <th class="text-center hidden sm:table-cell">Status</th>
+              <th class="text-center hidden sm:table-cell">accepted by</th>
+              <th class="text-center hidden sm:table-cell">evaluated by</th>
               <th class="text-center rounded-top-right"></th>
             </tr>
           </thead>
           <tbody class="divide-y divide-grey-500 bodyrowhover">
-            <!-- th:each="app : *{listOfApplicants}"
-            th:data-id="${app.applicantIdPk}" -->
+            <tr
+              th:each="app : *{listOfApplicants}"
+              class="row-btn"
+              th:data-id="${app.applicantIdPk}"
+            >
+              <td
+                th:text="${app.email}"
+                class="whitespace-nowrap max-w-0 truncate"
+              ></td>
 
-            <tr class="row-btn">
-              <!-- th:text="${app.email}" -->
-              <td class="whitespace-nowrap max-w-0 truncate"></td>
-              <!-- th:text="${app.projectTitle}" -->
-              <td class="whitespace-nowrap max-w-0 truncate"></td>
+              <td
+                th:text="${app.projectTitle}"
+                class="whitespace-nowrap max-w-0 truncate"
+              ></td>
+              <td
+                th:text="${app.university}"
+                class="whitespace-nowrap max-w-0 truncate"
+              ></td>
+              <!-- th:text="${app.status == 0 ? 'In Officer' : app.status == 2 OR app.status != 0 ? 'Passed' : 'Failed'}"-->
+              <!--th:style="${app.status == 0 OR app.status == 1 OR app.status == 5 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"-->
+              <td
+                class="whitespace-nowrap max-w-0 truncate"
+                th:text="${app.status == 0 ? 'In Officer' : app.status == 2 ? 'Rejected' : app.status == 1 OR app.status == 3? 'In Manager' : app.status == 4 ? 'In Board' : app.status == 5 AND app.score >=6 ? 'Passed'  : 'Failed'}"
+                th:style="${app.status == 0 OR app.status == 1 OR app.status==3 OR app.status == 4  ? 'color:#000000; font-weight: bold;' : app.status == 2 OR ((app.status == 5 OR app.status == 6 OR app.status == 7) AND app.score <= 5) ? 'color:#FF0000; font-weight: bold;' : 'color:#008000; font-weight: bold;'}"
+              ></td>
               <!-- th:text="${app.university}" -->
-              <td class="whitespace-nowrap max-w-0 truncate"></td>
-              <!-- th:text="${app.status == 0 ? 'In Officer' : app.status == 2 ? 'Rejected' : app.status == 1 OR app.status == 3? 'In Manager' : app.status == 4 ? 'In Board' : app.status == 5 AND app.score >=6 ? 'Passed'  : 'Failed'}"
-              th:style="${app.status == 0 OR app.status == 1 OR app.status==3 OR app.status == 4  ? 'color:#000000; font-weight: bold;' : app.status == 2 OR ((app.status == 5 OR app.status == 6 OR app.status == 7) AND app.score <= 5) ? 'color:#FF0000; font-weight: bold;' : 'color:#008000; font-weight: bold;'}"
-           -->
+
               <td class="whitespace-nowrap max-w-0 truncate"></td>
               <td class="whitespace-nowrap max-w-0 truncate"></td>
-              <td class="whitespace-nowrap max-w-0 truncate"></td>
-              <td class="w-[10%]">
-                <!-- th:data-id="${app.applicantIdPk}"
-                  name="feedback"
-                  th:if="${app.status == 2 OR app.status == 5}"
-                -->
-                <button
-                  class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-                  type="button"
-                >
-                  <img class="h-6" th:src="@{/icons/trash.svg}" />
-                </button>
-                <button
-                  class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-                  type="button"
-                >
-                  <img class="h-6" th:src="@{/icons/edit.svg}" />
-                </button>
-              </td>
+              <td></td>
             </tr>
           </tbody>
         </table>
@@ -186,31 +167,7 @@
         ></div>
       </div>
     </div>
-    <!-- modal test -->
-    <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
-      <div class="modal-dialog feedback-modal-dialog" role="document">
-        <div class="modal-content feedback-modal-content">
-          <div class="p-2">
-            <div class="rejected">
-              <div class="resubmitFlg"></div>
-              <div class="rejected-feedback"></div>
-            </div>
-            <div class="evaluated">
-              <div
-                class="rounded-sm w-full text-center font-bold p-2 bg-customyellow"
-              >
-                Feedback
-              </div>
-              <div class="text-left">
-                <p class="score mb-2"></p>
-                <p class="evaluated-feedback"></p>
-                <!-- <hr class="my-4" /> -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -235,7 +192,7 @@
           columnDefs: [
             {
               // targets: "no-sort",
-              targets: -1,
+              targets: [-1, -2],
               orderable: false,
             },
           ],
@@ -243,11 +200,6 @@
           // ordering: false,
           info: true,
           lengthChange: false,
-          initComplete: function () {
-            $(".dt-end:first").prepend(
-              '<button type="submit" style="background-color: #FDCC01; color: black; padding: 10px; border-radius: 10px;">Create user</button>'
-            );
-          },
         });
 
         let rows = document.getElementsByClassName("row-btn");
