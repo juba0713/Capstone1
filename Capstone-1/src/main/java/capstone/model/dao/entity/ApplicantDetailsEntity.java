@@ -54,7 +54,7 @@ public class ApplicantDetailsEntity {
 				(Integer) objects[38],
 				(Integer) objects[39],
 				(String) objects[40],
-				(String) objects[41]
+				(String) objects[41]				
 		);	
 	}
 	

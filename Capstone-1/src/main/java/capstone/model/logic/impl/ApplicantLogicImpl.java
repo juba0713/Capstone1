@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import capstone.model.dao.AcceptedApplicantDao;
 import capstone.model.dao.ApplicantDao;
 import capstone.model.dao.EvaluatedApplicantDao;
 import capstone.model.dao.GroupDao;
 import capstone.model.dao.GroupMemberDao;
 import capstone.model.dao.ProjectDao;
 import capstone.model.dao.RejectedApplicantDao;
+import capstone.model.dao.entity.AcceptedApplicantEntity;
 import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.EvaluatedApplicantEntity;
@@ -41,6 +43,9 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	
 	@Autowired
 	private EvaluatedApplicantDao evaluatedApplicantDao;
+	
+	@Autowired
+	private AcceptedApplicantDao acceptedApplicantDao;
 
 	@Override
 	public int saveApplicantEntity(ApplicantEntity entity) {
@@ -241,6 +246,12 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	public void updateApplicantCeritificate(String certificateName, int applicantIdPk) {
 		
 		applicantDao.updateApplicantCertificate(certificateName, applicantIdPk);
+	}
+
+	@Override
+	public void saveAcceptedApplicantEntity(AcceptedApplicantEntity entity) {
+		
+		acceptedApplicantDao.save(entity);
 	}
 	
 }

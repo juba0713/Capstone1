@@ -6,9 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import capstone.model.dao.entity.JoinApplicantProject;
 import capstone.model.dao.entity.UserInformationEntity;
 import capstone.model.dto.AdminInOutDto;
+import capstone.model.logic.ApplicantLogic;
 import capstone.model.logic.UserLogic;
+import capstone.model.object.ApplicantObj;
 import capstone.model.object.UserDetailsObj;
 import capstone.model.service.AdminService;
 
@@ -17,6 +20,9 @@ public class AdminServiceImpl  implements AdminService{
 	
 	@Autowired
 	private UserLogic userLogic;
+	
+	@Autowired
+	private ApplicantLogic applicantLogic;
 
 	@Override
 	public AdminInOutDto getAllUsers() {
@@ -48,6 +54,48 @@ public class AdminServiceImpl  implements AdminService{
 		}
 		
 		outDto.setAllUsers(usersObj);
+		
+		return outDto;
+	}
+
+	@Override
+	public AdminInOutDto getAllApplicants() {
+		
+		AdminInOutDto outDto = new AdminInOutDto();
+		
+		List<Integer> status = List.of(0,1,2,3,4,5,6,7);
+		
+		List<JoinApplicantProject> listOfApplicant = applicantLogic.getAllApplicantByStatus(status);
+		
+		List<ApplicantObj> applicantsObj = new ArrayList<>();
+		
+		for(JoinApplicantProject app : listOfApplicant) {
+	
+			ApplicantObj obj = new ApplicantObj();
+			
+			obj.setApplicantIdPk(app.getApplicantIdPk());
+			
+			obj.setEmail(app.getEmail());
+			
+			obj.setProjectTitle(app.getProjectTitle());
+					
+			obj.setStatus(app.getStatus());
+			
+			obj.setUniversity(app.getUniversity());
+			
+			obj.setScore(app.getScore());
+			
+			obj.setFeedback(app.getFeedback());
+			
+			obj.setAcceptedBy(app.getAcceptedBy());
+			
+			obj.setEvaluatedBy(app.getEvaluatedBy());
+			
+			applicantsObj.add(obj);
+			
+		}
+		
+		outDto.setAllApplicants(applicantsObj);
 		
 		return outDto;
 	}

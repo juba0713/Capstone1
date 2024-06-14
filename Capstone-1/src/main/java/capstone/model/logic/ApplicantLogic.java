@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import capstone.model.dao.entity.AcceptedApplicantEntity;
 import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.EvaluatedApplicantEntity;
@@ -248,4 +249,10 @@ public interface ApplicantLogic {
 	 * @param applicantIdPk
 	 */
 	public void updateApplicantCeritificate(String certificateName, int applicantIdPk);
+	
+	/**
+	 * To save the accepted applicant
+	 * @param entity
+	 */
+	public void saveAcceptedApplicantEntity(AcceptedApplicantEntity entity);
 }

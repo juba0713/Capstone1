@@ -2,6 +2,7 @@ package capstone.model.dto;
 
 import java.util.List;
 
+import capstone.model.object.ApplicantObj;
 import capstone.model.object.UserDetailsObj;
 import lombok.Data;
 
@@ -9,4 +10,6 @@ import lombok.Data;
 public class AdminInOutDto {
 
 	private List<UserDetailsObj> allUsers;
+	
+	public List<ApplicantObj> allApplicants;
 }

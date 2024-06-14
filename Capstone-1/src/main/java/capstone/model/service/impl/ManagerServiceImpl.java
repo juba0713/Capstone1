@@ -83,6 +83,10 @@ public class ManagerServiceImpl implements ManagerService {
 			
 			obj.setFeedback(app.getFeedback());
 			
+			obj.setAcceptedBy(app.getAcceptedBy());
+			
+			obj.setEvaluatedBy(app.getEvaluatedBy());
+			
 			listOfAppObj.add(obj);
 			
 		}

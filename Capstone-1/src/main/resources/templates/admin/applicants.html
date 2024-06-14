@@ -106,7 +106,7 @@
       <div
         class="ml-[270px] mr-6 rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
       >
-        <table id="applicants-table" class="w-screen h-4/5">
+        <table id="applicants-table" class="w-screen h-4/5" th:object="${adminWebDto}">
           <!-- class="border-collapse table-auto border-4 border-violet-600 h-full border-spacing-0 w-fit" -->
 
           <thead class="font-secondary text-sm bg-customyellow">
@@ -117,6 +117,7 @@
 
               <th class="text-center w-1/5 hidden sm:table-cell">University</th>
               <th class="text-center hidden sm:table-cell">Status</th>
+              <th class="text-center hidden sm:table-cell">rejected by</th>
               <th class="text-center hidden sm:table-cell">accepted by</th>
               <th class="text-center hidden sm:table-cell">evaluated by</th>
               <th class="text-center rounded-top-right"></th>
@@ -124,7 +125,7 @@
           </thead>
           <tbody class="divide-y divide-grey-500 bodyrowhover">
             <tr
-              th:each="app : *{listOfApplicants}"
+              th:each="app : *{allApplicants}"
               class="row-btn"
               th:data-id="${app.applicantIdPk}"
             >
@@ -150,8 +151,9 @@
               ></td>
               <!-- th:text="${app.university}" -->
 
-              <td class="whitespace-nowrap max-w-0 truncate"></td>
-              <td class="whitespace-nowrap max-w-0 truncate"></td>
+			  <td class="whitespace-nowrap max-w-0 truncate" th:text="${app.status} == 2 ? ${app.acceptedBy} : ''"></td>
+              <td class="whitespace-nowrap max-w-0 truncate" th:text="${app.status} != 2 ? ${app.acceptedBy} : ''"></td>
+              <td class="whitespace-nowrap max-w-0 truncate" th:text="${app.evaluatedBy}"></td>
               <td></td>
             </tr>
           </tbody>
@@ -185,7 +187,7 @@
     ></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
     <script th:inline="javascript">
-      const webDto = /*[[${managerWebDto}]]*/ "";
+      const webDto = /*[[${adminWebDto}]]*/ "";
       console.log(webDto);
       $(document).ready(function () {
         $("#applicants-table").dataTable({

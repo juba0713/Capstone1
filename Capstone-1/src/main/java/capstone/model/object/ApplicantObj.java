@@ -22,4 +22,8 @@ public class ApplicantObj {
 	public int score;
 	
 	public String feedback;
+	
+	public String acceptedBy;
+	
+	public String evaluatedBy;
 }

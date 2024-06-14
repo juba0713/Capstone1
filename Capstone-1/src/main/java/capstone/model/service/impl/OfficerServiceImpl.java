@@ -8,11 +8,13 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import capstone.model.dao.entity.AcceptedApplicantEntity;
 import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
 import capstone.model.dao.entity.RejectedApplicantEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
+import capstone.model.dao.entity.UserInformationEntity;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.logic.ApplicantLogic;
 import capstone.model.logic.UserLogic;
@@ -20,6 +22,7 @@ import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantObj;
 import capstone.model.service.CommonService;
 import capstone.model.service.EmailService;
+import capstone.model.service.LoggedInUserService;
 import capstone.model.service.OfficerService;
 import jakarta.mail.MessagingException;
 
@@ -37,6 +40,9 @@ public class OfficerServiceImpl implements OfficerService{
 	
 	@Autowired
 	private UserLogic userLogic;
+	
+	@Autowired
+	private LoggedInUserService loggedInUserService;
 
 	@Override
 	public OfficerInOutDto getAllApplicants() {
@@ -73,6 +79,8 @@ public class OfficerServiceImpl implements OfficerService{
 
 	@Override
 	public OfficerInOutDto rejectApplicant(OfficerInOutDto inDto) throws MessagingException {
+		
+		UserInformationEntity loggedInUser = loggedInUserService.getUserInformation();
 		       
         String token = "R"+UUID.randomUUID().toString().replace("-", "");
 
@@ -92,11 +100,13 @@ public class OfficerServiceImpl implements OfficerService{
 		
 		rejectedApplicantEntity.setResubmitFlg(inDto.getResubmitFlg());
 		
-		rejectedApplicantEntity.setCreateDate(timeNow);
+		rejectedApplicantEntity.setCreatedDate(timeNow);
 		
 		rejectedApplicantEntity.setDeleteFlg(false);
 		
 		rejectedApplicantEntity.setToken(token);
+		
+		rejectedApplicantEntity.setCreatedBy(loggedInUser.getIdPk());
 		
 		applicantLogic.saveRejectedApplicantEntity(rejectedApplicantEntity);
 		
@@ -111,11 +121,27 @@ public class OfficerServiceImpl implements OfficerService{
 	@Override
 	public OfficerInOutDto acceptApplicant(OfficerInOutDto inDto) {
 		
+		UserInformationEntity loggedInUser = loggedInUserService.getUserInformation();
+		
+		Timestamp timeNow = new Timestamp(System.currentTimeMillis());
+		
 		OfficerInOutDto outDto = new OfficerInOutDto();
 		
 		ApplicantEntity applicantEntity = applicantLogic.getApplicantByIdPk(inDto.getApplicantIdPk());
 		
 		UserInfoAccountEntity account = userLogic.getUserAccountByUserIdPk(applicantEntity.getCreatedBy());
+		
+		AcceptedApplicantEntity acceptedEntity = new AcceptedApplicantEntity();
+		
+		acceptedEntity.setApplicantIdPk(inDto.getApplicantIdPk());
+		
+		acceptedEntity.setCreatedDate(timeNow);
+		
+		acceptedEntity.setCreatedBy(loggedInUser.getIdPk());
+		
+		acceptedEntity.setDeleteFlg(false);
+		
+		applicantLogic.saveAcceptedApplicantEntity(acceptedEntity);
 		
 		if(account.getPassword() == null) {
 			applicantLogic.updateApplicantStatus(1, List.of(inDto.getApplicantIdPk()));
