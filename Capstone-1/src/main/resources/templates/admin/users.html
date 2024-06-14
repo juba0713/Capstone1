@@ -59,6 +59,22 @@
       .feedback-modal-content {
         height: 30%;
       }
+      .edit-modal-dialog {
+        max-width: 30%;
+      }
+      .edit-modal-content {
+        height: 40%;
+      }
+      .delete-modal-dialog {
+        max-width: 30%;
+        max-height: 50px;
+      }
+      .delete-modal-content {
+        height: 40%;
+      }
+      .custom-scrollbar {
+        scrollbar-width: thin;
+      }
     </style>
   </head>
   <body>
@@ -119,53 +135,80 @@
       </div>
 
       <div
-        class="ml-[270px] mr-6 rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
+        class="relative max-h-[85%] border-2 ml-[270px] mr-6 rounded-lg mt-8 bg-white sm:overflow-auto overflow-hidden p-10 custom-scrollbar"
       >
-        <table id="applicants-table" class="w-screen h-4/5"  th:object="${adminWebDto}">
+        <table
+          id="applicants-table"
+          class="w-screen h-4/5"
+          th:object="${adminWebDto}"
+        >
           <!-- class="border-collapse table-auto border-4 border-violet-600 h-full border-spacing-0 w-fit" -->
 
           <thead class="font-secondary text-sm bg-customyellow">
             <tr>
-              <th class="text-center rounded-top-left">id</th>
+              <th class="text-center rounded-top-left indent-6">id</th>
               <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
               <th class="text-center w-1/5">email</th>
-              <th class="text-center w-1/5">number</th>
+              <th class="text-center w-1/5 indent-4">number</th>
 
-              <th class="text-center hidden sm:table-cell">role</th>
-              <th class="text-center hidden sm:table-cell">time-created</th>
-              <th class="text-center hidden sm:table-cell">time-modified</th>
+              <th class="text-center hidden sm:table-cell indent-4">role</th>
+              <th class="text-center hidden sm:table-cell indent-5">
+                time-created
+              </th>
+              <th class="text-center hidden sm:table-cell indent-5">
+                time-modified
+              </th>
               <th class="text-center rounded-top-right"></th>
             </tr>
           </thead>
           <tbody class="divide-y divide-grey-500 bodyrowhover">
             <!-- th:each="app : *{listOfApplicants}"
             th:data-id="${app.applicantIdPk}" -->
-
             <tr class="row-btn" th:each="user : *{allUsers}">
               <!-- th:text="${app.email}" -->
-              <td class="whitespace-nowrap max-w-0 truncate" th:text="${user.id}"></td>
+              <td
+                class="whitespace-nowrap max-w-0 truncate text-center"
+                th:text="${user.id}"
+              ></td>
               <!-- th:text="${app.projectTitle}" -->
-              <td class="whitespace-nowrap max-w-0 truncate" th:text="${user.email}"></td>
+              <td
+                class="whitespace-nowrap max-w-0 truncate text-center"
+                th:text="${user.email}"
+              ></td>
               <!-- th:text="${app.university}" -->
-              <td class="whitespace-nowrap max-w-0 truncate" th:text="${user.number}"></td>
+              <td
+                class="whitespace-nowrap max-w-0 truncate text-center"
+                th:text="${user.number}"
+              ></td>
               <!-- th:text="${app.status == 0 ? 'In Officer' : app.status == 2 ? 'Rejected' : app.status == 1 OR app.status == 3? 'In Manager' : app.status == 4 ? 'In Board' : app.status == 5 AND app.score >=6 ? 'Passed'  : 'Failed'}"
               th:style="${app.status == 0 OR app.status == 1 OR app.status==3 OR app.status == 4  ? 'color:#000000; font-weight: bold;' : app.status == 2 OR ((app.status == 5 OR app.status == 6 OR app.status == 7) AND app.score <= 5) ? 'color:#FF0000; font-weight: bold;' : 'color:#008000; font-weight: bold;'}"
            -->
-              <td class="whitespace-nowrap max-w-0 truncate" th:text="${user.role}"></td>
-              <td class="whitespace-nowrap max-w-0 truncate" th:text="${#dates.format(user.createdDate, 'MM-dd-yyyy')}"></td>
-              <td class="whitespace-nowrap max-w-0 truncate" th:text="${#dates.format(user.updatedDate, 'MM-dd-yyyy')}"></td>
+              <td
+                class="whitespace-nowrap max-w-0 truncate text-center"
+                th:text="${user.role}"
+              ></td>
+              <td
+                class="whitespace-nowrap max-w-0 truncate text-center"
+                th:text="${#dates.format(user.createdDate, 'MM-dd-yyyy')}"
+              ></td>
+              <td
+                class="whitespace-nowrap max-w-0 truncate"
+                th:text="${#dates.format(user.updatedDate, 'MM-dd-yyyy')}"
+              ></td>
               <td class="w-[10%]">
                 <!-- th:data-id="${app.applicantIdPk}"
                   name="feedback"
                   th:if="${app.status == 2 OR app.status == 5}"
                 -->
                 <button
+                  name="delete"
                   class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                   type="button"
                 >
                   <img class="h-6" th:src="@{/icons/trash.svg}" />
                 </button>
                 <button
+                  name="edit"
                   class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                   type="button"
                 >
@@ -186,27 +229,88 @@
         ></div>
       </div>
     </div>
-    <!-- modal test -->
-    <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
-      <div class="modal-dialog feedback-modal-dialog" role="document">
-        <div class="modal-content feedback-modal-content">
-          <div class="p-2">
-            <div class="rejected">
-              <div class="resubmitFlg"></div>
-              <div class="rejected-feedback"></div>
+    <!-- delete modal -->
+    <div
+      class="modal font-secondary"
+      tabindex="-1"
+      role="dialog"
+      id="delete-modal"
+    >
+      <div class="modal-dialog delete-modal-dialog" role="document">
+        <div class="modal-content delete-modal-content">
+          <div class="mb-24">
+            <div
+              class="rounded-t-md flex items-center flex-col justify-items-center mx-auto absolute z-10 w-full py-2 border-b-2"
+            >
+              <img th:src="@{/images/warning.png}" />
+
+              <h5 class="modal-title font-bold text-red-700">delete</h5>
             </div>
-            <div class="evaluated">
-              <div
-                class="rounded-sm w-full text-center font-bold p-2 bg-customyellow"
-              >
-                Feedback
+          </div>
+          <div class="modal-body" id="modal-body">
+            <form method="POST">
+              <div>test</div>
+              <div class="justify-between flex mx-16">
+                <button
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  type="button"
+                  class="close h-8 border-black hover:bg-[#F9F9F9] rounded-lg w-32 hover:text-black text-black border font-secondary sm:text-sm text-xs sm:p-1"
+                >
+                  Cancel
+                </button>
+                <button
+                  name="delete"
+                  class="w-3/6 px-3 h-8 border-black hover:bg-red-500 bg-red-600 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                >
+                  delete
+                </button>
+                <!-- once rejected, send info to applicant email the feedback -->
               </div>
-              <div class="text-left">
-                <p class="score mb-2"></p>
-                <p class="evaluated-feedback"></p>
-                <!-- <hr class="my-4" /> -->
-              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- edit modal -->
+    <div
+      class="modal font-secondary"
+      tabindex="-1"
+      role="dialog"
+      id="edit-modal"
+    >
+      <div class="modal-dialog edit-modal-dialog" role="document">
+        <div class="modal-content edit-modal-content">
+          <div class="mb-24">
+            <div
+              class="rounded-t-md flex items-center flex-col justify-items-center mx-auto absolute z-10 w-full py-2 border-b-2"
+            >
+              <img th:src="@{/images/warning.png}" />
+
+              <h5 class="modal-title font-bold text-customyellow">edit</h5>
             </div>
+          </div>
+          <div class="modal-body" id="modal-body">
+            <form method="POST">
+              <div>test</div>
+              <div class="justify-between flex mx-16">
+                <button
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  type="button"
+                  class="close h-8 border-black hover:bg-[#F9F9F9] rounded-lg w-32 hover:text-black text-black border font-secondary sm:text-sm text-xs sm:p-1"
+                >
+                  Cancel
+                </button>
+                <button
+                  name="edit"
+                  class="w-3/6 px-3 h-8 border-black hover:bg-customyellow hover:bg-opacity-75 bg-customyellow rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                >
+                  save edit
+                </button>
+                <!-- once rejected, send info to applicant email the feedback -->
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -245,7 +349,7 @@
           lengthChange: false,
           initComplete: function () {
             $(".dt-end:first").prepend(
-              '<button type="submit" style="background-color: #FDCC01; color: black; padding: 10px; border-radius: 10px;">Create user</button>'
+              '<button type="submit" style="background-color: #FDCC01; color: black; padding: 10px; border-radius: 10px;" onclick="window.location.href=\'/admin/create-user\';">Create user</button>'
             );
           },
         });
@@ -260,8 +364,6 @@
             let id = this.getAttribute("data-id");
 
             if (!rowBtnClicked) {
-
-             
             }
           });
         }
@@ -270,15 +372,21 @@
           btn.addEventListener("click", function () {
             rowBtnClicked = true;
             let idPk = this.getAttribute("data-id");
-           
-       
-
-              $("#feedback-modal").modal("show");
-            
+            console.log(this.name);
+            if (this.name === "delete") {
+              $("#delete-modal").modal("show");
+              document.setAttribute("value", idPk);
+            } else if (this.name === "edit") {
+              $("#edit-modal").modal("show");
+              document
+                .getElementById("edit-applicant-id-pk")
+                .setAttribute("value", idPk);
+            }
+            setTimeout(() => {
+              rowBtnClicked = false;
+            }, 100);
           });
         }
-
-        
       });
     </script>
     <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>

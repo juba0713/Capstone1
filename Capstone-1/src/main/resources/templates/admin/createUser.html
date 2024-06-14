@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Box Example</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}" />
+
+    <style>
+      .select-dropdown,
+      .select-dropdown * {
+        margin: 0;
+        padding: 0;
+        position: relative;
+        box-sizing: border-box;
+      }
+      .select-dropdown {
+        position: relative;
+        background-color: #e6e6e6;
+        border-radius: 4px;
+        width: 200px; /* Adjust width as needed */
+      }
+      .select-dropdown select {
+        font-size: 1rem;
+        font-weight: normal;
+        max-width: 100%;
+        padding: 8px 24px 8px 10px;
+        border: none;
+        background-color: transparent;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 100%; /* Adjust width to fill the container */
+        height: 40px; /* Adjust height as needed */
+      }
+      .select-dropdown select:active,
+      .select-dropdown select:focus {
+        outline: none;
+        box-shadow: none;
+      }
+      .select-dropdown:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 8px;
+        width: 0;
+        height: 0;
+        margin-top: -2px;
+        border-top: 5px solid #aaa;
+        border-right: 5px solid transparent;
+        border-left: 5px solid transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="border-2">
+      <a th:href="@{/admin/users}">
+        <div>back</div>
+      </a>
+      <div>Create User</div>
+      <div>
+        <div>email</div>
+        <input type="text" name="email" placeholder="email " class="border-2" />
+      </div>
+      <div>
+        <div>mobile number</div>
+        <input
+          type="text"
+          name="mobilenumber"
+          placeholder="mobile number "
+          class="border-2"
+        />
+      </div>
+      <div>
+        <div>first name</div>
+        <input
+          type="text"
+          name="firstname"
+          placeholder="first name"
+          class="border-2"
+        />
+      </div>
+      <div>
+        <div>last name</div>
+        <input
+          type="text"
+          name="lastname"
+          placeholder="last name"
+          class="border-2"
+        />
+      </div>
+
+      <div class="select-dropdown">
+        <select>
+          <option value="Option 1 " disabled selected>select role</option>
+          <option value="Option 2">Officer</option>
+          <option value="Option 3">tbiboard</option>
+          <option value="Option 3">manager</option>
+        </select>
+      </div>
+      <button class="border-2">cancel</button>
+      <button class="border2 bg-customyellow">save</button>
+    </div>
+  </body>
+</html>
