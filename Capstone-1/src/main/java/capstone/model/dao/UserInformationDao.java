@@ -1,5 +1,7 @@
 package capstone.model.dao;
 
+import java.util.List;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -38,6 +40,10 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 			+ "WHERE a.idPk = :applicantIdPk "
 			+ "AND a.deleteFlg = false";
 	
+	public final String GET_ALL_USERS = "SELECT e"
+			+ " FROM UserInformationEntity e"
+			+ " WHERE e.deleteFlg = false";
+	
 	@Query(value=GET_USER_BY_APPLICANT_ID_PK)
 	public UserInformationEntity getUserByApplicantIdPk(int applicantIdPk) throws DataAccessException;
 	
@@ -52,4 +58,7 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 	
 	@Query(value=GET_USER_BY_ID_PK)
 	public UserInformationEntity getUserByIdPk(int idPk) throws DataAccessException;
+	
+	@Query(value=GET_ALL_USERS)
+	public List<UserInformationEntity> getAllUsers() throws DataAccessException;
 }

@@ -71,7 +71,6 @@ public class SecurityConfig {
 						.requestMatchers("/images/**").permitAll()
 						.requestMatchers("/fonts/**").permitAll()
 						.requestMatchers("/design/**").permitAll()
-						.requestMatchers("/admin/**").permitAll()
 						.requestMatchers("/dashboard/**").permitAll()
 						.requestMatchers("/applicant/form/resubmit").permitAll()
 						.requestMatchers("/applicant/form").permitAll()
@@ -79,7 +78,8 @@ public class SecurityConfig {
 						.requestMatchers("/applicant/**").hasAnyAuthority("APPLICANT")
 						.requestMatchers("/officer/**").hasAnyAuthority("OFFICER")
 						.requestMatchers("/manager/**").hasAnyAuthority("MANAGER")
-						.requestMatchers("/tbi-board/**").hasAnyAuthority("TBIBOARD"))
+						.requestMatchers("/tbi-board/**").hasAnyAuthority("TBIBOARD")
+						.requestMatchers("/admin/**").hasAnyAuthority("ADMIN"))
 				.formLogin((form) -> form
 						.loginPage("/login")
 						.permitAll()

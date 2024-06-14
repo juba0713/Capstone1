@@ -1,5 +1,7 @@
 package capstone.model.logic.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +68,12 @@ public class UserLogicImpl implements UserLogic {
 	public UserInformationEntity getUserByApplicantIdPk(int applicantIdPk) {
 
 		return userInformationDao.getUserByApplicantIdPk(applicantIdPk);
+	}
+
+	@Override
+	public List<UserInformationEntity> getAllUsers() {
+		
+		return userInformationDao.getAllUsers();
 	}
 
 }

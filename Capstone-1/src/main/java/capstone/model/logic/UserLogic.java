@@ -1,5 +1,7 @@
 package capstone.model.logic;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import capstone.model.dao.entity.UserInfoAccountEntity;
@@ -69,4 +71,10 @@ public interface UserLogic {
 	 * @return UserInformationEntity
 	 */
 	public UserInformationEntity getUserByApplicantIdPk(int applicantIdPk);
+	
+	/**
+	 * To get all users
+	 * @return List<UserInformationEntity>
+	 */
+	public List<UserInformationEntity> getAllUsers();
 }
