@@ -7,6 +7,8 @@ import capstone.model.dto.AdminInOutDto;
 @Service
 public interface AdminService {
 	
+	public AdminInOutDto getAdminDashboardDetails();
+	
 	public AdminInOutDto getAllUsers();
 	
 	public AdminInOutDto getAllApplicants();

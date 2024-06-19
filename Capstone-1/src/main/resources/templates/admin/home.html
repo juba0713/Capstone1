@@ -128,7 +128,7 @@
       }
     </style>
   </head>
-  <body>
+  <body th:object="${adminWebDto}">
     <div
       class="h-full flex flex-col w-[250px] absolute bg-black z-10 justify-between text-customyellow"
     >
@@ -212,7 +212,7 @@
                 <circle class="fill"></circle>
                 <!-- <circle class="progress"></circle> -->
               </svg>
-              <div class="orb_value count">123</div>
+              <div class="orb_value count" th:text="*{adminDashboardObj.inOfficerCount}"></div>
             </div>
             <div class="orb_label text-sm">in officer</div>
           </div>
@@ -222,9 +222,9 @@
                 <circle class="fill"></circle>
                 <!-- <circle class="progress"></circle> -->
               </svg>
-              <div class="orb_value count">123</div>
+              <div class="orb_value count" th:text="*{adminDashboardObj.inTbiBoardCount}"></div>
             </div>
-            <div class="orb_label text-sm">in tbi board</div>
+            <div class="orb_label text-sm" >in tbi board</div>
           </div>
           <div class="orb">
             <div class="orb_graphic">
@@ -232,19 +232,9 @@
                 <circle class="fill"></circle>
                 <!-- <circle class="progress"></circle> -->
               </svg>
-              <div class="orb_value count">123</div>
+              <div class="orb_value count" th:text="*{adminDashboardObj.inManagerCount}"></div>
             </div>
             <div class="orb_label text-sm">in manager</div>
-          </div>
-          <div class="orb">
-            <div class="orb_graphic">
-              <svg>
-                <circle class="fill"></circle>
-                <!-- <circle class="progress"></circle> -->
-              </svg>
-              <div class="orb_value count">123</div>
-            </div>
-            <div class="orb_label text-sm">activated <br />accounts</div>
           </div>
           <div class="orb">
             <div class="orb_graphic">
@@ -268,8 +258,9 @@
               </svg>
               <div
                 class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
+                th:text="*{adminDashboardObj.applicantCount}"
               >
-                123
+               123
               </div>
             </div>
             <div class="orb_label text-sm">applicants</div>
@@ -282,6 +273,7 @@
               </svg>
               <div
                 class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
+                th:text="*{adminDashboardObj.officerCount}"
               >
                 123
               </div>
@@ -296,6 +288,7 @@
               </svg>
               <div
                 class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
+                th:text="*{adminDashboardObj.tbiboardCount}"
               >
                 123
               </div>
@@ -310,20 +303,41 @@
               </svg>
               <div
                 class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
+                th:text="*{adminDashboardObj.managerCount}"
               >
                 123
               </div>
             </div>
             <div class="orb_label text-sm">managers</div>
           </div>
+           <div class="orb">
+            <div class="orb_graphic">
+              <svg>
+                <div class="fill"></div>
+                <!-- <div class="progress"></div> -->
+              </svg>
+              <div
+                class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
+                th:text="*{adminDashboardObj.activatedAccountCount}"
+              >
+                123
+              </div>
+            </div>
+            <div class="orb_label text-sm">Total Accounts</div>
+          </div>
           <!-- Add more square charts as needed -->
         </div>
       </div>
     </div>
     <!-- officer -->
-    <script>
+    <script th:inline="javascript">
+		
+	  const webDto = /*[[${adminWebDto}]]*/'';
+	  const obj = webDto.adminDashboardObj;
+	  console.log(webDto);
+	  	
       var xValues = ["passed", "failed"];
-      var yValues = [55, 49];
+      var yValues = [obj.applicationPassedCount, obj.applicationFailedCount];
       var barColors = ["#b91d47", "#00aba9"];
 
       new Chart("officer", {
@@ -349,11 +363,9 @@
           },
         },
       });
-    </script>
-    <!-- tbiboard -->
-    <script>
+      
       var xValues2 = ["accepted", "rejected"];
-      var yValues2 = [55, 49];
+      var yValues2 = [obj.applicationAcceptedCount, obj.applicationRejectedCount];
       var barColors2 = ["#b91d47", "#00aba9"];
 
       new Chart("tbiBoard", {
@@ -379,8 +391,7 @@
           },
         },
       });
-    </script>
-    <script>
+      
       $(document).ready(function () {
         $(".count").each(function () {
           $(this)
@@ -399,6 +410,13 @@
             );
         });
       });
+    </script>
+    <!-- tbiboard -->
+    <script>
+      
+    </script>
+    <script>
+      
     </script>
   </body>
 </html>

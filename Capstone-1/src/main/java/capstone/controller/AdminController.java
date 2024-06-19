@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import capstone.controller.webdto.AdminWebDto;
 import capstone.model.dto.AdminInOutDto;
@@ -17,8 +16,13 @@ public class AdminController {
     private AdminService adminService;
 
     @GetMapping("/admin/home")
-    public String showAdminHome() {
-        // This will return the name of the HTML file (without the .html extension)
+    public String showAdminHome(@ModelAttribute AdminWebDto webDto) {
+         	
+    	AdminInOutDto outDto = adminService.getAdminDashboardDetails();
+    	
+    	webDto.setAdminDashboardObj(outDto.getAdminDashboardObj());
+    	
+    	 // This will return the name of the HTML file (without the .html extension)
         return "admin/home";
     }
 

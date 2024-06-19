@@ -6,11 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import capstone.model.dao.UserInformationDao;
+import capstone.model.dao.entity.AdminDashboardEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
 import capstone.model.dao.entity.UserInformationEntity;
 import capstone.model.dto.AdminInOutDto;
 import capstone.model.logic.ApplicantLogic;
 import capstone.model.logic.UserLogic;
+import capstone.model.object.AdminDashboardObj;
 import capstone.model.object.ApplicantObj;
 import capstone.model.object.UserDetailsObj;
 import capstone.model.service.AdminService;
@@ -23,6 +26,47 @@ public class AdminServiceImpl  implements AdminService{
 	
 	@Autowired
 	private ApplicantLogic applicantLogic;
+	
+	@Autowired
+	private UserInformationDao userDao;
+	
+	@Override
+	public AdminInOutDto getAdminDashboardDetails() {
+		
+		AdminInOutDto outDto = new AdminInOutDto();
+		
+		AdminDashboardEntity entity = userDao.getDetailsForAdmin();
+		
+		AdminDashboardObj obj = new AdminDashboardObj();
+		
+		obj.setApplicationPassedCount(entity.getApplicationPassedCount());
+		
+		obj.setApplicationFailedCount(entity.getApplicationFailedCount());
+		
+		obj.setApplicationAcceptedCount(entity.getApplicationAcceptedCount());
+		
+		obj.setApplicationRejectedCount(entity.getApplicationRejectedCount());
+		
+		obj.setInOfficerCount(entity.getInOfficerCount());
+		
+		obj.setInTbiBoardCount(entity.getInTbiBoardCount());
+		
+		obj.setInManagerCount(entity.getInManagerCount());
+		
+		obj.setApplicantCount(entity.getApplicantCount());
+		
+		obj.setOfficerCount(entity.getOfficerCount());
+		
+		obj.setTbiboardCount(entity.getTbiboardCount());
+		
+		obj.setManagerCount(entity.getManagerCount());
+		
+		obj.setActivatedAccountCount(entity.getActivatedAccountCount());
+		
+		outDto.setAdminDashboardObj(obj);
+		
+		return outDto;
+	}
 
 	@Override
 	public AdminInOutDto getAllUsers() {
