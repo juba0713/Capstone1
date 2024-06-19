@@ -63,6 +63,10 @@ public class AdminServiceImpl  implements AdminService{
 		
 		obj.setActivatedAccountCount(entity.getActivatedAccountCount());
 		
+		obj.setReapplicationRejectedCount(entity.getReapplicationRejectedCount());
+		
+		obj.setReapplicationFailedCount(entity.getReapplicationFailedCount());
+		
 		outDto.setAdminDashboardObj(obj);
 		
 		return outDto;

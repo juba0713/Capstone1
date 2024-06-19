@@ -64,6 +64,7 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 			+ "CAST( (\r\n"
 			+ "  SELECT COUNT(e) \r\n"
 			+ "  FROM t_rejected_applicant e\r\n"
+			+ "  WHERE e.resubmit_flg = false\r\n"
 			+ ") AS INTEGER) AS application_rejected_count,\r\n"
 			+ "CAST( (\r\n"
 			+ "  SELECT COUNT(e)\r\n"
@@ -111,7 +112,17 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 			+ "  SELECT COUNT(e) \r\n"
 			+ "  FROM m_user_information e\r\n"
 			+ "  WHERE e.delete_flg = false\r\n"
-			+ ") AS INTEGER) AS activated_account_count  ";
+			+ ") AS INTEGER) AS activated_account_count,"
+			+ "CAST( (\r\n"
+			+ "  SELECT COUNT(e) \r\n"
+			+ "  FROM t_rejected_applicant e\r\n"
+			+ "  WHERE e.resubmit_flg = true\r\n"
+			+ ") AS INTEGER) AS reapplication_rejected,\r\n"
+			+ "CAST( (\r\n"
+			+ "  SELECT COUNT(e) \r\n"
+			+ "  FROM t_evaluated_applicant e\r\n"
+			+ "  WHERE e.resubmit_flg = true\r\n"
+			+ ") AS INTEGER) AS reapplication_failed  ";
 	
 	@Query(value=GET_USER_BY_APPLICANT_ID_PK)
 	public UserInformationEntity getUserByApplicantIdPk(int applicantIdPk) throws DataAccessException;

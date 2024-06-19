@@ -28,4 +28,8 @@ public class AdminDashboardObj {
 	private int managerCount;
 	
 	private int activatedAccountCount;
+	
+	private int reapplicationRejectedCount;
+	
+	private int reapplicationFailedCount;
 }
