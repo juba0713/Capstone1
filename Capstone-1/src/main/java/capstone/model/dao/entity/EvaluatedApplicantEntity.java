@@ -31,5 +31,7 @@ public class EvaluatedApplicantEntity {
 	public Boolean deleteFlg;
 	
 	private String token;
+	
+	private Boolean resubmitFlg;
 
 }

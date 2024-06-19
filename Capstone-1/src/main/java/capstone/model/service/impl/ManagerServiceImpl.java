@@ -334,15 +334,18 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		ManagerInOutDto outDto = new ManagerInOutDto();
 		
+		boolean resubmitFlg = false;
+		
 		if(inDto.getStatus() == 6) {
 			applicantLogic.updateApplicantStatus(inDto.getStatus(), List.of(inDto.getApplicantIdPk()));
 			emailService.sendFailedMail(true,user.getEmail(), token);
+			resubmitFlg = true;
 		}else {
 			applicantLogic.updateApplicantStatus(inDto.getStatus(), List.of(inDto.getApplicantIdPk()));
 			emailService.sendFailedMail(false,user.getEmail(), token);
 		}
 		
-		applicantLogic.updateEvaluatedApplicant(token, inDto.getApplicantIdPk());
+		applicantLogic.updateEvaluatedApplicant(token,resubmitFlg,  inDto.getApplicantIdPk());
 		
 		return outDto;
 	}

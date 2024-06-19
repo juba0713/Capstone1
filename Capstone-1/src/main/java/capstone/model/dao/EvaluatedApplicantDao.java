@@ -14,7 +14,8 @@ public interface EvaluatedApplicantDao extends JpaRepository<EvaluatedApplicantE
 
 	public final String UPDATE_EVALUATED_APPLICANT = "UPDATE t_evaluated_applicant "
 			+ "SET "
-			+ "	token = :token "
+			+ "	token = :token, "
+			+ "	resubmit_flg = :resubmitFlg"
 			+ "WHERE "
 			+ "	applicant_id_pk = :applicantIdPk "
 			+ "AND "
@@ -31,5 +32,6 @@ public interface EvaluatedApplicantDao extends JpaRepository<EvaluatedApplicantE
 	@Modifying
 	@Query(value=UPDATE_EVALUATED_APPLICANT, nativeQuery=true)
 	public void updateEvaluatedApplicant(@Param("token") String token, 
+			@Param("resubmitFlg") boolean resubmitFlg,
 			@Param("applicantIdPk") int applicantIdPk) throws DataAccessException;
 }

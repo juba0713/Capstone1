@@ -224,9 +224,9 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	}
 
 	@Override
-	public void updateEvaluatedApplicant(String token, int applicantIdPk) {
+	public void updateEvaluatedApplicant(String token, boolean resubmitFlg, int applicantIdPk) {
 		
-		evaluatedApplicantDao.updateEvaluatedApplicant(token, applicantIdPk);
+		evaluatedApplicantDao.updateEvaluatedApplicant(token, resubmitFlg, applicantIdPk);
 	}
 
 	@Override

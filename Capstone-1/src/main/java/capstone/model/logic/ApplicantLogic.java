@@ -227,7 +227,7 @@ public interface ApplicantLogic {
 	 * @param token
 	 * @param applicantIdPk
 	 */
-	public void updateEvaluatedApplicant(String token, int applicantIdPk);
+	public void updateEvaluatedApplicant(String token, boolean resubmitFlg, int applicantIdPk);
 	
 	/**
 	 * To get evaluated applicant by token
