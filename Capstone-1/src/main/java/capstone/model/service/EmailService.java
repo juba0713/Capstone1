@@ -12,4 +12,10 @@ public interface EmailService {
 	public void sendActivationMail(String password, String email) throws MessagingException;
 	
 	public void sendFailedMail(boolean resubmitFlg, String email, String token) throws MessagingException;
+	
+	public void sendAcceptedMail(String email) throws MessagingException;
+	
+	public void sendTBITransferedMail(String email) throws MessagingException;
+	
+	public void sendEvaluatedMail(String email) throws MessagingException;
 }

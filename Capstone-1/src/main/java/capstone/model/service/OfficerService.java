@@ -19,7 +19,7 @@ public interface OfficerService {
 	 * @param inDto
 	 * @return OfficerInOutDto
 	 */
-	public OfficerInOutDto acceptApplicant(OfficerInOutDto inDto);
+	public OfficerInOutDto acceptApplicant(OfficerInOutDto inDto) throws MessagingException;
 	
 	/**
 	 * To reject an applicants

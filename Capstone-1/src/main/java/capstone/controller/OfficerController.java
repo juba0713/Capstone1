@@ -36,8 +36,8 @@ public class OfficerController {
 		return "officer/home";
 	}
 
-	@PostMapping(value = "/action", params = "accept")
-	public String acceptApplicant(@ModelAttribute OfficerWebDto webDto) {
+	@PostMapping(value = "/action", params = "accept") 
+	public String acceptApplicant(@ModelAttribute OfficerWebDto webDto) throws MessagingException {
 
 		OfficerInOutDto inDto = new OfficerInOutDto();
 

@@ -120,10 +120,20 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public void updateApplicantStatus(ManagerInOutDto inDto) {
+	public void updateApplicantStatus(ManagerInOutDto inDto) throws MessagingException {
 		
 		applicantLogic.updateApplicantStatus(inDto.getStatus(), inDto.getChosenApplicant()); 
-
+		
+		if(inDto.getTransferring()) {
+			
+			List<UserInformationEntity> users = userLogic.getUsersByApplicantIdPks(inDto.getChosenApplicant());
+			
+			for(UserInformationEntity user : users) {
+				emailService.sendEvaluatedMail(user.getEmail());		
+			
+			}
+		}
+		
 	}
 
 	@Override

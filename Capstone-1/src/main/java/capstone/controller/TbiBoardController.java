@@ -15,6 +15,7 @@ import capstone.controller.webdto.TbiBoardWebDto;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.dto.TbiBoardInOutDto;
 import capstone.model.service.TbiBoardService;
+import jakarta.mail.MessagingException;
 
 @Controller
 @RequestMapping("/tbi-board")
@@ -34,7 +35,7 @@ public class TbiBoardController {
 	}
 	
 	@PostMapping("/evaluate")
-	public String evaluateApplication(@ModelAttribute TbiBoardWebDto webDto, RedirectAttributes ra) {
+	public String evaluateApplication(@ModelAttribute TbiBoardWebDto webDto, RedirectAttributes ra) throws MessagingException {
 		
 		TbiBoardInOutDto inDto = new TbiBoardInOutDto();
 		

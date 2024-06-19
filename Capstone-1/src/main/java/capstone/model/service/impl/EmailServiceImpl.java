@@ -103,4 +103,57 @@ public class EmailServiceImpl implements EmailService {
 		
 	}
 
+	@Override
+	public void sendAcceptedMail(String email) throws MessagingException {
+		MimeMessage message = emailSender.createMimeMessage();
+
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+		helper.setFrom(CommonConstant.EMAIL);
+		helper.setTo(email);
+		helper.setSubject("Application Accepted");
+
+		String htmlText = "<div>Your application has been accepted!. Please wait for more further instructions.</div> ";
+
+		helper.setText(htmlText, true);
+
+		emailSender.send(message);
+	}
+
+	@Override
+	public void sendTBITransferedMail(String email) throws MessagingException {
+		MimeMessage message = emailSender.createMimeMessage();
+
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+		helper.setFrom(CommonConstant.EMAIL);
+		helper.setTo(email);
+		helper.setSubject("Application Transferred");
+
+		String htmlText = "<div>Your application has been transferred to the board for evaluation!. Please wait for the result..</div> ";
+
+		helper.setText(htmlText, true);
+
+		emailSender.send(message);
+		
+	}
+
+	@Override
+	public void sendEvaluatedMail(String email) throws MessagingException {
+		
+		MimeMessage message = emailSender.createMimeMessage();
+
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+		helper.setFrom(CommonConstant.EMAIL);
+		helper.setTo(email);
+		helper.setSubject("Application Evaluated");
+
+		String htmlText = "<div>Your application has been evaluated!. Please login to see the result.</div> ";
+
+		helper.setText(htmlText, true);
+
+		emailSender.send(message);
+	}
+
 }

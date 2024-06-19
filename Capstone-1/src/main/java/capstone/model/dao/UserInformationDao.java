@@ -124,9 +124,18 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 			+ "  WHERE e.resubmit_flg = true\r\n"
 			+ ") AS INTEGER) AS reapplication_failed  ";
 	
+	public final String GET_USERS_BY_APPLICANT_ID_PKS = "SELECT u "
+			+ "FROM ApplicantEntity a "
+			+ "JOIN UserInformationEntity u ON u.idPk = a.createdBy AND u.deleteFlg = false "
+			+ "WHERE a.idPk IN (:applicantIdPks) "
+			+ "AND a.deleteFlg = false";
+	
 	@Query(value=GET_USER_BY_APPLICANT_ID_PK)
 	public UserInformationEntity getUserByApplicantIdPk(int applicantIdPk) throws DataAccessException;
 	
+	@Query(value=GET_USERS_BY_APPLICANT_ID_PKS)
+	public List<UserInformationEntity> getUsersByApplicantIdPks(List<Integer> applicantIdPks) throws DataAccessException;
+
 	@Query(value=GET_USER_BY_EVALUATED_TOKEN)
 	public UserInformationEntity getUserByEvaluatedtoken(String token) throws DataAccessException;
 	

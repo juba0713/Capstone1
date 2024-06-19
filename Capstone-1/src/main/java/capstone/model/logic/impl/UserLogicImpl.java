@@ -76,4 +76,10 @@ public class UserLogicImpl implements UserLogic {
 		return userInformationDao.getAllUsers();
 	}
 
+	@Override
+	public List<UserInformationEntity> getUsersByApplicantIdPks(List<Integer> applicantIdPks) {
+		
+		return userInformationDao.getUsersByApplicantIdPks(applicantIdPks);
+	}
+
 }

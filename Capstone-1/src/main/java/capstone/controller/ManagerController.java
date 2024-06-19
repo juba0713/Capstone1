@@ -76,7 +76,7 @@ public class ManagerController {
 	}
 
 	@PostMapping("/proceed")
-	public String proceedApplicationToTBI(@ModelAttribute ManagerWebDto webDto, RedirectAttributes ra) {
+	public String proceedApplicationToTBI(@ModelAttribute ManagerWebDto webDto, RedirectAttributes ra) throws MessagingException {
 
 		ManagerInOutDto inDto = new ManagerInOutDto();
 
@@ -91,6 +91,8 @@ public class ManagerController {
 		inDto.setStatus(4);
 
 		inDto.setChosenApplicant(webDto.getChosenApplicant());
+		
+		inDto.setTransferring(true);
 
 		managerService.updateApplicantStatus(inDto);
 

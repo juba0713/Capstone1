@@ -27,8 +27,10 @@ import capstone.model.logic.UserLogic;
 import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantObj;
 import capstone.model.service.CommonService;
+import capstone.model.service.EmailService;
 import capstone.model.service.LoggedInUserService;
 import capstone.model.service.TbiBoardService;
+import jakarta.mail.MessagingException;
 
 @Service
 public class TbiBoardServiceImpl implements TbiBoardService {
@@ -37,7 +39,7 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 	private ApplicantLogic applicantLogic;
 
 	@Autowired
-	private CommonService commonService;
+	private EmailService emailService;
 
 	@Autowired
 	private LoggedInUserService loggedInUserService;
@@ -82,7 +84,7 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 	}
 
 	@Override
-	public void evaluateApplicant(TbiBoardInOutDto inDto) {
+	public void evaluateApplicant(TbiBoardInOutDto inDto) throws MessagingException {
 
 		UserInformationEntity loggedInUser = loggedInUserService.getUserInformation();
 
@@ -103,10 +105,10 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 		evaluatedApplicantEntity.setCreatedDate(timeNow);
 
 		evaluatedApplicantEntity.setDeleteFlg(false);
-
+		
+		UserInformationEntity user = userLogic.getUserByApplicantIdPk(inDto.getApplicantIdPk());
+			
 		if (inDto.getScore() > 5) {
-
-			UserInformationEntity user = userLogic.getUserByApplicantIdPk(inDto.getApplicantIdPk());
 
 			String folderPath = env.getProperty("certificate.path").toString();
 
@@ -138,6 +140,8 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 				e.printStackTrace();
 			}
 		}
+		
+		emailService.sendEvaluatedMail(user.getEmail());
 
 		applicantLogic.saveEvaluateedApplicant(evaluatedApplicantEntity);
 
