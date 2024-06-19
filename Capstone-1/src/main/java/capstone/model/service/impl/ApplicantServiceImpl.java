@@ -72,9 +72,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 		ErrorObj errorObj = new ErrorObj();
 
-		Pattern EMAIL_PATTERN = Pattern
-				.compile("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
-
 		List<String> emailError = new ArrayList<>();
 		List<String> projectTitleError = new ArrayList<>();
 		List<String> projectDescriptionError = new ArrayList<>();
@@ -93,67 +90,67 @@ public class ApplicantServiceImpl implements ApplicantService {
 		List<String> leaderAddressError = new ArrayList<>();
 		List<String> membersError = new ArrayList<>();
 		List<String> vitaeFileError = new ArrayList<>();
-		String agreeFlgError = "";
-		String technologyAnsError = "";
-		String productDevelopmentAnsError = "";
-		String CompetitiveLandscapeAnsError = "";
-		String productDesignAnsError = "";
-		String teamAnsError = "";
-		String goToMarketAnsError = "";
-		String manufacturingAnsError = "";
-		String eligibilityAgreeFlgError = "";
-		String commitmentOneFlgError = "";
-		String commitmentTwoFlgError = "";
-		String commitmentThreeFlgError = "";
-		String commitmentFourFlgError = "";
+		String agreeFlgError = CommonConstant.BLANK;
+		String technologyAnsError = CommonConstant.BLANK;
+		String productDevelopmentAnsError = CommonConstant.BLANK;
+		String CompetitiveLandscapeAnsError = CommonConstant.BLANK;
+		String productDesignAnsError = CommonConstant.BLANK;
+		String teamAnsError = CommonConstant.BLANK;
+		String goToMarketAnsError = CommonConstant.BLANK;
+		String manufacturingAnsError = CommonConstant.BLANK;
+		String eligibilityAgreeFlgError = CommonConstant.BLANK;
+		String commitmentOneFlgError = CommonConstant.BLANK;
+		String commitmentTwoFlgError = CommonConstant.BLANK;
+		String commitmentThreeFlgError = CommonConstant.BLANK;
+		String commitmentFourFlgError = CommonConstant.BLANK;
 
 		boolean hasError = false;
 
 		if (CommonConstant.BLANK.equals(inDto.getEmail())) {
-			emailError.add("Email is required!");
+			emailError.add(MessageConstant.EMAIL_BLANK);
 			hasError = true;
 		}
-		if (!EMAIL_PATTERN.matcher(inDto.getEmail()).matches()) {
-			emailError.add("Email is incorrect format!");
+		if (!CommonConstant.EMAIL_PATTERN.matcher(inDto.getEmail()).matches()) {
+			emailError.add(MessageConstant.EMAIL_INCORRECT_FORMAT);
 			hasError = true;
 		}
 
 		if (CommonConstant.BLANK.equals(inDto.getProjectTitle())) {
-			projectTitleError.add("Project Title is required!");
+			projectTitleError.add(MessageConstant.PROJECT_TITLE_BLANK);
 			hasError = true;
 		}
 
 		if (CommonConstant.BLANK.equals(inDto.getProjectDescription())) {
-			projectDescriptionError.add("Project Description is required!");
+			projectDescriptionError.add(MessageConstant.PROJECT_DESCRIPTION_BLANK);
 			hasError = true;
 		}
 
 		for (String[] team : inDto.getTeams()) {
 			if (team[0].length() == 0 || team[1].length() == 0) {
-				teamsError.add("Member name and Input role cannot be empty!");
+				teamsError.add(MessageConstant.TEAM_BLANK);
 				hasError = true;
 				break;
 			}
 		}
 
 		if (CommonConstant.BLANK.equals(inDto.getProblemStatement())) {
-			problemStatementError.add("Problem Statement is required!");
+			problemStatementError.add(MessageConstant.PROBLEM_STATEMENT_BLANK);
 			hasError = true;
 		}
 
 		if (CommonConstant.BLANK.equals(inDto.getTargetMarket())) {
-			targetMarketError.add("Problem Statement is required!");
+			targetMarketError.add(MessageConstant.TARGET_MARKET_BLANK);
 			hasError = true;
 		}
 
 		if (CommonConstant.BLANK.equals(inDto.getSolutionDescription())) {
-			solutionDecriptionError.add("Problem Statement is required!");
+			solutionDecriptionError.add(MessageConstant.SOLUTION_DESCRIPTION_BLANK);
 			hasError = true;
 		}
 
 		for (String[] time : inDto.getHistoricalTimeline()) {
 			if (!time[0].isEmpty() && time[1].isEmpty() || time[0].isEmpty() && !time[1].isEmpty()) {
-				historicalTimelineError.add("Please ensure month and year and the key activities are filled in!");
+				historicalTimelineError.add(MessageConstant.HISTORICAL_TIMELINE_ERROR);
 				hasError = true;
 				break;
 			}
@@ -167,132 +164,131 @@ public class ApplicantServiceImpl implements ApplicantService {
 				inDto.getPricingStrategy().get(1).isEmpty() &&
 				inDto.getPricingStrategy().get(2).isEmpty() &&
 				inDto.getPricingStrategy().get(3).isEmpty()) {
-			productServiceOfferingError.add(
-					"Please describe the key activities or milestones for your product/service offering and pricing strategy for at least one competitor or alternative!");
+			productServiceOfferingError.add(MessageConstant.PRODUCT_SERVICE_ERROR);
 			hasError = true;
 		}
 
 		if (CommonConstant.BLANK.equals(inDto.getObjectives())) {
-			objectivesError.add("Objectives is required!");
+			objectivesError.add(MessageConstant.OBJECTIVES_BLANK);
 			hasError = true;
 		}
 
 		if (CommonConstant.BLANK.equals(inDto.getScopeProposal())) {
-			scopeProposalError.add("Scope of the Proposal is required!");
+			scopeProposalError.add(MessageConstant.SCOPE_PROPOSAL_BLANK);
 			hasError = true;
 		}
 
 		if (CommonConstant.BLANK.equals(inDto.getMethodology())) {
-			methodologyError.add("Methodology and Expected Outputs is required!");
+			methodologyError.add(MessageConstant.METHODOLOGY_BLANK);
 			hasError = true;
 		}
 
 		if (CommonConstant.BLANK.equals(inDto.getGroupName())) {
-			groupNameError.add("Group Name is required!");
+			groupNameError.add(MessageConstant.GROUP_NAME_BLANK);
 			hasError = true;
 		}
 
 		if (CommonConstant.BLANK.equals(inDto.getGroupLeader())) {
-			groupLeaderError.add("Group Leader is required!");
+			groupLeaderError.add(MessageConstant.GROUP_LEADER_BLANK);
 			hasError = true;
 		}
 
 		if (inDto.getGroupLeader().split(",").length != 2) {
-			groupLeaderError.add("Incorrect Format! (Lastname, Firstname)");
+			groupLeaderError.add(MessageConstant.NAME_INCORRECT_FORMAT);
 			hasError = true;
 		}
 
 		if (CommonConstant.BLANK.equals(inDto.getLeaderNumber())) {
-			leaderNumberError.add("Mobile Number is required!");
+			leaderNumberError.add(MessageConstant.MOBILE_NUMBER_BLANK);
 			hasError = true;
 		}
 
 		if (CommonConstant.BLANK.equals(inDto.getLeaderAddress())) {
-			leaderAddressError.add("Address is required!");
+			leaderAddressError.add(MessageConstant.ADDRESS_BLANK);
 			hasError = true;
 		}
 
 		for (String member : inDto.getMembers()) {
 			if (member.split(",").length != 2 && !CommonConstant.BLANK.equals(member)) {
-				membersError.add("Incorrect Format! (Lastname, Firstname)");
+				membersError.add(MessageConstant.NAME_INCORRECT_FORMAT);
 				hasError = true;
 				break;
 			}
 		}
 
 		if (inDto.getAgreeFlg() == null) {
-			agreeFlgError = "Please select whether you agree or disagree to the terms!";
+			agreeFlgError = MessageConstant.AGREE_FLG_ERROR;
 			hasError = true;
 		}
 
 		if (inDto.getTechnologyAns() == 0) {
-			technologyAnsError = "Please select an option!";
+			technologyAnsError = MessageConstant.OPTION_ERROR;
 			hasError = true;
 		}
 
 		if (inDto.getProductDevelopmentAns() == 0) {
-			productDevelopmentAnsError = "Please select an option!";
+			productDevelopmentAnsError = MessageConstant.OPTION_ERROR;
 			hasError = true;
 		}
 
 		if (inDto.getCompetitiveLandscapeAns() == 0) {
-			CompetitiveLandscapeAnsError = "Please select an option!";
+			CompetitiveLandscapeAnsError = MessageConstant.OPTION_ERROR;
 			hasError = true;
 		}
 
 		if (inDto.getProductDesignAns() == 0) {
-			productDesignAnsError = "Please select an option!";
+			productDesignAnsError = MessageConstant.OPTION_ERROR;
 			hasError = true;
 		}
 
 		if (inDto.getTeamAns() == 0) {
-			teamAnsError = "Please select an option!";
+			teamAnsError = MessageConstant.OPTION_ERROR;
 			hasError = true;
 		}
 
 		if (inDto.getGoToMarketAns() == 0) {
-			goToMarketAnsError = "Please select an option!";
+			goToMarketAnsError = MessageConstant.OPTION_ERROR;
 			hasError = true;
 		}
 
 		if (inDto.getManufacturingAns() == 0) {
-			manufacturingAnsError = "Please select an option!";
+			manufacturingAnsError = MessageConstant.OPTION_ERROR;
 			hasError = true;
 		}
 
 		if (inDto.getEligibilityAgreeFlg() == null) {
-			eligibilityAgreeFlgError = "Please select whether you agree or disagree to the Egilibility Agreement!";
+			eligibilityAgreeFlgError = MessageConstant.ELIGIBLITY_FLG_ERROR;
 			hasError = true;
 		}
 
 		if (inDto.getCommitmentOneFlg() == null) {
-			commitmentOneFlgError = "Please select an option!";
+			commitmentOneFlgError = MessageConstant.OPTION_ERROR;
 			hasError = true;
 		}
 
 		if (inDto.getCommitmentTwoFlg() == null) {
-			commitmentTwoFlgError = "Please select an option!";
+			commitmentTwoFlgError = MessageConstant.OPTION_ERROR;
 			hasError = true;
 		}
 
 		if (inDto.getCommitmentThreeFlg() == null) {
-			commitmentThreeFlgError = "Please select an option!";
+			commitmentThreeFlgError = MessageConstant.OPTION_ERROR;
 			hasError = true;
 		}
 
 		if (inDto.getCommitmentFourFlg() == null) {
-			commitmentFourFlgError = "Please select an option!";
+			commitmentFourFlgError = MessageConstant.OPTION_ERROR;
 			hasError = true;
 		}
 
 		if (inDto.getToken() == null &&  inDto.getVitaeFile().isEmpty()) {
-			vitaeFileError.add("Please upload a Curriculum Vitae");
+			vitaeFileError.add(MessageConstant.VITAE_FILE_BLANK);
 			hasError = true;
 		}
 
 		String extension = FilenameUtils.getExtension(inDto.getVitaeFile().getOriginalFilename()).toLowerCase();
 		if (inDto.getToken() == null && !extension.equals("pdf")) {
-			vitaeFileError.add("Please upload a PDF File");
+			vitaeFileError.add(MessageConstant.VITAE_FILE_FORMAT_ERROR);
 			hasError = true;
 		}
 

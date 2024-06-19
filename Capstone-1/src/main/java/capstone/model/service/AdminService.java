@@ -12,4 +12,8 @@ public interface AdminService {
 	public AdminInOutDto getAllUsers();
 	
 	public AdminInOutDto getAllApplicants();
+	
+	public AdminInOutDto validateInputs(AdminInOutDto inDto);
+	
+	public void saveUser(AdminInOutDto inDto);
 }

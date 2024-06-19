@@ -53,53 +53,124 @@
     </style>
   </head>
   <body>
-    <div class="border-2">
-      <a th:href="@{/admin/users}">
-        <div>back</div>
-      </a>
-      <div>Create User</div>
-      <div>
-        <div>email</div>
-        <input type="text" name="email" placeholder="email " class="border-2" />
-      </div>
-      <div>
-        <div>mobile number</div>
-        <input
-          type="text"
-          name="mobilenumber"
-          placeholder="mobile number "
-          class="border-2"
-        />
-      </div>
-      <div>
-        <div>first name</div>
-        <input
-          type="text"
-          name="firstname"
-          placeholder="first name"
-          class="border-2"
-        />
-      </div>
-      <div>
-        <div>last name</div>
-        <input
-          type="text"
-          name="lastname"
-          placeholder="last name"
-          class="border-2"
-        />
-      </div>
-
-      <div class="select-dropdown">
-        <select>
-          <option value="Option 1 " disabled selected>select role</option>
-          <option value="Option 2">Officer</option>
-          <option value="Option 3">tbiboard</option>
-          <option value="Option 3">manager</option>
-        </select>
-      </div>
-      <button class="border-2">cancel</button>
-      <button class="border2 bg-customyellow">save</button>
-    </div>
+	<form th:action="@{/admin/users/create}" method="POST">
+	    <div class="border-2">
+	      <a th:href="@{/admin/users}">
+	        <div>back</div>
+	      </a>
+	      <div>Create User</div>
+	      <div>
+	        <div>email</div>
+	        <input type="text" name="email" placeholder="email " class="border-2" />
+	      </div>
+	       <div th:if="*{errors != null}" class="h-6">
+                <div	
+                  th:each="err : *{errors.emailError}"
+                  th:text="${err}"
+                  class="text-red-600 text-xs"
+                ></div>
+              </div>
+	      <div>
+	        <div>mobile number</div>
+	        <input
+	          type="text"
+	          name="mobileNumber"
+	          placeholder="mobile number "
+	          class="border-2"
+	        />
+	      </div>
+	     <div th:if="*{errors != null}" class="h-6">
+            <div
+              th:text="*{errors.mobileNumberError}"
+              class="text-red-600 text-xs"
+            ></div>
+          </div>
+          
+	      <div>
+	        <div>first name</div>
+	        <input
+	          type="text"
+	          name="firstName"
+	          placeholder="first name"
+	          class="border-2"
+	        />
+	      </div>
+	      <div th:if="*{errors != null}" class="h-6">
+            <div
+              th:text="*{errors.firstNameError}"
+              class="text-red-600 text-xs"
+            ></div>
+          </div>
+          
+	      <div>
+	        <div>last name</div>
+	        <input
+	          type="text"
+	          name="lastName"
+	          placeholder="last name"
+	          class="border-2"
+	        />
+	      </div>
+	      <div th:if="*{errors != null}" class="h-6">
+            <div
+              th:text="*{errors.lastNameError}"
+              class="text-red-600 text-xs"
+            ></div>
+          </div>
+     
+	
+	      <div class="select-dropdown">
+	        <select name="role">
+	          <option value="none" disabled selected>select role</option>
+	          <option value="OFFICER">Officer</option>
+	          <option value="TBIBOARD">tbiboard</option>
+	          <option value="MANAGER">manager</option>
+	        </select>
+	      </div>
+	      <div th:if="*{errors != null}" class="h-6">
+            <div
+              th:text="*{errors.roleError}"
+              class="text-red-600 text-xs"
+            ></div>
+          </div>
+	       <div>
+	      <div>
+	        <div>Password</div>
+	        <input
+	          type="password"
+	          name="password"
+	          class="border-2"
+	        />
+	      </div>
+	       <div th:if="*{errors != null}" class="h-6">
+                    <div
+                      th:each="err : *{errors.newPasswordError}"
+                      th:text="${err}"
+                      class="text-red-600 text-xs"
+                    ></div>
+                  </div>
+	       <div>
+	        <div>Confirm Password</div>
+	        <input
+	          type="password"
+	          name="confirmPassword"
+	          class="border-2"
+	        />
+	         <div th:if="*{errors != null}" class="h-6">
+                <div
+                  th:each="err : *{errors.confirmPasswordError}"
+                  th:text="${err}"
+                  class="text-red-600 text-xs"
+                ></div>
+              </div>
+	       <div>
+	      </div>
+	      <button class="border-2">cancel</button>
+	      <button class="border2 bg-customyellow">save</button>
+	    </div>
+	 </form>
+	 <script th:inline="javascript">
+		 console.log(/*[[${errors}]]*/'');
+	 </script>
   </body>
 </html>

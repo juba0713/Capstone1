@@ -1,20 +1,26 @@
 package capstone.model.service.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import capstone.common.constant.CommonConstant;
+import capstone.common.constant.MessageConstant;
 import capstone.model.dao.UserInformationDao;
 import capstone.model.dao.entity.AdminDashboardEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
+import capstone.model.dao.entity.UserInfoAccountEntity;
 import capstone.model.dao.entity.UserInformationEntity;
 import capstone.model.dto.AdminInOutDto;
 import capstone.model.logic.ApplicantLogic;
 import capstone.model.logic.UserLogic;
 import capstone.model.object.AdminDashboardObj;
 import capstone.model.object.ApplicantObj;
+import capstone.model.object.ErrorObj;
 import capstone.model.object.UserDetailsObj;
 import capstone.model.service.AdminService;
 
@@ -29,6 +35,9 @@ public class AdminServiceImpl  implements AdminService{
 	
 	@Autowired
 	private UserInformationDao userDao;
+	
+	@Autowired
+	private PasswordEncoder encoder;
 	
 	@Override
 	public AdminInOutDto getAdminDashboardDetails() {
@@ -146,6 +155,158 @@ public class AdminServiceImpl  implements AdminService{
 		outDto.setAllApplicants(applicantsObj);
 		
 		return outDto;
+	}
+
+	@Override
+	public AdminInOutDto validateInputs(AdminInOutDto inDto) {
+		
+		AdminInOutDto outDto = new AdminInOutDto();
+		
+		ErrorObj error = new ErrorObj();
+
+		List<String> currentPasswordError = new ArrayList<>();
+
+		List<String> newPasswordError = new ArrayList<>();
+
+		List<String> confirmPasswordError = new ArrayList<>();
+		
+		List<String> emailError = new ArrayList<>();
+		
+		String roleError = CommonConstant.BLANK;
+		
+		String mobileNumberError = CommonConstant.BLANK;
+		
+		String firstNameError = CommonConstant.BLANK;
+		
+		String lastNameError = CommonConstant.BLANK;
+		
+		if (inDto.getEmail() == null || inDto.getEmail().isEmpty()) {
+			
+			emailError.add(MessageConstant.EMAIL_BLANK);
+			
+			outDto.setResult(CommonConstant.INVALID);
+		}
+		if (!CommonConstant.EMAIL_PATTERN.matcher(inDto.getEmail()).matches()) {
+			
+			emailError.add(MessageConstant.EMAIL_INCORRECT_FORMAT);
+			
+			outDto.setResult(CommonConstant.INVALID);
+		}
+		
+		if (inDto.getMobileNumber() == null || inDto.getMobileNumber().isEmpty()) {
+
+			mobileNumberError = MessageConstant.MOBILE_NUMBER_BLANK;
+
+			outDto.setResult(CommonConstant.INVALID);
+		}
+		
+		if (inDto.getFirstName() == null || inDto.getFirstName().isEmpty()) {
+
+			firstNameError = MessageConstant.FIRST_NAME_BLANK;
+
+			outDto.setResult(CommonConstant.INVALID);
+		}
+		
+		if (inDto.getLastName() == null || inDto.getLastName().isEmpty()) {
+
+			lastNameError = MessageConstant.LAST_NAME_BLANK;
+
+			outDto.setResult(CommonConstant.INVALID);
+		}
+		
+		if(inDto.getRole() == null || inDto.getRole().equals("none")){
+			
+			roleError = MessageConstant.ROLE_BLANK;
+			
+			outDto.setResult(CommonConstant.INVALID);
+		}
+				
+		if (inDto.getPassword() == null || inDto.getPassword().isEmpty()) {
+
+			newPasswordError.add(MessageConstant.PASSWORD_BLANK);
+
+			outDto.setResult(CommonConstant.INVALID);
+		}
+
+		if (!inDto.getPassword().equals(inDto.getConfirmPassword())) {
+
+			newPasswordError.add(MessageConstant.NEW_CONFIRM_EQUAL_ERROR);
+
+			outDto.setResult(CommonConstant.INVALID);
+
+		}
+
+		if (inDto.getConfirmPassword() == null || inDto.getConfirmPassword().isEmpty()) {
+
+			confirmPasswordError.add(MessageConstant.CONFIRM_PASSWORD_BLANK);
+
+			outDto.setResult(CommonConstant.INVALID);
+		}
+
+		if (CommonConstant.INVALID.equals(outDto.getResult())) {
+
+			error.setNewPasswordError(newPasswordError);
+
+			error.setConfirmPasswordError(confirmPasswordError);
+
+			error.setCurrentPasswordError(currentPasswordError);
+			
+			error.setEmailError(emailError);
+			
+			error.setRoleError(roleError);
+			
+			error.setMobileNumberError(mobileNumberError);
+			
+			error.setFirstNameError(firstNameError);
+			
+			error.setLastNameError(lastNameError);
+			
+			outDto.setErrors(error);
+		} else {
+			outDto.setResult(CommonConstant.VALID);
+		}
+
+		return outDto;
+	}
+
+	@Override
+	public void saveUser(AdminInOutDto inDto) {
+		
+		Timestamp timeNow = new Timestamp(System.currentTimeMillis());
+	
+		UserInformationEntity newUser = new UserInformationEntity();
+		
+		newUser.setEmail(inDto.getEmail());
+		
+		newUser.setMobileNumber(inDto.getMobileNumber());
+		
+		newUser.setFirstName(inDto.getFirstName());
+		
+		newUser.setLastName(inDto.getLastName());
+		
+		newUser.setRole(inDto.getRole());
+		
+		newUser.setInitialChangePass(false);
+		
+		newUser.setCreatedDate(timeNow);
+		
+		newUser.setUpdatedDate(timeNow);
+		
+		newUser.setDeleteFlg(false);
+		
+		int idPk = userLogic.saveUser(newUser);
+		
+		UserInfoAccountEntity newUserAccount = new UserInfoAccountEntity();
+		
+		newUserAccount.setUserIdPk(idPk);
+		
+		newUserAccount.setPassword(encoder.encode(inDto.getPassword()));
+		
+		newUserAccount.setCreatedDate(timeNow);
+		
+		newUserAccount.setDeleteFlg(false);
+		
+		userLogic.saveUserAccount(newUserAccount);
 	}
 
 }

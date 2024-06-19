@@ -76,4 +76,12 @@ public class ErrorObj {
 	public List<String> currentPasswordError;
 	
 	public List<String> confirmPasswordError;
+	
+	public String roleError;
+	
+	public String mobileNumberError;
+	
+	public String firstNameError;
+	
+	public String lastNameError;
 }

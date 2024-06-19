@@ -16,4 +16,22 @@ public class AdminWebDto {
 	private List<UserDetailsObj> allUsers;
 	
 	private List<ApplicantObj> allApplicants;
+	
+	
+	/*
+	 * Create Account
+	 */
+	private String email;
+	
+	private String mobileNumber;
+	
+	private String firstName;
+	
+	private String lastName;
+	
+	private String role;
+	
+	private String password;
+	
+	private String confirmPassword;
 }
