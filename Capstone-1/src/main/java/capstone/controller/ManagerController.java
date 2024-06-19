@@ -14,9 +14,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import capstone.controller.webdto.ManagerWebDto;
 import capstone.controller.webdto.TbiBoardWebDto;
+import capstone.model.dto.AdminInOutDto;
 import capstone.model.dto.ManagerInOutDto;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.dto.TbiBoardInOutDto;
+import capstone.model.service.AdminService;
 import capstone.model.service.EmailService;
 import capstone.model.service.ManagerService;
 import jakarta.mail.MessagingException;
@@ -30,6 +32,9 @@ public class ManagerController {
 
 	@Autowired
 	private EmailService emailService;
+
+	@Autowired
+	private AdminService adminService;
 
 	@GetMapping("/home")
 	public String showManagerHome(@ModelAttribute ManagerWebDto webDto) {
@@ -61,6 +66,15 @@ public class ManagerController {
 		return "manager/officerEvalResults";
 	}
 
+	@GetMapping("/analytics")
+	public String showAnalyticsManager(@ModelAttribute ManagerWebDto webDto) {
+		AdminInOutDto outDto = adminService.getAdminDashboardDetails();
+
+		webDto.setAdminDashboardObj(outDto.getAdminDashboardObj());
+		System.out.println("test");
+		return "manager/analyticsManager";
+	}
+
 	@PostMapping("/account/activate")
 	public String activateAccount(@ModelAttribute ManagerWebDto webDto) throws MessagingException {
 
@@ -76,7 +90,8 @@ public class ManagerController {
 	}
 
 	@PostMapping("/proceed")
-	public String proceedApplicationToTBI(@ModelAttribute ManagerWebDto webDto, RedirectAttributes ra) throws MessagingException {
+	public String proceedApplicationToTBI(@ModelAttribute ManagerWebDto webDto, RedirectAttributes ra)
+			throws MessagingException {
 
 		ManagerInOutDto inDto = new ManagerInOutDto();
 
@@ -91,7 +106,7 @@ public class ManagerController {
 		inDto.setStatus(4);
 
 		inDto.setChosenApplicant(webDto.getChosenApplicant());
-		
+
 		inDto.setTransferring(true);
 
 		managerService.updateApplicantStatus(inDto);

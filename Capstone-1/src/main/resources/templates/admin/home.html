@@ -212,7 +212,10 @@
                 <circle class="fill"></circle>
                 <!-- <circle class="progress"></circle> -->
               </svg>
-              <div class="orb_value count" th:text="*{adminDashboardObj.inOfficerCount}"></div>
+              <div
+                class="orb_value count"
+                th:text="*{adminDashboardObj.inOfficerCount}"
+              ></div>
             </div>
             <div class="orb_label text-sm">in officer</div>
           </div>
@@ -222,9 +225,12 @@
                 <circle class="fill"></circle>
                 <!-- <circle class="progress"></circle> -->
               </svg>
-              <div class="orb_value count" th:text="*{adminDashboardObj.inTbiBoardCount}"></div>
+              <div
+                class="orb_value count"
+                th:text="*{adminDashboardObj.inTbiBoardCount}"
+              ></div>
             </div>
-            <div class="orb_label text-sm" >in tbi board</div>
+            <div class="orb_label text-sm">in tbi board</div>
           </div>
           <div class="orb">
             <div class="orb_graphic">
@@ -232,7 +238,10 @@
                 <circle class="fill"></circle>
                 <!-- <circle class="progress"></circle> -->
               </svg>
-              <div class="orb_value count" th:text="*{adminDashboardObj.inManagerCount}"></div>
+              <div
+                class="orb_value count"
+                th:text="*{adminDashboardObj.inManagerCount}"
+              ></div>
             </div>
             <div class="orb_label text-sm">in manager</div>
           </div>
@@ -242,23 +251,32 @@
                 <circle class="fill"></circle>
                 <!-- <circle class="progress"></circle> -->
               </svg>
-              <div class="orb_value count" th:text="*{adminDashboardObj.reapplicationRejectedCount}">123</div>
+              <div
+                class="orb_value count"
+                th:text="*{adminDashboardObj.reapplicationRejectedCount}"
+              >
+                123
+              </div>
             </div>
-            <div class="orb_label text-sm">reapplication<br>rejected</div>
+            <div class="orb_label text-sm">reapplication<br />rejected</div>
           </div>
-        </div>
-         <div class="orb">
+          <div class="orb">
             <div class="orb_graphic">
               <svg>
                 <circle class="fill"></circle>
                 <!-- <circle class="progress"></circle> -->
               </svg>
-              <div class="orb_value count" th:text="*{adminDashboardObj.reapplicationFailedCount}">123</div>
+              <div
+                class="orb_value count"
+                th:text="*{adminDashboardObj.reapplicationFailedCount}"
+              >
+                123
+              </div>
             </div>
-            <div class="orb_label text-sm">reapplication<br>rejected</div>
+            <div class="orb_label text-sm">reapplication<br />rejected</div>
           </div>
         </div>
-         
+
         <!-- squares -->
 
         <div class="square_orb w-full">
@@ -272,7 +290,7 @@
                 class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
                 th:text="*{adminDashboardObj.applicantCount}"
               >
-               123
+                123
               </div>
             </div>
             <div class="orb_label text-sm">applicants</div>
@@ -322,7 +340,7 @@
             </div>
             <div class="orb_label text-sm">managers</div>
           </div>
-           <div class="orb">
+          <div class="orb">
             <div class="orb_graphic">
               <svg>
                 <div class="fill"></div>
@@ -335,7 +353,7 @@
                 123
               </div>
             </div>
-            <div class="orb_label text-sm">Total Accounts</div>
+            <div class="orb_label text-sm">Total <br />Accounts</div>
           </div>
           <!-- Add more square charts as needed -->
         </div>
@@ -343,15 +361,33 @@
     </div>
     <!-- officer -->
     <script th:inline="javascript">
-		
-	  const webDto = /*[[${adminWebDto}]]*/'';
-	  const obj = webDto.adminDashboardObj;
-	  console.log(webDto);
-	  	
-      var xValues = ["passed", "failed"];
+      const webDto = /*[[${adminWebDto}]]*/ "";
+      const obj = webDto.adminDashboardObj;
+      console.log(webDto);
+      var xValues = [];
       var yValues = [obj.applicationPassedCount, obj.applicationFailedCount];
-      var barColors = ["#b91d47", "#00aba9"];
+      var barColors = [];
 
+      // Check if all values are null or zero
+      var allZeroOrNull = yValues.every(
+        (value) => value === null || value === 0
+      );
+
+      if (allZeroOrNull) {
+        // If all values are null or zero, add "none"
+        xValues.push("none");
+        barColors.push("black");
+        yValues = [1]; // Set the default value for "none" to 1
+      } else {
+        // Loop through yValues to populate xValues and barColors
+        for (var i = 0; i < yValues.length; i++) {
+          if (yValues[i] !== null && yValues[i] !== 0) {
+            // If value is not null and not zero, add corresponding label and color
+            xValues.push(i === 0 ? "passed" : "failed");
+            barColors.push(i === 0 ? "#00aba9" : "#b91d47");
+          }
+        }
+      }
       new Chart("officer", {
         type: "doughnut",
         data: {
@@ -366,20 +402,56 @@
         options: {
           title: {
             display: true,
-            text: "OPERATIONS OFFICER - passed and failed",
+            text: "TBI-BOARD",
             position: "bottom",
           },
           legend: {
             display: true,
             position: "bottom", // Position legend below the chart
           },
+          tooltips: {
+            callbacks: {
+              label: function (tooltipItem, data) {
+                var label = data.labels[tooltipItem.index] || "";
+                if (label === "none") {
+                  return label;
+                } else {
+                  return "";
+                }
+              },
+            },
+          },
         },
       });
-      
-      var xValues2 = ["accepted", "rejected"];
-      var yValues2 = [obj.applicationAcceptedCount, obj.applicationRejectedCount];
-      var barColors2 = ["#b91d47", "#00aba9"];
 
+      var xValues2 = [];
+      var yValues2 = [
+        obj.applicationAcceptedCount,
+        obj.applicationRejectedCount,
+      ];
+      var barColors2 = [];
+      var defaultAdded2 = false; // Flag to track if default "none" has been added
+
+      // Check if all values are null or zero
+      var allZeroOrNull = yValues2.every(
+        (value) => value === null || value === 0
+      );
+
+      if (allZeroOrNull) {
+        // If all values are null or zero, add "none"
+        xValues2.push("none");
+        barColors2.push("black");
+        yValues2 = [1]; // Set the default value for "none" to 1
+      } else {
+        // Loop through yValues2 to populate xValues2 and barColors2
+        for (var i = 0; i < yValues2.length; i++) {
+          if (yValues2[i] !== null && yValues2[i] !== 0) {
+            // If value is not null and not zero, add corresponding label and color
+            xValues2.push(i === 0 ? "accepted" : "rejected");
+            barColors2.push(i === 0 ? "#00aba9" : "#b91d47");
+          }
+        }
+      }
       new Chart("tbiBoard", {
         type: "doughnut",
         data: {
@@ -394,7 +466,7 @@
         options: {
           title: {
             display: true,
-            text: "TBI BOARD - accepted and rejected",
+            text: "OPERATION OFFICER",
             position: "bottom",
           },
           legend: {
@@ -403,7 +475,7 @@
           },
         },
       });
-      
+
       $(document).ready(function () {
         $(".count").each(function () {
           $(this)
@@ -424,11 +496,7 @@
       });
     </script>
     <!-- tbiboard -->
-    <script>
-      
-    </script>
-    <script>
-      
-    </script>
+    <script></script>
+    <script></script>
   </body>
 </html>

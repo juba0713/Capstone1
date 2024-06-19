@@ -97,26 +97,30 @@
     <!-- applicant table -->
     <div class="h-screen bg-[#F9F9F9] p-2">
       <div class="flex place-items-end flex-col ml-60 pr-10 pt-3">
-        <div class="font-primary text-4xl w-full flex justify-end">
+        <div class="font-primary text-4xl">
           Welcome, <span th:text="${session.fullname}"></span>!
         </div>
-        <!-- <div>ID: <span th:text="${session.id}"></span></div> -->
+        <div>ID: <span th:text="${session.id}"></span></div>
       </div>
 
       <div
         class="ml-[270px] mr-6 rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
       >
-        <table id="applicants-table" class="w-screen h-4/5" th:object="${adminWebDto}">
+        <table
+          id="applicants-table"
+          class="w-screen h-4/5"
+          th:object="${adminWebDto}"
+        >
           <!-- class="border-collapse table-auto border-4 border-violet-600 h-full border-spacing-0 w-fit" -->
 
           <thead class="font-secondary text-sm bg-customyellow">
             <tr>
-              <th class="text-center w-1/5 rounded-top-left">Email</th>
+              <th class="text-center w-1/5 rounded-top-left">email</th>
               <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
-              <th class="text-center">Project Title</th>
+              <th class="text-center">project Title</th>
 
-              <th class="text-center w-1/5 hidden sm:table-cell">University</th>
-              <th class="text-center hidden sm:table-cell">Status</th>
+              <th class="text-center w-1/5 hidden sm:table-cell">university</th>
+              <th class="text-center hidden sm:table-cell">status</th>
               <th class="text-center hidden sm:table-cell">rejected by</th>
               <th class="text-center hidden sm:table-cell">accepted by</th>
               <th class="text-center hidden sm:table-cell">evaluated by</th>
@@ -151,9 +155,18 @@
               ></td>
               <!-- th:text="${app.university}" -->
 
-			  <td class="whitespace-nowrap max-w-0 truncate" th:text="${app.status} == 2 ? ${app.acceptedBy} : ''"></td>
-              <td class="whitespace-nowrap max-w-0 truncate" th:text="${app.status} != 2 ? ${app.acceptedBy} : ''"></td>
-              <td class="whitespace-nowrap max-w-0 truncate" th:text="${app.evaluatedBy}"></td>
+              <td
+                class="whitespace-nowrap max-w-0 truncate"
+                th:text="${app.status} == 2 ? ${app.acceptedBy} : ''"
+              ></td>
+              <td
+                class="whitespace-nowrap max-w-0 truncate"
+                th:text="${app.status} != 2 ? ${app.acceptedBy} : ''"
+              ></td>
+              <td
+                class="whitespace-nowrap max-w-0 truncate"
+                th:text="${app.evaluatedBy}"
+              ></td>
               <td></td>
             </tr>
           </tbody>
