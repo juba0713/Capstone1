@@ -184,26 +184,27 @@
         </div>
         <!-- <div>ID: <span th:text="${session.id}"></span></div> -->
       </div>
-      <div
-        class="ml-[270px] mr-10 flex flex-row flex-wrap justify-between font-secondary"
-      >
-        <div class="flex justify-between w-screen h-[30%] border-b-2">
+      <div class="ml-[270px] mr-10 flex flex-row flex-wrap font-secondary">
+        <div class="flex w-screen h-[30%] border-b-2 text-center">
           <!-- officer -->
-          <div class="w-full flex justify-center h-90">
+          <div class="w-full flex justify-center flex-col h-90">
             <canvas
               id="officer"
               style="width: 200px; height: 70px"
               class="w-40"
             ></canvas>
+            <p>OFFICER</p>
           </div>
           <!-- tbiboard -->
-          <div class="w-full flex justify-center h-90">
+          <div class="w-full flex justify-center flex-col h-90">
             <canvas
               id="tbiBoard"
               style="width: 200px; height: 70px"
               class="w-40"
             ></canvas>
+            <p>TBI BOARD</p>
           </div>
+          <div class="flex"></div>
         </div>
         <div class="charts_orb w-screen border-b-2">
           <div class="orb">
@@ -386,8 +387,8 @@
         options: {
           title: {
             display: true,
-            text: "tbi board",
-            position: "bottom",
+            // text: "tbi board",
+            // position: "bottom",
           },
           legend: {
             display: true,
@@ -417,8 +418,8 @@
         options: {
           title: {
             display: true,
-            text: "officer",
-            position: "bottom",
+            // text: "officer",
+            // position: "bottom",
           },
           legend: {
             display: true,
