@@ -364,109 +364,60 @@
       const webDto = /*[[${adminWebDto}]]*/ "";
       const obj = webDto.adminDashboardObj;
       console.log(webDto);
-      var xValues = [];
-      var yValues = [obj.applicationPassedCount, obj.applicationFailedCount];
-      var barColors = [];
 
-      // Check if all values are null or zero
-      var allZeroOrNull = yValues.every(
-        (value) => value === null || value === 0
-      );
+      var xtbiBoardValues = ["passed", "failed"];
+      var ytbiBoardValues = [
+        obj.applicationPassedCount,
+        obj.applicationFailedCount,
+      ];
+      var barColors = ["#00aba9", "#b91d47"];
 
-      if (allZeroOrNull) {
-        // If all values are null or zero, add "none"
-        xValues.push("none");
-        barColors.push("black");
-        yValues = [1]; // Set the default value for "none" to 1
-      } else {
-        // Loop through yValues to populate xValues and barColors
-        for (var i = 0; i < yValues.length; i++) {
-          if (yValues[i] !== null && yValues[i] !== 0) {
-            // If value is not null and not zero, add corresponding label and color
-            xValues.push(i === 0 ? "passed" : "failed");
-            barColors.push(i === 0 ? "#00aba9" : "#b91d47");
-          }
-        }
-      }
-      new Chart("officer", {
+      new Chart("tbiBoard", {
         type: "doughnut",
         data: {
-          labels: xValues,
+          labels: xtbiBoardValues,
           datasets: [
             {
               backgroundColor: barColors,
-              data: yValues,
+              data: ytbiBoardValues,
             },
           ],
         },
         options: {
           title: {
             display: true,
-            text: "TBI-BOARD",
+            text: "tbi board",
             position: "bottom",
           },
           legend: {
             display: true,
             position: "bottom", // Position legend below the chart
           },
-          tooltips: {
-            callbacks: {
-              label: function (tooltipItem, data) {
-                var label = data.labels[tooltipItem.index] || "";
-                if (label === "none") {
-                  return label;
-                } else {
-                  return "";
-                }
-              },
-            },
-          },
         },
       });
 
-      var xValues2 = [];
-      var yValues2 = [
+      var xofficerValues2 = ["accepted", "rejected"];
+      var yofficerValues2 = [
         obj.applicationAcceptedCount,
         obj.applicationRejectedCount,
       ];
-      var barColors2 = [];
-      var defaultAdded2 = false; // Flag to track if default "none" has been added
+      var barColors2 = ["#00aba9", "#b91d47"];
 
-      // Check if all values are null or zero
-      var allZeroOrNull = yValues2.every(
-        (value) => value === null || value === 0
-      );
-
-      if (allZeroOrNull) {
-        // If all values are null or zero, add "none"
-        xValues2.push("none");
-        barColors2.push("black");
-        yValues2 = [1]; // Set the default value for "none" to 1
-      } else {
-        // Loop through yValues2 to populate xValues2 and barColors2
-        for (var i = 0; i < yValues2.length; i++) {
-          if (yValues2[i] !== null && yValues2[i] !== 0) {
-            // If value is not null and not zero, add corresponding label and color
-            xValues2.push(i === 0 ? "accepted" : "rejected");
-            barColors2.push(i === 0 ? "#00aba9" : "#b91d47");
-          }
-        }
-      }
-      new Chart("tbiBoard", {
+      new Chart("officer", {
         type: "doughnut",
         data: {
-          labels: xValues2,
+          labels: xofficerValues2,
           datasets: [
             {
               backgroundColor: barColors2,
-              data: yValues2,
+              data: yofficerValues2,
             },
           ],
         },
         options: {
           title: {
             display: true,
-            text: "OPERATION OFFICER",
+            text: "officer",
             position: "bottom",
           },
           legend: {

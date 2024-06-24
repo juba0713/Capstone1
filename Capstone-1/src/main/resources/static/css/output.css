@@ -1315,11 +1315,6 @@ video {
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
 }
 
-.border-red-400{
-  --tw-border-opacity: 1;
-  border-color: rgb(248 113 113 / var(--tw-border-opacity));
-}
-
 .border-red-600{
   --tw-border-opacity: 1;
   border-color: rgb(220 38 38 / var(--tw-border-opacity));
@@ -1699,10 +1694,6 @@ video {
 
 .uppercase{
   text-transform: uppercase;
-}
-
-.italic{
-  font-style: italic;
 }
 
 .tracking-widest{
