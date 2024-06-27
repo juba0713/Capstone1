@@ -130,7 +130,7 @@
   </head>
   <body th:object="${adminWebDto}">
     <div
-      class="h-full flex flex-col w-[250px] absolute bg-black z-10 justify-between text-customyellow"
+      class="h-full flex flex-col w-[250px] absolute bg-black z-20 justify-between text-customyellow"
     >
       <div class="pt-4">
         <img
@@ -177,36 +177,34 @@
       </div>
     </div>
     <!-- applicant table -->
-    <div class="h-screen bg-[#F9F9F9] p-2">
-      <div class="flex place-items-end flex-col ml-60 pr-10 pt-3">
+    <div class="h-screen bg-[#F9F9F9] overflow-y-auto">
+      <div
+        class="flex place-items-end flex-col ml-60 pr-10 pt-3 sticky top-0 z-10 bg-opacity-5 backdrop-blur-[3px]"
+      >
         <div class="font-primary text-4xl w-full flex justify-end">
           Welcome, <span th:text="${session.fullname}"></span>!
         </div>
         <!-- <div>ID: <span th:text="${session.id}"></span></div> -->
       </div>
       <div class="ml-[270px] mr-10 flex flex-row flex-wrap font-secondary">
-        <div class="flex w-screen h-[30%] border-b-2 text-center">
+        <div class="flex w-screen text-center justify-center mb-4 mt-2">
           <!-- officer -->
-          <div class="w-full flex justify-center flex-col h-90">
-            <canvas
-              id="officer"
-              style="width: 200px; height: 70px"
-              class="w-40"
-            ></canvas>
-            <p>OFFICER</p>
+          <div
+            class="flex justify-center flex-col h-90 border rounded-lg shadow-md w-[40%] mr-10"
+          >
+            <canvas id="officer" style="height: 80px" class="w-40"></canvas>
+            <p>OPERATIONS OFFICER</p>
           </div>
           <!-- tbiboard -->
-          <div class="w-full flex justify-center flex-col h-90">
-            <canvas
-              id="tbiBoard"
-              style="width: 200px; height: 70px"
-              class="w-40"
-            ></canvas>
+          <div
+            class="flex justify-center flex-col h-90 border rounded-lg shadow-md w-[40%]"
+          >
+            <canvas id="tbiBoard" style="height: 80px" class="w-40"></canvas>
             <p>TBI BOARD</p>
           </div>
           <div class="flex"></div>
         </div>
-        <div class="charts_orb w-screen border-b-2">
+        <div class="charts_orb w-screen border rounded-lg shadow-md mb-4">
           <div class="orb">
             <div class="orb_graphic">
               <svg>
@@ -280,7 +278,7 @@
 
         <!-- squares -->
 
-        <div class="square_orb w-full">
+        <div class="square_orb w-full border rounded-lg shadow-md mb-4">
           <div class="orb">
             <div class="orb_graphic">
               <svg>
@@ -371,7 +369,7 @@
         obj.applicationPassedCount,
         obj.applicationFailedCount,
       ];
-      var barColors = ["#00aba9", "#b91d47"];
+      var barColors = ["#2493DF", "#FF4C4C"];
 
       new Chart("tbiBoard", {
         type: "doughnut",
@@ -402,7 +400,7 @@
         obj.applicationAcceptedCount,
         obj.applicationRejectedCount,
       ];
-      var barColors2 = ["#00aba9", "#b91d47"];
+      var barColors2 = ["#00C838", "#FF4C4C"];
 
       new Chart("officer", {
         type: "doughnut",

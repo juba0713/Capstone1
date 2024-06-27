@@ -36,7 +36,7 @@ public class EmailServiceImpl implements EmailService {
 			htmlText += "<div>Please review the feedback and consider resubmitting a revised application.</div>"
 					+ "<a href='http://localhost:8080/applicant/form/resubmit?token=" + token + "'>"
 					+ "resubmit</a>";
-		}else {
+		} else {
 			htmlText += "<div>You are not qualified to resubmit this application. Please consider submitting a new application if you wish to reapply.</div>"
 					+ "<a href='http://localhost:8080/applicant/form?token=" + token + "'>"
 					+ "reapply</a>";
@@ -74,7 +74,7 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public void sendFailedMail(boolean resubmitFlg, String email, String token)
 			throws MessagingException {
-		
+
 		MimeMessage message = emailSender.createMimeMessage();
 
 		MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -84,13 +84,12 @@ public class EmailServiceImpl implements EmailService {
 		helper.setSubject("Application Failed");
 
 		String htmlText = "<div>Your application did not pass the evaluation, as it did not reach the passing score of 6 out of 10. </div> ";
-	
 
 		if (resubmitFlg) {
 			htmlText += "<div>Please review the feedback and consider resubmitting a revised application.</div>"
 					+ "<a href='http://localhost:8080/applicant/form/resubmit?token=" + token + "'>"
 					+ "resubmit</a>";
-		}else {
+		} else {
 			htmlText += "<div>You are not qualified to resubmit this application. Please consider submitting a new application if you wish to reapply.</div>"
 					+ "<a href='http://localhost:8080/applicant/form?token=" + token + "'>"
 					+ "reapply</a>";
@@ -100,7 +99,6 @@ public class EmailServiceImpl implements EmailService {
 
 		emailSender.send(message);
 
-		
 	}
 
 	@Override
@@ -135,12 +133,12 @@ public class EmailServiceImpl implements EmailService {
 		helper.setText(htmlText, true);
 
 		emailSender.send(message);
-		
+
 	}
 
 	@Override
 	public void sendEvaluatedMail(String email) throws MessagingException {
-		
+
 		MimeMessage message = emailSender.createMimeMessage();
 
 		MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -149,7 +147,7 @@ public class EmailServiceImpl implements EmailService {
 		helper.setTo(email);
 		helper.setSubject("Application Evaluated");
 
-		String htmlText = "<div>Your application has been evaluated!. Please login to see the result.</div> ";
+		String htmlText = "<div>Your application has been evaluated!. Please <a href='http://localhost:8080/login'>login</a> to see the result.</div> ";
 
 		helper.setText(htmlText, true);
 

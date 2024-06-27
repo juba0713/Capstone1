@@ -13,12 +13,13 @@
         padding: 0;
         position: relative;
         box-sizing: border-box;
+        width: 100%;
       }
       .select-dropdown {
         position: relative;
         background-color: #e6e6e6;
         border-radius: 4px;
-        width: 200px; /* Adjust width as needed */
+        width: 75%; /* Adjust width as needed */
       }
       .select-dropdown select {
         font-size: 1rem;
@@ -52,125 +53,155 @@
       }
     </style>
   </head>
-  <body>
-	<form th:action="@{/admin/users/create}" method="POST">
-	    <div class="border-2">
-	      <a th:href="@{/admin/users}">
-	        <div>back</div>
-	      </a>
-	      <div>Create User</div>
-	      <div>
-	        <div>email</div>
-	        <input type="text" name="email" placeholder="email " class="border-2" />
-	      </div>
-	       <div th:if="*{errors != null}" class="h-6">
-                <div	
-                  th:each="err : *{errors.emailError}"
-                  th:text="${err}"
-                  class="text-red-600 text-xs"
-                ></div>
-              </div>
-	      <div>
-	        <div>mobile number</div>
-	        <input
-	          type="text"
-	          name="mobileNumber"
-	          placeholder="mobile number "
-	          class="border-2"
-	        />
-	      </div>
-	     <div th:if="*{errors != null}" class="h-6">
-            <div
-              th:text="*{errors.mobileNumberError}"
-              class="text-red-600 text-xs"
-            ></div>
-          </div>
-          
-	      <div>
-	        <div>first name</div>
-	        <input
-	          type="text"
-	          name="firstName"
-	          placeholder="first name"
-	          class="border-2"
-	        />
-	      </div>
-	      <div th:if="*{errors != null}" class="h-6">
-            <div
-              th:text="*{errors.firstNameError}"
-              class="text-red-600 text-xs"
-            ></div>
-          </div>
-          
-	      <div>
-	        <div>last name</div>
-	        <input
-	          type="text"
-	          name="lastName"
-	          placeholder="last name"
-	          class="border-2"
-	        />
-	      </div>
-	      <div th:if="*{errors != null}" class="h-6">
-            <div
-              th:text="*{errors.lastNameError}"
-              class="text-red-600 text-xs"
-            ></div>
-          </div>
-     
-	
-	      <div class="select-dropdown">
-	        <select name="role">
-	          <option value="none" disabled selected>select role</option>
-	          <option value="OFFICER">Officer</option>
-	          <option value="TBIBOARD">tbiboard</option>
-	          <option value="MANAGER">manager</option>
-	        </select>
-	      </div>
-	      <div th:if="*{errors != null}" class="h-6">
-            <div
-              th:text="*{errors.roleError}"
-              class="text-red-600 text-xs"
-            ></div>
-          </div>
-	       <div>
-	      <div>
-	        <div>Password</div>
-	        <input
-	          type="password"
-	          name="password"
-	          class="border-2"
-	        />
-	      </div>
-	       <div th:if="*{errors != null}" class="h-6">
-                    <div
-                      th:each="err : *{errors.newPasswordError}"
-                      th:text="${err}"
-                      class="text-red-600 text-xs"
-                    ></div>
-                  </div>
-	       <div>
-	        <div>Confirm Password</div>
-	        <input
-	          type="password"
-	          name="confirmPassword"
-	          class="border-2"
-	        />
-	         <div th:if="*{errors != null}" class="h-6">
+  <body class="bg-slate-50">
+    <form th:action="@{/admin/users/create}" method="POST">
+      <a
+        th:href="@{/admin/users}"
+        class="top-0 z-10 hover:bg-slate-300 font-secondary flex place-items-start w-[5%] fixed m-6 rounded-md items-center text-center bg-slate-200 p-2 pr-4"
+      >
+        <div class="flex flex-row justify-center">
+          <img th:src="@{/icons/back.svg}" class="h-6" />
+          <p>Back</p>
+        </div>
+      </a>
+      <div class="w-full h-full flex items-center flex-col font-secondary">
+        <div class="font-semibold text-2xl pt-12">Create User</div>
+        <div
+          class="flex justify-between flex-row gap-10 border-y mt-10 p-8 w-6/12"
+        >
+          <div class="w-6/12">
+            <div>
+              <div>Email</div>
+              <input
+                type="text"
+                name="email"
+                placeholder="email@gmail.com"
+                class="border w-full rounded-sm h-10 indent-2"
+              />
+            </div>
+            <div th:if="*{errors != null}">
+              <div
+                th:each="err : *{errors.emailError}"
+                th:text="${err}"
+                class="text-red-600 text-xs"
+              ></div>
+            </div>
+            <div class="pt-2">
+              <div>Mobile number</div>
+              <input
+                type="text"
+                name="mobileNumber"
+                placeholder="enter phone number"
+                class="border w-full rounded-sm h-10 indent-2"
+              />
+            </div>
+            <div th:if="*{errors != null}">
+              <div
+                th:text="*{errors.mobileNumberError}"
+                class="text-red-600 text-xs"
+              ></div>
+            </div>
+
+            <div class="pt-2">
+              <div>First Name</div>
+              <input
+                type="text"
+                name="firstName"
+                placeholder="first name"
+                class="border w-full rounded-sm h-10 indent-2"
+              />
+            </div>
+            <div th:if="*{errors != null}">
+              <div
+                th:text="*{errors.firstNameError}"
+                class="text-red-600 text-xs"
+              ></div>
+            </div>
+
+            <div class="pt-2">
+              <div>Last Name</div>
+              <input
+                type="text"
+                name="lastName"
+                placeholder="last name"
+                class="border w-full rounded-sm h-10 indent-2"
+              />
+            </div>
+            <div th:if="*{errors != null}">
+              <div
+                th:text="*{errors.lastNameError}"
+                class="text-red-600 text-xs"
+              ></div>
+            </div>
+            <div class="pt-2">
+              <div>Password</div>
+              <input
+                type="password"
+                name="password"
+                class="border w-full rounded-sm h-10 indent-2"
+              />
+            </div>
+            <div th:if="*{errors != null}">
+              <div
+                th:each="err : *{errors.newPasswordError}"
+                th:text="${err}"
+                class="text-red-600 text-xs"
+              ></div>
+            </div>
+            <div class="pt-2">
+              <div>Confirm Password</div>
+              <input
+                type="password"
+                name="confirmPassword"
+                class="border w-full rounded-sm h-10 indent-2"
+              />
+              <div th:if="*{errors != null}">
                 <div
                   th:each="err : *{errors.confirmPasswordError}"
                   th:text="${err}"
                   class="text-red-600 text-xs"
                 ></div>
               </div>
-	       <div>
-	      </div>
-	      <button class="border-2">cancel</button>
-	      <button class="border2 bg-customyellow">save</button>
-	    </div>
-	 </form>
-	 <script th:inline="javascript">
-		 console.log(/*[[${errors}]]*/'');
-	 </script>
+            </div>
+          </div>
+          <div class="w-6/12">
+            <p>Role</p>
+            <div class="select-dropdown">
+              <select name="role">
+                <option value="none" disabled selected>select role</option>
+                <option value="OFFICER">Officer</option>
+                <option value="TBIBOARD">TbiBoard</option>
+                <option value="MANAGER">Manager</option>
+              </select>
+            </div>
+            <div th:if="*{errors != null}" class="">
+              <div
+                th:text="*{errors.roleError}"
+                class="text-red-600 text-xs"
+              ></div>
+            </div>
+          </div>
+          <!-- <div>
+            <button class="border w-full">cancel</button>
+            <button class="border2 bg-customyellow">save</button>
+          </div> -->
+        </div>
+        <div class="w-6/12 justify-end flex p-8">
+          <div class="w-[30%] flex justify-between">
+            <button class="h-10 w-[45%] hover:underline">
+              <a th:href="@{/admin/users/create}">cancel </a>
+            </button>
+            <button
+              class="rounded-3xl w-[45%] hover:underline hover:text-white bg-customyellow"
+            >
+              create
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <script th:inline="javascript">
+      console.log(/*[[${errors}]]*/ "");
+    </script>
   </body>
 </html>

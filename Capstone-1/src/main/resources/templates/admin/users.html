@@ -75,7 +75,7 @@
       .custom-scrollbar {
         scrollbar-width: thin;
       }
-      
+
       .error-container,
       .success-container {
         position: absolute;
@@ -104,22 +104,18 @@
     </style>
   </head>
   <body>
-	   <div
-        class="error-container"
-        th:if="${errorMsg != null}"
-        id="flash-message"
-      >
-        <div th:text="${errorMsg}"></div>
-      </div>
-      <div
-        class="success-container"
-        th:if="${succMsg != null}"
-        id="flash-message"
-      >
-        <div th:text="${succMsg}"></div>
-      </div>
+    <div class="error-container" th:if="${errorMsg != null}" id="flash-message">
+      <div th:text="${errorMsg}"></div>
+    </div>
     <div
-      class="h-full flex flex-col w-[250px] absolute bg-black z-10 justify-between text-customyellow"
+      class="success-container"
+      th:if="${succMsg != null}"
+      id="flash-message"
+    >
+      <div th:text="${succMsg}"></div>
+    </div>
+    <div
+      class="h-full flex flex-col w-[250px] absolute bg-black z-20 justify-between text-customyellow"
     >
       <div class="pt-4">
         <img
@@ -166,17 +162,18 @@
       </div>
     </div>
     <!-- applicant table -->
-    <div class="h-screen bg-[#F9F9F9] p-2">
-      <div class="flex place-items-end flex-col ml-60 pr-10 pt-3">
+    <div class="h-screen bg-[#F9F9F9] overflow-y-auto">
+      <div
+        class="flex place-items-end flex-col ml-60 pr-10 pt-3 sticky top-0 z-10 bg-opacity-5 backdrop-blur-[3px]"
+      >
         <div class="font-primary text-4xl w-full flex justify-end">
           Welcome, <span th:text="${session.fullname}"></span>!
         </div>
         <!-- <div>ID: <span th:text="${session.id}"></span></div> -->
       </div>
-      
 
       <div
-        class="relative max-h-[85%] border-2 ml-[270px] mr-6 rounded-lg mt-8 bg-white sm:overflow-auto overflow-hidden p-10 custom-scrollbar"
+        class="mb-10 relative border-2 ml-[270px] mr-6 rounded-lg mt-8 bg-white p-10 custom-scrollbar"
       >
         <table
           id="applicants-table"
@@ -243,17 +240,19 @@
                 -->
                 <button
                   name="delete"
-                  class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  class="btn-row border-4 border-[#FF4C4C] hover:bg-red-600 hover:border-red-600 bg-[#FF4C4C] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                   type="button"
                 >
-                  <img class="h-6" th:src="@{/icons/trash.svg}" />
+                  <img class="h-4" th:src="@{/icons/trash.svg}" />
                 </button>
                 <button
                   name="edit"
-                  class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  class="btn-row border-4 border-[#2493DF] hover:bg-blue-600 hover:border-blue-600 bg-[#2493DF] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                   type="button"
                 >
-                  <img class="h-6" th:src="@{/icons/edit.svg}" />
+                  <!-- <a th:href="@{/admin/editUser}"> -->
+                  <img class="h-4" th:src="@{/icons/edit.svg}" />
+                  <!-- </a> -->
                 </button>
               </td>
             </tr>
@@ -279,30 +278,35 @@
     >
       <div class="modal-dialog delete-modal-dialog" role="document">
         <div class="modal-content delete-modal-content">
-          <div class="mb-24">
+          <div class="mb-20">
             <div
-              class="rounded-t-md flex items-center flex-col justify-items-center mx-auto absolute z-10 w-full py-2 border-b-2"
+              class="rounded-t-md flex items-center flex-col justify-items-center mx-auto absolute z-10 w-full py-2"
             >
               <img th:src="@{/images/warning.png}" />
 
-              <h5 class="modal-title font-bold text-red-700">delete</h5>
+              <!-- <h5 class="modal-title font-bold text-red-700">delete</h5> -->
             </div>
           </div>
           <div class="modal-body" id="modal-body">
             <form method="POST">
-              <div>test</div>
-              <div class="justify-between flex mx-16">
+              <p class="font-semibold text-xl text-center">
+                Are you sure you want to delete this user?
+              </p>
+              <p class="opacity-45 text-center">
+                This action is permanent and cannot be undone.
+              </p>
+              <div class="justify-between flex mx-16 mt-2">
                 <button
                   data-dismiss="modal"
                   aria-label="Close"
                   type="button"
-                  class="close h-8 border-black hover:bg-[#F9F9F9] rounded-lg w-32 hover:text-black text-black border font-secondary sm:text-sm text-xs sm:p-1"
+                  class="close h-8 border-black hover:bg-[#ede9e9] rounded-lg w-32 hover:text-black text-black border font-secondary sm:text-sm text-xs sm:p-1"
                 >
-                  Cancel
+                  cancel
                 </button>
                 <button
                   name="delete"
-                  class="w-3/6 px-3 h-8 border-black hover:bg-red-500 bg-red-600 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  class="w-3/6 px-3 h-8 border-black hover:bg-red-500 bg-[#FF4C4C] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                 >
                   delete
                 </button>
@@ -324,31 +328,32 @@
         <div class="modal-content edit-modal-content">
           <div class="mb-24">
             <div
-              class="rounded-t-md flex items-center flex-col justify-items-center mx-auto absolute z-10 w-full py-2 border-b-2"
+              class="rounded-t-md flex items-center flex-col justify-items-center mx-auto absolute z-10 w-full py-2"
             >
-              <img th:src="@{/images/warning.png}" />
-
-              <h5 class="modal-title font-bold text-customyellow">edit</h5>
+              <img th:src="@{/images/editWarning.png}" />
             </div>
           </div>
           <div class="modal-body" id="modal-body">
             <form method="POST">
-              <div>test</div>
-              <div class="justify-between flex mx-16">
+              <p class="font-semibold text-xl text-center">
+                Are you sure you want to edit this user?
+              </p>
+              <p class="opacity-45 text-center">Select "edit" to proceed.</p>
+              <div class="justify-between flex mx-16 mt-2 text-center">
                 <button
                   data-dismiss="modal"
                   aria-label="Close"
                   type="button"
-                  class="close h-8 border-black hover:bg-[#F9F9F9] rounded-lg w-32 hover:text-black text-black border font-secondary sm:text-sm text-xs sm:p-1"
+                  class="close h-8 border-black hover:bg-[#ede9e9] rounded-lg w-32 hover:text-black text-black border font-secondary sm:text-sm text-xs sm:p-1"
                 >
-                  Cancel
+                  cancel
                 </button>
-                <button
-                  name="edit"
-                  class="w-3/6 px-3 h-8 border-black hover:bg-customyellow hover:bg-opacity-75 bg-customyellow rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                <a
+                  th:href="@{/admin/users/edit-user}"
+                  class="w-32 text-center px-3 h-8 border-black hover:bg-blue-500 hover:bg-opacity-75 bg-[#2493DF] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                 >
-                  save edit
-                </button>
+                  <button name="edit" class="pt-[2px]">edit</button>
+                </a>
                 <!-- once rejected, send info to applicant email the feedback -->
               </div>
             </form>
@@ -437,5 +442,19 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script>
+      // JavaScript function to remove the flash message after a specified time
+      function hideFlashMessage() {
+        const flashMessage = document.getElementById("flash-message");
+        if (flashMessage) {
+          setTimeout(() => {
+            flashMessage.style.display = "none";
+          }, 5000); // 5000 milliseconds = 5 seconds
+        }
+      }
+
+      // Call the function on page load
+      window.onload = hideFlashMessage;
+    </script>
   </body>
 </html>
