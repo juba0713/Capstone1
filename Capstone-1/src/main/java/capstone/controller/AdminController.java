@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import capstone.common.constant.CommonConstant;
+import capstone.common.constant.MessageConstant;
 import capstone.controller.webdto.AdminWebDto;
 import capstone.model.dto.AdminInOutDto;
 import capstone.model.service.AdminService;
@@ -87,6 +88,8 @@ public class AdminController {
     	}
     	
     	adminService.saveUser(inDto);
+    	
+    	ra.addFlashAttribute("succMsg", MessageConstant.ACCOUNT_CREATED);
 
         // This will return the name of the HTML file (without the .html extension)
         return "redirect:/admin/users";

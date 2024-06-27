@@ -75,9 +75,49 @@
       .custom-scrollbar {
         scrollbar-width: thin;
       }
+      
+      .error-container,
+      .success-container {
+        position: absolute;
+        top: 30px;
+        left: 100px;
+        width: 67%;
+        display: flex;
+        margin-left: 245px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .error-container div,
+      .success-container div {
+        background: green;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 8px;
+        border-radius: 6px;
+      }
+
+      .error-container div {
+        background: red;
+      }
     </style>
   </head>
   <body>
+	   <div
+        class="error-container"
+        th:if="${errorMsg != null}"
+        id="flash-message"
+      >
+        <div th:text="${errorMsg}"></div>
+      </div>
+      <div
+        class="success-container"
+        th:if="${succMsg != null}"
+        id="flash-message"
+      >
+        <div th:text="${succMsg}"></div>
+      </div>
     <div
       class="h-full flex flex-col w-[250px] absolute bg-black z-10 justify-between text-customyellow"
     >
@@ -133,6 +173,7 @@
         </div>
         <!-- <div>ID: <span th:text="${session.id}"></span></div> -->
       </div>
+      
 
       <div
         class="relative max-h-[85%] border-2 ml-[270px] mr-6 rounded-lg mt-8 bg-white sm:overflow-auto overflow-hidden p-10 custom-scrollbar"

@@ -129,7 +129,7 @@ public class ManagerServiceImpl implements ManagerService {
 			List<UserInformationEntity> users = userLogic.getUsersByApplicantIdPks(inDto.getChosenApplicant());
 			
 			for(UserInformationEntity user : users) {
-				emailService.sendEvaluatedMail(user.getEmail());		
+				emailService.sendTBITransferedMail(user.getEmail());		
 			
 			}
 		}

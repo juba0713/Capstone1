@@ -29,7 +29,7 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "	CASE "
 			+ "		WHEN a.status > 0 "
 			+ "			THEN (SELECT DISTINCT CONCAT(u2.first_name, ' ', u2.last_name) AS full_name "
-			+ "				  FROM t_rejected_applicant r2 "
+			+ "				  FROM t_accepted_applicant r2 "
 			+ "				  JOIN m_user_information u2 ON u2.id_pk = r2.created_by AND u2.delete_flg = false "
 			+ "				  WHERE r2.applicant_id_pk = a.id_pk"
 			+ "				 ) "

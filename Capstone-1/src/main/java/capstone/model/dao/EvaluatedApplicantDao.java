@@ -15,7 +15,7 @@ public interface EvaluatedApplicantDao extends JpaRepository<EvaluatedApplicantE
 	public final String UPDATE_EVALUATED_APPLICANT = "UPDATE t_evaluated_applicant "
 			+ "SET "
 			+ "	token = :token, "
-			+ "	resubmit_flg = :resubmitFlg"
+			+ "	resubmit_flg = :resubmitFlg "
 			+ "WHERE "
 			+ "	applicant_id_pk = :applicantIdPk "
 			+ "AND "
