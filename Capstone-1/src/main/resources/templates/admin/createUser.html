@@ -27,7 +27,7 @@
         max-width: 100%;
         padding: 8px 24px 8px 10px;
         border: none;
-        background-color: transparent;
+        background-color: #ffd834;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
@@ -53,7 +53,7 @@
       }
     </style>
   </head>
-  <body class="bg-slate-50">
+  <body class="bg-gradient-to-t from-[#E9D790] to-[#FFFFFF] h-screen">
     <form th:action="@{/admin/users/create}" method="POST">
       <a
         th:href="@{/admin/users}"
@@ -64,11 +64,15 @@
           <p>Back</p>
         </div>
       </a>
-      <div class="w-full h-full flex items-center flex-col font-secondary">
-        <div class="font-semibold text-2xl pt-12">Create User</div>
-        <div
-          class="flex justify-between flex-row gap-10 border-y mt-10 p-8 w-6/12"
-        >
+      <div class="w-full flex items-center flex-col font-secondary text-sm">
+        <div class="flex justify-center flex-col items-center mt-10">
+          <img
+            class="h-[100px] w-[110px]"
+            th:src="@{/images/wilBlackBox.png}"
+          />
+          <div class="font-semibold text-2xl p-4">Create User</div>
+        </div>
+        <div class="flex justify-between flex-row gap-10 border-y p-8 w-6/12">
           <div class="w-6/12">
             <div>
               <div>Email</div>
@@ -170,7 +174,7 @@
               <select name="role">
                 <option value="none" disabled selected>select role</option>
                 <option value="OFFICER">Officer</option>
-                <option value="TBIBOARD">TbiBoard</option>
+                <option value="TBIBOARD">Tbi-Board</option>
                 <option value="MANAGER">Manager</option>
               </select>
             </div>
@@ -186,7 +190,7 @@
             <button class="border2 bg-customyellow">save</button>
           </div> -->
         </div>
-        <div class="w-6/12 justify-end flex p-8">
+        <div class="w-6/12 justify-end flex p-4">
           <div class="w-[30%] flex justify-between">
             <button class="h-10 w-[45%] hover:underline">
               <a th:href="@{/admin/users/create}">cancel </a>
