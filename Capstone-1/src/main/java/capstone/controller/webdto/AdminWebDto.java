@@ -17,6 +17,8 @@ public class AdminWebDto {
 	
 	private List<ApplicantObj> allApplicants;
 	
+	private int userIdPk;
+	
 	
 	/*
 	 * Create Account

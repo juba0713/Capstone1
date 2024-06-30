@@ -1,14 +1,20 @@
 package capstone.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import capstone.model.dao.entity.AdminDashboardEntity;
+import capstone.model.dao.entity.UserDetailsEntity;
 import capstone.model.dao.entity.UserInformationEntity;
 
+@Transactional
 public interface UserInformationDao extends JpaRepository<UserInformationEntity, Integer>{
 
 	public final String GET_USER_BY_USERNAME = "SELECT e"
@@ -41,9 +47,9 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 			+ "WHERE a.idPk = :applicantIdPk "
 			+ "AND a.deleteFlg = false";
 	
-	public final String GET_ALL_USERS = "SELECT e"
-			+ " FROM UserInformationEntity e"
-			+ " WHERE e.deleteFlg = false";
+//	public final String GET_ALL_USERS = "SELECT e"
+//			+ " FROM UserInformationEntity e"
+//			+ " WHERE e.deleteFlg = false";
 	
 	public final String GET_DETAILS_FOR_ADMIN = "SELECT CAST( (\r\n"
 			+ "  SELECT COUNT(e) \r\n"
@@ -130,6 +136,47 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 			+ "WHERE a.idPk IN (:applicantIdPks) "
 			+ "AND a.deleteFlg = false";
 	
+	public final String GET_ALL_USERS = "SELECT e.id_pk, \r\n"
+			+ "e.email,\r\n"
+			+ "CONCAT(e.first_name, ' ', e.last_name) AS fullName,\r\n"
+			+ "e.mobile_number,\r\n"
+			+ "e.role,\r\n"
+			+ "e.created_date,\r\n"
+			+ "e.updated_date,\r\n"
+			+ "NOT ((SELECT COUNT(a.created_by)>0 \r\n"
+			+ " FROM t_accepted_applicant a \r\n"
+			+ " WHERE a.created_by = e.id_pk \r\n"
+			+ " AND e.delete_flg = false)\r\n"
+			+ " OR\r\n"
+			+ " (SELECT COUNT(a.created_by)>0 \r\n"
+			+ " FROM t_rejected_applicant a \r\n"
+			+ " WHERE a.created_by = e.id_pk \r\n"
+			+ " AND e.delete_flg = false)\r\n"
+			+ " OR\r\n"
+			+ " (SELECT COUNT(a.created_by)>0 \r\n"
+			+ " FROM t_evaluated_applicant a 	\r\n"
+			+ " WHERE a.created_by = e.id_pk \r\n"
+			+ " AND e.delete_flg = false)\r\n"
+			+ " OR\r\n"
+			+ " (SELECT COUNT(u)>0 \r\n"
+			+ "  FROM m_user_information u\r\n"
+			+ "  WHERE u.role IN ('APPLICANT', 'ADMIN')\r\n"
+			+ "  AND u.id_pk = e.id_pk)\r\n"
+			+ " )\r\n"
+			+ " AS deletable\r\n"
+			+ "FROM m_user_information e\r\n"
+			+ "WHERE e.delete_flg = false";
+	
+	public final String DELETE_USER = "UPDATE m_user_information  "
+			+ "SET "
+			+ "	delete_flg = true "
+			+ "WHERE "
+			+ "	id_pk = :userIdPk ";
+	
+	@Modifying
+	@Query(value=DELETE_USER, nativeQuery=true)
+	public void deleteUser(@Param("userIdPk") int userIdPk) throws DataAccessException;
+	
 	@Query(value=GET_USER_BY_APPLICANT_ID_PK)
 	public UserInformationEntity getUserByApplicantIdPk(int applicantIdPk) throws DataAccessException;
 	
@@ -148,8 +195,21 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 	@Query(value=GET_USER_BY_ID_PK)
 	public UserInformationEntity getUserByIdPk(int idPk) throws DataAccessException;
 	
-	@Query(value=GET_ALL_USERS)
-	public List<UserInformationEntity> getAllUsers() throws DataAccessException;
+	@Query(value=GET_ALL_USERS, nativeQuery=true)
+	public List<Object[]> getAllUsersRaw() throws DataAccessException;
+	
+	default List<UserDetailsEntity> getAllUsers() {
+		
+		List<Object[]> rawResults = getAllUsersRaw();
+	    List<UserDetailsEntity> users = new ArrayList<>();
+
+	    for (Object[] objects : rawResults) {
+	    	UserDetailsEntity applicant = new UserDetailsEntity(objects);  
+	        users.add(applicant);
+	    }
+
+	    return users;
+	};
 	
 	@Query(value=GET_DETAILS_FOR_ADMIN, nativeQuery=true)
 	public List<Object[]> getDetailsForAdminRaw() throws DataAccessException;

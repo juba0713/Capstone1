@@ -17,6 +17,8 @@ public class AdminInOutDto {
 	
 	public List<ApplicantObj> allApplicants;
 	
+	public int userIdPk;
+	
 	/*
 	 * Create Account
 	 */

@@ -100,4 +100,18 @@ public class AdminController {
         // This will return the name of the HTML file (without the .html extension)
         return "redirect:/admin/users";
     }
+    
+    @PostMapping("/admin/users/delete")
+    public String postUserDelete(@ModelAttribute AdminWebDto webDto, RedirectAttributes ra) {
+    	
+    	AdminInOutDto inDto = new AdminInOutDto();
+    	
+    	inDto.setUserIdPk(webDto.getUserIdPk());
+    	
+    	adminService.deleteUser(inDto);
+    	
+    	ra.addFlashAttribute("succMsg", MessageConstant.ACCOUNT_DELETED);
+    	
+    	return "redirect:/admin/users";
+    }
 }

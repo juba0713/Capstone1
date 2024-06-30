@@ -13,6 +13,7 @@ import capstone.common.constant.MessageConstant;
 import capstone.model.dao.UserInformationDao;
 import capstone.model.dao.entity.AdminDashboardEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
+import capstone.model.dao.entity.UserDetailsEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
 import capstone.model.dao.entity.UserInformationEntity;
 import capstone.model.dto.AdminInOutDto;
@@ -86,11 +87,11 @@ public class AdminServiceImpl  implements AdminService{
 		
 		AdminInOutDto outDto = new AdminInOutDto();
 		
-		List<UserInformationEntity> users = userLogic.getAllUsers();
+		 List<UserDetailsEntity> users = userLogic.getAllUsers();
 		
 		List<UserDetailsObj> usersObj = new ArrayList<>();
 		
-		for(UserInformationEntity user : users) {
+		for(UserDetailsEntity user : users) {
 			
 			UserDetailsObj obj = new UserDetailsObj();
 			
@@ -105,6 +106,8 @@ public class AdminServiceImpl  implements AdminService{
 			obj.setCreatedDate(user.getCreatedDate());
 			
 			obj.setUpdatedDate(user.getUpdatedDate());
+			
+			obj.setDeletable(user.getDeletable());
 			
 			usersObj.add(obj);
 			
@@ -307,6 +310,15 @@ public class AdminServiceImpl  implements AdminService{
 		newUserAccount.setDeleteFlg(false);
 		
 		userLogic.saveUserAccount(newUserAccount);
+	}
+
+	@Override
+	public void deleteUser(AdminInOutDto inDto) {
+		
+		userLogic.deleteUser(inDto.getUserIdPk());
+		
+		System.out.println(inDto.getUserIdPk());
+
 	}
 
 }

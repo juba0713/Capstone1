@@ -2,7 +2,9 @@ package capstone.common.constant;
 
 public class MessageConstant {
 	
-	public static String ACCOUNT_CREATED = "New account has been created successfully";
+	public static String ACCOUNT_CREATED = "New account has been created successfully!";
+	
+	public static String ACCOUNT_DELETED = "Account has been deleted successfully!";
 	
 	public static String CURRENT_PASSWORD_ERROR = "Please enter current password!";
 	

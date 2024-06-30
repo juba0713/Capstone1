@@ -141,6 +141,8 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 			}
 		}
 		
+		applicantLogic.updatePreviousEvaluatedApplicant(inDto.getApplicantIdPk());
+		
 		emailService.sendEvaluatedMail(user.getEmail());
 
 		applicantLogic.saveEvaluateedApplicant(evaluatedApplicantEntity);

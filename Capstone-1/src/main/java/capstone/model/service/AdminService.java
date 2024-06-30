@@ -16,4 +16,6 @@ public interface AdminService {
 	public AdminInOutDto validateInputs(AdminInOutDto inDto);
 	
 	public void saveUser(AdminInOutDto inDto);
+	
+	public void deleteUser(AdminInOutDto inDto);
 }

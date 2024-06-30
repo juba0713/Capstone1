@@ -255,4 +255,10 @@ public interface ApplicantLogic {
 	 * @param entity
 	 */
 	public void saveAcceptedApplicantEntity(AcceptedApplicantEntity entity);
+	
+	public void updatePreviousAcceptedApplicant(int applicantIdPk);
+	
+	public void updatePreviousRejectedApplicant(int applicantIdPk);
+	
+	public void updatePreviousEvaluatedApplicant(int applicantIdPk);
 }

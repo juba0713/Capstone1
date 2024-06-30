@@ -91,7 +91,11 @@ public class OfficerServiceImpl implements OfficerService{
 		ApplicantEntity applicantEntity = applicantLogic.getApplicantByIdPk(inDto.getApplicantIdPk());
 		
 		applicantLogic.updateApplicantStatus(2, List.of(inDto.getApplicantIdPk()));
-				
+		
+		applicantLogic.updatePreviousRejectedApplicant(inDto.getApplicantIdPk());
+		
+		applicantLogic.updatePreviousAcceptedApplicant(inDto.getApplicantIdPk());
+		
 		RejectedApplicantEntity rejectedApplicantEntity = new RejectedApplicantEntity();
 		
 		rejectedApplicantEntity.setApplicantIdPk(inDto.getApplicantIdPk());

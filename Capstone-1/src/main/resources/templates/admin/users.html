@@ -202,7 +202,7 @@
           <tbody class="divide-y divide-grey-500 bodyrowhover">
             <!-- th:each="app : *{listOfApplicants}"
             th:data-id="${app.applicantIdPk}" -->
-            <tr class="row-btn" th:each="user : *{allUsers}">
+            <tr class="row-btn" th:each="user : *{allUsers}" th:data-id="${user.id}">
               <!-- th:text="${app.email}" -->
               <td
                 class="whitespace-nowrap max-w-0 truncate text-center"
@@ -239,7 +239,7 @@
                   th:if="${app.status == 2 OR app.status == 5}"
                 -->
                 <button
-                  name="delete"
+                  th:name="${user.deletable} ? 'delete' : ''"
                   class="btn-row border-4 border-[#FF4C4C] hover:bg-red-600 hover:border-red-600 bg-[#FF4C4C] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                   type="button"
                 >
@@ -288,7 +288,8 @@
             </div>
           </div>
           <div class="modal-body" id="modal-body">
-            <form method="POST">
+            <form th:action="@{/admin/users/delete}" method="POST">
+			  <input type="hidden" name="userIdPk" id="delete-user-id-pk"/>
               <p class="font-semibold text-xl text-center">
                 Are you sure you want to delete this user?
               </p>
@@ -417,11 +418,12 @@
         for (let btn of btnRows) {
           btn.addEventListener("click", function () {
             rowBtnClicked = true;
-            let idPk = this.getAttribute("data-id");
-            console.log(this.name);
+            let idPk = this.parentElement.parentElement.getAttribute("data-id");
+            console.log(this.parentElement.parentElement);
             if (this.name === "delete") {
               $("#delete-modal").modal("show");
-              document.setAttribute("value", idPk);
+              document.getElementById('delete-user-id-pk')
+              .setAttribute("value", idPk);
             } else if (this.name === "edit") {
               $("#edit-modal").modal("show");
               document

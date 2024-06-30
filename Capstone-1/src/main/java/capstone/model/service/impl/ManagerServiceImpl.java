@@ -357,6 +357,8 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		applicantLogic.updateEvaluatedApplicant(token,resubmitFlg,  inDto.getApplicantIdPk());
 		
+		applicantLogic.updatePreviousEvaluatedApplicant(inDto.getApplicantIdPk());
+		
 		return outDto;
 	}
 	

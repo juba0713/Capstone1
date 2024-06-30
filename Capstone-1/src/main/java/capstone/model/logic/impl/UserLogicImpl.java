@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import capstone.model.dao.UserInfoAccountDao;
 import capstone.model.dao.UserInformationDao;
+import capstone.model.dao.entity.UserDetailsEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
 import capstone.model.dao.entity.UserInformationEntity;
 import capstone.model.logic.UserLogic;
@@ -71,7 +72,7 @@ public class UserLogicImpl implements UserLogic {
 	}
 
 	@Override
-	public List<UserInformationEntity> getAllUsers() {
+	public  List<UserDetailsEntity> getAllUsers() {
 		
 		return userInformationDao.getAllUsers();
 	}
@@ -80,6 +81,13 @@ public class UserLogicImpl implements UserLogic {
 	public List<UserInformationEntity> getUsersByApplicantIdPks(List<Integer> applicantIdPks) {
 		
 		return userInformationDao.getUsersByApplicantIdPks(applicantIdPks);
+	}
+
+	@Override
+	public void deleteUser(int userIdPk) {
+		
+		userInformationDao.deleteUser(userIdPk);
+		
 	}
 
 }

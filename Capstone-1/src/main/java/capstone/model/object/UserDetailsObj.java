@@ -13,9 +13,13 @@ public class UserDetailsObj {
 	
 	private String number;
 	
+	private String fullname;
+	
 	private String role;
 	
 	private Timestamp createdDate;
 	
 	private Timestamp updatedDate;
+	
+	private Boolean deletable;
 }
