@@ -50,7 +50,7 @@
   <body th:object="${managerWebDto}">
     <div>
       <div
-        class="h-full flex flex-col w-[250px] absolute bg-black z-10 justify-between text-customyellow"
+        class="h-full flex flex-col w-[250px] absolute bg-black z-20 justify-between text-customyellow"
       >
         <div class="pt-4">
           <img
@@ -95,15 +95,17 @@
         </div>
       </div>
       <!-- applicant details -->
-      <div class="h-screen bg-[#F9F9F9] p-2">
-        <div class="flex place-items-end flex-col ml-60 pr-10 pt-3">
+      <div class="h-screen bg-[#F9F9F9] overflow-y-auto">
+        <div
+          class="flex place-items-end flex-col ml-60 pr-10 pt-3 sticky top-0 z-10 bg-opacity-5 backdrop-blur-[3px]"
+        >
           <div class="font-primary text-4xl">
             Welcome, <span th:text="${session.fullname}"></span>!
           </div>
           <div>ID: <span th:text="${session.id}"></span></div>
         </div>
         <div
-          class="ml-[270px] mr-6 rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
+          class="mb-8 ml-[270px] mr-6 rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
         >
           <form th:action="@{/manager/proceed}" method="POST">
             <table id="applicants-table" class="w-screen h-4/5">
@@ -111,9 +113,11 @@
                 <tr>
                   <th class="text-center rounded-top-left">Email</th>
                   <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
-                  <th class="text-center">Project Title</th>
+                  <th class="text-center indent-4">Project Title</th>
 
-                  <th class="text-center hidden sm:table-cell">University</th>
+                  <th class="text-center hidden sm:table-cell indent-4">
+                    University
+                  </th>
                   <th class="text-center hidden sm:table-cell">Status</th>
                   <th
                     class="text-center hidden sm:table-cell rounded-top-right"
@@ -129,14 +133,6 @@
                   class="row-btn"
                   th:data-id="${app.applicantIdPk}"
                 >
-                  <!--<td>
-                <input
-                  type="checkbox"
-                  name="chosenApplicant"
-                  th:value="${app.applicantIdPk}"
-                  th:if="${app.status == 3}"
-                />
-              </td>-->
                   <td
                     th:text="${app.email}"
                     class="whitespace-nowrap max-w-0 truncate"
@@ -173,21 +169,6 @@
                       View Feedback
                     </button>
                   </td>
-                  <!-- <td>
-                     <button
-                      class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary text-sm sm:p-1"
-                      type="button"
-                      th:data-id="${app.applicantIdPk}"
-                      name="incubate"
-                      th:if="${app.score} >= 6"
-                    >
-                      Create Incubate Account
-                    </button> 
-                    <img
-                      th:src="@{/icons/remove.svg}"
-                      class="h-6 hover:cursor-pointer hover:invert-[.25]"
-                    />
-                  </td>-->
                 </tr>
               </tbody>
             </table>

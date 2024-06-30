@@ -78,6 +78,7 @@
 
       .error-container,
       .success-container {
+        z-index: 999;
         position: absolute;
         top: 30px;
         left: 100px;
@@ -202,7 +203,11 @@
           <tbody class="divide-y divide-grey-500 bodyrowhover">
             <!-- th:each="app : *{listOfApplicants}"
             th:data-id="${app.applicantIdPk}" -->
-            <tr class="row-btn" th:each="user : *{allUsers}" th:data-id="${user.id}">
+            <tr
+              class="row-btn"
+              th:each="user : *{allUsers}"
+              th:data-id="${user.id}"
+            >
               <!-- th:text="${app.email}" -->
               <td
                 class="whitespace-nowrap max-w-0 truncate text-center"
@@ -240,11 +245,14 @@
                 -->
                 <button
                   th:name="${user.deletable} ? 'delete' : ''"
-                  class="btn-row border-4 border-[#FF4C4C] hover:bg-red-600 hover:border-red-600 bg-[#FF4C4C] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  class="btn-row border-4 border-[#FF4C4C] bg-[#FF4C4C] hover:bg-red-600 hover:border-red-600 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                   type="button"
+                  th:classappend="${user.deletable} ? '' : 'border-gray-300 bg-gray-300 pointer-events-none'"
+                  th:disabled="${user.deletable} ? false : true"
                 >
                   <img class="h-4" th:src="@{/icons/trash.svg}" />
                 </button>
+
                 <button
                   name="edit"
                   class="btn-row border-4 border-[#2493DF] hover:bg-blue-600 hover:border-blue-600 bg-[#2493DF] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
@@ -289,7 +297,7 @@
           </div>
           <div class="modal-body" id="modal-body">
             <form th:action="@{/admin/users/delete}" method="POST">
-			  <input type="hidden" name="userIdPk" id="delete-user-id-pk"/>
+              <input type="hidden" name="userIdPk" id="delete-user-id-pk" />
               <p class="font-semibold text-xl text-center">
                 Are you sure you want to delete this user?
               </p>
@@ -422,8 +430,9 @@
             console.log(this.parentElement.parentElement);
             if (this.name === "delete") {
               $("#delete-modal").modal("show");
-              document.getElementById('delete-user-id-pk')
-              .setAttribute("value", idPk);
+              document
+                .getElementById("delete-user-id-pk")
+                .setAttribute("value", idPk);
             } else if (this.name === "edit") {
               $("#edit-modal").modal("show");
               document

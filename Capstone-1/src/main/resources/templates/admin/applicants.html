@@ -48,7 +48,7 @@
   </head>
   <body>
     <div
-      class="h-full flex flex-col w-[250px] absolute bg-black z-10 justify-between text-customyellow"
+      class="h-full flex flex-col w-[250px] absolute bg-black z-20 justify-between text-customyellow"
     >
       <div class="pt-4">
         <img
@@ -95,8 +95,10 @@
       </div>
     </div>
     <!-- applicant table -->
-    <div class="h-screen bg-[#F9F9F9] p-2">
-      <div class="flex place-items-end flex-col ml-60 pr-10 pt-3">
+    <div class="h-screen bg-[#F9F9F9] overflow-y-auto">
+      <div
+        class="flex place-items-end flex-col ml-60 pr-10 pt-3 sticky top-0 z-10 bg-opacity-5 backdrop-blur-[3px]"
+      >
         <div class="font-primary text-4xl">
           Welcome, <span th:text="${session.fullname}"></span>!
         </div>
@@ -104,19 +106,16 @@
       </div>
 
       <div
-        class="ml-[270px] mr-6 rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
+        class="mb-8 ml-[270px] mr-6 rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
       >
         <table
           id="applicants-table"
           class="w-screen h-4/5"
           th:object="${adminWebDto}"
         >
-          <!-- class="border-collapse table-auto border-4 border-violet-600 h-full border-spacing-0 w-fit" -->
-
           <thead class="font-secondary text-sm bg-customyellow">
             <tr>
               <th class="text-center w-1/5 rounded-top-left">email</th>
-              <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
               <th class="text-center indent-4">project title</th>
 
               <th class="text-center hidden sm:table-cell indent-4">
@@ -129,9 +128,7 @@
               <th class="text-center hidden sm:table-cell indent-5">
                 accepted by
               </th>
-              <th class="text-center hidden sm:table-cell indent-5">
-                evaluated by
-              </th>
+              <th class="text-center hidden sm:table-cell">evaluated by</th>
               <th class="text-center rounded-top-right"></th>
             </tr>
           </thead>
@@ -154,15 +151,11 @@
                 th:text="${app.university}"
                 class="whitespace-nowrap max-w-0 truncate"
               ></td>
-              <!-- th:text="${app.status == 0 ? 'In Officer' : app.status == 2 OR app.status != 0 ? 'Passed' : 'Failed'}"-->
-              <!--th:style="${app.status == 0 OR app.status == 1 OR app.status == 5 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"-->
               <td
                 class="whitespace-nowrap max-w-0 truncate"
                 th:text="${app.status == 0 ? 'In Officer' : app.status == 2 ? 'Rejected' : app.status == 1 OR app.status == 3? 'In Manager' : app.status == 4 ? 'In Board' : app.status == 5 AND app.score >=6 ? 'Passed'  : 'Failed'}"
                 th:style="${app.status == 0 OR app.status == 1 OR app.status==3 OR app.status == 4  ? 'color:#000000; font-weight: bold;' : app.status == 2 OR ((app.status == 5 OR app.status == 6 OR app.status == 7) AND app.score <= 5) ? 'color:#FF0000; font-weight: bold;' : 'color:#008000; font-weight: bold;'}"
               ></td>
-              <!-- th:text="${app.university}" -->
-
               <td
                 class="whitespace-nowrap max-w-0 truncate"
                 th:text="${app.status} == 2 ? ${app.acceptedBy} : ''"
