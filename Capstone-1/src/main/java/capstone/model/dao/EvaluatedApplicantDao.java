@@ -25,7 +25,13 @@ public interface EvaluatedApplicantDao extends JpaRepository<EvaluatedApplicantE
 			+ "SET "
 			+ "	delete_flg = true "
 			+ "WHERE "
-			+ "	applicant_id_pk = :applicantIdPk ";
+			+ "	applicant_id_pk = :applicantIdPk "
+			+ "AND applicant_id_pk < ("
+			+ "    SELECT MAX(applicant_id_pk) "
+			+ "    FROM t_evaluated_applicant "
+			+ "    WHERE applicant_id_pk = :applicantIdPk "
+			+ "    AND delete_flg = false "
+			+ ");";
 	
 	public final String GET_EVALUATED_APPLICANT_BY_TOKEN = "SELECT e"
 			+ " FROM EvaluatedApplicantEntity e"

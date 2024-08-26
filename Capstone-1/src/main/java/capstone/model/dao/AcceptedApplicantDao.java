@@ -14,7 +14,7 @@ public interface AcceptedApplicantDao extends JpaRepository<AcceptedApplicantEnt
 
 	public final String UPDATE_PREVIOUS_ACCEPTED_APPLICANT = "UPDATE t_accepted_applicant  "
 			+ "SET "
-			+ "	delete_flg = true"
+			+ "	delete_flg = true "
 			+ "WHERE "
 			+ "	applicant_id_pk = :applicantIdPk ";
 	

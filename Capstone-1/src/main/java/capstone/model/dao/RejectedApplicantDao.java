@@ -5,9 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import capstone.model.dao.entity.RejectedApplicantEntity;
 
+@Transactional
 public interface RejectedApplicantDao extends JpaRepository<RejectedApplicantEntity, Integer>{
 
 	public final String GET_REJECTED_APPLICANT_BY_TOKEN = "SELECT e"
@@ -17,7 +19,7 @@ public interface RejectedApplicantDao extends JpaRepository<RejectedApplicantEnt
 	
 	public final String UPDATE_PREVIOUS_REJECTED_APPLICANT = "UPDATE t_rejected_applicant  "
 			+ "SET "
-			+ "	delete_flg = true"
+			+ "	delete_flg = true "
 			+ "WHERE "
 			+ "	applicant_id_pk = :applicantIdPk ";
 		
