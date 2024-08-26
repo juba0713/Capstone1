@@ -660,38 +660,6 @@ video {
   top: 18rem;
 }
 
-.top-52{
-  top: 13rem;
-}
-
-.bottom-10{
-  bottom: 2.5rem;
-}
-
-.top-20{
-  top: 5rem;
-}
-
-.top-28{
-  top: 7rem;
-}
-
-.top-24{
-  top: 6rem;
-}
-
-.top-32{
-  top: 8rem;
-}
-
-.top-\[50\%\]{
-  top: 50%;
-}
-
-.top-\[40\%\]{
-  top: 40%;
-}
-
 .top-\[45\%\]{
   top: 45%;
 }
@@ -726,10 +694,6 @@ video {
 
 .m-auto{
   margin: auto;
-}
-
-.m-8{
-  margin: 2rem;
 }
 
 .mx-10{
@@ -770,11 +734,6 @@ video {
 .my-4{
   margin-top: 1rem;
   margin-bottom: 1rem;
-}
-
-.my-auto{
-  margin-top: auto;
-  margin-bottom: auto;
 }
 
 .mb-1{
@@ -897,10 +856,6 @@ video {
   margin-top: 2rem;
 }
 
-.mt-32{
-  margin-top: 8rem;
-}
-
 .block{
   display: block;
 }
@@ -1009,19 +964,6 @@ video {
   height: 100vh;
 }
 
-.h-fit{
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
-.h-96{
-  height: 24rem;
-}
-
-.h-52{
-  height: 13rem;
-}
-
 .min-h-32{
   min-height: 8rem;
 }
@@ -1044,10 +986,6 @@ video {
 
 .w-1\/5{
   width: 20%;
-}
-
-.w-1\/6{
-  width: 16.666667%;
 }
 
 .w-12{
@@ -1179,10 +1117,6 @@ video {
   width: 50%;
 }
 
-.w-\[160px\]{
-  width: 160px;
-}
-
 .min-w-60{
   min-width: 15rem;
 }
@@ -1212,10 +1146,6 @@ video {
 
 .transform{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.cursor-not-allowed{
-  cursor: not-allowed;
 }
 
 .cursor-pointer{
@@ -1254,10 +1184,6 @@ video {
   align-items: center;
 }
 
-.items-stretch{
-  align-items: stretch;
-}
-
 .justify-end{
   justify-content: flex-end;
 }
@@ -1272,10 +1198,6 @@ video {
 
 .justify-evenly{
   justify-content: space-evenly;
-}
-
-.justify-stretch{
-  justify-content: stretch;
 }
 
 .justify-items-center{
@@ -1455,6 +1377,11 @@ video {
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
+.border-gray-300{
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+
 .border-gray-500{
   --tw-border-opacity: 1;
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
@@ -1484,9 +1411,9 @@ video {
   border-color: rgb(253 224 71 / var(--tw-border-opacity));
 }
 
-.border-gray-300{
+.border-red-300{
   --tw-border-opacity: 1;
-  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+  border-color: rgb(252 165 165 / var(--tw-border-opacity));
 }
 
 .border-b-customyellow{
@@ -1577,9 +1504,14 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-red-100{
+.bg-red-400{
   --tw-bg-opacity: 1;
-  background-color: rgb(254 226 226 / var(--tw-bg-opacity));
+  background-color: rgb(248 113 113 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#f9f9f9\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 249 249 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-5{
@@ -1926,6 +1858,11 @@ video {
   color: rgb(253 204 1 / var(--tw-text-opacity));
 }
 
+.text-gray-400{
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
 .text-gray-50{
   --tw-text-opacity: 1;
   color: rgb(249 250 251 / var(--tw-text-opacity));
@@ -1969,16 +1906,6 @@ video {
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-gray-300{
-  --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity));
-}
-
-.text-gray-400{
-  --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
 }
 
 .underline{
@@ -2439,11 +2366,6 @@ video {
   background-color: rgb(253 204 1 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-yellow-50:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 252 232 / var(--tw-bg-opacity));
-}
-
 .hover\:bg-opacity-75:hover{
   --tw-bg-opacity: 0.75;
 }
@@ -2480,11 +2402,6 @@ video {
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.hover\:invert-\[\.25\]:hover{
-  --tw-invert: invert(.25);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
 .hover\:focus-within\:border-black:focus-within:hover{
