@@ -73,12 +73,17 @@
             <a
               th:href="@{/manager/evaluated-result}"
               class="hover:rounded-sm hover:bg-tanglow hover:text-black hover:no-underline p-2"
-              >Evaluated Appications</a
+              >Evaluated Applications</a
             >
             <a
               th:href="@{/manager/analytics}"
               class="hover:rounded-sm hover:bg-tanglow hover:text-black hover:no-underline p-2"
               >Analytics</a
+            >
+            <a
+              th:href="@{/manager/rank-startups}"
+              class="hover:rounded-sm hover:bg-tanglow hover:text-black hover:no-underline p-2"
+              >Rank Startups</a
             >
           </div>
         </div>
@@ -412,7 +417,7 @@
           let objectives = document.querySelector(".objectives");
           let scopeProposal = document.querySelector(".scopeProposal");
           let methodology = document.querySelector(".methodology");
-          //let vitaeFile = document.querySelector('.vitaeFile');
+          let vitaeFile = document.querySelector(".vitaeFile");
           let supportLink = document.querySelector(".supportLink");
           let groupName = document.querySelector(".groupName");
           let groupLeader = document.querySelector(".groupLeader");
@@ -622,6 +627,7 @@
           } else {
             university.value = "NA";
           }
+          vitaeFile.setAttribute("href", "/view/" + applicant.vitaeFile);
           //Technology Answer
           technologyAns[applicant.technologyAns - 1].checked = true;
           //Product Development Answer

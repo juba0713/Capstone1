@@ -71,8 +71,12 @@ public class ManagerController {
 		AdminInOutDto outDto = adminService.getAdminDashboardDetails();
 
 		webDto.setAdminDashboardObj(outDto.getAdminDashboardObj());
-		System.out.println("test");
 		return "manager/analyticsManager";
+	}
+
+	@GetMapping("/rank-startups")
+	public String showRankStartups(@ModelAttribute ManagerWebDto webDto) {
+		return "manager/rankStartups";
 	}
 
 	@PostMapping("/account/activate")

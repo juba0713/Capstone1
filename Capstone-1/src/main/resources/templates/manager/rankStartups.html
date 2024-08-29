@@ -14,7 +14,6 @@
       href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" th:href="@{/css/officer/officer.css}" />
     <link rel="stylesheet" th:href="@{/css/output.css}" />
 
     <style>
@@ -27,14 +26,6 @@
         font-size: smaller;
         position: relative;
       }
-      .dt-end > button {
-        /* Your styles here */
-        margin-left: 0;
-        position: absolute;
-        left: 0%;
-        top: 2px;
-        font-family: Poppins;
-      }
       .dt-input {
         margin-right: 10px;
       }
@@ -45,39 +36,44 @@
         width: 100%;
         height: 92vh;
       }
-      .activation-modal-dialog {
-        margin-left: 35%;
+      .feedback-modal-dialog {
         max-width: 30%;
+        text-align: center;
+        max-height: 50px;
       }
-      .activation-modal-content {
-        height: 20%;
-      }
-
-      .error-container,
-      .success-container {
-        z-index: 999;
-        position: absolute;
-        top: 5px;
-        left: 10px;
-        width: 67%;
-        display: flex;
-        margin-left: 245px;
-        justify-content: center;
-        align-items: center;
+      .feedback-modal-content {
+        height: 30%;
       }
 
-      .error-container div,
-      .success-container div {
-        background: green;
-        color: #fff;
-        font-size: 16px;
-        font-weight: 400;
-        padding: 8px;
-        border-radius: 6px;
+      .ranking-container {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
       }
 
-      .error-container div {
-        background: red;
+      .ranking-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+      }
+
+      .ranking-item {
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        transition: box-shadow 0.3s ease;
+      }
+
+      .ranking-item:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        background-color: #e9e9e9;
+      }
+
+      .ranking-item:last-child {
+        margin-bottom: 0;
       }
     </style>
   </head>
@@ -89,7 +85,6 @@
         <div class="pt-4">
           <img
             class="filter-logo pointer-events-none h-16 w-52 flex justify-center mx-auto border-2 border-blue-500 mb-4"
-            src="/Capstone1/Capstone-1/src/main/resources/static/images/yellowLogo.png"
             th:src="@{/images/yellowLogo.png}"
           />
           <div
@@ -122,7 +117,6 @@
             >
           </div>
         </div>
-
         <div
           class="text-center p-2 text-xl font-primary hover:text-white w-full"
         >
@@ -135,21 +129,6 @@
           </form>
         </div>
       </div>
-
-      <div
-        class="error-container"
-        th:if="${errorMsg != null}"
-        id="flash-message"
-      >
-        <div th:text="${errorMsg}"></div>
-      </div>
-      <div
-        class="success-container"
-        th:if="${succMsg != null}"
-        id="flash-message"
-      >
-        <div th:text="${succMsg}"></div>
-      </div>
       <!-- applicant details -->
       <div class="h-screen bg-[#F9F9F9] overflow-y-auto">
         <div
@@ -160,22 +139,16 @@
           </div>
           <div>ID: <span th:text="${session.id}"></span></div>
         </div>
-        <div
-          class="mb-8 ml-[270px] mr-6 rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
-        >
-          <form th:action="@{/manager/proceed}" method="POST">
+        <div class="flex ml-[275px] mr-10 justify-between">
+          <div
+            class="mb-8 w-[55%] rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
+          >
             <table id="applicants-table" class="w-screen h-4/5">
-              <!-- class="border-collapse table-auto border-4 border-violet-600 h-full border-spacing-0 w-fit" -->
-
               <thead class="font-secondary text-sm bg-customyellow">
                 <tr>
-                  <th class="text-center rounded-top-left">Email</th>
-                  <th class="text-center w-3/12">Project Title</th>
+                  <th class="text-center rounded-top-left">Applicants</th>
 
-                  <th class="text-center w-1/5 hidden sm:table-cell">
-                    University
-                  </th>
-                  <th class="text-center rounded-top-right">Actions</th>
+                  <th class="text-center rounded-top-right"></th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-grey-500 bodyrowhover">
@@ -188,40 +161,41 @@
                     th:text="${app.email}"
                     class="whitespace-nowrap max-w-0 truncate"
                   ></td>
-                  <td
-                    th:text="${app.projectTitle}"
-                    class="whitespace-nowrap max-w-0 truncate"
-                  ></td>
-                  <td
-                    th:text="${app.university}"
-                    class="whitespace-nowrap max-w-0 truncate"
-                  ></td>
 
                   <td>
                     <button
-                      class="px-3 h-8 btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                      class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                       type="button"
                       th:data-id="${app.applicantIdPk}"
-                      name="activate"
-                      th:if="${app.status == 1}"
+                      name="feedback"
+                      th:if="${app.status == 2 OR app.status == 5}"
                     >
-                      Activate Account
+                      Rank Startup
                     </button>
-                    <input
-                      class="btn-row"
-                      type="checkbox"
-                      name="chosenApplicant"
-                      th:value="${app.applicantIdPk}"
-                      th:if="${app.status == 3}"
-                    />
                   </td>
                 </tr>
               </tbody>
             </table>
-          </form>
+          </div>
+          <div class="w-[40%] mt-8">
+            <div class="ranking-container">
+              <div class="flex justify-between">
+                <p class="font-bold text-xl mb-4">RANKING</p>
+                <p>download as pdf</p>
+              </div>
+              <ul class="ranking-list">
+                <li class="ranking-item">1. Item One</li>
+                <li class="ranking-item">2. Item Two</li>
+                <li class="ranking-item">3. Item Three</li>
+                <li class="ranking-item">4. Item Four</li>
+                <li class="ranking-item">5. Item Five</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-      <!-- applicant details modal -->
+
+      <!-- applicant details -->
       <div class="modal" tabindex="-1" role="dialog" id="details-modal">
         <div class="modal-dialog" role="document">
           <div
@@ -230,43 +204,27 @@
           ></div>
         </div>
       </div>
-
-      <!-- activation modal -->
-      <div
-        class="modal font-secondary"
-        tabindex="-1"
-        role="dialog"
-        id="activate-account-modal"
-      >
-        <div class="modal-dialog activation-modal-dialog" role="document">
-          <div class="modal-content activation-modal-content">
-            <div class="mb-10">
-              <div
-                class="rounded-t-md flex items-center flex-col justify-items-center mx-auto absolute z-10 w-full py-2 border-b-2"
-              >
-                <h5 class="modal-title font-bold text-green-700">Activation</h5>
+      <!-- feedback modal result-->
+      <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
+        <div class="modal-dialog feedback-modal-dialog" role="document">
+          <div class="modal-content feedback-modal-content">
+            <div class="p-2">
+              <div class="rejected">
+                <div class="resubmitFlg"></div>
+                <div class="rejected-feedback"></div>
               </div>
-            </div>
-            <div class="modal-body justify-center flex" id="modal-body">
-              <form th:action="@{/manager/account/activate}" method="POST">
-                <div class="mb-3">Activate this account?</div>
-
-                <input
-                  type="hidden"
-                  name="applicantIdPk"
-                  id="activate-applicant-id-pk"
-                  value="0"
-                />
-                <div class="justify-center flex">
-                  <button
-                    type="submit"
-                    name="activate"
-                    class="px-3 h-8 border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-                  >
-                    Activate Account
-                  </button>
+              <div class="evaluated">
+                <div
+                  class="rounded-sm w-full text-center font-bold p-2 bg-customyellow"
+                >
+                  Feedback
                 </div>
-              </form>
+                <div class="text-left">
+                  <p class="score mb-2"></p>
+                  <p class="evaluated-feedback"></p>
+                  <!-- <hr class="my-4" /> -->
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -290,14 +248,14 @@
     ></script>
     <script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
     <script th:inline="javascript">
-      console.log(/*[[${managerWebDto}]]*/ "");
-
+      const webDto = /*[[${managerWebDto}]]*/ "";
+      console.log(webDto);
       $(document).ready(function () {
         $("#applicants-table").dataTable({
           columnDefs: [
             {
               // targets: "no-sort",
-              targets: -1,
+              targets: [-1, -2],
               orderable: false,
             },
           ],
@@ -305,11 +263,6 @@
           // ordering: false,
           info: true,
           lengthChange: false,
-          initComplete: function () {
-            $(".dt-end:first").prepend(
-              '<button type="submit" style="background-color: #FDCC01; color: black; padding: 10px; border-radius: 10px;">Send to TbiBoard</button>'
-            );
-          },
         });
 
         let rows = document.getElementsByClassName("row-btn");
@@ -319,16 +272,11 @@
 
         for (let row of rows) {
           row.addEventListener("click", function () {
-            console.log("HELLO");
+            let id = this.getAttribute("data-id");
 
             if (!rowBtnClicked) {
-              $("#details-modal").modal("show");
-              let id = this.getAttribute("data-id");
-              console.log("ID: " + id);
-
               retrieveApplicantDetails(id);
-
-              // getApplicantDetails();
+              $("#details-modal").modal("show");
             }
           });
         }
@@ -337,15 +285,32 @@
           btn.addEventListener("click", function () {
             rowBtnClicked = true;
             let idPk = this.getAttribute("data-id");
-            if (this.name === "activate") {
-              let hiddenApplicantIdPk = document
-                .getElementById("activate-applicant-id-pk")
-                .setAttribute("value", this.getAttribute("data-id"));
+            if (this.name === "feedback") {
+              let evaluated = document.querySelector(".evaluated");
+              let rejected = document.querySelector(".rejected");
 
-              $("#activate-account-modal").modal("show");
-            }
-            if (this.name === "chosenApplicant") {
-              console.log("YES");
+              webDto.listOfApplicants.forEach((applicant) => {
+                if (applicant.applicantIdPk == idPk) {
+                  evaluated.style.display = "inline";
+                  rejected.style.display = "none";
+                  let score = document.querySelector(".score");
+                  let feedback = document.querySelector(".evaluated-feedback");
+
+                  if (applicant.status == 5) {
+                    score.innerHTML =
+                      "<p style='font-weight: 600; '>Score: </p>" +
+                      applicant.score;
+                  } else {
+                    score.innerHTML = "";
+                  }
+
+                  feedback.innerHTML =
+                    "<p style='font-weight: 600; '>Feedback: </p>" +
+                    applicant.feedback;
+                }
+              });
+
+              $("#feedback-modal").modal("show");
             }
             setTimeout(() => {
               rowBtnClicked = false;
@@ -364,12 +329,15 @@
 
           const data = await response.json();
 
+          console.log(data);
+
           document.querySelector(".overflow-auto").scrollTo({
             top: 0,
           });
 
           let applicant = data.applicantDetailsObj;
           let email = document.querySelector(".email");
+          console.log(email);
           let agreeFlgs = document.querySelectorAll(".agreeFlg");
           let projectTitle = document.querySelector(".projectTitle");
           let projectDescription = document.querySelector(
@@ -561,10 +529,9 @@
           scopeProposal.textContent = applicant.scopeProposal;
           //Methodology
           methodology.textContent = applicant.methodology;
-          //Vitae File
-          vitaeFile.href = "/view/" + applicant.vitaeFile;
           //Supporting Link
           if (applicant.supportLink != "") {
+            console.log("EMPTY LINK");
             supportLink.href = applicant.supportLink;
             supportLink.innerHTML = applicant.supportLink;
           } else {
@@ -618,6 +585,7 @@
           } else {
             university.value = "NA";
           }
+          vitaeFile.setAttribute("href", "/view/" + applicant.vitaeFile);
           //Technology Answer
           technologyAns[applicant.technologyAns - 1].checked = true;
           //Product Development Answer
@@ -667,19 +635,162 @@
         }
       });
     </script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+      integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script>
-      // JavaScript function to remove the flash message after a specified time
-      function hideFlashMessage() {
-        const flashMessage = document.getElementById("flash-message");
-        if (flashMessage) {
-          setTimeout(() => {
-            flashMessage.style.display = "none";
-          }, 5000); // 5000 milliseconds = 5 seconds
-        }
-      }
+      // Wait for the DOM to load before accessing elements
+      document.addEventListener("DOMContentLoaded", () => {
+        const downloadButton = document.querySelector(".download-btn");
+        console.log(downloadButton);
+        downloadButton.addEventListener("click", function () {
+          const { jsPDF } = window.jspdf;
+          const firstPageContent =
+            document.getElementById("first-page-content");
+          const secondPageContent = document.getElementById(
+            "second-page-content"
+          );
+          const thirdPageContent =
+            document.getElementById("third-page-content");
+          const forthPageContent =
+            document.getElementById("forth-page-content");
+          const fifthPageContent =
+            document.getElementById("fifth-page-content");
+          // const secondPageContentOne = document.getElementById(
+          //   "second-page-content-one"
+          // );
+          // const secondPageContentTwo = document.getElementById(
+          //   "second-page-content-two"
+          // );
 
-      // Call the function on page load
-      window.onload = hideFlashMessage;
+          //Logo for all page
+          // const image = document.createElement("img");
+          // image.src = "/images/wilBlackBox.png";
+          // image.alt = "image";
+          // image.style.position = "absolute";
+          // image.style.top = "10px";
+          // image.style.right = "10px";
+
+          //This is for first page content
+          let firstPageContentClone = firstPageContent.cloneNode(true);
+          let secondPageContentClone = secondPageContent.cloneNode(true);
+          let thirdPageContentClone = thirdPageContent.cloneNode(true);
+          let forthPageContentClone = forthPageContent.cloneNode(true);
+          let fifthPageContentClone = fifthPageContent.cloneNode(true);
+          // firstPageContentClone.style.position = "relative";
+
+          // firstPageContentClone.appendChild(image);
+
+          //This is for second page content
+          // let secondPageContentOneClone = secondPageContentOne.cloneNode(true);
+          // let secondPageContentTwoClone = secondPageContentTwo.cloneNode(true);
+
+          firstPageContentClone.style.height = "9999px";
+          firstPageContentClone.style.padding = "50px";
+
+          secondPageContentClone.style.height = "9999px";
+          secondPageContentClone.style.padding = "50px";
+
+          thirdPageContentClone.style.height = "9999px";
+          thirdPageContentClone.style.padding = "50px";
+
+          forthPageContentClone.style.height = "9999px";
+          forthPageContentClone.style.padding = "50px";
+
+          fifthPageContentClone.style.height = "9999px";
+          fifthPageContentClone.style.padding = "50px";
+          // secondPageContentTwoClone.style.padding = "0px 20px";
+          // secondPageContentTwoClone.style.fontSize = "50px";
+
+          // let problemStatement =
+          //   secondPageContentTwoClone.querySelector(".problemStatement");
+          // problemStatement.style.fontSize = "50px";
+          // problemStatement.style.border = "none !important";
+          // problemStatement.style.outline = "none !important";
+
+          // const secondPageContentClone = document.createElement("div");
+          // secondPageContentClone.style.position = "relative";
+
+          // secondPageContentClone.appendChild(image);
+          // secondPageContentClone.appendChild(secondPageContentOneClone);
+          // secondPageContentClone.appendChild(secondPageContentTwoClone);
+
+          //This is for third page content
+
+          document.body.appendChild(firstPageContentClone);
+          document.body.appendChild(secondPageContentClone);
+          document.body.appendChild(thirdPageContentClone);
+          document.body.appendChild(forthPageContentClone);
+          document.body.appendChild(fifthPageContentClone);
+          // document.body.appendChild(secondPageContentClone);
+
+          const doc = new jsPDF("p", "pt", "a4"); // 'l' for landscape, 'pt' for points (unit), 'a4' for A4 size
+
+          html2canvas(firstPageContentClone).then((canvas) => {
+            const imgData = canvas.toDataURL("image/png");
+
+            const imgProps = doc.getImageProperties(imgData);
+            const pdfWidth = doc.internal.pageSize.getWidth();
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+            doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+            // Add a new page before adding the second page content
+            doc.addPage();
+
+            html2canvas(secondPageContentClone).then((canvas) => {
+              const imgData = canvas.toDataURL("image/png");
+              const imgProps = doc.getImageProperties(imgData);
+              const pdfWidth = doc.internal.pageSize.getWidth();
+              const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+              doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+              doc.addPage();
+
+              html2canvas(thirdPageContentClone).then((canvas) => {
+                const imgData = canvas.toDataURL("image/png");
+                const imgProps = doc.getImageProperties(imgData);
+                const pdfWidth = doc.internal.pageSize.getWidth();
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+                doc.addPage();
+
+                html2canvas(forthPageContentClone).then((canvas) => {
+                  const imgData = canvas.toDataURL("image/png");
+                  const imgProps = doc.getImageProperties(imgData);
+                  const pdfWidth = doc.internal.pageSize.getWidth();
+                  const pdfHeight =
+                    (imgProps.height * pdfWidth) / imgProps.width;
+                  doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+                  doc.addPage();
+
+                  html2canvas(fifthPageContentClone).then((canvas) => {
+                    const imgData = canvas.toDataURL("image/png");
+                    const imgProps = doc.getImageProperties(imgData);
+                    const pdfWidth = doc.internal.pageSize.getWidth();
+                    const pdfHeight =
+                      (imgProps.height * pdfWidth) / imgProps.width;
+                    doc.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+
+                    // Save the PDF after the second page is added
+                    doc.save("applicant_Form_Data.pdf");
+
+                    firstPageContentClone.remove();
+                    secondPageContentClone.remove();
+                    thirdPageContentClone.remove();
+                    forthPageContentClone.remove();
+                    fifthPageContentClone.remove();
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
     </script>
   </body>
 </html>

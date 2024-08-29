@@ -168,7 +168,8 @@
         class="flex place-items-end flex-col ml-60 pr-10 pt-3 sticky top-0 z-10 bg-opacity-5 backdrop-blur-[3px]"
       >
         <div class="font-primary text-4xl w-full flex justify-end">
-          Welcome, <span th:text="${session.fullname}"></span>!
+          <!-- Welcome, <span th:text="${session.fullname}"></span>! -->
+          Welcome, Admin!
         </div>
         <!-- <div>ID: <span th:text="${session.id}"></span></div> -->
       </div>
@@ -185,18 +186,14 @@
 
           <thead class="font-secondary text-sm bg-customyellow">
             <tr>
-              <th class="text-center rounded-top-left indent-6">id</th>
+              <th class="text-center rounded-top-left">id</th>
               <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
               <th class="text-center w-1/5">email</th>
-              <th class="text-center w-1/5 indent-4">number</th>
+              <th class="text-center w-1/5">number</th>
 
-              <th class="text-center hidden sm:table-cell indent-4">role</th>
-              <th class="text-center hidden sm:table-cell indent-5">
-                date-created
-              </th>
-              <th class="text-center hidden sm:table-cell indent-5">
-                date-modified
-              </th>
+              <th class="text-center hidden sm:table-cell">role</th>
+              <th class="text-center hidden sm:table-cell">date-created</th>
+              <th class="text-center hidden sm:table-cell">date-modified</th>
               <th class="text-center rounded-top-right"></th>
             </tr>
           </thead>
