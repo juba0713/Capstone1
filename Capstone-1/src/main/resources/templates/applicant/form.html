@@ -80,7 +80,7 @@
     <div
       class="bg-gradient-to-r from-formbg-dark to-formbg-light flex w-full md:flex-row-reverse bg-fixed"
     >
-      <div
+      <!-- <div
         class="z-50 font-secondary font-normal text-black pt-20 mt-14 md:w-3/12 md:fixed md:block hidden"
       >
         <div class="mb-4 font-semibold">Registration Form</div>
@@ -97,7 +97,7 @@
             <a href="#cvProjectLeader"> III. Curriculum Vitae </a>
           </li>
         </ul>
-      </div>
+      </div> -->
       <div class="error-container" th:if="*{error != null}">
         <div>Please fill out all required fields!</div>
       </div>
@@ -1631,7 +1631,7 @@
       </div>
     </div>
     <!-- Scroll to top button -->
-    <div
+    <!-- <div
       class="bg-transparent text-white py-4 px-8 flex justify-end fixed bottom-0 w-full z-50"
     >
       <button
@@ -1652,9 +1652,9 @@
           />
         </svg>
       </button>
-    </div>
+    </div> -->
 
-    <script th:inline="javascript">
+    <!-- <script th:inline="javascript">
       console.log(/*[[${applicantWebDto}]]*/ "");
 
       window.addEventListener("scroll", function () {
@@ -1676,6 +1676,6 @@
             behavior: "smooth",
           });
         });
-    </script>
+    </script> -->
   </body>
 </html>
