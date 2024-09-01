@@ -21,6 +21,26 @@ input[type="file"] {
     min-width: 150px;
   }
 }
+
+/* back to login button */
+.floating-back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: hsl(48, 99%, 50%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+.floating-back-button:hover {
+  background-color: hsl(48, 99%, 65%);
+}
+
 .buttonfx {
   color: #ffffff; /* button text color */
   outline: none;
