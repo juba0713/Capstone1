@@ -3,7 +3,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Default style for larger screens */
+input[type="file"] {
+  min-width: 230px;
+}
 
+/* For tablets and smaller screens */
+@media (max-width: 768px) {
+  input[type="file"] {
+    min-width: 110px;
+  }
+}
+
+/* For mobile phones */
+@media (max-width: 480px) {
+  input[type="file"] {
+    min-width: 150px;
+  }
+}
 .buttonfx {
   color: #ffffff; /* button text color */
   outline: none;
