@@ -54,7 +54,7 @@ public class ApplicantController {
 			webDto.setToken(token);
 		}
 
-		return "applicant/applicationForm";
+		return "applicant/evaluateApplication";
 	}
 
 	/**

@@ -108,9 +108,9 @@
       <div>Please fill out all required fields!</div>
     </div>
     <div class="flex flex-row">
-      <!-- <div class="border-2 border-red-500"> -->
       <form id="regForm" action="">
-        <div class="tab">
+        <!-- page 1 -->
+        <!-- <div class="tab">
           <div>
             <div class="flex justify-between">
               <div class="mt-20 mb-6 h-20 flex text-center items-center">
@@ -236,9 +236,9 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <!-- 2nd page -->
+        <!-- page 2 -->
         <div class="tab">
           <h1
             class="w-full bg-gradient-to-r from-[#E7BA05] to-customyellow font-semibold text-lg p-4 rounded-t-lg"
@@ -278,34 +278,37 @@
                 I. About the Startup/Project
               </p>
               <!-- project description -->
-              <h2 class="text-black">
-                A. Project Description<span class="text-red-600"> *</span>
-              </h2>
-              <textarea
-                oninput="this.className = ''"
-                type="text"
-                placeholder="Type something here..."
-                name="projectDescription"
-                th:text="*{projectDescription}"
-                class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
-              ></textarea>
-              <small class="block mt-2 text-gray-500">
-                • Maximum of 100 words<br />
-                • If a startup, describe the nature of the business including
-                the product or service offering.<br />
-                • If a project, provide a detailed description or statement
-                about the subject, program, competition, or initiative that
-                initiated this project.
-              </small>
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.projectDescriptionError != null}"
-              >
+              <div>
+                <h2 class="text-black">
+                  A. Project Description<span class="text-red-600"> *</span>
+                </h2>
+                <textarea
+                  oninput="this.className = ''"
+                  type="text"
+                  placeholder="Type something here..."
+                  name="projectDescription"
+                  th:text="*{projectDescription}"
+                  class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
+                ></textarea>
+                <small class="block mt-2 text-gray-500">
+                  • Maximum of 100 words<br />
+                  • If a startup, describe the nature of the business including
+                  the product or service offering.<br />
+                  • If a project, provide a detailed description or statement
+                  about the subject, program, competition, or initiative that
+                  initiated this project.
+                </small>
                 <div
-                  th:each="err : *{error.projectDescriptionError}"
-                  th:text="${err}"
-                ></div>
+                  class="error no-pad"
+                  th:if="*{error != null} AND *{error.projectDescriptionError != null}"
+                >
+                  <div
+                    th:each="err : *{error.projectDescriptionError}"
+                    th:text="${err}"
+                  ></div>
+                </div>
               </div>
+
               <hr class="my-4" />
 
               <!-- team composition -->
@@ -839,30 +842,32 @@
                 II. About the Proposed Acceleration
               </p>
               <!-- objectives -->
-              <h2 class="text-black">
-                A. Objectives<span class="text-red-600"> *</span>
-              </h2>
-              <textarea
-                oninput="this.className = ''"
-                type="text"
-                placeholder="Type something here..."
-                name="objectives"
-                th:text="*{objectives}"
-                class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
-              ></textarea>
-              <small class="block text-gray-500">
-                • Maximum of 50 words<br />
-                • Provide 3 main objectives of the proposed acceleration.<br />
-                • The readiness level must be specified.
-              </small>
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.ObjectivesError != null}"
-              >
+              <div>
+                <h2 class="text-black">
+                  A. Objectives<span class="text-red-600"> *</span>
+                </h2>
+                <textarea
+                  oninput="this.className = ''"
+                  type="text"
+                  placeholder="Type something here..."
+                  name="objectives"
+                  th:text="*{objectives}"
+                  class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
+                ></textarea>
+                <small class="block text-gray-500">
+                  • Maximum of 50 words<br />
+                  • Provide 3 main objectives of the proposed acceleration.<br />
+                  • The readiness level must be specified.
+                </small>
                 <div
-                  th:each="err : *{error.ObjectivesError}"
-                  th:text="${err}"
-                ></div>
+                  class="error no-pad"
+                  th:if="*{error != null} AND *{error.ObjectivesError != null}"
+                >
+                  <div
+                    th:each="err : *{error.ObjectivesError}"
+                    th:text="${err}"
+                  ></div>
+                </div>
               </div>
               <hr class="my-4" />
 
@@ -977,7 +982,8 @@
             </div>
           </div>
         </div>
-        <!-- group info -->
+
+        <!-- page 3 -->
         <div class="tab mb-3">
           <h1
             class="w-full bg-gradient-to-r from-formbg-dark to-formbg-light font-semibold text-lg p-4 rounded-t-lg"
@@ -1174,7 +1180,7 @@
             >
               <div th:each="err : *{error.membersError}" th:text="${err}"></div>
             </div>
-            <!-- page 3 -->
+
             <hr class="my-4" />
             <div class="relative pt-3 ml-6 mb-3">
               <h2 class="text-black mb-3">
@@ -1201,6 +1207,7 @@
             </div>
           </div>
         </div>
+
         <!-- page 4 -->
         <!-- Technology and Commercialization Readiness Level
  -->
@@ -1819,8 +1826,9 @@
             </div>
           </div>
         </div>
+
         <!-- page 5 -->
-        <div class="tab">
+        <!-- <div class="tab mb-3">
           <h1
             class="w-full bg-gradient-to-r from-formbg-dark to-formbg-light font-semibold text-lg p-4 rounded-t-lg"
           >
@@ -1835,6 +1843,7 @@
                 the eligibility criteria and rules of LaunchLab program.
               </h2>
             </div>
+            <hr class="my-3" />
             <div class="ml-6 pr-2 text-sm">
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
@@ -1867,12 +1876,11 @@
             >
               <div th:text="*{error.eligibilityAgreeFlgError}"></div>
             </div>
-            <hr class="my-3" />
           </div>
-        </div>
+        </div> -->
 
         <!-- page 6 -->
-        <div class="tab mb-3">
+        <!-- <div class="tab mb-3">
           <h1
             class="w-full bg-gradient-to-r from-formbg-dark to-formbg-light font-semibold text-lg p-4 rounded-t-lg"
           >
@@ -2058,9 +2066,10 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
+
         <!-- page 7 -->
-        <div class="tab mb-3">
+        <!-- <div class="tab mb-3">
           <h1
             class="w-full bg-gradient-to-r from-formbg-dark to-formbg-light font-semibold text-lg p-4 rounded-t-lg"
           >
@@ -2080,8 +2089,9 @@
               </h2>
             </div>
           </div>
-        </div>
-        <!-- ------------------ -->
+        </div> -->
+
+        <!---------- end page ------------>
         <div style="overflow: auto">
           <div style="float: right">
             <button
@@ -2107,15 +2117,21 @@
           <span class="step"></span>
           <span class="step"></span>
           <span class="step"></span>
+          <!-- <span class="step"></span> -->
+          <!-- <span class="step"></span>
           <span class="step"></span>
-          <span class="step"></span>
-          <span class="step"></span>
-          <span class="step"></span>
+          <span class="step"></span> -->
         </div>
       </form>
-      <!-- </div> -->
 
       <div class="checklist w-[45%] text-sm">
+        <div class="flex justify-end">
+          <a
+            th:href="@{/officer/home}"
+            class="bg-gray-400 hover:bg-black hover:text-white text-black border-solid border-opacity-100 border-2 rounded-full p-2 w-[15%] text-center"
+            >close</a
+          >
+        </div>
         <h1 class="font-semibold text-lg">Pre-screening Checklist</h1>
         <div>
           <div
