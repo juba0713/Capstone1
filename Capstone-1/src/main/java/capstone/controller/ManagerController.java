@@ -36,6 +36,26 @@ public class ManagerController {
 	@Autowired
 	private AdminService adminService;
 
+	@GetMapping("/version-history1")
+	public String showVersionHistoryOne(@ModelAttribute ManagerWebDto webDto) {
+
+		// ManagerInOutDto outDto = managerService.getAllApplicants();
+
+		// webDto.setListOfApplicants(outDto.getListOfApplicants());
+
+		return "manager/firstApplication";
+	}
+
+	@GetMapping("/version-history")
+	public String showVersionHistory(@ModelAttribute ManagerWebDto webDto) {
+
+		// ManagerInOutDto outDto = managerService.getAllApplicants();
+
+		// webDto.setListOfApplicants(outDto.getListOfApplicants());
+
+		return "manager/viewHistory";
+	}
+
 	@GetMapping("/home")
 	public String showManagerHome(@ModelAttribute ManagerWebDto webDto) {
 

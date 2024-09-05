@@ -109,136 +109,21 @@
     </div>
     <div class="flex flex-row">
       <form id="regForm" action="">
-        <!-- page 1 -->
-        <!-- <div class="tab">
-          <div>
-            <div class="flex justify-between">
-              <div class="mt-20 mb-6 h-20 flex text-center items-center">
-                <div class="ml-6 mt-4 font-semibold text-xl">
-                  Registration Form
-                </div>
-              </div>
-              <a href="/" class="h-24">
-                <img
-                  src="/images/wilBlackBox.png"
-                  class="h-20 mr-4 mt-4 pointer-events-none"
-                />
-              </a>
-            </div>
-            <p class="mb-10 ml-6 mr-6 text-justify">
-              Thank you for your interest in participating the LaunchLab Program
-              of DASIG. This program is spearheaded by CIT-U Wildcat Innovation
-              Labs. Please complete the following form to submit your capsule
-              proposal for consideration.
-            </p>
-            <hr class="ml-6 mr-6 my-8" />
-            <div
-              class="flex flex-col ml-6 w-2/4 relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
-            >
-              <h2 class="text-black mb-3">
-                Email<span class="text-red-600"> *</span>
-              </h2>
-              <input
-                required
-                oninput="this.className = ''"
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Enter your email here"
-                class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-              />
-              <span
-                class="absolute mt-20"
-                id="emailError"
-                style="color: red"
-              ></span>
-            </div>
-            <hr class="ml-6 mr-6 my-8" />
-            <div class="relative">
-              <p class="text-black text-justify mt-10 mb-8 ml-6 mr-6">
-                By accomplishing this form, the following personal information
-                will be collected including, startup team members names,
-                personal email address, mobile phone number and other relevant
-                information. The personal information you will provide in this
-                form will be used within LaunchLab Program, DASIG consortium
-                committee and will not be shared with any outside parties unless
-                you have prior written consent. Development and Acceleration
-                Support for Innovation Growth (DASIG) respects your rights as a
-                data subject under the Data Privacy Act.
-              </p>
-              <span class="absolute top-0 right-0 text-red-500">*</span>
-              <p class="text-black text-justify mt-8 mb-8 ml-6 mr-8">
-                If you have further questions and concerns regarding the
-                processing of your personal information, you are welcome to
-                contact our team, Engr. Ralph Laviste at
-                <a
-                  href="mailto:ralph.laviste@cit.edu"
-                  class="font-semibold text-blue-700"
-                  >ralph.laviste@cit.edu</a
-                >
-                and
-                <a
-                  href="mailto:rlaviste@gmail.com"
-                  class="font-semibold text-blue-700"
-                  >rlaviste@gmail.com</a
-                >
-                , and Engr. Jurydel Rama at
-                <a
-                  href="mailto:jurydel.rama@cit.edu"
-                  class="font-semibold text-blue-700"
-                  >jurydel.rama@cit.edu</a
-                >
-                and
-                <a
-                  href="mailto:jurydelrama@gmail.com"
-                  class="font-semibold text-blue-700"
-                  >jurydelrama@gmail.com</a
-                >
-                .
-              </p>
-              <p class="text-black text-justify mt-8 mb-8 ml-6 mr-8">
-                In compliance with the Data Privacy Act (DPA) of 2012, also
-                known as the Republic Act of 10173 (RA 10173), I agree and
-                authorize the Development and Acceleration Support for
-                Innovation Growth (DASIG) consortium members to use the personal
-                information for the purpose of LaunchLab programs and
-                initiatives. I also acknowledge and warrant that I have acquired
-                the consent from all parties relevant to this consent and hold
-                free and harmless and indemnify Development and Acceleration
-                Support for Innovation Growth (DASIG) from any complaint, suit,
-                or damages which any party may file or claim in relation to my
-                consent.
-              </p>
-              <div class="ml-4">
-                <div class="flex flex-row items-center">
-                  <label class="cursor-pointer flex items-center">
-                    <input
-                      type="radio"
-                      id="agreeYes"
-                      name="agreeFlg"
-                      value="true"
-                    />
-                    <span>I AGREE</span>
-                  </label>
-                </div>
-                <div class="flex flex-row items-center">
-                  <label class="cursor-pointer flex items-center">
-                    <input
-                      type="radio"
-                      id="agreeNo"
-                      name="agreeFlg"
-                      value="false"
-                    />
-                    <span>I DO NOT AGREE</span>
-                  </label>
-                </div>
-                <span class="mt-20" id="radioError" style="color: red"></span>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
         <!-- page 2 -->
+        <div class="flex justify-end">
+          <a th:href="@{/manager/viewHistory}">
+            <div class="border-2 cursor-pointer w-fit flex">
+              <img
+                id="eyeIcon"
+                src="/icons/history.svg"
+                alt="view history"
+                class="h-6 w-6 mr-2"
+              />
+              view history[make this visible only if performed resubmit
+              application]
+            </div>
+          </a>
+        </div>
         <div class="tab">
           <h1
             class="w-full bg-gradient-to-r from-[#E7BA05] to-customyellow font-semibold text-lg p-4 rounded-t-lg"
@@ -254,22 +139,12 @@
               </h2>
               <input
                 required
-                oninput="this.className = ''"
                 placeholder="Enter Project title"
                 name="projectTitle"
-                th:value="*{projectTitle}"
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
               />
             </div>
-            <div
-              class="error"
-              th:if="*{error != null} AND *{error.projectTitleError != null}"
-            >
-              <div
-                th:each="err : *{error.projectTitleError}"
-                th:text="${err}"
-              ></div>
-            </div>
+
             <hr class="my-8" />
 
             <!-- capsule proposal form -->
@@ -283,11 +158,9 @@
                   A. Project Description<span class="text-red-600"> *</span>
                 </h2>
                 <textarea
-                  oninput="this.className = ''"
                   type="text"
                   placeholder="Type something here..."
                   name="projectDescription"
-                  th:text="*{projectDescription}"
                   class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                 ></textarea>
                 <small class="block mt-2 text-gray-500">
@@ -298,15 +171,6 @@
                   about the subject, program, competition, or initiative that
                   initiated this project.
                 </small>
-                <div
-                  class="error no-pad"
-                  th:if="*{error != null} AND *{error.projectDescriptionError != null}"
-                >
-                  <div
-                    th:each="err : *{error.projectDescriptionError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
               </div>
 
               <hr class="my-4" />
@@ -324,9 +188,7 @@
                   <div
                     class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
                   >
-                    <!-- th:value="*{teams[0][0]}" -->
                     <input
-                      oninput="this.className = ''"
                       name="teams[0][0]"
                       type="text"
                       placeholder="Last Name, First Name"
@@ -336,10 +198,8 @@
                   <div
                     class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
                   >
-                    <!-- th:value="*{teams[0][1]}" -->
                     <input
                       name="teams[0][1]"
-                      oninput="this.className = ''"
                       type="text"
                       placeholder="Input position/role"
                       class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -348,9 +208,7 @@
                   <div
                     class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
                   >
-                    <!-- th:value="*{teams[0][0]}" -->
                     <input
-                      oninput="this.className = ''"
                       name="teams[0][0]"
                       type="text"
                       placeholder="Last Name, First Name"
@@ -360,10 +218,8 @@
                   <div
                     class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
                   >
-                    <!-- th:value="*{teams[0][1]}" -->
                     <input
                       name="teams[0][1]"
-                      oninput="this.className = ''"
                       type="text"
                       placeholder="Input position/role"
                       class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -372,9 +228,7 @@
                   <div
                     class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
                   >
-                    <!-- th:value="*{teams[0][0]}" -->
                     <input
-                      oninput="this.className = ''"
                       name="teams[0][0]"
                       type="text"
                       placeholder="Last Name, First Name"
@@ -384,10 +238,8 @@
                   <div
                     class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
                   >
-                    <!-- th:value="*{teams[0][1]}" -->
                     <input
                       name="teams[0][1]"
-                      oninput="this.className = ''"
                       type="text"
                       placeholder="Input position/role"
                       class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -396,9 +248,7 @@
                   <div
                     class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
                   >
-                    <!-- th:value="*{teams[0][0]}" -->
                     <input
-                      oninput="this.className = ''"
                       name="teams[0][0]"
                       type="text"
                       placeholder="Last Name, First Name"
@@ -408,10 +258,8 @@
                   <div
                     class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
                   >
-                    <!-- th:value="*{teams[0][1]}" -->
                     <input
                       name="teams[0][1]"
-                      oninput="this.className = ''"
                       type="text"
                       placeholder="Input position/role"
                       class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -420,9 +268,7 @@
                   <div
                     class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
                   >
-                    <!-- th:value="*{teams[0][0]}" -->
                     <input
-                      oninput="this.className = ''"
                       name="teams[0][0]"
                       type="text"
                       placeholder="Last Name, First Name"
@@ -432,10 +278,8 @@
                   <div
                     class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
                   >
-                    <!-- th:value="*{teams[0][1]}" -->
                     <input
                       name="teams[0][1]"
-                      oninput="this.className = ''"
                       type="text"
                       placeholder="Input position/role"
                       class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -443,12 +287,7 @@
                   </div>
                 </div>
               </div>
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.teamsError != null}"
-              >
-                <div th:each="err : *{error.teamsError}" th:text="${err}"></div>
-              </div>
+
               <hr class="my-4" />
 
               <!--  About the Product/Solution -->
@@ -459,10 +298,8 @@
                   1. Problem Statement<span class="text-red-600"> *</span>
                 </p>
                 <textarea
-                  oninput="this.className = ''"
                   placeholder="Type something here..."
                   name="problemStatement"
-                  th:text="*{problemStatement}"
                   class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                 ></textarea>
                 <small class="block text-gray-500">
@@ -476,7 +313,6 @@
                   <textarea
                     placeholder="Type something here..."
                     name="targetMarket"
-                    th:text="*{targetMarket}"
                     class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                   ></textarea>
                   <small class="block text-gray-500">
@@ -485,15 +321,6 @@
                     the product/project.<br />
                     • Specify the size of the market
                   </small>
-                  <div
-                    class="error no-pad"
-                    th:if="*{error != null} AND *{error.targetMarketError != null}"
-                  >
-                    <div
-                      th:each="err : *{error.targetMarketError}"
-                      th:text="${err}"
-                    ></div>
-                  </div>
                 </div>
                 <div>
                   <p class="text-sm mt-4">
@@ -503,7 +330,6 @@
                   <textarea
                     placeholder="Type something here..."
                     name="solutionDescription"
-                    th:text="*{solutionDescription}"
                     class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20"
                   ></textarea>
                   <small class="block text-gray-500">
@@ -516,24 +342,6 @@
                     • Highlight Value Proposition or Innovation: Emphasize the
                     unique aspects or innovative elements of your solution.
                   </small>
-                  <div
-                    class="error no-pad"
-                    th:if="*{error != null} AND *{error.solutionDescriptionError != null}"
-                  >
-                    <div
-                      th:each="err : *{error.solutionDescriptionError}"
-                      th:text="${err}"
-                    ></div>
-                  </div>
-                </div>
-                <div
-                  class="error no-pad"
-                  th:if="*{error != null} AND *{error.problemStatementError != null}"
-                >
-                  <div
-                    th:each="err : *{error.problemStatementError}"
-                    th:text="${err}"
-                  ></div>
                 </div>
               </div>
               <hr class="my-4" />
@@ -564,7 +372,6 @@
                   <tbody>
                     <tr>
                       <td class="border border-gray-500 px-4 py-2">
-                        <!-- th:value="*{historicalTimeline[0][0]}" -->
                         <input
                           oninput="this.className = 'w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1'"
                           type="text"
@@ -574,8 +381,6 @@
                         />
                       </td>
                       <td class="border border-gray-500 px-4 py-2">
-                        <!-- th:value="*{historicalTimeline[0][1]}" -->
-
                         <textarea
                           type="text"
                           oninput="this.className = 'resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
@@ -587,7 +392,6 @@
                     </tr>
                     <tr>
                       <td class="border border-gray-500 px-4 py-2">
-                        <!-- th:value="*{historicalTimeline[1][0]}" -->
                         <input
                           oninput="this.className = 'w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1'"
                           type="text"
@@ -597,7 +401,6 @@
                         />
                       </td>
                       <td class="border border-gray-500 px-4 py-2">
-                        <!-- th:value="*{historicalTimeline[1][1]}" -->
                         <textarea
                           type="text"
                           oninput="this.className = 'resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
@@ -609,7 +412,6 @@
                     </tr>
                     <tr>
                       <td class="border border-gray-500 px-4 py-2">
-                        <!-- th:value="*{historicalTimeline[2][0]}" -->
                         <input
                           oninput="this.className = 'w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1'"
                           type="text"
@@ -619,7 +421,6 @@
                         />
                       </td>
                       <td class="border border-gray-500 px-4 py-2">
-                        <!-- th:value="*{historicalTimeline[2][1]}" -->
                         <textarea
                           type="text"
                           oninput="this.className = 'resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
@@ -631,7 +432,6 @@
                     </tr>
                     <tr>
                       <td class="border border-gray-500 px-4 py-2">
-                        <!-- th:value="*{historicalTimeline[3][0]}" -->
                         <input
                           oninput="this.className = 'w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1'"
                           type="text"
@@ -641,7 +441,6 @@
                         />
                       </td>
                       <td class="border border-gray-500 px-4 py-2">
-                        <!-- th:value="*{historicalTimeline[3][1]}" -->
                         <textarea
                           type="text"
                           oninput="this.className = 'resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
@@ -653,7 +452,6 @@
                     </tr>
                     <tr>
                       <td class="border border-gray-500 px-4 py-2">
-                        <!-- th:value="*{historicalTimeline[4][0]}" -->
                         <input
                           oninput="this.className = 'w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1'"
                           type="text"
@@ -663,7 +461,6 @@
                         />
                       </td>
                       <td class="border border-gray-500 px-4 py-2">
-                        <!-- th:value="*{historicalTimeline[4][1]}" -->
                         <textarea
                           type="text"
                           oninput="this.className = 'resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
@@ -675,16 +472,6 @@
                     </tr>
                   </tbody>
                 </table>
-
-                <div
-                  class="error no-pad"
-                  th:if="*{error != null} AND *{error.historicalTimelineError != null}"
-                >
-                  <div
-                    th:each="err : *{error.historicalTimelineError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
               </div>
               <hr class="my-4" />
 
@@ -732,7 +519,7 @@
                         Product/Service Offering
                       </th>
                       <td class="border border-gray-500 px-2 py-2">
-                        <!-- oninput="this.className = ''" -->
+                        <!--  -->
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
                           name="productServiceOffering[0]"
@@ -806,15 +593,6 @@
                     </tr>
                   </tbody>
                 </table>
-                <div
-                  class="error no-pad"
-                  th:if="*{error != null} AND *{error.productServiceOfferingError != null}"
-                >
-                  <div
-                    th:each="err : *{error.productServiceOfferingError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
               </div>
               <hr class="my-4" />
 
@@ -824,9 +602,7 @@
                   F. Intellectual Property Status (If applicable)
                 </h2>
 
-                <!-- th:value="*{intPropertyStatus}" -->
                 <textarea
-                  oninput="this.className = ''"
                   type="text"
                   placeholder="Type something here..."
                   name="intPropertyStatus"
@@ -847,11 +623,9 @@
                   A. Objectives<span class="text-red-600"> *</span>
                 </h2>
                 <textarea
-                  oninput="this.className = ''"
                   type="text"
                   placeholder="Type something here..."
                   name="objectives"
-                  th:text="*{objectives}"
                   class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                 ></textarea>
                 <small class="block text-gray-500">
@@ -859,15 +633,6 @@
                   • Provide 3 main objectives of the proposed acceleration.<br />
                   • The readiness level must be specified.
                 </small>
-                <div
-                  class="error no-pad"
-                  th:if="*{error != null} AND *{error.ObjectivesError != null}"
-                >
-                  <div
-                    th:each="err : *{error.ObjectivesError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
               </div>
               <hr class="my-4" />
 
@@ -881,22 +646,12 @@
                 <textarea
                   placeholder="Type something here..."
                   name="scopeProposal"
-                  th:text="*{scopeProposal}"
                   class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                 ></textarea>
                 <small class="block text-gray-500">
                   • Maximum of 50 words<br />
                   • State the focus of the proposal
                 </small>
-                <div
-                  class="error no-pad"
-                  th:if="*{error != null} AND *{error.scopeProposalError != null}"
-                >
-                  <div
-                    th:each="err : *{error.scopeProposalError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
               </div>
               <hr class="my-4" />
 
@@ -910,22 +665,12 @@
                 <textarea
                   placeholder="Type something here..."
                   name="methodology"
-                  th:text="*{methodology}"
                   class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                 ></textarea>
                 <small class="block text-gray-500">
                   • Maximum of 300 words<br />
                   • State the focus of the proposal
                 </small>
-                <div
-                  class="error no-pad"
-                  th:if="*{error != null} AND *{error.methodologyError != null}"
-                >
-                  <div
-                    th:each="err : *{error.methodologyError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
               </div>
             </div>
             <hr class="my-8" />
@@ -950,15 +695,6 @@
                   >Submit your file in
                   <span class="font-bold"> PDF </span> format.</span
                 >
-                <div
-                  class="error no-pad"
-                  th:if="*{error != null} AND *{error.vitaeFileError != null}"
-                >
-                  <div
-                    th:each="err : *{error.vitaeFileError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
               </div>
             </div>
             <hr class="my-8" />
@@ -976,7 +712,6 @@
                 type="text"
                 placeholder="Input here"
                 name="supportLink"
-                th:value="*{supportLink}"
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
               />
             </div>
@@ -1000,21 +735,10 @@
               <input
                 type="text"
                 required
-                oninput="this.className = ''"
                 placeholder="Input here"
                 name="groupName"
-                th:value="*{groupName}"
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
               />
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.groupNameError != null}"
-              >
-                <div
-                  th:each="err : *{error.groupNameError}"
-                  th:text="${err}"
-                ></div>
-              </div>
             </div>
             <hr class="my-4" />
             <div
@@ -1030,21 +754,10 @@
               <input
                 type="text"
                 required
-                oninput="this.className = ''"
                 placeholder="Input here"
                 name="groupLeader"
-                th:value="*{groupLeader}"
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
               />
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.groupLeaderError != null}"
-              >
-                <div
-                  th:each="err : *{error.groupLeaderError}"
-                  th:text="${err}"
-                ></div>
-              </div>
             </div>
             <hr class="my-4" />
             <div
@@ -1057,21 +770,10 @@
               <input
                 type="text"
                 required
-                oninput="this.className = ''"
                 placeholder="Input here"
                 name="leaderNumber"
-                th:value="*{leaderNumber}"
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
               />
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.leaderNumberError != null}"
-              >
-                <div
-                  th:each="err : *{error.leaderNumberError}"
-                  th:text="${err}"
-                ></div>
-              </div>
             </div>
             <hr class="my-4" />
             <div
@@ -1082,24 +784,13 @@
                 <strong> Email Address </strong>
                 <span class="text-red-600"> *</span>
               </h2>
-              <!-- th:value="*{leaderAddress}" -->
               <input
                 type="text"
                 required
-                oninput="this.className = ''"
                 placeholder="Input here"
                 name="leaderAddress"
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
               />
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.leaderAddressError != null}"
-              >
-                <div
-                  th:each="err : *{error.leaderAddressError}"
-                  th:text="${err}"
-                ></div>
-              </div>
             </div>
             <hr class="my-4" />
             <div
@@ -1110,11 +801,9 @@
 
                 <span class="text-red-600"> *</span>
               </h2>
-              <!-- th:value="*{members[0] != '' ? members[0] : ''}" -->
               <input
                 type="text"
                 required
-                oninput="this.className = ''"
                 placeholder="Input here"
                 name="members[0]"
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -1128,11 +817,9 @@
 
                 <span class="text-red-600"> *</span>
               </h2>
-              <!-- th:value="*{members[1] != '' ? members[1] : ''}" -->
               <input
                 type="text"
                 required
-                oninput="this.className = ''"
                 placeholder="Input here"
                 name="members[1]"
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -1146,11 +833,9 @@
 
                 <span class="text-red-600"> *</span>
               </h2>
-              <!-- th:value="*{members[2] != '' ? members[2] : ''}" -->
               <input
                 type="text"
                 required
-                oninput="this.className = ''"
                 placeholder="Input here"
                 name="members[2]"
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -1164,21 +849,13 @@
 
                 <span class="text-red-600"> *</span>
               </h2>
-              <!-- th:value="*{members[3] != '' ? members[3] : ''}" -->
               <input
                 type="text"
                 required
-                oninput="this.className = ''"
                 placeholder="Input here"
                 name="members[3]"
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
               />
-            </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.membersError != null}"
-            >
-              <div th:each="err : *{error.membersError}" th:text="${err}"></div>
             </div>
 
             <hr class="my-4" />
@@ -1248,7 +925,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="technologyAns"
                     value="1"
@@ -1261,7 +937,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="technologyAns"
                     value="2"
@@ -1274,7 +949,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="technologyAns"
                     value="3"
@@ -1288,7 +962,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="technologyAns"
                     value="4"
@@ -1301,7 +974,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="technologyAns"
                     value="5"
@@ -1312,12 +984,7 @@
                 </label>
               </div>
             </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.technologyAnsError != null}"
-            >
-              <div th:text="*{error.technologyAnsError}"></div>
-            </div>
+
             <hr class="my-3" />
             <div class="ml-6 text-sm">
               <div>
@@ -1329,7 +996,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="productDevelopmentAns"
                     value="1"
@@ -1342,7 +1008,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="productDevelopmentAns"
                     value="2"
@@ -1355,7 +1020,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="productDevelopmentAns"
                     value="3"
@@ -1368,7 +1032,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="productDevelopmentAns"
                     value="4"
@@ -1382,7 +1045,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="productDevelopmentAns"
                     value="5"
@@ -1393,12 +1055,7 @@
                 </label>
               </div>
             </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.productDevelopmentAnsError != null}"
-            >
-              <div th:text="*{error.productDevelopmentAnsError}"></div>
-            </div>
+
             <hr class="my-3" />
             <div class="ml-6 text-sm">
               <div>
@@ -1410,7 +1067,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="competitiveLandscapeAns"
                     value="1"
@@ -1425,7 +1081,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="competitiveLandscapeAns"
                     value="2"
@@ -1439,7 +1094,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="competitiveLandscapeAns"
                     value="3"
@@ -1454,7 +1108,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="competitiveLandscapeAns"
                     value="4"
@@ -1468,7 +1121,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="competitiveLandscapeAns"
                     value="5"
@@ -1480,12 +1132,7 @@
                 </label>
               </div>
             </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.competitiveLandscapeAnsError != null}"
-            >
-              <div th:text="*{error.competitiveLandscapeAnsError}"></div>
-            </div>
+
             <hr class="my-3" />
             <div class="ml-6 text-sm">
               <div>
@@ -1498,7 +1145,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="productDesignAns"
                     value="1"
@@ -1512,7 +1158,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="productDesignAns"
                     value="2"
@@ -1525,7 +1170,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="productDesignAns"
                     value="3"
@@ -1539,7 +1183,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="productDesignAns"
                     value="4"
@@ -1554,7 +1197,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="productDesignAns"
                     value="5"
@@ -1566,12 +1208,7 @@
                 </label>
               </div>
             </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.productDesignAnsError != null}"
-            >
-              <div th:text="*{error.productDesignAnsError}"></div>
-            </div>
+
             <hr class="my-3" />
             <div class="ml-6 text-sm">
               <div>
@@ -1583,7 +1220,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="teamAns"
                     value="1"
@@ -1597,7 +1233,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="teamAns"
                     value="2"
@@ -1610,7 +1245,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="teamAns"
                     value="3"
@@ -1624,7 +1258,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="teamAns"
                     value="4"
@@ -1638,7 +1271,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="teamAns"
                     value="5"
@@ -1650,12 +1282,7 @@
                 </label>
               </div>
             </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.teamAnsError != null}"
-            >
-              <div th:text="*{error.teamAnsError}"></div>
-            </div>
+
             <hr class="my-3" />
             <div class="ml-6 text-sm">
               <div>
@@ -1667,7 +1294,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="goToMarketAns"
                     value="1"
@@ -1680,7 +1306,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="goToMarketAns"
                     value="2"
@@ -1694,7 +1319,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="goToMarketAns"
                     value="3"
@@ -1709,7 +1333,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="goToMarketAns"
                     value="4"
@@ -1723,7 +1346,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="goToMarketAns"
                     value="5"
@@ -1734,12 +1356,7 @@
                 </label>
               </div>
             </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.goToMarketAnsError != null}"
-            >
-              <div th:text="*{error.goToMarketAnsError}"></div>
-            </div>
+
             <hr class="my-3" />
             <div class="ml-6 text-sm">
               <div>
@@ -1752,7 +1369,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="manufacturingAns"
                     value="1"
@@ -1766,7 +1382,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="manufacturingAns"
                     value="2"
@@ -1781,7 +1396,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="manufacturingAns"
                     value="3"
@@ -1794,7 +1408,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="manufacturingAns"
                     value="4"
@@ -1807,7 +1420,6 @@
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
                   <input
-                    oninput="this.className = ''"
                     type="radio"
                     name="manufacturingAns"
                     value="5"
@@ -1818,278 +1430,8 @@
                 </label>
               </div>
             </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.manufacturingAnsError != null}"
-            >
-              <div th:text="*{error.manufacturingAnsError}"></div>
-            </div>
           </div>
         </div>
-
-        <!-- page 5 -->
-        <!-- <div class="tab mb-3">
-          <h1
-            class="w-full bg-gradient-to-r from-formbg-dark to-formbg-light font-semibold text-lg p-4 rounded-t-lg"
-          >
-            Eligibility and Agreement:
-          </h1>
-          <div>
-            <div
-              class="pt-3 flex flex-col w-full relative border-gray-200 bg-transparent focus-within:border-blue-600"
-            >
-              <h2 class="text-black ml-6 pr-3">
-                I confirm that I have read, understood, and agree to comply with
-                the eligibility criteria and rules of LaunchLab program.
-              </h2>
-            </div>
-            <hr class="my-3" />
-            <div class="ml-6 pr-2 text-sm">
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
-                  <input
-                    oninput="this.className = ''"
-                    type="radio"
-                    name="eligibilityAgreeFlg"
-                    value="true"
-                    th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}"
-                  />
-                  I AGREE</label
-                >
-              </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
-                  <input
-                    oninput="this.className = ''"
-                    type="radio"
-                    name="eligibilityAgreeFlg"
-                    value="false"
-                    th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}"
-                  />
-                  I DO NOT AGREE</label
-                >
-              </div>
-            </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.eligibilityAgreeFlgError != null}"
-            >
-              <div th:text="*{error.eligibilityAgreeFlgError}"></div>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- page 6 -->
-        <!-- <div class="tab mb-3">
-          <h1
-            class="w-full bg-gradient-to-r from-formbg-dark to-formbg-light font-semibold text-lg p-4 rounded-t-lg"
-          >
-            Applicant Commitment Verification Form
-          </h1>
-          <div>
-            <div
-              class="pt-3 flex flex-col w-full relative border-gray-200 bg-transparent focus-within:border-blue-600"
-            >
-              <h2 class="text-black ml-6 pr-3">
-                To ensure your commitment to the LaunchLab Program, please
-                respond to the following questions with a Yes or No.
-              </h2>
-            </div>
-            <hr class="my-3" />
-            <div class="ml-6 pr-2 text-sm">
-              <div>
-                <h2 class="text-black mb-3 text-base">
-                  Do you commit to complete and actively cooperate in all
-                  scheduled activities, workshops, and mentorship sessions
-                  during the 4-month program of the LaunchLab Program?
-                  <span class="text-red-600"> *</span>
-                </h2>
-              </div>
-
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
-                  <input
-                    oninput="this.className = ''"
-                    type="radio"
-                    name="commitmentOneFlg"
-                    value="true"
-                    th:checked="*{commitmentOneFlg!=null AND commitmentOneFlg}"
-                  />
-                  Yes</label
-                >
-              </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
-                  <input
-                    oninput="this.className = ''"
-                    type="radio"
-                    name="commitmentOneFlg"
-                    value="false"
-                    th:checked="*{commitmentOneFlg!=null AND !commitmentOneFlg}"
-                  />
-                  No</label
-                >
-              </div>
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.commitmentOneFlgError != null}"
-              >
-                <div th:text="*{error.commitmentOneFlgError}"></div>
-              </div>
-            </div>
-            <hr class="my-3" />
-            <div class="ml-6 pr-2 text-sm">
-              <div>
-                <h2 class="text-black mb-3 text-base">
-                  Do you commit to diligently working towards executing your
-                  startup’s approved growth plan as outlined in the program?
-                  <span class="text-red-600"> *</span>
-                </h2>
-              </div>
-
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
-                  <input
-                    oninput="this.className = ''"
-                    type="radio"
-                    name="commitmentTwoFlg"
-                    value="true"
-                    th:checked="*{commitmentTwoFlg!=null AND commitmentTwoFlg}"
-                  />
-                  Yes</label
-                >
-              </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
-                  <input
-                    oninput="this.className = ''"
-                    type="radio"
-                    name="commitmentTwoFlg"
-                    value="false"
-                    th:checked="*{commitmentTwoFlg!=null AND !commitmentTwoFlg}"
-                  />
-                  No</label
-                >
-              </div>
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.commitmentTwoFlgError != null}"
-              >
-                <div th:text="*{error.commitmentTwoFlgError}"></div>
-              </div>
-            </div>
-            <hr class="my-3" />
-            <div class="ml-6 pr-2 text-sm">
-              <div>
-                <h2 class="text-black mb-3 text-base">
-                  If the founder is not always available, will you assign at
-                  least one dedicated personnel, directly involved in the aspect
-                  of the startup being accelerated, to be consistently involved
-                  in all program activities and deliverables, understanding that
-                  changing personnel frequently can adversely affect the
-                  progress of the acceleration?
-                  <span class="text-red-600"> *</span>
-                </h2>
-              </div>
-
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
-                  <input
-                    oninput="this.className = ''"
-                    type="radio"
-                    name="commitmentThreeFlg"
-                    value="true"
-                    th:checked="*{commitmentThreeFlg!=null AND commitmentThreeFlg}"
-                  />
-                  Yes</label
-                >
-              </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
-                  <input
-                    oninput="this.className = ''"
-                    type="radio"
-                    name="commitmentThreeFlg"
-                    value="false"
-                    th:checked="*{commitmentThreeFlg!=null AND !commitmentThreeFlg}"
-                  />
-                  No</label
-                >
-              </div>
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.commitmentThreeFlgError != null}"
-              >
-                <div th:text="*{error.commitmentThreeFlgError}"></div>
-              </div>
-            </div>
-            <hr class="my-3" />
-            <div class="ml-6 pr-2 text-sm">
-              <div>
-                <h2 class="text-black mb-3 text-base">
-                  Do you understand and agree that your evaluation results and
-                  performance reports will be shared with DOST as part of the
-                  program’s accomplishment reports?
-                  <span class="text-red-600"> *</span>
-                </h2>
-              </div>
-
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
-                  <input
-                    oninput="this.className = ''"
-                    type="radio"
-                    name="commitmentFourFlg"
-                    value="true"
-                    th:checked="*{commitmentFourFlg!=null AND commitmentFourFlg}"
-                  />
-                  Yes</label
-                >
-              </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
-                  <input
-                    oninput="this.className = ''"
-                    type="radio"
-                    name="commitmentFourFlg"
-                    value="false"
-                    th:checked="*{commitmentFourFlg!=null AND !commitmentFourFlg}"
-                  />
-                  No</label
-                >
-              </div>
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.commitmentFourFlgError != null}"
-              >
-                <div th:text="*{error.commitmentFourFlgError}"></div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-        <!-- page 7 -->
-        <!-- <div class="tab mb-3">
-          <h1
-            class="w-full bg-gradient-to-r from-formbg-dark to-formbg-light font-semibold text-lg p-4 rounded-t-lg"
-          >
-            Thank you.
-          </h1>
-          <div>
-            <div
-              class="pt-3 flex flex-col w-full relative border-gray-200 bg-transparent focus-within:border-blue-600"
-            >
-              <h2 class="text-black ml-6 pr-3">
-                Thank you for taking the time to complete the registration. We
-                understand and respect your concerns.
-                <br /><br />
-                If you have further questions and concerns , you are welcome to
-                contact our project lead, Engr. Jurydel Rama, at
-                jurydel.rama@cit.edu
-              </h2>
-            </div>
-          </div>
-        </div> -->
 
         <!---------- end page ------------>
         <div style="overflow: auto">
@@ -2192,7 +1534,7 @@
                       LaunchLab Capsule Proposal
                     </th>
                     <td class="border border-gray-500 px-2 py-2">
-                      <!-- oninput="this.className = ''" -->
+                      <!--  -->
                       <p class="resize-none w-full sm:text-sm">
                         Has the applicant provided a detailed LaunchLab capsule
                         proposal including all required information?
@@ -2206,7 +1548,7 @@
                             <!-- name="eligibilityAgreeFlg"
                           value="true"
                           th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             Yes</label
                           >
                         </div>
@@ -2217,7 +1559,7 @@
                             <!-- name="eligibilityAgreeFlg"
                           value="false"
                           th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             No</label
                           >
                         </div>
@@ -2252,7 +1594,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="true"
                               th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             Yes</label
                           >
                         </div>
@@ -2263,7 +1605,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="false"
                               th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             No</label
                           >
                         </div>
@@ -2298,7 +1640,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="true"
                               th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             Yes</label
                           >
                         </div>
@@ -2309,7 +1651,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="false"
                               th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             No</label
                           >
                         </div>
@@ -2344,7 +1686,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="true"
                               th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             Yes</label
                           >
                         </div>
@@ -2355,7 +1697,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="false"
                               th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             No</label
                           >
                         </div>
@@ -2417,7 +1759,7 @@
                       Alignment with Theme
                     </th>
                     <td class="border border-gray-500 px-2 py-2">
-                      <!-- oninput="this.className = ''" -->
+                      <!--  -->
                       <p class="resize-none w-full sm:text-sm">
                         Does the startup's proposal align with the current cycle
                         themes or priority areas of DASIG partners?
@@ -2431,7 +1773,7 @@
                             <!-- name="eligibilityAgreeFlg"
                           value="true"
                           th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             Yes</label
                           >
                         </div>
@@ -2442,7 +1784,7 @@
                             <!-- name="eligibilityAgreeFlg"
                           value="false"
                           th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             No</label
                           >
                         </div>
@@ -2477,7 +1819,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="true"
                               th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             Yes</label
                           >
                         </div>
@@ -2488,7 +1830,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="false"
                               th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             No</label
                           >
                         </div>
@@ -2523,7 +1865,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="true"
                               th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             Yes</label
                           >
                         </div>
@@ -2534,7 +1876,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="false"
                               th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             No</label
                           >
                         </div>
@@ -2569,7 +1911,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="true"
                               th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             Yes</label
                           >
                         </div>
@@ -2580,7 +1922,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="false"
                               th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             No</label
                           >
                         </div>
@@ -2615,7 +1957,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="true"
                               th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             Yes</label
                           >
                         </div>
@@ -2626,7 +1968,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="false"
                               th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input type="radio" />
                             No</label
                           >
                         </div>
@@ -2647,9 +1989,8 @@
           </div>
         </div>
         <!-- accept or reject button -->
-        <hr class="my-4" />
-        <div class="flex justify-between">
-          <!-- th:data-id="${app.applicantIdPk}" -->
+        <!-- <hr class="my-4" /> -->
+        <!-- <div class="flex justify-between">
           <button
             class="btn-row border-black hover:bg-green-500 bg-green-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
             type="button"
@@ -2657,7 +1998,6 @@
           >
             Accept
           </button>
-          <!-- th:data-id="${app.applicantIdPk}" -->
           <button
             class="btn-row border-black hover:bg-red-500 bg-red-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
             type="button"
@@ -2665,7 +2005,7 @@
           >
             Reject
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
     <script>
@@ -2686,8 +2026,8 @@
 
         document.getElementById("prevBtn").style.display =
           n === 0 ? "none" : "inline";
-        document.getElementById("nextBtn").innerHTML =
-          n === x.length - 1 ? "Submit" : "Next";
+        document.getElementById("nextBtn").style.display =
+          n === x.length - 1 ? "none" : "inline";
         fixStepIndicator(n);
 
         // Scroll to the top of the page
@@ -2696,59 +2036,14 @@
 
       function nextPrev(n) {
         var x = document.getElementsByClassName("tab");
-
-        // In development mode, skip validation
-        if (DEVELOPMENT_MODE || (n === 1 && validateForm())) {
-          x[currentTab].style.display = "none";
-          currentTab += n;
-          if (currentTab >= x.length) {
-            // For development, just go back to the first tab instead of submitting
-            if (DEVELOPMENT_MODE) {
-              currentTab = 0;
-            } else {
-              document.getElementById("regForm").submit();
-              return false;
-            }
-          }
-          showTab(currentTab);
+        x[currentTab].style.display = "none";
+        currentTab += n;
+        if (currentTab >= x.length) {
+          currentTab = x.length - 1;
+        } else if (currentTab < 0) {
+          currentTab = 0;
         }
-      }
-
-      function validateForm() {
-        if (DEVELOPMENT_MODE) return true; // Skip validation in development mode
-
-        const emailInput = document.getElementById("email");
-        const emailError = document.getElementById("emailError");
-        const radioButtons = document.getElementsByName("agreeFlg");
-        const radioError = document.getElementById("radioError");
-
-        let isValid = true;
-
-        // Email validation
-        if (!emailInput.checkValidity()) {
-          emailError.textContent = "Please enter a valid email address.";
-          emailInput.focus();
-          isValid = false;
-        } else {
-          emailError.textContent = "";
-        }
-
-        // Agreement radio button validation
-        let isRadioChecked = false;
-        for (let radioButton of radioButtons) {
-          if (radioButton.checked) {
-            isRadioChecked = true;
-            break;
-          }
-        }
-        if (!isRadioChecked) {
-          radioError.textContent = "Please select an option.";
-          isValid = false;
-        } else {
-          radioError.textContent = "";
-        }
-
-        return isValid;
+        showTab(currentTab);
       }
 
       function fixStepIndicator(n) {
@@ -2759,25 +2054,6 @@
         }
         x[n].className += " active";
       }
-
-      function updateNextButtonAppearance(isDisagreed) {
-        const nextBtn = document.getElementById("nextBtn");
-        if (isDisagreed) {
-          nextBtn.classList.add("disagreed");
-        } else {
-          nextBtn.classList.remove("disagreed");
-        }
-      }
-
-      // Add event listeners to radio buttons
-      document.getElementsByName("agreeFlg").forEach((radio) => {
-        radio.addEventListener("change", function () {
-          updateNextButtonAppearance(this.value === "false");
-        });
-      });
-
-      // Initial state: button is in normal state
-      updateNextButtonAppearance(false);
 
       // Add development mode indicator
       if (DEVELOPMENT_MODE) {
@@ -2791,6 +2067,11 @@
         devModeIndicator.style.borderRadius = "5px";
         document.body.appendChild(devModeIndicator);
       }
+
+      // Initialize the script when the DOM is fully loaded
+      //   document.addEventListener("DOMContentLoaded", function () {
+      //     showTab(currentTab);
+      //   });
     </script>
   </body>
 </html>
