@@ -26,7 +26,7 @@ public class ApplicantWebDto {
 	public String projectDescription;
 	
 	//Teams
-	public List<String[]> teams = List.of(new String[] {"",""}, new String[] {"",""}, new String[] {"",""});
+	public List<String[]> teams = List.of(new String[] {"",""}, new String[] {"",""}, new String[] {"",""}, new String[] {"",""}, new String[] {"",""});
 	
 	//Problem Statement
 	public String problemStatement;
