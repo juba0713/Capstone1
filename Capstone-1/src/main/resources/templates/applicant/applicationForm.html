@@ -71,7 +71,7 @@
 
       .error-container {
         position: absolute;
-        top: 40px;;
+        top: 40px;
         left: 0;
         width: 100%;
         display: flex;
@@ -91,11 +91,11 @@
         background-color: #cccccc;
         color: #666666;
       }
-      
+
       .no-pad {
         padding: 0 !important;
       }
-      
+
       .error {
         padding-left: 20px;
         font-size: 15px;
@@ -106,11 +106,17 @@
   </head>
   <body class="font-secondary" th:object="${applicantWebDto}">
     <div class="error-container" th:if="*{error != null}">
-        <div>Please fill out all required fields!</div>
-      </div>
+      <div>Please fill out all required fields!</div>
+    </div>
     <a href="/" class="floating-back-button">Back to login</a>
-    <form th:action="@{/applicant/form}" method="POST" id="regForm" action="" class="rounded-lg" enctype="multipart/form-data">
-		
+    <form
+      th:action="@{/applicant/form}"
+      method="POST"
+      id="regForm"
+      action=""
+      class="rounded-lg"
+      enctype="multipart/form-data"
+    >
       <div class="tab">
         <div>
           <div class="flex justify-between">
@@ -247,11 +253,11 @@
         </div>
       </div>
       <div
-            class="error"
-            th:if="*{error != null} AND *{error.agreeFlgError != null}"
-          >
-            <div th:text="*{error.agreeFlgError}"></div>
-          </div>
+        class="error"
+        th:if="*{error != null} AND *{error.agreeFlgError != null}"
+      >
+        <div th:text="*{error.agreeFlgError}"></div>
+      </div>
 
       <!-- 2nd page -->
       <div class="tab">
@@ -297,7 +303,7 @@
               A. Project Description<span class="text-red-600"> *</span>
             </h2>
             <textarea
-              oninput="this.className = ''"
+              oninput="this.className = 'resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10'"
               type="text"
               placeholder="Type something here..."
               name="projectDescription"
@@ -481,7 +487,7 @@
                 1. Problem Statement<span class="text-red-600"> *</span>
               </p>
               <textarea
-                oninput="this.className = ''"
+                oninput="this.className = 'resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10'"
                 placeholder="Type something here..."
                 name="problemStatement"
                 th:text="*{problemStatement}"
@@ -555,15 +561,6 @@
                     th:text="${err}"
                   ></div>
                 </div>
-              </div>
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.problemStatementError != null}"
-              >
-                <div
-                  th:each="err : *{error.problemStatementError}"
-                  th:text="${err}"
-                ></div>
               </div>
             </div>
             <hr class="my-4" />
@@ -668,7 +665,7 @@
                         oninput="this.className = 'w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1'"
                         type="text"
                         name="historicalTimeline[3][0]"
-                      	th:value="*{historicalTimeline[3][0]}"
+                        th:value="*{historicalTimeline[3][0]}"
                         placeholder="mm/yyyy"
                         class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
                       />
@@ -770,7 +767,7 @@
                     <td class="border border-gray-500 px-2 py-2">
                       <!-- oninput="this.className = ''" -->
                       <textarea
-                        oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
+                        oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
                         name="productServiceOffering[0]"
                         th:value="*{productServiceOffering[0]}"
                         placeholder="Enter product/service offering"
@@ -779,7 +776,7 @@
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
+                        oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
                         name="productServiceOffering[1]"
                         th:value="*{productServiceOffering[1]}"
                         placeholder="Enter product/service offering"
@@ -788,7 +785,7 @@
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
+                        oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
                         name="productServiceOffering[2]"
                         th:value="*{productServiceOffering[2]}"
                         placeholder="Enter product/service offering"
@@ -797,7 +794,7 @@
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
+                        oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
                         name="productServiceOffering[3]"
                         th:value="*{productServiceOffering[3]}"
                         placeholder="Enter product/service offering"
@@ -813,7 +810,7 @@
                     </th>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
+                        oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
                         name="pricingStrategy[0]"
                         th:value="*{pricingStrategy[0]}"
                         placeholder="Enter pricing strategy"
@@ -822,7 +819,7 @@
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
+                        oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
                         name="pricingStrategy[1]"
                         th:value="*{pricingStrategy[1]}"
                         placeholder="Enter pricing strategy"
@@ -831,7 +828,7 @@
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
+                        oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
                         name="pricingStrategy[2]"
                         th:value="*{pricingStrategy[2]}"
                         placeholder="Enter pricing strategy"
@@ -840,7 +837,7 @@
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
+                        oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
                         name="pricingStrategy[3]"
                         th:value="*{pricingStrategy[3]}"
                         placeholder="Enter pricing strategy"
@@ -850,17 +847,16 @@
                   </tr>
                 </tbody>
               </table>
-              
             </div>
             <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.productServiceOfferingError != null}"
-              >
-                <div
-                  th:each="err : *{error.productServiceOfferingError}"
-                  th:text="${err}"
-                ></div>
-              </div>
+              class="error no-pad"
+              th:if="*{error != null} AND *{error.productServiceOfferingError != null}"
+            >
+              <div
+                th:each="err : *{error.productServiceOfferingError}"
+                th:text="${err}"
+              ></div>
+            </div>
             <hr class="my-4" />
 
             <!-- intellectual property status -->
@@ -871,7 +867,7 @@
 
               <!-- th:value="*{intPropertyStatus}" -->
               <textarea
-                oninput="this.className = ''"
+                oninput="this.className = 'resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
                 type="text"
                 placeholder="Type something here..."
                 name="intPropertyStatus"
@@ -892,7 +888,7 @@
               A. Objectives<span class="text-red-600"> *</span>
             </h2>
             <textarea
-              oninput="this.className = ''"
+              oninput="this.className = 'resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10'"
               type="text"
               placeholder="Type something here..."
               name="objectives"
@@ -1012,7 +1008,7 @@
           >
             <h2 class="text-black mb-3">
               Links to any supporting materials
-              <span class="text-red-600"> *</span>
+              <!-- <span class="text-red-600"> *</span> -->
             </h2>
             <input
               type="text"
@@ -1047,15 +1043,12 @@
               th:value="*{groupName}"
               class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
             />
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.groupNameError != null}"
-            >
-              <div
-                th:each="err : *{error.groupNameError}"
-                th:text="${err}"
-              ></div>
-            </div>
+          </div>
+          <div
+            class="error no-pad"
+            th:if="*{error != null} AND *{error.groupNameError != null}"
+          >
+            <div th:each="err : *{error.groupNameError}" th:text="${err}"></div>
           </div>
           <hr class="my-4" />
           <div
@@ -1077,15 +1070,15 @@
               th:value="*{groupLeader}"
               class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
             />
+          </div>
+          <div
+            class="error no-pad"
+            th:if="*{error != null} AND *{error.groupLeaderError != null}"
+          >
             <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.groupLeaderError != null}"
-            >
-              <div
-                th:each="err : *{error.groupLeaderError}"
-                th:text="${err}"
-              ></div>
-            </div>
+              th:each="err : *{error.groupLeaderError}"
+              th:text="${err}"
+            ></div>
           </div>
           <hr class="my-4" />
           <div
@@ -1104,15 +1097,15 @@
               th:value="*{leaderNumber}"
               class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
             />
+          </div>
+          <div
+            class="error no-pad"
+            th:if="*{error != null} AND *{error.leaderNumberError != null}"
+          >
             <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.leaderNumberError != null}"
-            >
-              <div
-                th:each="err : *{error.leaderNumberError}"
-                th:text="${err}"
-              ></div>
-            </div>
+              th:each="err : *{error.leaderNumberError}"
+              th:text="${err}"
+            ></div>
           </div>
           <hr class="my-4" />
           <div
@@ -1132,15 +1125,15 @@
               name="leaderAddress"
               class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
             />
+          </div>
+          <div
+            class="error no-pad"
+            th:if="*{error != null} AND *{error.leaderAddressError != null}"
+          >
             <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.leaderAddressError != null}"
-            >
-              <div
-                th:each="err : *{error.leaderAddressError}"
-                th:text="${err}"
-              ></div>
-            </div>
+              th:each="err : *{error.leaderAddressError}"
+              th:text="${err}"
+            ></div>
           </div>
           <hr class="my-4" />
           <div
@@ -1772,7 +1765,7 @@
             </div>
           </div>
           <div
-            class="error "
+            class="error"
             th:if="*{error != null} AND *{error.goToMarketAnsError != null}"
           >
             <div th:text="*{error.goToMarketAnsError}"></div>
@@ -2159,7 +2152,7 @@
         <span class="step"></span>
         <span class="step"></span>
       </div>
-      <input type="hidden" name="button" value="submit"/>
+      <input type="hidden" name="button" value="submit" />
     </form>
     <script>
       // Set this to true for development mode, false for production
@@ -2191,7 +2184,7 @@
         var x = document.getElementsByClassName("tab");
 
         // In development mode, skip validation
-        if (DEVELOPMENT_MODE || ((n === 1 || n=== -1) && validateForm())) {
+        if (DEVELOPMENT_MODE || ((n === 1 || n === -1) && validateForm())) {
           x[currentTab].style.display = "none";
           currentTab += n;
           if (currentTab >= x.length) {
@@ -2286,8 +2279,8 @@
       }
     </script>
     <script th:inline="javascript">
-		console.log(/*[[${applicantWebDto}]]*/'');
-	</script>
+      console.log(/*[[${applicantWebDto}]]*/ "");
+    </script>
   </body>
 </html>
 <!-- 
