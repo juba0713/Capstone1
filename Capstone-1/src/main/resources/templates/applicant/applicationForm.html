@@ -117,6 +117,7 @@
       class="rounded-lg"
       enctype="multipart/form-data"
     >
+      <!-- page 1 -->
       <div class="tab">
         <div>
           <div class="flex justify-between">
@@ -1028,112 +1029,123 @@
           Group Info
         </h1>
         <div>
-          <div
-            class="flex flex-col ml-6 w-2/4 relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
-          >
-            <h2 class="text-black mb-3">
-              Group Name<span class="text-red-600"> *</span>
-            </h2>
-            <input
-              type="text"
-              required
-              oninput="this.className = ''"
-              placeholder="Input here"
-              name="groupName"
-              th:value="*{groupName}"
-              class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-            />
-          </div>
-          <div
-            class="error no-pad"
-            th:if="*{error != null} AND *{error.groupNameError != null}"
-          >
-            <div th:each="err : *{error.groupNameError}" th:text="${err}"></div>
+          <div class="ml-6">
+            <div
+              class="flex flex-col w-2/4 relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
+            >
+              <h2 class="text-black mb-3">
+                Group Name<span class="text-red-600"> *</span>
+              </h2>
+              <input
+                type="text"
+                required
+                oninput="this.className = ''"
+                placeholder="Input here"
+                name="groupName"
+                th:value="*{groupName}"
+                class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
+              />
+            </div>
+            <div
+              class="error no-pad"
+              th:if="*{error != null} AND *{error.groupNameError != null}"
+            >
+              <div
+                th:each="err : *{error.groupNameError}"
+                th:text="${err}"
+              ></div>
+            </div>
           </div>
           <hr class="my-4" />
-          <div
-            class="flex flex-col ml-6 w-2/4 relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
-          >
-            <h2 class="text-black mb-3">
-              Team Leader - Team Member 1 (Last Name, First Name)<span
-                class="text-red-600"
-              >
-                *</span
-              >
-            </h2>
-            <input
-              type="text"
-              required
-              oninput="this.className = ''"
-              placeholder="Input here"
-              name="groupLeader"
-              th:value="*{groupLeader}"
-              class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-            />
-          </div>
-          <div
-            class="error no-pad"
-            th:if="*{error != null} AND *{error.groupLeaderError != null}"
-          >
+          <div class="ml-6">
             <div
-              th:each="err : *{error.groupLeaderError}"
-              th:text="${err}"
-            ></div>
+              class="flex flex-col w-2/4 relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
+            >
+              <h2 class="text-black mb-3">
+                Team Leader - Team Member 1 (Last Name, First Name)<span
+                  class="text-red-600"
+                >
+                  *</span
+                >
+              </h2>
+              <input
+                type="text"
+                required
+                oninput="this.className = ''"
+                placeholder="Input here"
+                name="groupLeader"
+                th:value="*{groupLeader}"
+                class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
+              />
+            </div>
+            <div
+              class="error no-pad"
+              th:if="*{error != null} AND *{error.groupLeaderError != null}"
+            >
+              <div
+                th:each="err : *{error.groupLeaderError}"
+                th:text="${err}"
+              ></div>
+            </div>
           </div>
           <hr class="my-4" />
-          <div
-            class="flex flex-col ml-6 w-2/4 relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
-          >
-            <h2 class="text-black mb-3">
-              Team Leader's <strong> Mobile Number </strong>
-              <span class="text-red-600"> *</span>
-            </h2>
-            <input
-              type="text"
-              required
-              oninput="this.className = ''"
-              placeholder="Input here"
-              name="leaderNumber"
-              th:value="*{leaderNumber}"
-              class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-            />
-          </div>
-          <div
-            class="error no-pad"
-            th:if="*{error != null} AND *{error.leaderNumberError != null}"
-          >
+          <div class="ml-6">
             <div
-              th:each="err : *{error.leaderNumberError}"
-              th:text="${err}"
-            ></div>
+              class="flex flex-col w-2/4 relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
+            >
+              <h2 class="text-black mb-3">
+                Team Leader's <strong> Mobile Number </strong>
+                <span class="text-red-600"> *</span>
+              </h2>
+              <input
+                type="text"
+                required
+                oninput="this.className = ''"
+                placeholder="Input here"
+                name="leaderNumber"
+                th:value="*{leaderNumber}"
+                class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
+              />
+            </div>
+            <div
+              class="error no-pad"
+              th:if="*{error != null} AND *{error.leaderNumberError != null}"
+            >
+              <div
+                th:each="err : *{error.leaderNumberError}"
+                th:text="${err}"
+              ></div>
+            </div>
           </div>
           <hr class="my-4" />
-          <div
-            class="flex flex-col ml-6 w-2/4 relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
-          >
-            <h2 class="text-black mb-3">
-              Team Leader's
-              <strong> Email Address </strong>
-              <span class="text-red-600"> *</span>
-            </h2>
-            <!-- th:value="*{leaderAddress}" -->
-            <input
-              type="text"
-              required
-              oninput="this.className = ''"
-              placeholder="Input here"
-              name="leaderAddress"
-              class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-            />
-          </div>
-          <div
-            class="error no-pad"
-            th:if="*{error != null} AND *{error.leaderAddressError != null}"
-          >
+          <div class="ml-6">
             <div
-              th:each="err : *{error.leaderAddressError}"
-              th:text="${err}"
-            ></div>
+              class="flex flex-col w-2/4 relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
+            >
+              <h2 class="text-black mb-3">
+                Team Leader's
+                <strong> Email Address </strong>
+                <span class="text-red-600"> *</span>
+              </h2>
+              <!-- th:value="*{leaderAddress}" -->
+              <input
+                type="text"
+                required
+                oninput="this.className = ''"
+                placeholder="Input here"
+                name="leaderAddress"
+                class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
+              />
+            </div>
+            <div
+              class="error no-pad"
+              th:if="*{error != null} AND *{error.leaderAddressError != null}"
+            >
+              <div
+                th:each="err : *{error.leaderAddressError}"
+                th:text="${err}"
+              ></div>
+            </div>
           </div>
           <hr class="my-4" />
           <div
@@ -1861,16 +1873,16 @@
         >
           Eligibility and Agreement:
         </h1>
-        <div>
+        <div class="ml-6">
           <div
             class="pt-3 flex flex-col w-full relative border-gray-200 bg-transparent focus-within:border-blue-600"
           >
-            <h2 class="text-black ml-6 pr-3">
+            <h2 class="text-black pr-3">
               I confirm that I have read, understood, and agree to comply with
               the eligibility criteria and rules of LaunchLab program.
             </h2>
           </div>
-          <div class="ml-6 pr-2 text-sm">
+          <div class="pr-2 text-sm">
             <div class="flex flex-row items-center">
               <label class="cursor-pointer flex items-center">
                 <input
@@ -2178,6 +2190,21 @@
 
         // Scroll to the top of the page
         window.scrollTo({ top: 0, behavior: "smooth" });
+
+        // Check agreements and commitments on the relevant tabs
+        if (n === 0) {
+          // First page agreement
+          checkAgreement();
+        } else if (n === 4) {
+          // Assuming the eligibility agreement is on the 5th tab (index 4)
+          checkEligibilityAgreement();
+        } else if (n === 5) {
+          // Assuming the commitment verification is on the 6th tab (index 5)
+          checkCommitmentVerification();
+        } else {
+          // Enable the Next button for all other tabs
+          updateNextButtonAppearance(false);
+        }
       }
 
       function nextPrev(n) {
@@ -2246,24 +2273,86 @@
         x[n].className += " active";
       }
 
-      function updateNextButtonAppearance(isDisagreed) {
+      function updateNextButtonAppearance(isDisabled) {
         const nextBtn = document.getElementById("nextBtn");
-        if (isDisagreed) {
+        if (isDisabled) {
           nextBtn.classList.add("disagreed");
+          nextBtn.disabled = true;
         } else {
           nextBtn.classList.remove("disagreed");
+          nextBtn.disabled = false;
         }
       }
 
-      // Add event listeners to radio buttons
-      document.getElementsByName("agreeFlg").forEach((radio) => {
-        radio.addEventListener("change", function () {
-          updateNextButtonAppearance(this.value === "false");
+      // Function to check the agreement on the first page
+      function checkAgreement() {
+        const agreeRadios = document.getElementsByName("agreeFlg");
+        agreeRadios.forEach((radio) => {
+          radio.addEventListener("change", function () {
+            updateNextButtonAppearance(this.value === "false");
+          });
         });
-      });
 
-      // Initial state: button is in normal state
-      updateNextButtonAppearance(false);
+        // Initial check
+        const disagreementRadio = Array.from(agreeRadios).find(
+          (radio) => radio.checked && radio.value === "false"
+        );
+        updateNextButtonAppearance(!!disagreementRadio);
+      }
+
+      // Function to check eligibility agreement
+      function checkEligibilityAgreement() {
+        const eligibilityRadios = document.getElementsByName(
+          "eligibilityAgreeFlg"
+        );
+        eligibilityRadios.forEach((radio) => {
+          radio.addEventListener("change", function () {
+            updateNextButtonAppearance(this.value === "false");
+          });
+        });
+
+        // Initial check
+        const disagreementRadio = Array.from(eligibilityRadios).find(
+          (radio) => radio.checked && radio.value === "false"
+        );
+        updateNextButtonAppearance(!!disagreementRadio);
+      }
+
+      // Function to check commitment verification
+      function checkCommitmentVerification() {
+        const commitmentQuestions = [
+          "commitmentOneFlg",
+          "commitmentTwoFlg",
+          "commitmentThreeFlg",
+          "commitmentFourFlg",
+        ];
+
+        function checkAllCommitments() {
+          const anyNoSelected = commitmentQuestions.some((question) => {
+            const radios = document.getElementsByName(question);
+            return Array.from(radios).find(
+              (radio) => radio.checked && radio.value === "false"
+            );
+          });
+          updateNextButtonAppearance(anyNoSelected);
+        }
+
+        commitmentQuestions.forEach((question) => {
+          const radios = document.getElementsByName(question);
+          radios.forEach((radio) => {
+            radio.addEventListener("change", checkAllCommitments);
+          });
+        });
+
+        // Initial check
+        checkAllCommitments();
+      }
+
+      // Add event listener when the DOM is fully loaded
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initial check for the first page agreement
+        checkAgreement();
+      });
 
       // Add development mode indicator
       if (DEVELOPMENT_MODE) {
