@@ -1062,6 +1062,10 @@ video {
   width: 3rem;
 }
 
+.w-2{
+  width: 0.5rem;
+}
+
 .w-2\/4{
   width: 50%;
 }
@@ -1186,6 +1190,10 @@ video {
   width: 700px;
 }
 
+.w-\[75px\]{
+  width: 75px;
+}
+
 .w-\[90vw\]{
   width: 90vw;
 }
@@ -1215,14 +1223,6 @@ video {
   width: 50%;
 }
 
-.w-\[25\%\]{
-  width: 25%;
-}
-
-.w-10{
-  width: 2.5rem;
-}
-
 .min-w-60{
   min-width: 15rem;
 }
@@ -1231,12 +1231,12 @@ video {
   min-width: 1000px;
 }
 
-.min-w-\[200px\]{
-  min-width: 200px;
-}
-
 .max-w-0{
   max-width: 0px;
+}
+
+.max-w-2xl{
+  max-width: 42rem;
 }
 
 .flex-grow{
@@ -1272,6 +1272,10 @@ video {
 
 .resize-none{
   resize: none;
+}
+
+.list-decimal{
+  list-style-type: decimal;
 }
 
 .grid-cols-2{
@@ -1310,6 +1314,10 @@ video {
   align-items: stretch;
 }
 
+.justify-start{
+  justify-content: flex-start;
+}
+
 .justify-end{
   justify-content: flex-end;
 }
@@ -1344,6 +1352,12 @@ video {
 
 .gap-4{
   gap: 1rem;
+}
+
+.space-y-2 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 
 .space-y-4 > :not([hidden]) ~ :not([hidden]){
@@ -1534,6 +1548,11 @@ video {
 .border-gray-500{
   --tw-border-opacity: 1;
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
+}
+
+.border-green-500{
+  --tw-border-opacity: 1;
+  border-color: rgb(34 197 94 / var(--tw-border-opacity));
 }
 
 .border-red-500{
@@ -1776,6 +1795,10 @@ video {
   padding: 1.25rem;
 }
 
+.p-6{
+  padding: 1.5rem;
+}
+
 .p-8{
   padding: 2rem;
 }
@@ -1858,6 +1881,10 @@ video {
 
 .pl-4{
   padding-left: 1rem;
+}
+
+.pl-5{
+  padding-left: 1.25rem;
 }
 
 .pr-10{
@@ -2643,6 +2670,10 @@ input[type="file"] {
   text-decoration-line: none;
 }
 
+.hover\:underline-offset-4:hover{
+  text-underline-offset: 4px;
+}
+
 .hover\:shadow-xl:hover{
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
@@ -2662,6 +2693,11 @@ input[type="file"] {
 .focus\:border-blue-600:focus{
   --tw-border-opacity: 1;
   border-color: rgb(37 99 235 / var(--tw-border-opacity));
+}
+
+.focus\:border-indigo-500:focus{
+  --tw-border-opacity: 1;
+  border-color: rgb(99 102 241 / var(--tw-border-opacity));
 }
 
 .focus\:border-transparent:focus{
@@ -2710,6 +2746,11 @@ input[type="file"] {
 .focus\:ring-blue-600:focus{
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(37 99 235 / var(--tw-ring-opacity));
+}
+
+.focus\:ring-indigo-500:focus{
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(99 102 241 / var(--tw-ring-opacity));
 }
 
 .focus\:ring-opacity-50:focus{
