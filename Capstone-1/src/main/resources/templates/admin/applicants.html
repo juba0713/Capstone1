@@ -123,8 +123,10 @@
               <th class="text-center hidden sm:table-cell">status</th>
               <th class="text-center hidden sm:table-cell">rejected by</th>
               <th class="text-center hidden sm:table-cell">accepted by</th>
-              <th class="text-center hidden sm:table-cell">evaluated by</th>
-              <th class="text-center rounded-top-right"></th>
+              <th class="text-center hidden sm:table-cell rounded-top-right">
+                evaluated by
+              </th>
+              <!-- <th class="text-center rounded-top-right"></th> -->
             </tr>
           </thead>
           <tbody class="divide-y divide-grey-500 bodyrowhover">
@@ -203,12 +205,12 @@
           columnDefs: [
             {
               // targets: "no-sort",
-              targets: [-1, -2],
-              orderable: false,
+              // targets: [-1, -2],
+              // orderable: false,
             },
           ],
           searching: true,
-          // ordering: false,
+          ordering: true,
           info: true,
           lengthChange: false,
         });

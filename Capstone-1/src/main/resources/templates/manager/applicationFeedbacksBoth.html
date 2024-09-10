@@ -203,7 +203,11 @@
       </div>
       <form id="regForm" action="">
         <!-- page 2 -->
-        <div class="flex justify-end">
+        <div class="flex justify-between">
+          <div>
+            Reject count: <span class="text-red-500 font-semibold">1</span>
+          </div>
+
           <a th:href="@{/manager/viewHistory}">
             <div class="border-2 cursor-pointer w-fit flex">
               <img
@@ -2728,17 +2732,17 @@
       }
 
       // Add development mode indicator
-      if (DEVELOPMENT_MODE) {
-        const devModeIndicator = document.createElement("div");
-        devModeIndicator.textContent = "Development Mode";
-        devModeIndicator.style.position = "fixed";
-        devModeIndicator.style.top = "10px";
-        devModeIndicator.style.right = "10px";
-        devModeIndicator.style.backgroundColor = "yellow";
-        devModeIndicator.style.padding = "5px";
-        devModeIndicator.style.borderRadius = "5px";
-        document.body.appendChild(devModeIndicator);
-      }
+      // if (DEVELOPMENT_MODE) {
+      //   const devModeIndicator = document.createElement("div");
+      //   devModeIndicator.textContent = "Development Mode";
+      //   devModeIndicator.style.position = "fixed";
+      //   devModeIndicator.style.top = "10px";
+      //   devModeIndicator.style.right = "10px";
+      //   devModeIndicator.style.backgroundColor = "yellow";
+      //   devModeIndicator.style.padding = "5px";
+      //   devModeIndicator.style.borderRadius = "5px";
+      //   document.body.appendChild(devModeIndicator);
+      // }
 
       // Initialize the script when the DOM is fully loaded
       //   document.addEventListener("DOMContentLoaded", function () {

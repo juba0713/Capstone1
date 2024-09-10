@@ -13,45 +13,56 @@
       class="border-red-500 max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg"
     >
       <div class="flex justify-start flex-col mb-4">
-        <h1 class="text-2xl font-bold mb-4">Ranking</h1>
-
-        <div class="border-green-500 w-80">
-          <div class="mr-4 border-blue-500 flex flex-row">
-            <label
-              for="month"
-              class="w-12 self-center text-sm font-medium text-gray-700"
-              >Month</label
-            >
-            <select
-              id="month"
-              class="border w-2[100px] mt-1 pl-3 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-            >
-              <option>January</option>
-              <option>February</option>
-              <option>March</option>
-              <option>April</option>
-              <option>May</option>
-              <option>June</option>
-              <option>July</option>
-              <option>August</option>
-              <option>September</option>
-              <option>October</option>
-              <option>November</option>
-              <option>December</option>
-            </select>
+        <div class="flex justify-between">
+          <div>
+            <h1 class="text-2xl font-bold">
+              Top Startup <span class="text-customyellow"> Rankings</span>
+            </h1>
+            <div class="text-sm w-80">
+              <div class="mr-4 flex flex-row">
+                <label
+                  for="month"
+                  class="w-12 self-center font-medium text-gray-700"
+                  >Month</label
+                >
+                <select
+                  id="month"
+                  class="border w-2[100px] mt-1 pl-3 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm: rounded-md"
+                >
+                  <option>January</option>
+                  <option>February</option>
+                  <option>March</option>
+                  <option>April</option>
+                  <option>May</option>
+                  <option>June</option>
+                  <option>July</option>
+                  <option>August</option>
+                  <option>September</option>
+                  <option>October</option>
+                  <option>November</option>
+                  <option>December</option>
+                </select>
+              </div>
+              <div class="mr-4 border-blue-500 flex flex-row">
+                <label
+                  for="year"
+                  class="w-12 self-center font-medium text-gray-700"
+                  >Year</label
+                >
+                <select
+                  id="year"
+                  class="border w-[75px] mt-1 pl-3 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                >
+                  <!-- Year options will be added by JavaScript -->
+                </select>
+              </div>
+            </div>
           </div>
-          <div class="mr-4 border-blue-500 flex flex-row">
-            <label
-              for="year"
-              class="w-12 self-center text-sm font-medium text-gray-700"
-              >Year</label
-            >
-            <select
-              id="year"
-              class="border w-[75px] mt-1 pl-3 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-            >
-              <!-- Year options will be added by JavaScript -->
-            </select>
+          <div>
+            <img
+              th:src="@{/images/wilBlackBox.png}"
+              class="h-20 pointer-events-none"
+            />
           </div>
         </div>
       </div>
@@ -59,16 +70,56 @@
 
       <div>
         <ul class="list-decimal pl-5 space-y-2">
-          <li class="text-lg">Item 1</li>
-          <li class="text-lg">Item 2</li>
-          <li class="text-lg">Item 3</li>
-          <li class="text-lg">Item 4</li>
-          <li class="text-lg">Item 5</li>
-          <li class="text-lg">Item 6</li>
-          <li class="text-lg">Item 7</li>
-          <li class="text-lg">Item 8</li>
-          <li class="text-lg">Item 9</li>
-          <li class="text-lg">Item 10</li>
+          <li
+            class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
+          >
+            Item 1
+          </li>
+          <li
+            class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
+          >
+            Item 2
+          </li>
+          <li
+            class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
+          >
+            Item 3
+          </li>
+          <li
+            class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
+          >
+            Item 4
+          </li>
+          <li
+            class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
+          >
+            Item 5
+          </li>
+          <li
+            class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
+          >
+            Item 6
+          </li>
+          <li
+            class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
+          >
+            Item 7
+          </li>
+          <li
+            class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
+          >
+            Item 8
+          </li>
+          <li
+            class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
+          >
+            Item 9
+          </li>
+          <li
+            class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
+          >
+            Item 10
+          </li>
         </ul>
       </div>
     </div>
