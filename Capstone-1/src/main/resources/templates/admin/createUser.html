@@ -53,7 +53,9 @@
       }
     </style>
   </head>
-  <body class="bg-gradient-to-t from-[#E9D790] to-[#FFFFFF] h-screen">
+  <body
+    class="bg-gradient-to-t from-[#E9D790] to-[#FFFFFF] bg-fixed min-h-screen"
+  >
     <form th:action="@{/admin/users/create}" method="POST">
       <a
         th:href="@{/admin/users}"
