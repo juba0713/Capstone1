@@ -41,8 +41,8 @@ input[type="file"] {
   position: fixed;
   top: 20px;
   left: 20px;
-  background-color: hsl(48, 99%, 50%);
-  color: white;
+  background-color: rgb(226 232 240);
+  color: black;
   padding: 10px 20px;
   border-radius: 5px;
   text-decoration: none;

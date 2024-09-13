@@ -104,7 +104,15 @@
       }
     </style>
   </head>
-  <body class="font-secondary" th:object="${applicantWebDto}">
+  <body
+    class="font-secondary bg-gradient-to-r from-formbg-dark to-formbg-light"
+    th:object="${applicantWebDto}"
+  >
+    <img
+      th:src="@{/images/honeycomb.png}"
+      src="/Capstone1/Capstone-1/src/main/resources/static/images/honeycomb.png"
+      class="mix-blend-overlay absolute top-0 right-0 md:fixed pointer-events-none z-0"
+    />
     <div class="error-container" th:if="*{error != null}">
       <div>Please fill out all required fields!</div>
     </div>
