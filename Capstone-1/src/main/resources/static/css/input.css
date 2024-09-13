@@ -21,7 +21,21 @@ input[type="file"] {
     min-width: 150px;
   }
 }
-
+.close-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Adjust width as needed */
+  height: 40px; /* Adjust height as needed */
+  font-size: 40px; /* Ensure this matches your text size */
+  font-weight: 300; /* Light font weight */
+  /* border: 2px solid red; Border styling */
+  box-sizing: border-box; /* Include border in the element's total width and height */
+}
+.close-button:hover {
+  background-color: black; /* Example hover effect */
+  color: white; /* Example hover effect */
+}
 /* back to login button */
 .floating-back-button {
   position: fixed;

@@ -1042,6 +1042,10 @@ video {
   min-height: 360px;
 }
 
+.min-h-screen{
+  min-height: 100vh;
+}
+
 .w-1\/2{
   width: 50%;
 }
@@ -1552,16 +1556,6 @@ video {
 .border-gray-500{
   --tw-border-opacity: 1;
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
-}
-
-.border-green-400{
-  --tw-border-opacity: 1;
-  border-color: rgb(74 222 128 / var(--tw-border-opacity));
-}
-
-.border-green-500{
-  --tw-border-opacity: 1;
-  border-color: rgb(34 197 94 / var(--tw-border-opacity));
 }
 
 .border-red-500{
@@ -2256,6 +2250,30 @@ input[type="file"] {
   input[type="file"] {
     min-width: 150px;
   }
+}
+
+.close-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  /* Adjust width as needed */
+  height: 40px;
+  /* Adjust height as needed */
+  font-size: 40px;
+  /* Ensure this matches your text size */
+  font-weight: 300;
+  /* Light font weight */
+  /* border: 2px solid red; Border styling */
+  box-sizing: border-box;
+  /* Include border in the element's total width and height */
+}
+
+.close-button:hover {
+  background-color: black;
+  /* Example hover effect */
+  color: white;
+  /* Example hover effect */
 }
 
 /* back to login button */

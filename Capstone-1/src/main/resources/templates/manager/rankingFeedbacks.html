@@ -30,7 +30,7 @@
         right: 0;
         top: 0;
         height: 100%;
-        overflow-y: auto;
+        /* overflow-y: auto; */
       }
 
       input {
@@ -1456,11 +1456,7 @@
 
       <div class="checklist w-[45%] text-sm">
         <div class="flex justify-end">
-          <a
-            th:href="@{/officer/home}"
-            class="bg-gray-400 hover:bg-black hover:text-white text-black border-solid border-opacity-100 border-2 rounded-full p-2 w-[15%] text-center"
-            >close</a
-          >
+          <a th:href="@{/manager/home}" class="close-button">&times;</a>
         </div>
         <h1 class="font-semibold text-lg">FEEDBACKS</h1>
         <div>
@@ -1472,26 +1468,51 @@
         </div>
         <hr class="my-4" />
 
-        <!--  Documentary Requirements-->
         <div>
-          <div class="w-full overflow-x-auto">
+          <div>
+            <!-- <div class="w-full overflow-x-auto"> -->
             <!-- <div class="overflow-auto w-[700px] h-[550px]"> -->
             <div class="min-w-[1000px]">
-              <h2 class="text-black">test</h2>
+              <h2 class="text-black">manager 1</h2>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+                iure?
+              </p>
+              <p>score</p>
             </div>
           </div>
         </div>
         <hr class="my-4" />
-
-        <!--  Pre-Screening Criteria-->
         <div>
-          <div class="w-full overflow-x-auto">
+          <div>
+            <!-- <div class="w-full overflow-x-auto"> -->
             <!-- <div class="overflow-auto w-[700px] h-[550px]"> -->
             <div class="min-w-[1000px]">
-              <h2 class="text-black">test</h2>
+              <h2 class="text-black">manager 2</h2>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+                iure?
+              </p>
+              <p>score</p>
             </div>
           </div>
         </div>
+        <hr class="my-4" />
+        <div>
+          <div>
+            <!-- <div class="w-full overflow-x-auto"> -->
+            <!-- <div class="overflow-auto w-[700px] h-[550px]"> -->
+            <div class="min-w-[1000px]">
+              <h2 class="text-black">manager 3</h2>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. At,
+                iure?
+              </p>
+              <p>score</p>
+            </div>
+          </div>
+        </div>
+
         <hr class="my-4" />
         <!-- <div class="w-full h-[100px]">
           <textarea
