@@ -91,7 +91,7 @@ public class ManagerController {
 		AdminInOutDto outDto = adminService.getAdminDashboardDetails();
 
 		webDto.setAdminDashboardObj(outDto.getAdminDashboardObj());
-		return "manager/analyticsManager";
+		return "manager/analytics";
 	}
 
 	@GetMapping("/rank-startups")
