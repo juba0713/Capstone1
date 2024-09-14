@@ -9,6 +9,8 @@
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" th:href="@{/css/output.css}" />
+
     <style>
       .dashboard-card {
         height: 100%;
@@ -105,9 +107,9 @@
         </div>
       </div>
 
-      <!-- Officer Performance Metrics -->
+      <!-- officer, tbiboard Performance Metrics -->
       <div class="row mb-4">
-        <div class="col-md-12">
+        <div class="col-md-12 w-1/2">
           <div class="card dashboard-card">
             <div class="card-body">
               <h5 class="card-title">Officer Performance Metrics</h5>
@@ -117,11 +119,29 @@
                     <tr>
                       <th>Officer</th>
                       <th>Applications Reviewed</th>
-                      <th>Avg. Review Time</th>
-                      <th>Acceptance Rate</th>
                     </tr>
                   </thead>
                   <tbody id="officerPerformanceTable">
+                    <!-- Table rows will be populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 w-1/2">
+          <div class="card dashboard-card">
+            <div class="card-body">
+              <h5 class="card-title">Tbiboard Performance Metrics</h5>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Tbiboard</th>
+                      <th>Applications Evaluated</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbiboardPerformanceTable">
                     <!-- Table rows will be populated dynamically -->
                   </tbody>
                 </table>
@@ -312,21 +332,30 @@
       document.getElementById("officerPerformanceTable").innerHTML = `
             <tr>
                 <td>Officer 1</td>
-                <td>100</td>
-                <td>30 min</td>
-                <td>75%</td>
+                <td>100</td> 
             </tr>
             <tr>
                 <td>Officer 2</td>
-                <td>85</td>
-                <td>35 min</td>
-                <td>70%</td>
+                <td>85</td> 
             </tr>
             <tr>
                 <td>Officer 3</td>
-                <td>120</td>
-                <td>25 min</td>
-                <td>80%</td>
+                <td>120</td> 
+            </tr>
+        `;
+      // Populate Tbiboard Performance Table
+      document.getElementById("tbiboardPerformanceTable").innerHTML = `
+            <tr>
+                <td>tbiboard 1</td>
+                <td>100</td> 
+            </tr>
+            <tr>
+                <td>tbiboard 2</td>
+                <td>85</td> 
+            </tr>
+            <tr>
+                <td>tbiboard 3</td>
+                <td>120</td> 
             </tr>
         `;
 
