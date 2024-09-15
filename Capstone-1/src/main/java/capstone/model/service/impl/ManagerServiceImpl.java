@@ -76,10 +76,6 @@ public class ManagerServiceImpl implements ManagerService {
 			
 			obj.setUniversity(app.getUniversity());
 			
-			obj.setScore(app.getScore());
-			
-			obj.setFeedback(app.getFeedback());
-			
 			obj.setAcceptedBy(app.getAcceptedBy());
 			
 			obj.setEvaluatedBy(app.getEvaluatedBy());
@@ -157,10 +153,6 @@ public class ManagerServiceImpl implements ManagerService {
 			obj.setStatus(app.getStatus());
 			
 			obj.setUniversity(app.getUniversity());
-			
-			obj.setScore(app.getScore());
-			
-			obj.setFeedback(app.getFeedback());
 					
 			listOfAppObj.add(obj);
 			
@@ -195,10 +187,6 @@ public class ManagerServiceImpl implements ManagerService {
 			obj.setStatus(app.getStatus());
 			
 			obj.setUniversity(app.getUniversity());
-			
-			obj.setScore(app.getScore());
-			
-			obj.setFeedback(app.getFeedback());
 			
 			listOfAppObj.add(obj);
 			
@@ -312,10 +300,6 @@ public class ManagerServiceImpl implements ManagerService {
 				applicantDetailsObj.setCommitmentFourFlg(app.getCommitmentFourFlg());
 				
 				applicantDetailsObj.setStatus(app.getStatus());
-				
-				applicantDetailsObj.setScore(app.getScore());
-				
-				applicantDetailsObj.setFeedback(app.getFeedback());
 			}
 
 			members[firstRow] = app.getMemberLastName()+", "+app.getMemberFirstName();

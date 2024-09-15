@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.EvaluatedApplicantEntity;
+import capstone.model.dao.entity.EvaluationDetailsEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
 import capstone.model.dao.entity.UserInformationEntity;
 import capstone.model.dto.OfficerInOutDto;
@@ -43,6 +44,9 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 
 	@Autowired
 	private LoggedInUserService loggedInUserService;
+	
+	@Autowired
+	private CommonService commonService;
 
 	@Autowired
 	private UserLogic userLogic;
@@ -51,7 +55,7 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 	private Environment env;
 
 	@Override
-	public TbiBoardInOutDto getAllApplicants() {
+	public TbiBoardInOutDto getAllApplicants() throws Exception {
 		TbiBoardInOutDto outDto = new TbiBoardInOutDto();
 
 		List<Integer> status = List.of(4);
@@ -63,8 +67,8 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 		for (JoinApplicantProject app : listOfApplicant) {
 
 			ApplicantObj obj = new ApplicantObj();
-
-			obj.setApplicantIdPk(app.getApplicantIdPk());
+			
+			obj.setEncryptedApplicantIdPk(commonService.encrypt(String.valueOf(app.getApplicantIdPk())));;
 
 			obj.setEmail(app.getEmail());
 
@@ -96,10 +100,6 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 
 		evaluatedApplicantEntity.setApplicantIdPk(inDto.getApplicantIdPk());
 
-		evaluatedApplicantEntity.setScore(inDto.getScore());
-
-		evaluatedApplicantEntity.setFeedback(inDto.getFeedback());
-
 		evaluatedApplicantEntity.setCreatedBy(loggedInUser.getIdPk());
 
 		evaluatedApplicantEntity.setCreatedDate(timeNow);
@@ -108,44 +108,90 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 		
 		UserInformationEntity user = userLogic.getUserByApplicantIdPk(inDto.getApplicantIdPk());
 			
-		if (inDto.getScore() > 5) {
-
-			String folderPath = env.getProperty("certificate.path").toString();
-
-			try {
-				// Load the image
-				File imageFile = new File(folderPath + "base_certificate.png");
-				BufferedImage image = ImageIO.read(imageFile);
-
-				Graphics g = image.getGraphics();
-
-				g.setFont(new Font("Leelawadee UI Semilight", Font.BOLD, 130));
-				g.setColor(new Color(253, 204, 1));
-
-				String fullName = user.getFirstName() + " " + user.getLastName();
-				int x = 132;
-				int y = 760;
-				g.drawString(fullName, x, y);
-
-				g.dispose();
-
-				String fileName = "certificate_" + user.getIdPk();
-				File outputFile = new File(folderPath + fileName + ".png");
-				ImageIO.write(image, "png", outputFile);
-
-				applicantLogic.updateApplicantCeritificate(fileName, inDto.getApplicantIdPk());
-				;
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+//		if (inDto.getScore() > 5) {
+//
+//			String folderPath = env.getProperty("certificate.path").toString();
+//
+//			try {
+//				// Load the image
+//				File imageFile = new File(folderPath + "base_certificate.png");
+//				BufferedImage image = ImageIO.read(imageFile);
+//
+//				Graphics g = image.getGraphics();
+//
+//				g.setFont(new Font("Leelawadee UI Semilight", Font.BOLD, 130));
+//				g.setColor(new Color(253, 204, 1));
+//
+//				String fullName = user.getFirstName() + " " + user.getLastName();
+//				int x = 132;
+//				int y = 760;
+//				g.drawString(fullName, x, y);
+//
+//				g.dispose();
+//
+//				String fileName = "certificate_" + user.getIdPk();
+//				File outputFile = new File(folderPath + fileName + ".png");
+//				ImageIO.write(image, "png", outputFile);
+//
+//				applicantLogic.updateApplicantCeritificate(fileName, inDto.getApplicantIdPk());
+//				;
+//
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
 		
 		applicantLogic.updatePreviousEvaluatedApplicant(inDto.getApplicantIdPk());
+
+		int idPk = applicantLogic.saveEvaluateedApplicant(evaluatedApplicantEntity);
+		
+		EvaluationDetailsEntity evaluation = new EvaluationDetailsEntity();
+		
+		evaluation.setEvaluatedApplicantIdPk(idPk);
+		
+		evaluation.setCtOneRating(inDto.getCtOneRating());
+		
+		evaluation.setCtOneComments(inDto.getCtOneComments());
+		
+		evaluation.setCtTwoRating(inDto.getCtTwoRating());
+		
+		evaluation.setCtTwoComments(inDto.getCtTwoComments());
+		
+		evaluation.setCtThreeRating(inDto.getCtThreeRating());
+		
+		evaluation.setCtThreeComments(inDto.getCtThreeComments());
+		
+		evaluation.setCtFourRating(inDto.getCtFourRating());
+		
+		evaluation.setCtFourComments(inDto.getCtFourComments());
+		
+		evaluation.setCtFiveRating(inDto.getCtFiveRating());
+		
+		evaluation.setCtFiveComments(inDto.getCtFiveComments());
+		
+		evaluation.setCtSixRating(inDto.getCtSixRating());
+		
+		evaluation.setCtSixComments(inDto.getCtSixComments());
+		
+		evaluation.setCtSevenRating(inDto.getCtSevenRating());
+		
+		evaluation.setCtSevenComments(inDto.getCtSevenComments());
+		
+		evaluation.setCtEightRating(inDto.getCtEightRating());
+		
+		evaluation.setCtEightComments(inDto.getCtEightComments());
+		
+		evaluation.setTbiFeedback(inDto.getTbiFeedback());
+		
+		evaluation.setCreatedBy(loggedInUser.getIdPk());
+
+		evaluation.setCreatedDate(timeNow);
+
+		evaluation.setDeleteFlg(false);
+		
+		applicantLogic.saveEvaluationDetailsEntity(evaluation);
 		
 		emailService.sendEvaluatedMail(user.getEmail());
-
-		applicantLogic.saveEvaluateedApplicant(evaluatedApplicantEntity);
 
 	}
 
@@ -177,9 +223,9 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 
 				List<String[]> teams = new ArrayList<>();
 
-				teams.add(app.getTeams()[0].split("\\|"));
-				teams.add(app.getTeams()[1].split("\\|"));
-				teams.add(app.getTeams()[2].split("\\|"));
+				for(int i = 0; i < app.getTeams().length; i++) {
+					teams.add(app.getTeams()[i].split("\\|"));
+				}
 
 				applicantDetailsObj.setTeams(teams);
 
@@ -191,11 +237,9 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 
 				List<String[]> historicallTimelines = new ArrayList<>();
 
-				historicallTimelines.add(app.getHistoricalTimeline()[0].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[1].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[2].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[3].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[4].split("\\|"));
+				for(int i = 0; i < app.getHistoricalTimeline().length; i++) {
+					historicallTimelines.add(app.getHistoricalTimeline()[i].split("\\|"));
+				}
 
 				applicantDetailsObj.setHistoricalTimeline(historicallTimelines);
 
@@ -253,9 +297,6 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 
 				applicantDetailsObj.setStatus(app.getStatus());
 
-				applicantDetailsObj.setScore(app.getScore());
-
-				applicantDetailsObj.setFeedback(app.getFeedback());
 			}
 
 			members[firstRow] = app.getMemberLastName() + ", " + app.getMemberFirstName();

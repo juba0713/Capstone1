@@ -20,10 +20,6 @@ public class EvaluatedApplicantEntity {
 	
 	public int applicantIdPk;
 	
-	public int score;
-	
-	public String feedback;
-	
 	public int createdBy;
 	
 	public Timestamp createdDate;

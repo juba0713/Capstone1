@@ -12,7 +12,7 @@ public interface TbiBoardService {
 	 * TO get all applicants for TbiBOard
 	 * @return ManagerInOutDto
 	 */
-	public TbiBoardInOutDto getAllApplicants();
+	public TbiBoardInOutDto getAllApplicants() throws Exception ;
 	
 	/**
 	 * To evaluate applicant

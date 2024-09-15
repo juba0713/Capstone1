@@ -824,9 +824,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 				List<String[]> teams = new ArrayList<>();
 
-				teams.add(app.getTeams()[0].split("\\|"));
-				teams.add(app.getTeams()[1].split("\\|"));
-				teams.add(app.getTeams()[2].split("\\|"));
+				for(int i = 0; i < app.getTeams().length; i++) {
+					teams.add(app.getTeams()[i].split("\\|"));
+				}
 
 				applicantDetailsObj.setTeams(teams);
 
@@ -838,11 +838,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 				List<String[]> historicallTimelines = new ArrayList<>();
 
-				historicallTimelines.add(app.getHistoricalTimeline()[0].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[1].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[2].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[3].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[4].split("\\|"));
+				for(int i = 0; i < app.getHistoricalTimeline().length; i++) {
+					historicallTimelines.add(app.getHistoricalTimeline()[i].split("\\|"));
+				}
 
 				applicantDetailsObj.setHistoricalTimeline(historicallTimelines);
 
@@ -899,10 +897,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 				applicantDetailsObj.setCommitmentFourFlg(app.getCommitmentFourFlg());
 
 				applicantDetailsObj.setStatus(app.getStatus());
-
-				applicantDetailsObj.setScore(app.getScore());
-
-				applicantDetailsObj.setFeedback(app.getFeedback());
 				
 				applicantDetailsObj.setCertificateName(app.getCertificateName());				
 				
@@ -940,7 +934,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 			
 			applicantIdPk = evaluatedApplicant.getApplicantIdPk();
 			
-			outDto.setFeedback(evaluatedApplicant.getFeedback());
+			outDto.setFeedback("");
 		}
 		
 		List<ApplicantDetailsEntity> applicant = applicantLogic.getApplicantDetailsByIdPk(applicantIdPk);

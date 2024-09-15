@@ -4,7 +4,6 @@ import java.util.List;
 
 import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantObj;
-import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data

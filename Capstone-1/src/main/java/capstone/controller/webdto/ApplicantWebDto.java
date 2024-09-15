@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ErrorObj;
 import lombok.Data;

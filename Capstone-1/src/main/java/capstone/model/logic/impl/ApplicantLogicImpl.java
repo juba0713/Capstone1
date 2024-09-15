@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import capstone.model.dao.AcceptedApplicantDao;
 import capstone.model.dao.ApplicantDao;
 import capstone.model.dao.EvaluatedApplicantDao;
+import capstone.model.dao.EvaluationDetailsDao;
 import capstone.model.dao.GroupDao;
 import capstone.model.dao.GroupMemberDao;
 import capstone.model.dao.PrescreenDetailsDao;
@@ -17,6 +18,7 @@ import capstone.model.dao.entity.AcceptedApplicantEntity;
 import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.EvaluatedApplicantEntity;
+import capstone.model.dao.entity.EvaluationDetailsEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
@@ -51,6 +53,9 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	
 	@Autowired
 	private PrescreenDetailsDao prescreenDetailsDao;
+	
+	@Autowired
+	private EvaluationDetailsDao evaluationDetailsDao;
 
 	@Override
 	public int saveApplicantEntity(ApplicantEntity entity) {
@@ -113,10 +118,11 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	}
 
 	@Override
-	public void saveEvaluateedApplicant(EvaluatedApplicantEntity entity) {
+	public int saveEvaluateedApplicant(EvaluatedApplicantEntity entity) {
 		
 		evaluatedApplicantDao.save(entity);
 		
+		return entity.getIdPk();	
 	}
 
 	@Override
@@ -283,6 +289,13 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	public void savePrescreenDetailsEntity(PrescreenDetailsEntity entity) {
 		
 		prescreenDetailsDao.save(entity);
+	}
+
+	@Override
+	public void saveEvaluationDetailsEntity(EvaluationDetailsEntity entity) {
+		
+		evaluationDetailsDao.save(entity);
+		
 	}
 	
 }

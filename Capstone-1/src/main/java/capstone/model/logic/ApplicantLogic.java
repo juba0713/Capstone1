@@ -9,6 +9,7 @@ import capstone.model.dao.entity.AcceptedApplicantEntity;
 import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.EvaluatedApplicantEntity;
+import capstone.model.dao.entity.EvaluationDetailsEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
@@ -98,7 +99,7 @@ public interface ApplicantLogic {
 	 * 
 	 * @param entity
 	 */
-	public void saveEvaluateedApplicant(EvaluatedApplicantEntity entity);
+	public int saveEvaluateedApplicant(EvaluatedApplicantEntity entity);
 
 	/**
 	 * TO get applicant by who created it
@@ -264,4 +265,6 @@ public interface ApplicantLogic {
 	public void updatePreviousEvaluatedApplicant(int applicantIdPk);
 	
 	public void savePrescreenDetailsEntity(PrescreenDetailsEntity entity);
+	
+	public void saveEvaluationDetailsEntity(EvaluationDetailsEntity entity);
 }

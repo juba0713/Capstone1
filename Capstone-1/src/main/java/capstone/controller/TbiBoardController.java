@@ -14,6 +14,7 @@ import capstone.controller.webdto.OfficerWebDto;
 import capstone.controller.webdto.TbiBoardWebDto;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.dto.TbiBoardInOutDto;
+import capstone.model.service.CommonService;
 import capstone.model.service.TbiBoardService;
 import jakarta.mail.MessagingException;
 
@@ -23,15 +24,32 @@ public class TbiBoardController {
 	
 	@Autowired
 	private TbiBoardService tbiBoardService;
+	
+	@Autowired
+	private CommonService commonService;
 
 	@GetMapping("/home")
-	public String showTbiBoardHome(@ModelAttribute TbiBoardWebDto webDto) {
+	public String showTbiBoardHome(@ModelAttribute TbiBoardWebDto webDto) throws Exception {
 		
 		TbiBoardInOutDto outDto = tbiBoardService.getAllApplicants();
 		
 		webDto.setListOfApplicants(outDto.getListOfApplicants());
 		
 		return "tbiboard/home";
+	}
+	
+	@GetMapping("/evaluate")
+	public String showEvaluate(@RequestParam("id") String id,@ModelAttribute TbiBoardWebDto webDto ) throws Exception{
+		
+		TbiBoardInOutDto inDto = new TbiBoardInOutDto();
+		  
+		inDto.setApplicantIdPk(Integer.parseInt(commonService.decrypt(id)));
+ 
+		TbiBoardInOutDto outDto = tbiBoardService.getApplicantDetails(inDto);
+		
+		webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
+		
+		return "tbiboard/evaluateApplication";
 	}
 	
 	@PostMapping("/evaluate")
@@ -41,11 +59,39 @@ public class TbiBoardController {
 		
 		inDto.setApplicantIdPk(webDto.getApplicantIdPk());
 		
-		inDto.setScore(webDto.getScore());
+		inDto.setCtOneRating(webDto.getCtOneRating());
 		
-		inDto.setFeedback(webDto.getFeedback());
+		inDto.setCtOneComments(webDto.getCtOneComments());
 		
-		tbiBoardService.evaluateApplicant(inDto);
+		inDto.setCtTwoRating(webDto.getCtTwoRating());
+		
+		inDto.setCtTwoComments(webDto.getCtTwoComments());
+		
+		inDto.setCtThreeRating(webDto.getCtThreeRating());
+		
+		inDto.setCtThreeComments(webDto.getCtThreeComments());
+		
+		inDto.setCtFourRating(webDto.getCtFourRating());
+		
+		inDto.setCtFourComments(webDto.getCtFourComments());
+		
+		inDto.setCtFiveRating(webDto.getCtFiveRating());
+		
+		inDto.setCtFiveComments(webDto.getCtFiveComments());
+		
+		inDto.setCtSixRating(webDto.getCtSixRating());
+		
+		inDto.setCtSixComments(webDto.getCtSixComments());
+		
+		inDto.setCtSevenRating(webDto.getCtSevenRating());
+		
+		inDto.setCtSevenComments(webDto.getCtSevenComments());
+		
+		inDto.setCtEightRating(webDto.getCtEightRating());
+		
+		inDto.setCtEightComments(webDto.getCtEightComments());
+				
+		//tbiBoardService.evaluateApplicant(inDto);
 		
 		ra.addFlashAttribute("succMsg", "The application has been evaluated!");
 		

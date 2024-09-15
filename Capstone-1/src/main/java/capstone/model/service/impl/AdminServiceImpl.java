@@ -143,10 +143,6 @@ public class AdminServiceImpl  implements AdminService{
 			
 			obj.setUniversity(app.getUniversity());
 			
-			obj.setScore(app.getScore());
-			
-			obj.setFeedback(app.getFeedback());
-			
 			obj.setAcceptedBy(app.getAcceptedBy());
 			
 			obj.setEvaluatedBy(app.getEvaluatedBy());

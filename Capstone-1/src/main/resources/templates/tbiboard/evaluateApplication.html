@@ -103,7 +103,7 @@
       }
     </style>
   </head>
-  <body class="font-secondary">
+  <body class="font-secondary" th:object="${tbiBoardWebDto}">
     <div class="error-container" id="globalError" style="display: none">
       <div>Please fill out all required fields!</div>
     </div>
@@ -129,19 +129,11 @@
                 oninput="this.className = ''"
                 placeholder="Enter Project title"
                 name="projectTitle"
-                th:value="*{projectTitle}"
+				th:value="*{applicantDetailsObj.projectTitle}"
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
               />
             </div>
-            <div
-              class="error"
-              th:if="*{error != null} AND *{error.projectTitleError != null}"
-            >
-              <div
-                th:each="err : *{error.projectTitleError}"
-                th:text="${err}"
-              ></div>
-            </div>
+          
             <hr class="my-8" />
 
             <!-- capsule proposal form -->
@@ -158,8 +150,8 @@
                   oninput="this.className = ''"
                   type="text"
                   placeholder="Type something here..."
-                  name="projectDescription"
-                  th:text="*{projectDescription}"
+                  name="projectDescription" 
+                  th:text="*{applicantDetailsObj.projectDescription}"
                   class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                 ></textarea>
                 <small class="block mt-2 text-gray-500">
@@ -170,15 +162,7 @@
                   about the subject, program, competition, or initiative that
                   initiated this project.
                 </small>
-                <div
-                  class="error no-pad"
-                  th:if="*{error != null} AND *{error.projectDescriptionError != null}"
-                >
-                  <div
-                    th:each="err : *{error.projectDescriptionError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
+               
               </div>
 
               <hr class="my-4" />
@@ -315,12 +299,7 @@
                   </div>
                 </div>
               </div>
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.teamsError != null}"
-              >
-                <div th:each="err : *{error.teamsError}" th:text="${err}"></div>
-              </div>
+           
               <hr class="my-4" />
 
               <!--  About the Product/Solution -->
@@ -334,7 +313,7 @@
                   oninput="this.className = ''"
                   placeholder="Type something here..."
                   name="problemStatement"
-                  th:text="*{problemStatement}"
+
                   class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                 ></textarea>
                 <small class="block text-gray-500">
@@ -348,7 +327,7 @@
                   <textarea
                     placeholder="Type something here..."
                     name="targetMarket"
-                    th:text="*{targetMarket}"
+
                     class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                   ></textarea>
                   <small class="block text-gray-500">
@@ -357,15 +336,7 @@
                     the product/project.<br />
                     • Specify the size of the market
                   </small>
-                  <div
-                    class="error no-pad"
-                    th:if="*{error != null} AND *{error.targetMarketError != null}"
-                  >
-                    <div
-                      th:each="err : *{error.targetMarketError}"
-                      th:text="${err}"
-                    ></div>
-                  </div>
+              
                 </div>
                 <div>
                   <p class="text-sm mt-4">
@@ -375,7 +346,7 @@
                   <textarea
                     placeholder="Type something here..."
                     name="solutionDescription"
-                    th:text="*{solutionDescription}"
+
                     class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20"
                   ></textarea>
                   <small class="block text-gray-500">
@@ -388,25 +359,9 @@
                     • Highlight Value Proposition or Innovation: Emphasize the
                     unique aspects or innovative elements of your solution.
                   </small>
-                  <div
-                    class="error no-pad"
-                    th:if="*{error != null} AND *{error.solutionDescriptionError != null}"
-                  >
-                    <div
-                      th:each="err : *{error.solutionDescriptionError}"
-                      th:text="${err}"
-                    ></div>
-                  </div>
+                 
                 </div>
-                <div
-                  class="error no-pad"
-                  th:if="*{error != null} AND *{error.problemStatementError != null}"
-                >
-                  <div
-                    th:each="err : *{error.problemStatementError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
+             
               </div>
               <hr class="my-4" />
 
@@ -548,15 +503,6 @@
                   </tbody>
                 </table>
 
-                <div
-                  class="error no-pad"
-                  th:if="*{error != null} AND *{error.historicalTimelineError != null}"
-                >
-                  <div
-                    th:each="err : *{error.historicalTimelineError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
               </div>
               <hr class="my-4" />
 
@@ -678,15 +624,7 @@
                     </tr>
                   </tbody>
                 </table>
-                <div
-                  class="error no-pad"
-                  th:if="*{error != null} AND *{error.productServiceOfferingError != null}"
-                >
-                  <div
-                    th:each="err : *{error.productServiceOfferingError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
+           
               </div>
               <hr class="my-4" />
 
@@ -723,7 +661,7 @@
                   type="text"
                   placeholder="Type something here..."
                   name="objectives"
-                  th:text="*{objectives}"
+
                   class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                 ></textarea>
                 <small class="block text-gray-500">
@@ -731,15 +669,7 @@
                   • Provide 3 main objectives of the proposed acceleration.<br />
                   • The readiness level must be specified.
                 </small>
-                <div
-                  class="error no-pad"
-                  th:if="*{error != null} AND *{error.ObjectivesError != null}"
-                >
-                  <div
-                    th:each="err : *{error.ObjectivesError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
+               
               </div>
               <hr class="my-4" />
 
@@ -753,22 +683,14 @@
                 <textarea
                   placeholder="Type something here..."
                   name="scopeProposal"
-                  th:text="*{scopeProposal}"
+     
                   class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                 ></textarea>
                 <small class="block text-gray-500">
                   • Maximum of 50 words<br />
                   • State the focus of the proposal
                 </small>
-                <div
-                  class="error no-pad"
-                  th:if="*{error != null} AND *{error.scopeProposalError != null}"
-                >
-                  <div
-                    th:each="err : *{error.scopeProposalError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
+             
               </div>
               <hr class="my-4" />
 
@@ -782,22 +704,13 @@
                 <textarea
                   placeholder="Type something here..."
                   name="methodology"
-                  th:text="*{methodology}"
                   class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                 ></textarea>
                 <small class="block text-gray-500">
                   • Maximum of 300 words<br />
                   • State the focus of the proposal
                 </small>
-                <div
-                  class="error no-pad"
-                  th:if="*{error != null} AND *{error.methodologyError != null}"
-                >
-                  <div
-                    th:each="err : *{error.methodologyError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
+             
               </div>
             </div>
             <hr class="my-8" />
@@ -822,15 +735,7 @@
                   >Submit your file in
                   <span class="font-bold"> PDF </span> format.</span
                 >
-                <div
-                  class="error no-pad"
-                  th:if="*{error != null} AND *{error.vitaeFileError != null}"
-                >
-                  <div
-                    th:each="err : *{error.vitaeFileError}"
-                    th:text="${err}"
-                  ></div>
-                </div>
+           
               </div>
             </div>
             <hr class="my-8" />
@@ -848,7 +753,6 @@
                 type="text"
                 placeholder="Input here"
                 name="supportLink"
-                th:value="*{supportLink}"
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
               />
             </div>
@@ -875,18 +779,9 @@
                 oninput="this.className = ''"
                 placeholder="Input here"
                 name="groupName"
-                th:value="*{groupName}"
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
               />
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.groupNameError != null}"
-              >
-                <div
-                  th:each="err : *{error.groupNameError}"
-                  th:text="${err}"
-                ></div>
-              </div>
+           
             </div>
             <hr class="my-4" />
             <div
@@ -905,18 +800,8 @@
                 oninput="this.className = ''"
                 placeholder="Input here"
                 name="groupLeader"
-                th:value="*{groupLeader}"
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-              />
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.groupLeaderError != null}"
-              >
-                <div
-                  th:each="err : *{error.groupLeaderError}"
-                  th:text="${err}"
-                ></div>
-              </div>
+              />     
             </div>
             <hr class="my-4" />
             <div
@@ -932,18 +817,9 @@
                 oninput="this.className = ''"
                 placeholder="Input here"
                 name="leaderNumber"
-                th:value="*{leaderNumber}"
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
               />
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.leaderNumberError != null}"
-              >
-                <div
-                  th:each="err : *{error.leaderNumberError}"
-                  th:text="${err}"
-                ></div>
-              </div>
+            
             </div>
             <hr class="my-4" />
             <div
@@ -963,15 +839,7 @@
                 name="leaderAddress"
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
               />
-              <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.leaderAddressError != null}"
-              >
-                <div
-                  th:each="err : *{error.leaderAddressError}"
-                  th:text="${err}"
-                ></div>
-              </div>
+          
             </div>
             <hr class="my-4" />
             <div
@@ -1046,12 +914,7 @@
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
               />
             </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.membersError != null}"
-            >
-              <div th:each="err : *{error.membersError}" th:text="${err}"></div>
-            </div>
+      
 
             <hr class="my-4" />
             <div class="relative pt-3 ml-6 mb-3">
@@ -1124,7 +987,7 @@
                     type="radio"
                     name="technologyAns"
                     value="1"
-                    th:checked="*{technologyAns==1}"
+
                   />
                   Project work is beyond basic research and technology concept
                   has been defined</label
@@ -1137,7 +1000,7 @@
                     type="radio"
                     name="technologyAns"
                     value="2"
-                    th:checked="*{technologyAns==2}"
+
                   />
                   Applied research has begun and practical application(s) have
                   been identified</label
@@ -1150,7 +1013,7 @@
                     type="radio"
                     name="technologyAns"
                     value="3"
-                    th:checked="*{technologyAns==3}"
+
                   />
                   Preliminary testing of technology components has begun, and
                   technical feasibility has been established in a laboratory
@@ -1164,7 +1027,7 @@
                     type="radio"
                     name="technologyAns"
                     value="4"
-                    th:checked="*{technologyAns==4}"
+
                   />
                   Initial testing of integrated product/system has been
                   completed in a laboratory environment
@@ -1177,19 +1040,14 @@
                     type="radio"
                     name="technologyAns"
                     value="5"
-                    th:checked="*{technologyAns==5}"
+
                   />
                   Laboratory scale integrated product/system demonstrates
                   performance in the intended application(s)
                 </label>
               </div>
             </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.technologyAnsError != null}"
-            >
-              <div th:text="*{error.technologyAnsError}"></div>
-            </div>
+      
             <hr class="my-3" />
             <div class="ml-6 text-sm">
               <div>
@@ -1205,7 +1063,7 @@
                     type="radio"
                     name="productDevelopmentAns"
                     value="1"
-                    th:checked="*{productDevelopmentAns==1}"
+
                   />
                   Initial product/market fit has been defined</label
                 >
@@ -1218,7 +1076,7 @@
                     type="radio"
                     name="productDevelopmentAns"
                     value="2"
-                    th:checked="*{productDevelopmentAns==2}"
+     
                   />
                   Pilot scale product/system has been tested in the intended
                   application(s)</label
@@ -1231,7 +1089,7 @@
                     type="radio"
                     name="productDevelopmentAns"
                     value="3"
-                    th:checked="*{productDevelopmentAns==3}"
+       
                   />
                   Demonstration of a full scale product/system prototype has
                   been completed in the intended application(s)</label
@@ -1244,7 +1102,7 @@
                     type="radio"
                     name="productDevelopmentAns"
                     value="4"
-                    th:checked="*{productDevelopmentAns==4}"
+
                   />
                   Actual product/system has been proven to work in its
                   near-final form under a representative set of expected
@@ -1258,19 +1116,14 @@
                     type="radio"
                     name="productDevelopmentAns"
                     value="5"
-                    th:checked="*{productDevelopmentAns==5}"
+
                   />
                   Product/system is in final form and has been operated under
                   the full range of operating conditions and environments
                 </label>
               </div>
             </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.productDevelopmentAnsError != null}"
-            >
-              <div th:text="*{error.productDevelopmentAnsError}"></div>
-            </div>
+           
             <hr class="my-3" />
             <div class="ml-6 text-sm">
               <div>
@@ -1286,7 +1139,7 @@
                     type="radio"
                     name="competitiveLandscapeAns"
                     value="1"
-                    th:checked="*{competitiveLandscapeAns==1}"
+
                   />
                   Secondary market research has been performed and basic
                   knowledge of potential applications and competitive landscape
@@ -1301,7 +1154,7 @@
                     type="radio"
                     name="competitiveLandscapeAns"
                     value="2"
-                    th:checked="*{competitiveLandscapeAns==2}"
+
                   />
                   Primary market research to prove the product/system commercial
                   feasibility has been completed and basic understanding of
@@ -1315,7 +1168,7 @@
                     type="radio"
                     name="competitiveLandscapeAns"
                     value="3"
-                    th:checked="*{competitiveLandscapeAns==3}"
+ 
                   />
                   Comprehensive market research to prove the product/system
                   commercial feasibility has been completed and intermediate
@@ -1330,7 +1183,7 @@
                     type="radio"
                     name="competitiveLandscapeAns"
                     value="4"
-                    th:checked="*{competitiveLandscapeAns==4}"
+
                   />
                   Competitive analysis to illustrate unique features and
                   advantages of the product/system compared to competitive
@@ -1344,7 +1197,7 @@
                     type="radio"
                     name="competitiveLandscapeAns"
                     value="5"
-                    th:checked="*{competitiveLandscapeAns==5}"
+   
                   />
                   Full and complete understanding of the competitive landscape,
                   target application(s), competitive products/systems, and
@@ -1352,12 +1205,7 @@
                 </label>
               </div>
             </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.competitiveLandscapeAnsError != null}"
-            >
-              <div th:text="*{error.competitiveLandscapeAnsError}"></div>
-            </div>
+   
             <hr class="my-3" />
             <div class="ml-6 text-sm">
               <div>
@@ -1374,7 +1222,7 @@
                     type="radio"
                     name="productDesignAns"
                     value="1"
-                    th:checked="*{productDesignAns==1}"
+
                   />
                   One or more initial product hypotheses have been
                   defined</label
@@ -1388,7 +1236,7 @@
                     type="radio"
                     name="productDesignAns"
                     value="2"
-                    th:checked="*{productDesignAns==2}"
+
                   />
                   Mapping product/system attributes against customer needs has
                   highlighted a clear value proposition</label
@@ -1401,7 +1249,7 @@
                     type="radio"
                     name="productDesignAns"
                     value="3"
-                    th:checked="*{productDesignAns==3}"
+
                   />
                   The product/system has been scaled from laboratory to pilot
                   scale and issues that may affect achieving full scale have
@@ -1415,7 +1263,7 @@
                     type="radio"
                     name="productDesignAns"
                     value="4"
-                    th:checked="*{productDesignAns==4}"
+
                   />
                   Comprehensive customer value proposition model has been
                   developed, including a detailed understanding of
@@ -1430,7 +1278,7 @@
                     type="radio"
                     name="productDesignAns"
                     value="5"
-                    th:checked="*{productDesignAns==5}"
+
                   />
                   Product/system final design optimization has been completed,
                   required certifications have been obtained, and product/system
@@ -1438,12 +1286,7 @@
                 </label>
               </div>
             </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.productDesignAnsError != null}"
-            >
-              <div th:text="*{error.productDesignAnsError}"></div>
-            </div>
+        
             <hr class="my-3" />
             <div class="ml-6 text-sm">
               <div>
@@ -1459,7 +1302,7 @@
                     type="radio"
                     name="teamAns"
                     value="1"
-                    th:checked="*{teamAns==1}"
+
                   />
                   No team or company in place (single individual, no legal
                   entity)</label
@@ -1473,7 +1316,7 @@
                     type="radio"
                     name="teamAns"
                     value="2"
-                    th:checked="*{teamAns==2}"
+
                   />
                   Solely technical or non-technical founder(s) running the
                   company with no outside assistance</label
@@ -1486,7 +1329,7 @@
                     type="radio"
                     name="teamAns"
                     value="3"
-                    th:checked="*{teamAns==3}"
+        
                   />
                   Solely technical or non-technical founder(s) running the
                   company with assistance from outside advisors/mentors and/or
@@ -1500,7 +1343,7 @@
                     type="radio"
                     name="teamAns"
                     value="4"
-                    th:checked="*{teamAns==4}"
+
                   />
                   Balanced team with technical and business
                   development/commercialization experience running the company
@@ -1514,7 +1357,7 @@
                     type="radio"
                     name="teamAns"
                     value="5"
-                    th:checked="*{teamAns==5}"
+
                   />
                   Balanced team with all capabilities onboard (e.g., sales,
                   marketing, customer service, operations, etc.) running the
@@ -1522,12 +1365,7 @@
                 </label>
               </div>
             </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.teamAnsError != null}"
-            >
-              <div th:text="*{error.teamAnsError}"></div>
-            </div>
+           
             <hr class="my-3" />
             <div class="ml-6 text-sm">
               <div>
@@ -1543,7 +1381,7 @@
                     type="radio"
                     name="goToMarketAns"
                     value="1"
-                    th:checked="*{goToMarketAns==1}"
+
                   />
                   Initial business model and value proposition have been
                   defined</label
@@ -1556,7 +1394,7 @@
                     type="radio"
                     name="goToMarketAns"
                     value="2"
-                    th:checked="*{goToMarketAns==2}"
+
                   />
                   Customers/partners have been interviewed to understand their
                   pain points/needs, and business model and value proposition
@@ -1570,7 +1408,7 @@
                     type="radio"
                     name="goToMarketAns"
                     value="3"
-                    th:checked="*{goToMarketAns==3}"
+
                   />
                   Market and customer/partner needs and how those translate to
                   product requirements have been defined, and initial
@@ -1585,8 +1423,8 @@
                     type="radio"
                     name="goToMarketAns"
                     value="4"
-                    th:checked="*{goToMarketAns==4}"
-                  />
+       
+               />
                   Partnerships have been formed with key stakeholders across the
                   value chain (e.g., suppliers, partners, service providers, and
                   customers)
@@ -1599,19 +1437,14 @@
                     type="radio"
                     name="goToMarketAns"
                     value="5"
-                    th:checked="*{goToMarketAns==5}"
+
                   />
                   Supply agreements with suppliers and partners are in place and
                   initial purchase orders from customers have been received
                 </label>
               </div>
             </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.goToMarketAnsError != null}"
-            >
-              <div th:text="*{error.goToMarketAnsError}"></div>
-            </div>
+           
             <hr class="my-3" />
             <div class="ml-6 text-sm">
               <div>
@@ -1628,7 +1461,7 @@
                     type="radio"
                     name="manufacturingAns"
                     value="1"
-                    th:checked="*{manufacturingAns==1}"
+
                   />
                   Potential suppliers, partners, and customers have been
                   identified and mapped in an initial value chain
@@ -1642,7 +1475,7 @@
                     type="radio"
                     name="manufacturingAns"
                     value="2"
-                    th:checked="*{manufacturingAns==2}"
+
                   />
                   Relationships have been established with potential suppliers,
                   partners, service providers, and customers and they have
@@ -1657,7 +1490,7 @@
                     type="radio"
                     name="manufacturingAns"
                     value="3"
-                    th:checked="*{manufacturingAns==3}"
+        
                   />
                   Manufacturing process qualifications (e.g. QC/QA) have been
                   defined and are in progress</label
@@ -1670,7 +1503,7 @@
                     type="radio"
                     name="manufacturingAns"
                     value="4"
-                    th:checked="*{manufacturingAns==4}"
+
                   />
                   Products/systems have been pilot manufactured and sold to
                   initial customerss
@@ -1683,19 +1516,14 @@
                     type="radio"
                     name="manufacturingAns"
                     value="5"
-                    th:checked="*{manufacturingAns==5}"
+          
                   />
                   Full scale manufacturing and widespread deployment of
                   product/system to customers and/or users has been achieved
                 </label>
               </div>
             </div>
-            <div
-              class="error no-pad"
-              th:if="*{error != null} AND *{error.manufacturingAnsError != null}"
-            >
-              <div th:text="*{error.manufacturingAnsError}"></div>
-            </div>
+            
           </div>
         </div>
 
@@ -1795,7 +1623,8 @@
           </div>
         </div>
         <hr class="my-4" />
-
+		
+		<form th:action="@{/tbi-board/evaluate}" method="POST">
         <div>
           <div class="w-full overflow-x-auto max-h-[550px]">
             <!-- <div class="overflow-auto w-[700px] h-[550px]"> -->
@@ -1855,7 +1684,7 @@
                             required
                             oninput="this.className = ''"
                             id="rating"
-                            name="rating"
+                            name="ctOneRating"
                             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option value="none" disabled selected>
@@ -1877,7 +1706,7 @@
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                          name="productServiceOffering[2]"
+                          name="ctOneComments"
                           placeholder="Enter comment"
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -1910,7 +1739,7 @@
                             required
                             oninput="this.className = ''"
                             id="rating"
-                            name="rating"
+                            name="ctTwoRating"
                             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option value="none" disabled selected>
@@ -1932,7 +1761,7 @@
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                          name="pricingStrategy[2]"
+                          name="ctTwoComments"
                           placeholder="Enter comment"
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -1965,7 +1794,7 @@
                             required
                             oninput="this.className = ''"
                             id="rating"
-                            name="rating"
+                            name="ctThreeRating"
                             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option value="none" disabled selected>
@@ -1987,7 +1816,7 @@
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                          name="pricingStrategy[2]"
+                          name="ctThreeComments"
                           placeholder="Enter comment"
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2011,7 +1840,7 @@
                             required
                             oninput="this.className = ''"
                             id="rating"
-                            name="rating"
+                            name="ctFourRating"
                             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option value="none" disabled selected>
@@ -2033,7 +1862,7 @@
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                          name="pricingStrategy[2]"
+                          name="ctFourComments"
                           placeholder="Enter comment"
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2066,7 +1895,7 @@
                             required
                             oninput="this.className = ''"
                             id="rating"
-                            name="rating"
+                            name="ctFiveRating"
                             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option value="none" disabled selected>
@@ -2088,7 +1917,7 @@
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                          name="pricingStrategy[2]"
+                          name="ctFiveComments"
                           placeholder="Enter comment"
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2121,7 +1950,7 @@
                             required
                             oninput="this.className = ''"
                             id="rating"
-                            name="rating"
+                            name="ctSixRating"
                             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option value="none" disabled selected>
@@ -2143,7 +1972,7 @@
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                          name="pricingStrategy[2]"
+                          name="ctSixComments"
                           placeholder="Enter comment"
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2168,7 +1997,7 @@
                             required
                             oninput="this.className = ''"
                             id="rating"
-                            name="rating"
+                            name="ctSevenRating"
                             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option value="none" disabled selected>
@@ -2190,7 +2019,7 @@
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                          name="pricingStrategy[2]"
+                          name="ctSevenComments"
                           placeholder="Enter comment"
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2214,7 +2043,7 @@
                             required
                             oninput="this.className = ''"
                             id="rating"
-                            name="rating"
+                            name="ctEightRating"
                             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option value="none" disabled selected>
@@ -2236,7 +2065,7 @@
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                          name="pricingStrategy[2]"
+                          name="ctEightComments"
                           placeholder="Enter comment"
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2271,22 +2100,24 @@
           <div class="w-full h-[100px]">
             <textarea
               oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
-              name="pricingStrategy[2]"
+              name="tbiFeedback"
               placeholder="Additional feedback"
               class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
             ></textarea>
           </div>
           <button
             class="flex justify-center items-center self-end text-center mt-2 h-[50px] border-black hover:bg-green-500 bg-green-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-            type="button"
+            type="submit"
             name="accept"
           >
             Submit
           </button>
         </div>
       </div>
+      </form>
     </div>
-    <script>
+    <script th:inline="javascript">
+		console.log(/*[[${tbiBoardWebDto}]]*/'');
       // Set this to true for development mode, false for production
       const DEVELOPMENT_MODE = true;
 
@@ -2333,5 +2164,6 @@
         x[n].className += " active";
       }
     </script>
+    
   </body>
 </html>
