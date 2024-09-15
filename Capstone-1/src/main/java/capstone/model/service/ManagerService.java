@@ -14,7 +14,7 @@ public interface ManagerService {
 	 * TO get all applicants for manager
 	 * @return ManagerInOutDto
 	 */
-	public ManagerInOutDto getAllApplicants();
+	public ManagerInOutDto getAllApplicants() throws Exception;
 	
 	/**
 	 * TO create an account for applicant

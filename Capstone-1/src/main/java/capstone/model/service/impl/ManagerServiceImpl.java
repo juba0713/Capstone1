@@ -50,12 +50,9 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	@Autowired
 	private PasswordEncoder encoder;
-	
-	@Autowired
-	private Environment env;
 
 	@Override
-	public ManagerInOutDto getAllApplicants() {
+	public ManagerInOutDto getAllApplicants() throws Exception{
 		
 		ManagerInOutDto outDto = new ManagerInOutDto();
 		
@@ -69,7 +66,7 @@ public class ManagerServiceImpl implements ManagerService {
 			
 			ApplicantObj obj = new ApplicantObj();
 			
-			obj.setApplicantIdPk(app.getApplicantIdPk());
+			obj.setEncryptedApplicantIdPk(commonService.encrypt(String.valueOf(app.getApplicantIdPk())));;
 			
 			obj.setEmail(app.getEmail());
 			

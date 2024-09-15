@@ -46,4 +46,10 @@ public class TestController {
 
         return "initial";
     }
+    
+    @GetMapping("/test/screen")
+    public String showPrescreen() {
+    	
+    	return "manager/applicationDetails";
+    }
 }

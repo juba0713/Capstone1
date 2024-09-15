@@ -57,13 +57,23 @@ public class ManagerController {
 	}
 
 	@GetMapping("/home")
-	public String showManagerHome(@ModelAttribute ManagerWebDto webDto) {
+	public String showManagerHome(@ModelAttribute ManagerWebDto webDto) throws Exception {
 
 		ManagerInOutDto outDto = managerService.getAllApplicants();
 
 		webDto.setListOfApplicants(outDto.getListOfApplicants());
 
 		return "manager/listOfAllApplicants";
+	}
+	
+	@GetMapping("/home/application-details")
+	public String showManagerHome(@RequestParam("id") String id, @ModelAttribute ManagerWebDto webDto) throws Exception {
+
+		if(id.isEmpty()) {
+			return "redirect:/manager/home";
+		}
+
+		return "manager/applicationDetails";
 	}
 
 	@GetMapping("/evaluated-result")
