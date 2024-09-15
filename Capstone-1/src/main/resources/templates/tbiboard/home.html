@@ -114,16 +114,10 @@
         class="relative z-10 rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden sm:w-auto p-10 ml-2 sm:ml-0"
       >
         <table id="applicants-table" class="w-screen h-4/5">
-          <!-- class="border-collapse table-auto border-4 border-violet-600 h-full border-spacing-0 w-fit" -->
-
           <thead class="font-secondary text-sm bg-customyellow">
             <tr>
               <th class="text-center rounded-top-left">Email</th>
-              <!-- <th class="text-left hidden sm:table-cell">Consent</th> -->
               <th class="text-center w-3/12">Project Title</th>
-              <!--<th class="text-center w-1/5 hidden sm:table-cell">
-                Description
-              </th>-->
               <th class="text-center w-1/5 hidden sm:table-cell">University</th>
               <th class="text-center rounded-top-right">Actions</th>
             </tr>
@@ -137,52 +131,30 @@
               <td
                 th:text="${app.email}"
                 class="whitespace-nowrap max-w-0 truncate"
-              >
-                test@gmail.com
-              </td>
-              <!-- <td
-                th:text="${app.consent ? 'Yes' : 'No'}"
-                class="whitespace-nowrap hidden sm:table-cell"
-              >
-                oms
-              </td> -->
+              ></td>
               <td
                 th:text="${app.projectTitle}"
                 class="whitespace-nowrap max-w-0 truncate"
-              >
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Eligendi quaerat officia exercitationem. Voluptatum velit
-                asperiores reiciendis saepe soluta hic in!
-              </td>
-              <!--<td
-                th:text="${app.description}"
-                class="whitespace-nowrap max-w-0 truncate hidden sm:table-cell"
-              >
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Recusandae ut consectetur cumque odit! Corporis commodi maiores
-                nostrum nulla! Doloremque nesciunt explicabo cum, quidem, sequi
-                accusamus, officiis ipsam quia fugiat cupiditate repudiandae.
-                Eligendi consectetur ad molestias perspiciatis officia debitis
-                nesciunt, praesentium cum tempore earum error delectus in est
-                odio. Necessitatibus, voluptatibus.
-              </td>-->
+              ></td>
               <td
                 class="whitespace-nowrap max-w-0 truncate hidden sm:table-cell"
                 th:text="${app.university}"
-              >
-                test/NA if walay university
-              </td>
+              ></td>
               <td>
-				  <form th:action="@{/tbi-board/evaluate}" method="GET">
-	                <button
-	                  class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-	                  type="submit"
-	                  name="id"
-	                  th:value="${app.encryptedApplicantIdPk}"
-	                >
-	                  Evaluate
-	                </button>
-	               </form>
+                <form
+                  th:action="@{/tbi-board/evaluate}"
+                  method="GET"
+                  target="_blank"
+                >
+                  <button
+                    class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                    type="submit"
+                    name="id"
+                    th:value="${app.encryptedApplicantIdPk}"
+                  >
+                    Evaluate
+                  </button>
+                </form>
               </td>
             </tr>
           </tbody>
@@ -197,17 +169,7 @@
         </form>
       </div>
     </div>
-    <!-- applicant details -->
-    <div class="modal" tabindex="-1" role="dialog" id="details-modal">
-      <div class="modal-dialog" role="document">
-        <div
-          th:replace="~{fragments/applicantdetails :: applicantDetailsFragment}"
-          class="modal-content"
-        ></div>
-      </div>
-    </div>
 
-  
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -236,7 +198,7 @@
             },
           ],
         });
-        });
-	</script>
+      });
+    </script>
   </body>
 </html>
