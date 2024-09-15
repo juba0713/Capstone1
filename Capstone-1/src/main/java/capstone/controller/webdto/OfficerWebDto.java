@@ -4,20 +4,65 @@ import java.util.List;
 
 import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantObj;
+import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data
 public class OfficerWebDto {
 
-	public List<ApplicantObj> listOfApplicants;
+	private List<ApplicantObj> listOfApplicants;
 	
-	public int applicantIdPk;
+	private int applicantIdPk;
 	
-	public String feedback;
+	private String encryptedApplicantIdPk;
 	
-	public Boolean resubmitFlg;
+	private String feedback;
 	
-	ApplicantDetailsObj applicantDetailsObj;
+	private Boolean resubmitFlg;
 	
-	public String email;
+	private ApplicantDetailsObj applicantDetailsObj;
+	
+	private String email;
+	
+	
+	/*
+	 * For Prescreen DTO
+	 */
+	private Boolean ctOneFlg;
+	
+	private String ctOneComments;
+	
+	private Boolean ctTwoFlg;
+	
+	private String ctTwoComments;
+
+	private Boolean ctThreeFlg;
+	
+	private String ctThreeComments;
+
+	private Boolean ctFourFlg;
+	
+	private String ctFourComments;
+
+	private Boolean ctFiveFlg;
+
+	private String ctFiveComments;
+
+	private Boolean ctSixFlg;
+
+	private String ctSixComments;
+
+	private Boolean ctSevenFlg;
+
+	private String ctSevenComments;
+
+	private Boolean ctEightFlg;
+
+	private String ctEightComments;
+
+	private Boolean ctNineFlg;
+
+	private String ctNineComments;
+
+	private String recommendation;
 }

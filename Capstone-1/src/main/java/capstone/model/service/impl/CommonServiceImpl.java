@@ -1,15 +1,30 @@
 package capstone.model.service.impl;
 
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Random;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import capstone.model.service.CommonService;
 
 @Service
 public class CommonServiceImpl implements CommonService {
+	
+	@Autowired
+	private Environment env;
 
 	@Override
 	public List<String> convertToList(String[] val) {
@@ -79,6 +94,29 @@ public class CommonServiceImpl implements CommonService {
 		}
 			
 		return converteValue;
+	}
+
+	@Override
+	public String encrypt(String value) throws Exception {
+		String algorithm = env.getProperty("cipher.algorithm");
+		byte[] secretKey = env.getProperty("cipher.secret_key").getBytes();
+		SecretKey key = new SecretKeySpec(secretKey, algorithm);
+        Cipher cipher = Cipher.getInstance(algorithm);
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+        byte[] encryptedValue = cipher.doFinal(value.getBytes());
+        return Base64.getEncoder().encodeToString(encryptedValue);
+	}
+
+	@Override
+	public String decrypt(String encryptedValue) throws Exception {
+		String algorithm = env.getProperty("cipher.algorithm");
+		byte[] secretKey = env.getProperty("cipher.secret_key").getBytes();
+		SecretKey key = new SecretKeySpec(secretKey, algorithm);
+		Cipher cipher = Cipher.getInstance(algorithm);
+        cipher.init(Cipher.DECRYPT_MODE, key);
+        byte[] decodedValue = Base64.getDecoder().decode(encryptedValue);
+        byte[] decryptedValue = cipher.doFinal(decodedValue);
+        return new String(decryptedValue);
 	}
 
 }

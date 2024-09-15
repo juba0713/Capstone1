@@ -103,7 +103,7 @@
       }
     </style>
   </head>
-  <body class="font-secondary">
+  <body class="font-secondary" >
     <div class="error-container" id="globalError" style="display: none">
       <div>Please fill out all required fields!</div>
     </div>
@@ -1820,7 +1820,7 @@
               </div>
               <div class="flex flex-row items-center">
                 <label class="cursor-pointer flex items-center">
-                  <input
+                  <inputd
                     oninput="this.className = ''"
                     type="radio"
                     name="manufacturingAns"
@@ -2137,7 +2137,8 @@
           <span class="step"></span> -->
         </div>
       </form>
-
+	 <form th:action="@{/officer/action}" method="POST" th:object="${officerWebDto}">
+	  <input type="hidden" name="encryptedApplicantIdPk" th:value="*{encryptedApplicantIdPk}"/>
       <div class="checklist w-[45%] text-sm">
         <div class="flex justify-end">
           <a th:href="@{/officer/home}" class="close-button">&times;</a>
@@ -2216,7 +2217,7 @@
                             <!-- name="eligibilityAgreeFlg"
                           value="true"
                           th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctOneFlg" value="true"/>
                             Yes</label
                           >
                         </div>
@@ -2227,7 +2228,7 @@
                             <!-- name="eligibilityAgreeFlg"
                           value="false"
                           th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctOneFlg" value="false" />
                             No</label
                           >
                         </div>
@@ -2236,8 +2237,8 @@
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
                         oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                        name="productServiceOffering[2]"
                         placeholder="Enter comment"
+                        name="ctOneComments"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
                     </td>
@@ -2262,7 +2263,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="true"
                               th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctTwoFlg" value="true"/>
                             Yes</label
                           >
                         </div>
@@ -2273,7 +2274,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="false"
                               th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctTwoFlg" value="false"/>
                             No</label
                           >
                         </div>
@@ -2282,7 +2283,7 @@
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
                         oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                        name="pricingStrategy[2]"
+                        name="ctTwoComments"
                         placeholder="Enter comment"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
@@ -2308,7 +2309,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="true"
                               th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctThreeFlg" value="true"/>
                             Yes</label
                           >
                         </div>
@@ -2319,7 +2320,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="false"
                               th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctThreeFlg" value="false"/>
                             No</label
                           >
                         </div>
@@ -2328,7 +2329,7 @@
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
                         oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                        name="pricingStrategy[2]"
+                        name="ctThreeComments"
                         placeholder="Enter comment"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
@@ -2354,7 +2355,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="true"
                               th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctFourFlg" value="true"/>
                             Yes</label
                           >
                         </div>
@@ -2365,7 +2366,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="false"
                               th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctFourFlg" value="false"/>
                             No</label
                           >
                         </div>
@@ -2374,7 +2375,7 @@
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
                         oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                        name="pricingStrategy[2]"
+                        name="ctFourComments"
                         placeholder="Enter comment"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
@@ -2441,7 +2442,7 @@
                             <!-- name="eligibilityAgreeFlg"
                           value="true"
                           th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctFiveFlg" value="true" />
                             Yes</label
                           >
                         </div>
@@ -2452,7 +2453,7 @@
                             <!-- name="eligibilityAgreeFlg"
                           value="false"
                           th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctFiveFlg" value="false"/>
                             No</label
                           >
                         </div>
@@ -2461,7 +2462,7 @@
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
                         oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                        name="productServiceOffering[2]"
+                        name="ctFiveComments"
                         placeholder="Enter comment"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
@@ -2487,7 +2488,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="true"
                               th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctSixFlg" value="true" />
                             Yes</label
                           >
                         </div>
@@ -2498,7 +2499,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="false"
                               th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctSixFlg" value="false" />
                             No</label
                           >
                         </div>
@@ -2507,7 +2508,7 @@
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
                         oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                        name="pricingStrategy[2]"
+                        name="ctSixComments"
                         placeholder="Enter comment"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
@@ -2533,7 +2534,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="true"
                               th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctSevenFlg" value="true" />
                             Yes</label
                           >
                         </div>
@@ -2544,7 +2545,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="false"
                               th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctSevenFlg" value="false" />
                             No</label
                           >
                         </div>
@@ -2553,7 +2554,7 @@
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
                         oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                        name="pricingStrategy[2]"
+                        name="ctSevenComments"
                         placeholder="Enter comment"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
@@ -2579,7 +2580,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="true"
                               th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctEightFlg" value="true"  />
                             Yes</label
                           >
                         </div>
@@ -2590,7 +2591,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="false"
                               th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctEightFlg" value="false" />
                             No</label
                           >
                         </div>
@@ -2599,7 +2600,7 @@
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
                         oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                        name="pricingStrategy[2]"
+                        name="ctEightComments"
                         placeholder="Enter comment"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
@@ -2625,7 +2626,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="true"
                               th:checked="*{eligibilityAgreeFlg!=null AND eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctNineFlg" value="true" />
                             Yes</label
                           >
                         </div>
@@ -2636,7 +2637,7 @@
                             <!-- name="eligibilityAgreeFlg"
                               value="false"
                               th:checked="*{eligibilityAgreeFlg!=null AND !eligibilityAgreeFlg}" -->
-                            <input oninput="this.className = ''" type="radio" />
+                            <input oninput="this.className = ''" type="radio" name="ctNineFlg" value="false" />
                             No</label
                           >
                         </div>
@@ -2645,7 +2646,7 @@
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
                         oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                        name="pricingStrategy[2]"
+                        name="ctNineComments"
                         placeholder="Enter comment"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
@@ -2661,7 +2662,7 @@
         <div class="w-full h-[100px]">
           <textarea
             oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
-            name="pricingStrategy[2]"
+            name="recommendation"
             placeholder="Recommendations"
             class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
           ></textarea>
@@ -2671,7 +2672,7 @@
           <!-- th:data-id="${app.applicantIdPk}" -->
           <button
             class="btn-row border-black hover:bg-green-500 bg-green-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-            type="button"
+            type="submit"
             name="accept"
           >
             Accept
@@ -2679,13 +2680,14 @@
           <!-- th:data-id="${app.applicantIdPk}" -->
           <button
             class="btn-row border-black hover:bg-red-500 bg-red-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-            type="button"
+            type="submit"
             name="reject"
           >
             Reject
           </button>
         </div>
       </div>
+      </form>
     </div>
     <script>
       // Set this to true for development mode, false for production
@@ -2734,23 +2736,9 @@
         x[n].className += " active";
       }
 
-      // Add development mode indicator
-      // if (DEVELOPMENT_MODE) {
-      //   const devModeIndicator = document.createElement("div");
-      //   devModeIndicator.textContent = "Development Mode";
-      //   devModeIndicator.style.position = "fixed";
-      //   devModeIndicator.style.top = "10px";
-      //   devModeIndicator.style.right = "10px";
-      //   devModeIndicator.style.backgroundColor = "yellow";
-      //   devModeIndicator.style.padding = "5px";
-      //   devModeIndicator.style.borderRadius = "5px";
-      //   document.body.appendChild(devModeIndicator);
-      // }
-
-      // Initialize the script when the DOM is fully loaded
-      //   document.addEventListener("DOMContentLoaded", function () {
-      //     showTab(currentTab);
-      //   });
     </script>
+    <script th:inline="javascript">
+		console.log(/*[[${officerWebDto}]]*/'');
+	</script>
   </body>
 </html>

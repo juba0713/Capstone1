@@ -12,7 +12,7 @@ public interface OfficerService {
 	 * To get all applicants for officer
 	 * @return OfficerInOutDto
 	 */
-	public OfficerInOutDto getAllApplicants();
+	public OfficerInOutDto getAllApplicants() throws Exception;
 	
 	/**
 	 * To accept an applicantion

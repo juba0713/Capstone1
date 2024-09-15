@@ -5,13 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import capstone.model.dao.entity.AcceptedApplicantEntity;
 import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
+import capstone.model.dao.entity.PrescreenDetailsEntity;
 import capstone.model.dao.entity.RejectedApplicantEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
 import capstone.model.dao.entity.UserInformationEntity;
@@ -31,7 +36,7 @@ public class OfficerServiceImpl implements OfficerService{
 	
 	@Autowired
 	private ApplicantLogic applicantLogic;
-	
+
 	@Autowired
 	private CommonService commonService;
 	
@@ -45,7 +50,7 @@ public class OfficerServiceImpl implements OfficerService{
 	private LoggedInUserService loggedInUserService;
 
 	@Override
-	public OfficerInOutDto getAllApplicants() {
+	public OfficerInOutDto getAllApplicants()  throws Exception{
 		
 		OfficerInOutDto outDto = new OfficerInOutDto();
 		
@@ -54,12 +59,16 @@ public class OfficerServiceImpl implements OfficerService{
 		List<JoinApplicantProject> listOfApplicant = applicantLogic.getAllApplicantByStatus(status);
 		
 		List<ApplicantObj> listOfAppObj = new ArrayList<>();
-		
+				
 		for(JoinApplicantProject app : listOfApplicant) {
 			
 			ApplicantObj obj = new ApplicantObj();
 			
-			obj.setApplicantIdPk(app.getApplicantIdPk());
+			//obj.setApplicantIdPk(app.getApplicantIdPk());
+			
+			String encrypted = commonService.encrypt(String.valueOf(app.getApplicantIdPk()));
+			
+			obj.setEncryptedApplicantIdPk(encrypted);
 			
 			obj.setEmail(app.getEmail());
 			
@@ -145,7 +154,59 @@ public class OfficerServiceImpl implements OfficerService{
 		
 		acceptedEntity.setDeleteFlg(false);
 		
-		applicantLogic.saveAcceptedApplicantEntity(acceptedEntity);
+		int idPk = applicantLogic.saveAcceptedApplicantEntity(acceptedEntity);
+		
+		PrescreenDetailsEntity prescreen = new PrescreenDetailsEntity();
+		
+		prescreen.setAcceptedApplicantIdPk(idPk);
+		
+		prescreen.setRejectedApplicantIdPk(0);
+		
+		prescreen.setCtOneFlg(inDto.getCtOneFlg());
+		
+		prescreen.setCtOneComments(inDto.getCtOneComments());
+		
+		prescreen.setCtTwoFlg(inDto.getCtTwoFlg());
+		
+		prescreen.setCtTwoComments(inDto.getCtTwoComments());
+		
+		prescreen.setCtThreeFlg(inDto.getCtThreeFlg());
+		
+		prescreen.setCtThreeComments(inDto.getCtThreeComments());
+		
+		prescreen.setCtFourFlg(inDto.getCtFourFlg());
+		
+		prescreen.setCtFourComments(inDto.getCtFourComments());
+		
+		prescreen.setCtFiveFlg(inDto.getCtFiveFlg());
+		
+		prescreen.setCtFiveComments(inDto.getCtFiveComments());
+		
+		prescreen.setCtSixFlg(inDto.getCtSixFlg());
+		
+		prescreen.setCtSixComments(inDto.getCtSixComments());
+		
+		prescreen.setCtSevenFlg(inDto.getCtSevenFlg());
+		
+		prescreen.setCtSevenComments(inDto.getCtSevenComments());
+		
+		prescreen.setCtEightFlg(inDto.getCtEightFlg());
+		
+		prescreen.setCtEightComments(inDto.getCtEightComments());
+		
+		prescreen.setCtNineFlg(inDto.getCtNineFlg());
+		
+		prescreen.setCtNineComments(inDto.getCtNineComments());
+		
+		prescreen.setRecommendation(inDto.getRecommendation());
+		
+		prescreen.setCreatedBy(loggedInUser.getIdPk());
+		
+		prescreen.setCreatedDate(timeNow);
+		
+		prescreen.setDeleteFlg(false);
+		
+		applicantLogic.savePrescreenDetailsEntity(prescreen);
 		
 		if(account.getPassword() == null) {
 			applicantLogic.updateApplicantStatus(1, List.of(inDto.getApplicantIdPk()));
@@ -187,10 +248,10 @@ public class OfficerServiceImpl implements OfficerService{
 				
 				
 				List<String[]> teams = new ArrayList<>();
-				 
-				teams.add(app.getTeams()[0].split("\\|"));
-				teams.add(app.getTeams()[1].split("\\|"));
-				teams.add(app.getTeams()[2].split("\\|"));			 
+							
+				for(int i = 0; i < app.getTeams().length; i++) {
+					teams.add(app.getTeams()[i].split("\\|"));
+				}
 				
 				applicantDetailsObj.setTeams(teams);
 				
@@ -201,12 +262,10 @@ public class OfficerServiceImpl implements OfficerService{
 				applicantDetailsObj.setSolutionDescription(app.getSolutionDescription());
 				
 				List<String[]> historicallTimelines = new ArrayList<>();
-				
-				historicallTimelines.add(app.getHistoricalTimeline()[0].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[1].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[2].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[3].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[4].split("\\|"));
+							
+				for(int i = 0; i < app.getHistoricalTimeline().length; i++) {
+					historicallTimelines.add(app.getHistoricalTimeline()[i].split("\\|"));
+				}
 				
 				applicantDetailsObj.setHistoricalTimeline(historicallTimelines);
 				

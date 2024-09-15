@@ -2217,7 +2217,7 @@
 
       function nextPrev(n) {
         var x = document.getElementsByClassName("tab");
-
+		console.log(n);
         // In development mode, skip validation
         if (DEVELOPMENT_MODE || ((n === 1 || n === -1) && validateForm())) {
           x[currentTab].style.display = "none";

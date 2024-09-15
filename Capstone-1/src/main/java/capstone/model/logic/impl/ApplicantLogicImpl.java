@@ -10,6 +10,7 @@ import capstone.model.dao.ApplicantDao;
 import capstone.model.dao.EvaluatedApplicantDao;
 import capstone.model.dao.GroupDao;
 import capstone.model.dao.GroupMemberDao;
+import capstone.model.dao.PrescreenDetailsDao;
 import capstone.model.dao.ProjectDao;
 import capstone.model.dao.RejectedApplicantDao;
 import capstone.model.dao.entity.AcceptedApplicantEntity;
@@ -19,6 +20,7 @@ import capstone.model.dao.entity.EvaluatedApplicantEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
+import capstone.model.dao.entity.PrescreenDetailsEntity;
 import capstone.model.dao.entity.ProjectEntity;
 import capstone.model.dao.entity.RejectedApplicantEntity;
 import capstone.model.logic.ApplicantLogic;
@@ -46,6 +48,9 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	
 	@Autowired
 	private AcceptedApplicantDao acceptedApplicantDao;
+	
+	@Autowired
+	private PrescreenDetailsDao prescreenDetailsDao;
 
 	@Override
 	public int saveApplicantEntity(ApplicantEntity entity) {
@@ -249,9 +254,11 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	}
 
 	@Override
-	public void saveAcceptedApplicantEntity(AcceptedApplicantEntity entity) {
+	public int saveAcceptedApplicantEntity(AcceptedApplicantEntity entity) {
 		
 		acceptedApplicantDao.save(entity);
+		
+		return entity.getIdPk();
 	}
 
 	@Override
@@ -270,6 +277,12 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	public void updatePreviousEvaluatedApplicant(int applicantIdPk) {
 		
 		evaluatedApplicantDao.updatePreviousEvaluatedApplicant(applicantIdPk);
+	}
+
+	@Override
+	public void savePrescreenDetailsEntity(PrescreenDetailsEntity entity) {
+		
+		prescreenDetailsDao.save(entity);
 	}
 	
 }

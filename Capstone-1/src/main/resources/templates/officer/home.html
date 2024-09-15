@@ -142,7 +142,7 @@
                 class="whitespace-nowrap max-w-0 truncate"
               ></td>
               <td>
-                <button
+                <!--<button
                   class="btn-row border-black hover:bg-green-500 bg-green-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                   type="button"
                   th:data-id="${app.applicantIdPk}"
@@ -157,7 +157,18 @@
                   name="reject"
                 >
                   Reject
+                </button>-->
+                <form th:action="@{/officer/prescreen}" method="GET">
+                <button
+                  class="btn-row border-black hover:bg-green-500 bg-green-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  type="submit"
+                  th:data-id="${app.encryptedApplicantIdPk}"
+                  name="id"
+                  th:value="${app.encryptedApplicantIdPk}"
+                >
+                  Evaluate
                 </button>
+                </form>
               </td>
             </tr>
             <!--  -->

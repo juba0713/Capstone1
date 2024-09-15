@@ -9,6 +9,8 @@ public class ApplicantObj {
 	
 	//Applicant Id
 	public int applicantIdPk;
+
+	public String encryptedApplicantIdPk;
 	
 	//Id
 	public String email;

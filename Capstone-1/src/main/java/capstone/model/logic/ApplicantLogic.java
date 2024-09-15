@@ -12,6 +12,7 @@ import capstone.model.dao.entity.EvaluatedApplicantEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
+import capstone.model.dao.entity.PrescreenDetailsEntity;
 import capstone.model.dao.entity.ProjectEntity;
 import capstone.model.dao.entity.RejectedApplicantEntity;
 
@@ -254,11 +255,13 @@ public interface ApplicantLogic {
 	 * To save the accepted applicant
 	 * @param entity
 	 */
-	public void saveAcceptedApplicantEntity(AcceptedApplicantEntity entity);
+	public int saveAcceptedApplicantEntity(AcceptedApplicantEntity entity);
 	
 	public void updatePreviousAcceptedApplicant(int applicantIdPk);
 	
 	public void updatePreviousRejectedApplicant(int applicantIdPk);
 	
 	public void updatePreviousEvaluatedApplicant(int applicantIdPk);
+	
+	public void savePrescreenDetailsEntity(PrescreenDetailsEntity entity);
 }
