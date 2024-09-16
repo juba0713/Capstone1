@@ -21,6 +21,13 @@ input[type="file"] {
     min-width: 150px;
   }
 }
+
+/* buttons
+ */
+#nextBtn.disagreed {
+  background-color: #cccccc;
+  color: #666666;
+}
 .close-button {
   display: flex;
   align-items: center;
@@ -236,4 +243,49 @@ input[type="file"] {
 }
 .filter-logo {
   @apply filter invert brightness-0 contrast-100;
+}
+/* forms & form tabs */
+/* .regForm {
+  background-color: #ffffff;
+  padding: 40px;
+  width: 55%;
+} */
+
+.tab {
+  display: none;
+}
+
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+.step.finish {
+  background-color: #04aa6d;
+}
+
+/* modals prescreenChecklist */
+.modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+.modal.show {
+  display: block;
+}
+.modal-backdrop {
+  display: none !important;
+}
+body.modal-open {
+  overflow: auto !important;
+  padding-right: 0 !important;
 }

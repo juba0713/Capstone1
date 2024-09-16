@@ -1297,6 +1297,10 @@ video {
   flex-wrap: wrap;
 }
 
+.place-content-center{
+  place-content: center;
+}
+
 .place-items-start{
   place-items: start;
 }
@@ -1407,6 +1411,10 @@ video {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.text-clip{
+  text-overflow: clip;
 }
 
 .whitespace-nowrap{
@@ -1911,12 +1919,24 @@ video {
   padding-top: 2px;
 }
 
+.pl-4{
+  padding-left: 1rem;
+}
+
+.pt-1{
+  padding-top: 0.25rem;
+}
+
 .text-left{
   text-align: left;
 }
 
 .text-center{
   text-align: center;
+}
+
+.text-right{
+  text-align: right;
 }
 
 .text-justify{
@@ -2233,6 +2253,14 @@ input[type="file"] {
   }
 }
 
+/* buttons
+ */
+
+#nextBtn.disagreed {
+  background-color: #cccccc;
+  color: #666666;
+}
+
 .close-button {
   display: flex;
   align-items: center;
@@ -2528,6 +2556,57 @@ input[type="file"] {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
+/* forms & form tabs */
+
+/* .regForm {
+  background-color: #ffffff;
+  padding: 40px;
+  width: 55%;
+} */
+
+.tab {
+  display: none;
+}
+
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+.step.finish {
+  background-color: #04aa6d;
+}
+
+/* modals prescreenChecklist */
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+.modal.show {
+  display: block;
+}
+
+.modal-backdrop {
+  display: none !important;
+}
+
+body.modal-open {
+  overflow: auto !important;
+  padding-right: 0 !important;
+}
+
 .focus-within\:border-black:focus-within{
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
@@ -2599,11 +2678,6 @@ input[type="file"] {
   border-color: rgb(220 38 38 / var(--tw-border-opacity));
 }
 
-.hover\:bg-\[\#F9F9F9\]:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 249 249 / var(--tw-bg-opacity));
-}
-
 .hover\:bg-\[\#FEE902\]:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(254 233 2 / var(--tw-bg-opacity));
@@ -2657,6 +2731,11 @@ input[type="file"] {
 .hover\:bg-tanglow:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(253 204 1 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-\[\#F9F9F9\]:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 249 249 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-opacity-75:hover{
