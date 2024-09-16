@@ -25,5 +25,5 @@ public interface TbiBoardService {
 	 * @param inDto
 	 * @return ApplicantInOutDto
 	 */
-	public TbiBoardInOutDto getApplicantDetails(TbiBoardInOutDto inDto); 
+	public TbiBoardInOutDto getApplicantDetails(TbiBoardInOutDto inDto) throws Exception ; 
 }

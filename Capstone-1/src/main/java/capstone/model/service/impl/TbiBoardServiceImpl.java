@@ -144,7 +144,7 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 		applicantLogic.updatePreviousEvaluatedApplicant(inDto.getApplicantIdPk());
 
 		int idPk = applicantLogic.saveEvaluateedApplicant(evaluatedApplicantEntity);
-		
+
 		EvaluationDetailsEntity evaluation = new EvaluationDetailsEntity();
 		
 		evaluation.setEvaluatedApplicantIdPk(idPk);
@@ -196,7 +196,7 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 	}
 
 	@Override
-	public TbiBoardInOutDto getApplicantDetails(TbiBoardInOutDto inDto) {
+	public TbiBoardInOutDto getApplicantDetails(TbiBoardInOutDto inDto) throws Exception {
 
 		TbiBoardInOutDto outDto = new TbiBoardInOutDto();
 
@@ -211,7 +211,9 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 
 			if (firstRow == 0) {
 
-				applicantDetailsObj.setApplicantIdPk(app.getApplicantIdPk());
+				//applicantDetailsObj.setApplicantIdPk(app.getApplicantIdPk());
+				
+				applicantDetailsObj.setEncryptedApplicantIdPk(commonService.encrypt(String.valueOf(app.getApplicantIdPk())));
 
 				applicantDetailsObj.setEmail(app.getEmail());
 

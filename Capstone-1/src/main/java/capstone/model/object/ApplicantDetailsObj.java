@@ -9,6 +9,8 @@ public class ApplicantDetailsObj {
 
 	public int applicantIdPk;
 	
+	public String encryptedApplicantIdPk;
+	
 	public String email;
 	
 	public Boolean agreeFlg;

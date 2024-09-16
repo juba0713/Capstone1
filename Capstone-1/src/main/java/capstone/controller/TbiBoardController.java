@@ -16,7 +16,6 @@ import capstone.model.dto.OfficerInOutDto;
 import capstone.model.dto.TbiBoardInOutDto;
 import capstone.model.service.CommonService;
 import capstone.model.service.TbiBoardService;
-import jakarta.mail.MessagingException;
 
 @Controller
 @RequestMapping("/tbi-board")
@@ -53,11 +52,11 @@ public class TbiBoardController {
 	}
 	
 	@PostMapping("/evaluate")
-	public String evaluateApplication(@ModelAttribute TbiBoardWebDto webDto, RedirectAttributes ra) throws MessagingException {
+	public String evaluateApplication(@ModelAttribute TbiBoardWebDto webDto, RedirectAttributes ra) throws Exception {
 		
 		TbiBoardInOutDto inDto = new TbiBoardInOutDto();
 		
-		inDto.setApplicantIdPk(webDto.getApplicantIdPk());
+		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(webDto.getEncryptedApplicantIdPk())));
 		
 		inDto.setCtOneRating(webDto.getCtOneRating());
 		
@@ -90,8 +89,11 @@ public class TbiBoardController {
 		inDto.setCtEightRating(webDto.getCtEightRating());
 		
 		inDto.setCtEightComments(webDto.getCtEightComments());
+		
+		inDto.setTbiFeedback(webDto.getTbiFeedback());
 				
-		//tbiBoardService.evaluateApplicant(inDto);
+		tbiBoardService.evaluateApplicant(inDto);
+		System.out.println(webDto);
 		
 		ra.addFlashAttribute("succMsg", "The application has been evaluated!");
 		
@@ -99,7 +101,7 @@ public class TbiBoardController {
 	}
 	
 	@GetMapping("/retrieve/details")
-	public ResponseEntity<TbiBoardWebDto> getApplicantDetails(@RequestParam("applicantIdPk") String applicantIdPk) {
+	public ResponseEntity<TbiBoardWebDto> getApplicantDetails(@RequestParam("applicantIdPk") String applicantIdPk) throws Exception {
 
 		
 		TbiBoardInOutDto inDto = new TbiBoardInOutDto();

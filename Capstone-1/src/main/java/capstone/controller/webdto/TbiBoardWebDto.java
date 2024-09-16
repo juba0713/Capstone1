@@ -12,6 +12,8 @@ public class TbiBoardWebDto {
 	
 	public int applicantIdPk;
 	
+	public String encryptedApplicantIdPk;
+	
 	public List<Integer> chosenApplicant;
 
 	ApplicantDetailsObj applicantDetailsObj;
