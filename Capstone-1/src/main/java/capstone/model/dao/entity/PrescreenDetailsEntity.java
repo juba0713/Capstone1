@@ -29,55 +29,55 @@ public class PrescreenDetailsEntity {
 	@Column(nullable = false)
 	private Boolean ctOneFlg;
 	
-	@Column(columnDefinition = "text", nullable = false)
+	@Column(columnDefinition = "text")
 	private String ctOneComments;
 	
 	@Column(nullable = false)
 	private Boolean ctTwoFlg;
 	
-	@Column(columnDefinition = "text", nullable = false)
+	@Column(columnDefinition = "text")
 	private String ctTwoComments;
 	
 	@Column(nullable = false)
 	private Boolean ctThreeFlg;
 	
-	@Column(columnDefinition = "text", nullable = false)
+	@Column(columnDefinition = "text")
 	private String ctThreeComments;
 	
 	@Column(nullable = false)
 	private Boolean ctFourFlg;
 	
-	@Column(columnDefinition = "text", nullable = false)
+	@Column(columnDefinition = "text")
 	private String ctFourComments;
 	
 	@Column(nullable = false)
 	private Boolean ctFiveFlg;
 	
-	@Column(columnDefinition = "text", nullable = false)
+	@Column(columnDefinition = "text")
 	private String ctFiveComments;
 	
 	@Column(nullable = false)
 	private Boolean ctSixFlg;
 	
-	@Column(columnDefinition = "text", nullable = false)
+	@Column(columnDefinition = "text")
 	private String ctSixComments;
 	
 	@Column(nullable = false)
 	private Boolean ctSevenFlg;
 	
-	@Column(columnDefinition = "text", nullable = false)
+	@Column(columnDefinition = "text")
 	private String ctSevenComments;
 	
 	@Column(nullable = false)
 	private Boolean ctEightFlg;
 	
-	@Column(columnDefinition = "text", nullable = false)
+	@Column(columnDefinition = "text")
 	private String ctEightComments;
 	
 	@Column(nullable = false)
 	private Boolean ctNineFlg;
 	
-	@Column(columnDefinition = "text", nullable = false)
+	@Column(columnDefinition = "text")
 	private String ctNineComments;
 	
 	@Column(columnDefinition = "text", nullable = false)
