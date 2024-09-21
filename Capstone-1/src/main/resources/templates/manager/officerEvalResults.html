@@ -182,7 +182,7 @@
                 <tr
                   th:each="app : *{listOfApplicants}"
                   class="row-btn"
-                  th:data-id="${app.applicantIdPk}"
+                  th:data-id="${app.encryptedApplicantIdPk}"
                 >
                   <td
                     th:text="${app.email}"
@@ -201,7 +201,7 @@
                     <button
                       class="px-3 h-8 btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                       type="button"
-                      th:data-id="${app.applicantIdPk}"
+                      th:data-id="${app.encryptedApplicantIdPk}"
                       name="activate"
                       th:if="${app.status == 1}"
                     >
@@ -211,7 +211,7 @@
                       class="btn-row"
                       type="checkbox"
                       name="chosenApplicant"
-                      th:value="${app.applicantIdPk}"
+                      th:value="${app.encryptedApplicantIdPk}"
                       th:if="${app.status == 3}"
                     />
                   </td>

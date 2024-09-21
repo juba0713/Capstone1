@@ -1,8 +1,16 @@
 package capstone.model.service.impl;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +27,7 @@ import capstone.model.dao.entity.ApplicantDetailsFeedbackEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.ApplicantMonthly;
 import capstone.model.dao.entity.JoinApplicantProject;
+import capstone.model.dao.entity.UserCertificateEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
 import capstone.model.dao.entity.UserInformationEntity;
 import capstone.model.dto.ManagerInOutDto;
@@ -55,6 +64,9 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	@Autowired
 	private PasswordEncoder encoder;
+	
+	@Autowired
+	private Environment env;
 
 	@Override
 	public ManagerInOutDto getAllApplicants() throws Exception{
@@ -137,11 +149,11 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public ManagerInOutDto getAllEvaluatedApplicants() {
+	public ManagerInOutDto getAllEvaluatedApplicants() throws Exception {
 		
 		ManagerInOutDto outDto = new ManagerInOutDto();
-		
-		List<Integer> status = List.of(5,6,7);
+		 
+		List<Integer> status = List.of(5,50,6,7);
 		
 		List<JoinApplicantProject> listOfApplicant = applicantLogic.getAllApplicantByStatus(status);
 		
@@ -151,7 +163,9 @@ public class ManagerServiceImpl implements ManagerService {
 			
 			ApplicantObj obj = new ApplicantObj();
 			
-			obj.setApplicantIdPk(app.getApplicantIdPk());
+			//obj.setApplicantIdPk(app.getApplicantIdPk());
+			
+			obj.setEncryptedApplicantIdPk(commonService.encrypt(String.valueOf(app.getApplicantIdPk())));
 			
 			obj.setEmail(app.getEmail());
 			
@@ -173,7 +187,7 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public ManagerInOutDto getAllAcceptedApplicants() {
+	public ManagerInOutDto getAllAcceptedApplicants() throws Exception {
 		
 		ManagerInOutDto outDto = new ManagerInOutDto();
 		
@@ -187,7 +201,9 @@ public class ManagerServiceImpl implements ManagerService {
 			
 			ApplicantObj obj = new ApplicantObj();
 			
-			obj.setApplicantIdPk(app.getApplicantIdPk());
+			//obj.setApplicantIdPk(app.getApplicantIdPk());
+			
+			obj.setEncryptedApplicantIdPk(commonService.encrypt(String.valueOf(app.getApplicantIdPk())));
 			
 			obj.setEmail(app.getEmail());
 			
@@ -569,6 +585,55 @@ public class ManagerServiceImpl implements ManagerService {
 		outDto.setApplicantOffFeedbackObj(appOffFeedbackObj);
 		
 		outDto.setApplicantTbiFeedbackObj(appTbiFeedbackObj);
+		
+		return outDto;
+	}
+
+	@Override
+	public ManagerInOutDto issuedCertificate(ManagerInOutDto inDto) throws MessagingException {
+		
+		ManagerInOutDto outDto = new ManagerInOutDto();
+		
+		UserCertificateEntity userCertificate = applicantLogic.getUserInformationForCeritificate(inDto.getApplicantIdPk());
+		
+		if (userCertificate.getTotalRating() >= 60) {
+
+			String folderPath = env.getProperty("certificate.path").toString();
+
+			try {
+				// Load the image
+				File imageFile = new File(folderPath + "base_certificate.png");
+				BufferedImage image = ImageIO.read(imageFile);
+
+				Graphics g = image.getGraphics();
+
+				g.setFont(new Font("Leelawadee UI Semilight", Font.BOLD, 130));
+				g.setColor(new Color(253, 204, 1));
+
+				String fullName = userCertificate.getFirstName() + " " + userCertificate.getLastName();
+				int x = 132;
+				int y = 760;
+				g.drawString(fullName, x, y);
+
+				g.dispose();
+
+				String fileName = "certificate_" + userCertificate.getUserIdPk();
+				File outputFile = new File(folderPath + fileName + ".png");
+				ImageIO.write(image, "png", outputFile);
+
+				applicantLogic.updateApplicantCeritificate(fileName, inDto.getApplicantIdPk());
+				
+				emailService.sendIssuedCertificate(userCertificate.getEmail());
+				
+			} catch (IOException e) {
+				
+				outDto.setResult(CommonConstant.INVALID);
+				
+				return outDto;
+			}
+		}
+		
+		outDto.setResult(CommonConstant.VALID);
 		
 		return outDto;
 	}

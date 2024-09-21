@@ -34,13 +34,13 @@ public interface ManagerService {
 	 * TO get all evaluated applicants for manager
 	 * @return ManagerInOutDto
 	 */
-	public ManagerInOutDto getAllEvaluatedApplicants();
+	public ManagerInOutDto getAllEvaluatedApplicants() throws Exception;
 	
 	/**
 	 * TO get all accepted applicants for manager
 	 * @return ManagerInOutDto
 	 */
-	public ManagerInOutDto getAllAcceptedApplicants();
+	public ManagerInOutDto getAllAcceptedApplicants() throws Exception;
 	
 	/**
 	 * To get the details of the application by id pk
@@ -59,5 +59,7 @@ public interface ManagerService {
 	public ManagerInOutDto getAppllicantOnTodayMonth() throws Exception;
 	
 	public ManagerInOutDto getApplicantDetailsWithFeedback(ManagerInOutDto inDto);
+	
+	public ManagerInOutDto issuedCertificate(ManagerInOutDto inDto) throws MessagingException;
 	
 }

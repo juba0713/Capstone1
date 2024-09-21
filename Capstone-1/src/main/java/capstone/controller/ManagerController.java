@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import capstone.common.constant.CommonConstant;
 import capstone.controller.webdto.ManagerWebDto;
 import capstone.controller.webdto.TbiBoardWebDto;
 import capstone.model.dto.AdminInOutDto;
@@ -81,7 +82,7 @@ public class ManagerController {
 	}
 
 	@GetMapping("/evaluated-result")
-	public String showEvaluatedApplication(@ModelAttribute ManagerWebDto webDto) {
+	public String showEvaluatedApplication(@ModelAttribute ManagerWebDto webDto) throws Exception {
 
 		ManagerInOutDto outDto = managerService.getAllEvaluatedApplicants();
 
@@ -91,7 +92,7 @@ public class ManagerController {
 	}
 
 	@GetMapping("/accepted-result")
-	public String showOfficerAcceptedApplication(@ModelAttribute ManagerWebDto webDto) {
+	public String showOfficerAcceptedApplication(@ModelAttribute ManagerWebDto webDto) throws Exception {
 
 		ManagerInOutDto outDto = managerService.getAllAcceptedApplicants();
 
@@ -233,4 +234,22 @@ public class ManagerController {
 		return "manager/applicationFeedbacksBoth";
 	}
 
+	@PostMapping("/issue/certificate")
+	public String issuedCertificate(@ModelAttribute ManagerWebDto webDto, RedirectAttributes ra) throws NumberFormatException, Exception {
+		
+		System.out.println(webDto.getEncryptedApplicantIdPk());
+		
+		ManagerInOutDto inDto = new ManagerInOutDto();
+		
+		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(webDto.getEncryptedApplicantIdPk())));
+		
+		ManagerInOutDto outDto = managerService.issuedCertificate(inDto);
+		
+		if(CommonConstant.INVALID.equals(outDto.getResult())) {
+			ra.addFlashAttribute("errorMsg", "There's a problem issuing a certificate!");
+			return "redirect:/manager/evaluated-result";
+		}
+		ra.addFlashAttribute("successMsg", "A certificate has been issued");
+		return "redirect:/manager/evaluated-result";
+	}
 }

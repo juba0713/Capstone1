@@ -76,6 +76,7 @@ public class ApplicantEntity {
 	 * 4 - Pending for evaluation
 	 * 04 - Pending for evaluation -resubmitted - Tbi
 	 * 5 - Evaluated By Tbi
+	 * 05 - Issued Certificate
 	 * 6 - Qualified for Resubmission - Failed
 	 * 7 - Not Qualified for Resubmission - Failed
 	 * 8 - Evaluated By Manager

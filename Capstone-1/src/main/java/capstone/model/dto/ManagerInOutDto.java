@@ -33,4 +33,6 @@ public class ManagerInOutDto {
 	public Boolean transferring;
 	
 	List<ApplicantMonthlyObj> applicantMonthlyObj;
+	
+	public String result;
 }

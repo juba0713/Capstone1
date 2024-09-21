@@ -14,6 +14,7 @@ import capstone.model.dao.entity.ApplicantDetailsFeedbackEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.ApplicantMonthly;
 import capstone.model.dao.entity.JoinApplicantProject;
+import capstone.model.dao.entity.UserCertificateEntity;
 import jakarta.transaction.Transactional;
 
 @Transactional
@@ -206,7 +207,8 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 	
 	public final String UPDATE_APPLICANT_CERTIFICATE = "UPDATE m_applicant "
 			+ "SET "
-			+ "	certificate_name = :certificateName "
+			+ "	certificate_name = :certificateName,"
+			+ "	status = 50 "
 			+ "WHERE"
 			+ "	id_pk = :applicantIdPk "
 			+ "AND "
@@ -330,6 +332,35 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "WHERE a.id_pk = :idPk "
 			+ "AND a.delete_flg = false; "
 			+ "";
+	
+	public final String GET_USER_INFORMATION_FOR_CERTIFICATE = "SELECT\r\n"
+			+ "	u.id_pk AS user_id_pk, "
+			+ "	u.first_name,\r\n"
+			+ "	u.last_name,\r\n"
+			+ "	u.email, "
+			+ "	ed.total\r\n"
+			+ "FROM\r\n"
+			+ "	m_applicant s\r\n"
+			+ "LEFT JOIN\r\n"
+			+ "	m_user_information u ON u.id_pk = s.created_by AND u.delete_flg = false\r\n"
+			+ "LEFT JOIN\r\n"
+			+ "	t_evaluated_applicant ea ON ea.applicant_id_pk = s.id_pk AND ea.delete_flg = false\r\n"
+			+ "LEFT JOIN\r\n"
+			+ "	t_evaluation_details ed ON ed.evaluated_applicant_id_pk = ea.id_pk AND ed.delete_flg = false\r\n"
+			+ "WHERE\r\n"
+			+ "	s.id_pk = :applicantIdPk";
+	
+	@Query(value=GET_USER_INFORMATION_FOR_CERTIFICATE, nativeQuery=true)
+	public List<Object[]> getUserInformationForCertificateRaw(int applicantIdPk) throws DataAccessException;
+	
+	default UserCertificateEntity getUserInformationForCertificate(int applicantIdPk){
+		
+		List<Object[]> rawResults = getUserInformationForCertificateRaw(applicantIdPk);
+	  
+		UserCertificateEntity applicant = new UserCertificateEntity(rawResults.get(0));  
+   
+	    return applicant;
+	}
 	
 	@Query(value=GET_APPLICANT_DETAILS_WITH_FEEDBACKS, nativeQuery=true)
 	public List<Object[]> getApplicantDetailsWithFeedbackRaw(int idPk) throws DataAccessException;

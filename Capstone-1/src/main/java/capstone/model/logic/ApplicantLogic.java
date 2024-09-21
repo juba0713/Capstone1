@@ -18,6 +18,7 @@ import capstone.model.dao.entity.JoinApplicantProject;
 import capstone.model.dao.entity.PrescreenDetailsEntity;
 import capstone.model.dao.entity.ProjectEntity;
 import capstone.model.dao.entity.RejectedApplicantEntity;
+import capstone.model.dao.entity.UserCertificateEntity;
 
 @Service
 public interface ApplicantLogic {
@@ -273,4 +274,6 @@ public interface ApplicantLogic {
 	public List<ApplicantMonthly> getApplicantOnTodayMonth();
 	
 	public List<ApplicantDetailsFeedbackEntity> getApplicantDetailsWithFeedback(int idPk);
+	
+	public UserCertificateEntity getUserInformationForCeritificate(int applicantIdPk);
 }

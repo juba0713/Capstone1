@@ -154,4 +154,28 @@ public class EmailServiceImpl implements EmailService {
 		emailSender.send(message);
 	}
 
+	@Override
+	public void sendIssuedCertificate(String email) throws MessagingException {
+	    MimeMessage message = emailSender.createMimeMessage();
+	    MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+	    helper.setFrom(CommonConstant.EMAIL);
+	    helper.setTo(email);
+	    helper.setSubject("Certificate Issued");
+
+	    String htmlText = "<div>"
+	            + "<h1>Congratulations!</h1>"
+	            + "<p>We are pleased to inform you that your certificate has been successfully issued.</p>"
+	            + "<p>You can now download or access your certificate by logging into your account.</p>"
+	            + "<br>"
+	            + "<p>Thank you for your efforts and dedication.</p>"
+	            + "<p>Best regards,<br>The Certification Team</p>"
+	            + "</div>";
+
+	    helper.setText(htmlText, true);
+
+	    emailSender.send(message);
+	}
+
+
 }

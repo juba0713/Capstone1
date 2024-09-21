@@ -27,6 +27,7 @@ import capstone.model.dao.entity.JoinApplicantProject;
 import capstone.model.dao.entity.PrescreenDetailsEntity;
 import capstone.model.dao.entity.ProjectEntity;
 import capstone.model.dao.entity.RejectedApplicantEntity;
+import capstone.model.dao.entity.UserCertificateEntity;
 import capstone.model.logic.ApplicantLogic;
 
 @Service
@@ -310,6 +311,12 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	public List<ApplicantDetailsFeedbackEntity> getApplicantDetailsWithFeedback(int idPk) {
 
 		return applicantDao.getApplicantDetailsWithFeedback(idPk);
+	}
+
+	@Override
+	public UserCertificateEntity getUserInformationForCeritificate(int applicantIdPk) {
+	
+		return applicantDao.getUserInformationForCertificate(applicantIdPk);
 	}
 	
 }

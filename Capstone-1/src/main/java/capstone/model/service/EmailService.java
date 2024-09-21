@@ -18,4 +18,6 @@ public interface EmailService {
 	public void sendTBITransferedMail(String email) throws MessagingException;
 	
 	public void sendEvaluatedMail(String email) throws MessagingException;
+	
+	public void sendIssuedCertificate(String email) throws MessagingException;
 }
