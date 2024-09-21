@@ -898,7 +898,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 				applicantDetailsObj.setStatus(app.getStatus());
 				
-				applicantDetailsObj.setCertificateName(app.getCertificateName());				
+				applicantDetailsObj.setCertificateName(app.getCertificateName());		
+				
+				applicantDetailsObj.setTotalRating(app.getTotalRating());
 				
 			}
 

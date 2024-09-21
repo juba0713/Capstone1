@@ -124,8 +124,8 @@
             <div th:if="*{applicantDetailsObj.status >= 5}">
               <div
                 class="z-50 rounded-xl w-full text-center"
-                th:text="*{applicantDetailsObj.score} >= 6 ? 'Passed' : 'Rejected'"
-                th:style="*{applicantDetailsObj.score} >= 6 ? 'background: green;' : 'background: red;'"
+                th:text="*{applicantDetailsObj.totalRating} >= 60 ? 'Passed' : 'Rejected'"
+                th:style="*{applicantDetailsObj.totalRating} >= 60 ? 'background: green;' : 'background: red;'"
               >
                 Rejected
                 <!--  pending
@@ -156,8 +156,8 @@
                     <div class="font-secondary">
                       <div
                         class="w-full text-center font-bold rounded-sm p-2"
-                        th:text="*{applicantDetailsObj.score} >= 6 ? 'Passed' : 'Rejected'"
-                        th:style="*{applicantDetailsObj.score} >= 6 ? 'background: green; color: white; font-weight: normal' : 'background: red; color: white; font-weight: normal'"
+                        th:text="*{applicantDetailsObj.totalRating} >= 60 ? 'Passed' : 'Rejected'"
+                        th:style="*{applicantDetailsObj.totalRating} >= 60 ? 'background: green; color: white; font-weight: normal' : 'background: red; color: white; font-weight: normal'"
                       >
                         <!--  pending
                   accepted
@@ -168,7 +168,7 @@
             -->
                       </div>
                       <p class="font-semibold">Score:</p>
-                      <div th:text="*{applicantDetailsObj.score}"></div>
+                      <div th:text="*{applicantDetailsObj.totalRating}"></div>
                       <p class="font-semibold">Feedback:</p>
                       <div
                         class="flex flex-col"
@@ -177,7 +177,7 @@
 
                       <div
                         class="w-full mt-4"
-                        th:if="*{applicantDetailsObj.score} >= 6 "
+                        th:if="*{applicantDetailsObj.totalRating} >= 60 "
                       >
                         <hr class="mb-4" />
                         <div class="text-xs">Click image to view</div>

@@ -158,12 +158,14 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "	a.commitment_three_flg,"
 			+ "	a.commitment_four_flg,"
 			+ " a.status, "
-			+ " a.certificate_name "
+			+ " a.certificate_name,"
+			+ " COALESCE(ed.total, 0) as total_rating "
 			+ "FROM m_applicant a "
 			+ "LEFT JOIN t_project p ON p.applicant_id_pk = a.id_pk AND p.delete_flg = false "
 			+ "LEFT JOIN m_group g ON g.applicant_id_pk = a.id_pk AND g.delete_flg = false "
 			+ "LEFT JOIN t_group_member gm ON gm.group_id_pk = g.id_pk AND gm.delete_flg = false "
 			+ "LEFT JOIN t_evaluated_applicant ea ON ea.applicant_id_pk = a.id_pk AND ea.delete_flg = false "
+			+ "LEFT JOIN t_evaluation_details ed ON ed.evaluated_applicant_id_pk = ea.id_pk AND ed.delete_flg = false "
 			+ "WHERE a.id_pk = :applicantIdPk "
 			+ "AND a.delete_flg = false";
 
