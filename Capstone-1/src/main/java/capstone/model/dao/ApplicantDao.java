@@ -243,7 +243,7 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "LEFT JOIN t_evaluation_details ed ON ed.evaluated_applicant_id_pk = ea.id_pk AND ed.delete_flg = false "
 			+ "WHERE EXTRACT(MONTH FROM a.created_date) = EXTRACT(MONTH FROM CURRENT_DATE) "
 			+ "  AND EXTRACT(YEAR FROM a.created_date) = EXTRACT(YEAR FROM CURRENT_DATE)"
-			+ "  AND a.status = 5 "
+			+ "  AND a.status IN (5,50)"
 			+ " AND ed.total >= 60 ";
 	
 	public final String GET_APPLICANT_DETAILS_WITH_FEEDBACKS = "SELECT  "
