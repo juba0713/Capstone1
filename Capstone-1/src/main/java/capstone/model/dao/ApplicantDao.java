@@ -71,7 +71,7 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "	p.project_title,"
 			+ " a.status,"
 			+ " g.university,"
-			+ " ed.total AS totalRating, "
+			+ " COALESCE(ed.total, 0) AS totalRating, "
 			+ "( "
 			+ "	CASE "
 			+ "		WHEN a.status > 0 "
