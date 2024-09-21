@@ -16,7 +16,9 @@ import capstone.model.dao.ProjectDao;
 import capstone.model.dao.RejectedApplicantDao;
 import capstone.model.dao.entity.AcceptedApplicantEntity;
 import capstone.model.dao.entity.ApplicantDetailsEntity;
+import capstone.model.dao.entity.ApplicantDetailsFeedbackEntity;
 import capstone.model.dao.entity.ApplicantEntity;
+import capstone.model.dao.entity.ApplicantMonthly;
 import capstone.model.dao.entity.EvaluatedApplicantEntity;
 import capstone.model.dao.entity.EvaluationDetailsEntity;
 import capstone.model.dao.entity.GroupEntity;
@@ -296,6 +298,18 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 		
 		evaluationDetailsDao.save(entity);
 		
+	}
+
+	@Override
+	public List<ApplicantMonthly> getApplicantOnTodayMonth() {
+		
+		return applicantDao.getApplicantOnTodayMonth();
+	}
+
+	@Override
+	public List<ApplicantDetailsFeedbackEntity> getApplicantDetailsWithFeedback(int idPk) {
+
+		return applicantDao.getApplicantDetailsWithFeedback(idPk);
 	}
 	
 }

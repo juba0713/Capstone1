@@ -19,6 +19,7 @@ import capstone.model.dto.ManagerInOutDto;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.dto.TbiBoardInOutDto;
 import capstone.model.service.AdminService;
+import capstone.model.service.CommonService;
 import capstone.model.service.EmailService;
 import capstone.model.service.ManagerService;
 import jakarta.mail.MessagingException;
@@ -35,6 +36,9 @@ public class ManagerController {
 
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private CommonService commonService;
 
 	@GetMapping("/version-history1")
 	public String showVersionHistoryOne(@ModelAttribute ManagerWebDto webDto) {
@@ -105,8 +109,29 @@ public class ManagerController {
 	}
 
 	@GetMapping("/rank-startups")
-	public String showRankStartups(@ModelAttribute ManagerWebDto webDto) {
+	public String showRankStartups(@ModelAttribute ManagerWebDto webDto) throws Exception {
+		ManagerInOutDto outDto = managerService.getAppllicantOnTodayMonth();
+		
+		webDto.setApplicantMonthlyObj(outDto.getApplicantMonthlyObj());
 		return "manager/rankStartups";
+	}
+	
+	@GetMapping("/rank-startups/evaluate")
+	public String evaluateApplicantForRanking(@RequestParam("id") String id, @ModelAttribute ManagerWebDto webDto) throws Exception {
+		
+		ManagerInOutDto inDto = new ManagerInOutDto();
+		
+		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(id)));
+		
+		ManagerInOutDto outDto = managerService.getApplicantDetailsWithFeedback(inDto);
+		
+		webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
+		
+		webDto.setApplicantOffFeedbackObj(outDto.getApplicantOffFeedbackObj());
+		
+		webDto.setApplicantTbiFeedbackObj(outDto.getApplicantTbiFeedbackObj());
+
+		return "manager/applicationFeedbacksBoth";
 	}
 
 	@PostMapping("/account/activate")
@@ -198,6 +223,14 @@ public class ManagerController {
 		managerService.sendResubmissionMail(inDto);
 
 		return "redirect:/manager/evaluated-result";
+	}
+	
+	@GetMapping("/evaluate")
+	public String showEvaluationForManager(@ModelAttribute ManagerWebDto webDto) throws Exception {
+		
+		
+		
+		return "manager/applicationFeedbacksBoth";
 	}
 
 }

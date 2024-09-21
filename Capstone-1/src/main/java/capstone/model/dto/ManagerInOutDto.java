@@ -3,7 +3,10 @@ package capstone.model.dto;
 import java.util.List;
 
 import capstone.model.object.ApplicantDetailsObj;
+import capstone.model.object.ApplicantMonthlyObj;
 import capstone.model.object.ApplicantObj;
+import capstone.model.object.ApplicantOfficerFeedbackObj;
+import capstone.model.object.ApplicantTbiFeedbackObj;
 import lombok.Data;
 
 @Data
@@ -23,5 +26,11 @@ public class ManagerInOutDto {
 	
 	ApplicantDetailsObj applicantDetailsObj;
 	
+	ApplicantOfficerFeedbackObj applicantOffFeedbackObj;
+	
+	ApplicantTbiFeedbackObj applicantTbiFeedbackObj;
+	
 	public Boolean transferring;
+	
+	List<ApplicantMonthlyObj> applicantMonthlyObj;
 }

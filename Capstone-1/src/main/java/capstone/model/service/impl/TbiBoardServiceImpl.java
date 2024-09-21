@@ -189,6 +189,15 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 
 		evaluation.setDeleteFlg(false);
 		
+		evaluation.setTotal(commonService.calculateTotalRatings(inDto.getCtOneRating(),
+				inDto.getCtTwoRating(),
+				inDto.getCtThreeRating(),		
+				inDto.getCtFourRating(),
+				inDto.getCtFiveRating(),
+				inDto.getCtSixRating(),
+				inDto.getCtSevenRating(),
+				inDto.getCtEightRating()));
+				
 		applicantLogic.saveEvaluationDetailsEntity(evaluation);
 		
 		emailService.sendEvaluatedMail(user.getEmail());

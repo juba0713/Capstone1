@@ -56,4 +56,8 @@ public interface ManagerService {
 	 */
 	public ManagerInOutDto sendResubmissionMail(ManagerInOutDto inDto)  throws MessagingException;
 	
+	public ManagerInOutDto getAppllicantOnTodayMonth() throws Exception;
+	
+	public ManagerInOutDto getApplicantDetailsWithFeedback(ManagerInOutDto inDto);
+	
 }

@@ -21,4 +21,6 @@ public interface CommonService {
 	public String encrypt(String value) throws Exception;
 	
 	public String decrypt(String encryptedValue) throws Exception;
+	
+	public int calculateTotalRatings(int rateOne, int rateTwo, int rateThree, int rateFour, int rateFive, int rateSix, int rateSeven, int RateEight);
 }

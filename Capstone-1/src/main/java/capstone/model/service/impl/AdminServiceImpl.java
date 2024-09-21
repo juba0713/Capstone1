@@ -103,6 +103,8 @@ public class AdminServiceImpl  implements AdminService{
 			
 			obj.setRole(user.getRole());
 			
+			
+			
 			obj.setCreatedDate(user.getCreatedDate());
 			
 			obj.setUpdatedDate(user.getUpdatedDate());
@@ -140,6 +142,8 @@ public class AdminServiceImpl  implements AdminService{
 			obj.setProjectTitle(app.getProjectTitle());
 					
 			obj.setStatus(app.getStatus());
+			
+			obj.setTotalRating(app.getTotalRating());;
 			
 			obj.setUniversity(app.getUniversity());
 			

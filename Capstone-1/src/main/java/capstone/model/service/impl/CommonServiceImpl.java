@@ -119,4 +119,31 @@ public class CommonServiceImpl implements CommonService {
         return new String(decryptedValue);
 	}
 
+	@Override
+	public int calculateTotalRatings(int rateOne, int rateTwo, int rateThree, int rateFour, int rateFive, int rateSix,
+			int rateSeven, int rateEight) {
+		
+		//Multiplier
+		double mOne = 1.0;
+		double mTwo = 2.0;
+		double mThree= 3.0;
+		double mFour = 1.5;
+		double divider = 1.35;
+		
+		double resOne = rateOne * mOne;
+		double resTwo = rateTwo * mOne;
+		double resThree = rateThree * mTwo;
+		double resFour = rateFour * mTwo;
+		double resFive = rateFive * mThree;
+		double resSix = rateSix * mFour;
+		double resSeven = rateSeven * mFour;
+		double resEight = rateEight * mFour;
+		
+		double total = resOne + resTwo + resThree + resFour + resFive + resSix + resSeven + resEight;
+		
+		int result = (int) Math.ceil(total / divider);
+		
+		return result;
+	}
+
 }

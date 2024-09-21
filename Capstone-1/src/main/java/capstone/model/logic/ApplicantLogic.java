@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import capstone.model.dao.entity.AcceptedApplicantEntity;
 import capstone.model.dao.entity.ApplicantDetailsEntity;
+import capstone.model.dao.entity.ApplicantDetailsFeedbackEntity;
 import capstone.model.dao.entity.ApplicantEntity;
+import capstone.model.dao.entity.ApplicantMonthly;
 import capstone.model.dao.entity.EvaluatedApplicantEntity;
 import capstone.model.dao.entity.EvaluationDetailsEntity;
 import capstone.model.dao.entity.GroupEntity;
@@ -267,4 +269,8 @@ public interface ApplicantLogic {
 	public void savePrescreenDetailsEntity(PrescreenDetailsEntity entity);
 	
 	public void saveEvaluationDetailsEntity(EvaluationDetailsEntity entity);
+	
+	public List<ApplicantMonthly> getApplicantOnTodayMonth();
+	
+	public List<ApplicantDetailsFeedbackEntity> getApplicantDetailsWithFeedback(int idPk);
 }

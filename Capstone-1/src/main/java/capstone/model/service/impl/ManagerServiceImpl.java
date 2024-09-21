@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 
 import capstone.common.constant.CommonConstant;
 import capstone.model.dao.entity.ApplicantDetailsEntity;
+import capstone.model.dao.entity.ApplicantDetailsFeedbackEntity;
 import capstone.model.dao.entity.ApplicantEntity;
+import capstone.model.dao.entity.ApplicantMonthly;
 import capstone.model.dao.entity.JoinApplicantProject;
 import capstone.model.dao.entity.UserInfoAccountEntity;
 import capstone.model.dao.entity.UserInformationEntity;
@@ -24,7 +26,10 @@ import capstone.model.dto.TbiBoardInOutDto;
 import capstone.model.logic.ApplicantLogic;
 import capstone.model.logic.UserLogic;
 import capstone.model.object.ApplicantDetailsObj;
+import capstone.model.object.ApplicantMonthlyObj;
 import capstone.model.object.ApplicantObj;
+import capstone.model.object.ApplicantOfficerFeedbackObj;
+import capstone.model.object.ApplicantTbiFeedbackObj;
 import capstone.model.service.CommonService;
 import capstone.model.service.EmailService;
 import capstone.model.service.LoggedInUserService;
@@ -56,7 +61,7 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		ManagerInOutDto outDto = new ManagerInOutDto();
 		
-		List<Integer> status = List.of(0,1,2,3,4,5,6,7);
+		List<Integer> status = List.of(0,00,1,2,3,4,04,5,6,7,8);
 		
 		List<JoinApplicantProject> listOfApplicant = applicantLogic.getAllApplicantByStatus(status);
 		
@@ -73,6 +78,8 @@ public class ManagerServiceImpl implements ManagerService {
 			obj.setProjectTitle(app.getProjectTitle());
 					
 			obj.setStatus(app.getStatus());
+			
+			obj.setTotalRating(app.getTotalRating());
 			
 			obj.setUniversity(app.getUniversity());
 			
@@ -147,6 +154,8 @@ public class ManagerServiceImpl implements ManagerService {
 			obj.setApplicantIdPk(app.getApplicantIdPk());
 			
 			obj.setEmail(app.getEmail());
+			
+			obj.setTotalRating(app.getTotalRating());
 			
 			obj.setProjectTitle(app.getProjectTitle());
 					
@@ -225,9 +234,10 @@ public class ManagerServiceImpl implements ManagerService {
 				
 				List<String[]> teams = new ArrayList<>();
 				
-				teams.add(app.getTeams()[0].split("\\|"));
-				teams.add(app.getTeams()[1].split("\\|"));
-				teams.add(app.getTeams()[2].split("\\|"));	
+				for(int i = 0; i < app.getTeams().length; i++) {
+					teams.add(app.getTeams()[i].split("\\|"));
+				}
+				
 				
 				applicantDetailsObj.setTeams(teams);
 				
@@ -239,11 +249,9 @@ public class ManagerServiceImpl implements ManagerService {
 				
 				List<String[]> historicallTimelines = new ArrayList<>();
 				
-				historicallTimelines.add(app.getHistoricalTimeline()[0].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[1].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[2].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[3].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[4].split("\\|"));
+				for(int i = 0; i < app.getHistoricalTimeline().length; i++) {
+					historicallTimelines.add(app.getHistoricalTimeline()[i].split("\\|"));
+				}
 				
 				applicantDetailsObj.setHistoricalTimeline(historicallTimelines);
 				
@@ -342,5 +350,229 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		return outDto;
 	}
+
+	@Override
+	public ManagerInOutDto getAppllicantOnTodayMonth() throws Exception {
+		
+		ManagerInOutDto outDto = new ManagerInOutDto();
+		
+		List<ApplicantMonthly> applicants = applicantLogic.getApplicantOnTodayMonth();
+		
+		List<ApplicantMonthlyObj> applicantMonthlyObj = new ArrayList<>();
+		
+		for(ApplicantMonthly app : applicants) {
+			ApplicantMonthlyObj obj = new ApplicantMonthlyObj();
+			
+			obj.setEncryptedApplicantIdPk(commonService.encrypt(String.valueOf(app.getApplicantIdPk())));
+			
+			obj.setProjectTitle(app.getProjectTitle());
+			
+			applicantMonthlyObj.add(obj);
+		}
+		
+		outDto.setApplicantMonthlyObj(applicantMonthlyObj);
+		
+		return outDto;
+	}
+
+	@Override
+	public ManagerInOutDto getApplicantDetailsWithFeedback(ManagerInOutDto inDto) {
+		ManagerInOutDto outDto = new ManagerInOutDto();
+		
+		List<ApplicantDetailsFeedbackEntity> applicant = applicantLogic.getApplicantDetailsWithFeedback(inDto.getApplicantIdPk());
+		
+		ApplicantDetailsObj applicantDetailsObj = new ApplicantDetailsObj();
+		
+		ApplicantOfficerFeedbackObj appOffFeedbackObj = new ApplicantOfficerFeedbackObj();
+		
+		ApplicantTbiFeedbackObj appTbiFeedbackObj = new ApplicantTbiFeedbackObj();
+		
+		String[] members = new String[4];
+		
+		int firstRow = 0;
+		for(ApplicantDetailsFeedbackEntity app : applicant) {
+			
+			if(firstRow == 0) {
+				
+				applicantDetailsObj.setApplicantIdPk(app.getApplicantIdPk());
+				
+				applicantDetailsObj.setEmail(app.getEmail());
+				
+				applicantDetailsObj.setAgreeFlg(app.getAgreeFlg());
+				
+				applicantDetailsObj.setProjectTitle(app.getProjectTitle());
+				
+				applicantDetailsObj.setProjectDescription(app.getProjectDescription());		
+				
+				List<String[]> teams = new ArrayList<>();
+				
+				for(int i = 0; i < app.getTeams().length; i++) {
+					teams.add(app.getTeams()[i].split("\\|"));
+				}
+				
+				
+				applicantDetailsObj.setTeams(teams);
+				
+				applicantDetailsObj.setProblemStatement(app.getProblemStatement());
+				
+				applicantDetailsObj.setTargetMarket(app.getTargetMarket());
+				
+				applicantDetailsObj.setSolutionDescription(app.getSolutionDescription());
+				
+				List<String[]> historicallTimelines = new ArrayList<>();
+				
+				for(int i = 0; i < app.getHistoricalTimeline().length; i++) {
+					historicallTimelines.add(app.getHistoricalTimeline()[i].split("\\|"));
+				}
+				
+				applicantDetailsObj.setHistoricalTimeline(historicallTimelines);
+				
+				applicantDetailsObj.setProductServiceOffering(app.getProductServiceOffering());
+				
+				applicantDetailsObj.setPricingStrategy(app.getPricingStrategy());
+				
+				applicantDetailsObj.setIntPropertyStatus(app.getIntPropertyStatus());
+				
+				applicantDetailsObj.setObjectives(app.getObjectives());
+				
+				applicantDetailsObj.setScopeProposal(app.getScopeProposal());
+				
+				applicantDetailsObj.setMethodology(app.getMethodology());
+				
+				applicantDetailsObj.setVitaeFile(app.getVitaeFile());
+				
+				applicantDetailsObj.setSupportLink(app.getSupportLink());
+				
+				applicantDetailsObj.setGroupName(app.getGroupName());
+				
+				applicantDetailsObj.setLeaderFirstName(app.getLeaderFirstName());
+				
+				applicantDetailsObj.setLeaderLastName(app.getLeaderLastName());
+				
+				applicantDetailsObj.setMobileNumber(app.getMobileNumber());
+				
+				applicantDetailsObj.setAddress(app.getAddress());
+				
+				applicantDetailsObj.setUniversity(app.getUniversity());
+				
+				applicantDetailsObj.setTechnologyAns(app.getTechnologyAns());
+
+				applicantDetailsObj.setProductDesignAns(app.getProductDesignAns());
+				
+				applicantDetailsObj.setCompetitiveLandscapeAns(app.getCompetitiveLandscapeAns());
+				
+				applicantDetailsObj.setProductDevelopmentAns(app.getProductDevelopmentAns());
+				
+				applicantDetailsObj.setTeamAns(app.getTeamAns());
+				
+				applicantDetailsObj.setGoToMarketAns(app.getGoToMarketAns());
+				
+				applicantDetailsObj.setManufacturingAns(app.getManufacturingAns());
+				
+				applicantDetailsObj.setEligibilityAgreeFlg(app.getEligibilityAgreeFlg());
+				
+				applicantDetailsObj.setCommitmentOneFlg(app.getCommitmentOneFlg());
+				
+				applicantDetailsObj.setCommitmentTwoFlg(app.getCommitmentTwoFlg());
+				
+				applicantDetailsObj.setCommitmentThreeFlg(app.getCommitmentThreeFlg());
+				
+				applicantDetailsObj.setCommitmentFourFlg(app.getCommitmentFourFlg());
+				
+				applicantDetailsObj.setStatus(app.getStatus());
+				
+				appOffFeedbackObj.setCtOneFlg(app.getOCtOneFlg());
+				
+				appOffFeedbackObj.setCtOneComments(app.getOCtOneComments());
+				
+				appOffFeedbackObj.setCtTwoFlg(app.getOCtTwoFlg());
+				
+				appOffFeedbackObj.setCtTwoComments(app.getOCtTwoComments());
+				
+				appOffFeedbackObj.setCtThreeFlg(app.getOCtThreeFlg());
+				
+				appOffFeedbackObj.setCtThreeComments(app.getOCtThreeComments());
+				
+				appOffFeedbackObj.setCtFourFlg(app.getOCtFourFlg());
+				
+				appOffFeedbackObj.setCtFourComments(app.getOCtFourComments());
+				
+				appOffFeedbackObj.setCtFiveFlg(app.getOCtFiveFlg());
+				
+				appOffFeedbackObj.setCtFiveComments(app.getOCtFiveComments());
+				
+				appOffFeedbackObj.setCtSixFlg(app.getOCtSixFlg());
+				
+				appOffFeedbackObj.setCtSixComments(app.getOCtSixComments());
+				
+				appOffFeedbackObj.setCtSevenFlg(app.getOCtSevenFlg());
+				
+				appOffFeedbackObj.setCtSevenComments(app.getOCtSevenComments());
+				
+				appOffFeedbackObj.setCtEightFlg(app.getOCtEightFlg());
+				
+				appOffFeedbackObj.setCtEightComments(app.getOCtEightComments());
+				
+				appOffFeedbackObj.setCtNineFlg(app.getOCtNineFlg());
+				
+				appOffFeedbackObj.setCtNineComments(app.getOCtNineComments());
+				
+				appOffFeedbackObj.setRecommendation(app.getRecommendation());
+				
+				appTbiFeedbackObj.setCtOneRating(app.getTCtOneRating());
+				
+				appTbiFeedbackObj.setCtOneComments(app.getTCtOneComments());
+				
+				appTbiFeedbackObj.setCtTwoRating(app.getTCtTwoRating());
+				
+				appTbiFeedbackObj.setCtTwoComments(app.getTCtTwoComments());
+				
+				appTbiFeedbackObj.setCtThreeRating(app.getTCtThreeRating());
+				
+				appTbiFeedbackObj.setCtThreeComments(app.getTCtThreeComments());	
+				
+				appTbiFeedbackObj.setCtFourRating(app.getTCtFourRating());
+				
+				appTbiFeedbackObj.setCtFourComments(app.getTCtFourComments());
+				
+				appTbiFeedbackObj.setCtFiveRating(app.getTCtFiveRating());
+				
+				appTbiFeedbackObj.setCtFiveComments(app.getTCtFiveComments());
+				
+				appTbiFeedbackObj.setCtSixRating(app.getTCtSixRating());
+				
+				appTbiFeedbackObj.setCtSixComments(app.getTCtSixComments());
+				
+				appTbiFeedbackObj.setCtSevenRating(app.getTCtSevenRating());
+				
+				appTbiFeedbackObj.setCtSevenComments(app.getTCtSevenComments());
+				
+				appTbiFeedbackObj.setCtEightRating(app.getTCtEightRating());
+				
+				appTbiFeedbackObj.setCtEightComments(app.getTCtEightComments());
+				
+				appTbiFeedbackObj.setTbiFeedback(app.getTbiFeedback());
+				
+				
+			
+			}
+
+			members[firstRow] = app.getMemberLastName()+", "+app.getMemberFirstName();
+			
+			firstRow++;
+		}
+		
+		applicantDetailsObj.setMembers(members);
+		
+		outDto.setApplicantDetailsObj(applicantDetailsObj);
+		
+		outDto.setApplicantOffFeedbackObj(appOffFeedbackObj);
+		
+		outDto.setApplicantTbiFeedbackObj(appTbiFeedbackObj);
+		
+		return outDto;
+	}
+	
+	
 	
 }

@@ -21,7 +21,7 @@ public class ApplicantObj {
 	
 	public String university;
 	
-	public int score;
+	public int totalRating;
 	
 	public String feedback;
 	

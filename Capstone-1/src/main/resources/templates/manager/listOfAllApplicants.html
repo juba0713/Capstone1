@@ -164,7 +164,6 @@
                   University
                 </th>
                 <th class="text-center hidden sm:table-cell">Status</th>
-                <th class="text-center rounded-top-right"></th>
               </tr>
             </thead>
             <tbody class="divide-y divide-grey-500 bodyrowhover">
@@ -190,8 +189,8 @@
                 <!--th:style="${app.status == 0 OR app.status == 1 OR app.status == 5 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"-->
                 <td
                   class="whitespace-nowrap max-w-0 truncate"
-                  th:text="${app.status == 0 ? 'In Officer' : app.status == 2 ? 'Rejected' : app.status == 1 OR app.status == 3? 'In Manager' : app.status == 4 ? 'In Board' : app.status == 5 AND app.score >=6 ? 'Passed'  : 'Failed'}"
-                  th:style="${app.status == 0 OR app.status == 1 OR app.status==3 OR app.status == 4  ? 'color:#000000; font-weight: bold;' : app.status == 2 OR ((app.status == 5 OR app.status == 6 OR app.status == 7) AND app.score <= 5) ? 'color:#FF0000; font-weight: bold;' : 'color:#008000; font-weight: bold;'}"
+                  th:text="${app.status == 0 ? 'In Officer' : app.status == 2 ? 'Rejected' : app.status == 1 OR app.status == 3? 'In Manager' : app.status == 4 ? 'In Board' : app.status == 5 AND app.totalRating >= 60 ? 'Passed'  : 'Failed'}"
+                  th:style="${app.status == 0 OR app.status == 1 OR app.status==3 OR app.status == 4  ? 'color:#000000; font-weight: bold;' : app.status == 2 OR ((app.status == 5 OR app.status == 6 OR app.status == 7) AND app.totalRating < 60) ? 'color:#FF0000; font-weight: bold;' : 'color:#008000; font-weight: bold;'}"
                 ></td>
               
               </tr>
@@ -260,11 +259,29 @@
       referrerpolicy="no-referrer"
     ></script>
  	<script>
+
+		$(document).ready(function () {
+	        	$("#applicants-table").dataTable({
+		          columnDefs: [
+		            {
+		              // targets: "no-sort",
+		              targets: [-1, -2],
+		              orderable: false,
+		            },
+		          ],
+		          searching: true,
+		          // ordering: false,
+		          info: true,
+		          lengthChange: false,
+		        });
+        
+        
 		 const ROW = document.querySelectorAll(".row-btn").forEach(row => row.addEventListener('click', function(){
 				const id = this.getAttribute('data-id');
 				
 				window.location.href = `/manager/home/application-details?id=${id}`;
 		 }));
+		 });
 	 </script>
   </body>
 </html>

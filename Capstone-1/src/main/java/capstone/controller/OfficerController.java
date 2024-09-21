@@ -43,6 +43,8 @@ public class OfficerController {
 	@PostMapping(value = "/action", params = "accept") 
 	public String acceptApplicant(@ModelAttribute OfficerWebDto webDto) throws Exception {
 		
+		System.out.println(webDto.getEncryptedApplicantIdPk());
+		
 		OfficerInOutDto inDto = new OfficerInOutDto();
 
 		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(webDto.getEncryptedApplicantIdPk())));
@@ -96,7 +98,7 @@ public class OfficerController {
 
 		OfficerInOutDto inDto = new OfficerInOutDto();
 
-		inDto.setApplicantIdPk(webDto.getApplicantIdPk());
+//		inDto.setApplicantIdPk(webDto.getApplicantIdPk());
 
 		inDto.setFeedback(webDto.getFeedback());
 

@@ -50,6 +50,6 @@ public class TestController {
     @GetMapping("/test/screen")
     public String showPrescreen() {
     	
-    	return "manager/applicationDetails";
+    	return "manager/applicationFeedbacksBoth";
     }
 }

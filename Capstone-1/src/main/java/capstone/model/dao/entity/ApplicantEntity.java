@@ -69,13 +69,16 @@ public class ApplicantEntity {
 	
 	/*
 	 * 0 - Pending
-	 * 1 - Accept
-	 * 2 - Reject
+	 *  00 - Resubmission - Officer
+	 * 1 - Accept By Officer
+	 * 2 - Reject By Officer
 	 * 3 - createdApplicantAccount
 	 * 4 - Pending for evaluation
-	 * 5 - Evaluated
+	 * 04 - Pending for evaluation -resubmitted - Tbi
+	 * 5 - Evaluated By Tbi
 	 * 6 - Qualified for Resubmission - Failed
 	 * 7 - Not Qualified for Resubmission - Failed
+	 * 8 - Evaluated By Manager
 	 */
 	@Column(nullable = false)
 	private int status;

@@ -17,8 +17,9 @@ public class JoinApplicantProject {
 			(String) objects[2],
 			(Integer) objects[3],
 			(String) objects[4],
-			(String) objects[5],
-			(String) objects[6]
+			(Integer) objects[5],
+			(String) objects[6],
+			(String) objects[7]
 		);
 	}
 	
@@ -31,6 +32,8 @@ public class JoinApplicantProject {
 	public int status;
 	
 	public String university;
+	
+	public int totalRating;
 	
 	public String acceptedBy;
 	
