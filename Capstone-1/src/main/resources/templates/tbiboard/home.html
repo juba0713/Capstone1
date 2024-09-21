@@ -50,6 +50,13 @@
     </style>
   </head>
   <body th:object="${tbiBoardWebDto}">
+    <div
+      class="success-container"
+      th:if="${succMsg != null}"
+      id="flash-message"
+    >
+      <div th:text="${succMsg}"></div>
+    </div>
     <img
       th:src="@{/images/blocks.png}"
       class="w-3/5 h-4/5 bottom-0 absolute right-0 md:fixed pointer-events-none z-0"
@@ -102,13 +109,6 @@
           </div>
         </div>
       </div>
-      <div
-        class="success-container"
-        th:if="${succMsg != null}"
-        id="flash-message"
-      >
-        <div th:text="${succMsg}"></div>
-      </div>
 
       <div
         class="relative z-10 rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden sm:w-auto p-10 ml-2 sm:ml-0"
@@ -119,6 +119,8 @@
               <th class="text-center rounded-top-left">Email</th>
               <th class="text-center w-3/12">Project Title</th>
               <th class="text-center w-1/5 hidden sm:table-cell">University</th>
+              <th class="text-center sm:table-cell">Status</th>
+
               <th class="text-center rounded-top-right">Actions</th>
             </tr>
           </thead>
@@ -140,6 +142,7 @@
                 class="whitespace-nowrap max-w-0 truncate hidden sm:table-cell"
                 th:text="${app.university}"
               ></td>
+              <td class="whitespace-nowrap max-w-0 truncate">Pending</td>
               <td>
                 <form
                   th:action="@{/tbi-board/evaluate}"
@@ -199,6 +202,20 @@
           ],
         });
       });
+    </script>
+    <script>
+      // JavaScript function to remove the flash message after a specified time
+      function hideFlashMessage() {
+        const flashMessage = document.getElementById("flash-message");
+        if (flashMessage) {
+          setTimeout(() => {
+            flashMessage.style.display = "none";
+          }, 5000); // 5000 milliseconds = 5 seconds
+        }
+      }
+
+      // Call the function on page load
+      window.onload = hideFlashMessage;
     </script>
   </body>
 </html>

@@ -153,9 +153,8 @@
               </thead>
               <tbody class="divide-y divide-grey-500 bodyrowhover">
                 <tr
-				th:each="applicant : *{applicantMonthlyObj}"
+                  th:each="applicant : *{applicantMonthlyObj}"
                   class="row-btn"
-   	
                 >
                   <td
                     class="whitespace-nowrap max-w-0 truncate"
@@ -163,14 +162,22 @@
                   ></td>
 
                   <td>
-					  <form th:action="@{/manager/rank-startups/evaluate}" method="GET">
-						  <input type="hidden" name="id" th:value="${applicant.encryptedApplicantIdPk}"/>
-	                    <button
-	                      class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-	                      type="submit"	     
-	                    >
-	                      Rank Startup
-	                    </button>
+                    <form
+                      th:action="@{/manager/rank-startups/evaluate}"
+                      method="GET"
+                      target="_blank"
+                    >
+                      <input
+                        type="hidden"
+                        name="id"
+                        th:value="${applicant.encryptedApplicantIdPk}"
+                      />
+                      <button
+                        class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                        type="submit"
+                      >
+                        Rank Startup
+                      </button>
                     </form>
                   </td>
                 </tr>
