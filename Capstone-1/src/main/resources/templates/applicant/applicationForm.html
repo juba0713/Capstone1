@@ -1132,7 +1132,7 @@
             >
               <h2 class="text-black mb-3">
                 Team Leader's
-                <strong> Email Address </strong>
+                <strong>Address </strong>
                 <span class="text-red-600"> *</span>
               </h2>
               <!-- th:value="*{leaderAddress}" -->
@@ -2175,9 +2175,6 @@
       <input type="hidden" name="button" value="submit" />
     </form>
     <script>
-      // Set this to true for development mode, false for production
-      const DEVELOPMENT_MODE = false;
-
       var currentTab = 0;
       showTab(currentTab);
 
@@ -2217,27 +2214,28 @@
 
       function nextPrev(n) {
         var x = document.getElementsByClassName("tab");
-		console.log(n);
-        // In development mode, skip validation
-        if (DEVELOPMENT_MODE || ((n === 1 || n === -1) && validateForm())) {
+
+        // Check if it's the submit button on the last tab
+        if (currentTab === x.length - 1 && n === 1) {
+          if (validateForm()) {
+            // Submit the form
+            document.getElementById("regForm").submit();
+          }
+          return; // Stop here to prevent moving to a non-existent next tab
+        }
+
+        // For other tabs, proceed as before
+        if (validateForm()) {
           x[currentTab].style.display = "none";
           currentTab += n;
           if (currentTab >= x.length) {
-            // For development, just go back to the first tab instead of submitting
-            if (DEVELOPMENT_MODE) {
-              currentTab = 0;
-            } else {
-              document.getElementById("regForm").submit();
-              return false;
-            }
+            currentTab = x.length - 1; // Ensure we don't go past the last tab
           }
           showTab(currentTab);
         }
       }
 
       function validateForm() {
-        if (DEVELOPMENT_MODE) return true; // Skip validation in development mode
-
         const emailInput = document.getElementById("email");
         const emailError = document.getElementById("emailError");
         const radioButtons = document.getElementsByName("agreeFlg");
@@ -2292,7 +2290,6 @@
         }
       }
 
-      // Function to check the agreement on the first page
       function checkAgreement() {
         const agreeRadios = document.getElementsByName("agreeFlg");
         agreeRadios.forEach((radio) => {
@@ -2308,7 +2305,6 @@
         updateNextButtonAppearance(!!disagreementRadio);
       }
 
-      // Function to check eligibility agreement
       function checkEligibilityAgreement() {
         const eligibilityRadios = document.getElementsByName(
           "eligibilityAgreeFlg"
@@ -2326,7 +2322,6 @@
         updateNextButtonAppearance(!!disagreementRadio);
       }
 
-      // Function to check commitment verification
       function checkCommitmentVerification() {
         const commitmentQuestions = [
           "commitmentOneFlg",
@@ -2356,137 +2351,12 @@
         checkAllCommitments();
       }
 
-      // Add event listener when the DOM is fully loaded
       document.addEventListener("DOMContentLoaded", function () {
-        // Initial check for the first page agreement
         checkAgreement();
       });
-
-      // Add development mode indicator
-      if (DEVELOPMENT_MODE) {
-        const devModeIndicator = document.createElement("div");
-        devModeIndicator.textContent = "Development Mode";
-        devModeIndicator.style.position = "fixed";
-        devModeIndicator.style.top = "10px";
-        devModeIndicator.style.right = "10px";
-        devModeIndicator.style.backgroundColor = "yellow";
-        devModeIndicator.style.padding = "5px";
-        devModeIndicator.style.borderRadius = "5px";
-        document.body.appendChild(devModeIndicator);
-      }
     </script>
     <script th:inline="javascript">
       console.log(/*[[${applicantWebDto}]]*/ "");
     </script>
   </body>
 </html>
-<!-- 
-*********DO NOT REMOVE THIS*********
-REPLACE THIS CODE TO THE SCRIPT ABOVE
-REPLACE THIS CODE TO THE SCRIPT ABOVE
-REPLACE THIS CODE TO THE SCRIPT ABOVE
-*********DO NOT REMOVE THIS*********
-
-
-<script>
-  var currentTab = 0;
-  showTab(currentTab);
-
-  function showTab(n) {
-    var x = document.getElementsByClassName("tab");
-    // Hide all tabs
-    for (var i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
-    }
-    // Show the current tab
-    x[n].style.display = "block";
-    
-    // Update button display
-    document.getElementById("prevBtn").style.display = n === 0 ? "none" : "inline";
-    document.getElementById("nextBtn").innerHTML = n === x.length - 1 ? "Submit" : "Next";
-    
-    fixStepIndicator(n);
-    
-    // Scroll to the top of the current tab
-    x[n].scrollIntoView({ behavior: "smooth", block: "start" });
-
-        // Scroll to the top of the page
-        window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  function nextPrev(n) {
-    var x = document.getElementsByClassName("tab");
-    if (n === 1 && !validateForm()) return false;
-    x[currentTab].style.display = "none";
-    currentTab += n;
-    if (currentTab >= x.length) {
-      document.getElementById("regForm").submit();
-      return false;
-    }
-    showTab(currentTab);
-  }
-
-  function validateForm() {
-    const emailInput = document.getElementById("email");
-    const emailError = document.getElementById("emailError");
-    const radioButtons = document.getElementsByName("agreeFlg");
-    const radioError = document.getElementById("radioError");
-
-    let isValid = true;
-
-    // Email validation
-    if (!emailInput.checkValidity()) {
-      emailError.textContent = "Please enter a valid email address.";
-      emailInput.focus();
-      isValid = false;
-    } else {
-      emailError.textContent = "";
-    }
-
-    // Agreement radio button validation
-    let isRadioChecked = false;
-    for (let radioButton of radioButtons) {
-      if (radioButton.checked) {
-        isRadioChecked = true;
-        break;
-      }
-    }
-    if (!isRadioChecked) {
-      radioError.textContent = "Please select an option.";
-      isValid = false;
-    } else {
-      radioError.textContent = "";
-    }
-
-    return isValid;
-  }
-
-  function fixStepIndicator(n) {
-    var i,
-      x = document.getElementsByClassName("step");
-    for (i = 0; i < x.length; i++) {
-      x[i].className = x[i].className.replace(" active", "");
-    }
-    x[n].className += " active";
-  }
-
-  function updateNextButtonAppearance(isDisagreed) {
-    const nextBtn = document.getElementById("nextBtn");
-    if (isDisagreed) {
-      nextBtn.classList.add("disagreed");
-    } else {
-      nextBtn.classList.remove("disagreed");
-    }
-  }
-
-  // Add event listeners to radio buttons
-  document.getElementsByName("agreeFlg").forEach((radio) => {
-    radio.addEventListener("change", function () {
-      updateNextButtonAppearance(this.value === "false");
-    });
-  });
-
-  // Initial state: button is in normal state
-  updateNextButtonAppearance(false);
-</script>
-   -->
