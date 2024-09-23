@@ -12,23 +12,30 @@ import lombok.Data;
 
 @Data
 public class ManagerWebDto {
+	
 	private AdminDashboardObj adminDashboardObj;
 
-	public List<ApplicantObj> listOfApplicants;
+	private List<ApplicantObj> listOfApplicants;
 
-	public int applicantIdPk;
+	private int applicantIdPk;
 	
-	public String encryptedApplicantIdPk;
+	private String encryptedApplicantIdPk;
 
-	public List<Integer> chosenApplicant;
+	private List<Integer> chosenApplicant;
 
-	ApplicantDetailsObj applicantDetailsObj;
+	private ApplicantDetailsObj applicantDetailsObj;
 	
-	ApplicantOfficerFeedbackObj applicantOffFeedbackObj;
+	private ApplicantOfficerFeedbackObj applicantOffFeedbackObj;
 	
-	ApplicantTbiFeedbackObj applicantTbiFeedbackObj;
+	private ApplicantTbiFeedbackObj applicantTbiFeedbackObj;
 	
-	List<ApplicantMonthlyObj> applicantMonthlyObj;
+	private List<ApplicantMonthlyObj> applicantMonthlyObj;
+	
+	private List<ApplicantMonthlyObj> applicantRankingMonthlyObj;
+	
+	private int month;
+	
+	private int year;
 	
 	/*
 	 * Evaluation DTO

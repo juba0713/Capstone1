@@ -84,4 +84,18 @@ public interface ManagerService {
 	 */
 	public ManagerInOutDto evaluateApplicant(ManagerInOutDto inDto) throws MessagingException;
 	
+	/**
+	 *  To get Applicant Ranking By Monthly
+	 * @return ManagerInOutDto
+	 * @throws Exception
+	 */
+	public ManagerInOutDto getAppllicantRankingOnTodayMonth() throws Exception;
+	
+	/**
+	 *  To get Applicant Ranking By Monthly
+	 * @return ManagerInOutDto
+	 * @throws Exception
+	 */
+	public ManagerInOutDto getAppllicantRankingByYearMonth(ManagerInOutDto inDto) throws Exception;
+	
 }

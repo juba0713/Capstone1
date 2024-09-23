@@ -74,6 +74,8 @@ public class SecurityConfig {
 						.requestMatchers("/dashboard/**").permitAll()
 						.requestMatchers("/applicant/form/resubmit").permitAll()
 						.requestMatchers("/applicant/form").permitAll()
+						.requestMatchers("/ranking").permitAll()
+						.requestMatchers("/retrieve/ranking").permitAll()
 						.requestMatchers("/view/**").permitAll()
 						.requestMatchers("/applicant/**").hasAnyAuthority("APPLICANT")
 						.requestMatchers("/officer/**").hasAnyAuthority("OFFICER")

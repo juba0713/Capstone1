@@ -275,6 +275,10 @@ public interface ApplicantLogic {
 	
 	public List<ApplicantMonthly> getApplicantOnTodayMonth();
 	
+	public List<ApplicantMonthly> getApplicantRankingOnTodayMonth();
+	
+	public List<ApplicantMonthly> getApplicantRankingByYearMonth(int month, int year);
+	
 	public List<ApplicantDetailsFeedbackEntity> getApplicantDetailsWithFeedback(int idPk);
 	
 	public UserCertificateEntity getUserInformationForCeritificate(int applicantIdPk);

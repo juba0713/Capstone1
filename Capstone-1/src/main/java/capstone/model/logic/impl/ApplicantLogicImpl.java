@@ -342,5 +342,17 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 		
 		mEvaluationDetailsDao.save(entity);
 	}
+
+	@Override
+	public List<ApplicantMonthly> getApplicantRankingOnTodayMonth() {
+
+		return applicantDao.getApplicantRankingOnTodayMonth();
+	}
+
+	@Override
+	public List<ApplicantMonthly> getApplicantRankingByYearMonth(int month, int year) {
+		
+		return applicantDao.getApplicantRankingByYearMonth(month, year);
+	}
 	
 }

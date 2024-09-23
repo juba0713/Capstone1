@@ -258,6 +258,18 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ " ORDER BY ed.total ASC; "
 			+ "";
 	
+	public final String GET_APPLICANT_RANKING_BY_YEAR_MONTH = "SELECT a.id_pk, "
+			+ "       p.project_title "
+			+ "FROM m_applicant a "
+			+ "LEFT JOIN t_project p ON p.applicant_id_pk = a.id_pk AND p.delete_flg = false "
+			+ "LEFT JOIN t_evaluated_applicant ea ON ea.applicant_id_pk = a.id_pk AND ea.delete_flg = false "
+			+ "LEFT JOIN t_evaluation_details ed ON ed.evaluated_applicant_id_pk = ea.id_pk AND ed.delete_flg = false "
+			+ "WHERE EXTRACT(MONTH FROM a.created_date) = :month "
+			+ "  AND EXTRACT(YEAR FROM a.created_date) = :year "
+			+ "  AND a.status IN (8) "
+			+ " ORDER BY ed.total ASC; "
+			+ "";
+	
 	public final String GET_APPLICANT_DETAILS_WITH_FEEDBACKS = "SELECT  "
 			+ "    a.id_pk, "
 			+ "    a.email, "
@@ -396,6 +408,36 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 	
 	default List<ApplicantMonthly> getApplicantOnTodayMonth(){
 		List<Object[]> rawResults = getApplicantOnTodayMonthRaw();
+	    List<ApplicantMonthly> applicants = new ArrayList<>();
+
+	    for (Object[] objects : rawResults) {
+	    	ApplicantMonthly applicant = new ApplicantMonthly(objects);  
+	        applicants.add(applicant);
+	    }
+
+	    return applicants;
+	}
+	
+	@Query(value=GET_APPLICANT_RANKING_ON_TODAY_MONTH, nativeQuery=true)
+	public List<Object[]> getApplicantRankingOnTodayMonthRaw() throws DataAccessException;
+	
+	default List<ApplicantMonthly> getApplicantRankingOnTodayMonth(){
+		List<Object[]> rawResults = getApplicantRankingOnTodayMonthRaw();
+	    List<ApplicantMonthly> applicants = new ArrayList<>();
+
+	    for (Object[] objects : rawResults) {
+	    	ApplicantMonthly applicant = new ApplicantMonthly(objects);  
+	        applicants.add(applicant);
+	    }
+
+	    return applicants;
+	}
+	
+	@Query(value=GET_APPLICANT_RANKING_BY_YEAR_MONTH, nativeQuery=true)
+	public List<Object[]> getApplicantRankingByYearMonthRaw(int month, int year) throws DataAccessException;
+	
+	default List<ApplicantMonthly> getApplicantRankingByYearMonth(int month, int year){
+		List<Object[]> rawResults = getApplicantRankingByYearMonthRaw(month, year);
 	    List<ApplicantMonthly> applicants = new ArrayList<>();
 
 	    for (Object[] objects : rawResults) {

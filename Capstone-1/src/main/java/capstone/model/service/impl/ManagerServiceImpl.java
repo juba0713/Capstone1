@@ -732,6 +732,58 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		return outDto;
 	}
+
+	@Override
+	public ManagerInOutDto getAppllicantRankingOnTodayMonth() throws Exception {
+		
+		ManagerInOutDto outDto = new ManagerInOutDto();
+		
+		List<ApplicantMonthly> applicants = applicantLogic.getApplicantRankingOnTodayMonth();
+		
+		List<ApplicantMonthlyObj> applicantMonthlyObj = new ArrayList<>();
+		
+		for(ApplicantMonthly app : applicants) {
+			ApplicantMonthlyObj obj = new ApplicantMonthlyObj();
+			
+			obj.setEncryptedApplicantIdPk(commonService.encrypt(String.valueOf(app.getApplicantIdPk())));
+			
+			obj.setProjectTitle(app.getProjectTitle());
+			
+			applicantMonthlyObj.add(obj);
+		}
+		
+		outDto.setApplicantRankingMonthlyObj(applicantMonthlyObj);
+		
+		return outDto;
+	}
+
+	@Override
+	public ManagerInOutDto getAppllicantRankingByYearMonth(ManagerInOutDto inDto) throws Exception {
+		
+		ManagerInOutDto outDto = new ManagerInOutDto();
+		
+		List<ApplicantMonthly> applicants = applicantLogic.getApplicantRankingByYearMonth(inDto.getMonth(), inDto.getYear());
+		
+		System.out.println(applicants);
+		
+		List<ApplicantMonthlyObj> applicantMonthlyObj = new ArrayList<>();
+		
+		for(ApplicantMonthly app : applicants) {
+			ApplicantMonthlyObj obj = new ApplicantMonthlyObj();
+			
+			obj.setEncryptedApplicantIdPk(commonService.encrypt(String.valueOf(app.getApplicantIdPk())));
+			
+			obj.setProjectTitle(app.getProjectTitle());
+			
+			applicantMonthlyObj.add(obj);
+			
+		}
+		
+		outDto.setApplicantRankingMonthlyObj(applicantMonthlyObj);
+		
+		return outDto;
+		
+	}
 	
 	
 	

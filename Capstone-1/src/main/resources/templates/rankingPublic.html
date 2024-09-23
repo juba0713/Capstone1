@@ -55,18 +55,6 @@
                     id="month"
                     class="border w-2[100px] mt-1 pl-3 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm: rounded-md"
                   >
-                    <option>January</option>
-                    <option>February</option>
-                    <option>March</option>
-                    <option>April</option>
-                    <option>May</option>
-                    <option>June</option>
-                    <option>July</option>
-                    <option>August</option>
-                    <option>September</option>
-                    <option>October</option>
-                    <option>November</option>
-                    <option>December</option>
                   </select>
                 </div>
                 <div class="mr-4 border-blue-500 flex flex-row">
@@ -96,73 +84,109 @@
         <hr class="my-4" />
 
         <div>
-          <ul class="list-decimal pl-5 space-y-2">
+          <ul class="list-decimal pl-5 space-y-2 rank-list">
             <li
               class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
             >
               Item 1
-            </li>
-            <li
-              class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
-            >
-              Item 2
-            </li>
-            <li
-              class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
-            >
-              Item 3
-            </li>
-            <li
-              class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
-            >
-              Item 4
-            </li>
-            <li
-              class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
-            >
-              Item 5
-            </li>
-            <li
-              class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
-            >
-              Item 6
-            </li>
-            <li
-              class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
-            >
-              Item 7
-            </li>
-            <li
-              class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
-            >
-              Item 8
-            </li>
-            <li
-              class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
-            >
-              Item 9
-            </li>
-            <li
-              class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
-            >
-              Item 10
-            </li>
+            </li>         
           </ul>
         </div>
       </div>
     </div>
     <script>
-      // JavaScript to dynamically add years to the dropdown
-      const yearSelect = document.getElementById("year");
-      const currentYear = new Date().getFullYear();
-      const numberOfYears = 5; // Number of years to display
+		 // JavaScript to dynamically add years to the dropdown
+		  const yearSelect = document.getElementById("year");
+		  const monthSelect = document.getElementById("month");
+		  
+		  const numberOfYears = 5; // Number of years to display
+		
+		  const currentYear = new Date().getFullYear();
+		  const currentMonth = new Date().getMonth() + 1; // getMonth() is 0-indexed (0 = January)
+		  
+		  setCurrentYearAndMonthRanking();
+		  getRankings(currentYear, currentMonth);
+		  
+		  document.querySelectorAll("select").forEach(s => s.addEventListener('change', function(){
+			  
+			  let selectedYear = this.id === 'year' ? this.value : currentYear;
+			  let selectedMonth = this.id === 'month' ? this.value : currentMonth;
+			  
+			  getRankings(selectedYear, selectedMonth);
+			  
+		  }));
+		  
+		  async function getRankings(year, month) {
+			  const url = `/retrieve/ranking?month=${month}&year=${year}`;
+	        const response = await fetch(url, { method: "GET" });
+	
+	        if (!response.ok) {
+	          const errorData = await response.json();
+	          throw new Error(`Server Error: ${errorData.message || "Unknown"}`);
+	        }
+	
+	        const data = await response.json();
+	
+			populateRanking(data);
+			}
+		
+		function populateRanking(data){
+			const rankList = document.querySelector(".rank-list");
+			rankList.innerHTML = '';
+			
+			if(data.applicantRankingMonthlyObj.length != 0){
+				for(let app of data.applicantRankingMonthlyObj){
+						let listHTML = `<li
+						              class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
+						            >
+						              ${app.projectTitle}
+						            </li> `;
+						 
+						 rankList.innerHTML += listHTML;
+				}
+			}else{
+				rankList.innerHTML = `<div
+						              class="text-lg bg-gray-100 p-2 border border-gray-300 rounded-md hover:transform hover:scale-105 transition-transform duration-200"
+						            >
+						              No Data
+						            </div> `;
+			}
+		}
 
-      for (let i = 0; i < numberOfYears; i++) {
-        const option = document.createElement("option");
-        option.value = currentYear + i;
-        option.textContent = currentYear + i;
-        yearSelect.appendChild(option);
-      }
-    </script>
+	
+		 function setCurrentYearAndMonthRanking(){
+								
+			  // Populate the year dropdown
+			  for (let i = 0; i < numberOfYears; i++) {
+			    const option = document.createElement("option");
+			    const year = currentYear + i;
+			    option.value = year;
+			    option.textContent = year;
+			    if (year === currentYear) {
+			      option.selected = true; // Set current year as selected
+			    }
+			    yearSelect.appendChild(option);
+			  }
+			
+			  // Populate the month dropdown
+			  const months = [
+			    "January", "February", "March", "April", "May", "June",
+			    "July", "August", "September", "October", "November", "December"
+			  ];
+			
+			  months.forEach((month, index) => {
+			    const option = document.createElement("option");
+			    option.value = index + 1; // Value from 1 to 12 for months
+			    option.textContent = month;
+			    if (index + 1 === currentMonth) {
+			      option.selected = true; // Set current month as selected
+			    }
+			    monthSelect.appendChild(option);
+			  });
+		}
+
+  
+</script>
+
   </body>
 </html>

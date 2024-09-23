@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import capstone.common.constant.CommonConstant;
 import capstone.controller.webdto.ManagerWebDto;
+import capstone.controller.webdto.OfficerWebDto;
 import capstone.controller.webdto.TbiBoardWebDto;
 import capstone.model.dto.AdminInOutDto;
 import capstone.model.dto.ManagerInOutDto;
@@ -108,9 +110,14 @@ public class ManagerController {
 
 	@GetMapping("/rank-startups")
 	public String showRankStartups(@ModelAttribute ManagerWebDto webDto) throws Exception {
-		ManagerInOutDto outDto = managerService.getAppllicantOnTodayMonth();
+		ManagerInOutDto monthlyOutDto = managerService.getAppllicantOnTodayMonth();
 		
-		webDto.setApplicantMonthlyObj(outDto.getApplicantMonthlyObj());
+		webDto.setApplicantMonthlyObj(monthlyOutDto.getApplicantMonthlyObj());
+		
+		ManagerInOutDto monthlyRankingOutDto = managerService.getAppllicantRankingOnTodayMonth();
+		
+		webDto.setApplicantRankingMonthlyObj(monthlyRankingOutDto.getApplicantRankingMonthlyObj());
+		
 		return "manager/rankStartups";
 	}
 	
@@ -297,4 +304,6 @@ public class ManagerController {
 		ra.addFlashAttribute("successMsg", "A certificate has been issued");
 		return "redirect:/manager/evaluated-result";
 	}
+	
+	
 }

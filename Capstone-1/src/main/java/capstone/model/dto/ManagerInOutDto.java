@@ -12,29 +12,35 @@ import lombok.Data;
 @Data
 public class ManagerInOutDto {
 	
-	public List<ApplicantObj> listOfApplicants;
+	private List<ApplicantObj> listOfApplicants;
 	
-	public int applicantIdPk;
+	private int applicantIdPk;
 	
-	public String feedback;
+	private String feedback;
 	
-	public Boolean resubmitFlg;
+	private Boolean resubmitFlg;
 	
-	public List<Integer> chosenApplicant;
+	private List<Integer> chosenApplicant;
 	
-	public int status;
+	private int status;
 	
-	ApplicantDetailsObj applicantDetailsObj;
+	private ApplicantDetailsObj applicantDetailsObj;
 	
-	ApplicantOfficerFeedbackObj applicantOffFeedbackObj;
+	private ApplicantOfficerFeedbackObj applicantOffFeedbackObj;
 	
-	ApplicantTbiFeedbackObj applicantTbiFeedbackObj;
+	private ApplicantTbiFeedbackObj applicantTbiFeedbackObj;
 	
-	public Boolean transferring;
+	private Boolean transferring;
 	
-	List<ApplicantMonthlyObj> applicantMonthlyObj;
+	private List<ApplicantMonthlyObj> applicantMonthlyObj;
 	
-	public String result;
+	private List<ApplicantMonthlyObj> applicantRankingMonthlyObj;
+	
+	private String result;
+	
+	private int month;
+	
+	private int year;
 	
 	/*
 	 * Evaluation DTO
