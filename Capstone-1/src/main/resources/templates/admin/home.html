@@ -357,6 +357,21 @@
             <div class="orb_label text-sm">Total <br />Accounts</div>
           </div>
           <!-- Add more square charts as needed -->
+          <div class="orb">
+            <div class="orb_graphic">
+              <svg>
+                <div class="fill"></div>
+                <!-- <div class="progress"></div> -->
+              </svg>
+              <div
+                class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
+                th:text="*{adminDashboardObj.activatedAccountCount}"
+              >
+                123
+              </div>
+            </div>
+            <div class="orb_label text-sm">Issued <br />Certificates</div>
+          </div>
         </div>
       </div>
     </div>
