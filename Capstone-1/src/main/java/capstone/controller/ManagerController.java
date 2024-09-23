@@ -249,11 +249,11 @@ public class ManagerController {
 	}
 
 	@PostMapping(value = "/qualified", params = "yes")
-	public String qualifiedResubmissionYes(@ModelAttribute ManagerWebDto webDto) throws MessagingException {
+	public String qualifiedResubmissionYes(@ModelAttribute ManagerWebDto webDto) throws NumberFormatException, Exception {
 
 		ManagerInOutDto inDto = new ManagerInOutDto();
 
-		inDto.setApplicantIdPk(webDto.getApplicantIdPk());
+		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(webDto.getEncryptedApplicantIdPk())));
 
 		inDto.setStatus(6);
 
@@ -263,11 +263,11 @@ public class ManagerController {
 	}
 
 	@PostMapping(value = "/qualified", params = "no")
-	public String qualifiedResubmissionNo(@ModelAttribute ManagerWebDto webDto) throws MessagingException {
+	public String qualifiedResubmissionNo(@ModelAttribute ManagerWebDto webDto) throws NumberFormatException, Exception {
 
 		ManagerInOutDto inDto = new ManagerInOutDto();
 
-		inDto.setApplicantIdPk(webDto.getApplicantIdPk());
+		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(webDto.getEncryptedApplicantIdPk())));
 
 		inDto.setStatus(7);
 

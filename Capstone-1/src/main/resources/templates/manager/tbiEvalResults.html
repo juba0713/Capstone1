@@ -153,10 +153,10 @@
                     class="whitespace-nowrap max-w-0 truncate"
                   ></td>
                   <td
-                    th:text="${app.totalRating >= 60 ? 'Passed' : 'Failed'}"
+                    th:text="${app.status == 6 ? 'Resubmit' : app.totalRating >= 60 AND app.status == 5 ? 'Passed' :  'Failed'}"
                     th:style="${app.totalRating >= 60 ? 'color:#008000; font-weight: bold;' : 'color:#FF0000; font-weight: bold;'}"
                   ></td>
-                  <td>
+                  <td>	
 					<div th:if="${app.status == 50}">Issued</div>
                     <button	
                       class="border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary text-sm sm:p-1  btn-row"
