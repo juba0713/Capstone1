@@ -322,7 +322,7 @@
 
               if (webDto.listOfApplicants.length != 0) {
                 webDto.listOfApplicants.forEach((applicant, index) => {
-                  if (applicant.applicantIdPk == idPk) {
+                  if (applicant.encryptedApplicantIdPk == encryptedId) {
                     totalRating.innerHTML = applicant.totalRating;
                     feedback.innerHTML = applicant.feedback;
 
