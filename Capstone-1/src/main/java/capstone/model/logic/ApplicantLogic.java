@@ -15,6 +15,8 @@ import capstone.model.dao.entity.EvaluationDetailsEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
+import capstone.model.dao.entity.ManagerEvaluatedApplicantEntity;
+import capstone.model.dao.entity.ManagerEvaluationDetailsEntity;
 import capstone.model.dao.entity.PrescreenDetailsEntity;
 import capstone.model.dao.entity.ProjectEntity;
 import capstone.model.dao.entity.RejectedApplicantEntity;
@@ -276,4 +278,8 @@ public interface ApplicantLogic {
 	public List<ApplicantDetailsFeedbackEntity> getApplicantDetailsWithFeedback(int idPk);
 	
 	public UserCertificateEntity getUserInformationForCeritificate(int applicantIdPk);
+	
+	public int saveManagerEvaluatedApplicant(ManagerEvaluatedApplicantEntity entity);
+	
+	public void saveManagerEvaluationDetails(ManagerEvaluationDetailsEntity entity);
 }

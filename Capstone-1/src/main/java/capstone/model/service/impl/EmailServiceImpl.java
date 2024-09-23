@@ -177,5 +177,29 @@ public class EmailServiceImpl implements EmailService {
 	    emailSender.send(message);
 	}
 
+	@Override
+	public void sendEvaluatedMailManager(String email) throws MessagingException {
+	    MimeMessage message = emailSender.createMimeMessage();
+	    MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+	    helper.setFrom(CommonConstant.EMAIL);
+	    helper.setTo(email);
+	    helper.setSubject("Your Application Has Been Evaluated");
+
+	    String htmlText = "<div>"
+	            + "<h1>Your Application Has Been Evaluated!</h1>"
+	            + "<p>We are pleased to inform you that your application has been evaluated successfully.</p>"
+	            + "<p>You can now log in to your account to check your ranking and see where you stand in the evaluation process.</p>"
+	            + "<br>"
+	            + "<p>Thank you for your participation and effort.</p>"
+	            + "<p>Best regards,<br>The Evaluation Team</p>"
+	            + "</div>";
+
+	    helper.setText(htmlText, true);
+
+	    emailSender.send(message);
+	}
+
+
 
 }

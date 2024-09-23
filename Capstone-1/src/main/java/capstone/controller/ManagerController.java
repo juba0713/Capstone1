@@ -33,9 +33,6 @@ public class ManagerController {
 	private ManagerService managerService;
 
 	@Autowired
-	private EmailService emailService;
-
-	@Autowired
 	private AdminService adminService;
 	
 	@Autowired
@@ -133,6 +130,52 @@ public class ManagerController {
 		webDto.setApplicantTbiFeedbackObj(outDto.getApplicantTbiFeedbackObj());
 
 		return "manager/applicationFeedbacksBoth";
+	}
+	
+	@PostMapping("/rank-startups/evaluate")
+	public String epostApplicantForRanking(@ModelAttribute ManagerWebDto webDto) throws Exception {
+		
+		ManagerInOutDto inDto = new ManagerInOutDto();
+		
+		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(webDto.getEncryptedApplicantIdPk())));
+		
+		inDto.setCtOneRating(webDto.getCtOneRating());
+		
+		inDto.setCtOneComments(webDto.getCtOneComments());
+		
+		inDto.setCtTwoRating(webDto.getCtTwoRating());
+		
+		inDto.setCtTwoComments(webDto.getCtTwoComments());
+		
+		inDto.setCtThreeRating(webDto.getCtThreeRating());
+		
+		inDto.setCtThreeComments(webDto.getCtThreeComments());
+		
+		inDto.setCtFourRating(webDto.getCtFourRating());
+		
+		inDto.setCtFourComments(webDto.getCtFourComments());
+		
+		inDto.setCtFiveRating(webDto.getCtFiveRating());
+		
+		inDto.setCtFiveComments(webDto.getCtFiveComments());
+		
+		inDto.setCtSixRating(webDto.getCtSixRating());
+		
+		inDto.setCtSixComments(webDto.getCtSixComments());
+		
+		inDto.setCtSevenRating(webDto.getCtSevenRating());
+		
+		inDto.setCtSevenComments(webDto.getCtSevenComments());
+		
+		inDto.setCtEightRating(webDto.getCtEightRating());
+		
+		inDto.setCtEightComments(webDto.getCtEightComments());
+		
+		inDto.setManagerFeedback(webDto.getManagerFeedback());
+		
+		managerService.evaluateApplicant(inDto);
+
+		return "redirect:/manager/rank-startups";
 	}
 
 	@PostMapping("/account/activate")
@@ -233,6 +276,8 @@ public class ManagerController {
 		
 		return "manager/applicationFeedbacksBoth";
 	}
+	
+
 
 	@PostMapping("/issue/certificate")
 	public String issuedCertificate(@ModelAttribute ManagerWebDto webDto, RedirectAttributes ra) throws NumberFormatException, Exception {

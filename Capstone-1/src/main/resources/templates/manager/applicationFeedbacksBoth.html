@@ -99,14 +99,14 @@
       }
     </style>
   </head>
-  <body class="font-secondary">
+  <body class="font-secondary" th:object="${managerWebDto}">
     <!-- manager container evaluation -->
     <div class="container">
       <div class="content" id="content">
         <!-- evaluation  for manager-->
         <div>
-          <form method="POST" class="">
-            <input type="hidden" name="encryptedApplicantIdPk" />
+          <form th:action="@{/manager/rank-startups/evaluate}" method="POST" class="">
+            <input type="hidden" name="encryptedApplicantIdPk" th:value="*{applicantDetailsObj.encryptedApplicantIdPk}" />
 
             <div class="text-sm">
               <h1 class="font-semibold text-lg">Evaluation Form</h1>
@@ -179,6 +179,7 @@
               </div>
               <hr class="my-4" />
 
+			  
               <div>
                 <div class="w-full overflow-x-auto max-h-[550px]">
                   <!-- <div class="overflow-auto w-[700px] h-[550px]"> -->
@@ -648,6 +649,7 @@
                   </div>
                 </div>
               </div>
+              </form>
               <hr class="my-4" />
 
               <!-- additional feedback -->
@@ -656,7 +658,7 @@
                 <div class="w-full h-[100px]">
                   <textarea
                     oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
-                    name="tbiFeedback"
+                    name="managerFeedback"
                     placeholder="Additional feedback"
                     class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                   ></textarea>
@@ -670,7 +672,6 @@
                 </button>
               </div>
             </div>
-          </form>
         </div>
         <div class="button-container">
           <button id="slideButton">Rank Application</button>
@@ -1919,7 +1920,6 @@
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
                         placeholder="Enter comment"
-                        name="ctOneComments"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
                     </td>
@@ -1954,7 +1954,6 @@
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        name="ctTwoComments"
                         placeholder="Enter comment"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
@@ -1998,7 +1997,6 @@
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        name="ctThreeComments"
                         placeholder="Enter comment"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
@@ -2038,7 +2036,6 @@
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        name="ctFourComments"
                         placeholder="Enter comment"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
@@ -2118,7 +2115,6 @@
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        name="ctFiveComments"
                         placeholder="Enter comment"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
@@ -2154,7 +2150,6 @@
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        name="ctSixComments"
                         placeholder="Enter comment"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
@@ -2198,7 +2193,6 @@
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        name="ctSevenComments"
                         placeholder="Enter comment"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
@@ -2242,7 +2236,6 @@
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        name="ctEightComments"
                         placeholder="Enter comment"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
@@ -2282,7 +2275,6 @@
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        name="ctNineComments"
                         placeholder="Enter comment"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
@@ -2302,7 +2294,7 @@
           ></textarea>
         </div>
         <hr class="my-4" />
-
+		
         <!-- evaluation  -->
         <h1 class="font-semibold text-lg">Evaluation Form</h1>
         <div>
@@ -2425,7 +2417,6 @@
                             required
                             oninput="this.className = ''"
                             id="rating"
-                            name="ctOneRating"
                             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option value="none" disabled selected>
@@ -2447,7 +2438,6 @@
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                          name="ctOneComments"
                           placeholder="Enter comment"
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2480,7 +2470,6 @@
                             required
                             oninput="this.className = ''"
                             id="rating"
-                            name="ctTwoRating"
                             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option value="none" disabled selected>
@@ -2502,7 +2491,6 @@
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                          name="ctTwoComments"
                           placeholder="Enter comment"
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2535,7 +2523,6 @@
                             required
                             oninput="this.className = ''"
                             id="rating"
-                            name="ctThreeRating"
                             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option value="none" disabled selected>
@@ -2557,7 +2544,6 @@
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                          name="ctThreeComments"
                           placeholder="Enter comment"
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2581,7 +2567,6 @@
                             required
                             oninput="this.className = ''"
                             id="rating"
-                            name="ctFourRating"
                             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option value="none" disabled selected>
@@ -2603,7 +2588,6 @@
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                          name="ctFourComments"
                           placeholder="Enter comment"
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2636,7 +2620,6 @@
                             required
                             oninput="this.className = ''"
                             id="rating"
-                            name="ctFiveRating"
                             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option value="none" disabled selected>
@@ -2658,7 +2641,6 @@
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                          name="ctFiveComments"
                           placeholder="Enter comment"
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2691,7 +2673,6 @@
                             required
                             oninput="this.className = ''"
                             id="rating"
-                            name="ctSixRating"
                             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option value="none" disabled selected>
@@ -2713,7 +2694,6 @@
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                          name="ctSixComments"
                           placeholder="Enter comment"
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2738,7 +2718,6 @@
                             required
                             oninput="this.className = ''"
                             id="rating"
-                            name="ctSevenRating"
                             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option value="none" disabled selected>
@@ -2760,7 +2739,6 @@
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                          name="ctSevenComments"
                           placeholder="Enter comment"
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2784,7 +2762,6 @@
                             required
                             oninput="this.className = ''"
                             id="rating"
-                            name="ctEightRating"
                             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option value="none" disabled selected>
@@ -2806,7 +2783,6 @@
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
-                          name="ctEightComments"
                           placeholder="Enter comment"
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2842,7 +2818,6 @@
           <div class="w-full h-[100px]">
             <textarea
               oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
-              name="tbiFeedback"
               placeholder="Additional feedback ni tbiboard"
               class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
             ></textarea>
@@ -2908,5 +2883,9 @@
         x[n].className += " active";
       }
     </script>
+    <script th:inline="javascript">
+		console.log(/*[[${managerWebDto}]]*/'');
+	</script>
+		
   </body>
 </html>

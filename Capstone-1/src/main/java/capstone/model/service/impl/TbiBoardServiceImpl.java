@@ -51,8 +51,6 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 	@Autowired
 	private UserLogic userLogic;
 
-	@Autowired
-	private Environment env;
 
 	@Override
 	public TbiBoardInOutDto getAllApplicants() throws Exception {
@@ -107,39 +105,6 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 		evaluatedApplicantEntity.setDeleteFlg(false);
 		
 		UserInformationEntity user = userLogic.getUserByApplicantIdPk(inDto.getApplicantIdPk());
-			
-//		if (inDto.getScore() > 5) {
-//
-//			String folderPath = env.getProperty("certificate.path").toString();
-//
-//			try {
-//				// Load the image
-//				File imageFile = new File(folderPath + "base_certificate.png");
-//				BufferedImage image = ImageIO.read(imageFile);
-//
-//				Graphics g = image.getGraphics();
-//
-//				g.setFont(new Font("Leelawadee UI Semilight", Font.BOLD, 130));
-//				g.setColor(new Color(253, 204, 1));
-//
-//				String fullName = user.getFirstName() + " " + user.getLastName();
-//				int x = 132;
-//				int y = 760;
-//				g.drawString(fullName, x, y);
-//
-//				g.dispose();
-//
-//				String fileName = "certificate_" + user.getIdPk();
-//				File outputFile = new File(folderPath + fileName + ".png");
-//				ImageIO.write(image, "png", outputFile);
-//
-//				applicantLogic.updateApplicantCeritificate(fileName, inDto.getApplicantIdPk());
-//				;
-//
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
 		
 		applicantLogic.updatePreviousEvaluatedApplicant(inDto.getApplicantIdPk());
 

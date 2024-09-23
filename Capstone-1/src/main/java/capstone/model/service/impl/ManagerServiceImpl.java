@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -26,7 +27,11 @@ import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantDetailsFeedbackEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.ApplicantMonthly;
+import capstone.model.dao.entity.EvaluatedApplicantEntity;
+import capstone.model.dao.entity.EvaluationDetailsEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
+import capstone.model.dao.entity.ManagerEvaluatedApplicantEntity;
+import capstone.model.dao.entity.ManagerEvaluationDetailsEntity;
 import capstone.model.dao.entity.UserCertificateEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
 import capstone.model.dao.entity.UserInformationEntity;
@@ -67,6 +72,9 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	@Autowired
 	private Environment env;
+	
+	@Autowired
+	private LoggedInUserService loggedInUserService;
 
 	@Override
 	public ManagerInOutDto getAllApplicants() throws Exception{
@@ -392,7 +400,7 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public ManagerInOutDto getApplicantDetailsWithFeedback(ManagerInOutDto inDto) {
+	public ManagerInOutDto getApplicantDetailsWithFeedback(ManagerInOutDto inDto) throws Exception {
 		ManagerInOutDto outDto = new ManagerInOutDto();
 		
 		List<ApplicantDetailsFeedbackEntity> applicant = applicantLogic.getApplicantDetailsWithFeedback(inDto.getApplicantIdPk());
@@ -410,7 +418,9 @@ public class ManagerServiceImpl implements ManagerService {
 			
 			if(firstRow == 0) {
 				
-				applicantDetailsObj.setApplicantIdPk(app.getApplicantIdPk());
+				//applicantDetailsObj.setApplicantIdPk(app.getApplicantIdPk());
+				
+				applicantDetailsObj.setEncryptedApplicantIdPk(commonService.encrypt(String.valueOf(app.getApplicantIdPk())));
 				
 				applicantDetailsObj.setEmail(app.getEmail());
 				
@@ -634,6 +644,91 @@ public class ManagerServiceImpl implements ManagerService {
 		}
 		
 		outDto.setResult(CommonConstant.VALID);
+		
+		return outDto;
+	}
+
+	@Override
+	public ManagerInOutDto evaluateApplicant(ManagerInOutDto inDto) throws MessagingException {
+		
+		ManagerInOutDto outDto = new ManagerInOutDto();
+		
+		UserInformationEntity loggedInUser = loggedInUserService.getUserInformation();
+
+		Timestamp timeNow = new Timestamp(System.currentTimeMillis());
+
+		applicantLogic.updateApplicantStatus(8, List.of(inDto.getApplicantIdPk()));
+
+		ManagerEvaluatedApplicantEntity evaluatedApplicantEntity = new ManagerEvaluatedApplicantEntity();
+
+		evaluatedApplicantEntity.setApplicantIdPk(inDto.getApplicantIdPk());
+
+		evaluatedApplicantEntity.setCreatedBy(loggedInUser.getIdPk());
+
+		evaluatedApplicantEntity.setCreatedDate(timeNow);
+
+		evaluatedApplicantEntity.setDeleteFlg(false);
+		
+		UserInformationEntity user = userLogic.getUserByApplicantIdPk(inDto.getApplicantIdPk());
+		
+		int idPk = applicantLogic.saveManagerEvaluatedApplicant(evaluatedApplicantEntity);
+
+		ManagerEvaluationDetailsEntity evaluation = new ManagerEvaluationDetailsEntity();
+		
+		evaluation.setEvaluatedApplicantIdPk(idPk);
+		
+		evaluation.setCtOneRating(inDto.getCtOneRating());
+		
+		evaluation.setCtOneComments(inDto.getCtOneComments());
+		
+		evaluation.setCtTwoRating(inDto.getCtTwoRating());
+		
+		evaluation.setCtTwoComments(inDto.getCtTwoComments());
+		
+		evaluation.setCtThreeRating(inDto.getCtThreeRating());
+		
+		evaluation.setCtThreeComments(inDto.getCtThreeComments());
+		
+		evaluation.setCtFourRating(inDto.getCtFourRating());
+		
+		evaluation.setCtFourComments(inDto.getCtFourComments());
+		
+		evaluation.setCtFiveRating(inDto.getCtFiveRating());
+		
+		evaluation.setCtFiveComments(inDto.getCtFiveComments());
+		
+		evaluation.setCtSixRating(inDto.getCtSixRating());
+		
+		evaluation.setCtSixComments(inDto.getCtSixComments());
+		
+		evaluation.setCtSevenRating(inDto.getCtSevenRating());
+		
+		evaluation.setCtSevenComments(inDto.getCtSevenComments());
+		
+		evaluation.setCtEightRating(inDto.getCtEightRating());
+		
+		evaluation.setCtEightComments(inDto.getCtEightComments());
+		
+		evaluation.setManagerFeedback(inDto.getManagerFeedback());
+		
+		evaluation.setCreatedBy(loggedInUser.getIdPk());
+
+		evaluation.setCreatedDate(timeNow);
+
+		evaluation.setDeleteFlg(false);
+		
+		evaluation.setTotal(commonService.calculateTotalRatings(inDto.getCtOneRating(),
+				inDto.getCtTwoRating(),
+				inDto.getCtThreeRating(),		
+				inDto.getCtFourRating(),
+				inDto.getCtFiveRating(),
+				inDto.getCtSixRating(),
+				inDto.getCtSevenRating(),
+				inDto.getCtEightRating()));
+				
+		applicantLogic.saveManagerEvaluationDetails(evaluation);
+		
+		emailService.sendEvaluatedMailManager(user.getEmail());
 		
 		return outDto;
 	}

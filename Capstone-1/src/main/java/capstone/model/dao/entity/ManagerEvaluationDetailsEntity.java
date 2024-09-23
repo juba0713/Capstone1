@@ -71,7 +71,7 @@ public class ManagerEvaluationDetailsEntity {
 	private String ctEightComments;
 	
 	@Column(columnDefinition = "text", nullable = false)
-	private String tbiFeedback;
+	private String managerFeedback;
 	
 	@Column(nullable = false)
 	private int total;

@@ -1,6 +1,5 @@
 package capstone.model.service;
 
-import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -52,14 +51,37 @@ public interface ManagerService {
 	/**
 	 * To esnd a resubmission mail
 	 * @param inDto
-	 * @return
+	 * @return ManagerInOutDto
 	 */
 	public ManagerInOutDto sendResubmissionMail(ManagerInOutDto inDto)  throws MessagingException;
 	
+	/**
+	 *  To get Applicant By Monthly
+	 * @return ManagerInOutDto
+	 * @throws Exception
+	 */
 	public ManagerInOutDto getAppllicantOnTodayMonth() throws Exception;
 	
-	public ManagerInOutDto getApplicantDetailsWithFeedback(ManagerInOutDto inDto);
+	/**
+	 * To get applicant details with feedbacks
+	 * @param inDto
+	 * @return ManagerInOutDto
+	 */
+	public ManagerInOutDto getApplicantDetailsWithFeedback(ManagerInOutDto inDto) throws Exception;
 	
+	/**
+	 * Issue a certificate to the selected user
+	 * @param inDto
+	 * @return ManagerInOutDto
+	 * @throws MessagingException
+	 */
 	public ManagerInOutDto issuedCertificate(ManagerInOutDto inDto) throws MessagingException;
+	
+	/**
+	 * Evaluate the user by manager
+	 * @param inDto
+	 * @return ManagerInOutDto
+	 */
+	public ManagerInOutDto evaluateApplicant(ManagerInOutDto inDto) throws MessagingException;
 	
 }

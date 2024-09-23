@@ -246,6 +246,18 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "  AND a.status IN (5,50)"
 			+ " AND ed.total >= 60 ";
 	
+	public final String GET_APPLICANT_RANKING_ON_TODAY_MONTH = "SELECT a.id_pk, "
+			+ "       p.project_title "
+			+ "FROM m_applicant a "
+			+ "LEFT JOIN t_project p ON p.applicant_id_pk = a.id_pk AND p.delete_flg = false "
+			+ "LEFT JOIN t_evaluated_applicant ea ON ea.applicant_id_pk = a.id_pk AND ea.delete_flg = false "
+			+ "LEFT JOIN t_evaluation_details ed ON ed.evaluated_applicant_id_pk = ea.id_pk AND ed.delete_flg = false "
+			+ "WHERE EXTRACT(MONTH FROM a.created_date) = EXTRACT(MONTH FROM CURRENT_DATE) "
+			+ "  AND EXTRACT(YEAR FROM a.created_date) = EXTRACT(YEAR FROM CURRENT_DATE) "
+			+ "  AND a.status IN (8) "
+			+ " ORDER BY ed.total ASC; "
+			+ "";
+	
 	public final String GET_APPLICANT_DETAILS_WITH_FEEDBACKS = "SELECT  "
 			+ "    a.id_pk, "
 			+ "    a.email, "
@@ -335,21 +347,21 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "AND a.delete_flg = false; "
 			+ "";
 	
-	public final String GET_USER_INFORMATION_FOR_CERTIFICATE = "SELECT\r\n"
+	public final String GET_USER_INFORMATION_FOR_CERTIFICATE = "SELECT "
 			+ "	u.id_pk AS user_id_pk, "
-			+ "	u.first_name,\r\n"
-			+ "	u.last_name,\r\n"
+			+ "	u.first_name, "
+			+ "	u.last_name, "
 			+ "	u.email, "
-			+ "	ed.total\r\n"
-			+ "FROM\r\n"
-			+ "	m_applicant s\r\n"
-			+ "LEFT JOIN\r\n"
-			+ "	m_user_information u ON u.id_pk = s.created_by AND u.delete_flg = false\r\n"
-			+ "LEFT JOIN\r\n"
-			+ "	t_evaluated_applicant ea ON ea.applicant_id_pk = s.id_pk AND ea.delete_flg = false\r\n"
-			+ "LEFT JOIN\r\n"
-			+ "	t_evaluation_details ed ON ed.evaluated_applicant_id_pk = ea.id_pk AND ed.delete_flg = false\r\n"
-			+ "WHERE\r\n"
+			+ "	ed.total "
+			+ "FROM "
+			+ "	m_applicant s "
+			+ "LEFT JOIN "
+			+ "	m_user_information u ON u.id_pk = s.created_by AND u.delete_flg = false "
+			+ "LEFT JOIN "
+			+ "	t_evaluated_applicant ea ON ea.applicant_id_pk = s.id_pk AND ea.delete_flg = false "
+			+ "LEFT JOIN "
+			+ "	t_evaluation_details ed ON ed.evaluated_applicant_id_pk = ea.id_pk AND ed.delete_flg = false "
+			+ "WHERE "
 			+ "	s.id_pk = :applicantIdPk";
 	
 	@Query(value=GET_USER_INFORMATION_FOR_CERTIFICATE, nativeQuery=true)

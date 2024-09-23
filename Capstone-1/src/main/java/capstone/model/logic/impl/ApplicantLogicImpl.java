@@ -11,6 +11,8 @@ import capstone.model.dao.EvaluatedApplicantDao;
 import capstone.model.dao.EvaluationDetailsDao;
 import capstone.model.dao.GroupDao;
 import capstone.model.dao.GroupMemberDao;
+import capstone.model.dao.ManagerEvaluatedApplicantDao;
+import capstone.model.dao.ManagerEvaluationDetailsDao;
 import capstone.model.dao.PrescreenDetailsDao;
 import capstone.model.dao.ProjectDao;
 import capstone.model.dao.RejectedApplicantDao;
@@ -24,6 +26,8 @@ import capstone.model.dao.entity.EvaluationDetailsEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
+import capstone.model.dao.entity.ManagerEvaluatedApplicantEntity;
+import capstone.model.dao.entity.ManagerEvaluationDetailsEntity;
 import capstone.model.dao.entity.PrescreenDetailsEntity;
 import capstone.model.dao.entity.ProjectEntity;
 import capstone.model.dao.entity.RejectedApplicantEntity;
@@ -59,6 +63,12 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	
 	@Autowired
 	private EvaluationDetailsDao evaluationDetailsDao;
+	
+	@Autowired
+	private ManagerEvaluatedApplicantDao mEvaluatedApplicantDao;
+	
+	@Autowired
+	private ManagerEvaluationDetailsDao mEvaluationDetailsDao;
 
 	@Override
 	public int saveApplicantEntity(ApplicantEntity entity) {
@@ -317,6 +327,20 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	public UserCertificateEntity getUserInformationForCeritificate(int applicantIdPk) {
 	
 		return applicantDao.getUserInformationForCertificate(applicantIdPk);
+	}
+
+	@Override
+	public int saveManagerEvaluatedApplicant(ManagerEvaluatedApplicantEntity entity) {
+		
+		mEvaluatedApplicantDao.save(entity);
+		
+		return entity.getIdPk();
+	}
+
+	@Override
+	public void saveManagerEvaluationDetails(ManagerEvaluationDetailsEntity entity) {
+		
+		mEvaluationDetailsDao.save(entity);
 	}
 	
 }

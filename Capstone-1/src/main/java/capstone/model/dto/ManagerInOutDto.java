@@ -35,4 +35,41 @@ public class ManagerInOutDto {
 	List<ApplicantMonthlyObj> applicantMonthlyObj;
 	
 	public String result;
+	
+	/*
+	 * Evaluation DTO
+	 */
+	private int ctOneRating;
+
+	private String ctOneComments;
+
+	private int ctTwoRating;
+
+	private String ctTwoComments;
+
+	private int ctThreeRating;
+
+	private String ctThreeComments;
+	
+	private int ctFourRating;
+	
+	private String ctFourComments;
+	
+	private int ctFiveRating;
+	
+	private String ctFiveComments;
+	
+	private int ctSixRating;
+	
+	private String ctSixComments;
+	
+	private int ctSevenRating;
+	
+	private String ctSevenComments;
+
+	private int ctEightRating;
+
+	private String ctEightComments;
+
+	private String managerFeedback;
 }
