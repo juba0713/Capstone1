@@ -228,16 +228,12 @@ public class ManagerController {
 		// 4 - Pending for evaluation
 		inDto.setStatus(4);
 		
-		List<Integer> decryptedId = webDto.getChosenApplicant().stream()
-			    .map(id -> {
-			        try {
-			            return Integer.valueOf(commonService.decrypt(id));
-			        } catch (Exception e) {
-			            throw new RuntimeException(e);
-			        }
-			    })
-			    .collect(Collectors.toList());
-
+		List<Integer> decryptedId = new ArrayList<>();
+		
+		for(String id : webDto.getChosenApplicant()) {
+			decryptedId.add(Integer.valueOf(commonService.decrypt(id)));
+		}
+		
 		inDto.setChosenApplicant(decryptedId);
 
 		inDto.setTransferring(true);
