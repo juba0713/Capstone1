@@ -2484,7 +2484,15 @@
         </div>
       </div>
     </div>
+    <script>
+      const content = document.getElementById("content");
+      const button = document.getElementById("slideButton");
 
+      button.addEventListener("click", () => {
+        content.classList.toggle("visible");
+        button.classList.toggle("moved");
+      });
+    </script>
     <script>
       // Set this to true for development mode, false for production
       const DEVELOPMENT_MODE = true;
