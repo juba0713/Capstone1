@@ -87,13 +87,11 @@ public class OfficerServiceImpl implements OfficerService{
 	
 
 	@Override
-	public OfficerInOutDto rejectApplicant(OfficerInOutDto inDto) throws MessagingException {
+	public void rejectApplicant(OfficerInOutDto inDto) throws MessagingException {
 		
 		UserInformationEntity loggedInUser = loggedInUserService.getUserInformation();
 		       
         String token = "R"+UUID.randomUUID().toString().replace("-", "");
-
-		OfficerInOutDto outDto = new OfficerInOutDto();
 		
 		Timestamp timeNow = new Timestamp(System.currentTimeMillis());
 		
@@ -109,8 +107,6 @@ public class OfficerServiceImpl implements OfficerService{
 		
 		rejectedApplicantEntity.setApplicantIdPk(inDto.getApplicantIdPk());
 		
-		rejectedApplicantEntity.setFeedback(inDto.getFeedback());
-		
 		rejectedApplicantEntity.setResubmitFlg(inDto.getResubmitFlg());
 		
 		rejectedApplicantEntity.setCreatedDate(timeNow);
@@ -121,25 +117,74 @@ public class OfficerServiceImpl implements OfficerService{
 		
 		rejectedApplicantEntity.setCreatedBy(loggedInUser.getIdPk());
 		
-		applicantLogic.saveRejectedApplicantEntity(rejectedApplicantEntity);
+		int idPk = applicantLogic.saveRejectedApplicantEntity(rejectedApplicantEntity);
+		
+		PrescreenDetailsEntity prescreen = new PrescreenDetailsEntity();
+		
+		prescreen.setAcceptedApplicantIdPk(0);
+		
+		prescreen.setRejectedApplicantIdPk(idPk);
+		
+		prescreen.setCtOneFlg(inDto.getCtOneFlg());
+		
+		prescreen.setCtOneComments(inDto.getCtOneComments());
+		
+		prescreen.setCtTwoFlg(inDto.getCtTwoFlg());
+		
+		prescreen.setCtTwoComments(inDto.getCtTwoComments());
+		
+		prescreen.setCtThreeFlg(inDto.getCtThreeFlg());
+		
+		prescreen.setCtThreeComments(inDto.getCtThreeComments());
+		
+		prescreen.setCtFourFlg(inDto.getCtFourFlg());
+		
+		prescreen.setCtFourComments(inDto.getCtFourComments());
+		
+		prescreen.setCtFiveFlg(inDto.getCtFiveFlg());
+		
+		prescreen.setCtFiveComments(inDto.getCtFiveComments());
+		
+		prescreen.setCtSixFlg(inDto.getCtSixFlg());
+		
+		prescreen.setCtSixComments(inDto.getCtSixComments());
+		
+		prescreen.setCtSevenFlg(inDto.getCtSevenFlg());
+		
+		prescreen.setCtSevenComments(inDto.getCtSevenComments());
+		
+		prescreen.setCtEightFlg(inDto.getCtEightFlg());
+		
+		prescreen.setCtEightComments(inDto.getCtEightComments());
+		
+		prescreen.setCtNineFlg(inDto.getCtNineFlg());
+		
+		prescreen.setCtNineComments(inDto.getCtNineComments());
+		
+		prescreen.setRecommendation(inDto.getRecommendation());
+		
+		prescreen.setCreatedBy(loggedInUser.getIdPk());
+		
+		prescreen.setCreatedDate(timeNow);
+		
+		prescreen.setDeleteFlg(false);
+		
+		applicantLogic.savePrescreenDetailsEntity(prescreen);
 		
 		emailService.sendRejectionMail(inDto.getFeedback(), 
 															inDto.getResubmitFlg(), 
 															userLogic.getUserByIdPk(applicantEntity.getCreatedBy()).getEmail(),
 															token);
-		
-		return outDto;
+
 	}
 
 	@Override
-	public OfficerInOutDto acceptApplicant(OfficerInOutDto inDto) throws MessagingException {
+	public void acceptApplicant(OfficerInOutDto inDto) throws MessagingException {
 		
 		UserInformationEntity loggedInUser = loggedInUserService.getUserInformation();
 		
 		Timestamp timeNow = new Timestamp(System.currentTimeMillis());
-		
-		OfficerInOutDto outDto = new OfficerInOutDto();
-		
+			
 		ApplicantEntity applicantEntity = applicantLogic.getApplicantByIdPk(inDto.getApplicantIdPk());
 		
 		UserInfoAccountEntity account = userLogic.getUserAccountByUserIdPk(applicantEntity.getCreatedBy());
@@ -216,7 +261,6 @@ public class OfficerServiceImpl implements OfficerService{
 		
 		emailService.sendAcceptedMail(userLogic.getUserByIdPk(applicantEntity.getCreatedBy()).getEmail());
 		
-		return outDto;
 	}
 
 

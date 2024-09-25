@@ -75,7 +75,7 @@ public interface ApplicantLogic {
 	 * 
 	 * @param entity
 	 */
-	public void saveRejectedApplicantEntity(RejectedApplicantEntity entity);
+	public int saveRejectedApplicantEntity(RejectedApplicantEntity entity);
 
 	/**
 	 * To get the details of the applicant

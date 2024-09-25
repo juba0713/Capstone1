@@ -18,7 +18,6 @@ import capstone.controller.webdto.OfficerWebDto;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.service.CommonService;
 import capstone.model.service.OfficerService;
-import jakarta.mail.MessagingException;
 
 @Controller
 @RequestMapping("/officer")
@@ -42,9 +41,7 @@ public class OfficerController {
 
 	@PostMapping(value = "/action", params = "accept") 
 	public String acceptApplicant(@ModelAttribute OfficerWebDto webDto) throws Exception {
-		
-		System.out.println(webDto.getEncryptedApplicantIdPk());
-		
+				
 		OfficerInOutDto inDto = new OfficerInOutDto();
 
 		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(webDto.getEncryptedApplicantIdPk())));
@@ -87,24 +84,59 @@ public class OfficerController {
 		
 		inDto.setRecommendation(webDto.getRecommendation());
 		
-		OfficerInOutDto outDto = officerService.acceptApplicant(inDto);
+		 officerService.acceptApplicant(inDto);
 				
-
 		return "redirect:/officer/home";
 	}
 
 	@PostMapping(value = "/action", params = "reject")
-	public String rejectApplicant(@RequestParam("id") String id, @ModelAttribute OfficerWebDto webDto) throws MessagingException {
+	public String rejectApplicant(@ModelAttribute OfficerWebDto webDto) throws NumberFormatException, Exception {
 
 		OfficerInOutDto inDto = new OfficerInOutDto();
 
-//		inDto.setApplicantIdPk(webDto.getApplicantIdPk());
-
-		inDto.setFeedback(webDto.getFeedback());
-
+		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(webDto.getEncryptedApplicantIdPk())));
+		
 		inDto.setResubmitFlg(webDto.getResubmitFlg());
-
-		OfficerInOutDto outDto = officerService.rejectApplicant(inDto);
+		
+		inDto.setCtOneFlg(webDto.getCtOneFlg());
+		
+		inDto.setCtOneComments(webDto.getCtOneComments());
+		
+		inDto.setCtTwoFlg(webDto.getCtTwoFlg());
+		
+		inDto.setCtTwoComments(webDto.getCtTwoComments());
+		
+		inDto.setCtThreeFlg(webDto.getCtThreeFlg());
+		
+		inDto.setCtThreeComments(webDto.getCtThreeComments());
+		
+		inDto.setCtFourFlg(webDto.getCtFourFlg());
+		
+		inDto.setCtFourComments(webDto.getCtFourComments());
+		
+		inDto.setCtFiveFlg(webDto.getCtFiveFlg());
+		
+		inDto.setCtFiveComments(webDto.getCtFiveComments());
+		
+		inDto.setCtSixFlg(webDto.getCtSixFlg());
+		
+		inDto.setCtSixComments(webDto.getCtSixComments());
+		
+		inDto.setCtSevenFlg(webDto.getCtSevenFlg());
+		
+		inDto.setCtSevenComments(webDto.getCtSevenComments());
+		
+		inDto.setCtEightFlg(webDto.getCtEightFlg());
+		
+		inDto.setCtEightComments(webDto.getCtEightComments());
+		
+		inDto.setCtNineFlg(webDto.getCtNineFlg());
+		
+		inDto.setCtNineComments(webDto.getCtNineComments());
+		
+		inDto.setRecommendation(webDto.getRecommendation());
+		
+		 officerService.rejectApplicant(inDto);
 
 		return "redirect:/officer/home";
 	}
