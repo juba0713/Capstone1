@@ -54,7 +54,7 @@
       }
     </style>
   </head>
-  <body class="font-secondary">
+  <body class="font-secondary" th:object="${managerWebDto}">
     <!-- right side -->
     <div class="w-[55%] bg-white p-10">
       <div class="flex justify-between">
@@ -93,6 +93,7 @@
           <input
             placeholder="Enter Project title"
             name="projectTitle"
+            th:value="*{applicantDetailsObj.projectTitle}"
             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
           />
         </div>
@@ -113,6 +114,7 @@
               type="text"
               placeholder="Type something here..."
               name="projectDescription"
+              th:text="*{applicantDetailsObj.projectDescription}"
               class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
             ></textarea>
             <small class="block mt-2 text-gray-500">
@@ -142,6 +144,7 @@
               >
                 <input
                   name="teams[0][0]"
+                  th:value="*{applicantDetailsObj.teams[0][0]}"
                   type="text"
                   placeholder="Last Name, First Name"
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -152,6 +155,7 @@
               >
                 <input
                   name="teams[0][1]"
+                  th:value="*{applicantDetailsObj.teams[0][1]}"
                   type="text"
                   placeholder="Input position/role"
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -162,6 +166,7 @@
               >
                 <input
                   name="teams[1][0]"
+                  th:value="*{applicantDetailsObj.teams[1][0]}"
                   type="text"
                   placeholder="Last Name, First Name"
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -172,6 +177,7 @@
               >
                 <input
                   name="teams[1][1]"
+                  th:value="*{applicantDetailsObj.teams[1][1]}"
                   type="text"
                   placeholder="Input position/role"
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -182,6 +188,7 @@
               >
                 <input
                   name="teams[2][0]"
+                  th:value="*{applicantDetailsObj.teams[2][0]}"
                   type="text"
                   placeholder="Last Name, First Name"
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -192,6 +199,7 @@
               >
                 <input
                   name="teams[2][1]"
+                  th:value="*{applicantDetailsObj.teams[2][1]}"
                   type="text"
                   placeholder="Input position/role"
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -202,6 +210,7 @@
               >
                 <input
                   name="teams[3][0]"
+                  th:value="*{applicantDetailsObj.teams[3][0]}"
                   type="text"
                   placeholder="Last Name, First Name"
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -212,6 +221,7 @@
               >
                 <input
                   name="teams[3][1]"
+                  th:value="*{applicantDetailsObj.teams[3][1]}"
                   type="text"
                   placeholder="Input position/role"
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -222,6 +232,7 @@
               >
                 <input
                   name="teams[4][0]"
+                  th:value="*{applicantDetailsObj.teams[4][0]}"
                   type="text"
                   placeholder="Last Name, First Name"
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -232,6 +243,7 @@
               >
                 <input
                   name="teams[4][1]"
+                  th:value="*{applicantDetailsObj.teams[4][1]}"
                   type="text"
                   placeholder="Input position/role"
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
@@ -252,6 +264,7 @@
             <textarea
               placeholder="Type something here..."
               name="problemStatement"
+              th:text="*{applicantDetailsObj.problemStatement}"
               class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
             ></textarea>
             <small class="block text-gray-500">
@@ -265,6 +278,7 @@
               <textarea
                 placeholder="Type something here..."
                 name="targetMarket"
+                th:text="*{applicantDetailsObj.targetMarket}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
               ></textarea>
               <small class="block text-gray-500">
@@ -282,6 +296,7 @@
               <textarea
                 placeholder="Type something here..."
                 name="solutionDescription"
+                th:text="*{applicantDetailsObj.solutionDescription}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20"
               ></textarea>
               <small class="block text-gray-500">
@@ -322,6 +337,7 @@
                     <input
                       type="text"
                       name="historicalTimeline[0][0]"
+                      th:value="*{applicantDetailsObj.historicalTimeline[0].length != 0 ? applicantDetailsObj.historicalTimeline[0][0] : 'NA'}"
                       placeholder="mm/yyyy"
                       class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
                     />
@@ -330,6 +346,7 @@
                     <textarea
                       type="text"
                       name="historicalTimeline[0][1]"
+                       th:text="*{applicantDetailsObj.historicalTimeline[0].length != 0 ? applicantDetailsObj.historicalTimeline[0][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
                       class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                     ></textarea>
@@ -340,6 +357,7 @@
                     <input
                       type="text"
                       name="historicalTimeline[1][0]"
+   					 th:value="*{applicantDetailsObj.historicalTimeline[1].length != 0 ? applicantDetailsObj.historicalTimeline[1][0] : 'NA'}"
                       placeholder="mm/yyyy"
                       class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
                     />
@@ -348,6 +366,7 @@
                     <textarea
                       type="text"
                       name="historicalTimeline[1][1]"
+  					  th:text="*{applicantDetailsObj.historicalTimeline[1].length != 0 ? applicantDetailsObj.historicalTimeline[1][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
                       class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                     ></textarea>
@@ -2278,5 +2297,8 @@
         x[n].className += " active";
       }
     </script>
+    <script th:inline="javascript">
+		console.log(/*[[${managerWebDto}]]*/'');
+	</script>
   </body>
 </html>
