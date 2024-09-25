@@ -1,6 +1,8 @@
 package capstone.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,6 @@ import capstone.model.service.AdminService;
 import capstone.model.service.CommonService;
 import capstone.model.service.EmailService;
 import capstone.model.service.ManagerService;
-import jakarta.mail.MessagingException;
 
 @Controller
 @RequestMapping("/manager")
@@ -76,6 +77,18 @@ public class ManagerController {
 		if(id.isEmpty()) {
 			return "redirect:/manager/home";
 		}
+		
+		ManagerInOutDto inDto = new ManagerInOutDto();
+		
+		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(id)));
+		
+		ManagerInOutDto outDto = managerService.getApplicantDetailsWithFeedback(inDto);
+		
+		webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
+		
+		webDto.setApplicantOffFeedbackObj(outDto.getApplicantOffFeedbackObj());
+		
+		webDto.setApplicantTbiFeedbackObj(outDto.getApplicantTbiFeedbackObj());
 
 		return "manager/applicationDetails";
 	}
@@ -201,7 +214,7 @@ public class ManagerController {
 
 	@PostMapping("/proceed")
 	public String proceedApplicationToTBI(@ModelAttribute ManagerWebDto webDto, RedirectAttributes ra)
-			throws MessagingException {
+			throws NumberFormatException, Exception {
 
 		ManagerInOutDto inDto = new ManagerInOutDto();
 
@@ -214,11 +227,21 @@ public class ManagerController {
 
 		// 4 - Pending for evaluation
 		inDto.setStatus(4);
+		
+		List<Integer> decryptedId = webDto.getChosenApplicant().stream()
+			    .map(id -> {
+			        try {
+			            return Integer.valueOf(commonService.decrypt(id));
+			        } catch (Exception e) {
+			            throw new RuntimeException(e);
+			        }
+			    })
+			    .collect(Collectors.toList());
 
-		inDto.setChosenApplicant(webDto.getChosenApplicant());
+		inDto.setChosenApplicant(decryptedId);
 
 		inDto.setTransferring(true);
-
+				
 		managerService.updateApplicantStatus(inDto);
 
 		ra.addFlashAttribute("succMsg", "The application/s has been sent to the TbiBoard!");
