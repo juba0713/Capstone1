@@ -186,13 +186,13 @@ public class ManagerController {
 	}
 
 	@PostMapping("/account/activate")
-	public String activateAccount(@ModelAttribute ManagerWebDto webDto) throws MessagingException {
+	public String activateAccount(@ModelAttribute ManagerWebDto webDto) throws NumberFormatException, Exception {
 
 		ManagerInOutDto inDto = new ManagerInOutDto();
 
 		inDto.setStatus(3);
 
-		inDto.setApplicantIdPk(webDto.getApplicantIdPk());
+		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(webDto.getEncryptedApplicantIdPk())));
 
 		managerService.activateApplicantAccount(inDto);
 
