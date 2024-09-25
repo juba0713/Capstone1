@@ -928,7 +928,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 			
 			applicantIdPk = rejectedApplicant.getApplicantIdPk();
 			
-			outDto.setFeedback(rejectedApplicant.getFeedback());
 			
 		}else if(inDto.getToken().charAt(0)=='F') {
 			

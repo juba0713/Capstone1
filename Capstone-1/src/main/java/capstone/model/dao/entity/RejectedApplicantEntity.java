@@ -20,8 +20,6 @@ public class RejectedApplicantEntity {
 	
 	private int applicantIdPk;
 	
-	private String feedback;
-	
 	private Boolean resubmitFlg;
 	
 	private Timestamp createdDate;

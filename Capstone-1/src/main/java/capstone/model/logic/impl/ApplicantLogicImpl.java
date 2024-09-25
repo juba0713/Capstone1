@@ -106,9 +106,11 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	}
 
 	@Override
-	public void saveRejectedApplicantEntity(RejectedApplicantEntity entity) {
+	public int saveRejectedApplicantEntity(RejectedApplicantEntity entity) {
 	
 		rejectedApplicantDao.save(entity);
+		
+		return entity.getIdPk();
 	}
 
 
