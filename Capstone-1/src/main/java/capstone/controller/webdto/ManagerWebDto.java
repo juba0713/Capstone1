@@ -21,7 +21,7 @@ public class ManagerWebDto {
 	
 	private String encryptedApplicantIdPk;
 
-	private List<Integer> chosenApplicant;
+	private List<String> chosenApplicant;
 
 	private ApplicantDetailsObj applicantDetailsObj;
 	
