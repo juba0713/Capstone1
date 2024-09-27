@@ -356,5 +356,11 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 		
 		return applicantDao.getApplicantRankingByYearMonth(month, year);
 	}
+
+	@Override
+	public PrescreenDetailsEntity getRejectedPrescreenDetailsByToken(String token) {
+		
+		return prescreenDetailsDao.getRejectedPrescreenDetailsByToken(token);
+	}
 	
 }

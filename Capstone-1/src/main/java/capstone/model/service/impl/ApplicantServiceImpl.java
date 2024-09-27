@@ -25,6 +25,7 @@ import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.EvaluatedApplicantEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
+import capstone.model.dao.entity.PrescreenDetailsEntity;
 import capstone.model.dao.entity.ProjectEntity;
 import capstone.model.dao.entity.RejectedApplicantEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
@@ -34,6 +35,7 @@ import capstone.model.dto.OfficerInOutDto;
 import capstone.model.logic.ApplicantLogic;
 import capstone.model.logic.UserLogic;
 import capstone.model.object.ApplicantDetailsObj;
+import capstone.model.object.ApplicantOfficerFeedbackObj;
 import capstone.model.object.ErrorObj;
 import capstone.model.service.ApplicantService;
 import capstone.model.service.CommonService;
@@ -917,23 +919,72 @@ public class ApplicantServiceImpl implements ApplicantService {
 	}
 
 	@Override
-	public ApplicantInOutDto getApplicantDetailsByToken(ApplicantInOutDto inDto) {
+	public ApplicantInOutDto getApplicantDetailsWithFeedbackByToken(ApplicantInOutDto inDto) {
 		
 		ApplicantInOutDto outDto = new ApplicantInOutDto();
+		
+		outDto.setOnlyOfficerFeedback(false);
+		
+		outDto.setBothFeedback(false);
 		
 		int applicantIdPk = 0;
 		
 		if(inDto.getToken().charAt(0)=='R') {
-			RejectedApplicantEntity rejectedApplicant = applicantLogic.getRejectedApplicantByToken(inDto.getToken());
+			//RejectedApplicantEntity rejectedApplicant = applicantLogic.getRejectedApplicantByToken(inDto.getToken());
 			
-			applicantIdPk = rejectedApplicant.getApplicantIdPk();
+			PrescreenDetailsEntity rejectedPrescreen = applicantLogic.getRejectedPrescreenDetailsByToken(inDto.getToken());
 			
+			applicantIdPk = rejectedPrescreen.getRejectedApplicantIdPk();
+			
+			ApplicantOfficerFeedbackObj appOffFeedbackObj = new ApplicantOfficerFeedbackObj();
+			
+			appOffFeedbackObj.setCtOneFlg(rejectedPrescreen.getCtOneFlg());
+			
+			appOffFeedbackObj.setCtOneComments(rejectedPrescreen.getCtOneComments());
+			
+			appOffFeedbackObj.setCtTwoFlg(rejectedPrescreen.getCtTwoFlg());
+			
+			appOffFeedbackObj.setCtTwoComments(rejectedPrescreen.getCtTwoComments());
+			
+			appOffFeedbackObj.setCtThreeFlg(rejectedPrescreen.getCtThreeFlg());
+			
+			appOffFeedbackObj.setCtThreeComments(rejectedPrescreen.getCtThreeComments());
+			
+			appOffFeedbackObj.setCtFourFlg(rejectedPrescreen.getCtFourFlg());
+			
+			appOffFeedbackObj.setCtFourComments(rejectedPrescreen.getCtFourComments());
+			
+			appOffFeedbackObj.setCtFiveFlg(rejectedPrescreen.getCtFiveFlg());
+			
+			appOffFeedbackObj.setCtFiveComments(rejectedPrescreen.getCtFiveComments());
+			
+			appOffFeedbackObj.setCtSixFlg(rejectedPrescreen.getCtSixFlg());
+			
+			appOffFeedbackObj.setCtSixComments(rejectedPrescreen.getCtSixComments());
+			
+			appOffFeedbackObj.setCtSevenFlg(rejectedPrescreen.getCtSevenFlg());
+			
+			appOffFeedbackObj.setCtSevenComments(rejectedPrescreen.getCtSevenComments());
+			
+			appOffFeedbackObj.setCtEightFlg(rejectedPrescreen.getCtEightFlg());
+			
+			appOffFeedbackObj.setCtEightComments(rejectedPrescreen.getCtEightComments());
+			
+			appOffFeedbackObj.setCtNineFlg(rejectedPrescreen.getCtNineFlg());
+			
+			appOffFeedbackObj.setCtNineComments(rejectedPrescreen.getCtNineComments());
+			
+			appOffFeedbackObj.setRecommendation(rejectedPrescreen.getRecommendation());
+			
+			outDto.setAppOffFeedbackObj(appOffFeedbackObj);
 			
 		}else if(inDto.getToken().charAt(0)=='F') {
 			
 			EvaluatedApplicantEntity evaluatedApplicant = applicantLogic.getEvaluatedApplicantByToken(inDto.getToken());
 			
 			applicantIdPk = evaluatedApplicant.getApplicantIdPk();
+			
+			outDto.setBothFeedback(true);
 			
 			outDto.setFeedback("");
 		}
@@ -959,9 +1010,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 				List<String[]> teams = new ArrayList<>();
 
-				teams.add(app.getTeams()[0].split("\\|"));
-				teams.add(app.getTeams()[1].split("\\|"));
-				teams.add(app.getTeams()[2].split("\\|"));
+				for(int i = 0; i < app.getTeams().length; i++) {
+					teams.add(app.getTeams()[i].split("\\|"));
+				}
 
 				outDto.setTeams(teams);
 
@@ -973,11 +1024,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 				List<String[]> historicallTimelines = new ArrayList<>();
 
-				historicallTimelines.add(app.getHistoricalTimeline()[0].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[1].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[2].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[3].split("\\|"));
-				historicallTimelines.add(app.getHistoricalTimeline()[4].split("\\|"));
+				for(int i = 0; i < app.getHistoricalTimeline().length; i++) {
+					historicallTimelines.add(app.getHistoricalTimeline()[i].split("\\|"));
+				}
 
 				outDto.setHistoricalTimeline(historicallTimelines);
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import capstone.model.object.ApplicantDetailsObj;
+import capstone.model.object.ApplicantOfficerFeedbackObj;
 import capstone.model.object.ErrorObj;
 import lombok.Data;
 
@@ -12,132 +13,132 @@ import lombok.Data;
 public class ApplicantInOutDto {
 	
 	//Applicant Id Pk
-	public int applicantIdPk;
+	private int applicantIdPk;
 	
 	//Result
-	public String result;
+	private String result;
 	
 	//Error
-	public ErrorObj error;
+	private ErrorObj error;
 	
 	//Email
-	public String email;
+	private String email;
 	
 	//Agree 
-	public Boolean agreeFlg;
+	private Boolean agreeFlg;
 	
 	//Title
-	public String projectTitle;
+	private String projectTitle;
 	
 	//Description
-	public String projectDescription;
+	private String projectDescription;
 	
 	//Teams
-	public List<String[]> teams;
+	private List<String[]> teams;
 	
 	//Problem Statement
-	public String problemStatement;
+	private String problemStatement;
 	
 	//Target Market
-	public String targetMarket;
+	private String targetMarket;
 	
 	//Solution Description
-	public String solutionDescription;
+	private String solutionDescription;
 	
 	//Historical Timeline
-	public List<String[]> historicalTimeline;
+	private List<String[]> historicalTimeline;
 	
 	//Product Service Offering
-	public List<String> productServiceOffering;
+	private List<String> productServiceOffering;
 	
 	//Pricing Strategy
-	public List<String> pricingStrategy;
+	private List<String> pricingStrategy;
 	
 	//Intellectual Property Status
-	public String intPropertyStatus;
+	private String intPropertyStatus;
 	
 	//Objectives
-	public String objectives;
+	private String objectives;
 	
 	//Scope of the proposal
-	public String scopeProposal;
+	private String scopeProposal;
 	
 	//Methodlogy
-	public String methodology;
+	private String methodology;
 	
 	//Curriculum Vitae
-	public MultipartFile vitaeFile;
-	public String vitaeFileName;
+	private MultipartFile vitaeFile;
+	private String vitaeFileName;
 	
 	//Support link
-	public String supportLink;
+	private String supportLink;
 	
 	//Group Name
-	public String groupName;
+	private String groupName;
 	
 	//Group Leader
-	public String groupLeader;
+	private String groupLeader;
 	
 	//Leader Mobile Numebr
-	public String leaderNumber;
+	private String leaderNumber;
 	
 	//Leader email address
-	public String leaderAddress;
+	private String leaderAddress;
 	
 	//Members;
-	public List<String> members;
+	private List<String> members;
 	
 	//University
-	public String university;
+	private String university;
 	
 	//Technology Answer
-	public int technologyAns;
+	private int technologyAns;
 	
 	//Product Development
-	public int productDevelopmentAns;
+	private int productDevelopmentAns;
 	
 	//Competitive Landscape
-	public int CompetitiveLandscapeAns;
+	private int CompetitiveLandscapeAns;
 	
 	//Product Development/design
-	public int productDesignAns;
+	private int productDesignAns;
 	
 	//Team Answer
-	public int teamAns;
+	private int teamAns;
 	
 	//Go-To-Market
-	public int goToMarketAns;
+	private int goToMarketAns;
 	
 	//Manufacturing 
-	public int manufacturingAns;
+	private int manufacturingAns;
 	
 	//Eligibility Agreement
-	public Boolean eligibilityAgreeFlg;
+	private Boolean eligibilityAgreeFlg;
 	
 	//Commitment One
-	public Boolean commitmentOneFlg;
+	private Boolean commitmentOneFlg;
 	
 	//Commitment Two
-	public Boolean commitmentTwoFlg;
+	private Boolean commitmentTwoFlg;
 	
 	//Commitment Three
-	public Boolean commitmentThreeFlg;
+	private Boolean commitmentThreeFlg;
 	
 	//Commitment Four
-	public Boolean commitmentFourFlg;
+	private Boolean commitmentFourFlg;
 	
 	/*
 	 * Change Password
 	 */
 	
 	//Current Password
-	public String currentPassword;
+	private String currentPassword;
 	
 	//New Password
-	public String newPassword;
+	private String newPassword;
 	
 	//Confirm Password
-	public String confirmPassword;
+	private String confirmPassword;
 	
 	/*
 	 * Details
@@ -148,17 +149,23 @@ public class ApplicantInOutDto {
 	/*
 	 * Resubmission
 	 */
-	public String token;
+	private String token;
 	
-	public String feedback;
+	private String feedback;
 	
-	public int status;
+	private int status;
 	
-	public int score;
+	private int score;
+	
+	private Boolean onlyOfficerFeedback;
+	
+	private Boolean bothFeedback;
+	
+	private ApplicantOfficerFeedbackObj appOffFeedbackObj;
 	
 	
 	/*
 	 * Reapply
 	 */
-	public String reApplyToken;
+	private String reApplyToken;
 }

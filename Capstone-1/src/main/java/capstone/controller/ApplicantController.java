@@ -242,7 +242,7 @@ public class ApplicantController {
 
 		inDto.setToken(token);
 
-		ApplicantInOutDto outDto = applicantService.getApplicantDetailsByToken(inDto);
+		ApplicantInOutDto outDto = applicantService.getApplicantDetailsWithFeedbackByToken(inDto);
 
 		webDto.setEmail(outDto.getEmail());
 
@@ -314,7 +314,11 @@ public class ApplicantController {
 
 		webDto.setCommitmentFourFlg(outDto.getCommitmentFourFlg());
 
-		webDto.setFeedback(outDto.getFeedback());
+		webDto.setOnlyOfficer(outDto.getOnlyOfficerFeedback());
+		
+		webDto.setBothFeedback(outDto.getBothFeedback());
+		
+		webDto.setAppOffFeedbackObj(outDto.getAppOffFeedbackObj());
 
 		model.addAttribute("applicantWebDto", webDto);
 

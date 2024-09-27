@@ -50,7 +50,7 @@ public interface ApplicantService {
 	 * @param inDto
 	 * @return ApplicantInOutDto
 	 */
-	public ApplicantInOutDto getApplicantDetailsByToken(ApplicantInOutDto inDto); 
+	public ApplicantInOutDto getApplicantDetailsWithFeedbackByToken(ApplicantInOutDto inDto); 
 	
 	/**
 	 * To get the user who will reapply

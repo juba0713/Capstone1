@@ -286,4 +286,6 @@ public interface ApplicantLogic {
 	public int saveManagerEvaluatedApplicant(ManagerEvaluatedApplicantEntity entity);
 	
 	public void saveManagerEvaluationDetails(ManagerEvaluationDetailsEntity entity);
+	
+	public PrescreenDetailsEntity getRejectedPrescreenDetailsByToken(String token);
 }

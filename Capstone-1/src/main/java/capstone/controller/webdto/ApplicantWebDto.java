@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import capstone.model.dao.entity.PrescreenDetailsEntity;
 import capstone.model.object.ApplicantDetailsObj;
+import capstone.model.object.ApplicantOfficerFeedbackObj;
 import capstone.model.object.ErrorObj;
 import lombok.Data;
 
@@ -12,118 +14,124 @@ import lombok.Data;
 public class ApplicantWebDto {
 	
 	//Email
-	public String email;
+	private String email;
 	
 	//Agree 
-	public Boolean agreeFlg;
+	private Boolean agreeFlg;
 	
 	//Title
-	public String projectTitle;
+	private String projectTitle;
 	
 	//Description
-	public String projectDescription;
+	private String projectDescription;
 	
 	//Teams
-	public List<String[]> teams = List.of(new String[] {"",""}, new String[] {"",""}, new String[] {"",""}, new String[] {"",""}, new String[] {"",""});
+	private List<String[]> teams = List.of(new String[] {"",""}, new String[] {"",""}, new String[] {"",""}, new String[] {"",""}, new String[] {"",""});
 	
 	//Problem Statement
-	public String problemStatement;
+	private String problemStatement;
 	
 	//Target Market
-	public String targetMarket;
+	private String targetMarket;
 	
 	//Solution Description
-	public String solutionDescription;
+	private String solutionDescription;
 	
 	//Historical Timeline
-	public List<String[]> historicalTimeline = List.of(new String[] {"",""}, new String[] {"",""}, new String[] {"",""}, new String[] {"",""}, new String[] {"",""});
+	private List<String[]> historicalTimeline = List.of(new String[] {"",""}, new String[] {"",""}, new String[] {"",""}, new String[] {"",""}, new String[] {"",""});
 	
 	//Product Service Offering
-	public List<String> productServiceOffering = new ArrayList<>(Arrays.asList("", "", "", "")); 
+	private List<String> productServiceOffering = new ArrayList<>(Arrays.asList("", "", "", "")); 
 	
 	//Pricing Strategy
-	public List<String> pricingStrategy = new ArrayList<>(Arrays.asList("", "", "", "")); 
+	private List<String> pricingStrategy = new ArrayList<>(Arrays.asList("", "", "", "")); 
 	
 	//Intellectual Property Status
-	public String intPropertyStatus;
+	private String intPropertyStatus;
 	
 	//Objectives
-	public String objectives;
+	private String objectives;
 	
 	//Scope of the proposal
-	public String scopeProposal;
+	private String scopeProposal;
 	
 	//Methodlogy
-	public String methodology;
+	private String methodology;
 	
 //	//Curriculum Vitae
-	public String vitaeFileName;
+	private String vitaeFileName;
 	
 	//Support link
-	public String supportLink;
+	private String supportLink;
 	
 	//Group Name
-	public String groupName;
+	private String groupName;
 	
 	//Group Leader
-	public String groupLeader;
+	private String groupLeader;
 	
 	//Leader Mobile Numebr
-	public String leaderNumber;
+	private String leaderNumber;
 	
 	//Leader email address
-	public String leaderAddress;
+	private String leaderAddress;
 	
 	//Members;
-	public List<String> members = new ArrayList<>(Arrays.asList("", "", "", "", ""));
+	private List<String> members = new ArrayList<>(Arrays.asList("", "", "", "", ""));
 	
 	//University
-	public String university;
+	private String university;
 	
 	//Technology Answer
-	public int technologyAns;
+	private int technologyAns;
 	
 	//Product Development
-	public int productDevelopmentAns;
+	private int productDevelopmentAns;
 	
 	//Competitive Landscape
-	public int CompetitiveLandscapeAns;
+	private int CompetitiveLandscapeAns;
 	
 	//Product Development/design
-	public int productDesignAns;
+	private int productDesignAns;
 	
 	//Team Answer
-	public int teamAns;
+	private int teamAns;
 	
 	//Go-To-Market
-	public int goToMarketAns;
+	private int goToMarketAns;
 	
 	//Manufacturing 
-	public int manufacturingAns;
+	private int manufacturingAns;
 	
 	//Eligibility Agreement
-	public Boolean eligibilityAgreeFlg;
+	private Boolean eligibilityAgreeFlg;
 	
 	//Commitment One
-	public Boolean commitmentOneFlg;
+	private Boolean commitmentOneFlg;
 	
 	//Commitment Two
-	public Boolean commitmentTwoFlg;
+	private Boolean commitmentTwoFlg;
 	
 	//Commitment Three
-	public Boolean commitmentThreeFlg;
+	private Boolean commitmentThreeFlg;
 	
 	//Commitment Four
-	public Boolean commitmentFourFlg;
+	private Boolean commitmentFourFlg;
 	
 	//Feedback
-	public String feedback;
+	private String feedback;
 	
 	//Token
-	public String token;
+	private String token;
 	
 	//Re apply token
-	public String reApplyToken;
+	private String reApplyToken;
+	
+	private Boolean onlyOfficer;
+	
+	private Boolean bothFeedback;
+	
+	private ApplicantOfficerFeedbackObj appOffFeedbackObj;
 	
 	
 	/*
@@ -131,16 +139,16 @@ public class ApplicantWebDto {
 	 */
 	
 	//Current Password
-	public String currentPassword;
+	private String currentPassword;
 	
 	//New Password
-	public String newPassword;
+	private String newPassword;
 	
 	//Confirm Password
-	public String confirmPassword;
+	private String confirmPassword;
 	
-	public ApplicantDetailsObj applicantDetailsObj;
+	private ApplicantDetailsObj applicantDetailsObj;
 	
-	public ErrorObj error;
+	private ErrorObj error;
 	
 }
