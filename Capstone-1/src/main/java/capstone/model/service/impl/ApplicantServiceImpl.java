@@ -930,11 +930,12 @@ public class ApplicantServiceImpl implements ApplicantService {
 		int applicantIdPk = 0;
 		
 		if(inDto.getToken().charAt(0)=='R') {
-			//RejectedApplicantEntity rejectedApplicant = applicantLogic.getRejectedApplicantByToken(inDto.getToken());
 			
 			PrescreenDetailsEntity rejectedPrescreen = applicantLogic.getRejectedPrescreenDetailsByToken(inDto.getToken());
 			
-			applicantIdPk = rejectedPrescreen.getRejectedApplicantIdPk();
+			RejectedApplicantEntity rejectedApplicant = applicantLogic.getRejectedApplicantById(rejectedPrescreen.getRejectedApplicantIdPk());
+			
+			applicantIdPk = rejectedApplicant.getApplicantIdPk();
 			
 			ApplicantOfficerFeedbackObj appOffFeedbackObj = new ApplicantOfficerFeedbackObj();
 			

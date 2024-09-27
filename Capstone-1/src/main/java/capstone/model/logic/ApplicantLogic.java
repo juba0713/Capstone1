@@ -122,6 +122,14 @@ public interface ApplicantLogic {
 	public RejectedApplicantEntity getRejectedApplicantByToken(String token);
 	
 	/**
+	 * To get rejetced applicant by ID
+	 * 
+	 * @param idPk
+	 * @return RejectedApplicantEntity
+	 */
+	public RejectedApplicantEntity getRejectedApplicantById(int idPk);
+	
+	/**
 	 * To get project by applicant id
 	 * @param applicantIdPk
 	 * @return ProjectEntity
@@ -288,4 +296,6 @@ public interface ApplicantLogic {
 	public void saveManagerEvaluationDetails(ManagerEvaluationDetailsEntity entity);
 	
 	public PrescreenDetailsEntity getRejectedPrescreenDetailsByToken(String token);
+	
+	
 }

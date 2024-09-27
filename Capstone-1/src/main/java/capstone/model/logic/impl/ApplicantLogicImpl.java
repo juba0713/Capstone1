@@ -362,5 +362,11 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 		
 		return prescreenDetailsDao.getRejectedPrescreenDetailsByToken(token);
 	}
+
+	@Override
+	public RejectedApplicantEntity getRejectedApplicantById(int idPk) {
+		
+		return rejectedApplicantDao.getRejectedApplicantById(idPk);
+	}
 	
 }

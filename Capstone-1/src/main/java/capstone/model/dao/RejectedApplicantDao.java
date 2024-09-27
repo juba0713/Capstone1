@@ -17,6 +17,11 @@ public interface RejectedApplicantDao extends JpaRepository<RejectedApplicantEnt
 			+ " WHERE e.token = :token"
 			+ " AND e.deleteFlg = false";
 	
+	public final String GET_REJECTED_APPLICANT_BY_ID = "SELECT e"
+			+ " FROM RejectedApplicantEntity e"
+			+ " WHERE e.idPk = :idPk"
+			+ " AND e.deleteFlg = false";
+	
 	public final String UPDATE_PREVIOUS_REJECTED_APPLICANT = "UPDATE t_rejected_applicant  "
 			+ "SET "
 			+ "	delete_flg = true "
@@ -25,6 +30,9 @@ public interface RejectedApplicantDao extends JpaRepository<RejectedApplicantEnt
 		
 	@Query(value=GET_REJECTED_APPLICANT_BY_TOKEN)
 	public RejectedApplicantEntity getRejectedApplicantByToken(String token) throws DataAccessException;
+	
+	@Query(value=GET_REJECTED_APPLICANT_BY_ID)
+	public RejectedApplicantEntity getRejectedApplicantById(int idPk) throws DataAccessException;
 	
 	
 	@Modifying
