@@ -368,5 +368,29 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 		
 		return rejectedApplicantDao.getRejectedApplicantById(idPk);
 	}
+
+	@Override
+	public PrescreenDetailsEntity getAcceptedPrescreenDetailsByApplicantIdPk(int applicantIdPk) {
+		
+		return prescreenDetailsDao.getAcceptedPrescreenDetailsByApplicantIdPk(applicantIdPk);
+	}
+
+	@Override
+	public EvaluationDetailsEntity getEvaluationDetailsByToken(String token) {
+		
+		return evaluationDetailsDao.getEvaluationDetailsByToken(token);
+	}
+
+	@Override
+	public EvaluatedApplicantEntity getEvaluatedApplicantById(int idPk) {
+		
+		return evaluatedApplicantDao.getEvaluatedApplicantById(idPk);
+	}
+
+	@Override
+	public AcceptedApplicantEntity getAcceptedApplicantByApplicantIdPk(int applicantIdPk) {
+		
+		return acceptedApplicantDao.getAcceptedApplicantByApplicantIdPk(applicantIdPk);
+	}
 	
 }

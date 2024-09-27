@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantOfficerFeedbackObj;
+import capstone.model.object.ApplicantTbiFeedbackObj;
 import capstone.model.object.ErrorObj;
 import lombok.Data;
 
@@ -162,6 +163,8 @@ public class ApplicantInOutDto {
 	private Boolean bothFeedback;
 	
 	private ApplicantOfficerFeedbackObj appOffFeedbackObj;
+	
+	private ApplicantTbiFeedbackObj applicantTbiFeedbackObj;
 	
 	
 	/*

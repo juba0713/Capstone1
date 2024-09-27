@@ -38,6 +38,11 @@ public interface EvaluatedApplicantDao extends JpaRepository<EvaluatedApplicantE
 			+ " WHERE e.token = :token"
 			+ " AND e.deleteFlg = false"
 			+ " AND e.idPk = (SELECT MAX(e2.idPk) FROM EvaluatedApplicantEntity e2 WHERE e2.token = :token)";
+	
+	public final String GET_EVALUATED_APPLICANT_BY_ID= "SELECT e"
+			+ " FROM EvaluatedApplicantEntity e"
+			+ " WHERE e.deleteFlg = false"
+			+ " AND e.idPk = :idPk";
 		
 	@Query(value=GET_EVALUATED_APPLICANT_BY_TOKEN)
 	public EvaluatedApplicantEntity getEvaluatedApplicantByToken(String token) throws DataAccessException;
@@ -51,6 +56,9 @@ public interface EvaluatedApplicantDao extends JpaRepository<EvaluatedApplicantE
 	@Modifying
 	@Query(value=UPDATE_PREVIOUS_EVALUATED_APPLICANT, nativeQuery=true)
 	public void updatePreviousEvaluatedApplicant(@Param("applicantIdPk") int applicantIdPk) throws DataAccessException;
+	
+	@Query(value=GET_EVALUATED_APPLICANT_BY_ID)
+	public EvaluatedApplicantEntity getEvaluatedApplicantById(int idPk) throws DataAccessException;
 	
 	
 }

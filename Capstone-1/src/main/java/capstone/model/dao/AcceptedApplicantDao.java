@@ -21,4 +21,12 @@ public interface AcceptedApplicantDao extends JpaRepository<AcceptedApplicantEnt
 	@Modifying
 	@Query(value=UPDATE_PREVIOUS_ACCEPTED_APPLICANT, nativeQuery=true)
 	public void updatePreviousAcceptedApplicant(@Param("applicantIdPk") int applicantIdPk) throws DataAccessException;
+	
+	public final String GET_ACCEPTED_APPLICANT_BY_APPLICANT_ID_PK = "SELECT e "
+			+ "FROM AcceptedApplicantEntity e "
+			+ "WHERE e.applicantIdPk = :applicantIdPk "
+			+ "AND e.deleteFlg = false ";
+	
+	@Query(value=GET_ACCEPTED_APPLICANT_BY_APPLICANT_ID_PK)
+	public AcceptedApplicantEntity getAcceptedApplicantByApplicantIdPk(int applicantIdPk) throws DataAccessException;
 }

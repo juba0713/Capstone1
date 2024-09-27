@@ -297,5 +297,11 @@ public interface ApplicantLogic {
 	
 	public PrescreenDetailsEntity getRejectedPrescreenDetailsByToken(String token);
 	
+	public PrescreenDetailsEntity getAcceptedPrescreenDetailsByApplicantIdPk(int applicantIdPk);
 	
+	public EvaluationDetailsEntity getEvaluationDetailsByToken(String token);
+	
+	public EvaluatedApplicantEntity getEvaluatedApplicantById(int idPk);
+	
+	public AcceptedApplicantEntity getAcceptedApplicantByApplicantIdPk(int applicantIdPk);
 }

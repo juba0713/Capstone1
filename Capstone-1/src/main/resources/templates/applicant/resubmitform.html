@@ -86,6 +86,15 @@
       .details{
 		  position: relative;
 	  }
+	  
+	  .text-sm{
+		  text-align: center;
+	  }
+	  
+	  .font-20{
+		  font-size: 20px;
+		  font-weight: bold;
+	  }
     </style>
   </head>
   <body class="font-secondary" th:object="${applicantWebDto}"> 
@@ -1695,7 +1704,8 @@
               Next
             </button>
             <input type="hidden" name="button" value="resubmit" />
-            <input type="hidden" name="token" th:value="${token}" />
+            <input type="hidden" name="token" th:value="${token}" th:if="*{!bothFeedback}" />
+            <input type="hidden" name="reApplyToken" th:value="${token}" th:if="*{bothFeedback}" />
             <input type="hidden" name="email" th:value="*{email}" />
             <input type="hidden" name="agreeFlg" th:value="*{agreeFlg}" />
             <input type="hidden" name="eligibilityAgreeFlg" th:value="*{eligibilityAgreeFlg}" />
@@ -2075,33 +2085,15 @@
                         </p>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm">
-                          <select
-                            required
-                            oninput="this.className = ''"
-                            id="rating"
-                            class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-                          >
-                            <option value="none" disabled selected>
-                              select a rating
-                            </option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                          </select>
+                        <div class="text-sm font-20" th:text="*{applicantTbiFeedbackObj.ctOneRating}">               
                         </div>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
                           placeholder="Enter comment"
+                          th:text="*{applicantTbiFeedbackObj.ctOneComments}"
+                          readonly
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
                       </td>
@@ -2128,33 +2120,15 @@
                         </p>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm">
-                          <select
-                            required
-                            oninput="this.className = ''"
-                            id="rating"
-                            class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-                          >
-                            <option value="none" disabled selected>
-                              select a rating
-                            </option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                          </select>
+                        <div class="text-sm font-20" th:text="*{applicantTbiFeedbackObj.ctTwoRating}">                     
                         </div>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
                           placeholder="Enter comment"
+                          th:text="*{applicantTbiFeedbackObj.ctTwoComments}"
+                          readonly
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
                       </td>
@@ -2181,33 +2155,15 @@
                         </p>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm">
-                          <select
-                            required
-                            oninput="this.className = ''"
-                            id="rating"
-                            class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-                          >
-                            <option value="none" disabled selected>
-                              select a rating
-                            </option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                          </select>
+                        <div class="text-sm font-20" th:text="*{applicantTbiFeedbackObj.ctThreeRating}">                          
                         </div>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
                           placeholder="Enter comment"
+                          th:text="*{applicantTbiFeedbackObj.ctThreeComments}"
+                          readonly
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
                       </td>
@@ -2225,33 +2181,15 @@
                         </p>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm">
-                          <select
-                            required
-                            oninput="this.className = ''"
-                            id="rating"
-                            class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-                          >
-                            <option value="none" disabled selected>
-                              select a rating
-                            </option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                          </select>
+                        <div class="text-sm font-20" th:text="*{applicantTbiFeedbackObj.ctFourRating}">                         
                         </div>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
                           placeholder="Enter comment"
+                          th:text="*{applicantTbiFeedbackObj.ctFourComments}"
+                          readonly
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
                       </td>
@@ -2278,33 +2216,15 @@
                         </p>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm">
-                          <select
-                            required
-                            oninput="this.className = ''"
-                            id="rating"
-                            class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-                          >
-                            <option value="none" disabled selected>
-                              select a rating
-                            </option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                          </select>
+                        <div class="text-sm font-20" th:text="*{applicantTbiFeedbackObj.ctFiveRating}">                 
                         </div>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
                           placeholder="Enter comment"
+                          th:text="*{applicantTbiFeedbackObj.ctFiveComments}"
+                          readonly
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
                       </td>
@@ -2331,33 +2251,15 @@
                         </p>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm">
-                          <select
-                            required
-                            oninput="this.className = ''"
-                            id="rating"
-                            class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-                          >
-                            <option value="none" disabled selected>
-                              select a rating
-                            </option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                          </select>
+                        <div class="text-sm font-20" th:text="*{applicantTbiFeedbackObj.ctSixRating}">                          
                         </div>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
                           placeholder="Enter comment"
+                          th:text="*{applicantTbiFeedbackObj.ctSixComments}"
+                          readonly
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
                       </td>
@@ -2376,33 +2278,15 @@
                         </p>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm">
-                          <select
-                            required
-                            oninput="this.className = ''"
-                            id="rating"
-                            class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-                          >
-                            <option value="none" disabled selected>
-                              select a rating
-                            </option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                          </select>
+                        <div class="text-sm font-20" th:text="*{applicantTbiFeedbackObj.ctSevenRating}">                          
                         </div>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
                           placeholder="Enter comment"
+                          th:text="*{applicantTbiFeedbackObj.ctSevenComments}"
+                          readonly
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
                       </td>
@@ -2420,33 +2304,15 @@
                         </p>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm">
-                          <select
-                            required
-                            oninput="this.className = ''"
-                            id="rating"
-                            class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-                          >
-                            <option value="none" disabled selected>
-                              select a rating
-                            </option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                          </select>
+                        <div class="text-sm font-20" th:text="*{applicantTbiFeedbackObj.ctEightRating}">
                         </div>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
                           placeholder="Enter comment"
+                          th:text="*{applicantTbiFeedbackObj.ctEightComments}"
+                          readonly
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
                       </td>
@@ -2482,6 +2348,8 @@
             <textarea
               oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
               placeholder="Additional feedback ni tbiboard"
+              th:text="*{applicantTbiFeedbackObj.tbiFeedback}"
+              readonly
               class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
             ></textarea>
           </div>

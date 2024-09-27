@@ -146,12 +146,7 @@ public class ApplicantController {
 		inDto.setReApplyToken(webDto.getReApplyToken());
 
 		inDto.setVitaeFileName(webDto.getVitaeFileName());
-		
-		for(String[] s : webDto.getHistoricalTimeline()) {
-			System.out.println(s[0]);
-			System.out.println(s[1]);
-		}
-		
+			
 		ApplicantInOutDto outDto = applicantService.validateApplication(inDto);
 
 		if (CommonConstant.INVALID.equals(outDto.getResult())) {
@@ -173,7 +168,7 @@ public class ApplicantController {
 			}
 		}
 
-		applicantService.saveApplication(inDto);
+		//applicantService.saveApplication(inDto);
 
 		if (!button.equals("resubmit")) {
 			if (webDto.getReApplyToken() != null && !webDto.getReApplyToken().isEmpty()) {
@@ -328,7 +323,9 @@ public class ApplicantController {
 		webDto.setBothFeedback(outDto.getBothFeedback());
 		
 		webDto.setAppOffFeedbackObj(outDto.getAppOffFeedbackObj());
-
+		
+		webDto.setApplicantTbiFeedbackObj(outDto.getApplicantTbiFeedbackObj());
+		
 		model.addAttribute("applicantWebDto", webDto);
 
 		model.addAttribute("token", token);

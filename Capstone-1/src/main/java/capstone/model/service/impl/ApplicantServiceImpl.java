@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import capstone.common.constant.CommonConstant;
 import capstone.common.constant.MessageConstant;
+import capstone.model.dao.entity.AcceptedApplicantEntity;
 import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.EvaluatedApplicantEntity;
@@ -30,12 +31,14 @@ import capstone.model.dao.entity.ProjectEntity;
 import capstone.model.dao.entity.RejectedApplicantEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
 import capstone.model.dao.entity.UserInformationEntity;
+import capstone.model.dao.entity.EvaluationDetailsEntity;
 import capstone.model.dto.ApplicantInOutDto;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.logic.ApplicantLogic;
 import capstone.model.logic.UserLogic;
 import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantOfficerFeedbackObj;
+import capstone.model.object.ApplicantTbiFeedbackObj;
 import capstone.model.object.ErrorObj;
 import capstone.model.service.ApplicantService;
 import capstone.model.service.CommonService;
@@ -980,14 +983,99 @@ public class ApplicantServiceImpl implements ApplicantService {
 			outDto.setAppOffFeedbackObj(appOffFeedbackObj);
 			
 		}else if(inDto.getToken().charAt(0)=='F') {
+
+			EvaluationDetailsEntity evaluationDetails = applicantLogic.getEvaluationDetailsByToken(inDto.getToken());
 			
-			EvaluatedApplicantEntity evaluatedApplicant = applicantLogic.getEvaluatedApplicantByToken(inDto.getToken());
+			EvaluatedApplicantEntity evaluatedApplicant = applicantLogic.getEvaluatedApplicantById(evaluationDetails.getIdPk());
 			
 			applicantIdPk = evaluatedApplicant.getApplicantIdPk();
 			
+			ApplicantTbiFeedbackObj appTbiFeedbackObj = new ApplicantTbiFeedbackObj();
+			
+			appTbiFeedbackObj.setCtOneRating(evaluationDetails.getCtOneRating());
+			
+			appTbiFeedbackObj.setCtOneComments(evaluationDetails.getCtOneComments());
+			
+			appTbiFeedbackObj.setCtTwoRating(evaluationDetails.getCtTwoRating());
+			
+			appTbiFeedbackObj.setCtTwoComments(evaluationDetails.getCtTwoComments());
+			
+			appTbiFeedbackObj.setCtThreeRating(evaluationDetails.getCtThreeRating());
+			
+			appTbiFeedbackObj.setCtThreeComments(evaluationDetails.getCtThreeComments());	
+			
+			appTbiFeedbackObj.setCtFourRating(evaluationDetails.getCtFourRating());
+			
+			appTbiFeedbackObj.setCtFourComments(evaluationDetails.getCtFourComments());
+			
+			appTbiFeedbackObj.setCtFiveRating(evaluationDetails.getCtFiveRating());
+			
+			appTbiFeedbackObj.setCtFiveComments(evaluationDetails.getCtFiveComments());
+			
+			appTbiFeedbackObj.setCtSixRating(evaluationDetails.getCtSixRating());
+			
+			appTbiFeedbackObj.setCtSixComments(evaluationDetails.getCtSixComments());
+			
+			appTbiFeedbackObj.setCtSevenRating(evaluationDetails.getCtSevenRating());
+			
+			appTbiFeedbackObj.setCtSevenComments(evaluationDetails.getCtSevenComments());
+			
+			appTbiFeedbackObj.setCtEightRating(evaluationDetails.getCtEightRating());
+			
+			appTbiFeedbackObj.setCtEightComments(evaluationDetails.getCtEightComments());
+			
+			appTbiFeedbackObj.setTbiFeedback(evaluationDetails.getTbiFeedback());
+			
+			AcceptedApplicantEntity acceptedApplicant = applicantLogic.getAcceptedApplicantByApplicantIdPk(applicantIdPk);
+			
+			PrescreenDetailsEntity rejectedPrescreen = applicantLogic.getAcceptedPrescreenDetailsByApplicantIdPk(acceptedApplicant.getIdPk());
+				
+			ApplicantOfficerFeedbackObj appOffFeedbackObj = new ApplicantOfficerFeedbackObj();
+			
+			appOffFeedbackObj.setCtOneFlg(rejectedPrescreen.getCtOneFlg());
+			
+			appOffFeedbackObj.setCtOneComments(rejectedPrescreen.getCtOneComments());
+			
+			appOffFeedbackObj.setCtTwoFlg(rejectedPrescreen.getCtTwoFlg());
+			
+			appOffFeedbackObj.setCtTwoComments(rejectedPrescreen.getCtTwoComments());
+			
+			appOffFeedbackObj.setCtThreeFlg(rejectedPrescreen.getCtThreeFlg());
+			
+			appOffFeedbackObj.setCtThreeComments(rejectedPrescreen.getCtThreeComments());
+			
+			appOffFeedbackObj.setCtFourFlg(rejectedPrescreen.getCtFourFlg());
+			
+			appOffFeedbackObj.setCtFourComments(rejectedPrescreen.getCtFourComments()); 
+			
+			appOffFeedbackObj.setCtFiveFlg(rejectedPrescreen.getCtFiveFlg());
+			
+			appOffFeedbackObj.setCtFiveComments(rejectedPrescreen.getCtFiveComments());
+			
+			appOffFeedbackObj.setCtSixFlg(rejectedPrescreen.getCtSixFlg());
+			
+			appOffFeedbackObj.setCtSixComments(rejectedPrescreen.getCtSixComments());
+			
+			appOffFeedbackObj.setCtSevenFlg(rejectedPrescreen.getCtSevenFlg());
+			
+			appOffFeedbackObj.setCtSevenComments(rejectedPrescreen.getCtSevenComments());
+			
+			appOffFeedbackObj.setCtEightFlg(rejectedPrescreen.getCtEightFlg());
+			
+			appOffFeedbackObj.setCtEightComments(rejectedPrescreen.getCtEightComments());
+			
+			appOffFeedbackObj.setCtNineFlg(rejectedPrescreen.getCtNineFlg());
+			
+			appOffFeedbackObj.setCtNineComments(rejectedPrescreen.getCtNineComments());
+			
+			appOffFeedbackObj.setRecommendation(rejectedPrescreen.getRecommendation());
+			
+			outDto.setAppOffFeedbackObj(appOffFeedbackObj);
+			
+			outDto.setApplicantTbiFeedbackObj(appTbiFeedbackObj);
+			
 			outDto.setBothFeedback(true);
 			
-			outDto.setFeedback("");
 		}
 		
 		List<ApplicantDetailsEntity> applicant = applicantLogic.getApplicantDetailsByIdPk(applicantIdPk);

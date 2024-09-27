@@ -7,6 +7,7 @@ import java.util.List;
 import capstone.model.dao.entity.PrescreenDetailsEntity;
 import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantOfficerFeedbackObj;
+import capstone.model.object.ApplicantTbiFeedbackObj;
 import capstone.model.object.ErrorObj;
 import lombok.Data;
 
@@ -132,6 +133,8 @@ public class ApplicantWebDto {
 	private Boolean bothFeedback;
 	
 	private ApplicantOfficerFeedbackObj appOffFeedbackObj;
+	
+	private ApplicantTbiFeedbackObj applicantTbiFeedbackObj;
 	
 	
 	/*
