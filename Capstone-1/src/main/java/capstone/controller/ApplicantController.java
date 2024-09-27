@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import capstone.common.constant.CommonConstant;
+import capstone.common.constant.MessageConstant;
 import capstone.controller.webdto.ApplicantWebDto;
 import capstone.model.dto.ApplicantInOutDto;
 import capstone.model.service.ApplicantService;
@@ -145,7 +146,12 @@ public class ApplicantController {
 		inDto.setReApplyToken(webDto.getReApplyToken());
 
 		inDto.setVitaeFileName(webDto.getVitaeFileName());
-
+		
+		for(String[] s : webDto.getHistoricalTimeline()) {
+			System.out.println(s[0]);
+			System.out.println(s[1]);
+		}
+		
 		ApplicantInOutDto outDto = applicantService.validateApplication(inDto);
 
 		if (CommonConstant.INVALID.equals(outDto.getResult())) {
@@ -153,13 +159,16 @@ public class ApplicantController {
 			webDto.setError(outDto.getError());
 
 			ra.addFlashAttribute("applicantWebDto", webDto);
-
+			
 			if (!button.equals("resubmit")) {
 				if (webDto.getReApplyToken() != null && !webDto.getReApplyToken().isEmpty()) {
+					System.out.println("REAPPLY");
 					return "redirect:/applicant/form?token=" + webDto.getReApplyToken();
 				}
+				System.out.println("WTF");
 				return "redirect:/applicant/form";
 			} else {
+				System.out.println("RESUBMIT");
 				return "redirect:/applicant/form/resubmit?token=" + webDto.getToken();
 			}
 		}

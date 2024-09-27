@@ -52,11 +52,50 @@
         margin-right: 8px;
         margin-left: 4px;
       }
+      
+      .error {
+        padding-left: 20px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #dc143c;
+      }
+
+      .no-pad {
+        padding: 0;
+      }
+
+      .error-container {
+        position: absolute;
+        top: 45px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .error-container div {
+        background: red;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 10px;
+      }
+      
+      .details{
+		  position: relative;
+	  }
     </style>
   </head>
   <body class="font-secondary" th:object="${applicantWebDto}"> 
+	  
+	  
     <!-- LEFT side -->
-    <div class="w-[55%] bg-white p-10 border-2 border-red-500">
+    <div class="w-[55%] bg-white p-10 border-2 border-red-500 details">
+		<div class="error-container" th:if="*{error != null}">
+	        <div>Please fill out all required fields!</div>
+	      </div>
       <form
         th:action="@{/applicant/form}"
         method="POST"
@@ -88,6 +127,15 @@
                 class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
               />
             </div>
+            <div
+            class="error"
+            th:if="*{error != null} AND *{error.projectTitleError != null}"
+          >
+            <div
+              th:each="err : *{error.projectTitleError}"
+              th:text="${err}"
+            ></div>
+          </div>
 
             <hr class="my-8" />
 
@@ -108,6 +156,15 @@
                 th:text="*{projectDescription}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
               ></textarea>
+	               <div
+	                class="error no-pad"
+	                th:if="*{error != null} AND *{error.projectDescriptionError != null}"
+	              >
+	                <div
+	                  th:each="err : *{error.projectDescriptionError}"
+	                  th:text="${err}"
+	                ></div>
+	              </div>
               <small class="block mt-2 text-gray-500">
                 • Maximum of 100 words<br />
                 • If a startup, describe the nature of the business including
@@ -251,6 +308,13 @@
                   </div>
                 </div>
               </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.teamsError != null}"
+              >
+                <div th:each="err : *{error.teamsError}" th:text="${err}"></div>
+              </div>
+            </div>
 
               <hr class="my-4" />
 
@@ -268,6 +332,15 @@
                   th:text="*{problemStatement}"
                   class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                 ></textarea>
+               <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.problemStatementError != null}"
+              >
+                <div
+                  th:each="err : *{error.problemStatementError}"
+                  th:text="${err}"
+                ></div>
+              </div>
                 <small class="block text-gray-500">
                   • Maximum of 200 words<br />
                   • Provide the context of the problem.
@@ -283,6 +356,15 @@
                     th:text="*{targetMarket}"
                     class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                   ></textarea>
+                  <div
+	                class="error no-pad"
+	                th:if="*{error != null} AND *{error.targetMarketError != null}"
+	              >
+	                <div
+	                  th:each="err : *{error.targetMarketError}"
+	                  th:text="${err}"
+	                ></div>
+	              </div>
                   <small class="block text-gray-500">
                     • Maximum of 100 words<br />
                     • Specify the user/customer segment that will benefit from
@@ -301,6 +383,14 @@
                     th:text="*{solutionDescription}"
                     class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20"
                   ></textarea>
+                  <div
+	                class="error no-pad"
+	                th:if="*{error != null} AND *{error.solutionDescriptionError != null}"
+	              >
+	                <div
+	                  th:each="err : *{error.solutionDescriptionError}"
+	                  th:text="${err}"
+	                ></div>
                   <small class="block text-gray-500">
                     • Maximum of 500 words<br />
                     • Describe the Solution: Provide a detailed description of
@@ -452,6 +542,15 @@
                   </tbody>
                 </table>
               </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.historicalTimelineError != null}"
+              >
+                <div
+                  th:each="err : *{error.historicalTimelineError}"
+                  th:text="${err}"
+                ></div>
+              </div>
               <hr class="my-4" />
 
               <!-- competitive advantage analysis -->
@@ -581,7 +680,15 @@
                   </tbody>
                 </table>
               </div>
-
+			<div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.productServiceOfferingError != null}"
+              >
+                <div
+                  th:each="err : *{error.productServiceOfferingError}"
+                  th:text="${err}"
+                ></div>
+               </div>
               <hr class="my-4" />
 
               <!-- intellectual property status -->
@@ -619,6 +726,15 @@
                 th:text="*{objectives}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
               ></textarea>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.ObjectivesError != null}"
+              >
+                <div
+                  th:each="err : *{error.ObjectivesError}"
+                  th:text="${err}"
+                ></div>
+              </div>
               <small class="block text-gray-500">
                 • Maximum of 50 words<br />
                 • Provide 3 main objectives of the proposed acceleration.<br />
@@ -640,6 +756,15 @@
                   th:text="*{scopeProposal}"
                   class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                 ></textarea>
+                <div
+	                class="error no-pad"
+	                th:if="*{error != null} AND *{error.scopeProposalError != null}"
+	              >
+	                <div
+	                  th:each="err : *{error.scopeProposalError}"
+	                  th:text="${err}"
+	                ></div>
+	              </div>
                 <small class="block text-gray-500">
                   • Maximum of 50 words<br />
                   • State the focus of the proposal
@@ -660,6 +785,15 @@
                   th:text="*{methodology}"
                   class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                 ></textarea>
+                <div
+	                class="error no-pad"
+	                th:if="*{error != null} AND *{error.methodologyError != null}"
+	              >
+	                <div
+	                  th:each="err : *{error.methodologyError}"
+	                  th:text="${err}"
+	                ></div>
+	              </div>
                 <small class="block text-gray-500">
                   • Maximum of 300 words<br />
                   • State the focus of the proposal
@@ -688,6 +822,15 @@
                   >Submit your file in
                   <span class="font-bold"> PDF </span> format.</span
                 >
+              </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.vitaeFileError != null}"
+              >
+                <div
+                  th:each="err : *{error.vitaeFileError}"
+                  th:text="${err}"
+                ></div>
               </div>
               <div>Current File</div>
             <a
@@ -745,6 +888,15 @@
                   th:value="*{groupName}"
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                 />
+                <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.groupNameError != null}"
+              >
+                <div
+                  th:each="err : *{error.groupNameError}"
+                  th:text="${err}"
+                ></div>
+              </div>
               </div>
             </div>
             <hr class="my-4" />
@@ -768,6 +920,15 @@
                   th:value="*{groupLeader}"
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                 />
+                <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.groupLeaderError != null}"
+              >
+                <div
+                  th:each="err : *{error.groupLeaderError}"
+                  th:text="${err}"
+                ></div>
+              </div>
               </div>
             </div>
             <hr class="my-4" />
@@ -788,6 +949,15 @@
                   th:value="*{leaderNumber}"
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                 />
+                <div
+	                class="error no-pad"
+	                th:if="*{error != null} AND *{error.leaderNumberError != null}"
+	              >
+	                <div
+	                  th:each="err : *{error.leaderNumberError}"
+	                  th:text="${err}"
+	                ></div>
+	              </div>
               </div>
             </div>
             <hr class="my-4" />
@@ -809,6 +979,15 @@
                   th:value="*{leaderAddress}"
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                 />
+                <div
+	                class="error no-pad"
+	                th:if="*{error != null} AND *{error.leaderAddressError != null}"
+	              >
+	                <div
+	                  th:each="err : *{error.leaderAddressError}"
+	                  th:text="${err}"
+	                ></div>
+	              </div>
               </div>
             </div>
             <hr class="my-4" />
@@ -1532,7 +1711,6 @@
           <span class="step"></span>
           <span class="step"></span>
         </div>
-        <input type="hidden" name="button" value="submit" />
       </form>
     </div>
 

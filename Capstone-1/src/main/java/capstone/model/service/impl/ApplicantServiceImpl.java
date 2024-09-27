@@ -1026,7 +1026,12 @@ public class ApplicantServiceImpl implements ApplicantService {
 				List<String[]> historicallTimelines = new ArrayList<>();
 
 				for(int i = 0; i < app.getHistoricalTimeline().length; i++) {
-					historicallTimelines.add(app.getHistoricalTimeline()[i].split("\\|"));
+					if(!app.getHistoricalTimeline()[i].equals("|")) {
+						historicallTimelines.add(app.getHistoricalTimeline()[i].split("\\|"));
+					}else {
+						historicallTimelines.add(new String[]{"", ""});
+
+					}
 				}
 
 				outDto.setHistoricalTimeline(historicallTimelines);
