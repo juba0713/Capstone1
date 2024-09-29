@@ -52,7 +52,7 @@
         margin-right: 8px;
         margin-left: 4px;
       }
-      
+
       .error {
         padding-left: 20px;
         font-size: 15px;
@@ -82,29 +82,45 @@
         padding: 10px;
         border-radius: 10px;
       }
-      
-      .details{
-		  position: relative;
-	  }
-	  
-	  .text-sm{
-		  text-align: center;
-	  }
-	  
-	  .font-20{
-		  font-size: 20px;
-		  font-weight: bold;
-	  }
+
+      .details {
+        position: relative;
+      }
+
+      .text-sm {
+        text-align: center;
+      }
+
+      .font-20 {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .resubmit-back-button {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: hsl(48, 99%, 65%);
+        color: black;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s;
+      }
+
+      .resubmit-back-button:hover {
+        background-color: rgb(226 232 240);
+        color: black;
+      }
     </style>
   </head>
-  <body class="font-secondary" th:object="${applicantWebDto}"> 
-	  
-	  
+  <body class="font-secondary" th:object="${applicantWebDto}">
     <!-- LEFT side -->
-    <div class="w-[55%] bg-white p-10 border-2 border-red-500 details">
-		<div class="error-container" th:if="*{error != null}">
-	        <div>Please fill out all required fields!</div>
-	      </div>
+    <div class="w-[55%] bg-white p-10 border-red-500 details">
+      <div class="error-container" th:if="*{error != null}">
+        <div>Please fill out all required fields!</div>
+      </div>
       <form
         th:action="@{/applicant/form}"
         method="POST"
@@ -137,14 +153,14 @@
               />
             </div>
             <div
-            class="error"
-            th:if="*{error != null} AND *{error.projectTitleError != null}"
-          >
-            <div
-              th:each="err : *{error.projectTitleError}"
-              th:text="${err}"
-            ></div>
-          </div>
+              class="error"
+              th:if="*{error != null} AND *{error.projectTitleError != null}"
+            >
+              <div
+                th:each="err : *{error.projectTitleError}"
+                th:text="${err}"
+              ></div>
+            </div>
 
             <hr class="my-8" />
 
@@ -165,15 +181,15 @@
                 th:text="*{projectDescription}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
               ></textarea>
-	               <div
-	                class="error no-pad"
-	                th:if="*{error != null} AND *{error.projectDescriptionError != null}"
-	              >
-	                <div
-	                  th:each="err : *{error.projectDescriptionError}"
-	                  th:text="${err}"
-	                ></div>
-	              </div>
+              <div
+                class="error no-pad"
+                th:if="*{error != null} AND *{error.projectDescriptionError != null}"
+              >
+                <div
+                  th:each="err : *{error.projectDescriptionError}"
+                  th:text="${err}"
+                ></div>
+              </div>
               <small class="block mt-2 text-gray-500">
                 • Maximum of 100 words<br />
                 • If a startup, describe the nature of the business including
@@ -325,23 +341,23 @@
               </div>
             </div>
 
-              <hr class="my-4" />
+            <hr class="my-4" />
 
-              <!--  About the Product/Solution -->
-              <div>
-                <h2 class="text-black">C. About the Product/Solution</h2>
+            <!--  About the Product/Solution -->
+            <div class="ml-6">
+              <h2 class="text-black">C. About the Product/Solution</h2>
 
-                <p class="text-sm mt-4">
-                  1. Problem Statement<span class="text-red-600"> *</span>
-                </p>
-                <textarea
-                  oninput="this.className = 'resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10'"
-                  placeholder="Type something here..."
-                  name="problemStatement"
-                  th:text="*{problemStatement}"
-                  class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
-                ></textarea>
-               <div
+              <p class="text-sm mt-4 flex justify-start">
+                1. Problem Statement<span class="text-red-600"> *</span>
+              </p>
+              <textarea
+                oninput="this.className = 'resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10'"
+                placeholder="Type something here..."
+                name="problemStatement"
+                th:text="*{problemStatement}"
+                class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
+              ></textarea>
+              <div
                 class="error no-pad"
                 th:if="*{error != null} AND *{error.problemStatementError != null}"
               >
@@ -350,56 +366,56 @@
                   th:text="${err}"
                 ></div>
               </div>
-                <small class="block text-gray-500">
-                  • Maximum of 200 words<br />
-                  • Provide the context of the problem.
-                </small>
+              <small class="block text-gray-500">
+                • Maximum of 200 words<br />
+                • Provide the context of the problem.
+              </small>
 
-                <div>
-                  <p class="text-sm mt-4">
-                    2. Target Market<span class="text-red-600"> *</span>
-                  </p>
-                  <textarea
-                    placeholder="Type something here..."
-                    name="targetMarket"
-                    th:text="*{targetMarket}"
-                    class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
-                  ></textarea>
+              <div>
+                <p class="text-sm mt-4 flex justify-start">
+                  2. Target Market<span class="text-red-600"> *</span>
+                </p>
+                <textarea
+                  placeholder="Type something here..."
+                  name="targetMarket"
+                  th:text="*{targetMarket}"
+                  class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
+                ></textarea>
+                <div
+                  class="error no-pad"
+                  th:if="*{error != null} AND *{error.targetMarketError != null}"
+                >
                   <div
-	                class="error no-pad"
-	                th:if="*{error != null} AND *{error.targetMarketError != null}"
-	              >
-	                <div
-	                  th:each="err : *{error.targetMarketError}"
-	                  th:text="${err}"
-	                ></div>
-	              </div>
-                  <small class="block text-gray-500">
-                    • Maximum of 100 words<br />
-                    • Specify the user/customer segment that will benefit from
-                    the product/project.<br />
-                    • Specify the size of the market
-                  </small>
+                    th:each="err : *{error.targetMarketError}"
+                    th:text="${err}"
+                  ></div>
                 </div>
-                <div>
-                  <p class="text-sm mt-4">
-                    3. Solution Description<span class="text-red-600"> *</span>
-                  </p>
+                <small class="block text-gray-500">
+                  • Maximum of 100 words<br />
+                  • Specify the user/customer segment that will benefit from the
+                  product/project.<br />
+                  • Specify the size of the market
+                </small>
+              </div>
+              <div>
+                <p class="text-sm mt-4 flex justify-start">
+                  3. Solution Description<span class="text-red-600"> *</span>
+                </p>
 
-                  <textarea
-                    placeholder="Type something here..."
-                    name="solutionDescription"
-                    th:text="*{solutionDescription}"
-                    class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20"
-                  ></textarea>
+                <textarea
+                  placeholder="Type something here..."
+                  name="solutionDescription"
+                  th:text="*{solutionDescription}"
+                  class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20"
+                ></textarea>
+                <div
+                  class="error no-pad"
+                  th:if="*{error != null} AND *{error.solutionDescriptionError != null}"
+                >
                   <div
-	                class="error no-pad"
-	                th:if="*{error != null} AND *{error.solutionDescriptionError != null}"
-	              >
-	                <div
-	                  th:each="err : *{error.solutionDescriptionError}"
-	                  th:text="${err}"
-	                ></div>
+                    th:each="err : *{error.solutionDescriptionError}"
+                    th:text="${err}"
+                  ></div>
                   <small class="block text-gray-500">
                     • Maximum of 500 words<br />
                     • Describe the Solution: Provide a detailed description of
@@ -689,7 +705,7 @@
                   </tbody>
                 </table>
               </div>
-			<div
+              <div
                 class="error no-pad"
                 th:if="*{error != null} AND *{error.productServiceOfferingError != null}"
               >
@@ -697,7 +713,7 @@
                   th:each="err : *{error.productServiceOfferingError}"
                   th:text="${err}"
                 ></div>
-               </div>
+              </div>
               <hr class="my-4" />
 
               <!-- intellectual property status -->
@@ -766,14 +782,14 @@
                   class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                 ></textarea>
                 <div
-	                class="error no-pad"
-	                th:if="*{error != null} AND *{error.scopeProposalError != null}"
-	              >
-	                <div
-	                  th:each="err : *{error.scopeProposalError}"
-	                  th:text="${err}"
-	                ></div>
-	              </div>
+                  class="error no-pad"
+                  th:if="*{error != null} AND *{error.scopeProposalError != null}"
+                >
+                  <div
+                    th:each="err : *{error.scopeProposalError}"
+                    th:text="${err}"
+                  ></div>
+                </div>
                 <small class="block text-gray-500">
                   • Maximum of 50 words<br />
                   • State the focus of the proposal
@@ -795,14 +811,14 @@
                   class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
                 ></textarea>
                 <div
-	                class="error no-pad"
-	                th:if="*{error != null} AND *{error.methodologyError != null}"
-	              >
-	                <div
-	                  th:each="err : *{error.methodologyError}"
-	                  th:text="${err}"
-	                ></div>
-	              </div>
+                  class="error no-pad"
+                  th:if="*{error != null} AND *{error.methodologyError != null}"
+                >
+                  <div
+                    th:each="err : *{error.methodologyError}"
+                    th:text="${err}"
+                  ></div>
+                </div>
                 <small class="block text-gray-500">
                   • Maximum of 300 words<br />
                   • State the focus of the proposal
@@ -841,17 +857,21 @@
                   th:text="${err}"
                 ></div>
               </div>
-              <div>Current File</div>
-            <a
-              th:href="@{/view/} + *{vitaeFileName}"
-              target="_blank"
-              th:text="*{vitaeFileName} + ' (Click to view)'"
-            ></a>
-            <input
-              type="hidden"
-              name="vitaeFileName"
-              th:value="*{vitaeFileName}"
-            />
+              <div class="text-blue-500">
+                <div class="mt-2">Current File</div>
+                <div class="hover:underline">
+                  <a
+                    th:href="@{/view/} + *{vitaeFileName}"
+                    target="_blank"
+                    th:text="*{vitaeFileName} + ' (Click to view)'"
+                  ></a>
+                  <input
+                    type="hidden"
+                    name="vitaeFileName"
+                    th:value="*{vitaeFileName}"
+                  />
+                </div>
+              </div>
             </div>
             <hr class="my-8" />
 
@@ -874,6 +894,7 @@
             </div>
           </div>
         </div>
+
         <div class="tab mb-3">
           <h1
             class="w-full bg-gradient-to-r from-formbg-dark to-formbg-light font-semibold text-lg p-4 rounded-t-lg"
@@ -898,14 +919,14 @@
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                 />
                 <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.groupNameError != null}"
-              >
-                <div
-                  th:each="err : *{error.groupNameError}"
-                  th:text="${err}"
-                ></div>
-              </div>
+                  class="error no-pad"
+                  th:if="*{error != null} AND *{error.groupNameError != null}"
+                >
+                  <div
+                    th:each="err : *{error.groupNameError}"
+                    th:text="${err}"
+                  ></div>
+                </div>
               </div>
             </div>
             <hr class="my-4" />
@@ -930,14 +951,14 @@
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                 />
                 <div
-                class="error no-pad"
-                th:if="*{error != null} AND *{error.groupLeaderError != null}"
-              >
-                <div
-                  th:each="err : *{error.groupLeaderError}"
-                  th:text="${err}"
-                ></div>
-              </div>
+                  class="error no-pad"
+                  th:if="*{error != null} AND *{error.groupLeaderError != null}"
+                >
+                  <div
+                    th:each="err : *{error.groupLeaderError}"
+                    th:text="${err}"
+                  ></div>
+                </div>
               </div>
             </div>
             <hr class="my-4" />
@@ -959,14 +980,14 @@
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                 />
                 <div
-	                class="error no-pad"
-	                th:if="*{error != null} AND *{error.leaderNumberError != null}"
-	              >
-	                <div
-	                  th:each="err : *{error.leaderNumberError}"
-	                  th:text="${err}"
-	                ></div>
-	              </div>
+                  class="error no-pad"
+                  th:if="*{error != null} AND *{error.leaderNumberError != null}"
+                >
+                  <div
+                    th:each="err : *{error.leaderNumberError}"
+                    th:text="${err}"
+                  ></div>
+                </div>
               </div>
             </div>
             <hr class="my-4" />
@@ -989,14 +1010,14 @@
                   class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
                 />
                 <div
-	                class="error no-pad"
-	                th:if="*{error != null} AND *{error.leaderAddressError != null}"
-	              >
-	                <div
-	                  th:each="err : *{error.leaderAddressError}"
-	                  th:text="${err}"
-	                ></div>
-	              </div>
+                  class="error no-pad"
+                  th:if="*{error != null} AND *{error.leaderAddressError != null}"
+                >
+                  <div
+                    th:each="err : *{error.leaderAddressError}"
+                    th:text="${err}"
+                  ></div>
+                </div>
               </div>
             </div>
             <hr class="my-4" />
@@ -1073,7 +1094,6 @@
               />
             </div>
 
-            <!-- page 3 -->
             <hr class="my-4" />
             <div class="relative pt-3 ml-6 mb-3">
               <h2 class="text-black mb-3">
@@ -1110,36 +1130,36 @@
           >
             Technology and Commercialization Readiness Level
           </h1>
-          <div>
-            <div
-              class="pt-3 flex flex-col w-full relative border-gray-200 bg-transparent focus-within:border-blue-600"
-            >
-              <h2 class="text-black ml-6 pr-3">
-                This form, adopted from NYSERDA, assists emerging and growing
-                companies in determining the technical and commercial maturity
-                of their products or innovations. It utilizes a customized and
-                integrated tool that measures both the Technology Readiness
-                Level (TRL) and Commercial Readiness Level (CRL). This TRL/CRL
-                tool is based on systems developed by NASA, DOE, and ARPA-E.
-                Although it has been specifically designed for ventures in the
-                clean energy industry, it has also been widely used in solutions
-                and ventures across various other industries. For each category,
-                please select the option that best describes the current status
-                of your product, solution, or innovation.<br /><br />
-                For each category, please select the option that best describes
-                the current status of your product, solution, or innovation.
-              </h2>
-            </div>
-            <hr class="my-3" />
-            <div class="ml-6 pr-2 text-sm">
-              <div>
+          <div
+            class="pt-3 flex flex-col w-full relative border-gray-200 bg-transparent focus-within:border-blue-600"
+          >
+            <h2 class="text-black ml-6 pr-3">
+              This form, adopted from NYSERDA, assists emerging and growing
+              companies in determining the technical and commercial maturity of
+              their products or innovations. It utilizes a customized and
+              integrated tool that measures both the Technology Readiness Level
+              (TRL) and Commercial Readiness Level (CRL). This TRL/CRL tool is
+              based on systems developed by NASA, DOE, and ARPA-E. Although it
+              has been specifically designed for ventures in the clean energy
+              industry, it has also been widely used in solutions and ventures
+              across various other industries. For each category, please select
+              the option that best describes the current status of your product,
+              solution, or innovation.<br /><br />
+              For each category, please select the option that best describes
+              the current status of your product, solution, or innovation.
+            </h2>
+          </div>
+          <hr class="my-3" />
+          <div class="border-red-500">
+            <div class="ml-6 pr-2 text-sm text-left">
+              <div class="flex justify-start">
                 <h2 class="text-black mb-3 text-base">
                   Technology <span class="text-red-600"> *</span>
                 </h2>
               </div>
 
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1147,12 +1167,14 @@
                     value="1"
                     th:checked="*{technologyAns==1}"
                   />
-                  Project work is beyond basic research and technology concept
-                  has been defined</label
+                  <p>
+                    Project work is beyond basic research and technology concept
+                    has been defined
+                  </p></label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1160,12 +1182,14 @@
                     value="2"
                     th:checked="*{technologyAns==2}"
                   />
-                  Applied research has begun and practical application(s) have
-                  been identified</label
+                  <p>
+                    Applied research has begun and practical application(s) have
+                    been identified
+                  </p></label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1173,13 +1197,15 @@
                     value="3"
                     th:checked="*{technologyAns==3}"
                   />
-                  Preliminary testing of technology components has begun, and
-                  technical feasibility has been established in a laboratory
-                  environment</label
+                  <p>
+                    Preliminary testing of technology components has begun, and
+                    technical feasibility has been established in a laboratory
+                    environment
+                  </p></label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1191,8 +1217,8 @@
                   completed in a laboratory environment
                 </label>
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1208,14 +1234,14 @@
 
             <hr class="my-3" />
             <div class="ml-6 text-sm">
-              <div>
+              <div class="flex justify-start">
                 <h2 class="text-black mb-3 text-base">
                   Product Development <span class="text-red-600"> *</span>
                 </h2>
               </div>
 
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1227,8 +1253,8 @@
                 >
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1240,8 +1266,8 @@
                   application(s)</label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1253,8 +1279,8 @@
                   been completed in the intended application(s)</label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1267,8 +1293,8 @@
                   conditions and environments
                 </label>
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1284,14 +1310,14 @@
 
             <hr class="my-3" />
             <div class="ml-6 text-sm">
-              <div>
+              <div class="flex justify-start">
                 <h2 class="text-black mb-3 text-base">
                   Competitive Landscape <span class="text-red-600"> *</span>
                 </h2>
               </div>
 
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1303,10 +1329,9 @@
                   knowledge of potential applications and competitive landscape
                   have been identified</label
                 >
-                >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1319,8 +1344,8 @@
                   competitive products/systems has been demonstrated</label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1334,8 +1359,8 @@
                   demonstrated</label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1348,8 +1373,8 @@
                   products/systems has been completed
                 </label>
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1366,15 +1391,15 @@
 
             <hr class="my-3" />
             <div class="ml-6 text-sm">
-              <div>
+              <div class="flex justify-start">
                 <h2 class="text-black mb-3 text-base">
                   Product Development/Design
                   <span class="text-red-600"> *</span>
                 </h2>
               </div>
 
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1387,8 +1412,8 @@
                 >
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1400,8 +1425,8 @@
                   highlighted a clear value proposition</label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1414,8 +1439,8 @@
                   been identified</label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1429,8 +1454,8 @@
                   and trade-offs
                 </label>
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1447,14 +1472,14 @@
 
             <hr class="my-3" />
             <div class="ml-6 text-sm">
-              <div>
+              <div class="flex justify-start">
                 <h2 class="text-black mb-3 text-base">
                   Team <span class="text-red-600"> *</span>
                 </h2>
               </div>
 
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1467,8 +1492,8 @@
                 >
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1480,8 +1505,8 @@
                   company with no outside assistance</label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1494,8 +1519,8 @@
                   incubator/accelerator</label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1508,8 +1533,8 @@
                   with assistance from outside advisors/mentors
                 </label>
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1526,14 +1551,14 @@
 
             <hr class="my-3" />
             <div class="ml-6 text-sm">
-              <div>
+              <div class="flex justify-start">
                 <h2 class="text-black mb-3 text-base">
                   Go-to-Market <span class="text-red-600"> *</span>
                 </h2>
               </div>
 
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1545,8 +1570,8 @@
                   defined</label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1559,8 +1584,8 @@
                   have been refined based on customer/partner feedback</label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1574,8 +1599,8 @@
                   the value chain</label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1588,8 +1613,8 @@
                   customers)
                 </label>
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1605,15 +1630,15 @@
 
             <hr class="my-3" />
             <div class="ml-6 text-sm">
-              <div>
+              <div class="flex justify-start">
                 <h2 class="text-black mb-3 text-base">
                   Manufacturing/Supply Chain
                   <span class="text-red-600"> *</span>
                 </h2>
               </div>
 
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1626,8 +1651,8 @@
                   analysis</label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1641,8 +1666,8 @@
                   requirements</label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1654,8 +1679,8 @@
                   defined and are in progress</label
                 >
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1667,8 +1692,8 @@
                   initial customerss
                 </label>
               </div>
-              <div class="flex flex-row items-center">
-                <label class="cursor-pointer flex items-center">
+              <div class="flex flex-row items-center mb-2">
+                <label class="cursor-pointer flex items-center text-left">
                   <input
                     oninput="this.className = ''"
                     type="radio"
@@ -1704,15 +1729,45 @@
               Next
             </button>
             <input type="hidden" name="button" value="resubmit" />
-            <input type="hidden" name="token" th:value="${token}" th:if="*{!bothFeedback}" />
-            <input type="hidden" name="reApplyToken" th:value="${token}" th:if="*{bothFeedback}" />
+            <input
+              type="hidden"
+              name="token"
+              th:value="${token}"
+              th:if="*{!bothFeedback}"
+            />
+            <input
+              type="hidden"
+              name="reApplyToken"
+              th:value="${token}"
+              th:if="*{bothFeedback}"
+            />
             <input type="hidden" name="email" th:value="*{email}" />
             <input type="hidden" name="agreeFlg" th:value="*{agreeFlg}" />
-            <input type="hidden" name="eligibilityAgreeFlg" th:value="*{eligibilityAgreeFlg}" />
-            <input type="hidden" name="commitmentOneFlg" th:value="*{commitmentOneFlg}" />
-            <input type="hidden" name="commitmentTwoFlg" th:value="*{commitmentTwoFlg}" />
-            <input type="hidden" name="commitmentThreeFlg" th:value="*{commitmentThreeFlg}" />
-            <input type="hidden" name="commitmentFourFlg" th:value="*{commitmentFourFlg}" />
+            <input
+              type="hidden"
+              name="eligibilityAgreeFlg"
+              th:value="*{eligibilityAgreeFlg}"
+            />
+            <input
+              type="hidden"
+              name="commitmentOneFlg"
+              th:value="*{commitmentOneFlg}"
+            />
+            <input
+              type="hidden"
+              name="commitmentTwoFlg"
+              th:value="*{commitmentTwoFlg}"
+            />
+            <input
+              type="hidden"
+              name="commitmentThreeFlg"
+              th:value="*{commitmentThreeFlg}"
+            />
+            <input
+              type="hidden"
+              name="commitmentFourFlg"
+              th:value="*{commitmentFourFlg}"
+            />
           </div>
         </div>
 
@@ -1731,11 +1786,15 @@
       <div class="checklist w-[45%] text-sm">
         <div class="flex justify-end">
           <!-- th:href="@{/manager/rank-startups}" -->
-          <a class="close-button">&times;</a>
+          <!-- <a class="close-button">&times;</a> -->
+          <a href="/login" class="resubmit-back-button">Back to login</a>
         </div>
         <!-- prescreen -->
-        <h1>Feedbacks</h1>
-        <h1 class="font-semibold text-lg">Feedback summary 1</h1>
+        <!-- <h1 class="text-base">Feedbacks</h1> -->
+        <h1 class="font-semibold text-lg flex justify-start">
+          Feedback summary
+        </h1>
+        <!-- <h1 class="font-semibold text-lg">Feedback summary 1</h1> -->
         <div>
           <div
             class="pt-3 flex flex-col w-full relative border-gray-200 bg-transparent focus-within:border-blue-600"
@@ -1748,7 +1807,9 @@
           <div class="w-full overflow-x-auto">
             <!-- <div class="overflow-auto w-[700px] h-[550px]"> -->
             <div class="min-w-[1000px]">
-              <h2 class="text-black">I. Documentary Requirements</h2>
+              <h2 class="text-black flex justify-start">
+                I. Documentary Requirements
+              </h2>
 
               <table class="w-full h-full">
                 <thead>
@@ -1872,7 +1933,9 @@
           <div class="w-full overflow-x-auto">
             <!-- <div class="overflow-auto w-[700px] h-[550px]"> -->
             <div class="min-w-[1000px]">
-              <h2 class="text-black">II. Pre-Screening Criteria</h2>
+              <h2 class="text-black flex justify-start">
+                II. Pre-Screening Criteria
+              </h2>
 
               <table class="w-full h-full">
                 <thead>
@@ -2024,16 +2087,21 @@
         <hr class="my-4" />
 
         <!-- evaluation  -->
-        <h1 class="font-semibold text-lg" th:if=*{bothFeedback}>Feedback Summary 2</h1>
-        <div th:if=*{bothFeedback}>
+        <h1 class="font-semibold text-lg" th:if="*{bothFeedback}">
+          Feedback Summary 2
+        </h1>
+        <div th:if="*{bothFeedback}">
           <div
             class="pt-3 flex flex-col w-full relative border-gray-200 bg-transparent focus-within:border-blue-600"
           ></div>
         </div>
-        <hr class="my-4" th:if=*{bothFeedback}/>
+        <hr class="my-4" th:if="*{bothFeedback}" />
 
         <div>
-          <div class="w-full overflow-x-auto max-h-[550px]" th:if=*{bothFeedback}>
+          <div
+            class="w-full overflow-x-auto max-h-[550px]"
+            th:if="*{bothFeedback}"
+          >
             <div class="min-w-[1000px]">
               <div>
                 <table class="w-full h-full">
@@ -2085,8 +2153,10 @@
                         </p>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm font-20" th:text="*{applicantTbiFeedbackObj.ctOneRating}">               
-                        </div>
+                        <div
+                          class="text-sm font-20"
+                          th:text="*{applicantTbiFeedbackObj.ctOneRating}"
+                        ></div>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
@@ -2120,8 +2190,10 @@
                         </p>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm font-20" th:text="*{applicantTbiFeedbackObj.ctTwoRating}">                     
-                        </div>
+                        <div
+                          class="text-sm font-20"
+                          th:text="*{applicantTbiFeedbackObj.ctTwoRating}"
+                        ></div>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
@@ -2155,8 +2227,10 @@
                         </p>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm font-20" th:text="*{applicantTbiFeedbackObj.ctThreeRating}">                          
-                        </div>
+                        <div
+                          class="text-sm font-20"
+                          th:text="*{applicantTbiFeedbackObj.ctThreeRating}"
+                        ></div>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
@@ -2181,8 +2255,10 @@
                         </p>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm font-20" th:text="*{applicantTbiFeedbackObj.ctFourRating}">                         
-                        </div>
+                        <div
+                          class="text-sm font-20"
+                          th:text="*{applicantTbiFeedbackObj.ctFourRating}"
+                        ></div>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
@@ -2216,8 +2292,10 @@
                         </p>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm font-20" th:text="*{applicantTbiFeedbackObj.ctFiveRating}">                 
-                        </div>
+                        <div
+                          class="text-sm font-20"
+                          th:text="*{applicantTbiFeedbackObj.ctFiveRating}"
+                        ></div>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
@@ -2251,8 +2329,10 @@
                         </p>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm font-20" th:text="*{applicantTbiFeedbackObj.ctSixRating}">                          
-                        </div>
+                        <div
+                          class="text-sm font-20"
+                          th:text="*{applicantTbiFeedbackObj.ctSixRating}"
+                        ></div>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
@@ -2278,8 +2358,10 @@
                         </p>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm font-20" th:text="*{applicantTbiFeedbackObj.ctSevenRating}">                          
-                        </div>
+                        <div
+                          class="text-sm font-20"
+                          th:text="*{applicantTbiFeedbackObj.ctSevenRating}"
+                        ></div>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
@@ -2304,8 +2386,10 @@
                         </p>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm font-20" th:text="*{applicantTbiFeedbackObj.ctEightRating}">
-                        </div>
+                        <div
+                          class="text-sm font-20"
+                          th:text="*{applicantTbiFeedbackObj.ctEightRating}"
+                        ></div>
                       </td>
                       <td class="border border-gray-500 px-2 py-2">
                         <textarea
@@ -2340,10 +2424,10 @@
             </div>
           </div>
         </div>
-        <hr class="my-4" th:if=*{bothFeedback}/>
+        <hr class="my-4" th:if="*{bothFeedback}" />
 
         <!-- additional feedback -->
-        <div class="flex flex-col" th:if=*{bothFeedback}>
+        <div class="flex flex-col" th:if="*{bothFeedback}">
           <div class="w-full h-[100px]">
             <textarea
               oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
