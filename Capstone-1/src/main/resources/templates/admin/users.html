@@ -102,6 +102,45 @@
       .error-container div {
         background: red;
       }
+
+      .role-badge {
+        display: inline-block;
+        width: 100%;
+        max-width: 120px;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 0.85em;
+        font-weight: bold;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .role-admin {
+        color: orange;
+        background-color: #ffe5cc;
+      }
+
+      .role-officer {
+        color: brown;
+        background-color: #f5deb3;
+      }
+
+      .role-tbiboard {
+        color: green;
+        background-color: #e6ffe6;
+      }
+
+      .role-manager {
+        color: blue;
+        background-color: #e6f2ff;
+      }
+
+      .role-default {
+        color: grey;
+        background-color: #f0f0f0;
+      }
     </style>
   </head>
   <body>
@@ -223,10 +262,17 @@
               <!-- th:text="${app.status == 0 ? 'In Officer' : app.status == 2 ? 'Rejected' : app.status == 1 OR app.status == 3? 'In Manager' : app.status == 4 ? 'In Board' : app.status == 5 AND app.score >=6 ? 'Passed'  : 'Failed'}"
               th:style="${app.status == 0 OR app.status == 1 OR app.status==3 OR app.status == 4  ? 'color:#000000; font-weight: bold;' : app.status == 2 OR ((app.status == 5 OR app.status == 6 OR app.status == 7) AND app.score <= 5) ? 'color:#FF0000; font-weight: bold;' : 'color:#008000; font-weight: bold;'}"
            -->
-              <td
-                class="whitespace-nowrap max-w-0 truncate text-center"
-                th:text="${user.role}"
-              ></td>
+              <td class="whitespace-nowrap max-w-0 text-center">
+                <span
+                  th:text="${user.role}"
+                  th:class="${'role-badge ' + 
+                        (user.role == 'ADMIN' ? 'role-admin' : 
+                        (user.role == 'OFFICER' ? 'role-officer' : 
+                        (user.role == 'TBIBOARD' ? 'role-tbiboard' :
+                        (user.role == 'MANAGER' ? 'role-manager' : 
+                        'role-default'))))}"
+                ></span>
+              </td>
               <td
                 class="whitespace-nowrap max-w-0 truncate text-center"
                 th:text="${#dates.format(user.createdDate, 'MM-dd-yyyy')}"
@@ -341,7 +387,7 @@
           </div>
           <div class="modal-body" id="modal-body">
             <form th:action="@{/admin/users/edit-user}" method="GET">
-			 <input type="hidden" name="id" value="0" id="edit-user-id-pk"/>
+              <input type="hidden" name="id" value="0" id="edit-user-id-pk" />
               <p class="font-semibold text-xl text-center">
                 Are you sure you want to edit this user?
               </p>
@@ -359,7 +405,7 @@
                   th:href="@{/admin/users/edit-user}"
                   class="w-32 text-center px-3 h-8 border-black hover:bg-blue-500 hover:bg-opacity-75 bg-[#2493DF] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                 >
-   				Edit
+                  Edit
                 </button>
                 <!-- once rejected, send info to applicant email the feedback -->
               </div>

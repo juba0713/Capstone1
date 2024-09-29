@@ -28,6 +28,7 @@
         top: 0;
         height: 100%;
         overflow-y: auto;
+        padding-top: 80px;
       }
 
       input {
@@ -116,8 +117,16 @@
     </style>
   </head>
   <body class="font-secondary" th:object="${applicantWebDto}">
+    <div class="h-20 sticky top-0 z-10 bg-opacity-5 backdrop-blur-[3px]">
+      <div
+        class="flex items-center justify-end h-full p-10 font-primary text-4xl text-center"
+      >
+        Resubmit Form
+      </div>
+      <a th:href="@{/officer/home}" class="ad-back-button">Back to home</a>
+    </div>
     <!-- LEFT side -->
-    <div class="w-[55%] bg-white p-10 border-red-500 details">
+    <div class="w-[55%] bg-white p-10 pt-2 details">
       <div class="error-container" th:if="*{error != null}">
         <div>Please fill out all required fields!</div>
       </div>
@@ -174,12 +183,12 @@
                 A. Project Description<span class="text-red-600"> *</span>
               </h2>
               <textarea
-                oninput="this.className = 'resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10'"
+                oninput="this.className = 'resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 '"
                 type="text"
                 placeholder="Type something here..."
                 name="projectDescription"
                 th:text="*{projectDescription}"
-                class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
+                class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20"
               ></textarea>
               <div
                 class="error no-pad"
@@ -735,7 +744,7 @@
             <hr class="my-8" />
 
             <!-- About the Proposed Acceleration -->
-            <div class="flex flex-col mt-4 mb-3 mx-6">
+            <div class="flex flex-col mt-4 mb-3 ml-6">
               <p class="mb-3 font-semibold text-base">
                 II. About the Proposed Acceleration
               </p>
@@ -1728,8 +1737,18 @@
             >
               Next
             </button>
-            <input type="hidden" name="button" value="resubmit" th:if="*{!bothFeedback}"/>
-            <input type="hidden" name="button" value="submit" th:if="*{bothFeedback}"/>
+            <input
+              type="hidden"
+              name="button"
+              value="resubmit"
+              th:if="*{!bothFeedback}"
+            />
+            <input
+              type="hidden"
+              name="button"
+              value="submit"
+              th:if="*{bothFeedback}"
+            />
             <input
               type="hidden"
               name="token"
@@ -1784,23 +1803,23 @@
     <div>
       <!-- <input type="hidden" name="encryptedApplicantIdPk" /> -->
 
-      <div class="checklist w-[45%] text-sm">
-        <div class="flex justify-end">
-          <!-- th:href="@{/manager/rank-startups}" -->
-          <!-- <a class="close-button">&times;</a> -->
-          <a href="/login" class="resubmit-back-button">Back to login</a>
-        </div>
+      <div class="checklist w-[45%] text-sm pt-20">
+        <!-- <div class="flex justify-end"> -->
+        <!-- th:href="@{/manager/rank-startups}" -->
+        <!-- <a class="close-button">&times;</a> -->
+        <!-- <a href="/login" class="resubmit-back-button">Back to login</a> -->
+        <!-- </div> -->
         <!-- prescreen -->
         <!-- <h1 class="text-base">Feedbacks</h1> -->
         <h1 class="font-semibold text-lg flex justify-start">
           Feedback summary
         </h1>
         <!-- <h1 class="font-semibold text-lg">Feedback summary 1</h1> -->
-        <div>
+        <!-- <div>
           <div
             class="pt-3 flex flex-col w-full relative border-gray-200 bg-transparent focus-within:border-blue-600"
           ></div>
-        </div>
+        </div> -->
         <hr class="my-4" />
 
         <!--  Documentary Requirements-->

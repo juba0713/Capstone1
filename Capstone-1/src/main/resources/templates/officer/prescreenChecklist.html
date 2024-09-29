@@ -27,6 +27,7 @@
         top: 0;
         height: 100%;
         overflow-y: auto;
+        padding-top: 80px;
       }
 
       input {
@@ -54,6 +55,15 @@
     </style>
   </head>
   <body class="font-secondary" th:object="${officerWebDto}">
+    <div class="h-20 sticky top-0 z-10 bg-opacity-5 backdrop-blur-[3px]">
+      <div
+        class="flex items-center justify-end h-full p-10 font-primary text-4xl text-center"
+      >
+        Review Application
+      </div>
+      <a th:href="@{/officer/home}" class="ad-back-button">Back to home</a>
+    </div>
+
     <div class="flex flex-row">
       <div
         th:replace="~{fragments/applicationDetails :: applicationDetails}"
@@ -67,9 +77,6 @@
           th:value="*{encryptedApplicantIdPk}"
         />
         <div class="checklist w-[45%] text-sm">
-          <div class="flex justify-end">
-            <a th:href="@{/officer/home}" class="close-button">&times;</a>
-          </div>
           <h1 class="font-semibold text-lg">Pre-screening Checklist</h1>
           <div>
             <div

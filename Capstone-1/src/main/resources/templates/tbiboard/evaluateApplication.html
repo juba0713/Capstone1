@@ -21,6 +21,7 @@
         top: 0;
         height: 100%;
         overflow-y: auto;
+        padding-top: 80px;
       }
 
       input {
@@ -48,6 +49,14 @@
     </style>
   </head>
   <body class="font-secondary" th:object="${tbiBoardWebDto}">
+    <div class="h-20 sticky top-0 z-10 bg-opacity-5 backdrop-blur-[3px]">
+      <div
+        class="flex items-center justify-end h-full p-10 font-primary text-4xl text-center"
+      >
+        Evaluate Application
+      </div>
+      <a th:href="@{/officer/home}" class="ad-back-button">Back to home</a>
+    </div>
     <div class="error-container" id="globalError" style="display: none">
       <div>Please fill out all required fields!</div>
     </div>
@@ -65,10 +74,6 @@
         />
 
         <div class="checklist w-[45%] text-sm">
-          <div class="flex justify-end">
-            <a th:href="@{/tbiboard/home}" class="close-button">&times;</a>
-          </div>
-
           <h1 class="font-semibold text-lg">Evaluation Form</h1>
           <div>
             <div
