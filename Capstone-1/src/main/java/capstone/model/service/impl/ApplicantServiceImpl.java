@@ -286,13 +286,13 @@ public class ApplicantServiceImpl implements ApplicantService {
 			hasError = true;
 		}
 
-		if (inDto.getToken() == null &&  inDto.getVitaeFile().isEmpty()) {
+		if (inDto.getToken() == null && inDto.getReApplyToken() == null && inDto.getVitaeFile().isEmpty()) {
 			vitaeFileError.add(MessageConstant.VITAE_FILE_BLANK);
 			hasError = true;
 		}
 
 		String extension = FilenameUtils.getExtension(inDto.getVitaeFile().getOriginalFilename()).toLowerCase();
-		if (inDto.getToken() == null && !extension.equals("pdf")) {
+		if (inDto.getToken() == null &&  inDto.getReApplyToken() == null  && !extension.equals("pdf")) {
 			vitaeFileError.add(MessageConstant.VITAE_FILE_FORMAT_ERROR);
 			hasError = true;
 		}
