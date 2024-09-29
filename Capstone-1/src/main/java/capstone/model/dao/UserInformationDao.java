@@ -1,5 +1,6 @@
 package capstone.model.dao;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -175,9 +176,29 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 			+ "WHERE "
 			+ "	id_pk = :userIdPk ";
 	
+	public final String UPDATE_USER = "UPDATE m_user_information "
+	        + "SET "
+	        + "    first_name = :firstName, "
+	        + "    last_name = :lastName, "
+	        + "    mobile_number = :mobileNumber, "
+	        + "    role = :role, "
+	        + "    updated_date = :updatedDate "
+	        + "WHERE "
+	        + "    id_pk = :userIdPk";
+
+	
 	@Modifying
 	@Query(value=DELETE_USER, nativeQuery=true)
 	public void deleteUser(@Param("userIdPk") int userIdPk) throws DataAccessException;
+	
+	@Modifying
+	@Query(value=UPDATE_USER, nativeQuery=true) 
+	public int updateUser(@Param("firstName") String firstName,
+			@Param("lastName") String lastName,
+			@Param("mobileNumber") String mobileNumber,
+			@Param("role") String role,
+			@Param("updatedDate") Timestamp updatedDate,
+			@Param("userIdPk") int userIdPk) throws DataAccessException;
 	
 	@Query(value=GET_USER_BY_APPLICANT_ID_PK)
 	public UserInformationEntity getUserByApplicantIdPk(int applicantIdPk) throws DataAccessException;

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import capstone.common.constant.CommonConstant;
@@ -60,9 +61,60 @@ public class AdminController {
     }
 
     @GetMapping("/admin/users/edit-user")
-    public String showEditUser() {
+    public String showEditUser(@RequestParam("id") int id, @ModelAttribute AdminWebDto webDto) {
+    	
+    	AdminInOutDto inDto = new AdminInOutDto();
+    	
+    	inDto.setUserIdPk(id);
+    	
+    	AdminInOutDto outDto = adminService.getUserDetails(inDto);
+    
+    	webDto.setUser(outDto.getUser());
 
         return "admin/editUser";
+    }
+    
+    @PostMapping("/admin/users/edit-user")
+    public String postEditUser(@ModelAttribute AdminWebDto webDto, RedirectAttributes ra) {
+    	
+    	AdminInOutDto inDto = new AdminInOutDto();
+    	
+    	inDto.setUserIdPk(webDto.getUserIdPk());
+    	
+    	inDto.setEmail(webDto.getEmail());
+    	
+    	inDto.setFirstName(webDto.getFirstName());
+    	
+    	inDto.setLastName(webDto.getLastName());
+    	
+    	inDto.setMobileNumber(webDto.getMobileNumber());
+    	
+    	inDto.setRole(webDto.getRole());
+    	
+    	inDto.setPassword(webDto.getPassword());
+    	
+    	inDto.setConfirmPassword(webDto.getConfirmPassword());
+    	
+    	String errorResult = adminService.validateInputs(inDto).getResult();
+    	
+    	if(CommonConstant.INVALID.equals(errorResult)) {
+    		
+    		ra.addFlashAttribute("errors", errorResult);
+    		
+    		return "redirect:/admin/users/edit-user?id=" + webDto.getUserIdPk();
+    	}
+    	
+    	String updateResult = adminService.updateUser(inDto).getResult();
+    	
+    	if(CommonConstant.INVALID.equals(updateResult)) {
+    		
+    		ra.addFlashAttribute("errorMsg",  "No changes were made. Please verify the details and try again.");
+ 
+    	}
+    	
+    	ra.addFlashAttribute("succMsg",  "User details updated successfully!");
+    	
+        return "redirect:/admin/users";
     }
 
     @PostMapping("/admin/users/create")
@@ -77,18 +129,20 @@ public class AdminController {
         inDto.setFirstName(webDto.getFirstName());
 
         inDto.setLastName(webDto.getLastName());
-
+        
+        
+        
         inDto.setRole(webDto.getRole());
 
         inDto.setPassword(webDto.getPassword());
 
         inDto.setConfirmPassword(webDto.getConfirmPassword());
 
-        AdminInOutDto validate = adminService.validateInputs(inDto);
+        AdminInOutDto result = adminService.validateInputs(inDto);
 
-        if (CommonConstant.INVALID.equals(validate.getResult())) {
+        if (CommonConstant.INVALID.equals(result.getResult())) {
 
-            ra.addFlashAttribute("errors", validate.getErrors());
+            ra.addFlashAttribute("errors", result.getErrors());
 
             return "redirect:/admin/users/create";
         }

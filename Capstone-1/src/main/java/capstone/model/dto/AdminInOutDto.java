@@ -19,6 +19,8 @@ public class AdminInOutDto {
 	
 	public int userIdPk;
 	
+	private UserDetailsObj user;
+	
 	/*
 	 * Create Account
 	 */

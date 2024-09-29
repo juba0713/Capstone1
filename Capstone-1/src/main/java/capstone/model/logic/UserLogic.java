@@ -1,5 +1,6 @@
 package capstone.model.logic;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -90,4 +91,16 @@ public interface UserLogic {
 	 * To delete user by changing the delete_flg to true
 	 */
 	public void deleteUser(int userIdPk);
+	
+	/**
+	 * To update usesr information
+	 * @param firstName
+	 * @param lastName
+	 * @param mobileNumber
+	 * @param role
+	 * @param updatedDate
+	 * @param userIdPk
+	 * @return int
+	 */
+	public int updateuser(String firstName, String lastName, String mobileNumber, String role, Timestamp updatedDate, int userIdPk);
 }
