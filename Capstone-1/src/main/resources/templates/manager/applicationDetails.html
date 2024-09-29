@@ -56,7 +56,7 @@
   </head>
   <body class="font-secondary" th:object="${managerWebDto}">
     <!-- left side -->
-    <div class="w-[55%] bg-white p-10">
+    <div class="w-[55%] bg-white p-10" th:style="*{applicantDetailsObj.status == 0 ? 'width: 100%;' : ''}">
       <div class="flex justify-between">
         <div>
           Reject count: <span class="text-red-500 font-semibold">1</span>
@@ -1433,7 +1433,7 @@
     </div>
 
     <!-- right side -->
-    <div>
+    <div th:if="*{applicantDetailsObj.status != 0}">
       <!-- <input type="hidden" name="encryptedApplicantIdPk" /> -->
 
       <div class="checklist w-[45%] text-sm">
