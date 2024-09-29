@@ -1728,7 +1728,8 @@
             >
               Next
             </button>
-            <input type="hidden" name="button" value="resubmit" />
+            <input type="hidden" name="button" value="resubmit" th:if="*{!bothFeedback}"/>
+            <input type="hidden" name="button" value="submit" th:if="*{bothFeedback}"/>
             <input
               type="hidden"
               name="token"

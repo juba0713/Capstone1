@@ -158,7 +158,7 @@ public class ApplicantController {
 			if (!button.equals("resubmit")) {
 				if (webDto.getReApplyToken() != null && !webDto.getReApplyToken().isEmpty()) {
 					System.out.println("REAPPLY");
-					return "redirect:/applicant/form?token=" + webDto.getReApplyToken();
+					return "redirect:/applicant/form/resubmit?token=" + webDto.getReApplyToken();
 				}
 				System.out.println("WTF");
 				return "redirect:/applicant/form";
@@ -168,15 +168,16 @@ public class ApplicantController {
 			}
 		}
 
-		//applicantService.saveApplication(inDto);
+		applicantService.saveApplication(inDto);
 
 		if (!button.equals("resubmit")) {
 			if (webDto.getReApplyToken() != null && !webDto.getReApplyToken().isEmpty()) {
 				ra.addFlashAttribute("success",
 						"Your reapplication was successful! We'll notify you of the outcome soon.");
+			}else {
+				ra.addFlashAttribute("success",
+						"You have sucessfully registered! Wait for the email that will be sent to you!");
 			}
-			ra.addFlashAttribute("success",
-					"You have sucessfully registered! Wait for the email that will be sent to you!");
 		} else {
 			ra.addFlashAttribute("success", "Resubmission successful! You'll receive an update shortly.");
 		}
