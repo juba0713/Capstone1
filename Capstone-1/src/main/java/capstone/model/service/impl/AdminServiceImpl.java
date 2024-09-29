@@ -183,13 +183,13 @@ public class AdminServiceImpl  implements AdminService{
 		
 		String lastNameError = CommonConstant.BLANK;
 		
-		if (inDto.getEmail() == null || inDto.getEmail().isEmpty()) {
+		if (inDto.getUserIdPk() == 0 && (inDto.getEmail() == null || inDto.getEmail().isEmpty())) {
 			
 			emailError.add(MessageConstant.EMAIL_BLANK);
 			
 			outDto.setResult(CommonConstant.INVALID);
 		}
-		if (!CommonConstant.EMAIL_PATTERN.matcher(inDto.getEmail()).matches()) {
+		if (inDto.getUserIdPk() == 0 && !CommonConstant.EMAIL_PATTERN.matcher(inDto.getEmail()).matches()) {
 			
 			emailError.add(MessageConstant.EMAIL_INCORRECT_FORMAT);
 			
@@ -224,7 +224,7 @@ public class AdminServiceImpl  implements AdminService{
 			outDto.setResult(CommonConstant.INVALID);
 		}
 				
-		if (inDto.getPassword() == null || inDto.getPassword().isEmpty()) {
+		if (inDto.getUserIdPk() == 0 &&  (inDto.getPassword() == null || inDto.getPassword().isEmpty())) {
 
 			newPasswordError.add(MessageConstant.PASSWORD_BLANK);
 
@@ -239,7 +239,7 @@ public class AdminServiceImpl  implements AdminService{
 
 		}
 
-		if (inDto.getConfirmPassword() == null || inDto.getConfirmPassword().isEmpty()) {
+		if (inDto.getUserIdPk() == 0 && ( inDto.getConfirmPassword() == null || inDto.getConfirmPassword().isEmpty())) {
 
 			confirmPasswordError.add(MessageConstant.CONFIRM_PASSWORD_BLANK);
 
@@ -316,9 +316,57 @@ public class AdminServiceImpl  implements AdminService{
 	public void deleteUser(AdminInOutDto inDto) {
 		
 		userLogic.deleteUser(inDto.getUserIdPk());
-		
-		System.out.println(inDto.getUserIdPk());
 
+	}
+
+	@Override
+	public AdminInOutDto getUserDetails(AdminInOutDto inDto) {
+		
+		AdminInOutDto outDto = new AdminInOutDto();
+		
+		UserInformationEntity entity = userLogic.getUserByIdPk(inDto.getUserIdPk());
+		
+		UserDetailsObj obj = new UserDetailsObj();
+		
+		obj.setId(entity.getIdPk());
+		
+		obj.setEmail(entity.getEmail());
+		
+		obj.setFirstName(entity.getFirstName());
+		
+		obj.setLastName(entity.getLastName());
+		
+		obj.setNumber(entity.getMobileNumber());
+		
+		obj.setRole(entity.getRole());
+				
+		if(entity.getRole().equals("APPLICANT")) {
+			obj.setIsApplicant(true);
+		}else {
+			obj.setIsApplicant(false);
+		}
+		
+		outDto.setUser(obj);
+		
+		return outDto;
+	}
+
+	@Override
+	public AdminInOutDto updateUser(AdminInOutDto inDto) {
+		
+		AdminInOutDto outDto = new AdminInOutDto();
+		
+		outDto.setResult(CommonConstant.VALID);
+		
+		Timestamp timeNow = new Timestamp(System.currentTimeMillis());
+		
+		int result = userLogic.updateuser(inDto.getFirstName(), inDto.getLastName(), inDto.getMobileNumber(), inDto.getRole(), timeNow, inDto.getUserIdPk());
+	
+		if(result == 0) {
+			outDto.setResult(CommonConstant.INVALID);
+		}
+		
+		return outDto;
 	}
 
 }

@@ -10,6 +10,7 @@ import capstone.model.dao.UserInformationDao;
 import capstone.model.dao.entity.UserDetailsEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
 import capstone.model.dao.entity.UserInformationEntity;
+import java.sql.Timestamp;
 import capstone.model.logic.UserLogic;
 
 @Service
@@ -89,5 +90,14 @@ public class UserLogicImpl implements UserLogic {
 		userInformationDao.deleteUser(userIdPk);
 		
 	}
+
+	@Override
+	public int updateuser(String firstName, String lastName, String mobileNumber, String role,
+			Timestamp updatedDate, int userIdPk) {
+		
+		return userInformationDao.updateUser(firstName, lastName, mobileNumber, role, updatedDate, userIdPk);
+	}
+
+
 
 }

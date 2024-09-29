@@ -15,6 +15,10 @@ public class UserDetailsObj {
 	
 	private String fullname;
 	
+	private String firstName;
+	
+	private String lastName;
+	
 	private String role;
 	
 	private Timestamp createdDate;
@@ -22,4 +26,6 @@ public class UserDetailsObj {
 	private Timestamp updatedDate;
 	
 	private Boolean deletable;
+	
+	private Boolean isApplicant;
 }
