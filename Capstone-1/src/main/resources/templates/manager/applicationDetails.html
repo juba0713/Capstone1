@@ -1441,8 +1441,8 @@
           <a class="close-button" th:href="@{/manager/home}">&times;</a>
         </div>
         <!-- prescreen -->
-        <h1 class="font-semibold text-lg">Pre-screening Checklist</h1>
-        <div>
+        <h1 class="font-semibold text-lg" th:if="*{applicantDetailsObj.status != 0}">Pre-screening Checklist</h1>
+        <div th:if="*{applicantDetailsObj.status != 0}">
           <div
             class="pt-3 flex flex-col w-full relative border-gray-200 bg-transparent focus-within:border-blue-600"
           >
@@ -1459,10 +1459,10 @@
             </h2>
           </div>
         </div>
-        <hr class="my-4" />
+        <hr class="my-4" th:if="*{applicantDetailsObj.status != 0}" />
         <!-- pre-screening checklist -->
         <!--  Documentary Requirements-->
-        <div>
+        <div th:if="*{applicantDetailsObj.status != 0}">
           <div class="w-full overflow-x-auto">
             <!-- <div class="overflow-auto w-[700px] h-[550px]"> -->
             <div class="min-w-[1000px]">
@@ -1687,9 +1687,9 @@
             </div>
           </div>
         </div>
-        <hr class="my-4" />
+        <hr class="my-4" th:if="*{applicantDetailsObj.status != 0}" />
 
-        <div>
+        <div th:if="*{applicantDetailsObj.status != 0}">
           <div class="w-full overflow-x-auto">
             <!-- <div class="overflow-auto w-[700px] h-[550px]"> -->
             <div class="min-w-[1000px]">
@@ -1961,8 +1961,8 @@
             </div>
           </div>
         </div>
-        <hr class="my-4" />
-        <div class="w-full h-[100px] pointer-events-none">
+        <hr class="my-4" th:if="*{applicantDetailsObj.status != 0}"/>
+        <div class="w-full h-[100px] pointer-events-none" th:if="*{applicantDetailsObj.status != 0}">
           Recommendation
           <textarea
             th:text="*{applicantOffFeedbackObj.recommendation}"
@@ -1973,7 +1973,7 @@
         </div>
 
         <!-- evaluation  -->
-        <div class="mt-2">
+        <div class="mt-2" th:if="*{applicantDetailsObj.status >= 5}">
           <hr class="my-10" />
 
           <h1 class="font-semibold text-lg">Evaluation Form</h1>
@@ -2036,9 +2036,9 @@
             </div>
           </div>
         </div>
-        <hr class="my-4" />
+        <hr class="my-4" th:if="*{applicantDetailsObj.status >= 5}"/>
 
-        <div>
+        <div th:if="*{applicantDetailsObj.status >= 5}">
           <div class="w-full overflow-x-auto max-h-[550px]">
             <div class="min-w-[1000px]">
               <div>
@@ -2410,10 +2410,10 @@
             </div>
           </div>
         </div>
-        <hr class="my-4" />
+        <hr class="my-4" th:if="*{applicantDetailsObj.status >= 5}" />
 
         <!-- additional feedback -->
-        <div class="flex flex-col pointer-events-none">
+        <div class="flex flex-col pointer-events-none" th:if="*{applicantDetailsObj.status >= 5}">
           <div class="w-full h-[100px]">
             <textarea
               th:text="*{applicantTbiFeedbackObj.tbiFeedback}"
