@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import capstone.common.constant.CommonConstant;
+import capstone.common.constant.MessageConstant;
 import capstone.controller.webdto.OfficerWebDto;
 import capstone.controller.webdto.TbiBoardWebDto;
 import capstone.model.dto.OfficerInOutDto;
@@ -58,6 +60,33 @@ public class TbiBoardController {
 	@PostMapping("/evaluate")
 	public String evaluateApplication(@ModelAttribute TbiBoardWebDto webDto, RedirectAttributes ra) throws Exception {
 		
+		if(CommonConstant.BLANK.equals(webDto.getTbiFeedback())) {
+			
+			ra.addFlashAttribute("error", MessageConstant.FEEDBACK_BLANK);
+			
+			ra.addFlashAttribute("tbiBoardWebDto", webDto);
+			
+			return "redirect:/tbi-board/evaluate?id=" + webDto.getEncryptedApplicantIdPk();
+			
+		}
+		
+		if(webDto.getCtOneRating() == 0 ||
+				webDto.getCtTwoRating() == 0 ||
+				webDto.getCtThreeRating() == 0 ||
+				webDto.getCtFourRating() == 0 ||
+				webDto.getCtFiveRating() == 0 ||
+				webDto.getCtSixRating() == 0 ||
+				webDto.getCtSevenRating() == 0 ||
+				webDto.getCtEightRating() == 0) {
+			
+			ra.addFlashAttribute("error", MessageConstant.RATING_BLANK);
+			
+			ra.addFlashAttribute("tbiBoardWebDto", webDto);
+			
+			return "redirect:/tbi-board/evaluate?id=" + webDto.getEncryptedApplicantIdPk();
+			
+		}
+		
 		TbiBoardInOutDto inDto = new TbiBoardInOutDto();
 		
 		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(webDto.getEncryptedApplicantIdPk())));
@@ -96,7 +125,7 @@ public class TbiBoardController {
 		
 		inDto.setTbiFeedback(webDto.getTbiFeedback());
 				
-		tbiBoardService.evaluateApplicant(inDto);
+		//tbiBoardService.evaluateApplicant(inDto);
 		System.out.println(webDto);
 		
 		ra.addFlashAttribute("succMsg", "The application has been evaluated!");

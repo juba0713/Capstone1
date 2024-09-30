@@ -75,4 +75,6 @@ public class MessageConstant {
 	public static String FEEDBACK_BLANK = "Please Provide Your Feedback!";
 	
 	public static String RESUBMIT_FLG_BLANK = "Please indicate whether the application sheet is qualified for resubmission. Your selection is required to proceed!";
+	
+	public static String RATING_BLANK = "Please select a rating from 1 to 10. Your feedback is essential for us to proceed!";
 }
