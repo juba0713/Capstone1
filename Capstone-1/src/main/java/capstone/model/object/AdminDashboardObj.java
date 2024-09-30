@@ -32,4 +32,6 @@ public class AdminDashboardObj {
 	private int reapplicationRejectedCount;
 	
 	private int reapplicationFailedCount;
+	
+	private int issuedCertificateCount;
 }

@@ -77,6 +77,8 @@ public class AdminServiceImpl  implements AdminService{
 		
 		obj.setReapplicationFailedCount(entity.getReapplicationFailedCount());
 		
+		obj.setIssuedCertificateCount(entity.getIssuedCertificateCount());
+		
 		outDto.setAdminDashboardObj(obj);
 		
 		return outDto;
