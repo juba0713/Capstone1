@@ -16,6 +16,7 @@ import capstone.model.dao.entity.AcceptedApplicantEntity;
 import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
+import capstone.model.dao.entity.OfficerDashboardEntity;
 import capstone.model.dao.entity.PrescreenDetailsEntity;
 import capstone.model.dao.entity.RejectedApplicantEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
@@ -25,6 +26,7 @@ import capstone.model.logic.ApplicantLogic;
 import capstone.model.logic.UserLogic;
 import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantObj;
+import capstone.model.object.OfficerDashboardObj;
 import capstone.model.service.CommonService;
 import capstone.model.service.EmailService;
 import capstone.model.service.LoggedInUserService;
@@ -380,6 +382,31 @@ public class OfficerServiceImpl implements OfficerService{
 		
 		return outDto;
 		
+	}
+
+
+	@Override
+	public OfficerInOutDto getDetailsForOfficerDashboard() {
+		
+		OfficerInOutDto outDto = new OfficerInOutDto();
+		
+		OfficerDashboardEntity entity = userLogic.getDetailsForOfficerDashboard();
+		
+		OfficerDashboardObj obj = new OfficerDashboardObj();
+		
+		obj.setPendingApplicationCount(entity.getPendingApplicationCount());
+		
+		obj.setAcceptedApplicationCount(entity.getAcceptedApplicationCount());
+		
+		obj.setRejectedApplicationEligibleCount(entity.getRejectedApplicationEligibleCount());
+		
+		obj.setRejectedApplicationNotEligibleCount(entity.getRejectedApplicationNotEligibleCount());
+		
+		obj.setResubmittedApplicationCount(entity.getResubmittedApplicationCount());
+		
+		outDto.setOfficerDashboardObj(obj);
+		
+		return outDto;
 	}
 
 }

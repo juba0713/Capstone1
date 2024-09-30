@@ -4,18 +4,21 @@ import java.util.List;
 
 import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantObj;
+import capstone.model.object.OfficerDashboardObj;
 import lombok.Data;
 
 @Data
 public class OfficerInOutDto {
 	
-	public List<ApplicantObj> listOfApplicants;
+	private OfficerDashboardObj officerDashboardObj;
 	
-	public int applicantIdPk;
+	private List<ApplicantObj> listOfApplicants;
 	
-	public String feedback;
+	private int applicantIdPk;
 	
-	public Boolean resubmitFlg;
+	private String feedback;
+	
+	private Boolean resubmitFlg;
 	
 	ApplicantDetailsObj applicantDetailsObj;
 	

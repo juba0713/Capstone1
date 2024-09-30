@@ -4,10 +4,13 @@ import java.util.List;
 
 import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantObj;
+import capstone.model.object.OfficerDashboardObj;
 import lombok.Data;
 
 @Data
 public class OfficerWebDto {
+	
+	private OfficerDashboardObj officerDashboardObj;
 
 	private List<ApplicantObj> listOfApplicants;
 	

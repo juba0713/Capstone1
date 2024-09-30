@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import capstone.model.dao.entity.AdminDashboardEntity;
+import capstone.model.dao.entity.OfficerDashboardEntity;
 import capstone.model.dao.entity.TbiBoardDashboardEntity;
 import capstone.model.dao.entity.UserDetailsEntity;
 import capstone.model.dao.entity.UserInformationEntity;
@@ -160,8 +161,37 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 			+ "               (SELECT COUNT(ee) FROM m_applicant ee WHERE ee.delete_flg = false)  "
 			+ "        FROM t_rejected_applicant e  "
 			+ "        WHERE e.delete_flg = false  "
-			+ "    ) AS INTEGER) AS failed_rate  "
-			+ "";
+			+ "    ) AS INTEGER) AS failed_rate  ";
+	
+	public final String GET_DETAILS_FOR_OFFICER_DASHBOARD = "SELECT   "
+			+ "    CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "        WHERE e.status IN ('0')  "
+			+ "        AND e.delete_flg = false  "
+			+ "    ) AS INTEGER) AS pending_applicant_count,  "
+			+ "    CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM t_accepted_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "    ) AS INTEGER) AS accepted_applicant_count,  "
+			+ "	CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM t_rejected_applicant e  "
+			+ "		WHERE e.resubmit_flg = true  "
+			+ "    ) AS INTEGER) AS rejected_applicant_yes_count,  "
+			+ "	CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM t_rejected_applicant e  "
+			+ "		WHERE e.resubmit_flg = false  "
+			+ "    ) AS INTEGER) AS rejected_applicant_no_count,  "
+			+ "	CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "		INNER JOIN t_rejected_applicant r ON r.applicant_id_pk = e.id_pk  "
+			+ "		WHERE r.resubmit_flg = true  "
+			+ "		AND e.status IN (1,3,4,40,5,50,6,7,8)  "
+			+ "    ) AS INTEGER) AS resubmitted_applicant_count";
 	
 	public final String GET_USERS_BY_APPLICANT_ID_PKS = "SELECT u "
 			+ "FROM ApplicantEntity a "
@@ -284,6 +314,18 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 		Object[] data = getDetailsForTbiBoardRaw().get(0);
 		
 		TbiBoardDashboardEntity entity = new TbiBoardDashboardEntity(data);
+		
+		return entity;
+	};
+	
+	@Query(value=GET_DETAILS_FOR_OFFICER_DASHBOARD, nativeQuery=true)
+	public List<Object[]> getDetailsForOfficerRaw() throws DataAccessException;
+	
+	default OfficerDashboardEntity  getDetailsForOfficerDashboard() {
+		
+		Object[] data = getDetailsForOfficerRaw().get(0);
+		
+		OfficerDashboardEntity entity = new OfficerDashboardEntity(data);
 		
 		return entity;
 	};

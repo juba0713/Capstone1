@@ -9,6 +9,12 @@ import jakarta.mail.MessagingException;
 public interface OfficerService {
 	
 	/**
+	 * To get the analytics details for officer dashboard
+	 * @return OfficerInOutDto
+	 */
+	public OfficerInOutDto getDetailsForOfficerDashboard();
+	
+	/**
 	 * To get all applicants for officer
 	 * @return OfficerInOutDto
 	 */

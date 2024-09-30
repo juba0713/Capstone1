@@ -35,6 +35,10 @@ public class OfficerController {
 		OfficerInOutDto outDto = officerService.getAllApplicants();
 
 		webDto.setListOfApplicants(outDto.getListOfApplicants());
+		
+		outDto = officerService.getDetailsForOfficerDashboard();
+		
+		webDto.setOfficerDashboardObj(outDto.getOfficerDashboardObj());
 
 		return "officer/home";
 	}

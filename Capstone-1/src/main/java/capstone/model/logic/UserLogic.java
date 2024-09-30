@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import capstone.model.dao.entity.AdminDashboardEntity;
+import capstone.model.dao.entity.OfficerDashboardEntity;
 import capstone.model.dao.entity.TbiBoardDashboardEntity;
 import capstone.model.dao.entity.UserDetailsEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
@@ -117,4 +118,10 @@ public interface UserLogic {
 	 * @return
 	 */
 	public TbiBoardDashboardEntity getDetailsForTbiBoardDashboard();
+	
+	/**
+	 * To get analytics details for Officer dashboard
+	 * @return
+	 */
+	public OfficerDashboardEntity getDetailsForOfficerDashboard();
 }
