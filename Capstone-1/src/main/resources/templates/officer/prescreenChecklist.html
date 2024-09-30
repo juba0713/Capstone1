@@ -52,9 +52,41 @@
         margin-right: 8px;
         margin-left: 4px;
       }
+      
+       .error-container {
+        position: absolute;
+        top: 30px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+      }
+
+      .error-container div {
+        background: red;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 10px;
+      }
+   
+
+      .error {
+        padding-left: 20px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #dc143c;
+      }
     </style>
   </head>
   <body class="font-secondary" th:object="${officerWebDto}">
+	  <script th:inline="javascript">console.log(/*[[${officerWebDto}]]*/'');</script>
+      <div class="error-container" th:if="${error != null}">
+      <div th:text="${error}"></div>
+    </div>
     <div class="h-20 sticky top-0 z-10 bg-opacity-5 backdrop-blur-[3px]">
       <div
         class="flex items-center justify-end h-full p-10 font-primary text-4xl text-center"
@@ -63,6 +95,8 @@
       </div>
       <a th:href="@{/officer/home}" class="ad-back-button">Back to home</a>
     </div>
+    
+
 
     <div class="flex flex-row">
       <div
@@ -151,6 +185,7 @@
                                 type="radio"
                                 name="ctOneFlg"
                                 value="true"
+								th:checked="*{ctOneFlg}"
                               />
                               Yes</label
                             >
@@ -161,6 +196,7 @@
                                 type="radio"
                                 name="ctOneFlg"
                                 value="false"
+   								th:checked="*{ctOneFlg == null ? 'checked' : !ctOneFlg}"
                               />
                               No</label
                             >
@@ -195,6 +231,7 @@
                                 type="radio"
                                 name="ctTwoFlg"
                                 value="true"
+                                th:checked="*{ctTwoFlg}"
                               />
                               Yes</label
                             >
@@ -205,6 +242,7 @@
                                 type="radio"
                                 name="ctTwoFlg"
                                 value="false"
+                                th:checked="*{ctTwoFlg == null ? 'checked' : !ctTwoFlg}"
                               />
                               No</label
                             >
@@ -239,6 +277,7 @@
                                 type="radio"
                                 name="ctThreeFlg"
                                 value="true"
+                                th:checked="*{ctThreeFlg}"
                               />
                               Yes</label
                             >
@@ -249,6 +288,7 @@
                                 type="radio"
                                 name="ctThreeFlg"
                                 value="false"
+                                th:checked="*{ctThreeFlg == null ? 'checked' : !ctThreeFlg}"
                               />
                               No</label
                             >
@@ -283,6 +323,7 @@
                                 type="radio"
                                 name="ctFourFlg"
                                 value="true"
+                                th:checked="*{ctFourFlg}"
                               />
                               Yes</label
                             >
@@ -293,6 +334,7 @@
                                 type="radio"
                                 name="ctFourFlg"
                                 value="false"
+                                th:checked="*{ctFourFlg == null ? 'checked' : !ctFourFlg}"
                               />
                               No</label
                             >
@@ -367,6 +409,7 @@
                                 type="radio"
                                 name="ctFiveFlg"
                                 value="true"
+                      			th:checked="*{ctFiveFlg}"
                               />
                               Yes</label
                             >
@@ -377,6 +420,7 @@
                                 type="radio"
                                 name="ctFiveFlg"
                                 value="false"
+                                th:checked="*{ctFiveFlg == null ? 'checked' : !ctFiveFlg}"
                               />
                               No</label
                             >
@@ -411,6 +455,7 @@
                                 type="radio"
                                 name="ctSixFlg"
                                 value="true"
+                                th:checked="*{ctSixFlg}"
                               />
                               Yes</label
                             >
@@ -421,6 +466,7 @@
                                 type="radio"
                                 name="ctSixFlg"
                                 value="false"
+                                th:checked="*{ctSixFlg == null ? 'checked' : !ctSixFlg}"
                               />
                               No</label
                             >
@@ -455,6 +501,7 @@
                                 type="radio"
                                 name="ctSevenFlg"
                                 value="true"
+                                th:checked="*{ctSevenFlg}"
                               />
                               Yes</label
                             >
@@ -465,6 +512,7 @@
                                 type="radio"
                                 name="ctSevenFlg"
                                 value="false"
+                                th:checked="*{ctSevenFlg == null ? 'checked' : !ctSevenFlg}"
                               />
                               No</label
                             >
@@ -499,6 +547,7 @@
                                 type="radio"
                                 name="ctEightFlg"
                                 value="true"
+                                th:checked="*{ctEightFlg}"
                               />
                               Yes</label
                             >
@@ -509,6 +558,7 @@
                                 type="radio"
                                 name="ctEightFlg"
                                 value="false"
+                                th:checked="*{ctEightFlg == null ? 'checked' : !ctEightFlg}"
                               />
                               No</label
                             >
@@ -543,6 +593,7 @@
                                 type="radio"
                                 name="ctNineFlg"
                                 value="true"
+                                th:checked="*{ctNineFlg}"
                               />
                               Yes</label
                             >
@@ -553,6 +604,7 @@
                                 type="radio"
                                 name="ctNineFlg"
                                 value="false"
+                                th:checked="*{ctNineFlg == null ? 'checked' : !ctNineFlg}"
                               />
                               No</label
                             >
@@ -668,6 +720,7 @@
                       value="true"
                       id="resubmit-yes"
                       class="form-check-input"
+                      th:checked="*{resubmitFlg}"
                     />
                     <label
                       class="cursor-pointer flex text-center form-check-label pl-4 pt-1"
@@ -683,6 +736,7 @@
                       value="false"
                       id="resubmit-no"
                       class="form-check-input"
+                      th:checked="*{resubmitFlg == null ? 'checked' : !resubmitFlg}"
                     />
                     <label
                       for="resubmit-no"

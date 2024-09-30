@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import capstone.common.constant.CommonConstant;
+import capstone.common.constant.MessageConstant;
 import capstone.controller.webdto.OfficerWebDto;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.service.CommonService;
@@ -44,7 +46,17 @@ public class OfficerController {
 	}
 
 	@PostMapping(value = "/action", params = "accept") 
-	public String acceptApplicant(@ModelAttribute OfficerWebDto webDto) throws Exception {
+	public String acceptApplicant(@ModelAttribute OfficerWebDto webDto, RedirectAttributes ra) throws Exception {
+		
+		if(CommonConstant.BLANK.equals(webDto.getRecommendation())) {
+			
+			ra.addFlashAttribute("error", MessageConstant.FEEDBACK_BLANK);
+			
+			ra.addFlashAttribute("officerWebDto", webDto);
+			
+			return "redirect:/officer/prescreen?id=" + webDto.getEncryptedApplicantIdPk();
+			
+		}
 				
 		OfficerInOutDto inDto = new OfficerInOutDto();
 
@@ -94,7 +106,27 @@ public class OfficerController {
 	}
 
 	@PostMapping(value = "/action", params = "reject")
-	public String rejectApplicant(@ModelAttribute OfficerWebDto webDto) throws NumberFormatException, Exception {
+	public String rejectApplicant(@ModelAttribute OfficerWebDto webDto, RedirectAttributes ra) throws NumberFormatException, Exception {
+		
+		if(CommonConstant.BLANK.equals(webDto.getRecommendation())) {
+			
+			ra.addFlashAttribute("error", MessageConstant.FEEDBACK_BLANK);
+			
+			ra.addFlashAttribute("officerWebDto", webDto);
+			
+			return "redirect:/officer/prescreen?id=" + webDto.getEncryptedApplicantIdPk();
+			
+		}
+		
+		if(webDto.getResubmitFlg() == null) {
+			
+			ra.addFlashAttribute("error", MessageConstant.RESUBMIT_FLG_BLANK);
+			
+			ra.addFlashAttribute("officerWebDto", webDto);
+			
+			return "redirect:/officer/prescreen?id=" + webDto.getEncryptedApplicantIdPk();
+			
+		}
 
 		OfficerInOutDto inDto = new OfficerInOutDto();
 
