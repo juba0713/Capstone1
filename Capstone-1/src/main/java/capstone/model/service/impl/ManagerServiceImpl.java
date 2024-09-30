@@ -816,11 +816,11 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		obj.setRejectionRate(entity.getRejectionRate());
 		
-		obj.setResubmittedApplicationsCount(obj.getResubmittedApplicationsCount());
+		obj.setResubmittedApplicationsCount(entity.getResubmittedApplicationsCount());
 		
-		obj.setRejectedApplicationEligibleCount(obj.getRejectedApplicationEligibleCount());
+		obj.setRejectedApplicationEligibleCount(entity.getRejectedApplicationEligibleCount());
 		
-		obj.setRejectedApplicationNotEligibleCount(obj.getRejectedApplicationNotEligibleCount());
+		obj.setRejectedApplicationNotEligibleCount(entity.getRejectedApplicationNotEligibleCount());
 		
 		outDto.setManagerDashboardObj(obj);
 		

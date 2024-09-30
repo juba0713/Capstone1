@@ -47,6 +47,7 @@
     </style>
   </head>
   <body th:object="${managerWebDto}">
+	  <script th:inline="javascript">console.log(/*[[${managerWebDto}]]*/'');</script>
     <div>
       <div
         class="h-full flex flex-col w-[250px] absolute bg-black z-20 justify-between text-customyellow"
