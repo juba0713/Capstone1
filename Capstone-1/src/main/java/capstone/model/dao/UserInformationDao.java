@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import capstone.model.dao.entity.AdminDashboardEntity;
+import capstone.model.dao.entity.TbiBoardDashboardEntity;
 import capstone.model.dao.entity.UserDetailsEntity;
 import capstone.model.dao.entity.UserInformationEntity;
 
@@ -48,7 +49,7 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 			+ "WHERE a.idPk = :applicantIdPk "
 			+ "AND a.deleteFlg = false";
 	
-	public final String GET_DETAILS_FOR_ADMIN = "SELECT CAST( ( "
+	public final String GET_DETAILS_FOR_ADMIN_DASHBOARD = "SELECT CAST( ( "
 			+ "  SELECT COUNT(e) "
 			+ "  FROM t_evaluated_applicant e	 "
 			+ "  LEFT JOIN t_evaluation_details ed ON ed.evaluated_applicant_id_pk = e.id_pk AND ed.delete_flg = false "
@@ -134,6 +135,33 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 			+ "        WHERE e.delete_flg = false "
 			+ "		AND e.certificate_name IS NOT NULL "
 			+ "    ) AS INTEGER) AS issued_certifate;";	
+	
+	public final String GET_DETAILS_FOR_TBI_DASHBOARD = "SELECT   "
+			+ "    CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "        WHERE e.status IN ('4', '40')  "
+			+ "        AND e.delete_flg = false  "
+			+ "    ) AS INTEGER) AS pending_applicant_count,  "
+			+ "  "
+			+ "    CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM t_evaluated_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "    ) AS INTEGER) AS evaluated_applicant_count,  "
+			+ "    CAST( (  "
+			+ "        SELECT (COUNT(e) * 100.0) /   "
+			+ "               (SELECT COUNT(ee) FROM m_applicant ee WHERE ee.delete_flg = false)  "
+			+ "        FROM t_accepted_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "    ) AS INTEGER) AS acceptance_rate,  "
+			+ "	CAST( (  "
+			+ "        SELECT (COUNT(e) * 100.0) /   "
+			+ "               (SELECT COUNT(ee) FROM m_applicant ee WHERE ee.delete_flg = false)  "
+			+ "        FROM t_rejected_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "    ) AS INTEGER) AS failed_rate  "
+			+ "";
 	
 	public final String GET_USERS_BY_APPLICANT_ID_PKS = "SELECT u "
 			+ "FROM ApplicantEntity a "
@@ -236,14 +264,26 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 	    return users;
 	};
 	
-	@Query(value=GET_DETAILS_FOR_ADMIN, nativeQuery=true)
+	@Query(value=GET_DETAILS_FOR_ADMIN_DASHBOARD, nativeQuery=true)
 	public List<Object[]> getDetailsForAdminRaw() throws DataAccessException;
 	
-	default AdminDashboardEntity getDetailsForAdmin() {
+	default AdminDashboardEntity getDetailsForAdmiDashboard() {
 		
 		Object[] data = getDetailsForAdminRaw().get(0);
 		
 		AdminDashboardEntity entity = new AdminDashboardEntity(data);
+		
+		return entity;
+	};
+	
+	@Query(value=GET_DETAILS_FOR_TBI_DASHBOARD, nativeQuery=true)
+	public List<Object[]> getDetailsForTbiBoardRaw() throws DataAccessException;
+	
+	default TbiBoardDashboardEntity  getDetailsForTbiBoardDashboard() {
+		
+		Object[] data = getDetailsForTbiBoardRaw().get(0);
+		
+		TbiBoardDashboardEntity entity = new TbiBoardDashboardEntity(data);
 		
 		return entity;
 	};

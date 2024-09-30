@@ -20,6 +20,7 @@ import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.EvaluatedApplicantEntity;
 import capstone.model.dao.entity.EvaluationDetailsEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
+import capstone.model.dao.entity.TbiBoardDashboardEntity;
 import capstone.model.dao.entity.UserInformationEntity;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.dto.TbiBoardInOutDto;
@@ -27,6 +28,7 @@ import capstone.model.logic.ApplicantLogic;
 import capstone.model.logic.UserLogic;
 import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantObj;
+import capstone.model.object.TbiBoardDashboardObj;
 import capstone.model.service.CommonService;
 import capstone.model.service.EmailService;
 import capstone.model.service.LoggedInUserService;
@@ -284,6 +286,28 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 
 		outDto.setApplicantDetailsObj(applicantDetailsObj);
 
+		return outDto;
+	}
+
+	@Override
+	public TbiBoardInOutDto getDetailsForTbiBoardDashboard() {
+		
+		TbiBoardInOutDto outDto = new TbiBoardInOutDto();
+		
+		TbiBoardDashboardEntity entity = userLogic.getDetailsForTbiBoardDashboard();
+		
+		TbiBoardDashboardObj obj = new TbiBoardDashboardObj();
+		
+		obj.setPendingApplicantCount(entity.getPendingApplicantCount());
+		
+		obj.setEvaluatedApplicantCount(entity.getEvaluatedApplicantCount());
+		
+		obj.setAcceptanceRate(entity.getAcceptanceRate());
+		
+		obj.setFailedRate(entity.getFailedRate());
+		
+		outDto.setTbiBoardDashboardObj(obj);
+		
 		return outDto;
 	}
 

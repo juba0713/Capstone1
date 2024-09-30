@@ -34,6 +34,10 @@ public class TbiBoardController {
 		
 		webDto.setListOfApplicants(outDto.getListOfApplicants());
 		
+		outDto = tbiBoardService.getDetailsForTbiBoardDashboard();
+		
+		webDto.setTbiBoardDashboardObj(outDto.getTbiBoardDashboardObj());
+		
 		return "tbiboard/home";
 	}
 	

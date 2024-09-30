@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import capstone.model.dao.UserInfoAccountDao;
 import capstone.model.dao.UserInformationDao;
+import capstone.model.dao.entity.AdminDashboardEntity;
+import capstone.model.dao.entity.TbiBoardDashboardEntity;
 import capstone.model.dao.entity.UserDetailsEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
 import capstone.model.dao.entity.UserInformationEntity;
@@ -96,6 +98,18 @@ public class UserLogicImpl implements UserLogic {
 			Timestamp updatedDate, int userIdPk) {
 		
 		return userInformationDao.updateUser(firstName, lastName, mobileNumber, role, updatedDate, userIdPk);
+	}
+
+	@Override
+	public AdminDashboardEntity getDetailsForAdminDashboard() {
+
+		return userInformationDao.getDetailsForAdmiDashboard();
+	}
+
+	@Override
+	public TbiBoardDashboardEntity getDetailsForTbiBoardDashboard() {
+	
+		return userInformationDao.getDetailsForTbiBoardDashboard();
 	}
 
 

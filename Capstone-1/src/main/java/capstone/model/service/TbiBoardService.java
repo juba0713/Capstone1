@@ -7,6 +7,12 @@ import jakarta.mail.MessagingException;
 
 @Service
 public interface TbiBoardService {
+	
+	/**
+	 * To get analytics details for Tbi Board Dashboard
+	 * @return
+	 */
+	public TbiBoardInOutDto getDetailsForTbiBoardDashboard();
 
 	/**
 	 * TO get all applicants for TbiBOard

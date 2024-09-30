@@ -4,10 +4,14 @@ import java.util.List;
 
 import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantObj;
+import capstone.model.object.TbiBoardDashboardObj;
 import lombok.Data;
 
 @Data
 public class TbiBoardWebDto {
+	
+	private TbiBoardDashboardObj tbiBoardDashboardObj;
+	
 	public List<ApplicantObj> listOfApplicants;
 	
 	public int applicantIdPk;

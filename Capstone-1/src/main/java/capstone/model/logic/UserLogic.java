@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import capstone.model.dao.entity.AdminDashboardEntity;
+import capstone.model.dao.entity.TbiBoardDashboardEntity;
 import capstone.model.dao.entity.UserDetailsEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
 import capstone.model.dao.entity.UserInformationEntity;
@@ -103,4 +105,16 @@ public interface UserLogic {
 	 * @return int
 	 */
 	public int updateuser(String firstName, String lastName, String mobileNumber, String role, Timestamp updatedDate, int userIdPk);
+	
+	/**
+	 * To get analytics details for admin dashboard
+	 * @return
+	 */
+	public AdminDashboardEntity getDetailsForAdminDashboard();
+	
+	/**
+	 * To get analytics details for tbiboard dashboard
+	 * @return
+	 */
+	public TbiBoardDashboardEntity getDetailsForTbiBoardDashboard();
 }

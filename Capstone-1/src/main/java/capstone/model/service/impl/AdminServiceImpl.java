@@ -35,9 +35,6 @@ public class AdminServiceImpl  implements AdminService{
 	private ApplicantLogic applicantLogic;
 	
 	@Autowired
-	private UserInformationDao userDao;
-	
-	@Autowired
 	private PasswordEncoder encoder;
 	
 	@Override
@@ -45,7 +42,7 @@ public class AdminServiceImpl  implements AdminService{
 		
 		AdminInOutDto outDto = new AdminInOutDto();
 		
-		AdminDashboardEntity entity = userDao.getDetailsForAdmin();
+		AdminDashboardEntity entity = userLogic.getDetailsForAdminDashboard();
 		
 		AdminDashboardObj obj = new AdminDashboardObj();
 		
