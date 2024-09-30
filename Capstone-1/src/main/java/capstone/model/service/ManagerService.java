@@ -10,6 +10,12 @@ import jakarta.mail.MessagingException;
 public interface ManagerService {
 	
 	/**
+	 * Get analytics details for manager dashboard
+	 * @return ManagerInOutDto
+	 */
+	public ManagerInOutDto getDetailsForManagerDashboard();
+	
+	/**
 	 * TO get all applicants for manager
 	 * @return ManagerInOutDto
 	 */

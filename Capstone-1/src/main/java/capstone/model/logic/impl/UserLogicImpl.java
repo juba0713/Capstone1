@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import capstone.model.dao.UserInfoAccountDao;
 import capstone.model.dao.UserInformationDao;
 import capstone.model.dao.entity.AdminDashboardEntity;
+import capstone.model.dao.entity.ManagerDashboardEntity;
 import capstone.model.dao.entity.OfficerDashboardEntity;
 import capstone.model.dao.entity.TbiBoardDashboardEntity;
 import capstone.model.dao.entity.UserDetailsEntity;
@@ -117,6 +118,12 @@ public class UserLogicImpl implements UserLogic {
 	public OfficerDashboardEntity getDetailsForOfficerDashboard() {
 		
 		return userInformationDao.getDetailsForOfficerDashboard();
+	}
+
+	@Override
+	public ManagerDashboardEntity getDetailsForManagerDashboard() {
+
+		return userInformationDao.getDetailsForManagerDashboard();
 	}
 
 

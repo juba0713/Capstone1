@@ -30,6 +30,7 @@ import capstone.model.dao.entity.ApplicantMonthly;
 import capstone.model.dao.entity.EvaluatedApplicantEntity;
 import capstone.model.dao.entity.EvaluationDetailsEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
+import capstone.model.dao.entity.ManagerDashboardEntity;
 import capstone.model.dao.entity.ManagerEvaluatedApplicantEntity;
 import capstone.model.dao.entity.ManagerEvaluationDetailsEntity;
 import capstone.model.dao.entity.UserCertificateEntity;
@@ -44,6 +45,7 @@ import capstone.model.object.ApplicantMonthlyObj;
 import capstone.model.object.ApplicantObj;
 import capstone.model.object.ApplicantOfficerFeedbackObj;
 import capstone.model.object.ApplicantTbiFeedbackObj;
+import capstone.model.object.ManagerDashboardObj;
 import capstone.model.service.CommonService;
 import capstone.model.service.EmailService;
 import capstone.model.service.LoggedInUserService;
@@ -81,7 +83,7 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		ManagerInOutDto outDto = new ManagerInOutDto();
 		
-		List<Integer> status = List.of(0,00,1,2,3,4,04,5,6,7,8);
+		List<Integer> status = List.of(0,00,1,2,3,4,40,5,50,6,7,8);
 		
 		List<JoinApplicantProject> listOfApplicant = applicantLogic.getAllApplicantByStatus(status);
 		
@@ -783,6 +785,46 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		return outDto;
 		
+	}
+
+	@Override
+	public ManagerInOutDto getDetailsForManagerDashboard() {
+		
+		ManagerInOutDto outDto = new ManagerInOutDto();
+		
+		ManagerDashboardEntity entity = userLogic.getDetailsForManagerDashboard();
+		
+		ManagerDashboardObj obj = new ManagerDashboardObj();
+		
+		obj.setTotalApplicationsCount(entity.getTotalApplicationsCount());
+		
+		obj.setInOfficerCount(entity.getInOfficerCount());
+		
+		obj.setInTbiboardCount(entity.getInTbiboardCount());
+		
+		obj.setIssuedCeritifcatesCount(entity.getIssuedCeritifcatesCount());
+		
+		obj.setPassedApplicationsCount(entity.getPassedApplicationsCount());
+		
+		obj.setFailedApplicationsCount(entity.getFailedApplicationsCount());
+		
+		obj.setAcceptedApplicationsCount(entity.getAcceptedApplicationsCount());
+		
+		obj.setEvalutedApplicaitonsCount(entity.getEvalutedApplicaitonsCount());
+		
+		obj.setAcceptanceRate(entity.getAcceptanceRate());
+		
+		obj.setRejectionRate(entity.getRejectionRate());
+		
+		obj.setResubmittedApplicationsCount(obj.getResubmittedApplicationsCount());
+		
+		obj.setRejectedApplicationEligibleCount(obj.getRejectedApplicationEligibleCount());
+		
+		obj.setRejectedApplicationNotEligibleCount(obj.getRejectedApplicationNotEligibleCount());
+		
+		outDto.setManagerDashboardObj(obj);
+		
+		return outDto;
 	}
 	
 	

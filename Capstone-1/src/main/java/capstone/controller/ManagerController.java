@@ -67,6 +67,10 @@ public class ManagerController {
 		ManagerInOutDto outDto = managerService.getAllApplicants();
 
 		webDto.setListOfApplicants(outDto.getListOfApplicants());
+		
+		outDto = managerService.getDetailsForManagerDashboard();
+		
+		webDto.setManagerDashboardObj(outDto.getManagerDashboardObj());
 
 		return "manager/listOfAllApplicants";
 	}

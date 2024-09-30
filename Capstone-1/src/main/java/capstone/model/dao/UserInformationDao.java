@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import capstone.model.dao.entity.AdminDashboardEntity;
+import capstone.model.dao.entity.ManagerDashboardEntity;
 import capstone.model.dao.entity.OfficerDashboardEntity;
 import capstone.model.dao.entity.TbiBoardDashboardEntity;
 import capstone.model.dao.entity.UserDetailsEntity;
@@ -193,6 +194,84 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 			+ "		AND e.status IN (1,3,4,40,5,50,6,7,8)  "
 			+ "    ) AS INTEGER) AS resubmitted_applicant_count";
 	
+	public final String GET_DETAILS_FOR_MANAGER_DASHBOARD = "SELECT   "
+			+ "    CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "    ) AS INTEGER) AS total_applications_count,  "
+			+ "    CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "		AND e.status = 0  "
+			+ "    ) AS INTEGER) AS in_officer_count,  "
+			+ "    CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "		AND e.status = 4  "
+			+ "    ) AS INTEGER) AS in_tbiboard_count,  "
+			+ "	CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "		AND e.certificate_name IS NOT NULL  "
+			+ "    ) AS INTEGER) AS issued_certificate_count,  "
+			+ "	CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "		LEFT JOIN t_evaluated_applicant ea ON ea.applicant_id_pk = e.id_pk AND ea.delete_flg = false  "
+			+ "		LEFT JOIN t_evaluation_details ed ON ed.evaluated_applicant_id_pk = ea.id_pk AND ed.delete_flg = false	  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "		AND ed.total >= 60  "
+			+ "    ) AS INTEGER) AS passed_applications_count,  "
+			+ "	CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "		LEFT JOIN t_evaluated_applicant ea ON ea.applicant_id_pk = e.id_pk AND ea.delete_flg = false  "
+			+ "		LEFT JOIN t_evaluation_details ed ON ed.evaluated_applicant_id_pk = ea.id_pk AND ed.delete_flg = false	  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "		AND ed.total < 60  "
+			+ "    ) AS INTEGER) AS failed_applications_count,  "
+			+ "	CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM t_accepted_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "    ) AS INTEGER) AS accepted_applications_count,  "
+			+ "	CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM t_evaluated_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "    ) AS INTEGER) AS evaluated_applications_count,  "
+			+ "    CAST( (  "
+			+ "        SELECT (COUNT(e) * 100.0) /   "
+			+ "               (SELECT COUNT(ee) FROM m_applicant ee WHERE ee.delete_flg = false)  "
+			+ "        FROM t_accepted_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "    ) AS INTEGER) AS acceptance_rate,  "
+			+ "	CAST( (  "
+			+ "        SELECT (COUNT(e) * 100.0) /   "
+			+ "               (SELECT COUNT(ee) FROM m_applicant ee WHERE ee.delete_flg = false)  "
+			+ "        FROM t_rejected_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "    ) AS INTEGER) AS rejection_rate,  "
+			+ "	CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "		INNER JOIN t_rejected_applicant r ON r.applicant_id_pk = e.id_pk	  "
+			+ "    ) AS INTEGER) AS resubmitted_applicant_count,  "
+			+ "	CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM t_rejected_applicant e  "
+			+ "		WHERE e.resubmit_flg = true  "
+			+ "    ) AS INTEGER) AS rejected_applicant_count,  "
+			+ "	CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM t_rejected_applicant e  "
+			+ "		WHERE e.resubmit_flg = false  "
+			+ "    ) AS INTEGER) AS rejected_applicant_count";
+	
 	public final String GET_USERS_BY_APPLICANT_ID_PKS = "SELECT u "
 			+ "FROM ApplicantEntity a "
 			+ "JOIN UserInformationEntity u ON u.idPk = a.createdBy AND u.deleteFlg = false "
@@ -326,6 +405,18 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 		Object[] data = getDetailsForOfficerRaw().get(0);
 		
 		OfficerDashboardEntity entity = new OfficerDashboardEntity(data);
+		
+		return entity;
+	};
+	
+	@Query(value=GET_DETAILS_FOR_MANAGER_DASHBOARD, nativeQuery=true)
+	public List<Object[]> getDetailsForManagerRaw() throws DataAccessException;
+	
+	default ManagerDashboardEntity  getDetailsForManagerDashboard() {
+		
+		Object[] data = getDetailsForManagerRaw().get(0);
+		
+		ManagerDashboardEntity entity = new ManagerDashboardEntity(data);
 		
 		return entity;
 	};

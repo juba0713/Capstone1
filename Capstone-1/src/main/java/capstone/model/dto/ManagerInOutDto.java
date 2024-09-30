@@ -7,10 +7,13 @@ import capstone.model.object.ApplicantMonthlyObj;
 import capstone.model.object.ApplicantObj;
 import capstone.model.object.ApplicantOfficerFeedbackObj;
 import capstone.model.object.ApplicantTbiFeedbackObj;
+import capstone.model.object.ManagerDashboardObj;
 import lombok.Data;
 
 @Data
 public class ManagerInOutDto {
+	
+	private ManagerDashboardObj managerDashboardObj;
 	
 	private List<ApplicantObj> listOfApplicants;
 	
