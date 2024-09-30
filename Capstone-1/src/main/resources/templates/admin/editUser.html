@@ -53,9 +53,12 @@
       }
     </style>
   </head>
-  <body class="bg-gradient-to-t from-[#E9D790] to-[#FFFFFF] h-screen" th:object="${adminWebDto}">
+  <body
+    class="bg-gradient-to-t from-[#E9D790] to-[#FFFFFF] h-screen"
+    th:object="${adminWebDto}"
+  >
     <form th:action="@{/admin/users/edit-user}" method="POST">
-		<input type="hidden" name="userIdPk" th:value="*{user.id}"/>
+      <input type="hidden" name="userIdPk" th:value="*{user.id}" />
       <a
         th:href="@{/admin/users}"
         class="top-0 z-10 hover:bg-slate-300 font-secondary flex place-items-start w-[5%] fixed m-6 rounded-md items-center text-center bg-slate-200 p-2 pr-4"
@@ -85,7 +88,7 @@
                 disabled
                 class="border w-full rounded-sm h-10 indent-2"
               />
-             <input
+              <input
                 type="hidden"
                 name="email"
                 placeholder="email@gmail.com"
@@ -93,13 +96,13 @@
                 class="border w-full rounded-sm h-10 indent-2"
               />
             </div>
-         
+
             <div class="pt-2">
               <div>Mobile number</div>
               <input
                 type="text"
                 name="mobileNumber"
-                 th:value="*{user.number}"
+                th:value="*{user.number}"
                 placeholder="enter phone number"
                 class="border w-full rounded-sm h-10 indent-2"
               />
@@ -116,7 +119,7 @@
               <input
                 type="text"
                 name="firstName"
-                 th:value="*{user.firstName}"
+                th:value="*{user.firstName}"
                 placeholder="first name"
                 class="border w-full rounded-sm h-10 indent-2"
               />
@@ -133,7 +136,7 @@
               <input
                 type="text"
                 name="lastName"
-                 th:value="*{user.lastName}"
+                th:value="*{user.lastName}"
                 placeholder="last name"
                 class="border w-full rounded-sm h-10 indent-2"
               />
@@ -177,15 +180,39 @@
           </div>
           <div class="w-6/12">
             <p>Role</p>
-            <div  th:text="*{user.role}"></div>
+            <div th:text="*{user.role}"></div>
             <div class="select-dropdown">
               <select name="role">
-			    <option value="none" disabled>select role</option>
-			    <option value="OFFICER" th:selected="*{user.role == 'APPLICANT'}" th:disabled="*{user.role != 'APPLICANT'}">Applicant</option>
-			    <option value="OFFICER" th:selected="*{user.role == 'OFFICER'}" th:disabled="*{user.role == 'APPLICANT'}">Officer</option>
-			    <option value="TBIBOARD" th:selected="*{user.role == 'TBIBOARD'}" th:disabled="*{user.role == 'APPLICANT'}">Tbi-Board</option>
-			    <option value="MANAGER" th:selected="*{user.role == 'MANAGER'}" th:disabled="*{user.role == 'APPLICANT'}">Manager</option>
-			</select>
+                <option value="none" disabled>select role</option>
+                <option
+                  value="OFFICER"
+                  th:selected="*{user.role == 'APPLICANT'}"
+                  th:disabled="*{user.role != 'APPLICANT'}"
+                >
+                  Applicant
+                </option>
+                <option
+                  value="OFFICER"
+                  th:selected="*{user.role == 'OFFICER'}"
+                  th:disabled="*{user.role == 'APPLICANT'}"
+                >
+                  Officer
+                </option>
+                <option
+                  value="TBIBOARD"
+                  th:selected="*{user.role == 'TBIBOARD'}"
+                  th:disabled="*{user.role == 'APPLICANT'}"
+                >
+                  Tbi-Board
+                </option>
+                <option
+                  value="MANAGER"
+                  th:selected="*{user.role == 'MANAGER'}"
+                  th:disabled="*{user.role == 'APPLICANT'}"
+                >
+                  Manager
+                </option>
+              </select>
             </div>
             <div th:if="*{errors != null}" class="">
               <div
@@ -202,7 +229,7 @@
         <div class="w-6/12 justify-end flex p-4">
           <div class="w-[30%] flex justify-between">
             <button class="h-10 w-[45%] hover:underline">
-              <a th:href="@{/admin/users/create}">cancel </a>
+              <a th:href="@{/admin/users }">cancel </a>
             </button>
             <button
               class="rounded-3xl w-[45%] hover:underline hover:text-white bg-customyellow"

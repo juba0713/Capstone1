@@ -56,8 +56,10 @@
     </style>
   </head>
   <body class="font-secondary" th:object="${managerWebDto}">
-	  <script th:inline="javascript">console.log(/*[[${managerWebDto}]]*/'')</script>
-		  
+    <script th:inline="javascript">
+      console.log(/*[[${managerWebDto}]]*/ "");
+    </script>
+
     <!-- left side -->
     <div class="h-20 sticky top-0 z-10 bg-opacity-5 backdrop-blur-[3px]">
       <div
@@ -1139,7 +1141,6 @@
                 />
                 One or more initial product hypotheses have been defined</label
               >
-              >
             </div>
             <div class="flex flex-row mb-2 items-center">
               <label class="cursor-pointer flex items-center">
@@ -1212,7 +1213,6 @@
                 />
                 No team or company in place (single individual, no legal
                 entity)</label
-              >
               >
             </div>
             <div class="flex flex-row mb-2 items-center">
@@ -1471,7 +1471,7 @@
               <br /><br />
               Compliance with all items is mandatory for the application to
               advance to the next stage, which involves evaluation by the
-              LaunchLab board.
+              [program name] board.
             </h2>
           </div>
         </div>
@@ -1514,12 +1514,12 @@
                     <th
                       class="font-normal border border-gray-500 px-4 py-2 text-sm"
                     >
-                      LaunchLab Capsule Proposal
+                      [program name] Capsule Proposal
                     </th>
                     <td class="border border-gray-500 px-2 py-2">
                       <p class="resize-none w-full sm:text-sm">
-                        Has the applicant provided a detailed LaunchLab capsule
-                        proposal including all required information?
+                        Has the applicant provided a detailed [program name]
+                        capsule proposal including all required information?
                       </p>
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
@@ -1704,7 +1704,7 @@
           </div>
         </div>
         <hr class="my-4" th:if="*{applicantDetailsObj.status != 0}" />
-		
+
         <div th:if="*{applicantDetailsObj.status != 0}">
           <div class="w-full overflow-x-auto">
             <!-- <div class="overflow-auto w-[700px] h-[550px]"> -->
