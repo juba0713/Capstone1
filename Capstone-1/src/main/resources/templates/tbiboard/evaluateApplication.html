@@ -681,28 +681,58 @@
       // }
 
       let totalScore = 0;
-      let totalScoreHTML = document.querySelector(".total-score");
-      document.querySelectorAll("select").forEach((select) => {
-        // Store the previous value for each select element
-        let previousValue = 0;
+let totalScoreHTML = document.querySelector(".total-score");
+let allValuesProvided = false;
 
-        select.addEventListener("change", function () {
-          // Subtract the previous value from the total score
-          totalScore -= previousValue;
+document.querySelectorAll("select").forEach((select, index) => {
+  let previousValue = 0;
 
-          // Get the new selected value
-          let currentValue = parseInt(this.value);
+  select.addEventListener("change", function () {
+    // Define the multiplier based on the index of the select element
+    let multiplier = 1.0; // Default multiplier is 1
+    if (index === 2 || index === 3) {
+      multiplier = 2.0; // Fourth and fifth select elements have x2 multiplier
+    } else if (index === 4) {
+      multiplier = 3.0; // Sixth select element has x3 multiplier
+    } else if (index === 5 || index === 6 || index === 7) {
+      multiplier = 1.5; // Seventh, eighth, and ninth select elements have x1.5 multiplier
+    }
 
-          // Add the new value to the total score
-          totalScore += currentValue;
+    // Subtract the previous value multiplied by its multiplier from the total score
+    totalScore -= previousValue * multiplier;
 
-          // Update the previous value to the current one
-          previousValue = currentValue;
+    // Get the new selected value
+    let currentValue = parseInt(this.value);
 
-          // Log or display the total score
-          totalScoreHTML.innerHTML = totalScore;
-        });
-      });
+    // Add the new value multiplied by the multiplier to the total score
+    totalScore += currentValue * multiplier;
+
+    // Update the previous value to the current one
+    previousValue = currentValue;
+
+    // Check if all select elements have a value other than 'none'
+    allValuesProvided = Array.from(document.querySelectorAll("select")).every(
+      (select) => select.value !== "none"
+    );
+    
+    console.log(totalScore);
+
+    // Only display if all values are provided
+    if (allValuesProvided) {
+      // Divide the total score by 1.35 and round up
+      let finalScore = Math.ceil(totalScore / 1.35);
+
+      // Display the final score
+      totalScoreHTML.innerHTML = finalScore; 
+    } else {
+      // If not all values are provided, display a message
+      totalScoreHTML.innerHTML = "Please complete all selections.";
+    }
+  });
+});
+
+
+
     </script>
   </body>
 </html>
