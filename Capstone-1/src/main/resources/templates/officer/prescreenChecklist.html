@@ -52,8 +52,8 @@
         margin-right: 8px;
         margin-left: 4px;
       }
-      
-       .error-container {
+
+      .error-container {
         position: absolute;
         top: 30px;
         left: 0;
@@ -72,7 +72,6 @@
         padding: 10px;
         border-radius: 10px;
       }
-   
 
       .error {
         padding-left: 20px;
@@ -83,8 +82,10 @@
     </style>
   </head>
   <body class="font-secondary" th:object="${officerWebDto}">
-	  <script th:inline="javascript">console.log(/*[[${officerWebDto}]]*/'');</script>
-      <div class="error-container" th:if="${error != null}">
+    <script th:inline="javascript">
+      console.log(/*[[${officerWebDto}]]*/ "");
+    </script>
+    <div class="error-container" th:if="${error != null}" id="flash-message">
       <div th:text="${error}"></div>
     </div>
     <div class="h-20 sticky top-0 z-10 bg-opacity-5 backdrop-blur-[3px]">
@@ -95,8 +96,6 @@
       </div>
       <a th:href="@{/officer/home}" class="ad-back-button">Back to home</a>
     </div>
-    
-
 
     <div class="flex flex-row">
       <div
@@ -185,7 +184,7 @@
                                 type="radio"
                                 name="ctOneFlg"
                                 value="true"
-								th:checked="*{ctOneFlg}"
+                                th:checked="*{ctOneFlg}"
                               />
                               Yes</label
                             >
@@ -196,7 +195,7 @@
                                 type="radio"
                                 name="ctOneFlg"
                                 value="false"
-   								th:checked="*{ctOneFlg == null ? 'checked' : !ctOneFlg}"
+                                th:checked="*{ctOneFlg == null ? 'checked' : !ctOneFlg}"
                               />
                               No</label
                             >
@@ -409,7 +408,7 @@
                                 type="radio"
                                 name="ctFiveFlg"
                                 value="true"
-                      			th:checked="*{ctFiveFlg}"
+                                th:checked="*{ctFiveFlg}"
                               />
                               Yes</label
                             >
@@ -794,5 +793,19 @@
         }
       });
     });
+  </script>
+  <script>
+    // JavaScript function to remove the flash message after a specified time
+    function hideFlashMessage() {
+      const flashMessage = document.getElementById("flash-message");
+      if (flashMessage) {
+        setTimeout(() => {
+          flashMessage.style.display = "none";
+        }, 5000); // 5000 milliseconds = 5 seconds
+      }
+    }
+
+    // Call the function on page load
+    window.onload = hideFlashMessage;
   </script>
 </html>
