@@ -56,6 +56,8 @@
     </style>
   </head>
   <body class="font-secondary" th:object="${managerWebDto}">
+	  <script th:inline="javascript">console.log(/*[[${managerWebDto}]]*/'')</script>
+		  
     <!-- left side -->
     <div class="h-20 sticky top-0 z-10 bg-opacity-5 backdrop-blur-[3px]">
       <div
@@ -1702,7 +1704,7 @@
           </div>
         </div>
         <hr class="my-4" th:if="*{applicantDetailsObj.status != 0}" />
-
+		
         <div th:if="*{applicantDetailsObj.status != 0}">
           <div class="w-full overflow-x-auto">
             <!-- <div class="overflow-auto w-[700px] h-[550px]"> -->
