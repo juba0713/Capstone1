@@ -46,7 +46,7 @@
         margin-right: 8px;
         margin-left: 4px;
       }
-      
+
       .error-container {
         position: absolute;
         top: 30px;
@@ -66,7 +66,6 @@
         padding: 10px;
         border-radius: 10px;
       }
-   
 
       .error {
         padding-left: 20px;
@@ -77,7 +76,7 @@
     </style>
   </head>
   <body class="font-secondary" th:object="${tbiBoardWebDto}">
-	  <div class="error-container" th:if="${error != null}">
+    <div class="error-container" th:if="${error != null}">
       <div th:text="${error}"></div>
     </div>
     <div class="h-20 sticky top-0 z-10 bg-opacity-5 backdrop-blur-[3px]">
@@ -86,7 +85,7 @@
       >
         Evaluate Application
       </div>
-      <a th:href="@{/officer/home}" class="ad-back-button">Back to home</a>
+      <a th:href="@{/tbiboard/home}" class="ad-back-button">Back to home</a>
     </div>
     <div class="error-container" id="globalError" style="display: none">
       <div>Please fill out all required fields!</div>
@@ -712,58 +711,55 @@
       // }
 
       let totalScore = 0;
-let totalScoreHTML = document.querySelector(".total-score");
-let allValuesProvided = false;
+      let totalScoreHTML = document.querySelector(".total-score");
+      let allValuesProvided = false;
 
-document.querySelectorAll("select").forEach((select, index) => {
-  let previousValue = 0;
+      document.querySelectorAll("select").forEach((select, index) => {
+        let previousValue = 0;
 
-  select.addEventListener("change", function () {
-    // Define the multiplier based on the index of the select element
-    let multiplier = 1.0; // Default multiplier is 1
-    if (index === 2 || index === 3) {
-      multiplier = 2.0; // Fourth and fifth select elements have x2 multiplier
-    } else if (index === 4) {
-      multiplier = 3.0; // Sixth select element has x3 multiplier
-    } else if (index === 5 || index === 6 || index === 7) {
-      multiplier = 1.5; // Seventh, eighth, and ninth select elements have x1.5 multiplier
-    }
+        select.addEventListener("change", function () {
+          // Define the multiplier based on the index of the select element
+          let multiplier = 1.0; // Default multiplier is 1
+          if (index === 2 || index === 3) {
+            multiplier = 2.0; // Fourth and fifth select elements have x2 multiplier
+          } else if (index === 4) {
+            multiplier = 3.0; // Sixth select element has x3 multiplier
+          } else if (index === 5 || index === 6 || index === 7) {
+            multiplier = 1.5; // Seventh, eighth, and ninth select elements have x1.5 multiplier
+          }
 
-    // Subtract the previous value multiplied by its multiplier from the total score
-    totalScore -= previousValue * multiplier;
+          // Subtract the previous value multiplied by its multiplier from the total score
+          totalScore -= previousValue * multiplier;
 
-    // Get the new selected value
-    let currentValue = parseInt(this.value);
+          // Get the new selected value
+          let currentValue = parseInt(this.value);
 
-    // Add the new value multiplied by the multiplier to the total score
-    totalScore += currentValue * multiplier;
+          // Add the new value multiplied by the multiplier to the total score
+          totalScore += currentValue * multiplier;
 
-    // Update the previous value to the current one
-    previousValue = currentValue;
+          // Update the previous value to the current one
+          previousValue = currentValue;
 
-    // Check if all select elements have a value other than 'none'
-    allValuesProvided = Array.from(document.querySelectorAll("select")).every(
-      (select) => select.value !== "none"
-    );
-    
-    console.log(totalScore);
+          // Check if all select elements have a value other than 'none'
+          allValuesProvided = Array.from(
+            document.querySelectorAll("select")
+          ).every((select) => select.value !== "none");
 
-    // Only display if all values are provided
-    if (allValuesProvided) {
-      // Divide the total score by 1.35 and round up
-      let finalScore = Math.ceil(totalScore / 1.35);
+          console.log(totalScore);
 
-      // Display the final score
-      totalScoreHTML.innerHTML = finalScore; 
-    } else {
-      // If not all values are provided, display a message
-      totalScoreHTML.innerHTML = "Please complete all selections.";
-    }
-  });
-});
+          // Only display if all values are provided
+          if (allValuesProvided) {
+            // Divide the total score by 1.35 and round up
+            let finalScore = Math.ceil(totalScore / 1.35);
 
-
-
+            // Display the final score
+            totalScoreHTML.innerHTML = finalScore;
+          } else {
+            // If not all values are provided, display a message
+            totalScoreHTML.innerHTML = "Please complete all selections.";
+          }
+        });
+      });
     </script>
   </body>
 </html>
