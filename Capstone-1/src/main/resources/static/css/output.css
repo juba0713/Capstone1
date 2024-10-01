@@ -620,11 +620,6 @@ video {
   inset: 0px;
 }
 
-.inset-x-0{
-  left: 0px;
-  right: 0px;
-}
-
 .bottom-0{
   bottom: 0px;
 }
@@ -667,10 +662,6 @@ video {
 
 .top-\[45\%\]{
   top: 45%;
-}
-
-.top-\[calc\(1rem\+25px\)\]{
-  top: calc(1rem + 25px);
 }
 
 .z-0{
@@ -1011,10 +1002,6 @@ video {
 
 .max-h-\[550px\]{
   max-height: 550px;
-}
-
-.max-h-screen{
-  max-height: 100vh;
 }
 
 .min-h-32{
@@ -1538,6 +1525,11 @@ video {
 .border-yellow-300{
   --tw-border-opacity: 1;
   border-color: rgb(253 224 71 / var(--tw-border-opacity));
+}
+
+.border-red-50{
+  --tw-border-opacity: 1;
+  border-color: rgb(254 242 242 / var(--tw-border-opacity));
 }
 
 .border-opacity-100{

@@ -96,11 +96,12 @@
       </div>
       <a th:href="@{/officer/home}" class="ad-back-button">Back to home</a>
     </div>
-
-    <div class="flex flex-row">
-      <div
-        th:replace="~{fragments/applicationDetails :: applicationDetails}"
-      ></div>
+    <div class="w-[55%]">
+      <div class="flex flex-row">
+        <div
+          th:replace="~{fragments/applicationDetails :: applicationDetails}"
+        ></div>
+      </div>
 
       <!-- pre-screen checklist -->
       <form th:action="@{/officer/action}" method="POST">
