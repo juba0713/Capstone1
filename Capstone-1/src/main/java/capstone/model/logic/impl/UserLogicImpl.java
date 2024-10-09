@@ -126,6 +126,12 @@ public class UserLogicImpl implements UserLogic {
 		return userInformationDao.getDetailsForManagerDashboard();
 	}
 
+	@Override
+	public int countAdminUsers() {
+
+		return userInformationDao.countAdminUsers();
+	}
+
 
 
 }

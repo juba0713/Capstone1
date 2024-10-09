@@ -422,4 +422,10 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 		
 		return entity;
 	};
+	
+	public final String COUNT_ADMIN_USER = "SELECT COUNT(*) FROM m_user_information WHERE role = 'ADMIN'";
+
+    @Query(value = COUNT_ADMIN_USER, nativeQuery = true)
+    int countAdminUsers();
+
 }

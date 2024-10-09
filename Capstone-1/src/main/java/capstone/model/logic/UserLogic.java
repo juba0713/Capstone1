@@ -18,6 +18,8 @@ public interface UserLogic {
 	// interface defines several methods related to user operations:
 	// interface abstracts the operations related to user management, such as
 	// retrieving and saving user information.
+	
+	public int countAdminUsers();
 	/**
 	 * To get user by email
 	 * 
@@ -131,4 +133,5 @@ public interface UserLogic {
 	 * @return
 	 */
 	public ManagerDashboardEntity getDetailsForManagerDashboard();
+	
 }
