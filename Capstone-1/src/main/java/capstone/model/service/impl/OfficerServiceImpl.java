@@ -78,6 +78,8 @@ public class OfficerServiceImpl implements OfficerService{
 				
 			obj.setUniversity(app.getUniversity());
 			
+			obj.setHasResubmittedOrLowEvaluation(app.getHasResubmittedOrLowEvaluation());
+			
 			listOfAppObj.add(obj);
 			
 		}

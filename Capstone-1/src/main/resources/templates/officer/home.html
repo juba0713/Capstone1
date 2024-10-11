@@ -174,45 +174,10 @@
               ></td>
 
               <td
-                th:text="${app.university	}"
+                th:text="${app.university}"
                 class="whitespace-nowrap max-w-0 truncate"
               ></td>
-              <td class="whitespace-nowrap max-w-0 truncate">PENDING</td>
-              <!-- pending, resubmitted -->
-              <!-- <td class="whitespace-nowrap max-w-0 truncate">Pending</td> -->
-              <td>
-                <form th:action="@{/officer/prescreen}" method="GET">
-                  <button
-                    class="btn-row border-black hover:bg-green-500 bg-green-600 rounded-lg px-2 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-                    type="submit"
-                    th:data-id="${app.encryptedApplicantIdPk}"
-                    name="id"
-                    th:value="${app.encryptedApplicantIdPk}"
-                  >
-                    Review Application
-                  </button>
-                </form>
-              </td>
-            </tr>
-            <tr
-              th:each="app : *{listOfApplicants}"
-              class="row-btn"
-              th:data-id="${app.applicantIdPk}"
-            >
-              <td
-                th:text="${app.email}"
-                class="whitespace-nowrap max-w-0 truncate"
-              ></td>
-              <td
-                th:text="${app.projectTitle}"
-                class="whitespace-nowrap max-w-0 truncate"
-              ></td>
-
-              <td
-                th:text="${app.university	}"
-                class="whitespace-nowrap max-w-0 truncate"
-              ></td>
-              <td class="whitespace-nowrap max-w-0 truncate">Resubmitted</td>
+              <td class="whitespace-nowrap max-w-0 truncate" th:text="${app.hasResubmittedOrLowEvaluation ? 'RESUBMITTED' : 'PENDING'}"></td>
               <!-- pending, resubmitted -->
               <!-- <td class="whitespace-nowrap max-w-0 truncate">Pending</td> -->
               <td>

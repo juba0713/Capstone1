@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.io.ByteArrayInputStream;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,7 @@ import capstone.model.object.ApplicantTbiFeedbackObj;
 import capstone.model.object.ErrorObj;
 import capstone.model.service.ApplicantService;
 import capstone.model.service.CommonService;
+import capstone.model.service.GoogleDriveService;
 import capstone.model.service.LoggedInUserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -69,6 +71,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 	@Autowired
 	private Environment env;
+	
+	@Autowired
+	private GoogleDriveService googleDriveService;
 
 	@Override
 	public ApplicantInOutDto validateApplication(ApplicantInOutDto inDto) {
@@ -512,17 +517,24 @@ public class ApplicantServiceImpl implements ApplicantService {
 			projectEntity.setScopeProposal(inDto.getScopeProposal());
 	
 			projectEntity.setMethodology(inDto.getMethodology());
-
-		   MultipartFile vitaeFile = inDto.getVitaeFile();
-	
+			
+			MultipartFile vitaeFile = inDto.getVitaeFile();
+			
 			int lastDotIndex = vitaeFile.getOriginalFilename().lastIndexOf('.');
-	
+			
 			String fileName = vitaeFile.getOriginalFilename().substring(0, lastDotIndex) + "_" + userIdPk
 					+ vitaeFile.getOriginalFilename().substring(lastDotIndex);
+
+		   googleDriveService.uploadPdfFile(vitaeFile, fileName);
 	
-			Path filePath = uploadPath.resolve(fileName);
-	
-			Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+//			int lastDotIndex = vitaeFile.getOriginalFilename().lastIndexOf('.');
+//	
+//			String fileName = vitaeFile.getOriginalFilename().substring(0, lastDotIndex) + "_" + userIdPk
+//					+ vitaeFile.getOriginalFilename().substring(lastDotIndex);
+//	
+//			Path filePath = uploadPath.resolve(fileName);
+//			
+//			Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 	
 			projectEntity.setVitaeFile(fileName);
 	
@@ -640,9 +652,11 @@ public class ApplicantServiceImpl implements ApplicantService {
 				fileName = vitaeFile.getOriginalFilename().substring(0, lastDotIndex) + "_" + applicant.getCreatedBy()
 						+ vitaeFile.getOriginalFilename().substring(lastDotIndex);
 		
-				Path filePath = uploadPath.resolve(fileName);
-		
-				Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+//				Path filePath = uploadPath.resolve(fileName);
+//		
+//				Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+				
+				googleDriveService.uploadPdfFile(vitaeFile, fileName);
 
 			}else {
 				fileName = inDto.getVitaeFileName();

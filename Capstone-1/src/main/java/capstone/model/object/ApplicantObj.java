@@ -28,4 +28,6 @@ public class ApplicantObj {
 	public String acceptedBy;
 	
 	public String evaluatedBy;
+	
+	private Boolean hasResubmittedOrLowEvaluation;
 }

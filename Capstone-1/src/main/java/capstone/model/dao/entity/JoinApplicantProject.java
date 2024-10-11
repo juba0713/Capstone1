@@ -19,23 +19,26 @@ public class JoinApplicantProject {
 			(String) objects[4],
 			(Integer) objects[5],
 			(String) objects[6],
-			(String) objects[7]
+			(String) objects[7],
+			(Boolean) objects[8]
 		);
 	}
 	
-	public int applicantIdPk;
+	private int applicantIdPk;
 	
-	public String email;
+	private String email;
 	
-	public String projectTitle;
+	private String projectTitle;
 
-	public int status;
+	private int status;
 	
-	public String university;
+	private String university;
 	
-	public int totalRating;
+	private int totalRating;
 	
-	public String acceptedBy;
+	private String acceptedBy;
 	
-	public String evaluatedBy;
+	private String evaluatedBy;
+	
+	private Boolean hasResubmittedOrLowEvaluation;
 }
