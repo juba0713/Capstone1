@@ -66,34 +66,40 @@
         </div>
       </div>
       <div class="p-4 flex justify-center font-secondary">
-        <div class="w-2/3">
+        <div class="w-11/12">
           <div class="flex gap-4">
             <!-- Pending Applications Card -->
-            <div class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6">
+            <div
+              class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6 border-b-4 border-[#800000]"
+            >
               <div
-                class="font-bold text-2xl mb-2 text-center"
+                class="font-bold text-2xl mb-2 text-center text-[#800000]"
                 th:text="*{officerDashboardObj.pendingApplicationCount}"
               ></div>
               <p class="text-gray-700 text-sm text-center">
-                Pending Applications
+                Pending <br />Applications
               </p>
             </div>
 
             <!-- Recently Reviewed Card -->
-            <div class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6">
+            <div
+              class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6 border-b-4 border-[#4CAF50]"
+            >
               <div
-                class="font-bold text-2xl mb-2 text-center"
+                class="font-bold text-2xl mb-2 text-center text-[#4CAF50]"
                 th:text="*{officerDashboardObj.acceptedApplicationCount}"
               ></div>
               <p class="text-gray-700 text-sm text-center">
-                Accepted Applications
+                Accepted <br />Applications
               </p>
             </div>
 
             <!-- Resubmission Card -->
-            <div class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6">
+            <div
+              class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6 border-b-4 border-[#FF9800]"
+            >
               <div
-                class="font-bold text-2xl mb-2 text-center"
+                class="font-bold text-2xl mb-2 text-center text-[#FF9800]"
                 th:text="*{officerDashboardObj.rejectedApplicationEligibleCount}"
               ></div>
               <p class="text-gray-700 text-sm text-center">
@@ -104,9 +110,11 @@
               </p>
             </div>
 
-            <div class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6">
+            <div
+              class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6 border-b-4 border-[#F44336]"
+            >
               <div
-                class="font-bold text-2xl mb-2 text-center"
+                class="font-bold text-2xl mb-2 text-center text-[#F44336]"
                 th:text="*{officerDashboardObj.rejectedApplicationNotEligibleCount}"
               ></div>
               <p class="text-gray-700 text-sm text-center">
@@ -117,13 +125,16 @@
               </p>
             </div>
 
-            <div class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6">
+            <div
+              class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6 border-b-4 border-[#2196F3]"
+            >
               <div
-                class="font-bold text-2xl mb-2 text-center"
+                class="font-bold text-2xl mb-2 text-center text-[#2196F3]"
                 th:text="*{officerDashboardObj.resubmittedApplicationCount}"
               ></div>
               <p class="text-gray-700 text-sm text-center">
-                Resubmitted Applications
+                Resubmitted <br />
+                Applications
               </p>
             </div>
           </div>
@@ -166,9 +177,42 @@
                 th:text="${app.university	}"
                 class="whitespace-nowrap max-w-0 truncate"
               ></td>
-              <td class="whitespace-nowrap max-w-0 truncate">
-                PENDING<sup>resubmitted</sup>
+              <td class="whitespace-nowrap max-w-0 truncate">PENDING</td>
+              <!-- pending, resubmitted -->
+              <!-- <td class="whitespace-nowrap max-w-0 truncate">Pending</td> -->
+              <td>
+                <form th:action="@{/officer/prescreen}" method="GET">
+                  <button
+                    class="btn-row border-black hover:bg-green-500 bg-green-600 rounded-lg px-2 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                    type="submit"
+                    th:data-id="${app.encryptedApplicantIdPk}"
+                    name="id"
+                    th:value="${app.encryptedApplicantIdPk}"
+                  >
+                    Review Application
+                  </button>
+                </form>
               </td>
+            </tr>
+            <tr
+              th:each="app : *{listOfApplicants}"
+              class="row-btn"
+              th:data-id="${app.applicantIdPk}"
+            >
+              <td
+                th:text="${app.email}"
+                class="whitespace-nowrap max-w-0 truncate"
+              ></td>
+              <td
+                th:text="${app.projectTitle}"
+                class="whitespace-nowrap max-w-0 truncate"
+              ></td>
+
+              <td
+                th:text="${app.university	}"
+                class="whitespace-nowrap max-w-0 truncate"
+              ></td>
+              <td class="whitespace-nowrap max-w-0 truncate">Resubmitted</td>
               <!-- pending, resubmitted -->
               <!-- <td class="whitespace-nowrap max-w-0 truncate">Pending</td> -->
               <td>
