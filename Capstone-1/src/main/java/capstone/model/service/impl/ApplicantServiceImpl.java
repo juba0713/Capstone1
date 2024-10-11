@@ -387,11 +387,11 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		String[] leaderNames = commonService.splitArray(inDto.getGroupLeader());
 		
-		Path uploadPath = Paths.get(env.getProperty("file.path"));
+		// Path uploadPath = Paths.get(env.getProperty("file.path"));
 		
-		if (!Files.exists(uploadPath)) {
-			Files.createDirectories(uploadPath);
-		}
+		// if (!Files.exists(uploadPath)) {
+		// 	Files.createDirectories(uploadPath);
+		// }
 		
 		int userIdPk = 0;
 		
