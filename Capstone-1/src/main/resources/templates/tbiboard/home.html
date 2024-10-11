@@ -84,9 +84,11 @@
         <div class="w-2/3">
           <div class="flex gap-4">
             <!-- Applications to Evaluate Card -->
-            <div class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6">
+            <div
+              class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6 border-b-4 border-[#03A9F4]"
+            >
               <div
-                class="font-bold text-2xl mb-2 text-center"
+                class="font-bold text-2xl mb-2 text-center text-[#03A9F4]"
                 th:text="*{tbiBoardDashboardObj.pendingApplicantCount}"
               ></div>
               <p class="text-gray-700 text-sm text-center">
@@ -95,9 +97,11 @@
             </div>
 
             <!-- Recently Evaluated Applications Card -->
-            <div class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6">
+            <div
+              class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6 border-b-4 border-[#009688]"
+            >
               <div
-                class="font-bold text-2xl mb-2 text-center"
+                class="font-bold text-2xl mb-2 text-center text-[#009688]"
                 th:text="*{tbiBoardDashboardObj.evaluatedApplicantCount}"
               ></div>
               <p class="text-gray-700 text-sm text-center">
@@ -106,9 +110,11 @@
             </div>
 
             <!-- Acceptance Rate Card -->
-            <div class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6">
+            <div
+              class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6 border-b-4 border-[#8BC34A]"
+            >
               <div
-                class="font-bold text-2xl mb-2 text-center"
+                class="font-bold text-2xl mb-2 text-center text-[#8BC34A]"
                 th:text="*{tbiBoardDashboardObj.acceptanceRate} + '%'"
               ></div>
               <p class="text-gray-700 text-sm text-center">
@@ -116,9 +122,11 @@
               </p>
             </div>
 
-            <div class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6">
+            <div
+              class="w-1/3 rounded overflow-hidden shadow-lg bg-white p-6 border-b-4 border-[#D32F2F]"
+            >
               <div
-                class="font-bold text-2xl mb-2 text-center"
+                class="font-bold text-2xl mb-2 text-center text-[#D32F2F]"
                 th:text="*{tbiBoardDashboardObj.failedRate} + '%'"
               ></div>
               <p class="text-gray-700 text-sm text-center">Rejection Rate</p>
@@ -215,20 +223,6 @@
           ],
         });
       });
-    </script>
-    <script>
-      // JavaScript function to remove the flash message after a specified time
-      function hideFlashMessage() {
-        const flashMessage = document.getElementById("flash-message");
-        if (flashMessage) {
-          setTimeout(() => {
-            flashMessage.style.display = "none";
-          }, 5000); // 5000 milliseconds = 5 seconds
-        }
-      }
-
-      // Call the function on page load
-      window.onload = hideFlashMessage;
     </script>
   </body>
 </html>
