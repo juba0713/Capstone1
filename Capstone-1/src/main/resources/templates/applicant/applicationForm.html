@@ -170,7 +170,7 @@
               style="color: red"
             ></span>
             <div
-              class="error"
+              class="error no-pad"
               th:if="*{error != null} AND *{error.emailError != null}"
             >
               <div th:each="err : *{error.emailError}" th:text="${err}"></div>

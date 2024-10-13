@@ -324,7 +324,7 @@
                 ></td>
                 <td
                   class="whitespace-nowrap max-w-0 truncate"
-                  th:text="${app.status == 0 ? 'In Officer' : app.status == 2 ? 'Rejected' : app.status == 1 OR app.status == 3? 'In Manager' : app.status == 4 ? 'In Board' : app.status == 8 ? 'Evaluated' : app.status == 5 OR app.status == 50 AND app.totalRating >= 60 ? 'Passed'  : 'Failed'}"
+                  th:text="${app.status == 0 ? 'In Officer' : app.status == 2 ? 'Rejected' : app.status == 1 OR app.status == 3? 'In Manager' : app.status == 4 ? 'In Board' : app.status == 8 ? 'Evaluated' : (app.status == 5 OR app.status == 50) AND app.totalRating >= 60 ? 'Passed'  : 'Failed'}"
                   th:style="${app.status == 0 OR app.status == 1 OR app.status==3 OR app.status == 4  ? 'color:#000000; font-weight: bold;' : app.status == 2 OR ((app.status == 5 OR app.status == 6 OR app.status == 7) AND app.totalRating < 60) ? 'color:#FF0000; font-weight: bold;' : 'color:#008000; font-weight: bold;'}"
                 ></td>
                 <td>

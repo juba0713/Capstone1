@@ -37,4 +37,6 @@ public class ApplicantTbiFeedbackObj {
 	private String ctEightComments;
 
 	private String tbiFeedback;
+	
+	private int totalRating;
 }

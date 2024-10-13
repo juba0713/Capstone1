@@ -20,6 +20,8 @@ public class MessageConstant {
 	
 	public static String EMAIL_INCORRECT_FORMAT = "Email is incorrect format!";
 	
+	public static String EMAIL_EXIST = "Email already in use";
+	
 	public static String PROJECT_TITLE_BLANK = "Project Title is required!";
 	
 	public static String PROJECT_DESCRIPTION_BLANK = "Project Description is required!";
