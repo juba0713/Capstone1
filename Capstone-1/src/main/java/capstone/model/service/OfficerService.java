@@ -40,4 +40,6 @@ public interface OfficerService {
 	 * @return OfficerInOutDto
 	 */
 	public OfficerInOutDto getApplicantDetails(OfficerInOutDto inDto); 
+	
+	public OfficerInOutDto getHistoryApplicantDetails(OfficerInOutDto inDto);
 }

@@ -12,7 +12,7 @@ import capstone.model.dao.entity.GroupMemberEntity;
 @Transactional
 public interface GroupMemberDao extends JpaRepository<GroupMemberEntity, Integer>{
 	
-	public final String DELETE_ALL_GROUP_MEMBER_BY_GROUP_ID = "DELETE FROM t_group_member WHERE group_id_pk = :groupIdPk";
+	public final String DELETE_ALL_GROUP_MEMBER_BY_GROUP_ID = "UPDATE t_group_member SET delete_flg = true  WHERE group_id_pk = :groupIdPk";
 	
 	@Modifying
 	@Query(value=DELETE_ALL_GROUP_MEMBER_BY_GROUP_ID, nativeQuery=true)

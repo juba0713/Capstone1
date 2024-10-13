@@ -13,6 +13,7 @@ import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.ApplicantDetailsFeedbackEntity;
 import capstone.model.dao.entity.ApplicantEntity;
 import capstone.model.dao.entity.ApplicantMonthly;
+import capstone.model.dao.entity.HistoryApplicantDetailsEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
 import capstone.model.dao.entity.UserCertificateEntity;
 import jakarta.transaction.Transactional;
@@ -32,7 +33,6 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 //			+ "	CASE "
 //			+ "		WHEN a.status > 0 "
 //			+ "			THEN (SELECT DISTINCT CONCAT(u2.first_name, ' ', u2.last_name) AS full_name "
-//			+ "				  FROM t_accepted_applicant r2 "
 //			+ "				  JOIN m_user_information u2 ON u2.id_pk = r2.created_by AND u2.delete_flg = false "
 //			+ "				  WHERE r2.applicant_id_pk = a.id_pk"
 //			+ "				 AND r2.id_pk = (SELECT MAX(id_pk) FROM t_accepted_applicant WHERE applicant_id_pk = a.id_pk)"
@@ -405,6 +405,72 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "	t_evaluation_details ed ON ed.evaluated_applicant_id_pk = ea.id_pk AND ed.delete_flg = false "
 			+ "WHERE "
 			+ "	s.id_pk = :applicantIdPk";
+	
+	public final String GET_HISTORY_APPLICANT_DETAILS_BY_ID_PK= "SELECT   "
+			+ "    a.id_pk,  "
+			+ "	p.id_pk,  "
+			+ "    a.email,  "
+			+ "    a.agree_flg,  "
+			+ "    p.project_title,  "
+			+ "    p.project_description,  "
+			+ "    p.teams,  "
+			+ "    p.problem_statement,  "
+			+ "    p.target_market,  "
+			+ "    p.solution_description,  "
+			+ "    p.historical_timeline,  "
+			+ "    p.product_service_offering,  "
+			+ "    p.pricing_strategy,  "
+			+ "    p.int_property_status,  "
+			+ "    p.objectives,  "
+			+ "    p.scope_proposal,  "
+			+ "    p.methodology,  "
+			+ "    p.vitae_file,  "
+			+ "    p.support_link,  "
+			+ "    g.group_name,  "
+			+ "    g.first_name AS leader_first_name,  "
+			+ "    g.last_name AS leader_last_name,  "
+			+ "    g.mobile_number,  "
+			+ "    g.address,  "
+			+ "    g.university,  "
+			+ "    gm.first_name AS member_first_name,  "
+			+ "    gm.last_name AS member_last_name,  "
+			+ "    a.technology_ans,  "
+			+ "    a.product_development_ans,  "
+			+ "    a.competitive_landscape_ans,  "
+			+ "    a.product_design_ans,  "
+			+ "    a.team_ans,  "
+			+ "    a.go_to_market_ans,  "
+			+ "    a.manufacturing_ans,  "
+			+ "    a.eligibility_agree_flg,  "
+			+ "    a.commitment_one_flg,  "
+			+ "    a.commitment_two_flg,  "
+			+ "    a.commitment_three_flg,  "
+			+ "    a.commitment_four_flg,  "
+			+ "    a.status,  "
+			+ "    a.certificate_name  "
+			+ "FROM m_applicant a  "
+			+ "LEFT JOIN t_project p ON p.applicant_id_pk = a.id_pk AND p.delete_flg = true  "
+			+ "LEFT JOIN m_group g ON g.applicant_id_pk = a.id_pk AND g.id_pk = :projectIdPk AND g.delete_flg = true  "
+			+ "LEFT JOIN t_group_member gm ON gm.group_id_pk = g.id_pk AND gm.delete_flg = true  "
+			+ "WHERE a.id_pk = :applicantIdPk "
+			+ "AND a.delete_flg = false "
+			+ "AND p.id_pk = :projectIdPk "
+			+ "ORDER BY p.id_pk ASC";
+	
+	@Query(value=GET_HISTORY_APPLICANT_DETAILS_BY_ID_PK, nativeQuery=true)
+	public List<Object[]> getHistoryApplicantDetailsByIdPkRaw(int applicantIdPk, int projectIdPk) throws DataAccessException;
+	
+	default List<HistoryApplicantDetailsEntity> getHistoryApplicantDetailsByIdPk(int applicantIdPk, int projectIdPk){
+		List<Object[]> rawResults = getHistoryApplicantDetailsByIdPkRaw(applicantIdPk, projectIdPk);
+	    List<HistoryApplicantDetailsEntity> applicants = new ArrayList<>();
+
+	    for (Object[] objects : rawResults) {
+	    	HistoryApplicantDetailsEntity applicant = new HistoryApplicantDetailsEntity(objects);  
+	        applicants.add(applicant);
+	    }
+
+	    return applicants;
+	}
 	
 	@Query(value=GET_USER_INFORMATION_FOR_CERTIFICATE, nativeQuery=true)
 	public List<Object[]> getUserInformationForCertificateRaw(int applicantIdPk) throws DataAccessException;

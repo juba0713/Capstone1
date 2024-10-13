@@ -22,6 +22,12 @@ public class OfficerInOutDto {
 	
 	ApplicantDetailsObj applicantDetailsObj;
 	
+	private int projectIdPk;
+	
+	private List<Integer> projectIdPks;
+	
+	private int rejectedCount;
+	
 	/*
 	 * For Prescreen DTO
 	 */

@@ -45,6 +45,12 @@ public class ManagerInOutDto {
 	
 	private int year;
 	
+	private int projectIdPk;
+	
+	private List<Integer> projectIdPks;
+	
+	private int rejectedCount;
+	
 	/*
 	 * Evaluation DTO
 	 */

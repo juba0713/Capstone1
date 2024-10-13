@@ -4,6 +4,7 @@ package capstone.model.service;
 import org.springframework.stereotype.Service;
 
 import capstone.model.dto.ManagerInOutDto;
+import capstone.model.dto.OfficerInOutDto;
 import jakarta.mail.MessagingException;
 
 @Service
@@ -103,5 +104,7 @@ public interface ManagerService {
 	 * @throws Exception
 	 */
 	public ManagerInOutDto getAppllicantRankingByYearMonth(ManagerInOutDto inDto) throws Exception;
+	
+	public ManagerInOutDto getHistoryApplicantDetails(ManagerInOutDto inDto);
 	
 }

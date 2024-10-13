@@ -398,6 +398,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		//If token is not null means resubmission
 		if(inDto.getToken() == null || inDto.getReApplyToken() != null) {
 			
+			//First Registration - Adding account for the applicant
 			if(inDto.getReApplyToken()==null || inDto.getReApplyToken().isEmpty()) {
 				
 				UserInformationEntity newUser = new UserInformationEntity();
@@ -442,9 +443,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 					
 					userIdPk = user.getIdPk();
 				}
-				
-				System.out.println(userIdPk);
-				
+						
 				applicantLogic.deleteApplicantByCreatedBy(userIdPk);
 			}
 
@@ -526,16 +525,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 					+ vitaeFile.getOriginalFilename().substring(lastDotIndex);
 
 		   googleDriveService.uploadPdfFile(vitaeFile, fileName);
-	
-//			int lastDotIndex = vitaeFile.getOriginalFilename().lastIndexOf('.');
-//	
-//			String fileName = vitaeFile.getOriginalFilename().substring(0, lastDotIndex) + "_" + userIdPk
-//					+ vitaeFile.getOriginalFilename().substring(lastDotIndex);
-//	
-//			Path filePath = uploadPath.resolve(fileName);
-//			
-//			Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-	
+
 			projectEntity.setVitaeFile(fileName);
 	
 			projectEntity.setSupportLink(inDto.getSupportLink());
@@ -625,6 +615,10 @@ public class ApplicantServiceImpl implements ApplicantService {
 			}
 			
 			ApplicantEntity applicant = applicantLogic.getApplicantByIdPk(applicantIdPk);
+			GroupEntity group = applicantLogic.getGroupByApplicantId(applicant.getIdPk());
+			
+			applicantLogic.deletePreviousProjectDetails(applicantIdPk);
+			applicantLogic.deletePreviousGroup(applicantIdPk);
 			
 			applicantLogic.updateApplicant(inDto.getAgreeFlg(),
 					inDto.getTechnologyAns(), 
@@ -642,6 +636,9 @@ public class ApplicantServiceImpl implements ApplicantService {
 					status,
 					applicant.getIdPk());
 			
+			
+			
+			
 			String fileName = "";
 			
 			if(!inDto.getVitaeFile().isEmpty()) {
@@ -651,56 +648,86 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 				fileName = vitaeFile.getOriginalFilename().substring(0, lastDotIndex) + "_" + applicant.getCreatedBy()
 						+ vitaeFile.getOriginalFilename().substring(lastDotIndex);
-		
-//				Path filePath = uploadPath.resolve(fileName);
-//		
-//				Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-				
+					
 				googleDriveService.uploadPdfFile(vitaeFile, fileName);
 
 			}else {
 				fileName = inDto.getVitaeFileName();
 			}
+						
+			ProjectEntity projectEntity = new ProjectEntity();
 			
+			projectEntity.setApplicantIdPk(applicantIdPk);
+	
+			projectEntity.setProjectTitle(inDto.getProjectTitle());
+	
+			projectEntity.setProjectDescription(inDto.getProjectDescription());
+	
+			projectEntity.setTeams(commonService.convertToArray(inDto.getTeams()));
+	
+			projectEntity.setProblemStatement(inDto.getProblemStatement());
+	
+			projectEntity.setTargetMarket(inDto.getTargetMarket());
+	
+			projectEntity.setSolutionDescription(inDto.getSolutionDescription());
+	
+			projectEntity.setHistoricalTimeline(commonService.convertToArray(inDto.getHistoricalTimeline()));
+	
+			projectEntity.setProductServiceOffering(inDto.getProductServiceOffering());
+	
+			projectEntity.setPricingStrategy(inDto.getPricingStrategy());
+	
+			projectEntity.setIntPropertyStatus(inDto.getIntPropertyStatus());
+	
+			projectEntity.setObjectives(inDto.getObjectives());
+	
+			projectEntity.setScopeProposal(inDto.getScopeProposal());
+	
+			projectEntity.setMethodology(inDto.getMethodology());
 			
-			applicantLogic.updateProject(inDto.getProjectTitle(), 
-					inDto.getProjectDescription(), 
-					commonService.listToArray(commonService.convertToArray(inDto.getTeams())),
-					inDto.getProblemStatement(), 
-					inDto.getTargetMarket(), 
-					inDto.getSolutionDescription(), 
-					commonService.listToArray(commonService.convertToArray(inDto.getHistoricalTimeline())),
-					commonService.listToArray(inDto.getProductServiceOffering()),
-					commonService.listToArray(inDto.getPricingStrategy()),
-					inDto.getIntPropertyStatus(), 
-					inDto.getObjectives(), 
-					inDto.getScopeProposal(), 
-					inDto.getMethodology(), 
-					fileName, 
-					inDto.getSupportLink(), 
-					applicant.getIdPk());
+			projectEntity.setVitaeFile(fileName);
+	
+			projectEntity.setSupportLink(inDto.getSupportLink());
+	
+			projectEntity.setCreatedDate(currentDateTime);
+	
+			projectEntity.setDeleteFlg(false);
+	
+			applicantLogic.saveProjectEntity(projectEntity);
 			
-			GroupEntity group = applicantLogic.getGroupByApplicantId(applicant.getIdPk());
+			GroupEntity groupEntity = new GroupEntity();
 			
-			applicantLogic.updateGroup(inDto.getGroupName(), 
-					leaderNames[0], 
-					leaderNames[1], 
-					inDto.getLeaderNumber(), 
-					inDto.getLeaderAddress(),
-					inDto.getUniversity(),
-					applicant.getIdPk());
+			groupEntity.setApplicantIdPk(applicantIdPk);
+	
+			groupEntity.setGroupName(inDto.getGroupName());
+	
+			groupEntity.setFirstName(leaderNames[1]);
+	
+			groupEntity.setLastName(leaderNames[0]);
+	
+			groupEntity.setMobileNumber(inDto.getLeaderNumber());
+	
+			groupEntity.setAddress(inDto.getLeaderAddress());
+	
+			groupEntity.setUniversity(inDto.getUniversity());
+	
+			groupEntity.setCreatedDate(currentDateTime);
+	
+			groupEntity.setDeleteFlg(false);
+			
+			int groupIdPk = applicantLogic.saveGroupEntity(groupEntity);
 			
 			applicantLogic.deleteAllPreviousMember(group.getIdPk());
-			
+	
 			List<GroupMemberEntity> members = new ArrayList<>();
-			
+	
 			for (String member : inDto.getMembers()) {
 	
 				if (!CommonConstant.BLANK.equals(member)) {
 	
 					GroupMemberEntity groupMemberEntity = new GroupMemberEntity();
 	
-					groupMemberEntity.setGroupIdPk(group.getIdPk());
+					groupMemberEntity.setGroupIdPk(groupIdPk);
 	
 					String[] memberNames = commonService.splitArray(member);
 	
@@ -717,6 +744,63 @@ public class ApplicantServiceImpl implements ApplicantService {
 			}
 	
 			applicantLogic.saveGroupMemberEntity(members);
+			
+		
+			
+//			applicantLogic.updateProject(inDto.getProjectTitle(), 
+//					inDto.getProjectDescription(), 
+//					commonService.listToArray(commonService.convertToArray(inDto.getTeams())),
+//					inDto.getProblemStatement(), 
+//					inDto.getTargetMarket(), 
+//					inDto.getSolutionDescription(), 
+//					commonService.listToArray(commonService.convertToArray(inDto.getHistoricalTimeline())),
+//					commonService.listToArray(inDto.getProductServiceOffering()),
+//					commonService.listToArray(inDto.getPricingStrategy()),
+//					inDto.getIntPropertyStatus(), 
+//					inDto.getObjectives(), 
+//					inDto.getScopeProposal(), 
+//					inDto.getMethodology(), 
+//					fileName, 
+//					inDto.getSupportLink(), 
+//					applicant.getIdPk());
+//			
+//			GroupEntity group = applicantLogic.getGroupByApplicantId(applicant.getIdPk());
+//			
+//			applicantLogic.updateGroup(inDto.getGroupName(), 
+//					leaderNames[0], 
+//					leaderNames[1], 
+//					inDto.getLeaderNumber(), 
+//					inDto.getLeaderAddress(),
+//					inDto.getUniversity(),
+//					applicant.getIdPk());
+//			
+//			applicantLogic.deleteAllPreviousMember(group.getIdPk());
+//			
+//			List<GroupMemberEntity> members = new ArrayList<>();
+//			
+//			for (String member : inDto.getMembers()) {
+//	
+//				if (!CommonConstant.BLANK.equals(member)) {
+//	
+//					GroupMemberEntity groupMemberEntity = new GroupMemberEntity();
+//	
+//					groupMemberEntity.setGroupIdPk(group.getIdPk());
+//	
+//					String[] memberNames = commonService.splitArray(member);
+//	
+//					groupMemberEntity.setFirstName(memberNames[1]);
+//	
+//					groupMemberEntity.setLastName(memberNames[0]);
+//	
+//					groupMemberEntity.setCreatedDate(currentDateTime);
+//	
+//					groupMemberEntity.setDeleteFlg(false);
+//	
+//					members.add(groupMemberEntity);
+//				}
+//			}
+//	
+//			applicantLogic.saveGroupMemberEntity(members);
 		}
 
 		return outDto;

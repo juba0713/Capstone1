@@ -93,6 +93,12 @@ public class ManagerController {
 		webDto.setApplicantOffFeedbackObj(outDto.getApplicantOffFeedbackObj());
 		
 		webDto.setApplicantTbiFeedbackObj(outDto.getApplicantTbiFeedbackObj());
+		
+		webDto.setEncryptedApplicantIdPk(id);
+		
+		webDto.setRejectedCount(outDto.getRejectedCount());
+		
+		webDto.setProjectIdPks(outDto.getProjectIdPks());
 
 		return "manager/applicationDetails";
 	}
@@ -249,27 +255,27 @@ public class ManagerController {
 		return "redirect:/manager/accepted-result";
 	}
 
-	@GetMapping("/retrieve/details")
-	public ResponseEntity<ManagerWebDto> getApplicantDetails(@RequestParam("applicantIdPk") String applicantIdPk) {
-
-		ManagerInOutDto inDto = new ManagerInOutDto();
-
-		System.out.println("ID: " + applicantIdPk);
-
-		inDto.setApplicantIdPk(Integer.parseInt(applicantIdPk));
-
-		ManagerInOutDto outDto = managerService.getApplicantDetails(inDto);
-
-		if (outDto.getApplicantDetailsObj() == null) {
-
-		}
-
-		ManagerWebDto returnWebDto = new ManagerWebDto();
-
-		returnWebDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
-
-		return ResponseEntity.ok(returnWebDto);
-	}
+//	@GetMapping("/retrieve/details")
+//	public ResponseEntity<ManagerWebDto> getApplicantDetails(@RequestParam("applicantIdPk") String applicantIdPk) {
+//
+//		ManagerInOutDto inDto = new ManagerInOutDto();
+//
+//		System.out.println("ID: " + applicantIdPk);
+//
+//		inDto.setApplicantIdPk(Integer.parseInt(applicantIdPk));
+//
+//		ManagerInOutDto outDto = managerService.getApplicantDetails(inDto);
+//
+//		if (outDto.getApplicantDetailsObj() == null) {
+//
+//		}
+//
+//		ManagerWebDto returnWebDto = new ManagerWebDto();
+//
+//		returnWebDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
+//
+//		return ResponseEntity.ok(returnWebDto);
+//	}
 
 	@PostMapping(value = "/qualified", params = "yes")
 	public String qualifiedResubmissionYes(@ModelAttribute ManagerWebDto webDto) throws NumberFormatException, Exception {
@@ -328,5 +334,28 @@ public class ManagerController {
 		return "redirect:/manager/evaluated-result";
 	}
 	
+	@GetMapping("/retrieve/details")
+	public ResponseEntity<ManagerWebDto> getApplicantDetails(@RequestParam("applicantIdPk") String applicantIdPk,
+			@RequestParam("projectIdPk") String projectIdPk) throws NumberFormatException, Exception {
+
+		
+		ManagerInOutDto inDto = new ManagerInOutDto();
+		  
+		inDto.setApplicantIdPk(Integer.parseInt(commonService.decrypt(applicantIdPk)));
+		
+		inDto.setProjectIdPk(Integer.parseInt(projectIdPk));
+ 
+		ManagerInOutDto outDto = managerService.getHistoryApplicantDetails(inDto);
+		
+		ManagerWebDto webDto = new ManagerWebDto();
+		
+		webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
+		
+		webDto.setRejectedCount(outDto.getRejectedCount());
+		
+		webDto.setProjectIdPks(outDto.getProjectIdPks());
+		 
+		return ResponseEntity.ok(webDto);
+	}
 	
 }

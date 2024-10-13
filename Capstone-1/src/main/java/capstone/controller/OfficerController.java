@@ -101,6 +101,8 @@ public class OfficerController {
 		inDto.setRecommendation(webDto.getRecommendation());
 		
 		 officerService.acceptApplicant(inDto);
+		 
+		 ra.addFlashAttribute("succMsg", MessageConstant.ACCEPTED_APPLICATION);
 				
 		return "redirect:/officer/home";
 	}
@@ -172,7 +174,9 @@ public class OfficerController {
 		
 		inDto.setRecommendation(webDto.getRecommendation());
 		
-		 officerService.rejectApplicant(inDto);
+		officerService.rejectApplicant(inDto);
+		 
+		 ra.addFlashAttribute("succMsg", MessageConstant.REJECTED_APPLICATION);
 
 		return "redirect:/officer/home";
 	}
@@ -189,28 +193,35 @@ public class OfficerController {
 		webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
 		
 		webDto.setEncryptedApplicantIdPk(id);
+		
+		webDto.setRejectedCount(outDto.getRejectedCount());
+		
+		webDto.setProjectIdPks(outDto.getProjectIdPks());
 	
 		return "officer/prescreenChecklist";
 	}
 	
 	@GetMapping("/retrieve/details")
-	public ResponseEntity<OfficerWebDto> getApplicantDetails(@RequestParam("applicantIdPk") String applicantIdPk) {
+	public ResponseEntity<OfficerWebDto> getApplicantDetails(@RequestParam("applicantIdPk") String applicantIdPk,
+			@RequestParam("projectIdPk") String projectIdPk) throws NumberFormatException, Exception {
 
 		
 		OfficerInOutDto inDto = new OfficerInOutDto();
-  
-		inDto.setApplicantIdPk(Integer.parseInt(applicantIdPk));
+		  
+		inDto.setApplicantIdPk(Integer.parseInt(commonService.decrypt(applicantIdPk)));
+		
+		inDto.setProjectIdPk(Integer.parseInt(projectIdPk));
  
-		OfficerInOutDto outDto = officerService.getApplicantDetails(inDto);
-  
-		if(outDto.getApplicantDetailsObj() == null) {
-  
-		}
-  
-		OfficerWebDto returnWebDto = new OfficerWebDto();
-				
-		returnWebDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
+		OfficerInOutDto outDto = officerService.getHistoryApplicantDetails(inDto);
+		
+		OfficerWebDto webDto = new OfficerWebDto();
+		
+		webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
+		
+		webDto.setRejectedCount(outDto.getRejectedCount());
+		
+		webDto.setProjectIdPks(outDto.getProjectIdPks());
 		 
-		return ResponseEntity.ok(returnWebDto);
+		return ResponseEntity.ok(webDto);
 	}
 }

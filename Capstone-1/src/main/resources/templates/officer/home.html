@@ -40,9 +40,37 @@
       .accepted-modal-content {
         height: 40%;
       }
+      
+      .error-container,
+      .success-container {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .error-container div,
+      .success-container div {
+        background: green;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 8px;
+        border-radius: 6px;
+      }
     </style>
   </head>
   <body th:object="${officerWebDto}">
+	   <div
+      class="success-container"
+      th:if="${succMsg != null}"
+      id="flash-message"
+    >
+      <div th:text="${succMsg}"></div>
+    </div>
     <img
       th:src="@{/images/blocks.png}"
       class="w-3/5 h-4/5 bottom-0 absolute right-0 md:fixed pointer-events-none z-0"

@@ -14,6 +14,7 @@ import capstone.model.dao.entity.EvaluatedApplicantEntity;
 import capstone.model.dao.entity.EvaluationDetailsEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
+import capstone.model.dao.entity.HistoryApplicantDetailsEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
 import capstone.model.dao.entity.ManagerEvaluatedApplicantEntity;
 import capstone.model.dao.entity.ManagerEvaluationDetailsEntity;
@@ -304,4 +305,12 @@ public interface ApplicantLogic {
 	public EvaluatedApplicantEntity getEvaluatedApplicantById(int idPk);
 	
 	public AcceptedApplicantEntity getAcceptedApplicantByApplicantIdPk(int applicantIdPk);
+	
+	public void deletePreviousProjectDetails(int applicantIdPk);
+	
+	public void deletePreviousGroup(int applicantIdPk);
+	
+	public List<HistoryApplicantDetailsEntity> getHistoryApplicantDetailsByIdPk(int applicantIdPk, int projectIdPk);
+	
+	public List<ProjectEntity> getHistoryOfApplicant(int applicantIdPk);
 }

@@ -251,7 +251,8 @@ input[type="file"] {
   width: 55%;
 } */
 
-.tab {
+.tab,
+.rejected-tab {
   display: none;
 }
 
@@ -292,7 +293,18 @@ body.modal-open {
 
 /* header back */
 
-.ad-back-button {
+.rejected-applications{
+	 background-color: hsl(48, 99%, 65%);
+  color: black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+.ad-back-button:nth-child(even)  {
   position: fixed;
   top: 20px;
   left: 40px;
@@ -310,3 +322,18 @@ body.modal-open {
   background-color: rgb(226 232 240);
   color: black;
 }
+
+.ad-back-button:nth-child(odd) {
+  position: fixed;
+  top: 20px;
+  left: 200px;;
+  background-color: hsl(48, 99%, 65%);
+  color: black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+

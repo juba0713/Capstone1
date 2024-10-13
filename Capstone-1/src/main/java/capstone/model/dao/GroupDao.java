@@ -30,6 +30,8 @@ public interface GroupDao extends JpaRepository<GroupEntity, Integer>{
 			+ "AND "
 			+ "	delete_flg = false";
 	
+	public final String DELETE_PREVIOUS_GROUP = "UPDATE m_group SET delete_flg = true WHERE applicant_id_pk = :applicantIdPk ";
+	
 	@Modifying
 	@Query(value=UPDATE_GROUP, nativeQuery=true)
 	public void updateGroupByApplicantId(@Param("groupName") String groupName,
@@ -43,4 +45,8 @@ public interface GroupDao extends JpaRepository<GroupEntity, Integer>{
 	
 	@Query(value=GET_GROUP_BY_APPLICANT_ID)
 	public GroupEntity getGroupByApplicantId(int applicantIdPk) throws DataAccessException;
+	
+	@Modifying
+	@Query(value=DELETE_PREVIOUS_GROUP, nativeQuery=true)
+	public void deletePreviousGroup(int applicantIdPk) throws DataAccessException;
 }

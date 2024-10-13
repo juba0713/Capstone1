@@ -18,6 +18,12 @@ public class TbiBoardInOutDto {
 	
 	ApplicantDetailsObj applicantDetailsObj;
 	
+	private int projectIdPk;
+	
+	private List<Integer> projectIdPks;
+	
+	private int rejectedCount;
+	
 	/*
 	 * Evaluation DTO
 	 */

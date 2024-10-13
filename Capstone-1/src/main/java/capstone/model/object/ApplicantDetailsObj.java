@@ -9,6 +9,8 @@ public class ApplicantDetailsObj {
 
 	private int applicantIdPk;
 	
+	private int projectIdPk;
+	
 	private String encryptedApplicantIdPk;
 	
 	private String email;

@@ -54,6 +54,12 @@ public class TbiBoardController {
 		
 		webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
 		
+		webDto.setEncryptedApplicantIdPk(id);	
+		
+		webDto.setRejectedCount(outDto.getRejectedCount());
+		
+		webDto.setProjectIdPks(outDto.getProjectIdPks());
+		
 		return "tbiboard/evaluateApplication";
 	}
 	
@@ -132,25 +138,49 @@ public class TbiBoardController {
 		return "redirect:/tbi-board/home";
 	}
 	
+//	@GetMapping("/retrieve/details")
+//	public ResponseEntity<TbiBoardWebDto> getApplicantDetails(@RequestParam("applicantIdPk") String applicantIdPk) throws Exception {
+//
+//		
+//		TbiBoardInOutDto inDto = new TbiBoardInOutDto();
+//  
+//		inDto.setApplicantIdPk(Integer.parseInt(applicantIdPk));
+// 
+//		TbiBoardInOutDto outDto = tbiBoardService.getApplicantDetails(inDto);
+//  
+//		if(outDto.getApplicantDetailsObj() == null) {
+//  
+//		}
+//  
+//		TbiBoardWebDto returnWebDto = new TbiBoardWebDto();
+//		
+//		returnWebDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
+//		 
+//
+//		return ResponseEntity.ok(returnWebDto);
+//	}
+	
 	@GetMapping("/retrieve/details")
-	public ResponseEntity<TbiBoardWebDto> getApplicantDetails(@RequestParam("applicantIdPk") String applicantIdPk) throws Exception {
+	public ResponseEntity<TbiBoardWebDto> getApplicantDetails(@RequestParam("applicantIdPk") String applicantIdPk,
+			@RequestParam("projectIdPk") String projectIdPk) throws NumberFormatException, Exception {
 
 		
 		TbiBoardInOutDto inDto = new TbiBoardInOutDto();
-  
-		inDto.setApplicantIdPk(Integer.parseInt(applicantIdPk));
- 
-		TbiBoardInOutDto outDto = tbiBoardService.getApplicantDetails(inDto);
-  
-		if(outDto.getApplicantDetailsObj() == null) {
-  
-		}
-  
-		TbiBoardWebDto returnWebDto = new TbiBoardWebDto();
+		  
+		inDto.setApplicantIdPk(Integer.parseInt(commonService.decrypt(applicantIdPk)));
 		
-		returnWebDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
+		inDto.setProjectIdPk(Integer.parseInt(projectIdPk));
+ 
+		TbiBoardInOutDto outDto = tbiBoardService.getHistoryApplicantDetails(inDto);
+		
+		TbiBoardWebDto webDto = new TbiBoardWebDto();
+		
+		webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
+		
+		webDto.setRejectedCount(outDto.getRejectedCount());
+		
+		webDto.setProjectIdPks(outDto.getProjectIdPks());
 		 
-
-		return ResponseEntity.ok(returnWebDto);
+		return ResponseEntity.ok(webDto);
 	}
 }

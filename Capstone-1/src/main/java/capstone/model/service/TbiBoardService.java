@@ -2,6 +2,7 @@ package capstone.model.service;
 
 import org.springframework.stereotype.Service;
 
+import capstone.model.dto.OfficerInOutDto;
 import capstone.model.dto.TbiBoardInOutDto;
 import jakarta.mail.MessagingException;
 
@@ -32,4 +33,6 @@ public interface TbiBoardService {
 	 * @return ApplicantInOutDto
 	 */
 	public TbiBoardInOutDto getApplicantDetails(TbiBoardInOutDto inDto) throws Exception ; 
+	
+	public TbiBoardInOutDto getHistoryApplicantDetails(TbiBoardInOutDto inDto);
 }

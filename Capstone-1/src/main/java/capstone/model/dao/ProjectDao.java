@@ -41,6 +41,13 @@ public interface ProjectDao extends JpaRepository<ProjectEntity, Integer>{
 			+ "AND "
 			+ "	delete_flg = false";
 	
+	public final String DELETE_PREVIOUS_PROJECT_DETAILS = "UPDATE t_project SET delete_flg = true WHERE applicant_id_pk = :applicantIdPk ";
+	
+	public final String GET_HISTORY_OF_APPLICANT = "SELECT e "
+			+ "FROM ProjectEntity e "
+			+ "WHERE e.deleteFlg = true "
+			+ "AND e.applicantIdPk = :applicantIdPk ";
+	
 	@Modifying
 	@Query(value=UPDATE_PROJECT, nativeQuery=true)
 	public void updateProject(@Param("projectTitle") String projectTitle,
@@ -63,4 +70,11 @@ public interface ProjectDao extends JpaRepository<ProjectEntity, Integer>{
 	
 	@Query(value=GET_PROJECT_BY_APPLICANT_ID)
 	public ProjectEntity getProjectByApplicantId(int applicantIdPk) throws DataAccessException;
+	
+	@Query(value=GET_HISTORY_OF_APPLICANT)
+	public List<ProjectEntity> getHistoryOfApplicant(int applicantIdPk) throws DataAccessException;
+	
+	@Modifying
+	@Query(value=DELETE_PREVIOUS_PROJECT_DETAILS, nativeQuery=true)
+	public void deletePreviousProjectDetails(int applicantIdPk) throws DataAccessException;
 }

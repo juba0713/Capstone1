@@ -25,6 +25,7 @@ import capstone.model.dao.entity.EvaluatedApplicantEntity;
 import capstone.model.dao.entity.EvaluationDetailsEntity;
 import capstone.model.dao.entity.GroupEntity;
 import capstone.model.dao.entity.GroupMemberEntity;
+import capstone.model.dao.entity.HistoryApplicantDetailsEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
 import capstone.model.dao.entity.ManagerEvaluatedApplicantEntity;
 import capstone.model.dao.entity.ManagerEvaluationDetailsEntity;
@@ -391,6 +392,30 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	public AcceptedApplicantEntity getAcceptedApplicantByApplicantIdPk(int applicantIdPk) {
 		
 		return acceptedApplicantDao.getAcceptedApplicantByApplicantIdPk(applicantIdPk);
+	}
+
+	@Override
+	public void deletePreviousProjectDetails(int applicantIdPk) {
+		projectDao.deletePreviousProjectDetails(applicantIdPk);
+		
+	}
+
+	@Override
+	public void deletePreviousGroup(int applicantIdPk) {
+		groupDao.deletePreviousGroup(applicantIdPk);
+		
+	}
+
+	@Override
+	public List<HistoryApplicantDetailsEntity> getHistoryApplicantDetailsByIdPk(int applicantIdPk, int projectIdPk) {
+		
+		return applicantDao.getHistoryApplicantDetailsByIdPk(applicantIdPk, projectIdPk);
+	}
+
+	@Override
+	public List<ProjectEntity> getHistoryOfApplicant(int applicantIdPk) {
+
+		return projectDao.getHistoryOfApplicant(applicantIdPk);
 	}
 	
 }

@@ -26,6 +26,12 @@ public class OfficerWebDto {
 	
 	private String email;
 	
+	private int projectIdPk;
+	
+	private List<Integer> projectIdPks;
+	
+	private int rejectedCount;
+	
 	
 	/*
 	 * For Prescreen DTO

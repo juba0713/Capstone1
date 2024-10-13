@@ -19,7 +19,9 @@ import org.springframework.stereotype.Service;
 import capstone.model.dao.entity.ApplicantDetailsEntity;
 import capstone.model.dao.entity.EvaluatedApplicantEntity;
 import capstone.model.dao.entity.EvaluationDetailsEntity;
+import capstone.model.dao.entity.HistoryApplicantDetailsEntity;
 import capstone.model.dao.entity.JoinApplicantProject;
+import capstone.model.dao.entity.ProjectEntity;
 import capstone.model.dao.entity.TbiBoardDashboardEntity;
 import capstone.model.dao.entity.UserInformationEntity;
 import capstone.model.dto.OfficerInOutDto;
@@ -175,6 +177,20 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 	public TbiBoardInOutDto getApplicantDetails(TbiBoardInOutDto inDto) throws Exception {
 
 		TbiBoardInOutDto outDto = new TbiBoardInOutDto();
+		
+		List<ProjectEntity> projectEntities = applicantLogic.getHistoryOfApplicant(inDto.getApplicantIdPk());
+		
+		List<Integer> projectIdPks = new ArrayList<>();
+		
+		for(ProjectEntity projectEntity : projectEntities) {
+			projectIdPks.add(projectEntity.getIdPk());
+		}
+		
+		outDto.setRejectedCount(projectEntities.size());
+		
+		outDto.setProjectIdPks(projectIdPks);
+		
+		outDto.setApplicantIdPk(inDto.getApplicantIdPk());
 
 		List<ApplicantDetailsEntity> applicant = applicantLogic.getApplicantDetailsByIdPk(inDto.getApplicantIdPk());
 
@@ -307,6 +323,124 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 		obj.setFailedRate(entity.getFailedRate());
 		
 		outDto.setTbiBoardDashboardObj(obj);
+		
+		return outDto;
+	}
+	
+	@Override
+	public TbiBoardInOutDto getHistoryApplicantDetails(TbiBoardInOutDto inDto) {
+		TbiBoardInOutDto outDto = new TbiBoardInOutDto();
+		
+		List<HistoryApplicantDetailsEntity> applicant = applicantLogic.getHistoryApplicantDetailsByIdPk(inDto.getApplicantIdPk(), inDto.getProjectIdPk());
+		
+		ApplicantDetailsObj applicantDetailsObj = new ApplicantDetailsObj();
+		
+		String[] members = new String[4];
+		
+		int firstRow = 0;
+		for(HistoryApplicantDetailsEntity app : applicant) {
+			
+			if(firstRow == 0) {
+				
+				applicantDetailsObj.setApplicantIdPk(app.getApplicantIdPk());
+				
+				applicantDetailsObj.setProjectIdPk(app.getProjectIdPk());
+				
+				applicantDetailsObj.setEmail(app.getEmail());
+				
+				applicantDetailsObj.setAgreeFlg(app.getAgreeFlg());
+				
+				applicantDetailsObj.setProjectTitle(app.getProjectTitle());
+				
+				applicantDetailsObj.setProjectDescription(app.getProjectDescription());		
+				
+				
+				List<String[]> teams = new ArrayList<>();
+							
+				for(int i = 0; i < app.getTeams().length; i++) {
+					teams.add(app.getTeams()[i].split("\\|"));
+				}
+				
+				applicantDetailsObj.setTeams(teams);
+				
+				applicantDetailsObj.setProblemStatement(app.getProblemStatement());
+				
+				applicantDetailsObj.setTargetMarket(app.getTargetMarket());
+				
+				applicantDetailsObj.setSolutionDescription(app.getSolutionDescription());
+				
+				List<String[]> historicallTimelines = new ArrayList<>();
+							
+				for(int i = 0; i < app.getHistoricalTimeline().length; i++) {
+					historicallTimelines.add(app.getHistoricalTimeline()[i].split("\\|"));
+				}
+				
+				applicantDetailsObj.setHistoricalTimeline(historicallTimelines);
+				
+				applicantDetailsObj.setProductServiceOffering(app.getProductServiceOffering());
+				
+				applicantDetailsObj.setPricingStrategy(app.getPricingStrategy());
+				
+				applicantDetailsObj.setIntPropertyStatus(app.getIntPropertyStatus());
+				
+				applicantDetailsObj.setObjectives(app.getObjectives());
+				
+				applicantDetailsObj.setScopeProposal(app.getScopeProposal());
+				
+				applicantDetailsObj.setMethodology(app.getMethodology());
+				
+				applicantDetailsObj.setVitaeFile(app.getVitaeFile());
+				
+				applicantDetailsObj.setSupportLink(app.getSupportLink());
+				
+				applicantDetailsObj.setGroupName(app.getGroupName());
+				
+				applicantDetailsObj.setLeaderFirstName(app.getLeaderFirstName());
+				
+				applicantDetailsObj.setLeaderLastName(app.getLeaderLastName());
+				
+				applicantDetailsObj.setMobileNumber(app.getMobileNumber());
+				
+				applicantDetailsObj.setAddress(app.getAddress());
+				
+				applicantDetailsObj.setUniversity(app.getUniversity());
+				
+				applicantDetailsObj.setTechnologyAns(app.getTechnologyAns());
+
+				applicantDetailsObj.setProductDesignAns(app.getProductDesignAns());
+				
+				applicantDetailsObj.setCompetitiveLandscapeAns(app.getCompetitiveLandscapeAns());
+				
+				applicantDetailsObj.setProductDevelopmentAns(app.getProductDevelopmentAns());
+				
+				applicantDetailsObj.setTeamAns(app.getTeamAns());
+				
+				applicantDetailsObj.setGoToMarketAns(app.getGoToMarketAns());
+				
+				applicantDetailsObj.setManufacturingAns(app.getManufacturingAns());
+				
+				applicantDetailsObj.setEligibilityAgreeFlg(app.getEligibilityAgreeFlg());
+				
+				applicantDetailsObj.setCommitmentOneFlg(app.getCommitmentOneFlg());
+				
+				applicantDetailsObj.setCommitmentTwoFlg(app.getCommitmentTwoFlg());
+				
+				applicantDetailsObj.setCommitmentThreeFlg(app.getCommitmentThreeFlg());
+				
+				applicantDetailsObj.setCommitmentFourFlg(app.getCommitmentFourFlg());
+				
+				applicantDetailsObj.setStatus(app.getStatus());
+				
+			}
+
+			members[firstRow] = app.getMemberLastName()+", "+app.getMemberFirstName();
+			
+			firstRow++;
+		}
+		
+		applicantDetailsObj.setMembers(members);
+		
+		outDto.setApplicantDetailsObj(applicantDetailsObj);
 		
 		return outDto;
 	}
