@@ -127,7 +127,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		UserInformationEntity user = userLogic.getUserByEmail(inDto.getEmail());
 		
-		if(user != null) {
+		if(inDto.getToken() == null && inDto.getReApplyToken() == null && user != null) {
 			emailError.add(MessageConstant.EMAIL_EXIST);
 			hasError = true;
 		}

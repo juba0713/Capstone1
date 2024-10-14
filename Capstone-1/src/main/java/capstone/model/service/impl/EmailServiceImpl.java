@@ -4,21 +4,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import capstone.common.constant.CommonConstant;
 import capstone.model.service.EmailService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class EmailServiceImpl implements EmailService {
 
 	@Autowired
 	private JavaMailSender emailSender;
+	
+	
 
 	@Override
 	public void sendRejectionMail(String feedback, boolean resubmitFlg, String email, String token)
 			throws MessagingException {
+		
+		String siteURL = getSiteUrl();
 
 		MimeMessage message = emailSender.createMimeMessage();
 
@@ -33,11 +40,11 @@ public class EmailServiceImpl implements EmailService {
 
 		if (resubmitFlg) {
 			htmlText += "<div>Please review the feedback and consider resubmitting a revised application.</div>"
-					+ "<a href='http://localhost:8080/applicant/form/resubmit?token=" + token + "'>"
+					+ "<a href='"+siteURL+"/applicant/form/resubmit?token=" + token + "'>"
 					+ "resubmit</a>";
 		} else {
 			htmlText += "<div>You are not qualified to resubmit this application. Please consider submitting a new application if you wish to reapply.</div>"
-					+ "<a href='http://localhost:8080/applicant/form?token=" + token + "'>"
+					+ "<a href='"+siteURL+"/applicant/form?token=" + token + "'>"
 					+ "reapply</a>";
 		}
 
@@ -50,6 +57,8 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public void sendActivationMail(String password, String email) throws MessagingException {
 
+		String siteURL = getSiteUrl();
+		
 		MimeMessage message = emailSender.createMimeMessage();
 
 		MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -62,7 +71,7 @@ public class EmailServiceImpl implements EmailService {
 				"<p>Your account has been activated.</p>" +
 				"<p>Your email: </p>" + email + "</p>" +
 				"<p>Your password: " + password + "</p>" +
-				"<div><a href='http://localhost:8080/login'>Login Now</a></div>";
+				"<div><a href='"+siteURL+"/login'>Login Now</a></div>";
 
 		helper.setText(htmlText, true);
 
@@ -73,6 +82,8 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public void sendFailedMail(boolean resubmitFlg, String email, String token)
 			throws MessagingException {
+		
+		String siteURL = getSiteUrl();
 
 		MimeMessage message = emailSender.createMimeMessage();
 
@@ -86,11 +97,11 @@ public class EmailServiceImpl implements EmailService {
 
 		if (resubmitFlg) {
 			htmlText += "<div>Please review the feedback and consider resubmitting a revised application.</div>"
-					+ "<a href='http://localhost:8080/applicant/form/resubmit?token=" + token + "'>"
+					+ "<a href='"+siteURL+"/applicant/form/resubmit?token=" + token + "'>"
 					+ "resubmit</a>";
 		} else {
 			htmlText += "<div>You are not qualified to resubmit this application. Please consider submitting a new application if you wish to reapply.</div>"
-					+ "<a href='http://localhost:8080/applicant/form?token=" + token + "'>"
+					+ "<a href='"+siteURL+"/applicant/form?token=" + token + "'>"
 					+ "reapply</a>";
 		}
 
@@ -199,6 +210,16 @@ public class EmailServiceImpl implements EmailService {
 	    emailSender.send(message);
 	}
 
+	public String getSiteUrl() {
+        ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attrs.getRequest();
+
+        // Generate site URL dynamically using the request object
+        String siteURL = request.getRequestURL().toString();
+        String sitePATH = request.getServletPath();
+        siteURL = siteURL.replace(sitePATH, "");
+        return siteURL;
+    }
 
 
 }
