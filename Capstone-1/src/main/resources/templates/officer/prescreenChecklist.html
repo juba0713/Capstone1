@@ -79,36 +79,51 @@
         font-weight: 600;
         color: #dc143c;
       }
-      
-      .modal{
-		  padding: 50px !important;
-	  }
-      
-      .rejected-modal-dialog{
-		  max-width: 100% !important;
-		  margin: 0 !important;
-		  display: flex;
-		  flex-direction: row;
-		  gap: 20px;
-	  }
-	  
-	  .application-list{
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-		align-items: center;  
-	  }	  
-	  
-	  .application-list-tab{
-		  max-width: 400px;
-		  height: 100%;
-		  display: flex;
-	  }
-	  
-	  .application-details-tab{
-		  height: 900px;;
-		  overflow: auto;
-	  }
+
+      .modal {
+        padding: 50px !important;
+      }
+
+      .rejected-modal-dialog {
+        max-width: 100% !important;
+        margin: 0 !important;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+      }
+
+      .application-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .application-list-tab {
+        max-width: 400px;
+        height: 100%;
+        display: flex;
+      }
+
+      .application-details-tab {
+        height: 900px;
+        overflow: auto;
+        border-radius: 20px;
+      }
+      .modal-content {
+        max-height: 90vh; /* Adjust to fit your design */
+        overflow: hidden; /* Ensure that scroll is contained within modal */
+      }
+
+      .modal-body {
+        max-height: 85vh; /* Adjust to your desired content height */
+        overflow-y: auto; /* Allow vertical scrolling */
+      }
+
+      .application-details-tab {
+        height: auto; /* Adjust height dynamically */
+        overflow: auto; /* Ensure the tab content is scrollable if needed */
+      }
     </style>
   </head>
   <body class="font-secondary" th:object="${officerWebDto}">
@@ -124,12 +139,19 @@
       >
         Review Application
       </div>
-       <a th:href="@{/officer/home}" class="ad-back-button">Back to home</a>
-        <button  class="ad-back-button" data-toggle="modal" data-target="#exampleModalCenter" th:if="*{!#lists.isEmpty(projectIdPks)}">History</button>
+      <a th:href="@{/officer/home}" class="ad-back-button">Back to home</a>
+      <button
+        class="ad-back-button"
+        data-toggle="modal"
+        data-target="#exampleModalCenter"
+        th:if="*{!#lists.isEmpty(projectIdPks)}"
+      >
+        History
+      </button>
     </div>
     <div class="w-[55%]">
       <div class="flex flex-row">
-        <div	
+        <div
           th:replace="~{fragments/applicationDetails :: applicationDetails}"
         ></div>
       </div>
@@ -796,35 +818,55 @@
         </div>
       </form>
     </div>
-    
+
     <!-- Modal -->
-	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-centered rejected-modal-dialog" role="document">
-	    <div class="modal-content application-list-tab">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLongTitle">History</h5>
-	    
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body application-list" >
-			 <div>
-				 <div>Rejected Count</div>
-				 <div th:text="*{rejectedCount}" style="text-align: center;"></div>
-			 </div>
-	        <button class="application-list rejected-applications view-btn" th:each="id, iStat : *{projectIdPks}" th:text="'Rejected Application #' + ${iStat.count}" th:value="${id}"></button>
-	      </div>
-	    </div>
-	    <div class="modal-content application-details-tab">
-	      <div class="modal-body">
-	         <div
-	          th:replace="~{fragments/applicationDetailsRejected :: applicationDetailsRejected}"
-	        ></div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+    <div
+      class="modal fade"
+      id="exampleModalCenter"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered rejected-modal-dialog"
+        role="document"
+      >
+        <div class="modal-content application-list-tab">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">History</h5>
+
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body application-list">
+            <div>
+              <div>Rejected Count</div>
+              <div th:text="*{rejectedCount}" style="text-align: center"></div>
+            </div>
+            <button
+              class="application-list rejected-applications view-btn"
+              th:each="id, iStat : *{projectIdPks}"
+              th:text="'Rejected Application #' + ${iStat.count}"
+              th:value="${id}"
+            ></button>
+          </div>
+        </div>
+        <div class="modal-content rounded-md">
+          <div class="modal-body application-details-tab">
+            <div
+              th:replace="~{fragments/applicationDetailsRejected :: applicationDetailsRejected}"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
   <script
     src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -870,29 +912,30 @@
     window.onload = hideFlashMessage;
   </script>
   <script th:inline="javascript">
-	  
-	  const webDto = /*[[${officerWebDto}]]*/'';
-	  
-	  document.querySelectorAll('.view-btn').forEach(btn => btn.addEventListener('click', function() {
-		  retrieveApplicantDetails(webDto.encryptedApplicantIdPk, this.value);
-	  }));
-	  
-	   async function retrieveApplicantDetails(applicantIdPk, projectIdPk) {
-        const url = `/officer/retrieve/details?applicantIdPk=${applicantIdPk}&projectIdPk=${projectIdPk}`;
-        const response = await fetch(url, { method: "GET" });
+    const webDto = /*[[${officerWebDto}]]*/ "";
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(`Server Error: ${errorData.message || "Unknown"}`);
-        }
-        
-        const data = await response.json();
-        
-        console.log(data);
-        
-        console.log(document.querySelector("#projectTitle"));
-        document.querySelector("#projectTitle").value = data.applicantDetailsObj.projectTitle;
-        
+    document.querySelectorAll(".view-btn").forEach((btn) =>
+      btn.addEventListener("click", function () {
+        retrieveApplicantDetails(webDto.encryptedApplicantIdPk, this.value);
+      })
+    );
+
+    async function retrieveApplicantDetails(applicantIdPk, projectIdPk) {
+      const url = `/officer/retrieve/details?applicantIdPk=${applicantIdPk}&projectIdPk=${projectIdPk}`;
+      const response = await fetch(url, { method: "GET" });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Server Error: ${errorData.message || "Unknown"}`);
       }
+
+      const data = await response.json();
+
+      console.log(data);
+
+      console.log(document.querySelector("#projectTitle"));
+      document.querySelector("#projectTitle").value =
+        data.applicantDetailsObj.projectTitle;
+    }
   </script>
 </html>
