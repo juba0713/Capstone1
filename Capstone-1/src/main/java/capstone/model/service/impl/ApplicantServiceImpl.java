@@ -395,11 +395,11 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 		String[] leaderNames = commonService.splitArray(inDto.getGroupLeader());
 		
-		// Path uploadPath = Paths.get(env.getProperty("file.path"));
+		 Path uploadPath = Paths.get(env.getProperty("new.file.path"));
 		
-		// if (!Files.exists(uploadPath)) {
-		// 	Files.createDirectories(uploadPath);
-		// }
+		 if (!Files.exists(uploadPath)) {
+		 	Files.createDirectories(uploadPath);
+		 }
 		
 		int userIdPk = 0;
 		
@@ -526,13 +526,23 @@ public class ApplicantServiceImpl implements ApplicantService {
 			projectEntity.setMethodology(inDto.getMethodology());
 			
 			MultipartFile vitaeFile = inDto.getVitaeFile();
-			
-			int lastDotIndex = vitaeFile.getOriginalFilename().lastIndexOf('.');
-			
-			String fileName = vitaeFile.getOriginalFilename().substring(0, lastDotIndex) + "_" + userIdPk
-					+ vitaeFile.getOriginalFilename().substring(lastDotIndex);
+		    
+		    int lastDotIndex = vitaeFile.getOriginalFilename().lastIndexOf('.');
+		    
+		    String fileName = vitaeFile.getOriginalFilename().substring(0, lastDotIndex) + "_" + userIdPk
+		            + vitaeFile.getOriginalFilename().substring(lastDotIndex);
+		    
+		    Path filePath = uploadPath.resolve(fileName);
+		    
+		    // Ensure the directory exists
+		    if (!Files.exists(uploadPath)) {
+		        Files.createDirectories(uploadPath);
+		    }
+		    
+		    // Save the file
+		    Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-		   googleDriveService.uploadPdfFile(vitaeFile, fileName);
+		  // googleDriveService.uploadPdfFile(vitaeFile, fileName);
 
 			projectEntity.setVitaeFile(fileName);
 	
@@ -656,8 +666,13 @@ public class ApplicantServiceImpl implements ApplicantService {
 		
 				fileName = vitaeFile.getOriginalFilename().substring(0, lastDotIndex) + "_" + applicant.getCreatedBy()
 						+ vitaeFile.getOriginalFilename().substring(lastDotIndex);
+				
+				Path filePath = uploadPath.resolve(fileName);
+				
+				Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 					
-				googleDriveService.uploadPdfFile(vitaeFile, fileName);
+				//googleDriveService.uploadPdfFile(vitaeFile, fileName);
+				
 
 			}else {
 				fileName = inDto.getVitaeFileName();

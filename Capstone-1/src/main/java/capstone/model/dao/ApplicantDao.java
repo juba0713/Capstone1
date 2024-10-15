@@ -364,7 +364,7 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "    COALESCE(ed.ct_eight_rating, 0) AS ct_eight_rating,   "
 			+ "    ed.ct_eight_comments,   "
 			+ "    ed.tbi_feedback,"
-			+ " 	ed.total  "
+			+ " 	COALESCE(ed.total, 0) as total  "
 			+ "FROM   "
 			+ "    m_applicant a   "
 			+ "LEFT JOIN   "
