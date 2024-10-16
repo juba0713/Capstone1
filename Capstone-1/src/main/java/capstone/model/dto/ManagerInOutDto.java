@@ -2,6 +2,9 @@ package capstone.model.dto;
 
 import java.util.List;
 
+import capstone.model.dao.entity.MonthlyHighestScoresEntity;
+import capstone.model.dao.entity.MonthlyTotalApplicationEntity;
+import capstone.model.dao.entity.PerformanceMetricsEntity;
 import capstone.model.object.ApplicantDetailsObj;
 import capstone.model.object.ApplicantMonthlyObj;
 import capstone.model.object.ApplicantObj;
@@ -50,6 +53,17 @@ public class ManagerInOutDto {
 	private List<Integer> projectIdPks;
 	
 	private int rejectedCount;
+	
+	
+	private List<MonthlyHighestScoresEntity> monthlyHighestScores;
+	
+	private List<PerformanceMetricsEntity> officerPerformanceMetrics;
+	
+	private List<PerformanceMetricsEntity> tbiBoardPerformanceMetrics;
+	
+	private List<MonthlyTotalApplicationEntity> monthlyAcceptedApplications;
+	
+	private List<MonthlyTotalApplicationEntity> monthlyRejectedApplications;
 	
 	/*
 	 * Evaluation DTO

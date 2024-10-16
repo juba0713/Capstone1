@@ -125,9 +125,23 @@ public class ManagerController {
 
 	@GetMapping("/analytics")
 	public String showAnalyticsManager(@ModelAttribute ManagerWebDto webDto) {
-		AdminInOutDto outDto = adminService.getAdminDashboardDetails();
-
-		webDto.setAdminDashboardObj(outDto.getAdminDashboardObj());
+		
+		ManagerInOutDto outDto = managerService.getDetailsForManagerDashboard();
+		
+		webDto.setManagerDashboardObj(outDto.getManagerDashboardObj());
+		
+		outDto = managerService.getManagerAnalyticsDetails();
+		
+		webDto.setMonthlyHighestScores(outDto.getMonthlyHighestScores());
+		
+		webDto.setOfficerPerformanceMetrics(outDto.getOfficerPerformanceMetrics());
+		
+		webDto.setTbiBoardPerformanceMetrics(outDto.getTbiBoardPerformanceMetrics());
+		
+		webDto.setMonthlyAcceptedApplications(outDto.getMonthlyAcceptedApplications());
+		
+		webDto.setMonthlyRejectedApplications(outDto.getMonthlyRejectedApplications());	
+		
 		return "manager/analytics";
 	}
 

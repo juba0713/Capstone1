@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 
 import capstone.model.dao.entity.AdminDashboardEntity;
 import capstone.model.dao.entity.ManagerDashboardEntity;
+import capstone.model.dao.entity.MonthlyHighestScoresEntity;
+import capstone.model.dao.entity.MonthlyTotalApplicationEntity;
 import capstone.model.dao.entity.OfficerDashboardEntity;
+import capstone.model.dao.entity.PerformanceMetricsEntity;
 import capstone.model.dao.entity.TbiBoardDashboardEntity;
 import capstone.model.dao.entity.UserDetailsEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
@@ -133,5 +136,15 @@ public interface UserLogic {
 	 * @return
 	 */
 	public ManagerDashboardEntity getDetailsForManagerDashboard();
+	
+	public List<MonthlyHighestScoresEntity> getMonthlyHighestScores();
+	
+	public List<PerformanceMetricsEntity> getOfficerPerformanceMetrics();
+	
+	public List<PerformanceMetricsEntity> getTbiBoardPerformanceMetrics();
+	
+	public List<MonthlyTotalApplicationEntity> getMonthlyAcceptedApplication();
+	
+	public List<MonthlyTotalApplicationEntity> getMonthlyRejectedApplication();
 	
 }
