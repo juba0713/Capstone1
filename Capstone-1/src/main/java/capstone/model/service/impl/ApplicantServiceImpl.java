@@ -70,8 +70,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 	@Autowired
 	private Environment env;
-	
-	@Autowired
 
 	@Override
 	public ApplicantInOutDto validateApplication(ApplicantInOutDto inDto) {
@@ -122,15 +120,14 @@ public class ApplicantServiceImpl implements ApplicantService {
 			emailError.add(MessageConstant.EMAIL_INCORRECT_FORMAT);
 			hasError = true;
 		}
-		
+
 		UserInformationEntity user = userLogic.getUserByEmail(inDto.getEmail());
-		
-		if(inDto.getToken() == null && inDto.getReApplyToken() == null && user != null) {
+
+		if (inDto.getToken() == null && inDto.getReApplyToken() == null && user != null) {
 			emailError.add(MessageConstant.EMAIL_EXIST);
 			hasError = true;
 		}
-		
-		
+
 		if (CommonConstant.BLANK.equals(inDto.getProjectTitle())) {
 			projectTitleError.add(MessageConstant.PROJECT_TITLE_BLANK);
 			hasError = true;
@@ -303,7 +300,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		}
 
 		String extension = FilenameUtils.getExtension(inDto.getVitaeFile().getOriginalFilename()).toLowerCase();
-		if (inDto.getToken() == null &&  inDto.getReApplyToken() == null  && !extension.equals("pdf")) {
+		if (inDto.getToken() == null && inDto.getReApplyToken() == null && !extension.equals("pdf")) {
 			vitaeFileError.add(MessageConstant.VITAE_FILE_FORMAT_ERROR);
 			hasError = true;
 		}
@@ -390,438 +387,435 @@ public class ApplicantServiceImpl implements ApplicantService {
 		Timestamp currentDateTime = new Timestamp(System.currentTimeMillis());
 
 		ApplicantInOutDto outDto = new ApplicantInOutDto();
-		
+
 		String[] leaderNames = commonService.splitArray(inDto.getGroupLeader());
-		
-		 Path uploadPath = Paths.get(env.getProperty("new.file.path"));
-		
-		 if (!Files.exists(uploadPath)) {
-		 	Files.createDirectories(uploadPath);
-		 }
-		
+
+		Path uploadPath = Paths.get(env.getProperty("new.file.path"));
+
+		if (!Files.exists(uploadPath)) {
+			Files.createDirectories(uploadPath);
+		}
+
 		int userIdPk = 0;
-		
-		//If token is not null means resubmission
-		if(inDto.getToken() == null || inDto.getReApplyToken() != null) {
-			
-			//First Registration - Adding account for the applicant
-			if(inDto.getReApplyToken()==null || inDto.getReApplyToken().isEmpty()) {
-				
+
+		// If token is not null means resubmission
+		if (inDto.getToken() == null || inDto.getReApplyToken() != null) {
+
+			// First Registration - Adding account for the applicant
+			if (inDto.getReApplyToken() == null || inDto.getReApplyToken().isEmpty()) {
+
 				UserInformationEntity newUser = new UserInformationEntity();
-				
+
 				newUser.setEmail(inDto.getEmail());
-		
+
 				newUser.setFirstName(leaderNames[1]);
-		
+
 				newUser.setLastName(leaderNames[0]);
-		
+
 				newUser.setMobileNumber(inDto.getLeaderNumber());
-		
+
 				newUser.setRole("APPLICANT");
-		
+
 				newUser.setInitialChangePass(false);
-		
+
 				newUser.setCreatedDate(currentDateTime);
-		
+
 				newUser.setDeleteFlg(false);
-				
+
 				newUser.setUpdatedDate(currentDateTime);
-				
+
 				userIdPk = userLogic.saveUser(newUser);
-		
+
 				UserInfoAccountEntity newUserAccount = new UserInfoAccountEntity();
-		
+
 				newUserAccount.setUserIdPk(userIdPk);
-		
+
 				newUserAccount.setCreatedDate(currentDateTime);
-		
+
 				newUserAccount.setDeleteFlg(false);
-		
+
 				userLogic.saveUserAccount(newUserAccount);
-			}else {
-				
-				if(inDto.getReApplyToken().charAt(0)=='F') {
+			} else {
+
+				if (inDto.getReApplyToken().charAt(0) == 'F') {
 					UserInformationEntity user = userLogic.getUserByEvaluatedToken(inDto.getReApplyToken());
-					
+
 					userIdPk = user.getIdPk();
-				}else {
+				} else {
 					UserInformationEntity user = userLogic.getUserByRejectedToken(inDto.getReApplyToken());
-					
+
 					userIdPk = user.getIdPk();
 				}
-						
+
 				applicantLogic.deleteApplicantByCreatedBy(userIdPk);
 			}
 
 			ApplicantEntity applicantEntity = new ApplicantEntity();
-	
-			applicantEntity.setEmail(inDto.getEmail());
-	
-			applicantEntity.setAgreeFlg(inDto.getAgreeFlg());
-	
-			applicantEntity.setTechnologyAns(inDto.getTechnologyAns());
-	
-			applicantEntity.setProductDevelopmentAns(inDto.getProductDevelopmentAns());
-	
-			applicantEntity.setCompetitiveLandscapeAns(inDto.getCompetitiveLandscapeAns());
-	
-			applicantEntity.setProductDesignAns(inDto.getProductDesignAns());
-	
-			applicantEntity.setTeamAns(inDto.getTeamAns());
-	
-			applicantEntity.setGoToMarketAns(inDto.getGoToMarketAns());
-	
-			applicantEntity.setManufacturingAns(inDto.getManufacturingAns());
-	
-			applicantEntity.setEligibilityAgreeFlg(inDto.getEligibilityAgreeFlg());
-	
-			applicantEntity.setCommitmentOneFlg(inDto.getCommitmentOneFlg());
-	
-			applicantEntity.setCommitmentTwoFlg(inDto.getCommitmentTwoFlg());
-	
-			applicantEntity.setCommitmentThreeFlg(inDto.getCommitmentThreeFlg());
-	
-			applicantEntity.setCommitmentFourFlg(inDto.getCommitmentFourFlg());
-	
-			applicantEntity.setCreatedDate(currentDateTime);
-	
-			applicantEntity.setDeleteFlg(false);
-	
-			applicantEntity.setStatus(0);
-	
-			applicantEntity.setCreatedBy(userIdPk);
-	
-			int applicantIdPk = applicantLogic.saveApplicantEntity(applicantEntity);
-	
-			ProjectEntity projectEntity = new ProjectEntity();
-	
-			projectEntity.setApplicantIdPk(applicantIdPk);
-	
-			projectEntity.setProjectTitle(inDto.getProjectTitle());
-	
-			projectEntity.setProjectDescription(inDto.getProjectDescription());
-	
-			projectEntity.setTeams(commonService.convertToArray(inDto.getTeams()));
-	
-			projectEntity.setProblemStatement(inDto.getProblemStatement());
-	
-			projectEntity.setTargetMarket(inDto.getTargetMarket());
-	
-			projectEntity.setSolutionDescription(inDto.getSolutionDescription());
-	
-			projectEntity.setHistoricalTimeline(commonService.convertToArray(inDto.getHistoricalTimeline()));
-	
-			projectEntity.setProductServiceOffering(inDto.getProductServiceOffering());
-	
-			projectEntity.setPricingStrategy(inDto.getPricingStrategy());
-	
-			projectEntity.setIntPropertyStatus(inDto.getIntPropertyStatus());
-	
-			projectEntity.setObjectives(inDto.getObjectives());
-	
-			projectEntity.setScopeProposal(inDto.getScopeProposal());
-	
-			projectEntity.setMethodology(inDto.getMethodology());
-			
-			MultipartFile vitaeFile = inDto.getVitaeFile();
-		    
-		    int lastDotIndex = vitaeFile.getOriginalFilename().lastIndexOf('.');
-		    
-		    String fileName = vitaeFile.getOriginalFilename().substring(0, lastDotIndex) + "_" + userIdPk
-		            + vitaeFile.getOriginalFilename().substring(lastDotIndex);
-		    
-		    Path filePath = uploadPath.resolve(fileName);
-		    
-		    // Ensure the directory exists
-		    if (!Files.exists(uploadPath)) {
-		        Files.createDirectories(uploadPath);
-		    }
-		    
-		    // Save the file
-		    Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
-		  // googleDriveService.uploadPdfFile(vitaeFile, fileName);
+			applicantEntity.setEmail(inDto.getEmail());
+
+			applicantEntity.setAgreeFlg(inDto.getAgreeFlg());
+
+			applicantEntity.setTechnologyAns(inDto.getTechnologyAns());
+
+			applicantEntity.setProductDevelopmentAns(inDto.getProductDevelopmentAns());
+
+			applicantEntity.setCompetitiveLandscapeAns(inDto.getCompetitiveLandscapeAns());
+
+			applicantEntity.setProductDesignAns(inDto.getProductDesignAns());
+
+			applicantEntity.setTeamAns(inDto.getTeamAns());
+
+			applicantEntity.setGoToMarketAns(inDto.getGoToMarketAns());
+
+			applicantEntity.setManufacturingAns(inDto.getManufacturingAns());
+
+			applicantEntity.setEligibilityAgreeFlg(inDto.getEligibilityAgreeFlg());
+
+			applicantEntity.setCommitmentOneFlg(inDto.getCommitmentOneFlg());
+
+			applicantEntity.setCommitmentTwoFlg(inDto.getCommitmentTwoFlg());
+
+			applicantEntity.setCommitmentThreeFlg(inDto.getCommitmentThreeFlg());
+
+			applicantEntity.setCommitmentFourFlg(inDto.getCommitmentFourFlg());
+
+			applicantEntity.setCreatedDate(currentDateTime);
+
+			applicantEntity.setDeleteFlg(false);
+
+			applicantEntity.setStatus(0);
+
+			applicantEntity.setCreatedBy(userIdPk);
+
+			int applicantIdPk = applicantLogic.saveApplicantEntity(applicantEntity);
+
+			ProjectEntity projectEntity = new ProjectEntity();
+
+			projectEntity.setApplicantIdPk(applicantIdPk);
+
+			projectEntity.setProjectTitle(inDto.getProjectTitle());
+
+			projectEntity.setProjectDescription(inDto.getProjectDescription());
+
+			projectEntity.setTeams(commonService.convertToArray(inDto.getTeams()));
+
+			projectEntity.setProblemStatement(inDto.getProblemStatement());
+
+			projectEntity.setTargetMarket(inDto.getTargetMarket());
+
+			projectEntity.setSolutionDescription(inDto.getSolutionDescription());
+
+			projectEntity.setHistoricalTimeline(commonService.convertToArray(inDto.getHistoricalTimeline()));
+
+			projectEntity.setProductServiceOffering(inDto.getProductServiceOffering());
+
+			projectEntity.setPricingStrategy(inDto.getPricingStrategy());
+
+			projectEntity.setIntPropertyStatus(inDto.getIntPropertyStatus());
+
+			projectEntity.setObjectives(inDto.getObjectives());
+
+			projectEntity.setScopeProposal(inDto.getScopeProposal());
+
+			projectEntity.setMethodology(inDto.getMethodology());
+
+			MultipartFile vitaeFile = inDto.getVitaeFile();
+
+			int lastDotIndex = vitaeFile.getOriginalFilename().lastIndexOf('.');
+
+			String fileName = vitaeFile.getOriginalFilename().substring(0, lastDotIndex) + "_" + userIdPk
+					+ vitaeFile.getOriginalFilename().substring(lastDotIndex);
+
+			Path filePath = uploadPath.resolve(fileName);
+
+			// Ensure the directory exists
+			if (!Files.exists(uploadPath)) {
+				Files.createDirectories(uploadPath);
+			}
+
+			// Save the file
+			Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+			// googleDriveService.uploadPdfFile(vitaeFile, fileName);
 
 			projectEntity.setVitaeFile(fileName);
-	
+
 			projectEntity.setSupportLink(inDto.getSupportLink());
-	
+
 			projectEntity.setCreatedDate(currentDateTime);
-	
+
 			projectEntity.setDeleteFlg(false);
-	
+
 			applicantLogic.saveProjectEntity(projectEntity);
-	
+
 			GroupEntity groupEntity = new GroupEntity();
-	
+
 			groupEntity.setApplicantIdPk(applicantIdPk);
-	
+
 			groupEntity.setGroupName(inDto.getGroupName());
-	
+
 			groupEntity.setFirstName(leaderNames[1]);
-	
+
 			groupEntity.setLastName(leaderNames[0]);
-	
+
 			groupEntity.setMobileNumber(inDto.getLeaderNumber());
-	
+
 			groupEntity.setAddress(inDto.getLeaderAddress());
-	
+
 			groupEntity.setUniversity(inDto.getUniversity());
-	
+
 			groupEntity.setCreatedDate(currentDateTime);
-	
+
 			groupEntity.setDeleteFlg(false);
-	
+
 			int groupIdPk = applicantLogic.saveGroupEntity(groupEntity);
-	
+
 			List<GroupMemberEntity> members = new ArrayList<>();
-	
+
 			for (String member : inDto.getMembers()) {
-	
+
 				if (!CommonConstant.BLANK.equals(member)) {
-	
+
 					GroupMemberEntity groupMemberEntity = new GroupMemberEntity();
-	
+
 					groupMemberEntity.setGroupIdPk(groupIdPk);
-	
+
 					String[] memberNames = commonService.splitArray(member);
-	
+
 					groupMemberEntity.setFirstName(memberNames[1]);
-	
+
 					groupMemberEntity.setLastName(memberNames[0]);
-	
+
 					groupMemberEntity.setCreatedDate(currentDateTime);
-	
+
 					groupMemberEntity.setDeleteFlg(false);
-	
+
 					members.add(groupMemberEntity);
 				}
 			}
-	
+
 			applicantLogic.saveGroupMemberEntity(members);
-		}else {
-			
+		} else {
+
 			int status = 0;
-			
+
 			int applicantIdPk = 0;
-			
-			if(inDto.getToken().charAt(0)=='F') {
+
+			if (inDto.getToken().charAt(0) == 'F') {
 				status = 4;
-				
-				EvaluatedApplicantEntity evaluatedApplicant = applicantLogic.getEvaluatedApplicantByToken(inDto.getToken());
-				
+
+				EvaluatedApplicantEntity evaluatedApplicant = applicantLogic
+						.getEvaluatedApplicantByToken(inDto.getToken());
+
 				evaluatedApplicant.setIdPk(evaluatedApplicant.getIdPk());
-				
+
 				evaluatedApplicant.setDeleteFlg(true);
-				
+
 				applicantLogic.saveEvaluateedApplicant(evaluatedApplicant);
-				
+
 				applicantIdPk = evaluatedApplicant.getApplicantIdPk();
-				
-			}else {
-				RejectedApplicantEntity rejectedApplicant = applicantLogic.getRejectedApplicantByToken(inDto.getToken());
-					
+
+			} else {
+				RejectedApplicantEntity rejectedApplicant = applicantLogic
+						.getRejectedApplicantByToken(inDto.getToken());
+
 				rejectedApplicant.setIdPk(rejectedApplicant.getIdPk());
-				
+
 				rejectedApplicant.setDeleteFlg(true);
-				
+
 				applicantLogic.saveRejectedApplicantEntity(rejectedApplicant);
-				
+
 				applicantIdPk = rejectedApplicant.getApplicantIdPk();
 			}
-			
+
 			ApplicantEntity applicant = applicantLogic.getApplicantByIdPk(applicantIdPk);
 			GroupEntity group = applicantLogic.getGroupByApplicantId(applicant.getIdPk());
-			
+
 			applicantLogic.deletePreviousProjectDetails(applicantIdPk);
 			applicantLogic.deletePreviousGroup(applicantIdPk);
-			
+
 			applicantLogic.updateApplicant(inDto.getAgreeFlg(),
-					inDto.getTechnologyAns(), 
-					inDto.getProductDevelopmentAns(), 
-					inDto.getCompetitiveLandscapeAns(), 
-					inDto.getProductDesignAns(), 
-					inDto.getTeamAns(), 
-					inDto.getGoToMarketAns(), 
-					inDto.getManufacturingAns(), 
-					inDto.getEligibilityAgreeFlg(), 
+					inDto.getTechnologyAns(),
+					inDto.getProductDevelopmentAns(),
+					inDto.getCompetitiveLandscapeAns(),
+					inDto.getProductDesignAns(),
+					inDto.getTeamAns(),
+					inDto.getGoToMarketAns(),
+					inDto.getManufacturingAns(),
+					inDto.getEligibilityAgreeFlg(),
 					inDto.getCommitmentOneFlg(),
 					inDto.getCommitmentTwoFlg(),
 					inDto.getCommitmentThreeFlg(),
 					inDto.getCommitmentFourFlg(),
 					status,
 					applicant.getIdPk());
-			
-			
-			
-			
+
 			String fileName = "";
-			
-			if(!inDto.getVitaeFile().isEmpty()) {
+
+			if (!inDto.getVitaeFile().isEmpty()) {
 				MultipartFile vitaeFile = inDto.getVitaeFile();
-				
+
 				int lastDotIndex = vitaeFile.getOriginalFilename().lastIndexOf('.');
-		
+
 				fileName = vitaeFile.getOriginalFilename().substring(0, lastDotIndex) + "_" + applicant.getCreatedBy()
 						+ vitaeFile.getOriginalFilename().substring(lastDotIndex);
-				
-				Path filePath = uploadPath.resolve(fileName);
-				
-				Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-					
-				//googleDriveService.uploadPdfFile(vitaeFile, fileName);
-				
 
-			}else {
+				Path filePath = uploadPath.resolve(fileName);
+
+				Files.copy(vitaeFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+				// googleDriveService.uploadPdfFile(vitaeFile, fileName);
+
+			} else {
 				fileName = inDto.getVitaeFileName();
 			}
-						
+
 			ProjectEntity projectEntity = new ProjectEntity();
-			
+
 			projectEntity.setApplicantIdPk(applicantIdPk);
-	
+
 			projectEntity.setProjectTitle(inDto.getProjectTitle());
-	
+
 			projectEntity.setProjectDescription(inDto.getProjectDescription());
-	
+
 			projectEntity.setTeams(commonService.convertToArray(inDto.getTeams()));
-	
+
 			projectEntity.setProblemStatement(inDto.getProblemStatement());
-	
+
 			projectEntity.setTargetMarket(inDto.getTargetMarket());
-	
+
 			projectEntity.setSolutionDescription(inDto.getSolutionDescription());
-	
+
 			projectEntity.setHistoricalTimeline(commonService.convertToArray(inDto.getHistoricalTimeline()));
-	
+
 			projectEntity.setProductServiceOffering(inDto.getProductServiceOffering());
-	
+
 			projectEntity.setPricingStrategy(inDto.getPricingStrategy());
-	
+
 			projectEntity.setIntPropertyStatus(inDto.getIntPropertyStatus());
-	
+
 			projectEntity.setObjectives(inDto.getObjectives());
-	
+
 			projectEntity.setScopeProposal(inDto.getScopeProposal());
-	
+
 			projectEntity.setMethodology(inDto.getMethodology());
-			
+
 			projectEntity.setVitaeFile(fileName);
-	
+
 			projectEntity.setSupportLink(inDto.getSupportLink());
-	
+
 			projectEntity.setCreatedDate(currentDateTime);
-	
+
 			projectEntity.setDeleteFlg(false);
-	
+
 			applicantLogic.saveProjectEntity(projectEntity);
-			
+
 			GroupEntity groupEntity = new GroupEntity();
-			
+
 			groupEntity.setApplicantIdPk(applicantIdPk);
-	
+
 			groupEntity.setGroupName(inDto.getGroupName());
-	
+
 			groupEntity.setFirstName(leaderNames[1]);
-	
+
 			groupEntity.setLastName(leaderNames[0]);
-	
+
 			groupEntity.setMobileNumber(inDto.getLeaderNumber());
-	
+
 			groupEntity.setAddress(inDto.getLeaderAddress());
-	
+
 			groupEntity.setUniversity(inDto.getUniversity());
-	
+
 			groupEntity.setCreatedDate(currentDateTime);
-	
+
 			groupEntity.setDeleteFlg(false);
-			
+
 			int groupIdPk = applicantLogic.saveGroupEntity(groupEntity);
-			
+
 			applicantLogic.deleteAllPreviousMember(group.getIdPk());
-	
+
 			List<GroupMemberEntity> members = new ArrayList<>();
-	
+
 			for (String member : inDto.getMembers()) {
-	
+
 				if (!CommonConstant.BLANK.equals(member)) {
-	
+
 					GroupMemberEntity groupMemberEntity = new GroupMemberEntity();
-	
+
 					groupMemberEntity.setGroupIdPk(groupIdPk);
-	
+
 					String[] memberNames = commonService.splitArray(member);
-	
+
 					groupMemberEntity.setFirstName(memberNames[1]);
-	
+
 					groupMemberEntity.setLastName(memberNames[0]);
-	
+
 					groupMemberEntity.setCreatedDate(currentDateTime);
-	
+
 					groupMemberEntity.setDeleteFlg(false);
-	
+
 					members.add(groupMemberEntity);
 				}
 			}
-	
+
 			applicantLogic.saveGroupMemberEntity(members);
-			
-		
-			
-//			applicantLogic.updateProject(inDto.getProjectTitle(), 
-//					inDto.getProjectDescription(), 
-//					commonService.listToArray(commonService.convertToArray(inDto.getTeams())),
-//					inDto.getProblemStatement(), 
-//					inDto.getTargetMarket(), 
-//					inDto.getSolutionDescription(), 
-//					commonService.listToArray(commonService.convertToArray(inDto.getHistoricalTimeline())),
-//					commonService.listToArray(inDto.getProductServiceOffering()),
-//					commonService.listToArray(inDto.getPricingStrategy()),
-//					inDto.getIntPropertyStatus(), 
-//					inDto.getObjectives(), 
-//					inDto.getScopeProposal(), 
-//					inDto.getMethodology(), 
-//					fileName, 
-//					inDto.getSupportLink(), 
-//					applicant.getIdPk());
-//			
-//			GroupEntity group = applicantLogic.getGroupByApplicantId(applicant.getIdPk());
-//			
-//			applicantLogic.updateGroup(inDto.getGroupName(), 
-//					leaderNames[0], 
-//					leaderNames[1], 
-//					inDto.getLeaderNumber(), 
-//					inDto.getLeaderAddress(),
-//					inDto.getUniversity(),
-//					applicant.getIdPk());
-//			
-//			applicantLogic.deleteAllPreviousMember(group.getIdPk());
-//			
-//			List<GroupMemberEntity> members = new ArrayList<>();
-//			
-//			for (String member : inDto.getMembers()) {
-//	
-//				if (!CommonConstant.BLANK.equals(member)) {
-//	
-//					GroupMemberEntity groupMemberEntity = new GroupMemberEntity();
-//	
-//					groupMemberEntity.setGroupIdPk(group.getIdPk());
-//	
-//					String[] memberNames = commonService.splitArray(member);
-//	
-//					groupMemberEntity.setFirstName(memberNames[1]);
-//	
-//					groupMemberEntity.setLastName(memberNames[0]);
-//	
-//					groupMemberEntity.setCreatedDate(currentDateTime);
-//	
-//					groupMemberEntity.setDeleteFlg(false);
-//	
-//					members.add(groupMemberEntity);
-//				}
-//			}
-//	
-//			applicantLogic.saveGroupMemberEntity(members);
+
+			// applicantLogic.updateProject(inDto.getProjectTitle(),
+			// inDto.getProjectDescription(),
+			// commonService.listToArray(commonService.convertToArray(inDto.getTeams())),
+			// inDto.getProblemStatement(),
+			// inDto.getTargetMarket(),
+			// inDto.getSolutionDescription(),
+			// commonService.listToArray(commonService.convertToArray(inDto.getHistoricalTimeline())),
+			// commonService.listToArray(inDto.getProductServiceOffering()),
+			// commonService.listToArray(inDto.getPricingStrategy()),
+			// inDto.getIntPropertyStatus(),
+			// inDto.getObjectives(),
+			// inDto.getScopeProposal(),
+			// inDto.getMethodology(),
+			// fileName,
+			// inDto.getSupportLink(),
+			// applicant.getIdPk());
+			//
+			// GroupEntity group =
+			// applicantLogic.getGroupByApplicantId(applicant.getIdPk());
+			//
+			// applicantLogic.updateGroup(inDto.getGroupName(),
+			// leaderNames[0],
+			// leaderNames[1],
+			// inDto.getLeaderNumber(),
+			// inDto.getLeaderAddress(),
+			// inDto.getUniversity(),
+			// applicant.getIdPk());
+			//
+			// applicantLogic.deleteAllPreviousMember(group.getIdPk());
+			//
+			// List<GroupMemberEntity> members = new ArrayList<>();
+			//
+			// for (String member : inDto.getMembers()) {
+			//
+			// if (!CommonConstant.BLANK.equals(member)) {
+			//
+			// GroupMemberEntity groupMemberEntity = new GroupMemberEntity();
+			//
+			// groupMemberEntity.setGroupIdPk(group.getIdPk());
+			//
+			// String[] memberNames = commonService.splitArray(member);
+			//
+			// groupMemberEntity.setFirstName(memberNames[1]);
+			//
+			// groupMemberEntity.setLastName(memberNames[0]);
+			//
+			// groupMemberEntity.setCreatedDate(currentDateTime);
+			//
+			// groupMemberEntity.setDeleteFlg(false);
+			//
+			// members.add(groupMemberEntity);
+			// }
+			// }
+			//
+			// applicantLogic.saveGroupMemberEntity(members);
 		}
 
 		return outDto;
@@ -948,7 +942,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 				List<String[]> teams = new ArrayList<>();
 
-				for(int i = 0; i < app.getTeams().length; i++) {
+				for (int i = 0; i < app.getTeams().length; i++) {
 					teams.add(app.getTeams()[i].split("\\|"));
 				}
 
@@ -962,7 +956,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 				List<String[]> historicallTimelines = new ArrayList<>();
 
-				for(int i = 0; i < app.getHistoricalTimeline().length; i++) {
+				for (int i = 0; i < app.getHistoricalTimeline().length; i++) {
 					historicallTimelines.add(app.getHistoricalTimeline()[i].split("\\|"));
 				}
 
@@ -1021,15 +1015,15 @@ public class ApplicantServiceImpl implements ApplicantService {
 				applicantDetailsObj.setCommitmentFourFlg(app.getCommitmentFourFlg());
 
 				applicantDetailsObj.setStatus(app.getStatus());
-				
-				applicantDetailsObj.setCertificateName(app.getCertificateName());		
-				
+
+				applicantDetailsObj.setCertificateName(app.getCertificateName());
+
 				applicantDetailsObj.setTotalRating(app.getTotalRating());
-				
+
 			}
 
 			members[firstRow] = app.getMemberLastName() + ", " + app.getMemberFirstName();
-			
+
 			firstRow++;
 		}
 
@@ -1042,161 +1036,166 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 	@Override
 	public ApplicantInOutDto getApplicantDetailsWithFeedbackByToken(ApplicantInOutDto inDto) {
-		
+
 		ApplicantInOutDto outDto = new ApplicantInOutDto();
-		
+
 		outDto.setOnlyOfficerFeedback(false);
-		
+
 		outDto.setBothFeedback(false);
-		
+
 		int applicantIdPk = 0;
-		
-		if(inDto.getToken().charAt(0)=='R') {
-			
-			PrescreenDetailsEntity rejectedPrescreen = applicantLogic.getRejectedPrescreenDetailsByToken(inDto.getToken());
-			
-			RejectedApplicantEntity rejectedApplicant = applicantLogic.getRejectedApplicantById(rejectedPrescreen.getRejectedApplicantIdPk());
-			
+
+		if (inDto.getToken().charAt(0) == 'R') {
+
+			PrescreenDetailsEntity rejectedPrescreen = applicantLogic
+					.getRejectedPrescreenDetailsByToken(inDto.getToken());
+
+			RejectedApplicantEntity rejectedApplicant = applicantLogic
+					.getRejectedApplicantById(rejectedPrescreen.getRejectedApplicantIdPk());
+
 			applicantIdPk = rejectedApplicant.getApplicantIdPk();
-			
+
 			ApplicantOfficerFeedbackObj appOffFeedbackObj = new ApplicantOfficerFeedbackObj();
-			
+
 			appOffFeedbackObj.setCtOneFlg(rejectedPrescreen.getCtOneFlg());
-			
+
 			appOffFeedbackObj.setCtOneComments(rejectedPrescreen.getCtOneComments());
-			
+
 			appOffFeedbackObj.setCtTwoFlg(rejectedPrescreen.getCtTwoFlg());
-			
+
 			appOffFeedbackObj.setCtTwoComments(rejectedPrescreen.getCtTwoComments());
-			
+
 			appOffFeedbackObj.setCtThreeFlg(rejectedPrescreen.getCtThreeFlg());
-			
+
 			appOffFeedbackObj.setCtThreeComments(rejectedPrescreen.getCtThreeComments());
-			
+
 			appOffFeedbackObj.setCtFourFlg(rejectedPrescreen.getCtFourFlg());
-			
+
 			appOffFeedbackObj.setCtFourComments(rejectedPrescreen.getCtFourComments());
-			
+
 			appOffFeedbackObj.setCtFiveFlg(rejectedPrescreen.getCtFiveFlg());
-			
+
 			appOffFeedbackObj.setCtFiveComments(rejectedPrescreen.getCtFiveComments());
-			
+
 			appOffFeedbackObj.setCtSixFlg(rejectedPrescreen.getCtSixFlg());
-			
+
 			appOffFeedbackObj.setCtSixComments(rejectedPrescreen.getCtSixComments());
-			
+
 			appOffFeedbackObj.setCtSevenFlg(rejectedPrescreen.getCtSevenFlg());
-			
+
 			appOffFeedbackObj.setCtSevenComments(rejectedPrescreen.getCtSevenComments());
-			
+
 			appOffFeedbackObj.setCtEightFlg(rejectedPrescreen.getCtEightFlg());
-			
+
 			appOffFeedbackObj.setCtEightComments(rejectedPrescreen.getCtEightComments());
-			
+
 			appOffFeedbackObj.setCtNineFlg(rejectedPrescreen.getCtNineFlg());
-			
+
 			appOffFeedbackObj.setCtNineComments(rejectedPrescreen.getCtNineComments());
-			
+
 			appOffFeedbackObj.setRecommendation(rejectedPrescreen.getRecommendation());
-			
+
 			outDto.setAppOffFeedbackObj(appOffFeedbackObj);
-			
-		}else if(inDto.getToken().charAt(0)=='F') {
+
+		} else if (inDto.getToken().charAt(0) == 'F') {
 
 			EvaluationDetailsEntity evaluationDetails = applicantLogic.getEvaluationDetailsByToken(inDto.getToken());
-			
-			EvaluatedApplicantEntity evaluatedApplicant = applicantLogic.getEvaluatedApplicantById(evaluationDetails.getIdPk());
-			
+
+			EvaluatedApplicantEntity evaluatedApplicant = applicantLogic
+					.getEvaluatedApplicantById(evaluationDetails.getIdPk());
+
 			applicantIdPk = evaluatedApplicant.getApplicantIdPk();
-			
+
 			ApplicantTbiFeedbackObj appTbiFeedbackObj = new ApplicantTbiFeedbackObj();
-			
+
 			appTbiFeedbackObj.setCtOneRating(evaluationDetails.getCtOneRating());
-			
+
 			appTbiFeedbackObj.setCtOneComments(evaluationDetails.getCtOneComments());
-			
+
 			appTbiFeedbackObj.setCtTwoRating(evaluationDetails.getCtTwoRating());
-			
+
 			appTbiFeedbackObj.setCtTwoComments(evaluationDetails.getCtTwoComments());
-			
+
 			appTbiFeedbackObj.setCtThreeRating(evaluationDetails.getCtThreeRating());
-			
-			appTbiFeedbackObj.setCtThreeComments(evaluationDetails.getCtThreeComments());	
-			
+
+			appTbiFeedbackObj.setCtThreeComments(evaluationDetails.getCtThreeComments());
+
 			appTbiFeedbackObj.setCtFourRating(evaluationDetails.getCtFourRating());
-			
+
 			appTbiFeedbackObj.setCtFourComments(evaluationDetails.getCtFourComments());
-			
+
 			appTbiFeedbackObj.setCtFiveRating(evaluationDetails.getCtFiveRating());
-			
+
 			appTbiFeedbackObj.setCtFiveComments(evaluationDetails.getCtFiveComments());
-			
+
 			appTbiFeedbackObj.setCtSixRating(evaluationDetails.getCtSixRating());
-			
+
 			appTbiFeedbackObj.setCtSixComments(evaluationDetails.getCtSixComments());
-			
+
 			appTbiFeedbackObj.setCtSevenRating(evaluationDetails.getCtSevenRating());
-			
+
 			appTbiFeedbackObj.setCtSevenComments(evaluationDetails.getCtSevenComments());
-			
+
 			appTbiFeedbackObj.setCtEightRating(evaluationDetails.getCtEightRating());
-			
+
 			appTbiFeedbackObj.setCtEightComments(evaluationDetails.getCtEightComments());
-			
+
 			appTbiFeedbackObj.setTbiFeedback(evaluationDetails.getTbiFeedback());
-			
-			AcceptedApplicantEntity acceptedApplicant = applicantLogic.getAcceptedApplicantByApplicantIdPk(applicantIdPk);
-			
-			PrescreenDetailsEntity rejectedPrescreen = applicantLogic.getAcceptedPrescreenDetailsByApplicantIdPk(acceptedApplicant.getIdPk());
-				
+
+			AcceptedApplicantEntity acceptedApplicant = applicantLogic
+					.getAcceptedApplicantByApplicantIdPk(applicantIdPk);
+
+			PrescreenDetailsEntity rejectedPrescreen = applicantLogic
+					.getAcceptedPrescreenDetailsByApplicantIdPk(acceptedApplicant.getIdPk());
+
 			ApplicantOfficerFeedbackObj appOffFeedbackObj = new ApplicantOfficerFeedbackObj();
-			
+
 			appOffFeedbackObj.setCtOneFlg(rejectedPrescreen.getCtOneFlg());
-			
+
 			appOffFeedbackObj.setCtOneComments(rejectedPrescreen.getCtOneComments());
-			
+
 			appOffFeedbackObj.setCtTwoFlg(rejectedPrescreen.getCtTwoFlg());
-			
+
 			appOffFeedbackObj.setCtTwoComments(rejectedPrescreen.getCtTwoComments());
-			
+
 			appOffFeedbackObj.setCtThreeFlg(rejectedPrescreen.getCtThreeFlg());
-			
+
 			appOffFeedbackObj.setCtThreeComments(rejectedPrescreen.getCtThreeComments());
-			
+
 			appOffFeedbackObj.setCtFourFlg(rejectedPrescreen.getCtFourFlg());
-			
-			appOffFeedbackObj.setCtFourComments(rejectedPrescreen.getCtFourComments()); 
-			
+
+			appOffFeedbackObj.setCtFourComments(rejectedPrescreen.getCtFourComments());
+
 			appOffFeedbackObj.setCtFiveFlg(rejectedPrescreen.getCtFiveFlg());
-			
+
 			appOffFeedbackObj.setCtFiveComments(rejectedPrescreen.getCtFiveComments());
-			
+
 			appOffFeedbackObj.setCtSixFlg(rejectedPrescreen.getCtSixFlg());
-			
+
 			appOffFeedbackObj.setCtSixComments(rejectedPrescreen.getCtSixComments());
-			
+
 			appOffFeedbackObj.setCtSevenFlg(rejectedPrescreen.getCtSevenFlg());
-			
+
 			appOffFeedbackObj.setCtSevenComments(rejectedPrescreen.getCtSevenComments());
-			
+
 			appOffFeedbackObj.setCtEightFlg(rejectedPrescreen.getCtEightFlg());
-			
+
 			appOffFeedbackObj.setCtEightComments(rejectedPrescreen.getCtEightComments());
-			
+
 			appOffFeedbackObj.setCtNineFlg(rejectedPrescreen.getCtNineFlg());
-			
+
 			appOffFeedbackObj.setCtNineComments(rejectedPrescreen.getCtNineComments());
-			
+
 			appOffFeedbackObj.setRecommendation(rejectedPrescreen.getRecommendation());
-			
+
 			outDto.setAppOffFeedbackObj(appOffFeedbackObj);
-			
+
 			outDto.setApplicantTbiFeedbackObj(appTbiFeedbackObj);
-			
+
 			outDto.setBothFeedback(true);
-			
+
 		}
-		
+
 		List<ApplicantDetailsEntity> applicant = applicantLogic.getApplicantDetailsByIdPk(applicantIdPk);
 
 		List<String> members = new ArrayList<>();
@@ -1218,7 +1217,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 				List<String[]> teams = new ArrayList<>();
 
-				for(int i = 0; i < app.getTeams().length; i++) {
+				for (int i = 0; i < app.getTeams().length; i++) {
 					teams.add(app.getTeams()[i].split("\\|"));
 				}
 
@@ -1232,11 +1231,11 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 				List<String[]> historicallTimelines = new ArrayList<>();
 
-				for(int i = 0; i < app.getHistoricalTimeline().length; i++) {
-					if(!app.getHistoricalTimeline()[i].equals("|")) {
+				for (int i = 0; i < app.getHistoricalTimeline().length; i++) {
+					if (!app.getHistoricalTimeline()[i].equals("|")) {
 						historicallTimelines.add(app.getHistoricalTimeline()[i].split("\\|"));
-					}else {
-						historicallTimelines.add(new String[]{"", ""});
+					} else {
+						historicallTimelines.add(new String[] { "", "" });
 
 					}
 				}
@@ -1292,51 +1291,48 @@ public class ApplicantServiceImpl implements ApplicantService {
 				outDto.setCommitmentThreeFlg(app.getCommitmentThreeFlg());
 
 				outDto.setCommitmentFourFlg(app.getCommitmentFourFlg());
-				
+
 			}
-			 
-			members.add(app.getMemberLastName()  + ", " + app.getMemberFirstName());
-			
+
+			members.add(app.getMemberLastName() + ", " + app.getMemberFirstName());
+
 			firstRow++;
 		}
-		
+
 		outDto.setMembers(members);
-		
-		
+
 		return outDto;
 	}
 
 	@Override
 	public ApplicantInOutDto getUserReapply(ApplicantInOutDto inDto) {
-		
+
 		ApplicantInOutDto outDto = new ApplicantInOutDto();
-		
+
 		int userIdPk = 0;
-		
+
 		String email = "";
-		
-		if(inDto.getToken().charAt(0)=='F') {	
+
+		if (inDto.getToken().charAt(0) == 'F') {
 			UserInformationEntity eUser = userLogic.getUserByEvaluatedToken(inDto.getToken());
-			
+
 			userIdPk = eUser.getIdPk();
-			
+
 			email = eUser.getEmail();
-			
-		}else {
+
+		} else {
 			UserInformationEntity rUser = userLogic.getUserByRejectedToken(inDto.getToken());
-			
+
 			userIdPk = rUser.getIdPk();
-			
+
 			email = rUser.getEmail();
 		}
-	
+
 		outDto.setApplicantIdPk(userIdPk);
-		
+
 		outDto.setEmail(email);
-		
+
 		return outDto;
 	}
-	
-	
 
 }
