@@ -56,7 +56,6 @@ import capstone.model.object.ApplicantTbiFeedbackObj;
 import capstone.model.object.ManagerDashboardObj;
 import capstone.model.service.CommonService;
 import capstone.model.service.EmailService;
-import capstone.model.service.GoogleDriveService;
 import capstone.model.service.LoggedInUserService;
 import capstone.model.service.ManagerService;
 import jakarta.mail.MessagingException;
@@ -94,7 +93,6 @@ public class ManagerServiceImpl implements ManagerService {
 	private LoggedInUserService loggedInUserService;
 	
 	@Autowired
-	private GoogleDriveService googleDriveService;
 
 	@Override
 	public ManagerInOutDto getAllApplicants() throws Exception{

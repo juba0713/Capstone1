@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Application Details</title>
+    <title>View Feedback</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -120,9 +120,9 @@
       }
     </style>
   </head>
-  <body class="font-secondary" th:object="${managerWebDto}">
+  <body class="font-secondary" th:object="${applicantWebDto}">
     <script th:inline="javascript">
-      console.log(/*[[${managerWebDto}]]*/ "");
+      console.log(/*[[${applicantWebDto}]]*/ "");
     </script>
 
     <!-- left side -->
@@ -132,7 +132,7 @@
       >
         Application Details
       </div>
-      <a th:href="@{/manager/home}" class="ad-back-button">Back to home</a>
+      <a th:href="@{/applicant/home}" class="ad-back-button">Back to home</a>
       <button
         class="ad-back-button"
         data-toggle="modal"
@@ -2613,8 +2613,8 @@
         x[n].className += " active";
       }
     </script>
-    <script th:inline="javascript">
-      const webDto = /*[[${managerWebDto}]]*/ "";
+    <!-- <script th:inline="javascript">
+      const webDto = /*[[${applicantWebDto}]]*/ "";
 
       document.querySelectorAll(".view-btn").forEach((btn) =>
         btn.addEventListener("click", function () {
@@ -2640,6 +2640,6 @@
         document.querySelector("#projectTitle").value =
           data.applicantDetailsObj.projectTitle;
       }
-    </script>
+    </script> -->
   </body>
 </html>
