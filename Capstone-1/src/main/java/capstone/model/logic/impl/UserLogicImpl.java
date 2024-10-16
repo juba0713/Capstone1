@@ -9,7 +9,10 @@ import capstone.model.dao.UserInfoAccountDao;
 import capstone.model.dao.UserInformationDao;
 import capstone.model.dao.entity.AdminDashboardEntity;
 import capstone.model.dao.entity.ManagerDashboardEntity;
+import capstone.model.dao.entity.MonthlyHighestScoresEntity;
+import capstone.model.dao.entity.MonthlyTotalApplicationEntity;
 import capstone.model.dao.entity.OfficerDashboardEntity;
+import capstone.model.dao.entity.PerformanceMetricsEntity;
 import capstone.model.dao.entity.TbiBoardDashboardEntity;
 import capstone.model.dao.entity.UserDetailsEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
@@ -130,6 +133,36 @@ public class UserLogicImpl implements UserLogic {
 	public int countAdminUsers() {
 
 		return userInformationDao.countAdminUsers();
+	}
+
+	@Override
+	public List<MonthlyHighestScoresEntity> getMonthlyHighestScores() {
+		
+		return userInformationDao.getMonthlyHighestScores();
+	}
+
+	@Override
+	public List<PerformanceMetricsEntity> getOfficerPerformanceMetrics() {
+	
+		return userInformationDao.getOfficerPerformanceMetrics();
+	}
+
+	@Override
+	public List<PerformanceMetricsEntity> getTbiBoardPerformanceMetrics() {
+
+		return userInformationDao.getTbiBoardPerformanceMetrics();
+	}
+
+	@Override
+	public List<MonthlyTotalApplicationEntity> getMonthlyAcceptedApplication() {
+
+		return userInformationDao.getMonthlyAcceptedApplications();
+	}
+
+	@Override
+	public List<MonthlyTotalApplicationEntity> getMonthlyRejectedApplication() {
+
+		return userInformationDao.getMonthlyRejectedApplications();
 	}
 
 

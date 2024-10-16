@@ -13,7 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import capstone.model.dao.entity.AdminDashboardEntity;
 import capstone.model.dao.entity.ManagerDashboardEntity;
+import capstone.model.dao.entity.MonthlyHighestScoresEntity;
+import capstone.model.dao.entity.MonthlyTotalApplicationEntity;
 import capstone.model.dao.entity.OfficerDashboardEntity;
+import capstone.model.dao.entity.PerformanceMetricsEntity;
 import capstone.model.dao.entity.TbiBoardDashboardEntity;
 import capstone.model.dao.entity.UserDetailsEntity;
 import capstone.model.dao.entity.UserInformationEntity;
@@ -195,84 +198,163 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 			+ "		AND e.status IN (1,3,4,40,5,50,6,7,8)  "
 			+ "    ) AS INTEGER) AS resubmitted_applicant_count";
 	
-	public final String GET_DETAILS_FOR_MANAGER_DASHBOARD = "SELECT \r\n"
-			+ "    COALESCE(CAST( (\r\n"
-			+ "        SELECT COUNT(e)\r\n"
-			+ "        FROM m_applicant e\r\n"
-			+ "        WHERE e.delete_flg = false\r\n"
-			+ "    ) AS INTEGER), 0) AS total_applications_count,\r\n"
-			+ "    COALESCE(CAST( (\r\n"
-			+ "        SELECT COUNT(e)\r\n"
-			+ "        FROM m_applicant e\r\n"
-			+ "        WHERE e.delete_flg = false\r\n"
-			+ "		AND e.status = 0\r\n"
-			+ "    ) AS INTEGER), 0) AS in_officer_count,\r\n"
-			+ "    COALESCE(CAST( (\r\n"
-			+ "        SELECT COUNT(e)\r\n"
-			+ "        FROM m_applicant e\r\n"
-			+ "        WHERE e.delete_flg = false\r\n"
-			+ "		AND e.status = 4\r\n"
-			+ "    ) AS INTEGER), 0) AS in_tbiboard_count,\r\n"
-			+ "	COALESCE(CAST( (\r\n"
-			+ "        SELECT COUNT(e)\r\n"
-			+ "        FROM m_applicant e\r\n"
-			+ "        WHERE e.delete_flg = false\r\n"
-			+ "		AND e.certificate_name IS NOT NULL\r\n"
-			+ "    ) AS INTEGER), 0) AS issued_certificate_count,\r\n"
-			+ "	COALESCE(CAST( (\r\n"
-			+ "        SELECT COUNT(e)\r\n"
-			+ "        FROM m_applicant e\r\n"
-			+ "		LEFT JOIN t_evaluated_applicant ea ON ea.applicant_id_pk = e.id_pk AND ea.delete_flg = false\r\n"
-			+ "		LEFT JOIN t_evaluation_details ed ON ed.evaluated_applicant_id_pk = ea.id_pk AND ed.delete_flg = false	\r\n"
-			+ "        WHERE e.delete_flg = false\r\n"
-			+ "		AND ed.total >= 60\r\n"
-			+ "    ) AS INTEGER), 0) AS passed_applications_count,\r\n"
-			+ "	COALESCE(CAST( (\r\n"
-			+ "        SELECT COUNT(e)\r\n"
-			+ "        FROM m_applicant e\r\n"
-			+ "		LEFT JOIN t_evaluated_applicant ea ON ea.applicant_id_pk = e.id_pk AND ea.delete_flg = false\r\n"
-			+ "		LEFT JOIN t_evaluation_details ed ON ed.evaluated_applicant_id_pk = ea.id_pk AND ed.delete_flg = false	\r\n"
-			+ "        WHERE e.delete_flg = false\r\n"
-			+ "		AND ed.total < 60\r\n"
-			+ "    ) AS INTEGER), 0) AS failed_applications_count,\r\n"
-			+ "	COALESCE(CAST( (\r\n"
-			+ "        SELECT COUNT(e)\r\n"
-			+ "        FROM t_accepted_applicant e\r\n"
-			+ "        WHERE e.delete_flg = false\r\n"
-			+ "    ) AS INTEGER), 0) AS accepted_applications_count,\r\n"
-			+ "	COALESCE(CAST( (\r\n"
-			+ "        SELECT COUNT(e)\r\n"
-			+ "        FROM t_evaluated_applicant e\r\n"
-			+ "        WHERE e.delete_flg = false\r\n"
-			+ "    ) AS INTEGER), 0) AS evaluated_applications_count,\r\n"
-			+ "    COALESCE(CAST( (\r\n"
-			+ "        SELECT (COUNT(e) * 100.0) / \r\n"
-			+ "               NULLIF((SELECT COUNT(ee) FROM m_applicant ee WHERE ee.delete_flg = false), 0)\r\n"
-			+ "        FROM t_accepted_applicant e\r\n"
-			+ "        WHERE e.delete_flg = false\r\n"
-			+ "    ) AS INTEGER), 0) AS acceptance_rate,\r\n"
-			+ "    \r\n"
-			+ "    COALESCE(CAST( (\r\n"
-			+ "        SELECT (COUNT(e) * 100.0) / \r\n"
-			+ "               NULLIF((SELECT COUNT(ee) FROM m_applicant ee WHERE ee.delete_flg = false), 0)\r\n"
-			+ "        FROM t_rejected_applicant e\r\n"
-			+ "        WHERE e.delete_flg = false\r\n"
-			+ "    ) AS INTEGER), 0) AS rejection_rate,\r\n"
-			+ "	COALESCE(CAST( (\r\n"
-			+ "        SELECT COUNT(e)\r\n"
-			+ "        FROM m_applicant e\r\n"
-			+ "		INNER JOIN t_rejected_applicant r ON r.applicant_id_pk = e.id_pk	\r\n"
-			+ "    ) AS INTEGER), 0) AS resubmitted_applicantions_count,\r\n"
-			+ "	COALESCE(CAST( (\r\n"
-			+ "        SELECT COUNT(e)\r\n"
-			+ "        FROM t_rejected_applicant e\r\n"
-			+ "		WHERE e.resubmit_flg = true\r\n"
-			+ "    ) AS INTEGER), 0) AS rejected_application_eligible_count,\r\n"
-			+ "	COALESCE(CAST( (\r\n"
-			+ "        SELECT COUNT(e)\r\n"
-			+ "        FROM t_rejected_applicant e\r\n"
-			+ "		WHERE e.resubmit_flg = false\r\n"
+	public final String GET_DETAILS_FOR_MANAGER_DASHBOARD = "SELECT   "
+			+ "    COALESCE(CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "    ) AS INTEGER), 0) AS total_applications_count,  "
+			+ "    COALESCE(CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "		AND e.status = 0  "
+			+ "    ) AS INTEGER), 0) AS in_officer_count,  "
+			+ "    COALESCE(CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "		AND e.status = 4  "
+			+ "    ) AS INTEGER), 0) AS in_tbiboard_count,  "
+			+ "	COALESCE(CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "		AND e.certificate_name IS NOT NULL  "
+			+ "    ) AS INTEGER), 0) AS issued_certificate_count,  "
+			+ "	COALESCE(CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "		LEFT JOIN t_evaluated_applicant ea ON ea.applicant_id_pk = e.id_pk AND ea.delete_flg = false  "
+			+ "		LEFT JOIN t_evaluation_details ed ON ed.evaluated_applicant_id_pk = ea.id_pk AND ed.delete_flg = false	  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "		AND ed.total >= 60  "
+			+ "    ) AS INTEGER), 0) AS passed_applications_count,  "
+			+ "	COALESCE(CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "		LEFT JOIN t_evaluated_applicant ea ON ea.applicant_id_pk = e.id_pk AND ea.delete_flg = false  "
+			+ "		LEFT JOIN t_evaluation_details ed ON ed.evaluated_applicant_id_pk = ea.id_pk AND ed.delete_flg = false	  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "		AND ed.total < 60  "
+			+ "    ) AS INTEGER), 0) AS failed_applications_count,  "
+			+ "	COALESCE(CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM t_accepted_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "    ) AS INTEGER), 0) AS accepted_applications_count,  "
+			+ "	COALESCE(CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM t_evaluated_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "    ) AS INTEGER), 0) AS evaluated_applications_count,  "
+			+ "    COALESCE(CAST( (  "
+			+ "        SELECT (COUNT(e) * 100.0) /   "
+			+ "               NULLIF((SELECT COUNT(ee) FROM m_applicant ee WHERE ee.delete_flg = false), 0)  "
+			+ "        FROM t_accepted_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "    ) AS INTEGER), 0) AS acceptance_rate,  "
+			+ "      "
+			+ "    COALESCE(CAST( (  "
+			+ "        SELECT (COUNT(e) * 100.0) /   "
+			+ "               NULLIF((SELECT COUNT(ee) FROM m_applicant ee WHERE ee.delete_flg = false), 0)  "
+			+ "        FROM t_rejected_applicant e  "
+			+ "        WHERE e.delete_flg = false  "
+			+ "    ) AS INTEGER), 0) AS rejection_rate,  "
+			+ "	COALESCE(CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM m_applicant e  "
+			+ "		INNER JOIN t_rejected_applicant r ON r.applicant_id_pk = e.id_pk	  "
+			+ "    ) AS INTEGER), 0) AS resubmitted_applicantions_count,  "
+			+ "	COALESCE(CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM t_rejected_applicant e  "
+			+ "		WHERE e.resubmit_flg = true  "
+			+ "    ) AS INTEGER), 0) AS rejected_application_eligible_count,  "
+			+ "	COALESCE(CAST( (  "
+			+ "        SELECT COUNT(e)  "
+			+ "        FROM t_rejected_applicant e  "
+			+ "		WHERE e.resubmit_flg = false  "
 			+ "    ) AS INTEGER), 0) AS rejected_application_not_eligible_count";
+	
+	public final String GET_MONTHLY_HIGHEST_SCORES_FOR_MANAGER_ANALYTICS = "WITH months AS ( "
+			+ "    SELECT generate_series(1, 12) AS month "
+			+ ")  "
+			+ "SELECT   "
+			+ "    m.month,  "
+			+ "    COALESCE(MAX(ed.total), 0) AS highest_total  "
+			+ "FROM   "
+			+ "    months m  "
+			+ "LEFT JOIN   "
+			+ "    t_evaluated_applicant ea   "
+			+ "    ON EXTRACT(MONTH FROM ea.created_date) = m.month  "
+			+ "LEFT JOIN   "
+			+ "    t_evaluation_details ed   "
+			+ "    ON ed.evaluated_applicant_id_pk = ea.id_pk  "
+			+ "    AND EXTRACT(YEAR FROM ea.created_date) = 2024  "
+			+ "GROUP BY   "
+			+ "    m.month  "
+			+ "ORDER BY   "
+			+ "    m.month;  "
+			+ "";
+	
+	public final String GET_OFFICER_PERFORMANCE_METRICS_FOR_MANAGER_ANALYTICS = "SELECT CONCAT(u.first_name, ' ', u.last_name) AS full_name, CAST(COUNT(*) AS INTEGER) AS review_count "
+			+ "FROM (  "
+			+ "    SELECT a.created_by  "
+			+ "    FROM t_accepted_applicant a  "
+			+ "    UNION ALL  "
+			+ "    SELECT r.created_by  "
+			+ "    FROM t_rejected_applicant r  "
+			+ ") AS combined  "
+			+ "LEFT JOIN m_user_information u ON u.id_pk = combined.created_by  "
+			+ "GROUP BY u.first_name, u.last_name  "
+			+ "ORDER BY review_count DESC  "
+			+ "LIMIT 3;  "
+			+ "";
+	
+	public final String GET_TBI_PERFORMANCE_METRICS_FOR_MANAGER_ANALYTICS = "SELECT CONCAT(u.first_name, ' ', u.last_name) AS full_name, CAST(COUNT(*) AS INTEGER) AS review_count  "
+			+ "FROM t_evaluated_applicant e  "
+			+ "LEFT JOIN m_user_information u ON u.id_pk = e.created_by  "
+			+ "GROUP BY u.first_name, u.last_name  "
+			+ "ORDER BY review_count DESC  "
+			+ "LIMIT 3;  "
+			+ "";
+	
+	public final String GET_MONTHLY_ACCEPTED_APPLICATION_FOR_MANAGER_ANALYTICS = "WITH months AS (  "
+			+ "    SELECT generate_series(1, 12) AS month  "
+			+ ")  "
+			+ "SELECT   "
+			+ "    m.month,  "
+			+ "    CAST( COALESCE(COUNT(a.id_pk), 0) AS INTEGER) AS total  "
+			+ "FROM   "
+			+ "    months m  "
+			+ "LEFT JOIN   "
+			+ "    t_accepted_applicant a   "
+			+ "    ON EXTRACT(MONTH FROM a.created_date) = m.month  "
+			+ "    AND EXTRACT(YEAR FROM a.created_date) = 2024  "
+			+ "GROUP BY   "
+			+ "    m.month  "
+			+ "ORDER BY   "
+			+ "    m.month;  "
+			+ "";
+	
+	public final String GET_MONTHLY_REJECTED_APPLICATION_FOR_MANAGER_ANALYTICS = "WITH months AS (  "
+			+ "    SELECT generate_series(1, 12) AS month  "
+			+ ")  "
+			+ "SELECT   "
+			+ "    m.month,  "
+			+ "   CAST( COALESCE(COUNT(a.id_pk), 0) AS INTEGER) AS total  "
+			+ "FROM   "
+			+ "    months m  "
+			+ "LEFT JOIN   "
+			+ "    t_rejected_applicant  a   "
+			+ "    ON EXTRACT(MONTH FROM a.created_date) = m.month  "
+			+ "    AND EXTRACT(YEAR FROM a.created_date) = 2024  "
+			+ "GROUP BY   "
+			+ "    m.month  "
+			+ "ORDER BY   "
+			+ "    m.month;  "
+			+ "";
 	
 	public final String GET_USERS_BY_APPLICANT_ID_PKS = "SELECT u "
 			+ "FROM ApplicantEntity a "
@@ -422,6 +504,87 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 		
 		return entity;
 	};
+	
+	@Query(value=GET_MONTHLY_HIGHEST_SCORES_FOR_MANAGER_ANALYTICS, nativeQuery=true)
+	public List<Object[]> getMonthlyHighestScoresRaw() throws DataAccessException;
+	
+	default List<MonthlyHighestScoresEntity> getMonthlyHighestScores() {
+		
+		List<Object[]> rawResults = getMonthlyHighestScoresRaw();
+	    List<MonthlyHighestScoresEntity> users = new ArrayList<>();
+
+	    for (Object[] objects : rawResults) {
+	    	MonthlyHighestScoresEntity applicant = new MonthlyHighestScoresEntity(objects);  
+	        users.add(applicant);
+	    }
+
+	    return users;
+	};
+	
+	@Query(value=GET_OFFICER_PERFORMANCE_METRICS_FOR_MANAGER_ANALYTICS, nativeQuery=true)
+	public List<Object[]> getOfficerPerformanceMetricsRaw() throws DataAccessException;
+	
+	default List<PerformanceMetricsEntity> getOfficerPerformanceMetrics() {
+		
+		List<Object[]> rawResults = getOfficerPerformanceMetricsRaw();
+	    List<PerformanceMetricsEntity> users = new ArrayList<>();
+
+	    for (Object[] objects : rawResults) {
+	    	PerformanceMetricsEntity applicant = new PerformanceMetricsEntity(objects);  
+	        users.add(applicant);
+	    }
+
+	    return users;
+	};
+	
+	@Query(value=GET_TBI_PERFORMANCE_METRICS_FOR_MANAGER_ANALYTICS, nativeQuery=true)
+	public List<Object[]> getTbiBoardPerformanceMetricsRaw() throws DataAccessException;
+	
+	default List<PerformanceMetricsEntity> getTbiBoardPerformanceMetrics() {
+		
+		List<Object[]> rawResults = getTbiBoardPerformanceMetricsRaw();
+	    List<PerformanceMetricsEntity> users = new ArrayList<>();
+
+	    for (Object[] objects : rawResults) {
+	    	PerformanceMetricsEntity applicant = new PerformanceMetricsEntity(objects);  
+	        users.add(applicant);
+	    }
+
+	    return users;
+	};
+	
+	@Query(value=GET_MONTHLY_ACCEPTED_APPLICATION_FOR_MANAGER_ANALYTICS, nativeQuery=true)
+	public List<Object[]> getMonthlyAcceptedApplicationsRaw() throws DataAccessException;
+	
+	default List<MonthlyTotalApplicationEntity> getMonthlyAcceptedApplications() {
+		
+		List<Object[]> rawResults = getMonthlyAcceptedApplicationsRaw();
+	    List<MonthlyTotalApplicationEntity> users = new ArrayList<>();
+
+	    for (Object[] objects : rawResults) {
+	    	MonthlyTotalApplicationEntity applicant = new MonthlyTotalApplicationEntity(objects);  
+	        users.add(applicant);
+	    }
+
+	    return users;
+	};
+	
+	@Query(value=GET_MONTHLY_REJECTED_APPLICATION_FOR_MANAGER_ANALYTICS, nativeQuery=true)
+	public List<Object[]> getMonthlyRejectedApplicationsRaw() throws DataAccessException;
+	
+	default List<MonthlyTotalApplicationEntity> getMonthlyRejectedApplications() {
+		
+		List<Object[]> rawResults = getMonthlyRejectedApplicationsRaw();
+	    List<MonthlyTotalApplicationEntity> users = new ArrayList<>();
+
+	    for (Object[] objects : rawResults) {
+	    	MonthlyTotalApplicationEntity applicant = new MonthlyTotalApplicationEntity(objects);  
+	        users.add(applicant);
+	    }
+
+	    return users;
+	};
+	
 	
 	public final String COUNT_ADMIN_USER = "SELECT COUNT(*) FROM m_user_information WHERE role = 'ADMIN'";
 

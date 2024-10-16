@@ -69,9 +69,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class ManagerServiceImpl implements ManagerService {
 	
 	@Autowired
-	private ResourceLoader resourceLoader;
-	
-	@Autowired
 	private ApplicantLogic applicantLogic;
 	
 	@Autowired
@@ -1013,6 +1010,24 @@ public class ManagerServiceImpl implements ManagerService {
 		applicantDetailsObj.setMembers(members);
 		
 		outDto.setApplicantDetailsObj(applicantDetailsObj);
+		
+		return outDto;
+	}
+
+	@Override
+	public ManagerInOutDto getManagerAnalyticsDetails() {
+		
+		ManagerInOutDto outDto = new ManagerInOutDto();
+		
+		outDto.setMonthlyHighestScores(userLogic.getMonthlyHighestScores());		
+		
+		outDto.setOfficerPerformanceMetrics(userLogic.getOfficerPerformanceMetrics());
+		
+		outDto.setTbiBoardPerformanceMetrics(userLogic.getTbiBoardPerformanceMetrics());
+		
+		outDto.setMonthlyAcceptedApplications(userLogic.getMonthlyAcceptedApplication());
+		
+		outDto.setMonthlyRejectedApplications(userLogic.getMonthlyRejectedApplication());	
 		
 		return outDto;
 	}

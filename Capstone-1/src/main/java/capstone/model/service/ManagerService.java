@@ -107,4 +107,6 @@ public interface ManagerService {
 	
 	public ManagerInOutDto getHistoryApplicantDetails(ManagerInOutDto inDto);
 	
+	public ManagerInOutDto getManagerAnalyticsDetails();
+	
 }

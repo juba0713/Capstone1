@@ -157,31 +157,31 @@
               <div class="row mb-4">
                 <div class="col-md-3">
                   <div class="metric-card bg-primary text-white">
-                    <h3 id="totalApplications">500</h3>
+                    <h3 id="totalApplications" th:text="*{managerDashboardObj.totalApplicationsCount}">500</h3>
                     <p>Total Applications</p>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="metric-card bg-info text-white">
-                    <h3 id="certificatesIssued">150</h3>
+                    <h3 id="certificatesIssued" th:text="*{managerDashboardObj.issuedCeritifcatesCount}">150</h3>
                     <p>Certificates Issued</p>
                   </div>
                 </div>
                 <div class="col-md-2">
                   <div class="metric-card bg-success text-white">
-                    <h3 id="acceptedApplications">200</h3>
+                    <h3 id="acceptedApplications" th:text="*{managerDashboardObj.acceptedApplicationsCount}">200</h3>
                     <p>Accepted Applications</p>
                   </div>
                 </div>
                 <div class="col-md-2">
                   <div class="metric-card bg-danger text-white">
-                    <h3 id="rejectedApplications">150</h3>
+                    <h3 id="rejectedApplications" th:text="*{managerDashboardObj.acceptedApplicationsCount}">150</h3>
                     <p>Rejected Applications</p>
                   </div>
                 </div>
                 <div class="col-md-2">
                   <div class="metric-card bg-warning text-white">
-                    <h3 id="underReviewApplications">150</h3>
+                    <h3 id="underReviewApplications" th:text="*{managerDashboardObj.inOfficerCount + managerDashboardObj.inTbiboardCount}">150</h3>
                     <p>Under Review</p>
                   </div>
                 </div>
@@ -200,8 +200,9 @@
                 <div class="col-md-6">
                   <div class="card dashboard-card">
                     <div class="card-body">
-                      <h5 class="card-title">Top Rejection Reasons</h5>
-                      <canvas id="rejectionReasonsChart"></canvas>
+                      <h5 class="card-title">Total Applications Submitted Each Month</h5>
+                      <canvas id="rejectionReasonsChart1"></canvas>
+                      <canvas id="rejectionReasonsChart2"></canvas>
                     </div>
                   </div>
                 </div>
@@ -256,7 +257,7 @@
                 <div class="col-md-6">
                   <div class="card dashboard-card">
                     <div class="card-body">
-                      <h5 class="card-title">Application Resubmission Data</h5>
+                      <h5 class="card-title">Monthly Highest Scores Overview</h5>
                       <canvas id="resubmissionChart"></canvas>
                     </div>
                   </div>
@@ -288,7 +289,26 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
+    <script th:inline="javascript">
+		
+		console.log(/*[[${managerWebDto}]]*/'');
+		
+		const webDto = /*[[${managerWebDto}]]*/'';
+		
+		const inOfficerCount = webDto.managerDashboardObj.inOfficerCount;
+		const inTbiboardCount = webDto.managerDashboardObj.inTbiboardCount;
+		const acceptedApplicationsCount = webDto.managerDashboardObj.acceptedApplicationsCount;
+		const rejectedApplicationEligibleCount = webDto.managerDashboardObj.rejectedApplicationEligibleCount;
+		const rejectedApplicationNotEligibleCount = webDto.managerDashboardObj.rejectedApplicationNotEligibleCount;
+		
+		const monthyHighestScores = webDto.monthlyHighestScores;
+		
+		const officerPerformanceMetrics = webDto.officerPerformanceMetrics;
+		const tbiBoardPerformanceMetrics = webDto.tbiBoardPerformanceMetrics;
+		
+		const monthlyAcceptedApplications = webDto.monthlyAcceptedApplications;
+		const monthlyRejectedApplications = webDto.monthlyRejectedApplications;
+		
       // Application Status Breakdown
       const applicationStatusCtx = document
         .getElementById("applicationStatusChart")
@@ -300,16 +320,18 @@
             "Pre-screening",
             "TBIboard Evaluation",
             "Accepted",
-            "Rejected",
+            "Rejected (Eligible for resubmission)",
+            "Rejected (Not Eligible for Resubmission)"
           ],
           datasets: [
             {
-              data: [30, 20, 60, 50],
+              data: [inOfficerCount, inTbiboardCount, acceptedApplicationsCount, rejectedApplicationEligibleCount,rejectedApplicationNotEligibleCount],
               backgroundColor: [
                 "rgba(255, 99, 132, 0.6)",
                 "rgba(255, 206, 86, 0.6)",
                 "rgba(75, 192, 192, 0.6)",
                 "rgba(153, 102, 255, 0.6)",
+                "rgba(54, 162, 235, 0.6)"
               ],
               borderColor: [
                 "rgba(255, 99, 132, 1)",
@@ -324,23 +346,97 @@
       });
 
       // Rejection Reasons Chart
-      const rejectionReasonsCtx = document
-        .getElementById("rejectionReasonsChart")
+      const rejectionReasonsCtx1 = document
+        .getElementById("rejectionReasonsChart1")
         .getContext("2d");
-      new Chart(rejectionReasonsCtx, {
+             const rejectionReasonsCtx2 = document
+        .getElementById("rejectionReasonsChart2")
+        .getContext("2d");
+      new Chart(rejectionReasonsCtx1, {
         type: "bar",
         data: {
           labels: [
-            "sample reason 1",
-            "sample reason 2",
-            "sample reason 3",
-            "sample reason 4",
-            "sample reason 5",
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
           ],
           datasets: [
             {
-              label: "Number of Rejections",
-              data: [45, 30, 25, 20, 15],
+              label: "Numbe of Accepted Applications",
+              data: [monthlyAcceptedApplications[0].total,
+              		monthlyAcceptedApplications[1].total,
+              		monthlyAcceptedApplications[2].total,
+              		monthlyAcceptedApplications[3].total,
+              		monthlyAcceptedApplications[4].total,
+              		monthlyAcceptedApplications[5].total,
+              		monthlyAcceptedApplications[6].total,
+              		monthlyAcceptedApplications[7].total,
+              		monthlyAcceptedApplications[8].total,
+              		monthlyAcceptedApplications[9].total,
+              		monthlyAcceptedApplications[10].total,
+              		monthlyAcceptedApplications[11].total
+              		],
+              backgroundColor: "rgba(75, 192, 192, 0.6)",
+              borderColor: "rgba(255, 99, 132, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                    // Set callback to format the ticks as integers
+                    callback: function(value) {
+                        return Number.isInteger(value) ? value : '';
+                    }
+                }
+            },
+          },
+        },
+      });
+      new Chart(rejectionReasonsCtx2, {
+        type: "bar",
+        data: {
+          labels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec"
+          ],
+          datasets: [
+            {
+              label: "Number of Rejected Applications",
+              data: [monthlyRejectedApplications[0].total,
+              		monthlyRejectedApplications[1].total,
+              		monthlyRejectedApplications[2].total,
+              		monthlyRejectedApplications[3].total,
+              		monthlyRejectedApplications[4].total,
+              		monthlyRejectedApplications[5].total,
+              		monthlyRejectedApplications[6].total,
+              		monthlyRejectedApplications[7].total,
+              		monthlyRejectedApplications[8].total,
+              		monthlyRejectedApplications[9].total,
+              		monthlyRejectedApplications[10].total,
+              		monthlyRejectedApplications[11].total],
               backgroundColor: "rgba(255, 99, 132, 0.6)",
               borderColor: "rgba(255, 99, 132, 1)",
               borderWidth: 1,
@@ -351,6 +447,12 @@
           scales: {
             y: {
               beginAtZero: true,
+              ticks: {
+                    // Set callback to format the ticks as integers
+                    callback: function(value) {
+                        return Number.isInteger(value) ? value : '';
+                    }
+                }
             },
           },
         },
@@ -363,20 +465,24 @@
       new Chart(resubmissionCtx, {
         type: "line",
         data: {
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
           datasets: [
             {
               label: "Resubmissions",
-              data: [12, 19, 15, 25, 22, 30],
+              data: [monthyHighestScores[0].score, 
+	              monthyHighestScores[1].score, 
+	              monthyHighestScores[2].score, 
+	              monthyHighestScores[3].score, 
+	              monthyHighestScores[4].score, 
+	              monthyHighestScores[5].score,
+	              monthyHighestScores[6].score,
+	              monthyHighestScores[7].score,
+	              monthyHighestScores[8].score,
+	              monthyHighestScores[9].score,
+	              monthyHighestScores[10].score,
+	              monthyHighestScores[11].score],
               fill: false,
               borderColor: "rgb(75, 192, 192)",
-              tension: 0.1,
-            },
-            {
-              label: "Successful Resubmissions",
-              data: [8, 12, 9, 17, 15, 22],
-              fill: false,
-              borderColor: "rgb(54, 162, 235)",
               tension: 0.1,
             },
           ],
@@ -385,6 +491,10 @@
           scales: {
             y: {
               beginAtZero: true,
+              max: 100,  // Set the maximum value for the y-axis
+        ticks: {
+          stepSize: 5, // Define the increments for the y-axis labels
+        },
             },
           },
         },
@@ -397,25 +507,47 @@
       new Chart(monthlyReportCtx, {
         type: "bar",
         data: {
-          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
           datasets: [
             {
               label: "Applications Submitted",
-              data: [65, 59, 80, 81, 56, 55],
+              data: [0,0,0,0,0,0,0,0,0,0,0,0],
               backgroundColor: "rgba(75, 192, 192, 0.6)",
               borderColor: "rgba(75, 192, 192, 1)",
               borderWidth: 1,
             },
             {
               label: "Applications Accepted",
-              data: [28, 48, 40, 19, 86, 27],
+              data: [monthlyAcceptedApplications[0].total,
+              		monthlyAcceptedApplications[1].total,
+              		monthlyAcceptedApplications[2].total,
+              		monthlyAcceptedApplications[3].total,
+              		monthlyAcceptedApplications[4].total,
+              		monthlyAcceptedApplications[5].total,
+              		monthlyAcceptedApplications[6].total,
+              		monthlyAcceptedApplications[7].total,
+              		monthlyAcceptedApplications[8].total,
+              		monthlyAcceptedApplications[9].total,
+              		monthlyAcceptedApplications[10].total,
+              		monthlyAcceptedApplications[11].total],
               backgroundColor: "rgba(54, 162, 235, 0.6)",
               borderColor: "rgba(54, 162, 235, 1)",
               borderWidth: 1,
             },
             {
               label: "Applications Rejected",
-              data: [30, 12, 30, 50, 20, 30],
+              data: [monthlyRejectedApplications[0].total,
+              		monthlyRejectedApplications[1].total,
+              		monthlyRejectedApplications[2].total,
+              		monthlyRejectedApplications[3].total,
+              		monthlyRejectedApplications[4].total,
+              		monthlyRejectedApplications[5].total,
+              		monthlyRejectedApplications[6].total,
+              		monthlyRejectedApplications[7].total,
+              		monthlyRejectedApplications[8].total,
+              		monthlyRejectedApplications[9].total,
+              		monthlyRejectedApplications[10].total,
+              		monthlyRejectedApplications[11].total],
               backgroundColor: "rgba(255, 99, 132, 0.6)",
               borderColor: "rgba(255, 99, 132, 1)",
               borderWidth: 1,
@@ -426,41 +558,55 @@
           scales: {
             y: {
               beginAtZero: true,
+              ticks: {
+                    // Set callback to format the ticks as integers
+                    callback: function(value) {
+                        return Number.isInteger(value) ? value : '';
+                    }
+                }
             },
           },
         },
       });
-
+      
+      let officerPerformanceTable = '';
+      
+      for(let i = 0; i < 3; i++ ){
+		  
+		  if(officerPerformanceMetrics[i]){
+			  officerPerformanceTable+=`<tr>
+                <td>${officerPerformanceMetrics[i].fullName}</td>
+                <td>${officerPerformanceMetrics[i].reviewedCount}</td> 
+            </tr>`
+		  }else{
+	  		  officerPerformanceTable+=`<tr>
+                <td colspan="2" style="text-align: center;">No Data</td> 
+            </tr>`
+		  }
+		  
+	  }
+	  
       // Populate Officer Performance Table
-      document.getElementById("officerPerformanceTable").innerHTML = `
-            <tr>
-                <td>Officer 1</td>
-                <td>100</td> 
-            </tr>
-            <tr>
-                <td>Officer 2</td>
-                <td>85</td> 
-            </tr>
-            <tr>
-                <td>Officer 3</td>
-                <td>120</td> 
-            </tr>
-        `;
+      document.getElementById("officerPerformanceTable").innerHTML = officerPerformanceTable;
+      
+      	  let tbiBoardPerformanceTable = '';
+      	  
+      for(let i = 0; i < 3; i++ ){
+		  
+		  if(tbiBoardPerformanceMetrics[i]){
+			  tbiBoardPerformanceTable+=`<tr>
+                <td>${tbiBoardPerformanceMetrics[i].fullName}</td>
+                <td>${tbiBoardPerformanceMetrics[i].reviewedCount}</td> 
+            </tr>`
+		  }else{
+	  		  tbiBoardPerformanceTable+=`<tr>
+                <td colspan="2" style="text-align: center;">No Data</td> 
+            </tr>`
+		  }
+		  
+	  }
       // Populate Tbiboard Performance Table
-      document.getElementById("tbiboardPerformanceTable").innerHTML = `
-            <tr>
-                <td>tbiboard 1</td>
-                <td>100</td> 
-            </tr>
-            <tr>
-                <td>tbiboard 2</td>
-                <td>85</td> 
-            </tr>
-            <tr>
-                <td>tbiboard 3</td>
-                <td>120</td> 
-            </tr>
-        `;
+      document.getElementById("tbiboardPerformanceTable").innerHTML = tbiBoardPerformanceTable;
 
       // Download Report Functionality (placeholder)
       document
