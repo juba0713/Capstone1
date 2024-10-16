@@ -142,10 +142,10 @@
             </a>
           </div>
           <p class="mb-10 ml-6 mr-6 text-justify">
-            Thank you for your interest in participating the [program name] Program
-            of DASIG. This program is spearheaded by CIT-U Wildcat Innovation
-            Labs. Please complete the following form to submit your capsule
-            proposal for consideration.
+            Thank you for your interest in participating the [program name]
+            Program of DASIG. This program is spearheaded by CIT-U Wildcat
+            Innovation Labs. Please complete the following form to submit your
+            capsule proposal for consideration.
           </p>
           <hr class="ml-6 mr-6 my-8" />
           <div
@@ -183,8 +183,8 @@
               will be collected including, startup team members names, personal
               email address, mobile phone number and other relevant information.
               The personal information you will provide in this form will be
-              used within [program name] Program, DASIG consortium committee and will
-              not be shared with any outside parties unless you have prior
+              used within [program name] Program, DASIG consortium committee and
+              will not be shared with any outside parties unless you have prior
               written consent. Development and Acceleration Support for
               Innovation Growth (DASIG) respects your rights as a data subject
               under the Data Privacy Act.
@@ -268,7 +268,7 @@
         <div th:text="*{error.agreeFlgError}"></div>
       </div>
 
-      <!-- 2nd page -->
+      <!-- page 2 -->
       <div class="tab">
         <h1
           class="w-full bg-gradient-to-r from-[#E7BA05] to-customyellow font-semibold text-lg p-4 rounded-t-lg"
@@ -598,12 +598,12 @@
                     <td class="border border-gray-500 px-4 py-2">
                       <!-- th:value="*{historicalTimeline[0][0]}" -->
                       <input
-                        oninput="this.className = 'w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1'"
+                        oninput="this.className = 'w-full h-12 focus:outline-none '"
                         type="text"
                         name="historicalTimeline[0][0]"
                         th:value="*{historicalTimeline[0][0]}"
                         placeholder="mm/yyyy"
-                        class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
+                        class="w-full h-12 focus:outline-none"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
@@ -611,11 +611,11 @@
 
                       <textarea
                         type="text"
-                        oninput="this.className = 'resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
+                        oninput="this.className = 'resize-none w-full h-20  rounded-md py-2 pl-3 focus:outline-none  sm:text-sm'"
                         name="historicalTimeline[0][1]"
                         th:text="*{historicalTimeline[0][1]}"
                         placeholder="Enter key activities or milestones here"
-                        class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                        class="resize-none w-full h-20 rounded-md py-2 pl-3 focus:outline-none sm:text-sm"
                       ></textarea>
                     </td>
                   </tr>
@@ -623,23 +623,23 @@
                     <td class="border border-gray-500 px-4 py-2">
                       <!-- th:value="*{historicalTimeline[1][0]}" -->
                       <input
-                        oninput="this.className = 'w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1'"
+                        oninput="this.className = 'w-full h-12 focus:outline-none '"
                         type="text"
                         name="historicalTimeline[1][0]"
                         th:value="*{historicalTimeline[1][0]}"
                         placeholder="mm/yyyy"
-                        class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
+                        class="w-full h-12 focus:outline-none"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
                       <!-- th:value="*{historicalTimeline[1][1]}" -->
                       <textarea
                         type="text"
-                        oninput="this.className = 'resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
+                        oninput="this.className = 'resize-none w-full h-20  rounded-md py-2 pl-3 focus:outline-none  sm:text-sm'"
                         name="historicalTimeline[1][1]"
                         th:text="*{historicalTimeline[1][1]}"
                         placeholder="Enter key activities or milestones here"
-                        class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                        class="resize-none w-full h-20 rounded-md py-2 pl-3 focus:outline-none sm:text-sm"
                       ></textarea>
                     </td>
                   </tr>
@@ -647,23 +647,23 @@
                     <td class="border border-gray-500 px-4 py-2">
                       <!-- th:value="*{historicalTimeline[2][0]}" -->
                       <input
-                        oninput="this.className = 'w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1'"
+                        oninput="this.className = 'w-full h-12 focus:outline-none '"
                         type="text"
                         name="historicalTimeline[2][0]"
                         th:value="*{historicalTimeline[2][0]}"
                         placeholder="mm/yyyy"
-                        class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
+                        class="w-full h-12 focus:outline-none"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
                       <!-- th:value="*{historicalTimeline[2][1]}" -->
                       <textarea
                         type="text"
-                        oninput="this.className = 'resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
+                        oninput="this.className = 'resize-none w-full h-20  rounded-md py-2 pl-3 focus:outline-none  sm:text-sm'"
                         name="historicalTimeline[2][1]"
                         th:text="*{historicalTimeline[2][1]}"
                         placeholder="Enter key activities or milestones here"
-                        class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                        class="resize-none w-full h-20 rounded-md py-2 pl-3 focus:outline-none sm:text-sm"
                       ></textarea>
                     </td>
                   </tr>
@@ -671,23 +671,23 @@
                     <td class="border border-gray-500 px-4 py-2">
                       <!-- th:value="*{historicalTimeline[3][0]}" -->
                       <input
-                        oninput="this.className = 'w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1'"
+                        oninput="this.className = 'w-full h-12 focus:outline-none '"
                         type="text"
                         name="historicalTimeline[3][0]"
                         th:value="*{historicalTimeline[3][0]}"
                         placeholder="mm/yyyy"
-                        class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
+                        class="w-full h-12 focus:outline-none"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
                       <!-- th:value="*{historicalTimeline[3][1]}" -->
                       <textarea
                         type="text"
-                        oninput="this.className = 'resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
+                        oninput="this.className = 'resize-none w-full h-20  rounded-md py-2 pl-3 focus:outline-none  sm:text-sm'"
                         name="historicalTimeline[3][1]"
                         th:text="*{historicalTimeline[3][1]}"
                         placeholder="Enter key activities or milestones here"
-                        class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                        class="resize-none w-full h-20 rounded-md py-2 pl-3 focus:outline-none sm:text-sm"
                       ></textarea>
                     </td>
                   </tr>
@@ -695,23 +695,23 @@
                     <td class="border border-gray-500 px-4 py-2">
                       <!-- th:value="*{historicalTimeline[4][0]}" -->
                       <input
-                        oninput="this.className = 'w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1'"
+                        oninput="this.className = 'w-full h-12 focus:outline-none '"
                         type="text"
                         name="historicalTimeline[4][0]"
                         th:value="*{historicalTimeline[4][0]}"
                         placeholder="mm/yyyy"
-                        class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
+                        class="w-full h-12 focus:outline-none"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
                       <!-- th:value="*{historicalTimeline[4][1]}" -->
                       <textarea
                         type="text"
-                        oninput="this.className = 'resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
+                        oninput="this.className = 'resize-none w-full h-20  rounded-md py-2 pl-3 focus:outline-none  sm:text-sm'"
                         name="historicalTimeline[4][1]"
                         th:text="*{historicalTimeline[4][1]}"
                         placeholder="Enter key activities or milestones here"
-                        class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                        class="resize-none w-full h-20 rounded-md py-2 pl-3 focus:outline-none sm:text-sm"
                       ></textarea>
                     </td>
                   </tr>
@@ -776,38 +776,38 @@
                     <td class="border border-gray-500 px-2 py-2">
                       <!-- oninput="this.className = ''" -->
                       <textarea
-                        oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
+                        oninput="this.className = 'resize-none w-full h-full  rounded-md py-2 pl-3   sm:text-sm focus:outline-none'"
                         name="productServiceOffering[0]"
                         th:text="*{productServiceOffering[0]}"
                         placeholder="Enter product/service offering"
-                        class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                        class="resize-none w-full h-full rounded-md py-2 pl-3 sm:text-sm focus:outline-none"
                       ></textarea>
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
+                        oninput="this.className = 'resize-none w-full h-full  rounded-md py-2 pl-3   sm:text-sm focus:outline-none'"
                         name="productServiceOffering[1]"
                         th:text="*{productServiceOffering[1]}"
                         placeholder="Enter product/service offering"
-                        class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                        class="resize-none w-full h-full rounded-md py-2 pl-3 sm:text-sm focus:outline-none"
                       ></textarea>
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
+                        oninput="this.className = 'resize-none w-full h-full  rounded-md py-2 pl-3   sm:text-sm focus:outline-none'"
                         name="productServiceOffering[2]"
                         th:text="*{productServiceOffering[2]}"
                         placeholder="Enter product/service offering"
-                        class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                        class="resize-none w-full h-full rounded-md py-2 pl-3 sm:text-sm focus:outline-none"
                       ></textarea>
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
+                        oninput="this.className = 'resize-none w-full h-full  rounded-md py-2 pl-3   sm:text-sm focus:outline-none'"
                         name="productServiceOffering[3]"
                         th:text="*{productServiceOffering[3]}"
                         placeholder="Enter product/service offering"
-                        class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                        class="resize-none w-full h-full rounded-md py-2 pl-3 sm:text-sm focus:outline-none"
                       ></textarea>
                     </td>
                   </tr>
@@ -819,38 +819,38 @@
                     </th>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
+                        oninput="this.className = 'resize-none w-full h-full  rounded-md py-2 pl-3   sm:text-sm focus:outline-none'"
                         name="pricingStrategy[0]"
                         th:text="*{pricingStrategy[0]}"
                         placeholder="Enter pricing strategy"
-                        class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                        class="resize-none w-full h-full rounded-md py-2 pl-3 sm:text-sm focus:outline-none"
                       ></textarea>
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
+                        oninput="this.className = 'resize-none w-full h-full  rounded-md py-2 pl-3   sm:text-sm focus:outline-none'"
                         name="pricingStrategy[1]"
                         th:text="*{pricingStrategy[1]}"
                         placeholder="Enter pricing strategy"
-                        class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                        class="resize-none w-full h-full rounded-md py-2 pl-3 sm:text-sm focus:outline-none"
                       ></textarea>
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
+                        oninput="this.className = 'resize-none w-full h-full  rounded-md py-2 pl-3   sm:text-sm focus:outline-none'"
                         name="pricingStrategy[2]"
                         th:text="*{pricingStrategy[2]}"
                         placeholder="Enter pricing strategy"
-                        class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                        class="resize-none w-full h-full rounded-md py-2 pl-3 sm:text-sm focus:outline-none"
                       ></textarea>
                     </td>
                     <td class="border border-gray-500 px-2 py-2">
                       <textarea
-                        oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
+                        oninput="this.className = 'resize-none w-full h-full  rounded-md py-2 pl-3   sm:text-sm focus:outline-none'"
                         name="pricingStrategy[3]"
                         th:text="*{pricingStrategy[3]}"
                         placeholder="Enter pricing strategy"
-                        class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                        class="resize-none w-full h-full rounded-md py-2 pl-3 sm:text-sm focus:outline-none"
                       ></textarea>
                     </td>
                   </tr>
@@ -1234,9 +1234,10 @@
           >
             <div th:each="err : *{error.membersError}" th:text="${err}"></div>
           </div>
-          <!-- page 3 -->
           <hr class="my-4" />
-          <div class="relative pt-3 ml-6 mb-3">
+          <div
+            class="flex flex-col ml-6 w-2/4 relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
+          >
             <h2 class="text-black mb-3">
               University
               <span class="text-red-600"> *</span>
@@ -1246,18 +1247,15 @@
               organization. Do not use acronyms. Otherwise, put
               <strong>NA</strong>
             </small>
-            <div
-              class="flex flex-col w-2/4 relative border-b border-gray-200 bg-transparent focus-within:border-blue-600"
-            >
-              <input
-                type="text"
-                required
-                oninput="this.className = 'w-full text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm'"
-                placeholder="Input here"
-                name="university"
-                class="w-full text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
-              />
-            </div>
+
+            <input
+              type="text"
+              required
+              oninput="this.className = ' '"
+              placeholder="Input here"
+              name="university"
+              class="w-full text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
+            />
           </div>
         </div>
       </div>
@@ -1934,8 +1932,8 @@
             class="pt-3 flex flex-col w-full relative border-gray-200 bg-transparent focus-within:border-blue-600"
           >
             <h2 class="text-black ml-6 pr-3">
-              To ensure your commitment to the [program name] Program, please respond
-              to the following questions with a Yes or No.
+              To ensure your commitment to the [program name] Program, please
+              respond to the following questions with a Yes or No.
             </h2>
           </div>
           <hr class="my-3" />
@@ -2149,7 +2147,7 @@
             Previous
           </button>
           <button
-            class="bg-tanglow text-black hover:bg-black hover:text-white font-secondary font-medium right-0 rounded btn-neutral border-b-2 border-black border-solid border-opacity-100 w-36 h-12"
+            class="border bg-tanglow text-black hover:bg-black hover:text-white font-secondary font-medium right-0 rounded btn-neutral border-b-2 border-black border-solid border-opacity-100 w-36 h-12"
             type="button"
             id="nextBtn"
             onclick="nextPrev(1)"
