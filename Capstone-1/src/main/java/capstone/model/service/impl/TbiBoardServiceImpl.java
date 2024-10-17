@@ -79,7 +79,9 @@ public class TbiBoardServiceImpl implements TbiBoardService {
 			obj.setStatus(app.getStatus());
 
 			obj.setUniversity(app.getUniversity());
-
+			
+			obj.setHasResubmittedOrLowEvaluation(app.getHasResubmittedOrLowEvaluation());
+			
 			listOfAppObj.add(obj);
 
 		}

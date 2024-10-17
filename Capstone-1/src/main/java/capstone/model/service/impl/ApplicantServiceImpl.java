@@ -399,7 +399,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		int userIdPk = 0;
 
 		// If token is not null means resubmission
-		if (inDto.getToken() == null || inDto.getReApplyToken() != null) {
+		if (inDto.getToken() == null && inDto.getReApplyToken() == null) {
 
 			// First Registration - Adding account for the applicant
 			if (inDto.getReApplyToken() == null || inDto.getReApplyToken().isEmpty()) {
@@ -523,7 +523,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 			MultipartFile vitaeFile = inDto.getVitaeFile();
 
 			int lastDotIndex = vitaeFile.getOriginalFilename().lastIndexOf('.');
-
+			
 			String fileName = vitaeFile.getOriginalFilename().substring(0, lastDotIndex) + "_" + userIdPk
 					+ vitaeFile.getOriginalFilename().substring(lastDotIndex);
 
@@ -601,6 +601,12 @@ public class ApplicantServiceImpl implements ApplicantService {
 			int status = 0;
 
 			int applicantIdPk = 0;
+			
+			if(inDto.getReApplyToken() != null) {
+				
+				inDto.setToken(inDto.getReApplyToken());
+				
+			}
 
 			if (inDto.getToken().charAt(0) == 'F') {
 				status = 4;

@@ -146,6 +146,8 @@ public class ApplicantController {
 		inDto.setReApplyToken(webDto.getReApplyToken());
 
 		inDto.setVitaeFileName(webDto.getVitaeFileName());
+		
+		System.out.println(webDto.getReApplyToken());
 			
 		ApplicantInOutDto outDto = applicantService.validateApplication(inDto);
 
@@ -199,6 +201,12 @@ public class ApplicantController {
 		webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
 
 		return "applicant/home";
+	} 
+	
+	@GetMapping("/home/feedback")
+	public String showFeedback(@ModelAttribute ApplicantWebDto webDto) {
+		
+		return "applicant/viewFeedback";
 	}
 
 	/**
