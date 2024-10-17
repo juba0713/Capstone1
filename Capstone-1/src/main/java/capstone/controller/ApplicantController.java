@@ -22,6 +22,7 @@ import capstone.common.constant.CommonConstant;
 import capstone.common.constant.MessageConstant;
 import capstone.controller.webdto.ApplicantWebDto;
 import capstone.model.dto.ApplicantInOutDto;
+import capstone.model.dto.ManagerInOutDto;
 import capstone.model.service.ApplicantService;
 
 @Controller
@@ -204,7 +205,32 @@ public class ApplicantController {
 	} 
 	
 	@GetMapping("/home/feedback")
-	public String showFeedback(@ModelAttribute ApplicantWebDto webDto) {
+	public String showFeedback(@ModelAttribute ApplicantWebDto webDto, 
+			@RequestParam("id") String id) throws Exception {
+		
+		if(id.isEmpty()) {
+			return "redirect:/manager/home";
+		}
+		
+		ApplicantInOutDto inDto = new ApplicantInOutDto();
+		
+		//inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(id)));
+		
+		inDto.setApplicantIdPk(Integer.valueOf(id));
+		
+		ApplicantInOutDto outDto = applicantService.getApplicantDetailsWithFeedback(inDto);
+		
+		webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
+		
+		webDto.setApplicantOffFeedbackObj(outDto.getApplicantOffFeedbackObj());
+		
+		webDto.setApplicantTbiFeedbackObj(outDto.getApplicantTbiFeedbackObj());
+		
+		//webDto.setEncryptedApplicantIdPk(id);
+		
+		//webDto.setRejectedCount(outDto.getRejectedCount());
+		
+		//webDto.setProjectIdPks(outDto.getProjectIdPks());
 		
 		return "applicant/viewFeedback";
 	}
@@ -331,7 +357,7 @@ public class ApplicantController {
 		
 		webDto.setBothFeedback(outDto.getBothFeedback());
 		
-		webDto.setAppOffFeedbackObj(outDto.getAppOffFeedbackObj());
+		webDto.setApplicantOffFeedbackObj(outDto.getApplicantOffFeedbackObj());
 		
 		webDto.setApplicantTbiFeedbackObj(outDto.getApplicantTbiFeedbackObj());
 		

@@ -171,13 +171,9 @@
                       <div class="text-center mt-4">
                         <form>
                           <!-- th:value="${app.encryptedApplicantIdPk}" -->
-                          <button
-                            class="bg-customyellow w-1/2 hover:text-white rounded-lg p-2 my-4 font-secondary sm:text-sm text-xs sm:p-1"
-                            type="submit"
-                            name="id"
-                          >
-                            click to view feedback
-                          </button>
+                           <a th:with="id=*{applicantDetailsObj.applicantIdPk}"
+  							 th:href="@{/applicant/home/feedback(id=${id})}">Feedback</a>
+
                         </form>
                       </div>
 

@@ -162,7 +162,7 @@ public class ApplicantInOutDto {
 	
 	private Boolean bothFeedback;
 	
-	private ApplicantOfficerFeedbackObj appOffFeedbackObj;
+	private ApplicantOfficerFeedbackObj applicantOffFeedbackObj;
 	
 	private ApplicantTbiFeedbackObj applicantTbiFeedbackObj;
 	

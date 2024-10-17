@@ -132,7 +132,9 @@ public class ApplicantWebDto {
 	
 	private Boolean bothFeedback;
 	
-	private ApplicantOfficerFeedbackObj appOffFeedbackObj;
+	private ApplicantDetailsObj applicantDetailsObj;
+	
+	private ApplicantOfficerFeedbackObj applicantOffFeedbackObj;
 	
 	private ApplicantTbiFeedbackObj applicantTbiFeedbackObj;
 	
@@ -149,8 +151,6 @@ public class ApplicantWebDto {
 	
 	//Confirm Password
 	private String confirmPassword;
-	
-	private ApplicantDetailsObj applicantDetailsObj;
 	
 	private ErrorObj error;
 	
