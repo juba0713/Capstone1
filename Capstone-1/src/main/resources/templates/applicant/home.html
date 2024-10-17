@@ -168,17 +168,19 @@
             -->
                       </div>
                       <!-- <form th:action="@{/tbi-board/evaluate}" method="GET"> -->
+                      <div class="text-center mt-4">
+                        <form>
+                          <!-- th:value="${app.encryptedApplicantIdPk}" -->
+                          <button
+                            class="bg-customyellow w-1/2 hover:text-white rounded-lg p-2 my-4 font-secondary sm:text-sm text-xs sm:p-1"
+                            type="submit"
+                            name="id"
+                          >
+                            click to view feedback
+                          </button>
+                        </form>
+                      </div>
 
-                      <form>
-                        <!-- th:value="${app.encryptedApplicantIdPk}" -->
-                        <button
-                          class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-                          type="submit"
-                          name="id"
-                        >
-                          click to view feedback
-                        </button>
-                      </form>
                       <div
                         class="flex flex-col"
                         th:text="*{applicantDetailsObj.feedback}"
