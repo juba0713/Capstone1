@@ -211,7 +211,7 @@
             Manager to Tbi-board
             <div class="flex flex-row">
               <p class="text-gray-500">TOTAL:</p>
-              <div class="h-10 text-4xl ml-4">123</div>
+              <div class="h-10 text-4xl ml-4 count">123</div>
             </div>
           </div>
         </div>
@@ -264,10 +264,8 @@
                   <circle class="fill"></circle>
                   <!-- <circle class="progress"></circle> -->
                 </svg>
-                <div
-                  class="orb_value count"
-                  th:text="*{adminDashboardObj.reapplicationRejectedCount}"
-                >
+                <div class="orb_value count">
+                  <!-- th:text="*{adminDashboardObj.reapplicationRejectedCount}" -->
                   123
                 </div>
               </div>
@@ -294,10 +292,8 @@
                   <circle class="fill"></circle>
                   <!-- <circle class="progress"></circle> -->
                 </svg>
-                <div
-                  class="orb_value count"
-                  th:text="*{adminDashboardObj.reapplicationFailedCount}"
-                >
+                <div class="orb_value count">
+                  <!-- th:text="*{adminDashboardObj.reapplicationFailedCount}" -->
                   123
                 </div>
               </div>
