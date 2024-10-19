@@ -34,7 +34,7 @@
   </head>
   <body th:fragment="applicationDetails" class="font-secondary">
     <!-- left side -->
-    <div class="bg-white p-10 pt-2">
+    <div class="p-10 pt-2">
       <!-- page 2 -->
       <div class="tab">
         <h1
@@ -60,12 +60,12 @@
         <hr class="my-8" />
 
         <!-- capsule proposal form -->
-        <div class="flex flex-col mt-4 mb-3 mx-6 pointer-events-none">
+        <div class="flex flex-col mt-4 mb-3 mx-6">
           <p class="mb-3 font-semibold text-base">
             I. About the Startup/Project
           </p>
           <!-- project description -->
-          <div>
+          <div class="pointer-events-none">
             <h2 class="text-black">
               A. Project Description<span class="text-red-600"> *</span>
             </h2>
@@ -89,7 +89,7 @@
           <hr class="my-4" />
 
           <!-- team composition -->
-          <div>
+          <div class="pointer-events-none">
             <h2 class="text-black">B. Team Composition</h2>
             <!-- B. Team Composition<span class="text-red-600"> *</span> -->
             <div class="grid grid-cols-2 w-4/5 gap-2 mt-2">
@@ -214,7 +214,7 @@
           <hr class="my-4" />
 
           <!--  About the Product/Solution -->
-          <div>
+          <div class="pointer-events-none">
             <h2 class="text-black">C. About the Product/Solution</h2>
 
             <p class="text-sm mt-4">
@@ -272,8 +272,8 @@
           <hr class="my-4" />
 
           <!-- historical timeline -->
-          <div>
-            <h2 class="text-black">
+          <div class="pointer-events-none">
+            <h2 class="text-black pointer-events-none">
               D. Historical Timeline of the Product/Project Development
             </h2>
             <small class="block text-gray-500">
@@ -282,10 +282,14 @@
             <table class="w-full">
               <thead>
                 <tr>
-                  <th class="font-semibold border border-gray-500 px-4 py-2">
+                  <th
+                    class="text-center font-semibold border border-gray-500 px-4 py-2"
+                  >
                     Month-Year
                   </th>
-                  <th class="font-semibold border border-gray-500 px-4 py-2">
+                  <th
+                    class="text-center font-semibold border border-gray-500 px-4 py-2"
+                  >
                     Key Activities or Milestones
                   </th>
                 </tr>
@@ -307,7 +311,7 @@
                       name="historicalTimeline[0][1]"
                       th:text="*{applicantDetailsObj.historicalTimeline[0].length != 0 ? applicantDetailsObj.historicalTimeline[0][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
-                      class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-20 rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                     ></textarea>
                   </td>
                 </tr>
@@ -327,7 +331,7 @@
                       name="historicalTimeline[1][1]"
                       th:text="*{applicantDetailsObj.historicalTimeline[1].length != 0 ? applicantDetailsObj.historicalTimeline[1][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
-                      class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-20 rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                     ></textarea>
                   </td>
                 </tr>
@@ -347,7 +351,7 @@
                       name="historicalTimeline[2][1]"
                       th:text="*{applicantDetailsObj.historicalTimeline[2].length != 0 ? applicantDetailsObj.historicalTimeline[2][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
-                      class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-20 rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                     ></textarea>
                   </td>
                 </tr>
@@ -367,7 +371,7 @@
                       name="historicalTimeline[3][1]"
                       th:text="*{applicantDetailsObj.historicalTimeline[3].length != 0 ? applicantDetailsObj.historicalTimeline[3][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
-                      class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-20 rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                     ></textarea>
                   </td>
                 </tr>
@@ -387,7 +391,7 @@
                       name="historicalTimeline[4][1]"
                       th:text="*{applicantDetailsObj.historicalTimeline[4].length != 0 ? applicantDetailsObj.historicalTimeline[4][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
-                      class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-20 rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                     ></textarea>
                   </td>
                 </tr>
@@ -397,19 +401,39 @@
           <hr class="my-4" />
 
           <!-- competitive advantage analysis -->
-          <div class="h-[600px]">
+          <div class="overflow-auto h-[550px]">
             <h2 class="text-black">E. Competitive Advantage Analysis</h2>
             <small class="block text-gray-500">
               • Add more applicable competitive factors
             </small>
-            <table class="w-full h-4/5">
+            <table class="w-full h-4/5 pointer-events-none">
               <thead>
                 <tr>
-                  <th>Competitive Factors</th>
-                  <th>Name of Competition 1/ Alternative 1</th>
-                  <th>Name of Competition 2/ Alternative 2</th>
-                  <th>Name of Competition 3/ Alternative 3</th>
-                  <th>Your Startup/Project Name</th>
+                  <th
+                    class="font-semibold border border-gray-500 px-4 py-2 text-sm"
+                  >
+                    Competitive Factors
+                  </th>
+                  <th
+                    class="font-semibold border border-gray-500 px-4 py-2 text-sm"
+                  >
+                    Name of Competition 1/ Alternative 1
+                  </th>
+                  <th
+                    class="font-semibold border border-gray-500 px-4 py-2 text-sm"
+                  >
+                    Name of Competition 2/ Alternative 2
+                  </th>
+                  <th
+                    class="font-semibold border border-gray-500 px-4 py-2 text-sm"
+                  >
+                    Name of Competition 3/ Alternative 3
+                  </th>
+                  <th
+                    class="font-semibold border border-gray-500 px-4 py-2 text-sm"
+                  >
+                    Your Startup/Project Name
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -424,7 +448,7 @@
                       name="productServiceOffering[0]"
                       th:text="*{applicantDetailsObj.productServiceOffering[0] != '' ? applicantDetailsObj.productServiceOffering[0] : 'NA'}"
                       placeholder="Enter product/service offering"
-                      class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-full rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                     ></textarea>
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
@@ -432,7 +456,7 @@
                       name="productServiceOffering[1]"
                       th:text="*{applicantDetailsObj.productServiceOffering[1] != '' ? applicantDetailsObj.productServiceOffering[0] : 'NA'}"
                       placeholder="Enter product/service offering"
-                      class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-full rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                     ></textarea>
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
@@ -440,7 +464,7 @@
                       name="productServiceOffering[2]"
                       th:text="*{applicantDetailsObj.productServiceOffering[2] != '' ? applicantDetailsObj.productServiceOffering[0] : 'NA'}"
                       placeholder="Enter product/service offering"
-                      class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-full rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                     ></textarea>
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
@@ -448,7 +472,7 @@
                       name="productServiceOffering[3]"
                       th:text="*{applicantDetailsObj.productServiceOffering[3] != '' ? applicantDetailsObj.productServiceOffering[0] : 'NA'}"
                       placeholder="Enter product/service offering"
-                      class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-full rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                     ></textarea>
                   </td>
                 </tr>
@@ -463,7 +487,7 @@
                       name="pricingStrategy[0]"
                       th:text="*{applicantDetailsObj.pricingStrategy[0] != '' ? applicantDetailsObj.pricingStrategy[0] : 'NA'}"
                       placeholder="Enter pricing strategy"
-                      class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-full rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                     ></textarea>
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
@@ -471,7 +495,7 @@
                       name="pricingStrategy[1]"
                       th:text="*{applicantDetailsObj.pricingStrategy[1] != '' ? applicantDetailsObj.pricingStrategy[0] : 'NA'}"
                       placeholder="Enter pricing strategy"
-                      class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-full rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                     ></textarea>
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
@@ -479,7 +503,7 @@
                       name="pricingStrategy[2]"
                       th:text="*{applicantDetailsObj.pricingStrategy[2] != '' ? applicantDetailsObj.pricingStrategy[0] : 'NA'}"
                       placeholder="Enter pricing strategy"
-                      class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-full rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                     ></textarea>
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
@@ -487,7 +511,7 @@
                       name="pricingStrategy[3]"
                       th:text="*{applicantDetailsObj.pricingStrategy[3] != '' ? applicantDetailsObj.pricingStrategy[0] : 'NA'}"
                       placeholder="Enter pricing strategy"
-                      class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-full rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                     ></textarea>
                   </td>
                 </tr>
@@ -497,7 +521,7 @@
           <hr class="my-4" />
 
           <!-- intellectual property status -->
-          <div>
+          <div class="pointer-events-none">
             <h2 class="text-black">
               F. Intellectual Property Status (If applicable)
             </h2>
@@ -837,19 +861,20 @@
             </div>
 
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="technologyAns"
                   value="1"
                   th:checked="*{applicantDetailsObj.technologyAns==1}"
                 />
+
                 Project work is beyond basic research and technology concept has
-                been defined</label
-              >
+                been defined
+              </label>
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="technologyAns"
@@ -861,7 +886,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="technologyAns"
@@ -874,7 +899,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="technologyAns"
@@ -886,7 +911,7 @@
               </label>
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="technologyAns"
@@ -908,7 +933,7 @@
             </div>
 
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="productDevelopmentAns"
@@ -919,7 +944,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="productDevelopmentAns"
@@ -931,7 +956,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="productDevelopmentAns"
@@ -943,7 +968,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="productDevelopmentAns"
@@ -956,7 +981,7 @@
               </label>
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="productDevelopmentAns"
@@ -978,7 +1003,7 @@
             </div>
 
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="competitiveLandscapeAns"
@@ -991,7 +1016,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="competitiveLandscapeAns"
@@ -1004,7 +1029,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="competitiveLandscapeAns"
@@ -1018,7 +1043,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="competitiveLandscapeAns"
@@ -1031,7 +1056,7 @@
               </label>
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="competitiveLandscapeAns"
@@ -1055,7 +1080,7 @@
             </div>
 
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="productDesignAns"
@@ -1066,7 +1091,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="productDesignAns"
@@ -1078,7 +1103,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="productDesignAns"
@@ -1091,7 +1116,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="productDesignAns"
@@ -1104,7 +1129,7 @@
               </label>
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="productDesignAns"
@@ -1127,7 +1152,7 @@
             </div>
 
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="teamAns"
@@ -1139,7 +1164,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="teamAns"
@@ -1151,7 +1176,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="teamAns"
@@ -1164,7 +1189,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="teamAns"
@@ -1177,7 +1202,7 @@
               </label>
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="teamAns"
@@ -1200,7 +1225,7 @@
             </div>
 
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="goToMarketAns"
@@ -1212,7 +1237,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="goToMarketAns"
@@ -1225,7 +1250,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="goToMarketAns"
@@ -1239,7 +1264,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="goToMarketAns"
@@ -1252,7 +1277,7 @@
               </label>
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="goToMarketAns"
@@ -1275,7 +1300,7 @@
             </div>
 
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="manufacturingAns"
@@ -1287,7 +1312,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="manufacturingAns"
@@ -1301,7 +1326,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="manufacturingAns"
@@ -1313,7 +1338,7 @@
               >
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="manufacturingAns"
@@ -1325,7 +1350,7 @@
               </label>
             </div>
             <div class="flex flex-row items-center">
-              <label class="cursor-pointer flex items-center">
+              <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
                   name="manufacturingAns"
@@ -1374,6 +1399,7 @@
 
       var currentTab = 0;
       showTab(currentTab);
+      var scrollableContainer = document.querySelector(".scroll-here");
 
       function showTab(n) {
         var x = document.getElementsByClassName("tab");
@@ -1390,8 +1416,13 @@
           n === x.length - 1 ? "none" : "inline";
         fixStepIndicator(n);
 
-        // Scroll to the top of the page
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        // Scroll to the top of the container
+        if (scrollableContainer) {
+          scrollableContainer.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          // Fallback to scroll the entire window
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
       }
 
       function nextPrev(n) {

@@ -150,12 +150,11 @@
       </button>
     </div>
     <div class="w-[55%]">
-      <div class="flex flex-row">
+      <div class=" ">
         <div
           th:replace="~{fragments/applicationDetails :: applicationDetails}"
         ></div>
       </div>
-
       <!-- pre-screen checklist -->
       <form th:action="@{/officer/action}" method="POST">
         <input
@@ -689,9 +688,9 @@
           <hr class="my-4" />
 
           <!-- Accept and Reject buttons -->
-          <div class="flex justify-between">
+          <div class="flex flex-row justify-between gap-1">
             <button
-              class="btn-row border-black hover:bg-green-500 bg-green-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+              class="w-2/5 btn-row border-black hover:bg-green-500 bg-green-600 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
               type="button"
               data-toggle="modal"
               data-target="#accept-modal"
@@ -699,15 +698,24 @@
               <!-- th:data-id="${app.applicantIdPk}" -->
               Accept
             </button>
-            <button
-              class="btn-row border-black hover:bg-red-500 bg-red-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-              type="button"
-              data-toggle="modal"
-              data-target="#reject-modal"
-            >
-              <!-- th:data-id="${app.applicantIdPk}" -->
-              Reject
-            </button>
+            <div class="w-3/5 gap-1 flex flex-row justify-between">
+              <button
+                class="w-1/2 btn-row border-black hover:bg-orange-500 bg-orange-600 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                type="button"
+              >
+                <!-- th:data-id="${app.applicantIdPk}" -->
+                Resubmission
+              </button>
+              <button
+                class="w-1/2 btn-row border-black hover:bg-red-500 bg-red-600 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                type="button"
+                data-toggle="modal"
+                data-target="#reject-modal"
+              >
+                <!-- th:data-id="${app.applicantIdPk}" -->
+                Reject
+              </button>
+            </div>
           </div>
         </div>
 
@@ -936,6 +944,8 @@
       console.log(document.querySelector("#projectTitle"));
       document.querySelector("#projectTitle").value =
         data.applicantDetailsObj.projectTitle;
+      document.querySelector("#projectDescription").value =
+        data.applicantDetailsObj.projectDescription;
     }
   </script>
 </html>

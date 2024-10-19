@@ -62,6 +62,7 @@
         align-items: center;
         justify-content: center;
         font-weight: bold;
+        font-size: 20px;
       }
 
       .square_orb .orb_label {
@@ -185,190 +186,221 @@
         </div>
         <!-- <div>ID: <span th:text="${session.id}"></span></div> -->
       </div>
-      <div class="mb-8 ml-[270px] mr-10 flex flex-row flex-wrap font-secondary">
-        <div class="flex w-screen text-center justify-center mb-4 mt-2">
+      <div
+        class="gap-2 mb-8 ml-[270px] mr-10 flex flex-row flex-wrap font-secondary"
+      >
+        <!-- charts -->
+        <div class="w-7/12 text-center justify-center mt-2">
           <!-- officer -->
           <div
-            class="flex justify-center flex-col border rounded-lg shadow-md w-[40%] mr-10"
+            class="mb-2 flex justify-center flex-col h-90 border shadow-md w-full"
           >
             <!-- <p class="top-[45%] relative text-gray-400">no data</p> -->
-            <canvas id="officer" style="height: 80px" class="w-40"></canvas>
+            <canvas id="officer" style="height: 70px" class="w-40"></canvas>
             <p>OPERATIONS OFFICER</p>
           </div>
           <!-- tbiboard -->
           <div
-            class="flex justify-center flex-col h-90 border rounded-lg shadow-md w-[40%]"
+            class="mb-2 flex justify-center flex-col h-90 border shadow-md w-full"
           >
             <!-- <p class="top-[45%] relative text-gray-400">no data</p> -->
-            <canvas id="tbiBoard" style="height: 80px" class="w-40"></canvas>
+            <canvas id="tbiBoard" style="height: 70px" class="w-40"></canvas>
             <p>TBI BOARD</p>
           </div>
-        </div>
-        <div class="charts_orb w-screen border rounded-lg shadow-md mb-4">
-          <div class="orb">
-            <div class="orb_graphic">
-              <svg>
-                <circle class="fill"></circle>
-                <!-- <circle class="progress"></circle> -->
-              </svg>
-              <div
-                class="orb_value count"
-                th:text="*{adminDashboardObj.inOfficerCount}"
-              ></div>
+          <div class="border p-2 text-left mt-2 shadow-md">
+            Manager to Tbi-board
+            <div class="flex flex-row">
+              <p class="text-gray-500">TOTAL:</p>
+              <div class="h-10 text-4xl ml-4">123</div>
             </div>
-            <div class="orb_label text-sm">In Operations <br />Officer</div>
-          </div>
-          <div class="orb">
-            <div class="orb_graphic">
-              <svg>
-                <circle class="fill"></circle>
-                <!-- <circle class="progress"></circle> -->
-              </svg>
-              <div
-                class="orb_value count"
-                th:text="*{adminDashboardObj.inTbiBoardCount}"
-              ></div>
-            </div>
-            <div class="orb_label text-sm">In TBI board</div>
-          </div>
-          <div class="orb">
-            <div class="orb_graphic">
-              <svg>
-                <circle class="fill"></circle>
-                <!-- <circle class="progress"></circle> -->
-              </svg>
-              <div
-                class="orb_value count"
-                th:text="*{adminDashboardObj.inManagerCount}"
-              ></div>
-            </div>
-            <div class="orb_label text-sm">In Manager</div>
-          </div>
-          <div class="orb">
-            <div class="orb_graphic">
-              <svg>
-                <circle class="fill"></circle>
-                <!-- <circle class="progress"></circle> -->
-              </svg>
-              <div
-                class="orb_value count"
-                th:text="*{adminDashboardObj.reapplicationRejectedCount}"
-              >
-                123
-              </div>
-            </div>
-            <div class="orb_label text-sm">Rejected<br />Application</div>
-          </div>
-          <div class="orb">
-            <div class="orb_graphic">
-              <svg>
-                <circle class="fill"></circle>
-                <!-- <circle class="progress"></circle> -->
-              </svg>
-              <div
-                class="orb_value count"
-                th:text="*{adminDashboardObj.reapplicationFailedCount}"
-              >
-                123
-              </div>
-            </div>
-            <div class="orb_label text-sm">Failed<br />Reapplication</div>
           </div>
         </div>
+        <div class="w-2/5 h-full mt-2 flex flex-col">
+          <!-- orbs -->
 
-        <!-- squares -->
+          <div class="mb-2 border charts_orb shadow-md">
+            <div class="orb">
+              <div class="orb_graphic">
+                <svg>
+                  <circle class="fill"></circle>
+                  <!-- <circle class="progress"></circle> -->
+                </svg>
+                <div
+                  class="orb_value count"
+                  th:text="*{adminDashboardObj.inOfficerCount}"
+                ></div>
+              </div>
+              <div class="orb_label text-sm">In Operations <br />Officer</div>
+            </div>
+            <div class="orb">
+              <div class="orb_graphic">
+                <svg>
+                  <circle class="fill"></circle>
+                  <!-- <circle class="progress"></circle> -->
+                </svg>
+                <div
+                  class="orb_value count"
+                  th:text="*{adminDashboardObj.inTbiBoardCount}"
+                ></div>
+              </div>
+              <div class="orb_label text-sm">In TBI board</div>
+            </div>
+            <div class="orb">
+              <div class="orb_graphic">
+                <svg>
+                  <circle class="fill"></circle>
+                  <!-- <circle class="progress"></circle> -->
+                </svg>
+                <div
+                  class="orb_value count"
+                  th:text="*{adminDashboardObj.inManagerCount}"
+                ></div>
+              </div>
+              <div class="orb_label text-sm">In Manager</div>
+            </div>
+            <div class="orb">
+              <div class="orb_graphic">
+                <svg>
+                  <circle class="fill"></circle>
+                  <!-- <circle class="progress"></circle> -->
+                </svg>
+                <div
+                  class="orb_value count"
+                  th:text="*{adminDashboardObj.reapplicationRejectedCount}"
+                >
+                  123
+                </div>
+              </div>
+              <div class="orb_label text-sm">Rejected<br />Application</div>
+            </div>
+            <div class="orb">
+              <div class="orb_graphic">
+                <svg>
+                  <circle class="fill"></circle>
+                  <!-- <circle class="progress"></circle> -->
+                </svg>
+                <div
+                  class="orb_value count"
+                  th:text="*{adminDashboardObj.reapplicationFailedCount}"
+                >
+                  123
+                </div>
+              </div>
+              <div class="orb_label text-sm">Failed<br />Reapplication</div>
+            </div>
+            <div class="orb">
+              <div class="orb_graphic">
+                <svg>
+                  <circle class="fill"></circle>
+                  <!-- <circle class="progress"></circle> -->
+                </svg>
+                <div
+                  class="orb_value count"
+                  th:text="*{adminDashboardObj.reapplicationFailedCount}"
+                >
+                  123
+                </div>
+              </div>
+              <div class="orb_label text-sm">Resubmission</div>
+            </div>
+          </div>
 
-        <div class="square_orb w-full border rounded-lg shadow-md mb-4">
-          <div class="orb">
-            <div class="orb_graphic">
-              <svg>
-                <div class="fill"></div>
-                <!-- <div class="progress"></div> -->
-              </svg>
-              <div
-                class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
-                th:text="*{adminDashboardObj.applicantCount}"
-              >
-                123
+          <!-- squares -->
+          <div class="border square_orb shadow-md">
+            <div class="orb">
+              <div class="orb_graphic h-20 w-20">
+                <svg>
+                  <div class="fill"></div>
+                  <!-- <div class="progress"></div> -->
+                </svg>
+                <div
+                  class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
+                  th:text="*{adminDashboardObj.applicantCount}"
+                >
+                  123
+                </div>
+              </div>
+              <div class="orb_label text-sm">Applicants</div>
+            </div>
+            <div class="orb">
+              <div class="orb_graphic h-20 w-20">
+                <svg>
+                  <div class="fill"></div>
+                  <!-- <div class="progress"></div> -->
+                </svg>
+                <div
+                  class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
+                  th:text="*{adminDashboardObj.officerCount}"
+                >
+                  123
+                </div>
+              </div>
+              <div class="orb_label text-sm">
+                Operations <br />
+                Officers
               </div>
             </div>
-            <div class="orb_label text-sm">Applicants</div>
-          </div>
-          <div class="orb">
-            <div class="orb_graphic">
-              <svg>
-                <div class="fill"></div>
-                <!-- <div class="progress"></div> -->
-              </svg>
-              <div
-                class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
-                th:text="*{adminDashboardObj.officerCount}"
-              >
-                123
+            <div class="orb">
+              <div class="orb_graphic h-20 w-20">
+                <svg>
+                  <div class="fill"></div>
+                  <!-- <div class="progress"></div> -->
+                </svg>
+                <div
+                  class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
+                  th:text="*{adminDashboardObj.tbiboardCount}"
+                >
+                  123
+                </div>
               </div>
+              <div class="orb_label text-sm">TBI Boards</div>
             </div>
-            <div class="orb_label text-sm">Operations Officers</div>
-          </div>
-          <div class="orb">
-            <div class="orb_graphic">
-              <svg>
-                <div class="fill"></div>
-                <!-- <div class="progress"></div> -->
-              </svg>
-              <div
-                class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
-                th:text="*{adminDashboardObj.tbiboardCount}"
-              >
-                123
+            <div class="orb">
+              <div class="orb_graphic h-20 w-20">
+                <svg>
+                  <div class="fill"></div>
+                  <!-- <div class="progress"></div> -->
+                </svg>
+                <div
+                  class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
+                  th:text="*{adminDashboardObj.managerCount}"
+                >
+                  123
+                </div>
               </div>
+              <div class="orb_label text-sm">Managers</div>
             </div>
-            <div class="orb_label text-sm">TBI Boards</div>
-          </div>
-          <div class="orb">
-            <div class="orb_graphic">
-              <svg>
-                <div class="fill"></div>
-                <!-- <div class="progress"></div> -->
-              </svg>
-              <div
-                class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
-                th:text="*{adminDashboardObj.managerCount}"
-              >
-                123
+            <div class="orb">
+              <div class="orb_graphic h-20 w-20">
+                <svg>
+                  <div class="fill"></div>
+                  <!-- <div class="progress"></div> -->
+                </svg>
+                <div
+                  class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
+                  th:text="*{adminDashboardObj.activatedAccountCount}"
+                >
+                  123
+                </div>
               </div>
+              <div class="orb_label text-sm">Total <br />Accounts</div>
             </div>
-            <div class="orb_label text-sm">Managers</div>
-          </div>
-          <div class="orb">
-            <div class="orb_graphic">
-              <svg>
-                <div class="fill"></div>
-                <!-- <div class="progress"></div> -->
-              </svg>
-              <div
-                class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
-                th:text="*{adminDashboardObj.activatedAccountCount}"
-              >
-                123
+            <!-- Add more square charts as needed -->
+            <div class="orb">
+              <div class="orb_graphic h-20 w-20">
+                <svg>
+                  <div class="fill"></div>
+                  <!-- <div class="progress"></div> -->
+                </svg>
+                <div
+                  class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
+                  th:text="*{adminDashboardObj.issuedCertificateCount}"
+                >
+                  123
+                </div>
               </div>
+              <div class="orb_label text-sm">Issued <br />Certificates</div>
             </div>
-            <div class="orb_label text-sm">Total <br />Accounts</div>
-          </div>
-          <!-- Add more square charts as needed -->
-          <div class="orb">
-            <div class="orb_graphic">
-              <svg>
-                <div class="fill"></div>
-                <!-- <div class="progress"></div> -->
-              </svg>
-              <div
-                class="orb_value count border-2 rounded-lg stroke-2 border-red-600"
-                th:text="*{adminDashboardObj.issuedCertificateCount}"
-              >
-                123
-              </div>
-            </div>
-            <div class="orb_label text-sm">Issued <br />Certificates</div>
           </div>
         </div>
       </div>

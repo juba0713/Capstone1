@@ -134,7 +134,7 @@
       <div>Please fill out all required fields!</div>
     </div>
     <div class="w-[55%]">
-      <div class="flex flex-row">
+      <div class=" ">
         <div
           th:replace="~{fragments/applicationDetails :: applicationDetails}"
         ></div>
@@ -1392,6 +1392,9 @@
               } else {
                 // Display a message if not all ratings have been provided
                 totalScoreHTML.innerHTML = "Please complete all selections.";
+                totalScoreHTML.style.textAlign = "center"; // Center the text horizontally
+                totalScoreHTML.style.display = "block"; // Ensure it's treated as a block
+                totalScoreHTML.style.margin = "0 auto"; // Center the block horizontally
               }
             });
           });
