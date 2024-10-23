@@ -139,9 +139,9 @@
       >
         Review Application
       </div>
-      <a th:href="@{/officer/home}" class="ad-back-button">Back to home</a>
+      <a th:href="@{/officer/home}" class="ad-back-button">Back</a>
       <button
-        class="ad-back-button"
+        class="history"
         data-toggle="modal"
         data-target="#exampleModalCenter"
         th:if="*{!#lists.isEmpty(projectIdPks)}"
@@ -178,7 +178,7 @@
                 <br /><br />
                 Compliance with all items is mandatory for the application to
                 advance to the next stage, which involves evaluation by the
-                LaunchLab board.
+                [program name] board.
               </h2>
             </div>
           </div>
@@ -221,11 +221,11 @@
                       <th
                         class="font-normal border border-gray-500 px-4 py-2 text-sm"
                       >
-                        LaunchLab Capsule Proposal
+                        [program name] Capsule Proposal
                       </th>
                       <td class="border border-gray-500 px-2 py-2">
                         <p class="resize-none w-full sm:text-sm">
-                          Has the applicant provided a detailed LaunchLab
+                          Has the applicant provided a detailed [program name]
                           capsule proposal including all required information?
                         </p>
                       </td>
@@ -679,9 +679,12 @@
           <!-- accept or reject button -->
           <hr class="my-4" />
           <div class="w-full h-[100px]">
+            <h2 class="text-black mb-2">
+              Recommendation<span class="text-red-600"> *</span>
+            </h2>
             <textarea
               name="recommendation"
-              placeholder="Recommendations"
+              placeholder="Input recommendations"
               class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
             ></textarea>
           </div>

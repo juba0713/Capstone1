@@ -153,16 +153,16 @@
                 th:style="${app.status == 0 OR app.status == 1 OR app.status==3 OR app.status == 4  ? 'color:#000000; font-weight: bold;' : app.status == 2 OR ((app.status == 5 OR app.status == 6 OR app.status == 7) AND app.totalRating < 60) ? 'color:#FF0000; font-weight: bold;' : 'color:#008000; font-weight: bold;'}"
               ></td>
               <td
-                class="whitespace-nowrap max-w-0 truncate"
-                th:text="${app.status} == 2 ? ${app.acceptedBy} : ''"
+                class="whitespace-nowrap max-w-0 truncate text-center"
+                th:text="${app.status} == 2 ? ${app.acceptedBy} : '-'"
+              ></td>
+              <td
+                class="whitespace-nowrap max-w-0 truncate text-center"
+                th:text="${app.status} != 2 ? ${app.acceptedBy} : '-'"
               ></td>
               <td
                 class="whitespace-nowrap max-w-0 truncate"
-                th:text="${app.status} != 2 ? ${app.acceptedBy} : ''"
-              ></td>
-              <td
-                class="whitespace-nowrap max-w-0 truncate"
-                th:text="${app.evaluatedBy}"
+                th:text="${#strings.isEmpty(app.evaluatedBy) ? '-' : app.evaluatedBy}"
               ></td>
             </tr>
           </tbody>

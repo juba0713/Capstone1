@@ -72,7 +72,8 @@
       /* Dashboard */
       .charts_orb {
         display: flex;
-        height: 25%;
+        /* max-height: 50vh; */
+        height: auto;
         align-items: flex-start;
         justify-content: center;
         flex-wrap: wrap;
@@ -80,10 +81,13 @@
       }
 
       .orb {
-        padding: 20px;
+        padding: 10px;
         height: 190px;
       }
-
+      .orb_boxes {
+        padding: 20px;
+        height: 160px;
+      }
       .orb_graphic {
         position: relative;
       }
@@ -190,10 +194,10 @@
         class="gap-2 mb-8 ml-[270px] mr-10 flex flex-row flex-wrap font-secondary"
       >
         <!-- charts -->
-        <div class="w-7/12 text-center justify-center mt-2">
+        <div class="w-7/12 text-center justify-center mt-2 max-h-full">
           <!-- officer -->
           <div
-            class="mb-2 flex justify-center flex-col h-90 border shadow-md w-full"
+            class="mb-2 flex justify-center flex-col border shadow-md w-full"
           >
             <!-- <p class="top-[45%] relative text-gray-400">no data</p> -->
             <canvas id="officer" style="height: 70px" class="w-40"></canvas>
@@ -201,7 +205,7 @@
           </div>
           <!-- tbiboard -->
           <div
-            class="mb-2 flex justify-center flex-col h-90 border shadow-md w-full"
+            class="mb-2 flex justify-center flex-col border shadow-md w-full"
           >
             <!-- <p class="top-[45%] relative text-gray-400">no data</p> -->
             <canvas id="tbiBoard" style="height: 70px" class="w-40"></canvas>
@@ -215,10 +219,10 @@
             </div>
           </div>
         </div>
-        <div class="w-2/5 h-full mt-2 flex flex-col">
+        <div class="w-2/5 mt-2 flex flex-col max-h-full">
           <!-- orbs -->
 
-          <div class="mb-2 border charts_orb shadow-md">
+          <div class="mb-2 border charts_orb shadow-md h-1/2">
             <div class="orb">
               <div class="orb_graphic">
                 <svg>
@@ -302,8 +306,8 @@
           </div>
 
           <!-- squares -->
-          <div class="border square_orb shadow-md">
-            <div class="orb">
+          <div class="border square_orb shadow-md h-1/2">
+            <div class="orb_boxes">
               <div class="orb_graphic h-20 w-20">
                 <svg>
                   <div class="fill"></div>
@@ -318,7 +322,7 @@
               </div>
               <div class="orb_label text-sm">Applicants</div>
             </div>
-            <div class="orb">
+            <div class="orb_boxes">
               <div class="orb_graphic h-20 w-20">
                 <svg>
                   <div class="fill"></div>
@@ -336,7 +340,7 @@
                 Officers
               </div>
             </div>
-            <div class="orb">
+            <div class="orb_boxes">
               <div class="orb_graphic h-20 w-20">
                 <svg>
                   <div class="fill"></div>
@@ -351,7 +355,7 @@
               </div>
               <div class="orb_label text-sm">TBI Boards</div>
             </div>
-            <div class="orb">
+            <div class="orb_boxes">
               <div class="orb_graphic h-20 w-20">
                 <svg>
                   <div class="fill"></div>
@@ -366,7 +370,7 @@
               </div>
               <div class="orb_label text-sm">Managers</div>
             </div>
-            <div class="orb">
+            <div class="orb_boxes">
               <div class="orb_graphic h-20 w-20">
                 <svg>
                   <div class="fill"></div>
@@ -382,7 +386,7 @@
               <div class="orb_label text-sm">Total <br />Accounts</div>
             </div>
             <!-- Add more square charts as needed -->
-            <div class="orb">
+            <div class="orb_boxes">
               <div class="orb_graphic h-20 w-20">
                 <svg>
                   <div class="fill"></div>

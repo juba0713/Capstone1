@@ -162,7 +162,6 @@
                     <form
                       th:action="@{/manager/rank-startups/evaluate}"
                       method="GET"
-                      target="_blank"
                     >
                       <input
                         type="hidden"
@@ -185,10 +184,14 @@
             <div class="ranking-container">
               <div class="flex justify-between">
                 <p class="font-bold text-xl mb-4">RANKING</p>
-                <p>download as pdf</p>
+                <!-- <p>download as pdf</p> -->
               </div>
               <ul class="ranking-list">
-                <li th:each="app : *{applicantRankingMonthlyObj}" class="ranking-item" th:text="${app.projectTitle}"></li>
+                <li
+                  th:each="app : *{applicantRankingMonthlyObj}"
+                  class="ranking-item"
+                  th:text="${app.projectTitle}"
+                ></li>
               </ul>
             </div>
           </div>

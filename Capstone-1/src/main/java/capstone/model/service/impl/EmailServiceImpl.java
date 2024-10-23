@@ -18,13 +18,11 @@ public class EmailServiceImpl implements EmailService {
 
 	@Autowired
 	private JavaMailSender emailSender;
-	
-	
 
 	@Override
 	public void sendRejectionMail(String feedback, boolean resubmitFlg, String email, String token)
 			throws MessagingException {
-		
+
 		String siteURL = getSiteUrl();
 
 		MimeMessage message = emailSender.createMimeMessage();
@@ -35,16 +33,17 @@ public class EmailServiceImpl implements EmailService {
 		helper.setTo(email);
 		helper.setSubject("Application Denied");
 
-		String htmlText = "<h1>Feedback:</h1>" +
-				"<p>" + "Reapplication: " + (resubmitFlg ? "Yes" : "No") + "</p>";
+		String htmlText = "<h1>Feedback:</h1>";
+		// +
+		// "<p>" + "Reapplication: " + (resubmitFlg ? "Yes" : "No") + "</p>";
 
 		if (resubmitFlg) {
 			htmlText += "<div>Please review the feedback and consider resubmitting a revised application.</div>"
-					+ "<a href='"+siteURL+"/applicant/form/resubmit?token=" + token + "'>"
+					+ "<a href='" + siteURL + "/applicant/form/resubmit?token=" + token + "'>"
 					+ "resubmit</a>";
 		} else {
 			htmlText += "<div>You are not qualified to resubmit this application. Please consider submitting a new application if you wish to reapply.</div>"
-					+ "<a href='"+siteURL+"/applicant/form?token=" + token + "'>"
+					+ "<a href='" + siteURL + "/applicant/form?token=" + token + "'>"
 					+ "reapply</a>";
 		}
 
@@ -58,7 +57,7 @@ public class EmailServiceImpl implements EmailService {
 	public void sendActivationMail(String password, String email) throws MessagingException {
 
 		String siteURL = getSiteUrl();
-		
+
 		MimeMessage message = emailSender.createMimeMessage();
 
 		MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -71,7 +70,7 @@ public class EmailServiceImpl implements EmailService {
 				"<p>Your account has been activated.</p>" +
 				"<p>Your email: </p>" + email + "</p>" +
 				"<p>Your password: " + password + "</p>" +
-				"<div><a href='"+siteURL+"/login'>Login Now</a></div>";
+				"<div><a href='" + siteURL + "/login'>Login Now</a></div>";
 
 		helper.setText(htmlText, true);
 
@@ -82,7 +81,7 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public void sendFailedMail(boolean resubmitFlg, String email, String token)
 			throws MessagingException {
-		
+
 		String siteURL = getSiteUrl();
 
 		MimeMessage message = emailSender.createMimeMessage();
@@ -97,11 +96,11 @@ public class EmailServiceImpl implements EmailService {
 
 		if (resubmitFlg) {
 			htmlText += "<div>Please review the feedback and consider resubmitting a revised application.</div>"
-					+ "<a href='"+siteURL+"/applicant/form/resubmit?token=" + token + "'>"
+					+ "<a href='" + siteURL + "/applicant/form/resubmit?token=" + token + "'>"
 					+ "resubmit</a>";
 		} else {
 			htmlText += "<div>You are not qualified to resubmit this application. Please consider submitting a new application if you wish to reapply.</div>"
-					+ "<a href='"+siteURL+"/applicant/form?token=" + token + "'>"
+					+ "<a href='" + siteURL + "/applicant/form?token=" + token + "'>"
 					+ "reapply</a>";
 		}
 
@@ -148,6 +147,7 @@ public class EmailServiceImpl implements EmailService {
 
 	@Override
 	public void sendEvaluatedMail(String email) throws MessagingException {
+		String siteURL = getSiteUrl();
 
 		MimeMessage message = emailSender.createMimeMessage();
 
@@ -157,8 +157,8 @@ public class EmailServiceImpl implements EmailService {
 		helper.setTo(email);
 		helper.setSubject("Application Evaluated");
 
-		String htmlText = "<div>Your application has been evaluated!. Please <a href='http://localhost:8080/login'>login</a> to see the result.</div> ";
-
+		String htmlText = "<div>Your application has been evaluated! Please <a href='" + siteURL
+				+ "/login'>login</a> to see the result.</div>";
 		helper.setText(htmlText, true);
 
 		emailSender.send(message);
@@ -166,60 +166,59 @@ public class EmailServiceImpl implements EmailService {
 
 	@Override
 	public void sendIssuedCertificate(String email) throws MessagingException {
-	    MimeMessage message = emailSender.createMimeMessage();
-	    MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		MimeMessage message = emailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-	    helper.setFrom(CommonConstant.EMAIL);
-	    helper.setTo(email);
-	    helper.setSubject("Certificate Issued");
+		helper.setFrom(CommonConstant.EMAIL);
+		helper.setTo(email);
+		helper.setSubject("Certificate Issued");
 
-	    String htmlText = "<div>"
-	            + "<h1>Congratulations!</h1>"
-	            + "<p>We are pleased to inform you that your certificate has been successfully issued.</p>"
-	            + "<p>You can now download or access your certificate by logging into your account.</p>"
-	            + "<br>"
-	            + "<p>Thank you for your efforts and dedication.</p>"
-	            + "<p>Best regards,<br>The Certification Team</p>"
-	            + "</div>";
+		String htmlText = "<div>"
+				+ "<h1>Congratulations!</h1>"
+				+ "<p>We are pleased to inform you that your certificate has been successfully issued.</p>"
+				+ "<p>You can now download or access your certificate by logging into your account.</p>"
+				+ "<br>"
+				+ "<p>Thank you for your efforts and dedication.</p>"
+				+ "<p>Best regards,<br>The Certification Team</p>"
+				+ "</div>";
 
-	    helper.setText(htmlText, true);
+		helper.setText(htmlText, true);
 
-	    emailSender.send(message);
+		emailSender.send(message);
 	}
 
 	@Override
 	public void sendEvaluatedMailManager(String email) throws MessagingException {
-	    MimeMessage message = emailSender.createMimeMessage();
-	    MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		MimeMessage message = emailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-	    helper.setFrom(CommonConstant.EMAIL);
-	    helper.setTo(email);
-	    helper.setSubject("Your Application Has Been Evaluated");
+		helper.setFrom(CommonConstant.EMAIL);
+		helper.setTo(email);
+		helper.setSubject("Your Application Has Been Evaluated");
 
-	    String htmlText = "<div>"
-	            + "<h1>Your Application Has Been Evaluated!</h1>"
-	            + "<p>We are pleased to inform you that your application has been evaluated successfully.</p>"
-	            + "<p>You can now log in to your account to check your ranking and see where you stand in the evaluation process.</p>"
-	            + "<br>"
-	            + "<p>Thank you for your participation and effort.</p>"
-	            + "<p>Best regards,<br>The Evaluation Team</p>"
-	            + "</div>";
+		String htmlText = "<div>"
+				+ "<h1>Your Application Has Been Evaluated!</h1>"
+				+ "<p>We are pleased to inform you that your application has been evaluated successfully.</p>"
+				+ "<p>You can now log in to your account to check your ranking and see where you stand in the evaluation process.</p>"
+				+ "<br>"
+				+ "<p>Thank you for your participation and effort.</p>"
+				+ "<p>Best regards,<br>The Evaluation Team</p>"
+				+ "</div>";
 
-	    helper.setText(htmlText, true);
+		helper.setText(htmlText, true);
 
-	    emailSender.send(message);
+		emailSender.send(message);
 	}
 
 	public String getSiteUrl() {
-        ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attrs.getRequest();
+		ServletRequestAttributes attrs = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+		HttpServletRequest request = attrs.getRequest();
 
-        // Generate site URL dynamically using the request object
-        String siteURL = request.getRequestURL().toString();
-        String sitePATH = request.getServletPath();
-        siteURL = siteURL.replace(sitePATH, "");
-        return siteURL;
-    }
-
+		// Generate site URL dynamically using the request object
+		String siteURL = request.getRequestURL().toString();
+		String sitePATH = request.getServletPath();
+		siteURL = siteURL.replace(sitePATH, "");
+		return siteURL;
+	}
 
 }

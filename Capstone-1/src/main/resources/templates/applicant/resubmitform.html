@@ -123,7 +123,10 @@
       >
         Resubmit Form
       </div>
-      <a th:href="@{/officer/home}" class="ad-back-button">Back to home</a>
+      <p class="remindertop pointer-events-none w-auto text-left">
+        As you resubmit your form, please remember to check that all required
+        fields are filled out.
+      </p>
     </div>
     <!-- LEFT side -->
     <div class="w-[55%] bg-white p-10 pt-2 details">
@@ -736,7 +739,7 @@
                   type="text"
                   placeholder="Type something here..."
                   name="intPropertyStatus"
-                  th:value="*{intPropertyStatus}"
+                  th:text="*{intPropertyStatus}"
                   class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                 ></textarea>
               </div>
@@ -753,12 +756,12 @@
                 A. Objectives<span class="text-red-600"> *</span>
               </h2>
               <textarea
-                oninput="this.className = 'resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10'"
+                oninput="this.className = 'resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20'"
                 type="text"
                 placeholder="Type something here..."
                 name="objectives"
                 th:text="*{objectives}"
-                class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
+                class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20"
               ></textarea>
               <div
                 class="error no-pad"
@@ -1854,12 +1857,12 @@
                     <th
                       class="font-normal border border-gray-500 px-4 py-2 text-sm"
                     >
-                      LaunchLab Capsule Proposal
+                      [program name] Capsule Proposal
                     </th>
                     <td class="border border-gray-500 px-2 py-2">
                       <p class="resize-none w-full sm:text-sm">
-                        Has the applicant provided a detailed LaunchLab capsule
-                        proposal including all required information?
+                        Has the applicant provided a detailed [program name]
+                        capsule proposal including all required information?
                       </p>
                     </td>
 
@@ -1911,7 +1914,7 @@
                       <textarea
                         placeholder="Enter comment"
                         readonly
-                         th:text="*{applicantOffFeedbackObj.ctThreeComments != '' ? applicantOffFeedbackObj.ctThreeComments : 'No comment'}"
+                        th:text="*{applicantOffFeedbackObj.ctThreeComments != '' ? applicantOffFeedbackObj.ctThreeComments : 'No comment'}"
                         class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                       ></textarea>
                     </td>
@@ -2093,6 +2096,7 @@
         </div>
         <hr class="my-4" />
         <div class="w-full h-[100px]">
+          <h2 class="text-black mb-2 text-left">Recommendation</h2>
           <textarea
             name="recommendation"
             placeholder="Recommendations ni officer"
