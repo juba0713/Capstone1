@@ -854,7 +854,30 @@
                 >
               </h2>
               <div class="mt-3 w-[50%]">
-                <input type="file" name="vitaeFile" />
+                <input
+                  type="file"
+                  name="vitaeFile"
+                  required
+                  th:value="*{vitaeFileName}"
+                  class="hidden"
+                  id="vitaeFileInput"
+                />
+                <div class="flex items-center">
+                  <button
+                    type="button"
+                    onclick="document.getElementById('vitaeFileInput').click()"
+                    class="mr-2 px-4 py-2 bg-blue-500 text-white rounded"
+                  >
+                    Choose File
+                  </button>
+                  <span
+                    id="vitaeFileName"
+                    class="text-sm"
+                    th:text="*{vitaeFileName} ?: 'No file chosen'"
+                  >
+                    No file chosen
+                  </span>
+                </div>
                 <span class="text-xs"
                   >Submit your file in
                   <span class="font-bold"> PDF </span> format.</span
@@ -2461,6 +2484,16 @@
         </div>
       </div>
     </div>
+    <script>
+      document
+        .getElementById("vitaeFileInput")
+        .addEventListener("change", function (event) {
+          const fileName = event.target.files[0]
+            ? event.target.files[0].name
+            : "No file chosen";
+          document.getElementById("vitaeFileName").textContent = fileName;
+        });
+    </script>
     <script>
       var currentTab = 0;
       showTab(currentTab);

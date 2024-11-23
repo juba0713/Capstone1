@@ -60,7 +60,7 @@ public class MessageConstant {
 
 	public static String ELIGIBLITY_FLG_ERROR = "Please select whether you agree or disagree to the Egilibility Agreement!";
 
-	public static String NAME_INCORRECT_FORMAT = "Incorrect Format! (Lastname, Firstname)";
+	public static String NAME_INCORRECT_FORMAT = "Invalid/Incorrect Format! (Lastname, Firstname)";
 
 	public static String MOBILE_NUMBER_BLANK = "Mobile Number is required!";
 
