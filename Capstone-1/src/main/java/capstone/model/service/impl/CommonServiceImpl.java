@@ -98,26 +98,27 @@ public class CommonServiceImpl implements CommonService {
 
 	@Override
 	public String encrypt(String value) throws Exception {
-		String algorithm = env.getProperty("cipher.algorithm");
-		byte[] secretKey = env.getProperty("cipher.secret_key").getBytes();
-		SecretKey key = new SecretKeySpec(secretKey, algorithm);
-        Cipher cipher = Cipher.getInstance(algorithm);
-        cipher.init(Cipher.ENCRYPT_MODE, key);
-        byte[] encryptedValue = cipher.doFinal(value.getBytes());
-        return Base64.getEncoder().encodeToString(encryptedValue);
+	    String algorithm = env.getProperty("cipher.algorithm");
+	    byte[] secretKey = env.getProperty("cipher.secret_key").getBytes();
+	    SecretKey key = new SecretKeySpec(secretKey, algorithm);
+	    Cipher cipher = Cipher.getInstance(algorithm);
+	    cipher.init(Cipher.ENCRYPT_MODE, key);
+	    byte[] encryptedValue = cipher.doFinal(value.getBytes());
+	    return Base64.getUrlEncoder().encodeToString(encryptedValue); // Use URL-safe encoding
 	}
 
 	@Override
 	public String decrypt(String encryptedValue) throws Exception {
-		String algorithm = env.getProperty("cipher.algorithm");
-		byte[] secretKey = env.getProperty("cipher.secret_key").getBytes();
-		SecretKey key = new SecretKeySpec(secretKey, algorithm);
-		Cipher cipher = Cipher.getInstance(algorithm);
-        cipher.init(Cipher.DECRYPT_MODE, key);
-        byte[] decodedValue = Base64.getDecoder().decode(encryptedValue);
-        byte[] decryptedValue = cipher.doFinal(decodedValue);
-        return new String(decryptedValue);
+	    String algorithm = env.getProperty("cipher.algorithm");
+	    byte[] secretKey = env.getProperty("cipher.secret_key").getBytes();
+	    SecretKey key = new SecretKeySpec(secretKey, algorithm);
+	    Cipher cipher = Cipher.getInstance(algorithm);
+	    cipher.init(Cipher.DECRYPT_MODE, key);
+	    byte[] decodedValue = Base64.getUrlDecoder().decode(encryptedValue); // Use URL-safe decoding
+	    byte[] decryptedValue = cipher.doFinal(decodedValue);
+	    return new String(decryptedValue);
 	}
+
 
 	@Override
 	public int calculateTotalRatings(int rateOne, int rateTwo, int rateThree, int rateFour, int rateFive, int rateSix,
