@@ -711,7 +711,7 @@ public class ManagerServiceImpl implements ManagerService {
 
 				applicantLogic.updateApplicantCeritificate(fileName, inDto.getApplicantIdPk());
 
-				emailService.sendIssuedCertificate(userCertificate.getEmail());
+				emailService.sendIssuedCertificate(userCertificate.getEmail(), fileName);
 
 			} catch (IOException e) {
 

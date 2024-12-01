@@ -19,7 +19,7 @@ public interface EmailService {
 	
 	public void sendEvaluatedMail(String email) throws MessagingException;
 	
-	public void sendIssuedCertificate(String email) throws MessagingException;
+	public void sendIssuedCertificate(String email, String fileName) throws MessagingException;
 	
 	public void sendEvaluatedMailManager(String email) throws MessagingException;
 }

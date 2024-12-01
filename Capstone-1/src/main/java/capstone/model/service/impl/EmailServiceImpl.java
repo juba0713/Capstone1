@@ -165,7 +165,10 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	@Override
-	public void sendIssuedCertificate(String email) throws MessagingException {
+	public void sendIssuedCertificate(String email, String fileName) throws MessagingException {
+		
+		String siteURL = getSiteUrl();
+		
 		MimeMessage message = emailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
@@ -180,7 +183,9 @@ public class EmailServiceImpl implements EmailService {
 				+ "<br>"
 				+ "<p>Thank you for your efforts and dedication.</p>"
 				+ "<p>Best regards,<br>The Certification Team</p>"
-				+ "</div>";
+				+ "</div>"
+				+ ""
+				+ "<a href='" + siteURL + "/download/certificate/" + fileName + "' >Click here to download the certificate</a>";
 
 		helper.setText(htmlText, true);
 
