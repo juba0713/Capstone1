@@ -237,7 +237,7 @@
                                 type="radio"
                                 name="ctOneFlg"
                                 value="true"
-                                th:checked="*{ctOneFlg}"
+                                th:checked="*{ctOneFlg == null ? 'checked' : !ctOneFlg}"
                               />
                               Yes</label
                             >
@@ -248,7 +248,7 @@
                                 type="radio"
                                 name="ctOneFlg"
                                 value="false"
-                                th:checked="*{ctOneFlg == null ? 'checked' : !ctOneFlg}"
+                                th:checked="*{ctOneFlg}"
                               />
                               No</label
                             >
@@ -283,7 +283,7 @@
                                 type="radio"
                                 name="ctTwoFlg"
                                 value="true"
-                                th:checked="*{ctTwoFlg}"
+                                th:checked="*{ctTwoFlg == null ? 'checked' : !ctTwoFlg}"
                               />
                               Yes</label
                             >
@@ -294,7 +294,7 @@
                                 type="radio"
                                 name="ctTwoFlg"
                                 value="false"
-                                th:checked="*{ctTwoFlg == null ? 'checked' : !ctTwoFlg}"
+                                th:checked="*{ctTwoFlg}"
                               />
                               No</label
                             >
@@ -329,7 +329,7 @@
                                 type="radio"
                                 name="ctThreeFlg"
                                 value="true"
-                                th:checked="*{ctThreeFlg}"
+                                th:checked="*{ctThreeFlg == null ? 'checked' : !ctThreeFlg}"
                               />
                               Yes</label
                             >
@@ -340,7 +340,7 @@
                                 type="radio"
                                 name="ctThreeFlg"
                                 value="false"
-                                th:checked="*{ctThreeFlg == null ? 'checked' : !ctThreeFlg}"
+                                th:checked="*{ctThreeFlg}"
                               />
                               No</label
                             >
@@ -375,7 +375,7 @@
                                 type="radio"
                                 name="ctFourFlg"
                                 value="true"
-                                th:checked="*{ctFourFlg}"
+                                th:checked="*{ctFourFlg == null ? 'checked' : !ctFourFlg}"
                               />
                               Yes</label
                             >
@@ -386,7 +386,7 @@
                                 type="radio"
                                 name="ctFourFlg"
                                 value="false"
-                                th:checked="*{ctFourFlg == null ? 'checked' : !ctFourFlg}"
+                                th:checked="*{ctFourFlg}"
                               />
                               No</label
                             >
@@ -461,7 +461,7 @@
                                 type="radio"
                                 name="ctFiveFlg"
                                 value="true"
-                                th:checked="*{ctFiveFlg}"
+                                th:checked="*{ctFiveFlg == null ? 'checked' : !ctFiveFlg}"
                               />
                               Yes</label
                             >
@@ -472,7 +472,7 @@
                                 type="radio"
                                 name="ctFiveFlg"
                                 value="false"
-                                th:checked="*{ctFiveFlg == null ? 'checked' : !ctFiveFlg}"
+                                th:checked="*{ctFiveFlg}"
                               />
                               No</label
                             >
@@ -507,7 +507,7 @@
                                 type="radio"
                                 name="ctSixFlg"
                                 value="true"
-                                th:checked="*{ctSixFlg}"
+                                th:checked="*{ctSixFlg == null ? 'checked' : !ctSixFlg}"
                               />
                               Yes</label
                             >
@@ -518,7 +518,7 @@
                                 type="radio"
                                 name="ctSixFlg"
                                 value="false"
-                                th:checked="*{ctSixFlg == null ? 'checked' : !ctSixFlg}"
+                                th:checked="*{ctSixFlg}"
                               />
                               No</label
                             >
@@ -553,7 +553,7 @@
                                 type="radio"
                                 name="ctSevenFlg"
                                 value="true"
-                                th:checked="*{ctSevenFlg}"
+                                th:checked="*{ctSevenFlg == null ? 'checked' : !ctSevenFlg}"
                               />
                               Yes</label
                             >
@@ -564,7 +564,7 @@
                                 type="radio"
                                 name="ctSevenFlg"
                                 value="false"
-                                th:checked="*{ctSevenFlg == null ? 'checked' : !ctSevenFlg}"
+                                th:checked="*{ctSevenFlg}"
                               />
                               No</label
                             >
@@ -599,7 +599,7 @@
                                 type="radio"
                                 name="ctEightFlg"
                                 value="true"
-                                th:checked="*{ctEightFlg}"
+                                th:checked="*{ctEightFlg == null ? 'checked' : !ctEightFlg}"
                               />
                               Yes</label
                             >
@@ -610,7 +610,7 @@
                                 type="radio"
                                 name="ctEightFlg"
                                 value="false"
-                                th:checked="*{ctEightFlg == null ? 'checked' : !ctEightFlg}"
+                                th:checked="*{ctEightFlg}"
                               />
                               No</label
                             >
@@ -645,7 +645,7 @@
                                 type="radio"
                                 name="ctNineFlg"
                                 value="true"
-                                th:checked="*{ctNineFlg}"
+                                th:checked="*{ctNineFlg == null ? 'checked' : !ctNineFlg}"
                               />
                               Yes</label
                             >
@@ -656,7 +656,7 @@
                                 type="radio"
                                 name="ctNineFlg"
                                 value="false"
-                                th:checked="*{ctNineFlg == null ? 'checked' : !ctNineFlg}"
+                                th:checked="*{ctNineFlg}"
                               />
                               No</label
                             >
@@ -760,13 +760,13 @@
             </div>
           </div>
         </div>
-        
-         <!-- Resubmit modal -->
+
+        <!-- Resubmit modal -->
         <div class="modal" tabindex="-1" role="dialog" id="resubmit-modal">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title font-bold text-green-700">
+                <h5 class="modal-title font-bold text-orange-500">
                   Resubmission Confirmation
                 </h5>
                 <button
@@ -779,14 +779,18 @@
                 </button>
               </div>
               <div class="modal-body">
-				  <input
-                      type="hidden"
-                      name="resubmitFlg"
-                      value="true"
-                      id="resubmit-no"
-                      class="form-check-input"
-                    />
-                <p>Are you sure you want to resubmit this application for further improvements? This action will initiate the resubmission process.</p>
+                <input
+                  type="hidden"
+                  name="resubmitFlg"
+                  value="true"
+                  id="resubmit-no"
+                  class="form-check-input"
+                />
+                <p>
+                  Are you sure you want to resubmit this application for further
+                  improvements? This action will initiate the resubmission
+                  process.
+                </p>
               </div>
               <div class="modal-footer">
                 <button
@@ -796,20 +800,20 @@
                 >
                   Cancel
                 </button>
-                <button type="submit" name="reject" class="btn btn-success">
+                <button type="submit" name="reject" class="btn btn-resubmission">
                   Confirm
                 </button>
               </div>
             </div>
           </div>
         </div>
-        
-         <!-- Reject modal -->
+
+        <!-- Reject modal -->
         <div class="modal" tabindex="-1" role="dialog" id="reject-modal">
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title font-bold text-green-700">
+                <h5 class="modal-title font-bold text-red-500">
                   Reject Confirmation
                 </h5>
                 <button
@@ -822,13 +826,13 @@
                 </button>
               </div>
               <div class="modal-body">
-				   <input
-                      type="hidden"
-                      name="resubmitFlg"
-                      value="false"
-                      id="resubmit-no"
-                      class="form-check-input"
-                    />
+                <input
+                  type="hidden"
+                  name="resubmitFlg"
+                  value="false"
+                  id="resubmit-no"
+                  class="form-check-input"
+                />
                 <p>Do you want to reject this application?</p>
               </div>
               <div class="modal-footer">
@@ -839,7 +843,7 @@
                 >
                   Cancel
                 </button>
-                <button type="submit" name="reject" class="btn btn-success">
+                <button type="submit" name="reject" class="btn btn-reject">
                   Confirm
                 </button>
               </div>
