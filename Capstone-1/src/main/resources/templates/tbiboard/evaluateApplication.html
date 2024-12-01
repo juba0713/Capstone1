@@ -1450,11 +1450,185 @@
 
         const data = await response.json();
 
-        console.log(data);
-
-        console.log(document.querySelector("#projectTitle"));
         document.querySelector("#projectTitle").value =
           data.applicantDetailsObj.projectTitle;
+        document.querySelector("#projectDescription").value =
+          data.applicantDetailsObj.projectDescription;
+
+        document.querySelectorAll("#teams[0][0]").value =
+          data.applicantDetailsObj.teams[0][0];
+
+        document.querySelectorAll("#teams[0][1]").value =
+          data.applicantDetailsObj.teams[0][1];
+
+        document.querySelectorAll("#teams[1][0]").value =
+          data.applicantDetailsObj.teams[1][0];
+
+        document.querySelectorAll("#teams[1][1]").value =
+          data.applicantDetailsObj.teams[1][1];
+
+        document.querySelectorAll("#teams[2][0]").value =
+          data.applicantDetailsObj.teams[2][0];
+
+        document.querySelectorAll("#teams[2][1]").value =
+          data.applicantDetailsObj.teams[2][1];
+
+        document.querySelectorAll("#teams[3][0]").value =
+          data.applicantDetailsObj.teams[3][0];
+
+        document.querySelectorAll("#teams[3][1]").value =
+          data.applicantDetailsObj.teams[3][1];
+
+        document.querySelectorAll("#teams[4][0]").value =
+          data.applicantDetailsObj.teams[4][0];
+
+        document.querySelectorAll("#teams[4][1]").value =
+          data.applicantDetailsObj.teams[4][1];
+
+        document.querySelector("#problemStatement").value =
+          data.applicantDetailsObj.problemStatement;
+
+        document.querySelector("#targetMarket").value =
+          data.applicantDetailsObj.targetMarket;
+
+        document.querySelector("#solutionDescription").value =
+          data.applicantDetailsObj.solutionDescription;
+
+        for (let i = 0; i < 5; i++) {
+          for (let j = 0; j < 2; j++) {
+            const selector = `#historicalTimeline${i}${j}`;
+            const value =
+              data.applicantDetailsObj.historicalTimeline[i] &&
+              data.applicantDetailsObj.historicalTimeline[i][j]
+                ? data.applicantDetailsObj.historicalTimeline[i][j]
+                : "NA";
+            document.querySelector(selector).value = value;
+          }
+        }
+
+        for (let i = 0; i < 4; i++) {
+          const selector = `#productServiceOffering${i}`;
+          const value =
+            data.applicantDetailsObj.productServiceOffering[i] !== undefined &&
+            data.applicantDetailsObj.productServiceOffering[i].trim() !== ""
+              ? data.applicantDetailsObj.productServiceOffering[i]
+              : "NA";
+          document.querySelector(selector).value = value;
+        }
+
+        for (let i = 0; i < 4; i++) {
+          const selector = `#pricingStrategy${i}`;
+          const value =
+            data.applicantDetailsObj.pricingStrategy[i] !== undefined &&
+            data.applicantDetailsObj.pricingStrategy[i].trim() !== ""
+              ? data.applicantDetailsObj.pricingStrategy[i]
+              : "NA";
+          document.querySelector(selector).value = value;
+        }
+
+        if (
+          data.applicantDetailsObj.intPropertyStatus !== undefined &&
+          data.applicantDetailsObj.intPropertyStatus.trim() !== ""
+        ) {
+          document.querySelector("#intPropertyStatus").value =
+            data.applicantDetailsObj.intPropertyStatus;
+        } else {
+          document.querySelector("#intPropertyStatus").value = "NA";
+        }
+
+        document.querySelector("#objectives").value =
+          data.applicantDetailsObj.objectives;
+
+        document.querySelector("#scopeProposal").value =
+          data.applicantDetailsObj.scopeProposal;
+
+        document.querySelector("#methodology").value =
+          data.applicantDetailsObj.methodology;
+
+        // document.querySelector("#vitaeFile").value =
+        //   data.applicantDetailsObj.vitaeFile;
+
+        if (
+          data.applicantDetailsObj.supportLink !== undefined &&
+          data.applicantDetailsObj.supportLink.trim() !== ""
+        ) {
+          document.querySelector("#supportLink").innerHTML =
+            data.applicantDetailsObj.supportLink;
+          document.querySelector("#supportLink").href =
+            data.applicantDetailsObj.supportLink;
+        } else {
+          document.querySelector("#supportLink").innerHTML = "NA";
+        }
+
+        document.querySelector("#groupName").value =
+          data.applicantDetailsObj.groupName;
+
+        document.querySelector("#groupLeader").value =
+          data.applicantDetailsObj.leaderLastName +
+          ", " +
+          applicantDetailsObj.leaderFirstName;
+
+        document.querySelector("#leaderNumber").value =
+          data.applicantDetailsObj.mobileNumber;
+
+        document.querySelector("#leaderAddress").value =
+          data.applicantDetailsObj.address;
+
+        if (
+          data.applicantDetailsObj.members[0] !== undefined &&
+          !data.applicantDetailsObj.members[0].includes("null")
+        ) {
+          document.querySelector("#members[0]").value =
+            data.applicantDetailsObj.members[0];
+        } else {
+          document.querySelector("#members[0]").value = "NA";
+        }
+        if (
+          data.applicantDetailsObj.members[1] !== undefined &&
+          !data.applicantDetailsObj.members[1].includes("null")
+        ) {
+          document.querySelector("#members[1]").value =
+            data.applicantDetailsObj.members[1];
+        } else {
+          document.querySelector("#members[1]").value = "NA";
+        }
+        if (
+          data.applicantDetailsObj.members[2] !== undefined &&
+          !data.applicantDetailsObj.members[2].includes("null")
+        ) {
+          document.querySelector("#members[2]").value =
+            data.applicantDetailsObj.members[2];
+        } else {
+          document.querySelector("#members[2]").value = "NA";
+        }
+        if (
+          data.applicantDetailsObj.members[3] !== undefined &&
+          !data.applicantDetailsObj.members[3].includes("null")
+        ) {
+          document.querySelector("#members[3]").value =
+            data.applicantDetailsObj.members[3];
+        } else {
+          document.querySelector("#members[3]").value = "NA";
+        }
+
+        // document.querySelector("#members[1]").value=
+        // data.applicantDetailsObj.members[1];
+
+        // document.querySelector("#members[2]").value=
+        // data.applicantDetailsObj.members[2];
+
+        // document.querySelector("#members[3]").value=
+        // data.applicantDetailsObj.members[3];
+
+        if (
+          data.applicantDetailsObj.university !== undefined &&
+          data.applicantDetailsObj.university.trim() !== ""
+        ) {
+          document.querySelector("#university").value =
+            data.applicantDetailsObj.university;
+        } else {
+          document.querySelector("#university").value = "NA";
+        }
       }
     </script>
   </body>

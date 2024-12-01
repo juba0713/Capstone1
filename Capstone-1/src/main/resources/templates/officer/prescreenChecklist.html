@@ -942,9 +942,6 @@
 
       const data = await response.json();
 
-      console.log(data);
-
-      console.log(document.querySelector("#projectTitle"));
       document.querySelector("#projectTitle").value =
         data.applicantDetailsObj.projectTitle;
       document.querySelector("#projectDescription").value =
@@ -1040,9 +1037,8 @@
       document.querySelector("#methodology").value =
         data.applicantDetailsObj.methodology;
 
-      document.querySelector("#vitaeFile").value =
-        data.applicantDetailsObj.vitaeFile;
-
+      // document.querySelector("#vitaeFile").href =
+      //   data.applicantDetailsObj.vitaeFile;
       if (
         data.applicantDetailsObj.supportLink !== undefined &&
         data.applicantDetailsObj.supportLink.trim() !== ""
