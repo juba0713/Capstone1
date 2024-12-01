@@ -185,7 +185,7 @@ public class EmailServiceImpl implements EmailService {
 				+ "<p>Best regards,<br>The Certification Team</p>"
 				+ "</div>"
 				+ ""
-				+ "<a href='" + siteURL + "/download/certificate/" + fileName + "' >Click here to download the certificate</a>";
+				+ "<a href='" + siteURL + "/download/certificate/" + fileName + ".png' >Click here to download the certificate</a>";
 
 		helper.setText(htmlText, true);
 
