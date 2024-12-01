@@ -402,7 +402,6 @@
           </div>
         </div>
         <hr class="my-4" th:if="*{applicantDetailsObj.status != 0}" />
-
         <div th:if="*{applicantDetailsObj.status != 0}">
           <div class="w-full overflow-x-auto">
             <!-- <div class="overflow-auto w-[700px] h-[550px]"> -->
@@ -688,7 +687,6 @@
             class="mt-2 resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
           ></textarea>
         </div>
-
         <!-- evaluation  -->
         <div class="mt-2" th:if="*{applicantDetailsObj.status >= 5}">
           <hr class="my-10" />
@@ -1129,10 +1127,7 @@
         <hr class="my-4" th:if="*{applicantDetailsObj.status >= 5}" />
 
         <!-- additional feedback -->
-        <div
-          class="flex flex-col pointer-events-none"
-          th:if="*{applicantDetailsObj.status >= 5}"
-        >
+        <div class="flex flex-col" th:if="*{applicantDetailsObj.status >= 5}">
           <div class="w-full h-[100px]">
             <h2 class="text-black mb-2">Feedback</h2>
             <textarea
@@ -1140,8 +1135,121 @@
               oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
               name="tbiFeedback"
               placeholder="Additional feedback ni tbiboard"
-              class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+              class="pointer-events-none resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
             ></textarea>
+            <div class="mt-4">
+              Qualified for reapplication?
+              <div class="w-full flex justify-center my-2">
+                <div class="w-full justify-between flex qualified-btns my-2">
+                  <button
+                    name="no"
+                    class="qualified-btn p-2 border-black hover:bg-red-500 bg-red-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  >
+                    No
+                  </button>
+                  <button
+                    name="yes"
+                    class="qualified-btn p-2 border-black hover:bg-green-500 bg-green-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  >
+                    Yes
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resubmit modal -->
+            <div class="modal" tabindex="-1" role="dialog" >
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title font-bold text-orange-500">
+                      Resubmission Confirmation
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <input
+                      type="hidden"
+                      name="resubmitFlg"
+                      value="true"
+                      id="resubmit-no"
+                      class="form-check-input"
+                    />
+                    <p>
+                      Are you sure you want to resubmit this application for
+                      further improvements? This action will initiate the
+                      resubmission process.
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      name="reject"
+                      class="btn btn-resubmission"
+                    >
+                      Confirm
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reject modal -->
+            <div class="modal" tabindex="-1" role="dialog" ">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title font-bold text-red-500">
+                      Reject Confirmation
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <input
+                      type="hidden"
+                      name="resubmitFlg"
+                      value="false"
+                      id="resubmit-no"
+                      class="form-check-input"
+                    />
+                    <p>Do you want to reject this application?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Cancel
+                    </button>
+                    <button type="submit" name="reject" class="btn btn-reject">
+                      Confirm
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

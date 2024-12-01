@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import capstone.common.constant.CommonConstant;
+import capstone.controller.webdto.ApplicantWebDto;
 import capstone.controller.webdto.ManagerWebDto;
 import capstone.controller.webdto.OfficerWebDto;
 import capstone.controller.webdto.TbiBoardWebDto;
 import capstone.model.dto.AdminInOutDto;
+import capstone.model.dto.ApplicantInOutDto;
 import capstone.model.dto.ManagerInOutDto;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.dto.TbiBoardInOutDto;
@@ -37,7 +39,7 @@ public class ManagerController {
 
 	@Autowired
 	private AdminService adminService;
-	
+
 	@Autowired
 	private CommonService commonService;
 
@@ -67,37 +69,38 @@ public class ManagerController {
 		ManagerInOutDto outDto = managerService.getAllApplicants();
 
 		webDto.setListOfApplicants(outDto.getListOfApplicants());
-		
+
 		outDto = managerService.getDetailsForManagerDashboard();
-		
+
 		webDto.setManagerDashboardObj(outDto.getManagerDashboardObj());
 
 		return "manager/listOfAllApplicants";
 	}
-	
-	@GetMapping("/home/application-details")
-	public String showManagerHome(@RequestParam("id") String id, @ModelAttribute ManagerWebDto webDto) throws Exception {
 
-		if(id.isEmpty()) {
+	@GetMapping("/home/application-details")
+	public String showManagerHome(@RequestParam("id") String id, @ModelAttribute ManagerWebDto webDto)
+			throws Exception {
+
+		if (id.isEmpty()) {
 			return "redirect:/manager/home";
 		}
-		
+
 		ManagerInOutDto inDto = new ManagerInOutDto();
-		
+
 		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(id)));
-		
+
 		ManagerInOutDto outDto = managerService.getApplicantDetailsWithFeedback(inDto);
-		
+
 		webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
-		
+
 		webDto.setApplicantOffFeedbackObj(outDto.getApplicantOffFeedbackObj());
-		
+
 		webDto.setApplicantTbiFeedbackObj(outDto.getApplicantTbiFeedbackObj());
-		
+
 		webDto.setEncryptedApplicantIdPk(id);
-		
+
 		webDto.setRejectedCount(outDto.getRejectedCount());
-		
+
 		webDto.setProjectIdPks(outDto.getProjectIdPks());
 
 		return "manager/applicationDetails";
@@ -125,98 +128,99 @@ public class ManagerController {
 
 	@GetMapping("/analytics")
 	public String showAnalyticsManager(@ModelAttribute ManagerWebDto webDto) {
-		
+
 		ManagerInOutDto outDto = managerService.getDetailsForManagerDashboard();
-		
+
 		webDto.setManagerDashboardObj(outDto.getManagerDashboardObj());
-		
+
 		outDto = managerService.getManagerAnalyticsDetails();
-		
+
 		webDto.setMonthlyHighestScores(outDto.getMonthlyHighestScores());
-		
+
 		webDto.setOfficerPerformanceMetrics(outDto.getOfficerPerformanceMetrics());
-		
+
 		webDto.setTbiBoardPerformanceMetrics(outDto.getTbiBoardPerformanceMetrics());
-		
+
 		webDto.setMonthlyAcceptedApplications(outDto.getMonthlyAcceptedApplications());
-		
-		webDto.setMonthlyRejectedApplications(outDto.getMonthlyRejectedApplications());	
-		
+
+		webDto.setMonthlyRejectedApplications(outDto.getMonthlyRejectedApplications());
+
 		return "manager/analytics";
 	}
 
 	@GetMapping("/rank-startups")
 	public String showRankStartups(@ModelAttribute ManagerWebDto webDto) throws Exception {
 		ManagerInOutDto monthlyOutDto = managerService.getAppllicantOnTodayMonth();
-		
+
 		webDto.setApplicantMonthlyObj(monthlyOutDto.getApplicantMonthlyObj());
-		
+
 		ManagerInOutDto monthlyRankingOutDto = managerService.getAppllicantRankingOnTodayMonth();
-		
+
 		webDto.setApplicantRankingMonthlyObj(monthlyRankingOutDto.getApplicantRankingMonthlyObj());
-		
+
 		return "manager/rankStartups";
 	}
-	
+
 	@GetMapping("/rank-startups/evaluate")
-	public String evaluateApplicantForRanking(@RequestParam("id") String id, @ModelAttribute ManagerWebDto webDto) throws Exception {
-		
+	public String evaluateApplicantForRanking(@RequestParam("id") String id, @ModelAttribute ManagerWebDto webDto)
+			throws Exception {
+
 		ManagerInOutDto inDto = new ManagerInOutDto();
-		
+
 		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(id)));
-		
+
 		ManagerInOutDto outDto = managerService.getApplicantDetailsWithFeedback(inDto);
-		
+
 		webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
-		
+
 		webDto.setApplicantOffFeedbackObj(outDto.getApplicantOffFeedbackObj());
-		
+
 		webDto.setApplicantTbiFeedbackObj(outDto.getApplicantTbiFeedbackObj());
 
 		return "manager/applicationFeedbacksBoth";
 	}
-	
+
 	@PostMapping("/rank-startups/evaluate")
 	public String epostApplicantForRanking(@ModelAttribute ManagerWebDto webDto) throws Exception {
-		
+
 		ManagerInOutDto inDto = new ManagerInOutDto();
-		
+
 		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(webDto.getEncryptedApplicantIdPk())));
-		
+
 		inDto.setCtOneRating(webDto.getCtOneRating());
-		
+
 		inDto.setCtOneComments(webDto.getCtOneComments());
-		
+
 		inDto.setCtTwoRating(webDto.getCtTwoRating());
-		
+
 		inDto.setCtTwoComments(webDto.getCtTwoComments());
-		
+
 		inDto.setCtThreeRating(webDto.getCtThreeRating());
-		
+
 		inDto.setCtThreeComments(webDto.getCtThreeComments());
-		
+
 		inDto.setCtFourRating(webDto.getCtFourRating());
-		
+
 		inDto.setCtFourComments(webDto.getCtFourComments());
-		
+
 		inDto.setCtFiveRating(webDto.getCtFiveRating());
-		
+
 		inDto.setCtFiveComments(webDto.getCtFiveComments());
-		
+
 		inDto.setCtSixRating(webDto.getCtSixRating());
-		
+
 		inDto.setCtSixComments(webDto.getCtSixComments());
-		
+
 		inDto.setCtSevenRating(webDto.getCtSevenRating());
-		
+
 		inDto.setCtSevenComments(webDto.getCtSevenComments());
-		
+
 		inDto.setCtEightRating(webDto.getCtEightRating());
-		
+
 		inDto.setCtEightComments(webDto.getCtEightComments());
-		
+
 		inDto.setManagerFeedback(webDto.getManagerFeedback());
-		
+
 		managerService.evaluateApplicant(inDto);
 
 		return "redirect:/manager/rank-startups";
@@ -251,17 +255,17 @@ public class ManagerController {
 
 		// 4 - Pending for evaluation
 		inDto.setStatus(4);
-		
+
 		List<Integer> decryptedId = new ArrayList<>();
-		
-		for(String id : webDto.getChosenApplicant()) {
+
+		for (String id : webDto.getChosenApplicant()) {
 			decryptedId.add(Integer.valueOf(commonService.decrypt(id)));
 		}
-		
+
 		inDto.setChosenApplicant(decryptedId);
 
 		inDto.setTransferring(true);
-				
+
 		managerService.updateApplicantStatus(inDto);
 
 		ra.addFlashAttribute("succMsg", "The application/s has been sent to the TbiBoard!");
@@ -269,30 +273,32 @@ public class ManagerController {
 		return "redirect:/manager/accepted-result";
 	}
 
-//	@GetMapping("/retrieve/details")
-//	public ResponseEntity<ManagerWebDto> getApplicantDetails(@RequestParam("applicantIdPk") String applicantIdPk) {
-//
-//		ManagerInOutDto inDto = new ManagerInOutDto();
-//
-//		System.out.println("ID: " + applicantIdPk);
-//
-//		inDto.setApplicantIdPk(Integer.parseInt(applicantIdPk));
-//
-//		ManagerInOutDto outDto = managerService.getApplicantDetails(inDto);
-//
-//		if (outDto.getApplicantDetailsObj() == null) {
-//
-//		}
-//
-//		ManagerWebDto returnWebDto = new ManagerWebDto();
-//
-//		returnWebDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
-//
-//		return ResponseEntity.ok(returnWebDto);
-//	}
+	// @GetMapping("/retrieve/details")
+	// public ResponseEntity<ManagerWebDto>
+	// getApplicantDetails(@RequestParam("applicantIdPk") String applicantIdPk) {
+	//
+	// ManagerInOutDto inDto = new ManagerInOutDto();
+	//
+	// System.out.println("ID: " + applicantIdPk);
+	//
+	// inDto.setApplicantIdPk(Integer.parseInt(applicantIdPk));
+	//
+	// ManagerInOutDto outDto = managerService.getApplicantDetails(inDto);
+	//
+	// if (outDto.getApplicantDetailsObj() == null) {
+	//
+	// }
+	//
+	// ManagerWebDto returnWebDto = new ManagerWebDto();
+	//
+	// returnWebDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
+	//
+	// return ResponseEntity.ok(returnWebDto);
+	// }
 
 	@PostMapping(value = "/qualified", params = "yes")
-	public String qualifiedResubmissionYes(@ModelAttribute ManagerWebDto webDto) throws NumberFormatException, Exception {
+	public String qualifiedResubmissionYes(@ModelAttribute ManagerWebDto webDto)
+			throws NumberFormatException, Exception {
 
 		ManagerInOutDto inDto = new ManagerInOutDto();
 
@@ -306,7 +312,8 @@ public class ManagerController {
 	}
 
 	@PostMapping(value = "/qualified", params = "no")
-	public String qualifiedResubmissionNo(@ModelAttribute ManagerWebDto webDto) throws NumberFormatException, Exception {
+	public String qualifiedResubmissionNo(@ModelAttribute ManagerWebDto webDto)
+			throws NumberFormatException, Exception {
 
 		ManagerInOutDto inDto = new ManagerInOutDto();
 
@@ -318,58 +325,85 @@ public class ManagerController {
 
 		return "redirect:/manager/evaluated-result";
 	}
-	
+
 	@GetMapping("/evaluate")
 	public String showEvaluationForManager(@ModelAttribute ManagerWebDto webDto) throws Exception {
-		
-		
-		
+
 		return "manager/applicationFeedbacksBoth";
 	}
-	
-
 
 	@PostMapping("/issue/certificate")
-	public String issuedCertificate(@ModelAttribute ManagerWebDto webDto, RedirectAttributes ra) throws NumberFormatException, Exception {
-		
+	public String issuedCertificate(@ModelAttribute ManagerWebDto webDto, RedirectAttributes ra)
+			throws NumberFormatException, Exception {
+
 		System.out.println(webDto.getEncryptedApplicantIdPk());
-		
+
 		ManagerInOutDto inDto = new ManagerInOutDto();
-		
+
 		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(webDto.getEncryptedApplicantIdPk())));
-		
+
 		ManagerInOutDto outDto = managerService.issuedCertificate(inDto);
-		
-		if(CommonConstant.INVALID.equals(outDto.getResult())) {
+
+		if (CommonConstant.INVALID.equals(outDto.getResult())) {
 			ra.addFlashAttribute("errorMsg", "There's a problem issuing a certificate!");
 			return "redirect:/manager/evaluated-result";
 		}
 		ra.addFlashAttribute("successMsg", "A certificate has been issued");
 		return "redirect:/manager/evaluated-result";
 	}
-	
+
 	@GetMapping("/retrieve/details")
 	public ResponseEntity<ManagerWebDto> getApplicantDetails(@RequestParam("applicantIdPk") String applicantIdPk,
 			@RequestParam("projectIdPk") String projectIdPk) throws NumberFormatException, Exception {
 
-		
 		ManagerInOutDto inDto = new ManagerInOutDto();
-		  
+
 		inDto.setApplicantIdPk(Integer.parseInt(commonService.decrypt(applicantIdPk)));
-		
+
 		inDto.setProjectIdPk(Integer.parseInt(projectIdPk));
- 
+
 		ManagerInOutDto outDto = managerService.getHistoryApplicantDetails(inDto);
-		
+
 		ManagerWebDto webDto = new ManagerWebDto();
-		
+
 		webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
-		
+
 		webDto.setRejectedCount(outDto.getRejectedCount());
-		
+
 		webDto.setProjectIdPks(outDto.getProjectIdPks());
-		 
+
 		return ResponseEntity.ok(webDto);
 	}
-	
+
+	@GetMapping("/manager/qualify-application")
+	public String showFeedback(@ModelAttribute ApplicantWebDto webDto,
+			@RequestParam("id") String id) throws Exception {
+
+		// if (id.isEmpty()) {
+		// 	return "redirect:/manager/home";
+		// }
+
+		// ApplicantInOutDto inDto = new ApplicantInOutDto();
+
+		// // inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(id)));
+
+		// inDto.setApplicantIdPk(Integer.valueOf(id));
+
+		// ApplicantInOutDto outDto = applicantService.getApplicantDetailsWithFeedback(inDto);
+
+		// webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
+
+		// webDto.setApplicantOffFeedbackObj(outDto.getApplicantOffFeedbackObj());
+
+		// webDto.setApplicantTbiFeedbackObj(outDto.getApplicantTbiFeedbackObj());
+
+		// webDto.setEncryptedApplicantIdPk(id);
+
+		// webDto.setRejectedCount(outDto.getRejectedCount());
+
+		// webDto.setProjectIdPks(outDto.getProjectIdPks());
+
+		return "manager/qualifyFailedEval";
+	}
+
 }
