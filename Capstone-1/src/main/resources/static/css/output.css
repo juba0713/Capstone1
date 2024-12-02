@@ -721,6 +721,11 @@ video {
   margin-bottom: 3.5rem;
 }
 
+.my-2{
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .my-3{
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
@@ -736,17 +741,16 @@ video {
   margin-bottom: 2rem;
 }
 
-.my-2{
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
 .mb-1{
   margin-bottom: 0.25rem;
 }
 
 .mb-10{
   margin-bottom: 2.5rem;
+}
+
+.mb-16{
+  margin-bottom: 4rem;
 }
 
 .mb-2{
@@ -1173,10 +1177,6 @@ video {
   width: 55%;
 }
 
-.w-\[60\%\]{
-  width: 60%;
-}
-
 .w-\[7\%\]{
   width: 7%;
 }
@@ -1214,22 +1214,6 @@ video {
   width: 50%;
 }
 
-.w-\[\]{
-  width: ;
-}
-
-.w-\[60\]{
-  width: 60;
-}
-
-.w-\[\%\]{
-  width: %;
-}
-
-.w-\[4\%\]{
-  width: 4%;
-}
-
 .min-w-60{
   min-width: 15rem;
 }
@@ -1244,6 +1228,10 @@ video {
 
 .max-w-2xl{
   max-width: 42rem;
+}
+
+.flex-1{
+  flex: 1 1 0%;
 }
 
 .flex-grow{
@@ -1311,10 +1299,6 @@ video {
 
 .place-items-end{
   place-items: end;
-}
-
-.place-items-center{
-  place-items: center;
 }
 
 .content-center{
@@ -1606,11 +1590,6 @@ video {
 .border-gray-500{
   --tw-border-opacity: 1;
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
-}
-
-.border-green-500{
-  --tw-border-opacity: 1;
-  border-color: rgb(34 197 94 / var(--tw-border-opacity));
 }
 
 .border-red-500{
@@ -2706,6 +2685,27 @@ body.modal-open {
   font-size: 16px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s;
+}
+
+.qualification-container {
+  position: fixed;
+  left: 40px;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.qualification-btn {
+  background-color: hsl(48, 99%, 65%);
+  color: black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+  width: 30%;
 }
 
 .ad-back-button:hover {

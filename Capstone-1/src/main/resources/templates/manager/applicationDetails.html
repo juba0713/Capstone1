@@ -147,10 +147,20 @@
       >
         Application Details
       </div>
-      <a th:if="*{!forQualification}" th:href="@{/manager/home}" class="ad-back-button">Back to home</a>
-      <a th:if="*{forQualification}" th:href="@{/manager/evaluated-result}" class="ad-back-button">Back to home</a>
-      <button
+      <a
+        th:if="*{!forQualification}"
+        th:href="@{/manager/home}"
         class="ad-back-button"
+        >Back</a
+      >
+      <a
+        th:if="*{forQualification}"
+        th:href="@{/manager/evaluated-result}"
+        class="ad-back-button"
+        >Back</a
+      >
+      <button
+        class="history"
         data-toggle="modal"
         data-target="#exampleModalCenter"
         th:if="*{!#lists.isEmpty(projectIdPks)}"
@@ -425,7 +435,7 @@
                       name="historicalTimeline[0][0]"
                       th:value="*{applicantDetailsObj.historicalTimeline[0].length != 0 ? applicantDetailsObj.historicalTimeline[0][0] : 'NA'}"
                       placeholder="mm/yyyy"
-                      class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
+                      class="w-full h-12"
                     />
                   </td>
                   <td class="border border-gray-500 px-4 py-2">
@@ -434,7 +444,7 @@
                       name="historicalTimeline[0][1]"
                       th:text="*{applicantDetailsObj.historicalTimeline[0].length != 0 ? applicantDetailsObj.historicalTimeline[0][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
-                      class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-20 py-2 pl-3 sm:text-sm"
                     ></textarea>
                   </td>
                 </tr>
@@ -445,7 +455,7 @@
                       name="historicalTimeline[1][0]"
                       th:value="*{applicantDetailsObj.historicalTimeline[1].length != 0 ? applicantDetailsObj.historicalTimeline[1][0] : 'NA'}"
                       placeholder="mm/yyyy"
-                      class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
+                      class="w-full h-12"
                     />
                   </td>
                   <td class="border border-gray-500 px-4 py-2">
@@ -454,7 +464,7 @@
                       name="historicalTimeline[1][1]"
                       th:text="*{applicantDetailsObj.historicalTimeline[1].length != 0 ? applicantDetailsObj.historicalTimeline[1][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
-                      class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-20 py-2 pl-3 sm:text-sm"
                     ></textarea>
                   </td>
                 </tr>
@@ -465,7 +475,7 @@
                       name="historicalTimeline[2][0]"
                       th:value="*{applicantDetailsObj.historicalTimeline[2].length != 0 ? applicantDetailsObj.historicalTimeline[2][0] : 'NA'}"
                       placeholder="mm/yyyy"
-                      class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
+                      class="w-full h-12"
                     />
                   </td>
                   <td class="border border-gray-500 px-4 py-2">
@@ -474,7 +484,7 @@
                       name="historicalTimeline[2][1]"
                       th:text="*{applicantDetailsObj.historicalTimeline[2].length != 0 ? applicantDetailsObj.historicalTimeline[2][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
-                      class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-20 py-2 pl-3 sm:text-sm"
                     ></textarea>
                   </td>
                 </tr>
@@ -485,7 +495,7 @@
                       name="historicalTimeline[3][0]"
                       th:value="*{applicantDetailsObj.historicalTimeline[3].length != 0 ? applicantDetailsObj.historicalTimeline[3][0] : 'NA'}"
                       placeholder="mm/yyyy"
-                      class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
+                      class="w-full h-12"
                     />
                   </td>
                   <td class="border border-gray-500 px-4 py-2">
@@ -494,7 +504,7 @@
                       name="historicalTimeline[3][1]"
                       th:text="*{applicantDetailsObj.historicalTimeline[3].length != 0 ? applicantDetailsObj.historicalTimeline[3][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
-                      class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-20 py-2 pl-3 sm:text-sm"
                     ></textarea>
                   </td>
                 </tr>
@@ -505,7 +515,7 @@
                       name="historicalTimeline[4][0]"
                       th:value="*{applicantDetailsObj.historicalTimeline[4].length != 0 ? applicantDetailsObj.historicalTimeline[4][0] : 'NA'}"
                       placeholder="mm/yyyy"
-                      class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
+                      class="w-full h-12"
                     />
                   </td>
                   <td class="border border-gray-500 px-4 py-2">
@@ -514,7 +524,7 @@
                       name="historicalTimeline[4][1]"
                       th:text="*{applicantDetailsObj.historicalTimeline[4].length != 0 ? applicantDetailsObj.historicalTimeline[4][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
-                      class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-20 py-2 pl-3 sm:text-sm"
                     ></textarea>
                   </td>
                 </tr>
@@ -571,7 +581,7 @@
                       name="productServiceOffering[0]"
                       th:text="*{applicantDetailsObj.productServiceOffering[0] != '' ? applicantDetailsObj.productServiceOffering[0] : 'NA'}"
                       placeholder="Enter product/service offering"
-                      class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-full py-2 pl-3 sm:text-sm"
                     ></textarea>
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
@@ -579,7 +589,7 @@
                       name="productServiceOffering[1]"
                       th:text="*{applicantDetailsObj.productServiceOffering[1] != '' ? applicantDetailsObj.productServiceOffering[0] : 'NA'}"
                       placeholder="Enter product/service offering"
-                      class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-full py-2 pl-3 sm:text-sm"
                     ></textarea>
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
@@ -587,7 +597,7 @@
                       name="productServiceOffering[2]"
                       th:text="*{applicantDetailsObj.productServiceOffering[2] != '' ? applicantDetailsObj.productServiceOffering[0] : 'NA'}"
                       placeholder="Enter product/service offering"
-                      class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-full py-2 pl-3 sm:text-sm"
                     ></textarea>
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
@@ -595,7 +605,7 @@
                       name="productServiceOffering[3]"
                       th:text="*{applicantDetailsObj.productServiceOffering[3] != '' ? applicantDetailsObj.productServiceOffering[0] : 'NA'}"
                       placeholder="Enter product/service offering"
-                      class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-full py-2 pl-3 sm:text-sm"
                     ></textarea>
                   </td>
                 </tr>
@@ -610,7 +620,7 @@
                       name="pricingStrategy[0]"
                       th:text="*{applicantDetailsObj.pricingStrategy[0] != '' ? applicantDetailsObj.pricingStrategy[0] : 'NA'}"
                       placeholder="Enter pricing strategy"
-                      class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-full py-2 pl-3 sm:text-sm"
                     ></textarea>
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
@@ -618,7 +628,7 @@
                       name="pricingStrategy[1]"
                       th:text="*{applicantDetailsObj.pricingStrategy[1] != '' ? applicantDetailsObj.pricingStrategy[0] : 'NA'}"
                       placeholder="Enter pricing strategy"
-                      class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-full py-2 pl-3 sm:text-sm"
                     ></textarea>
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
@@ -626,7 +636,7 @@
                       name="pricingStrategy[2]"
                       th:text="*{applicantDetailsObj.pricingStrategy[2] != '' ? applicantDetailsObj.pricingStrategy[0] : 'NA'}"
                       placeholder="Enter pricing strategy"
-                      class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-full py-2 pl-3 sm:text-sm"
                     ></textarea>
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
@@ -634,7 +644,7 @@
                       name="pricingStrategy[3]"
                       th:text="*{applicantDetailsObj.pricingStrategy[3] != '' ? applicantDetailsObj.pricingStrategy[0] : 'NA'}"
                       placeholder="Enter pricing strategy"
-                      class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+                      class="resize-none w-full h-full py-2 pl-3 sm:text-sm"
                     ></textarea>
                   </td>
                 </tr>
@@ -654,7 +664,7 @@
               placeholder="Type something here..."
               name="intPropertyStatus"
               th:text="*{applicantDetailsObj.intPropertyStatus}"
-              class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+              class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm sm:text-sm"
             ></textarea>
           </div>
         </div>
@@ -2511,7 +2521,7 @@
               oninput="this.className = 'resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm'"
               name="tbiFeedback"
               placeholder="Additional feedback ni tbiboard"
-              class="mt-2 resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
+              class="mt-2 mb-16 resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
             ></textarea>
           </div>
         </div>
@@ -2564,52 +2574,72 @@
           </div>
         </div>
       </div>
-      
     </div>
     <div th:if="*{forQualification}" class="qualification-container">
-		  <button
+      <button
         class="qualification-btn"
         data-toggle="modal"
         data-target="#feedback-modal"
       >
         Qualify
       </button>
-	  </div>
-	  
-	  <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
-        <div class="modal-dialog feedback-modal-dialog" role="document">
-          <div class="modal-content feedback-modal-content">
-            <div class="p-2">           
-              <div>
-                <p class="mb-4 qualified">
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
+      <div class="modal-dialog feedback-modal-dialog" role="document">
+        <div class="modal-content feedback-modal-content">
+          <div class="p-2">
+            <div>
+              <div class="modal-header">
+                <h5 class="qualified modal-title font-bold">
                   Qualified for reapplication?
                   <span class="is-qualified" style="font-weight: bold"></span>
-                </p>
-                <div class="w-full justify-between flex qualified-btns">
-					<form th:action="@{/manager/qualified}" method="POST">
-						<input type="hidden" name="encryptedApplicantIdPk" th:value="*{encryptedApplicantIdPk}" />
-						 <button
-		                    name="no"
-		                    class="qualified-btn p-2 border-black hover:bg-red-500 bg-red-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-		                  >
-		                    No
-		                  </button>
-		                  <button
-		                    name="yes"
-		                    class="qualified-btn p-2 border-black hover:bg-green-500 bg-green-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-		                  >
-		                    Yes
-		                  </button>
-		                  <button data-dismiss="modal">
-							  cancel
-						  </button>
-					</form>          
-                </div>
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <!-- <p class="mb-4 qualified">
+                Qualified for reapplication?
+                <span class="is-qualified" style="font-weight: bold"></span>
+              </p> -->
+              <div
+                class="modal-footer w-full justify-between flex qualified-btns"
+              >
+                <form
+                  th:action="@{/manager/qualified}"
+                  method="POST"
+                  class="w-full flex gap-2"
+                >
+                  <input
+                    type="hidden"
+                    name="encryptedApplicantIdPk"
+                    th:value="*{encryptedApplicantIdPk}"
+                  />
+                  <button
+                    name="no"
+                    class="flex-1 qualified-btn p-2 border-black hover:bg-red-500 bg-red-600 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  >
+                    No
+                  </button>
+                  <button
+                    name="yes"
+                    class="flex-1 qualified-btn p-2 border-black hover:bg-green-500 bg-green-600 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  >
+                    Yes
+                  </button>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

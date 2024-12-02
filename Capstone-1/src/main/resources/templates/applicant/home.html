@@ -125,7 +125,7 @@
               <div
                 class="z-50 rounded-xl w-full text-center"
                 th:text="*{applicantDetailsObj.totalRating} >= 60 ? 'Passed' : 'Rejected'"
-                th:style="*{applicantDetailsObj.totalRating} >= 60 ? 'background: green;' : 'background: red;'"
+                th:style="*{applicantDetailsObj.totalRating} >= 60 ? 'background: green; color:white; ' : 'background: red; color: white;'"
               >
                 Rejected
                 <!--  pending
@@ -185,10 +185,10 @@
                       ></div>
 
                       <div
-                        class="w-full mt-4"
+                        class="w-full mt-2"
                         th:if="*{applicantDetailsObj.totalRating} >= 60 "
                       >
-                        <hr class="mb-4" />
+                        <hr class="mb-2" />
                         <div class="images">
                           <img
                             id="myImage"
@@ -216,28 +216,31 @@
           <div class="w-full pr-44 mt-8">
             <div class="progress-container flex justify-center h-20 flex-col">
               <div
-                class="pointer-events-none flex flex-wrap justify-evenly px-36"
+                class="text-xs text-gray-500 items-center text-center pointer-events-none flex flex-wrap justify-evenly px-36"
               >
-                <div>
+                <div class="flex flex-col items-center justify-center">
                   <img
                     th:src="@{/icons/operationsOfficer.svg}"
                     alt="Example SVG"
                     class="h-10"
                   />
+                  <p>Initial Review</p>
                 </div>
-                <div>
+                <div class="flex flex-col items-center justify-center">
                   <img
                     th:src="@{/icons/tbiBoard.svg}"
                     alt="Example SVG"
                     class="h-10"
                   />
+                  <p>In Progress</p>
                 </div>
-                <div>
+                <div class="flex flex-col items-center justify-center">
                   <img
                     th:src="@{/icons/completed.svg}"
                     alt="Example SVG"
                     class="h-8"
                   />
+                  <p>Completed</p>
                 </div>
               </div>
 
@@ -249,10 +252,8 @@
                   aria-valuenow="33"
                   aria-valuemin="0"
                   aria-valuemax="100"
-                  th:text="*{applicantDetailsObj.status == 1 OR applicantDetailsObj.status == 3 ? 'In officer' : applicantDetailsObj.status == 4 ? 'In board' : 'Completed'}"
-                >
-                  [in officer]
-                </div>
+                  th:text="*{applicantDetailsObj.status == 1 OR applicantDetailsObj.status == 3 ? ' ' : applicantDetailsObj.status == 4 ? ' ' : ''}"
+                ></div>
               </div>
             </div>
           </div>

@@ -617,7 +617,9 @@
                         name="historicalTimeline[0][0]"
                         th:value="*{historicalTimeline[0][0]}"
                         placeholder="mm/yyyy"
-                        class="w-full h-12 focus:outline-none"
+                        pattern="^(0[1-9]|1[0-2])/\\d{4}$"
+                        maxlength="7"
+                        class="w-full h-12 focus:outline-none input-field"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
@@ -640,7 +642,9 @@
                         name="historicalTimeline[1][0]"
                         th:value="*{historicalTimeline[1][0]}"
                         placeholder="mm/yyyy"
-                        class="w-full h-12 focus:outline-none"
+                        pattern="^(0[1-9]|1[0-2])/\\d{4}$"
+                        maxlength="7"
+                        class="w-full h-12 focus:outline-none input-field"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
@@ -662,7 +666,9 @@
                         name="historicalTimeline[2][0]"
                         th:value="*{historicalTimeline[2][0]}"
                         placeholder="mm/yyyy"
-                        class="w-full h-12 focus:outline-none"
+                        pattern="^(0[1-9]|1[0-2])/\\d{4}$"
+                        maxlength="7"
+                        class="w-full h-12 focus:outline-none input-field"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
@@ -684,7 +690,9 @@
                         name="historicalTimeline[3][0]"
                         th:value="*{historicalTimeline[3][0]}"
                         placeholder="mm/yyyy"
-                        class="w-full h-12 focus:outline-none"
+                        pattern="^(0[1-9]|1[0-2])/\\d{4}$"
+                        maxlength="7"
+                        class="w-full h-12 focus:outline-none input-field"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
@@ -706,7 +714,9 @@
                         name="historicalTimeline[4][0]"
                         th:value="*{historicalTimeline[4][0]}"
                         placeholder="mm/yyyy"
-                        class="w-full h-12 focus:outline-none"
+                        pattern="^(0[1-9]|1[0-2])/\\d{4}$"
+                        maxlength="7"
+                        class="w-full h-12 focus:outline-none input-field"
                       />
                     </td>
                     <td class="border border-gray-500 px-4 py-2">
@@ -1148,6 +1158,8 @@
                 placeholder="Input here"
                 name="leaderNumber"
                 th:value="*{leaderNumber}"
+                pattern="^[0-9]{11}$"
+                maxlength="11"
                 class="text-black p-0 focus:outline-none focus:ring-0 sm:text-sm"
               />
             </div>
@@ -2167,6 +2179,32 @@
           document.getElementById("vitaeFileName").textContent = fileName;
         });
     </script>
+    <!-- <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const dateInputs = document.querySelectorAll(
+          'input[name^="historicalTimeline"][name$="[0]"]'
+        );
+
+        dateInputs.forEach((input) => {
+          input.addEventListener("input", function (e) {
+            // Remove non-numeric characters
+            let value = e.target.value.replace(/\D/g, "");
+
+            // Limit to 6 characters (mmyyyy)
+            if (value.length > 6) {
+              value = value.slice(0, 6);
+            }
+
+            // Insert / after month if needed
+            if (value.length > 2) {
+              value = value.slice(0, 2) + "/" + value.slice(2);
+            }
+
+            e.target.value = value;
+          });
+        });
+      });
+    </script> -->
     <script>
       var currentTab = 0;
       showTab(currentTab);

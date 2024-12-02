@@ -68,7 +68,7 @@ public class EmailServiceImpl implements EmailService {
 
 		String htmlText = "<h1>Welcome!</h1>" +
 				"<p>Your account has been activated.</p>" +
-				"<p>Your email: </p>" + email + "</p>" +
+				"<p>Your email:  " + email + "</p>" +
 				"<p>Your password: " + password + "</p>" +
 				"<div><a href='" + siteURL + "/login'>Login Now</a></div>";
 
@@ -92,14 +92,14 @@ public class EmailServiceImpl implements EmailService {
 		helper.setTo(email);
 		helper.setSubject("Application Failed");
 
-		String htmlText = "<div>Your application did not pass the evaluation, as it did not reach the passing score of 6 out of 10. </div> ";
+		String htmlText = "<div>We appreciate your effort in applying, but your application didn’t pass the evaluation this time.</div> ";
 
 		if (resubmitFlg) {
-			htmlText += "<div>Please review the feedback and consider resubmitting a revised application.</div>"
+			htmlText += "<div>Please review the feedback provided and consider submitting an updated version for re-evaluation.</div>"
 					+ "<a href='" + siteURL + "/applicant/form/resubmit?token=" + token + "'>"
 					+ "resubmit</a>";
 		} else {
-			htmlText += "<div>You are not qualified to resubmit this application. Please consider submitting a new application if you wish to reapply.</div>"
+			htmlText += "<div>If you would like to reapply, please submit a new application.</div>"
 					+ "<a href='" + siteURL + "/applicant/form?token=" + token + "'>"
 					+ "reapply</a>";
 		}
@@ -120,7 +120,7 @@ public class EmailServiceImpl implements EmailService {
 		helper.setTo(email);
 		helper.setSubject("Application Accepted");
 
-		String htmlText = "<div>Your application has been accepted!. Please wait for more further instructions.</div> ";
+		String htmlText = "<div>Your application is currently in the Initial Review stage. We will keep you informed about any updates as we move forward in the process.</div>";
 
 		helper.setText(htmlText, true);
 
@@ -137,7 +137,7 @@ public class EmailServiceImpl implements EmailService {
 		helper.setTo(email);
 		helper.setSubject("Application Transferred");
 
-		String htmlText = "<div>Your application has been transferred to the board for evaluation!. Please wait for the result..</div> ";
+		String htmlText = "<div>Your application has moved to the evaluation stage with the board. We will notify you with the outcome once the review is complete.</div>";
 
 		helper.setText(htmlText, true);
 

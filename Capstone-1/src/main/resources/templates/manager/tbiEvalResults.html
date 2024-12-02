@@ -319,13 +319,6 @@
             rowBtnClicked = true;
             let encryptedId = this.getAttribute("data-id");
 
-            document.querySelectorAll(".row-btn").forEach((row) => {
-              row.addEventListener("click", function () {
-                const id = this.getAttribute("data-id");
-                window.location.href = `/manager/qualify-application?id=${id}`;
-              });
-            });
-            
             if (this.name === "issue") {
               let form = document.querySelector("#issue-modal");
               console.log(form);
