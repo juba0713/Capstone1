@@ -125,34 +125,7 @@
           <div
             class="mb-8 w-full rounded-lg mt-8 bg-white border-2 sm:overflow-x-auto overflow-hidden p-10"
           >
-            <div class="container-fluid mt-4">
-              <h1 class="mb-4 font-bold text-2xl">
-                <!-- Manager Analytics  -->
-              </h1>
-
-              <!-- Filters and Search Tools -->
-              <div class="row mb-4">
-                <div class="col-md-3">
-                  <select class="form-select" id="dateFilter">
-                    <!-- Options will be populated dynamically -->
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <select class="form-select" id="officerFilter">
-                    <option>All Officers</option>
-                    <option>Officer 1</option>
-                    <option>Officer 2</option>
-                  </select>
-                </div>
-                <div class="col-md-3">
-                  <select class="form-select" id="stageFilter">
-                    <option>All Stages</option>
-                    <option>Pre-screening</option>
-                    <option>TBIboard Evaluation</option>
-                  </select>
-                </div>
-              </div>
-
+            <div class="container-fluid mt-2">
               <!-- Overview Section -->
               <div class="row mb-4">
                 <div class="col-md-3">
@@ -240,7 +213,9 @@
                 <div class="col-md-12 w-1/2">
                   <div class="card dashboard-card">
                     <div class="card-body">
-                      <h5 class="card-title">Officer Performance Metrics</h5>
+                      <h5 class="card-title">
+                        Operations Officer Performance Metrics
+                      </h5>
                       <div class="table-responsive">
                         <table class="table table-hover">
                           <thead>
@@ -298,18 +273,6 @@
                       <canvas id="monthlyReportChart"></canvas>
                     </div>
                   </div>
-                </div>
-              </div>
-
-              <!-- Export and Reporting -->
-              <div class="row mb-4">
-                <div class="col-md-12">
-                  <button class="btn btn-primary" id="downloadReport">
-                    Download Full Report
-                  </button>
-                  <button class="btn btn-secondary" id="downloadCustomReport">
-                    Customize Report
-                  </button>
                 </div>
               </div>
             </div>
@@ -408,7 +371,7 @@
           ],
           datasets: [
             {
-              label: "Numbe of Accepted Applications",
+              label: "Number of Accepted Applications",
               data: [
                 monthlyAcceptedApplications[0].total,
                 monthlyAcceptedApplications[1].total,
@@ -692,60 +655,6 @@
         .addEventListener("click", function () {
           alert(
             "Custom report generation functionality would be implemented here."
-          );
-        });
-
-      function populateDateFilter() {
-        const dateFilter = document.getElementById("dateFilter");
-        const today = new Date();
-        const dateOptions = [
-          { value: "7d", text: "Last 7 days" },
-          { value: "30d", text: "Last 30 days" },
-          { value: "90d", text: "Last 90 days" },
-          { value: "ytd", text: "Year to date" },
-          { value: "all", text: "All time" },
-        ];
-
-        dateOptions.forEach((option) => {
-          const optionElement = document.createElement("option");
-          optionElement.value = option.value;
-          optionElement.textContent = option.text;
-          dateFilter.appendChild(optionElement);
-        });
-
-        // Add custom date range option
-        const customOption = document.createElement("option");
-        customOption.value = "custom";
-        customOption.textContent = "Custom date range";
-        dateFilter.appendChild(customOption);
-      }
-
-      // Call function to populate date filter
-      populateDateFilter();
-
-      // Date Filter Change Event
-      document
-        .getElementById("dateFilter")
-        .addEventListener("change", function () {
-          if (this.value === "custom") {
-            // Here you would typically open a date range picker
-            alert("Custom date range picker would open here");
-          } else {
-            // Here you would typically update the dashboard based on the selected date range
-            alert("Dashboard would update for date range: " + this.value);
-          }
-        });
-      document
-        .getElementById("officerFilter")
-        .addEventListener("change", function () {
-          alert("Officer filter functionality would be implemented here.");
-        });
-
-      document
-        .getElementById("stageFilter")
-        .addEventListener("change", function () {
-          alert(
-            "Application stage filter functionality would be implemented here."
           );
         });
     </script>
