@@ -330,6 +330,27 @@ body.modal-open {
   transition: background-color 0.3s;
 }
 
+.qualification-container{
+  position: fixed;
+  left: 40px;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.qualification-btn {
+  background-color: hsl(48, 99%, 65%);
+  color: black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+  width: 500px;
+}
+
 .ad-back-button:hover {
   background-color: rgb(226 232 240);
   color: black;

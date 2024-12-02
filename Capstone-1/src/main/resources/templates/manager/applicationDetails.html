@@ -147,7 +147,8 @@
       >
         Application Details
       </div>
-      <a th:href="@{/manager/home}" class="ad-back-button">Back to home</a>
+      <a th:if="*{!forQualification}" th:href="@{/manager/home}" class="ad-back-button">Back to home</a>
+      <a th:if="*{forQualification}" th:href="@{/manager/evaluated-result}" class="ad-back-button">Back to home</a>
       <button
         class="ad-back-button"
         data-toggle="modal"
@@ -2563,7 +2564,52 @@
           </div>
         </div>
       </div>
+      
     </div>
+    <div th:if="*{forQualification}" class="qualification-container">
+		  <button
+        class="qualification-btn"
+        data-toggle="modal"
+        data-target="#feedback-modal"
+      >
+        Qualify
+      </button>
+	  </div>
+	  
+	  <div class="modal" tabindex="-1" role="dialog" id="feedback-modal">
+        <div class="modal-dialog feedback-modal-dialog" role="document">
+          <div class="modal-content feedback-modal-content">
+            <div class="p-2">           
+              <div>
+                <p class="mb-4 qualified">
+                  Qualified for reapplication?
+                  <span class="is-qualified" style="font-weight: bold"></span>
+                </p>
+                <div class="w-full justify-between flex qualified-btns">
+					<form th:action="@{/manager/qualified}" method="POST">
+						<input type="hidden" name="encryptedApplicantIdPk" th:value="*{encryptedApplicantIdPk}" />
+						 <button
+		                    name="no"
+		                    class="qualified-btn p-2 border-black hover:bg-red-500 bg-red-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+		                  >
+		                    No
+		                  </button>
+		                  <button
+		                    name="yes"
+		                    class="qualified-btn p-2 border-black hover:bg-green-500 bg-green-600 rounded-lg w-w45 hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+		                  >
+		                    Yes
+		                  </button>
+		                  <button data-dismiss="modal">
+							  cancel
+						  </button>
+					</form>          
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

@@ -300,7 +300,7 @@ public class ManagerController {
 	public String qualifiedResubmissionYes(@ModelAttribute ManagerWebDto webDto)
 			throws NumberFormatException, Exception {
 
-		ManagerInOutDto inDto = new ManagerInOutDto();
+		ManagerInOutDto inDto = new ManagerInOutDto(); 
 
 		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(webDto.getEncryptedApplicantIdPk())));
 
@@ -375,35 +375,35 @@ public class ManagerController {
 		return ResponseEntity.ok(webDto);
 	}
 
-	@GetMapping("/manager/qualify-application")
-	public String showFeedback(@ModelAttribute ApplicantWebDto webDto,
+	@GetMapping("/qualify-application")
+	public String showFeedback(@ModelAttribute ManagerWebDto webDto, 
 			@RequestParam("id") String id) throws Exception {
 
-		// if (id.isEmpty()) {
-		// 	return "redirect:/manager/home";
-		// }
+		if (id.isEmpty()) {
+			return "redirect:/manager/home";
+		} 
 
-		// ApplicantInOutDto inDto = new ApplicantInOutDto();
+		ManagerInOutDto inDto = new ManagerInOutDto();
 
-		// // inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(id)));
+		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(id)));
 
-		// inDto.setApplicantIdPk(Integer.valueOf(id));
+		ManagerInOutDto outDto = managerService.getApplicantDetailsWithFeedback(inDto);
 
-		// ApplicantInOutDto outDto = applicantService.getApplicantDetailsWithFeedback(inDto);
+		webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
 
-		// webDto.setApplicantDetailsObj(outDto.getApplicantDetailsObj());
+		webDto.setApplicantOffFeedbackObj(outDto.getApplicantOffFeedbackObj());
 
-		// webDto.setApplicantOffFeedbackObj(outDto.getApplicantOffFeedbackObj());
+		webDto.setApplicantTbiFeedbackObj(outDto.getApplicantTbiFeedbackObj());
 
-		// webDto.setApplicantTbiFeedbackObj(outDto.getApplicantTbiFeedbackObj());
+		webDto.setEncryptedApplicantIdPk(id);
 
-		// webDto.setEncryptedApplicantIdPk(id);
+		webDto.setRejectedCount(outDto.getRejectedCount());
 
-		// webDto.setRejectedCount(outDto.getRejectedCount());
-
-		// webDto.setProjectIdPks(outDto.getProjectIdPks());
-
-		return "manager/qualifyFailedEval";
+		webDto.setProjectIdPks(outDto.getProjectIdPks());
+		
+		webDto.setForQualification(true);
+		
+		return "manager/applicationDetails";
 	}
 
 }

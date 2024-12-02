@@ -43,6 +43,7 @@ import capstone.model.dao.entity.ProjectEntity;
 import capstone.model.dao.entity.UserCertificateEntity;
 import capstone.model.dao.entity.UserInfoAccountEntity;
 import capstone.model.dao.entity.UserInformationEntity;
+import capstone.model.dto.ApplicantInOutDto;
 import capstone.model.dto.ManagerInOutDto;
 import capstone.model.dto.OfficerInOutDto;
 import capstone.model.dto.TbiBoardInOutDto;
@@ -1040,5 +1041,6 @@ public class ManagerServiceImpl implements ManagerService {
 
 		return outDto;
 	}
-
+	
+	
 }

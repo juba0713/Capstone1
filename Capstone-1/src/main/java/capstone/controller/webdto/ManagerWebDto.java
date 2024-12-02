@@ -49,6 +49,8 @@ public class ManagerWebDto {
 	
 	private int rejectedCount;
 	
+	private Boolean forQualification = false;
+	
 	private List<MonthlyHighestScoresEntity> monthlyHighestScores;
 	
 	private List<PerformanceMetricsEntity> officerPerformanceMetrics;

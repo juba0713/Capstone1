@@ -171,15 +171,16 @@
                     </button>
                     <!-- <form th:action="@{/manager/}" method="GET"> -->
 
-                    <button
+                    <a
                       class="btn-row border-black hover:bg-[#FEE902] bg-black rounded-lg w-full hover:text-black text-gray-50 font-secondary text-sm sm:p-1"
                       type="button"
                       th:data-id="${app.encryptedApplicantIdPk}"
                       name="feedback"
                       th:if="${app.totalRating < 60 AND app.status == 5}"
+                      th:href="@{/manager/qualify-application?id=} + ${app.encryptedApplicantIdPk}"
                     >
                       View Feedback
-                    </button>
+                    </a>
                     <!-- </form> -->
                   </td>
                 </tr>
