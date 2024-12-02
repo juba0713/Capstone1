@@ -1153,8 +1153,11 @@ public class ApplicantServiceImpl implements ApplicantService {
 			AcceptedApplicantEntity acceptedApplicant = applicantLogic
 					.getAcceptedApplicantByApplicantIdPk(applicantIdPk);
 
+//		PrescreenDetailsEntity rejectedPrescreen = applicantLogic
+//				.getAcceptedPrescreenDetailsByApplicantIdPk(acceptedApplicant.getIdPk());
+			
 			PrescreenDetailsEntity rejectedPrescreen = applicantLogic
-					.getAcceptedPrescreenDetailsByApplicantIdPk(acceptedApplicant.getIdPk());
+			.getAcceptedPrescreenDetailsByApplicantIdPk(acceptedApplicant.getApplicantIdPk());
 
 			ApplicantOfficerFeedbackObj appOffFeedbackObj = new ApplicantOfficerFeedbackObj();
 
