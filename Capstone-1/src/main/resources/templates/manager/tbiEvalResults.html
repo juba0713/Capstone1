@@ -309,7 +309,6 @@
           lengthChange: false,
         });
 
-        let rows = document.getElementsByClassName("row-btn");
         let btnRows = document.getElementsByClassName("btn-row");
 
         var rowBtnClicked = false;
@@ -318,73 +317,14 @@
           btn.addEventListener("click", function () {
             rowBtnClicked = true;
             let encryptedId = this.getAttribute("data-id");
-            if (this.name === "feedback") {
-              let totalRating = document.getElementById("totalRating");
-              let feedback = document.getElementById("feedback");
 
-              if (webDto.listOfApplicants.length != 0) {
-                webDto.listOfApplicants.forEach((applicant, index) => {
-                  if (applicant.encryptedApplicantIdPk == encryptedId) {
-                    totalRating.innerHTML = applicant.totalRating;
-                    feedback.innerHTML = applicant.feedback;
-
-                    if (applicant.status == 6) {
-                      document.querySelector(".is-qualified").innerHTML =
-                        " Yes";
-                      document.querySelector(".is-qualified").style.color =
-                        "green";
-                      document.querySelector(".qualified-btns").style.display =
-                        "none";
-                    } else if (applicant.status == 7) {
-                      document.querySelector(".is-qualified").innerHTML = " No";
-                      document.querySelector(".is-qualified").style.color =
-                        "red";
-                      document.querySelector(".qualified-btns").style.display =
-                        "none";
-                    } else {
-                      document.querySelector(".is-qualified").innerHTML = "";
-                      document.querySelector(".qualified-btns").style.display =
-                        "flex";
-                    }
-                  }
-                });
-              }
-
-              $("#feedback-modal").modal("show");
-
-              let qualifiedBtns = document.querySelectorAll(".qualified-btn");
-              for (let btn of qualifiedBtns) {
-                btn.addEventListener("click", function () {
-                  let form = document.createElement("form");
-                  form.method = "POST";
-                  form.action = "/manager/qualified?" + this.name;
-
-                  let inputId = document.createElement("input");
-                  inputId.type = "hidden";
-                  inputId.name = "encryptedApplicantIdPk";
-                  inputId.value = encryptedId;
-
-                  form.appendChild(inputId);
-
-                  var csrfToken = document
-                    .querySelector('meta[name="_csrf"]')
-                    .getAttribute("content");
-                  var csrfHeader = document
-                    .querySelector('meta[name="_csrf_header"]')
-                    .getAttribute("content");
-
-                  var csrfInput = document.createElement("input");
-                  csrfInput.type = "hidden";
-                  csrfInput.name = "_csrf";
-                  csrfInput.value = csrfToken;
-
-                  form.appendChild(csrfInput);
-                  document.body.appendChild(form);
-                  form.submit();
-                });
-              }
-            }
-            console.log(this);
+            document.querySelectorAll(".row-btn").forEach((row) => {
+              row.addEventListener("click", function () {
+                const id = this.getAttribute("data-id");
+                window.location.href = `/manager/qualify-application?id=${id}`;
+              });
+            });
+            
             if (this.name === "issue") {
               let form = document.querySelector("#issue-modal");
               console.log(form);

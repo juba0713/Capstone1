@@ -149,7 +149,7 @@
           </p>
           <hr class="ml-6 mr-6 my-8" />
           <div
-            class="flex flex-col ml-6 w-2/4 relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
+            class="mb-3 flex flex-col ml-6 w-2/4 relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
           >
             <h2 class="text-black mb-3">
               Email<span class="text-red-600"> *</span>
@@ -163,12 +163,21 @@
               placeholder="Enter your email here"
               class="text-black p-0 focus:outline-none focus:ring-0 sm:text-sm"
             />
-            <span
-              class="absolute mt-20"
-              id="emailError"
-              style="color: red"
-            ></span>
+
+            <div>
+              <span
+                class="absolute mt-10"
+                id="emailError"
+                style="color: red"
+              ></span>
+            </div>
           </div>
+          <em
+            class="ml-6 text-sm text-gray-500 bg-gray-100 border-2 px-2 py-1 rounded"
+          >
+            Note: Use a valid Gmail address (e.g., example@gmail.com).
+          </em>
+
           <!-- <div
             class="error no-pad ml-6"
             th:if="*{error != null} AND *{error.emailError != null}"
@@ -2230,7 +2239,7 @@
         // Email validation
         if (!emailInput.checkValidity()) {
           emailError.textContent = "Please enter a valid email address.";
-          emailInput.style.border = "2px solid red"; // Add red border
+          // emailInput.style.border = "2px solid red"; // Add red border
           emailInput.focus();
           isValid = false;
         } else {
