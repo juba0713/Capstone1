@@ -20,7 +20,8 @@ public class JoinApplicantProject {
 			(Integer) objects[5],
 			(String) objects[6],
 			(String) objects[7],
-			(Boolean) objects[8]
+			(Boolean) objects[8],
+			(String) objects[9]
 		);
 	}
 	
@@ -41,4 +42,6 @@ public class JoinApplicantProject {
 	private String evaluatedBy;
 	
 	private Boolean hasResubmittedOrLowEvaluation;
+	
+	private String rejectedBy;
 }

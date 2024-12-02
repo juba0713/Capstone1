@@ -29,5 +29,7 @@ public class ApplicantObj {
 	
 	public String evaluatedBy;
 	
+	public String rejectedBy;
+	
 	private Boolean hasResubmittedOrLowEvaluation;
 }
