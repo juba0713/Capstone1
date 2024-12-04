@@ -90,14 +90,14 @@ public class FileController {
 		// Use classpath resource loading instead of direct file system access
 		Resource noImgResource = resourceLoader.getResource("classpath:static/images/no_image.png");
 		// String fileDirectory = env.getProperty("new.certificate.path");
-
+	
 		try {
 			// First try loading from classpath resources
-			Resource imageResource = resourceLoader.getResource("classpath:certs/" + imageName + ".png");
+			Resource imageResource = resourceLoader.getResource("classpath:static/images/" + imageName + ".png");
 			if (imageResource.exists()) {
 				return IOUtils.toByteArray(imageResource.getInputStream());
 			}
-
+		
 			// Fallback to no_image if target image not found
 			return IOUtils.toByteArray(noImgResource.getInputStream());
 		} catch (IOException e) {
@@ -105,7 +105,6 @@ public class FileController {
 			return new byte[0];
 		}
 	}
-
 	@GetMapping(value = "/download/certificate/{imageName}")
 	public ResponseEntity<byte[]> downloadImage(@PathVariable String imageName) {
 		String fileDirectory = env.getProperty("new.certificate.path"); // Path to the directory
