@@ -8,14 +8,18 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.io.InputStream;
 import java.sql.Timestamp;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -67,7 +71,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ManagerServiceImpl implements ManagerService {
-
+	@Autowired
+	private ResourceLoader resourceLoader;
+	
 	@Autowired
 	private ApplicantLogic applicantLogic;
 
@@ -631,101 +637,44 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	@Override
-	public ManagerInOutDto issuedCertificate(ManagerInOutDto inDto) throws MessagingException {
+public ManagerInOutDto issuedCertificate(ManagerInOutDto inDto) throws MessagingException {
+    ManagerInOutDto outDto = new ManagerInOutDto();
+    UserCertificateEntity userCertificate = applicantLogic.getUserInformationForCeritificate(inDto.getApplicantIdPk());
 
-		// ManagerInOutDto outDto = new ManagerInOutDto();
-		//
-		// UserCertificateEntity userCertificate =
-		// applicantLogic.getUserInformationForCeritificate(inDto.getApplicantIdPk());
-		//
-		// if (userCertificate.getTotalRating() >= 60) {
-		//
-		// try {
-		// // Load the image
-		// Resource resource =
-		// resourceLoader.getResource("classpath:static/images/base_certificate.png");
-		// BufferedImage image = ImageIO.read(resource.getInputStream());
-		//
-		// Graphics g = image.getGraphics();
-		//
-		// g.setFont(new Font("Leelawadee UI Semilight", Font.BOLD, 130));
-		// g.setColor(new Color(253, 204, 1));
-		//
-		// String fullName = userCertificate.getFirstName() + " " +
-		// userCertificate.getLastName();
-		// int x = 132;
-		// int y = 760;
-		// g.drawString(fullName, x, y);
-		//
-		// g.dispose();
-		//
-		// String fileName = "certificate_" + userCertificate.getUserIdPk();
-		// java.io.File outputFile = new java.io.File(fileName + ".png"); // Use
-		// java.io.File
-		// ImageIO.write(image, "png", outputFile);
-		//
-		// // Upload the modified file to Google Drive
-		// googleDriveService.uploadCertificateFile(outputFile, fileName); // Use the
-		// existing method
-		//
-		// applicantLogic.updateApplicantCeritificate(fileName,
-		// inDto.getApplicantIdPk());
-		// emailService.sendIssuedCertificate(userCertificate.getEmail());
-		//
-		// } catch (IOException e) {
-		// outDto.setResult(CommonConstant.INVALID);
-		// return outDto;
-		// }
-		// }
-		// outDto.setResult(CommonConstant.VALID);
-		// return outDto;
+    if (userCertificate.getTotalRating() >= 60) {
+        try {
+            // Create certificates directory if it doesn't exist
+            String folderPath = env.getProperty("new.certificate.path");
+            Files.createDirectories(Paths.get(folderPath));
 
-		ManagerInOutDto outDto = new ManagerInOutDto();
+            // Load base certificate from resources
+            Resource baseResource = resourceLoader.getResource("classpath:static/images/base_certificate.png");
+            BufferedImage image = ImageIO.read(baseResource.getInputStream());
 
-		UserCertificateEntity userCertificate = applicantLogic
-				.getUserInformationForCeritificate(inDto.getApplicantIdPk());
+            // Generate certificate
+            Graphics g = image.getGraphics();
+            g.setFont(new Font("Leelawadee UI Semilight", Font.BOLD, 130));
+            g.setColor(new Color(253, 204, 1));
+            String fullName = userCertificate.getFirstName() + " " + userCertificate.getLastName();
+            g.drawString(fullName, 132, 760);
+            g.dispose();
 
-		if (userCertificate.getTotalRating() >= 60) {
+            // Save to temp directory
+            String fileName = "certificate_" + userCertificate.getUserIdPk();
+            Path outputPath = Paths.get(folderPath, fileName + ".png");
+            ImageIO.write(image, "png", outputPath.toFile());
 
-			String folderPath = env.getProperty("new.certificate.path").toString();
+            // Update database and send email
+            applicantLogic.updateApplicantCeritificate(fileName, inDto.getApplicantIdPk());
+            emailService.sendIssuedCertificate(userCertificate.getEmail(), fileName);
 
-			try {
-				// Load the image
-				File imageFile = new File(folderPath + "base_certificate.png");
-				BufferedImage image = ImageIO.read(imageFile);
-
-				Graphics g = image.getGraphics();
-
-				g.setFont(new Font("Leelawadee UI Semilight", Font.BOLD, 130));
-				g.setColor(new Color(253, 204, 1));
-
-				String fullName = userCertificate.getFirstName() + " " + userCertificate.getLastName();
-				int x = 132;
-				int y = 760;
-				g.drawString(fullName, x, y);
-
-				g.dispose();
-
-				String fileName = "certificate_" + userCertificate.getUserIdPk();
-				File outputFile = new File(folderPath + fileName + ".png");
-				ImageIO.write(image, "png", outputFile);
-
-				applicantLogic.updateApplicantCeritificate(fileName, inDto.getApplicantIdPk());
-
-				emailService.sendIssuedCertificate(userCertificate.getEmail(), fileName);
-
-			} catch (IOException e) {
-
-				outDto.setResult(CommonConstant.INVALID);
-
-				return outDto;
-			}
-		}
-
-		outDto.setResult(CommonConstant.VALID);
-
-		return outDto;
-	}
+            outDto.setResult(CommonConstant.VALID);
+        } catch (IOException e) {
+            outDto.setResult(CommonConstant.INVALID);
+        }
+    }
+    return outDto;
+}
 
 	@Override
 	public ManagerInOutDto evaluateApplicant(ManagerInOutDto inDto) throws MessagingException {
@@ -1041,6 +990,5 @@ public class ManagerServiceImpl implements ManagerService {
 
 		return outDto;
 	}
-	
-	
+
 }

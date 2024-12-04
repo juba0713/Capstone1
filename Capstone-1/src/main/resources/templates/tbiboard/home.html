@@ -144,7 +144,7 @@
               <th class="text-center rounded-top-left">Email</th>
               <th class="text-center w-3/12">Project Title</th>
               <th class="text-center w-1/5 hidden sm:table-cell">University</th>
-               <th class="text-center sm:table-cell">Status</th>
+              <th class="text-center sm:table-cell">Status</th>
 
               <th class="text-center rounded-top-right">Actions</th>
             </tr>
@@ -167,7 +167,10 @@
                 class="whitespace-nowrap max-w-0 truncate hidden sm:table-cell"
                 th:text="${app.university}"
               ></td>
-              <td class="whitespace-nowrap max-w-0 truncate" th:text="${app.hasResubmittedOrLowEvaluation ? 'RESUBMITTED' : 'PENDING'}"></td>
+              <td
+                class="whitespace-nowrap max-w-0 truncate"
+                th:text="${app.hasResubmittedOrLowEvaluation ? 'RESUBMITTED' : 'PENDING'}"
+              ></td>
               <!-- <td class="whitespace-nowrap max-w-0 truncate">Pending</td> -->
               <td>
                 <form th:action="@{/tbi-board/evaluate}" method="GET">
@@ -194,7 +197,20 @@
         </form>
       </div>
     </div>
+    <script>
+      // JavaScript function to remove the flash message after a specified time
+      function hideFlashMessage() {
+        const flashMessage = document.getElementById("flash-message");
+        if (flashMessage) {
+          setTimeout(() => {
+            flashMessage.style.display = "none";
+          }, 5000); // 5000 milliseconds = 5 seconds
+        }
+      }
 
+      // Call the function on page load
+      window.onload = hideFlashMessage;
+    </script>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

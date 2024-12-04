@@ -755,8 +755,10 @@
                   <span class="font-bold"> PDF </span> format.</span
                 >
               </div> -->
-          <!-- th:href="@{/view/} + *{applicantDetailsObj.vitaeFile}" -->
-          <a id="vitaeFile" target="_blank" class="w-2/6 mt-3 vitaeFile"
+          <a
+            target="_blank"
+            class="w-2/6 mt-3 vitaeFile"
+            th:href="@{/view/} + *{applicantDetailsObj.vitaeFile}"
             ><p class="hover:underline text-blue-700 hover:cursor-pointer">
               View File
             </p></a
@@ -2818,8 +2820,8 @@
         document.querySelector("#methodology").value =
           data.applicantDetailsObj.methodology;
 
-        // document.querySelector("#vitaeFile").href =
-        //   "/view/" + data.applicantDetailsObj.vitaeFile;
+        const vitaeFileElement = document.querySelector("#vitaeFile");
+        vitaeFileElement.href = `/view/${data.applicantDetailsObj.vitaeFile}`;
 
         if (
           data.applicantDetailsObj.supportLink !== undefined &&
