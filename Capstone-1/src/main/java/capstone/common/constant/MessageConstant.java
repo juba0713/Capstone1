@@ -83,4 +83,6 @@ public class MessageConstant {
 	public static String REJECTED_APPLICATION = "You have successfully rejected the application!";
 
 	public static String ACCEPTED_APPLICATION = "You have successfully accepted the application!";
+	
+	public static String ALL_MEMBERS_REQUIRED = "All team member fields are required";
 }
