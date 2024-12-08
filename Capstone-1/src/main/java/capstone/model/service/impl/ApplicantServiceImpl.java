@@ -457,6 +457,8 @@ if (inDto.getMembers() == null || inDto.getMembers().size() < 4) {
 				newUser.setDeleteFlg(false);
 
 				newUser.setUpdatedDate(currentDateTime);
+				
+				newUser.setBlockFlg(false);
 
 				userIdPk = userLogic.saveUser(newUser);
 

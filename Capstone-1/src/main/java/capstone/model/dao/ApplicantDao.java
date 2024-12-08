@@ -205,8 +205,7 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "AND a.delete_flg = false";
 
 	public final String UPDATE_APPLICANT_STATUS = "UPDATE ApplicantEntity a "
-			+ "SET a.status = :status, "
-			+ " a.submissionCount = a.submissionCount + 1 "
+			+ "SET a.status = :status "
 			+ "WHERE a.idPk IN (:idPks) ";
 	
 	public final String GET_APPLICANT_BY_CREATED_BY = "SELECT e"
@@ -476,6 +475,15 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "AND a.delete_flg = false "
 			+ "AND p.id_pk = :projectIdPk "
 			+ "ORDER BY p.id_pk ASC";
+	
+	public final String UPDATE_APPLICANT_SUBMISSION_COUNT = "UPDATE ApplicantEntity a "
+			+ "SET a.submissionCount = a.submissionCount + 1 "
+			+ "WHERE a.idPk = :applicantIdPk ";
+	
+	@Modifying
+	@Transactional
+	@Query(value=UPDATE_APPLICANT_SUBMISSION_COUNT)
+	public void updateApplicantSubmissionCount(int applicantIdPk) throws DataAccessException;
 	
 	@Query(value=GET_HISTORY_APPLICANT_DETAILS_BY_ID_PK, nativeQuery=true)
 	public List<Object[]> getHistoryApplicantDetailsByIdPkRaw(int applicantIdPk, int projectIdPk) throws DataAccessException;

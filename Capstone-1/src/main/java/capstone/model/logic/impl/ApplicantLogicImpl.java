@@ -417,5 +417,11 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 
 		return projectDao.getHistoryOfApplicant(applicantIdPk);
 	}
+
+	@Override
+	public void updateSubmissionCount(int applicantIdPk) {
+		// TODO Auto-generated method stub
+		applicantDao.updateApplicantSubmissionCount(applicantIdPk);
+	}
 	
 }

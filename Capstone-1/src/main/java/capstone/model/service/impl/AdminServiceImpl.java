@@ -145,7 +145,7 @@ public class AdminServiceImpl implements AdminService {
 			obj.setStatus(app.getStatus());
 
 			obj.setTotalRating(app.getTotalRating());
-			;
+			
 
 			obj.setUniversity(app.getUniversity());
 

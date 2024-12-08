@@ -389,13 +389,15 @@ public class ManagerServiceImpl implements ManagerService {
 			applicantLogic.updateApplicantStatus(inDto.getStatus(), List.of(inDto.getApplicantIdPk()));
 			emailService.sendFailedMail(false, user.getEmail(), token);
 		}
-
+		
 		applicantLogic.updateEvaluatedApplicant(token, resubmitFlg, inDto.getApplicantIdPk());
-
+		
 		applicantLogic.updatePreviousEvaluatedApplicant(inDto.getApplicantIdPk());
-
+		
 		return outDto;
 	}
+	
+	
 
 	@Override
 	public ManagerInOutDto getAppllicantOnTodayMonth() throws Exception {
@@ -988,6 +990,12 @@ public class ManagerServiceImpl implements ManagerService {
 		outDto.setMonthlyRejectedApplications(userLogic.getMonthlyRejectedApplication());
 
 		return outDto;
+	}
+
+	@Override
+	public void updateSubmissionCount(ManagerInOutDto inDto) {
+		// TODO Auto-generated method stub
+		applicantLogic.updateSubmissionCount(inDto.getApplicantIdPk());
 	}
 
 }

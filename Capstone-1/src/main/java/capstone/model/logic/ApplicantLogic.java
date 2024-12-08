@@ -313,4 +313,6 @@ public interface ApplicantLogic {
 	public List<HistoryApplicantDetailsEntity> getHistoryApplicantDetailsByIdPk(int applicantIdPk, int projectIdPk);
 	
 	public List<ProjectEntity> getHistoryOfApplicant(int applicantIdPk);
+	
+	public void updateSubmissionCount(int applicantIdPk);
 }

@@ -295,6 +295,8 @@ public class ManagerController {
 		inDto.setTransferring(true);
 
 		managerService.updateApplicantStatus(inDto);
+		
+		managerService.updateSubmissionCount(inDto);
 
 		ra.addFlashAttribute("succMsg", "The application/s has been sent to the TbiBoard!");
 
