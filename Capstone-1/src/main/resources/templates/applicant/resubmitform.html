@@ -93,7 +93,7 @@
       }
 
       .font-20 {
-        font-size: 20px;
+        font-size: 16px;
         font-weight: bold;
       }
       .resubmit-back-button {
@@ -2209,7 +2209,7 @@
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
                           placeholder="Enter comment"
-                          th:text="*{applicantTbiFeedbackObj.ctOneComments}"
+                          th:text="*{applicantTbiFeedbackObj.ctOneComments != '' ? applicantTbiFeedbackObj.ctOneComments : 'No Comment'}"
                           readonly
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2246,7 +2246,7 @@
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
                           placeholder="Enter comment"
-                          th:text="*{applicantTbiFeedbackObj.ctTwoComments}"
+                          th:text="*{applicantTbiFeedbackObj.ctTwoComments != '' ? applicantTbiFeedbackObj.ctTwoComments : 'No Comment'}"
                           readonly
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2283,7 +2283,7 @@
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
                           placeholder="Enter comment"
-                          th:text="*{applicantTbiFeedbackObj.ctThreeComments}"
+                          th:text="*{applicantTbiFeedbackObj.ctThreeComments != '' ? applicantTbiFeedbackObj.ctThreeComments : 'No Comment'}"
                           readonly
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2311,7 +2311,7 @@
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
                           placeholder="Enter comment"
-                          th:text="*{applicantTbiFeedbackObj.ctFourComments}"
+                          th:text="*{applicantTbiFeedbackObj.ctFourComments != '' ? applicantTbiFeedbackObj.ctFourComments : 'No Comment'}"
                           readonly
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2348,7 +2348,7 @@
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
                           placeholder="Enter comment"
-                          th:text="*{applicantTbiFeedbackObj.ctFiveComments}"
+                          th:text="*{applicantTbiFeedbackObj.ctFiveComments != '' ? applicantTbiFeedbackObj.ctFiveComments : 'No Comment'}"
                           readonly
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2385,7 +2385,7 @@
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
                           placeholder="Enter comment"
-                          th:text="*{applicantTbiFeedbackObj.ctSixComments}"
+                          th:text="*{applicantTbiFeedbackObj.ctSixComments != '' ? applicantTbiFeedbackObj.ctSixComments : 'No Comment'}"
                           readonly
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2414,7 +2414,7 @@
                         <textarea
                           oninput="this.className = 'w-full h-32 max-h-32 px-2 py-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'"
                           placeholder="Enter comment"
-                          th:text="*{applicantTbiFeedbackObj.ctSevenComments}"
+                          th:text="*{applicantTbiFeedbackObj.ctSevenComments != '' ? applicantTbiFeedbackObj.ctSevenComments : 'No Comment'}"
                           readonly
                           class="resize-none w-full h-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
                         ></textarea>
@@ -2455,13 +2455,13 @@
                       >
                         Total
                       </th>
-
                       <td class="border border-gray-500 px-2 py-2">
-                        <div class="text-sm flex justify-center"></div>
+                        <div
+                          class="text-sm flex justify-center total-score font-semibold font-20"
+                          th:text="*{applicantTbiFeedbackObj.totalRating}"
+                        ></div>
                       </td>
-                      <td
-                        class="border border-gray-500 px-2 py-2 total-score"
-                      ></td>
+                      <td class="border border-gray-500 px-2 py-2"></td>
                     </tr>
                   </tbody>
                 </table>
@@ -2564,6 +2564,7 @@
         // No need to call checkAgreement() or other validation functions
       });
     </script>
+
     <script th:inline="javascript">
       console.log(/*[[${applicantWebDto}]]*/ "");
     </script>

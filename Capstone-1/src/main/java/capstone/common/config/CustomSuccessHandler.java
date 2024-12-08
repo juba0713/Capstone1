@@ -15,7 +15,7 @@ import capstone.model.service.LoggedInUserService;
 
 @Component
 public class CustomSuccessHandler implements AuthenticationSuccessHandler {
-	
+
 	@Autowired
 	private LoggedInUserService loggedInUserService;
 
@@ -23,54 +23,53 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 	public void onAuthenticationSuccess(jakarta.servlet.http.HttpServletRequest request,
 			jakarta.servlet.http.HttpServletResponse response, Authentication authentication)
 			throws IOException, jakarta.servlet.ServletException {
-		
-			// Retrieve user information
-			UserInformationEntity user = loggedInUserService.getUserInformation();
-	        System.out.println("This is user");
-	        System.out.println(user);
-	        if (user.getBlockFlg()) {
-	            // If the user is blocked, redirect to login with an error message
-	        	SecurityContextHolder.clearContext();
-	            request.getSession().invalidate();
-	            request.getSession().setAttribute("errorMessageLogin", "Your account has been blocked");
-	            response.sendRedirect("/login");
-	            return;
-	        }
-		
-			Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-			
-			// Check if the user has the "ROLE_ADMIN" authority
-	        if (authorities.stream().anyMatch(role -> role.getAuthority().equals("APPLICANT"))) {
-	            // Redirect to the admin page if the user has the ROLE_ADMIN
-	            response.sendRedirect("/applicant/home");
-	        } else if (authorities.stream().anyMatch(role -> role.getAuthority().equals("OFFICER"))) { // Redirect to the default user
-				 response.sendRedirect("/officer/home"); 
-			}else if (authorities.stream().anyMatch(role -> role.getAuthority().equals("MANAGER"))) { // Redirect to the default user
-				 response.sendRedirect("/manager/home"); 
-			}else if (authorities.stream().anyMatch(role -> role.getAuthority().equals("TBIBOARD"))) { // Redirect to the default user
-				 response.sendRedirect("/tbi-board/home"); 
-			}else if (authorities.stream().anyMatch(role -> role.getAuthority().equals("ADMIN"))) { // Redirect to the default user
-				 response.sendRedirect("/admin/home"); 
-			}else {
-				response.sendRedirect("/login"); 
-			}
-	        
-			 
-	        
-	      
-	        if (authentication != null) {
-	            String username = authentication.getName();
-	          
-	            
-	            request.getSession().setAttribute("fullname", user.getFirstName() + " " + user.getLastName());
-	    
-	            request.getSession().setAttribute("username", username);
-	      
-	            request.getSession().setAttribute("id", user.getIdPk());
-	            
-	            request.getSession().setAttribute("initialChangePass", user.getInitialChangePass());
-	        }
-		
+
+		// Retrieve user information
+		UserInformationEntity user = loggedInUserService.getUserInformation();
+
+		if (user.getBlockFlg()) {
+			// If the user is blocked, redirect to login with an error message
+			SecurityContextHolder.clearContext();
+			request.getSession().invalidate();
+			request.getSession().setAttribute("errorMessageLogin", "Your account has been blocked");
+			response.sendRedirect("/login");
+			return;
+		}
+
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
+		// Check if the user has the "ROLE_ADMIN" authority
+		if (authorities.stream().anyMatch(role -> role.getAuthority().equals("APPLICANT"))) {
+			// Redirect to the admin page if the user has the ROLE_ADMIN
+			response.sendRedirect("/applicant/home");
+		} else if (authorities.stream().anyMatch(role -> role.getAuthority().equals("OFFICER"))) { // Redirect to the
+																									// default user
+			response.sendRedirect("/officer/home");
+		} else if (authorities.stream().anyMatch(role -> role.getAuthority().equals("MANAGER"))) { // Redirect to the
+																									// default user
+			response.sendRedirect("/manager/home");
+		} else if (authorities.stream().anyMatch(role -> role.getAuthority().equals("TBIBOARD"))) { // Redirect to the
+																									// default user
+			response.sendRedirect("/tbi-board/home");
+		} else if (authorities.stream().anyMatch(role -> role.getAuthority().equals("ADMIN"))) { // Redirect to the
+																									// default user
+			response.sendRedirect("/admin/home");
+		} else {
+			response.sendRedirect("/login");
+		}
+
+		if (authentication != null) {
+			String username = authentication.getName();
+
+			request.getSession().setAttribute("fullname", user.getFirstName() + " " + user.getLastName());
+
+			request.getSession().setAttribute("username", username);
+
+			request.getSession().setAttribute("id", user.getIdPk());
+
+			request.getSession().setAttribute("initialChangePass", user.getInitialChangePass());
+		}
+
 	}
-	
+
 }

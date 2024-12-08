@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pre-screening Checklist</title>
     <link rel="stylesheet" href="/css/output.css" />
     <link rel="stylesheet" href="/css/input.css" />
@@ -51,7 +50,6 @@
           </h2>
           <input
             placeholder="Enter Project title"
-            name="projectTitle"
             th:value="*{applicantDetailsObj.projectTitle}"
             class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
           />
@@ -72,7 +70,6 @@
             <textarea
               type="text"
               placeholder="Type something here..."
-              name="projectDescription"
               th:text="*{applicantDetailsObj.projectDescription}"
               class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
             ></textarea>
@@ -102,7 +99,6 @@
                 class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
               >
                 <input
-                  name="teams[0][0]"
                   th:value="*{applicantDetailsObj.teams[0][0]}"
                   type="text"
                   placeholder="Last Name, First Name"
@@ -113,7 +109,6 @@
                 class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
               >
                 <input
-                  name="teams[0][1]"
                   th:value="*{applicantDetailsObj.teams[0][1]}"
                   type="text"
                   placeholder="Input position/role"
@@ -124,7 +119,6 @@
                 class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
               >
                 <input
-                  name="teams[1][0]"
                   th:value="*{applicantDetailsObj.teams[1][0]}"
                   type="text"
                   placeholder="Last Name, First Name"
@@ -135,7 +129,6 @@
                 class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
               >
                 <input
-                  name="teams[1][1]"
                   th:value="*{applicantDetailsObj.teams[1][1]}"
                   type="text"
                   placeholder="Input position/role"
@@ -146,7 +139,6 @@
                 class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
               >
                 <input
-                  name="teams[2][0]"
                   th:value="*{applicantDetailsObj.teams[2][0]}"
                   type="text"
                   placeholder="Last Name, First Name"
@@ -157,7 +149,6 @@
                 class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
               >
                 <input
-                  name="teams[2][1]"
                   th:value="*{applicantDetailsObj.teams[2][1]}"
                   type="text"
                   placeholder="Input position/role"
@@ -168,7 +159,6 @@
                 class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
               >
                 <input
-                  name="teams[3][0]"
                   th:value="*{applicantDetailsObj.teams[3][0]}"
                   type="text"
                   placeholder="Last Name, First Name"
@@ -179,7 +169,6 @@
                 class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
               >
                 <input
-                  name="teams[3][1]"
                   th:value="*{applicantDetailsObj.teams[3][1]}"
                   type="text"
                   placeholder="Input position/role"
@@ -190,7 +179,6 @@
                 class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
               >
                 <input
-                  name="teams[4][0]"
                   th:value="*{applicantDetailsObj.teams[4][0]}"
                   type="text"
                   placeholder="Last Name, First Name"
@@ -201,7 +189,6 @@
                 class="flex flex-col relative border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600"
               >
                 <input
-                  name="teams[4][1]"
                   th:value="*{applicantDetailsObj.teams[4][1]}"
                   type="text"
                   placeholder="Input position/role"
@@ -222,7 +209,6 @@
             </p>
             <textarea
               placeholder="Type something here..."
-              name="problemStatement"
               th:text="*{applicantDetailsObj.problemStatement}"
               class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
             ></textarea>
@@ -236,7 +222,6 @@
               </p>
               <textarea
                 placeholder="Type something here..."
-                name="targetMarket"
                 th:text="*{applicantDetailsObj.targetMarket}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
               ></textarea>
@@ -254,7 +239,6 @@
 
               <textarea
                 placeholder="Type something here..."
-                name="solutionDescription"
                 th:text="*{applicantDetailsObj.solutionDescription}"
                 class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20"
               ></textarea>
@@ -299,7 +283,6 @@
                   <td class="border border-gray-500 px-4 py-2">
                     <input
                       type="text"
-                      name="historicalTimeline[0][0]"
                       th:value="*{applicantDetailsObj.historicalTimeline[0].length != 0 ? applicantDetailsObj.historicalTimeline[0][0] : 'NA'}"
                       placeholder="mm/yyyy"
                       class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
@@ -308,7 +291,6 @@
                   <td class="border border-gray-500 px-4 py-2">
                     <textarea
                       type="text"
-                      name="historicalTimeline[0][1]"
                       th:text="*{applicantDetailsObj.historicalTimeline[0].length != 0 ? applicantDetailsObj.historicalTimeline[0][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
                       class="resize-none w-full h-20 rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
@@ -319,7 +301,6 @@
                   <td class="border border-gray-500 px-4 py-2">
                     <input
                       type="text"
-                      name="historicalTimeline[1][0]"
                       th:value="*{applicantDetailsObj.historicalTimeline[1].length != 0 ? applicantDetailsObj.historicalTimeline[1][0] : 'NA'}"
                       placeholder="mm/yyyy"
                       class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
@@ -328,7 +309,6 @@
                   <td class="border border-gray-500 px-4 py-2">
                     <textarea
                       type="text"
-                      name="historicalTimeline[1][1]"
                       th:text="*{applicantDetailsObj.historicalTimeline[1].length != 0 ? applicantDetailsObj.historicalTimeline[1][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
                       class="resize-none w-full h-20 rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
@@ -339,7 +319,6 @@
                   <td class="border border-gray-500 px-4 py-2">
                     <input
                       type="text"
-                      name="historicalTimeline[2][0]"
                       th:value="*{applicantDetailsObj.historicalTimeline[2].length != 0 ? applicantDetailsObj.historicalTimeline[2][0] : 'NA'}"
                       placeholder="mm/yyyy"
                       class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
@@ -348,7 +327,6 @@
                   <td class="border border-gray-500 px-4 py-2">
                     <textarea
                       type="text"
-                      name="historicalTimeline[2][1]"
                       th:text="*{applicantDetailsObj.historicalTimeline[2].length != 0 ? applicantDetailsObj.historicalTimeline[2][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
                       class="resize-none w-full h-20 rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
@@ -359,7 +337,6 @@
                   <td class="border border-gray-500 px-4 py-2">
                     <input
                       type="text"
-                      name="historicalTimeline[3][0]"
                       th:value="*{applicantDetailsObj.historicalTimeline[3].length != 0 ? applicantDetailsObj.historicalTimeline[3][0] : 'NA'}"
                       placeholder="mm/yyyy"
                       class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
@@ -368,7 +345,6 @@
                   <td class="border border-gray-500 px-4 py-2">
                     <textarea
                       type="text"
-                      name="historicalTimeline[3][1]"
                       th:text="*{applicantDetailsObj.historicalTimeline[3].length != 0 ? applicantDetailsObj.historicalTimeline[3][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
                       class="resize-none w-full h-20 rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
@@ -379,7 +355,6 @@
                   <td class="border border-gray-500 px-4 py-2">
                     <input
                       type="text"
-                      name="historicalTimeline[4][0]"
                       th:value="*{applicantDetailsObj.historicalTimeline[4].length != 0 ? applicantDetailsObj.historicalTimeline[4][0] : 'NA'}"
                       placeholder="mm/yyyy"
                       class="w-full h-12 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1"
@@ -388,7 +363,6 @@
                   <td class="border border-gray-500 px-4 py-2">
                     <textarea
                       type="text"
-                      name="historicalTimeline[4][1]"
                       th:text="*{applicantDetailsObj.historicalTimeline[4].length != 0 ? applicantDetailsObj.historicalTimeline[4][1] : 'NA'}"
                       placeholder="Enter key activities or milestones here"
                       class="resize-none w-full h-20 rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
@@ -445,7 +419,6 @@
                   </th>
                   <td class="border border-gray-500 px-2 py-2">
                     <textarea
-                      name="productServiceOffering[0]"
                       th:text="*{applicantDetailsObj.productServiceOffering[0] != '' ? applicantDetailsObj.productServiceOffering[0] : 'NA'}"
                       placeholder="Enter product/service offering"
                       class="resize-none w-full h-full rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
@@ -453,7 +426,6 @@
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
                     <textarea
-                      name="productServiceOffering[1]"
                       th:text="*{applicantDetailsObj.productServiceOffering[1] != '' ? applicantDetailsObj.productServiceOffering[0] : 'NA'}"
                       placeholder="Enter product/service offering"
                       class="resize-none w-full h-full rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
@@ -461,7 +433,6 @@
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
                     <textarea
-                      name="productServiceOffering[2]"
                       th:text="*{applicantDetailsObj.productServiceOffering[2] != '' ? applicantDetailsObj.productServiceOffering[0] : 'NA'}"
                       placeholder="Enter product/service offering"
                       class="resize-none w-full h-full rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
@@ -469,7 +440,6 @@
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
                     <textarea
-                      name="productServiceOffering[3]"
                       th:text="*{applicantDetailsObj.productServiceOffering[3] != '' ? applicantDetailsObj.productServiceOffering[0] : 'NA'}"
                       placeholder="Enter product/service offering"
                       class="resize-none w-full h-full rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
@@ -484,7 +454,6 @@
                   </th>
                   <td class="border border-gray-500 px-2 py-2">
                     <textarea
-                      name="pricingStrategy[0]"
                       th:text="*{applicantDetailsObj.pricingStrategy[0] != '' ? applicantDetailsObj.pricingStrategy[0] : 'NA'}"
                       placeholder="Enter pricing strategy"
                       class="resize-none w-full h-full rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
@@ -492,7 +461,6 @@
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
                     <textarea
-                      name="pricingStrategy[1]"
                       th:text="*{applicantDetailsObj.pricingStrategy[1] != '' ? applicantDetailsObj.pricingStrategy[0] : 'NA'}"
                       placeholder="Enter pricing strategy"
                       class="resize-none w-full h-full rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
@@ -500,7 +468,6 @@
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
                     <textarea
-                      name="pricingStrategy[2]"
                       th:text="*{applicantDetailsObj.pricingStrategy[2] != '' ? applicantDetailsObj.pricingStrategy[0] : 'NA'}"
                       placeholder="Enter pricing strategy"
                       class="resize-none w-full h-full rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
@@ -508,7 +475,6 @@
                   </td>
                   <td class="border border-gray-500 px-2 py-2">
                     <textarea
-                      name="pricingStrategy[3]"
                       th:text="*{applicantDetailsObj.pricingStrategy[3] != '' ? applicantDetailsObj.pricingStrategy[0] : 'NA'}"
                       placeholder="Enter pricing strategy"
                       class="resize-none w-full h-full rounded-md py-2 pl-3 focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
@@ -529,7 +495,6 @@
             <textarea
               type="text"
               placeholder="Type something here..."
-              name="intPropertyStatus"
               th:text="*{applicantDetailsObj.intPropertyStatus}"
               class="resize-none w-full h-20 border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm"
             ></textarea>
@@ -550,7 +515,6 @@
             <textarea
               type="text"
               placeholder="Type something here..."
-              name="objectives"
               th:text="*{applicantDetailsObj.objectives}"
               class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
             ></textarea>
@@ -571,7 +535,6 @@
 
             <textarea
               placeholder="Type something here..."
-              name="scopeProposal"
               th:text="*{applicantDetailsObj.scopeProposal}"
               class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
             ></textarea>
@@ -591,7 +554,6 @@
 
             <textarea
               placeholder="Type something here..."
-              name="methodology"
               th:text="*{applicantDetailsObj.methodology}"
               class="resize-none mt-2 bg-white w-full border border-slate-300 rounded-md py-2 pl-3 shadow-sm focus:outline-none focus:border-blue-600 focus:ring-blue-600 focus:ring-1 sm:text-sm h-20 z-10"
             ></textarea>
@@ -616,7 +578,6 @@
             >
           </h2>
           <!-- <div class="mt-3 w-2/6">
-            <input type="file" name="vitaeFile" class="w-full" />
             <span class="text-xs"
               >Submit your file in
               <span class="font-bold"> PDF </span> format.</span
@@ -668,7 +629,6 @@
               type="text"
               required
               placeholder="Input here"
-              name="groupName"
               th:value="*{applicantDetailsObj.groupName}"
               class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
             />
@@ -688,7 +648,6 @@
               type="text"
               required
               placeholder="Input here"
-              name="groupLeader"
               th:value="*{applicantDetailsObj.leaderLastName + ', ' + applicantDetailsObj.leaderFirstName}"
               class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
             />
@@ -705,7 +664,6 @@
               type="text"
               required
               placeholder="Input here"
-              name="leaderNumber"
               th:value="*{applicantDetailsObj.mobileNumber}"
               class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
             />
@@ -723,7 +681,6 @@
               type="text"
               required
               placeholder="Input here"
-              name="leaderAddress"
               th:value="*{applicantDetailsObj.address}"
               class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
             />
@@ -741,7 +698,6 @@
               type="text"
               required
               placeholder="Input here"
-              name="members[0]"
               th:value="*{applicantDetailsObj.members[0] != null AND !#strings.contains(applicantDetailsObj.members[0], 'null') ? applicantDetailsObj.members[0] : 'NA'}"
               class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
             />
@@ -758,7 +714,6 @@
               type="text"
               required
               placeholder="Input here"
-              name="members[1]"
               th:value="*{applicantDetailsObj.members[1] != null AND !#strings.contains(applicantDetailsObj.members[1], 'null') ? applicantDetailsObj.members[1] : 'NA'}"
               class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
             />
@@ -775,7 +730,6 @@
               type="text"
               required
               placeholder="Input here"
-              name="members[2]"
               th:value="*{applicantDetailsObj.members[2] != null AND !#strings.contains(applicantDetailsObj.members[2], 'null') ? applicantDetailsObj.members[2] : 'NA'}"
               class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
             />
@@ -792,7 +746,6 @@
               type="text"
               required
               placeholder="Input here"
-              name="members[3]"
               th:value="*{applicantDetailsObj.members[3] != null AND !#strings.contains(applicantDetailsObj.members[3], 'null') ? applicantDetailsObj.members[3] : 'NA'}"
               class="text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
             />
@@ -816,7 +769,6 @@
                 type="text"
                 required
                 placeholder="Input here"
-                name="university"
                 th:value="*{applicantDetailsObj.university != '' ? applicantDetailsObj.university : 'NA'} "
                 class="w-full text-black border-none p-0 focus:outline-none focus:ring-0 sm:text-sm"
               />
@@ -864,7 +816,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="technologyAns"
                   value="1"
                   th:checked="*{applicantDetailsObj.technologyAns==1}"
                 />
@@ -877,7 +828,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="technologyAns"
                   value="2"
                   th:checked="*{applicantDetailsObj.technologyAns==2}"
                 />
@@ -889,7 +839,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="technologyAns"
                   value="3"
                   th:checked="*{applicantDetailsObj.technologyAns==3}"
                 />
@@ -902,7 +851,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="technologyAns"
                   value="4"
                   th:checked="*{applicantDetailsObj.technologyAns==4}"
                 />
@@ -914,7 +862,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="technologyAns"
                   value="5"
                   th:checked="*{applicantDetailsObj.technologyAns==5}"
                 />
@@ -936,7 +883,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="productDevelopmentAns"
                   value="1"
                   th:checked="*{applicantDetailsObj.productDevelopmentAns==1}"
                 />
@@ -947,7 +893,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="productDevelopmentAns"
                   value="2"
                   th:checked="*{applicantDetailsObj.productDevelopmentAns==2}"
                 />
@@ -959,7 +904,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="productDevelopmentAns"
                   value="3"
                   th:checked="*{applicantDetailsObj.productDevelopmentAns==3}"
                 />
@@ -971,7 +915,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="productDevelopmentAns"
                   value="4"
                   th:checked="*{applicantDetailsObj.productDevelopmentAns==4}"
                 />
@@ -984,7 +927,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="productDevelopmentAns"
                   value="5"
                   th:checked="*{applicantDetailsObj.productDevelopmentAns==5}"
                 />
@@ -1006,7 +948,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="competitiveLandscapeAns"
                   value="1"
                   th:checked="*{applicantDetailsObj.competitiveLandscapeAns==1}"
                 />
@@ -1019,7 +960,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="competitiveLandscapeAns"
                   value="2"
                   th:checked="*{applicantDetailsObj.competitiveLandscapeAns==2}"
                 />
@@ -1032,7 +972,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="competitiveLandscapeAns"
                   value="3"
                   th:checked="*{applicantDetailsObj.competitiveLandscapeAns==3}"
                 />
@@ -1046,7 +985,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="competitiveLandscapeAns"
                   value="4"
                   th:checked="*{applicantDetailsObj.competitiveLandscapeAns==4}"
                 />
@@ -1059,7 +997,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="competitiveLandscapeAns"
                   value="5"
                   th:checked="*{applicantDetailsObj.competitiveLandscapeAns==5}"
                 />
@@ -1083,7 +1020,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="productDesignAns"
                   value="1"
                   th:checked="*{applicantDetailsObj.productDesignAns==1}"
                 />
@@ -1094,7 +1030,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="productDesignAns"
                   value="2"
                   th:checked="*{applicantDetailsObj.productDesignAns==2}"
                 />
@@ -1106,7 +1041,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="productDesignAns"
                   value="3"
                   th:checked="*{applicantDetailsObj.productDesignAns==3}"
                 />
@@ -1119,7 +1053,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="productDesignAns"
                   value="4"
                   th:checked="*{applicantDetailsObj.productDesignAns==4}"
                 />
@@ -1132,7 +1065,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="productDesignAns"
                   value="5"
                   th:checked="*{applicantDetailsObj.productDesignAns==5}"
                 />
@@ -1155,7 +1087,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="teamAns"
                   value="1"
                   th:checked="*{applicantDetailsObj.teamAns==1}"
                 />
@@ -1167,7 +1098,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="teamAns"
                   value="2"
                   th:checked="*{applicantDetailsObj.teamAns==2}"
                 />
@@ -1179,7 +1109,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="teamAns"
                   value="3"
                   th:checked="*{applicantDetailsObj.teamAns==3}"
                 />
@@ -1192,7 +1121,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="teamAns"
                   value="4"
                   th:checked="*{applicantDetailsObj.teamAns==4}"
                 />
@@ -1205,7 +1133,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="teamAns"
                   value="5"
                   th:checked="*{applicantDetailsObj.teamAns==5}"
                 />
@@ -1228,7 +1155,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="goToMarketAns"
                   value="1"
                   th:checked="*{applicantDetailsObj.goToMarketAns==1}"
                 />
@@ -1240,7 +1166,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="goToMarketAns"
                   value="2"
                   th:checked="*{applicantDetailsObj.goToMarketAns==2}"
                 />
@@ -1253,7 +1178,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="goToMarketAns"
                   value="3"
                   th:checked="*{applicantDetailsObj.goToMarketAns==3}"
                 />
@@ -1267,7 +1191,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="goToMarketAns"
                   value="4"
                   th:checked="*{applicantDetailsObj.goToMarketAns==4}"
                 />
@@ -1280,7 +1203,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="goToMarketAns"
                   value="5"
                   th:checked="*{applicantDetailsObj.goToMarketAns==5}"
                 />
@@ -1303,7 +1225,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="manufacturingAns"
                   value="1"
                   th:checked="*{applicantDetailsObj.manufacturingAns==1}"
                 />
@@ -1315,7 +1236,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="manufacturingAns"
                   value="2"
                   th:checked="*{applicantDetailsObj.manufacturingAns==2}"
                 />
@@ -1329,7 +1249,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="manufacturingAns"
                   value="3"
                   th:checked="*{applicantDetailsObj.manufacturingAns==3}"
                 />
@@ -1341,7 +1260,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="manufacturingAns"
                   value="4"
                   th:checked="*{applicantDetailsObj.manufacturingAns==4}"
                 />
@@ -1353,7 +1271,6 @@
               <label class="cursor-pointer flex items-center gap-2">
                 <input
                   type="radio"
-                  name="manufacturingAns"
                   value="5"
                   th:checked="*{applicantDetailsObj.manufacturingAns==5}"
                 />
