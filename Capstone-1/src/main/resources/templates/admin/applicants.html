@@ -156,10 +156,10 @@
                 class="whitespace-nowrap max-w-0 truncate text-center"
                 th:text="${app.status} == 2 ? ${app.rejectedBy} : '-'"
               ></td>
-              <td
-                class="whitespace-nowrap max-w-0 truncate text-center"
-                th:text="${app.status} != 2 ? ${app.acceptedBy} : '-'"
-              ></td>
+              <td class="whitespace-nowrap max-w-0 truncate text-center" 
+              th:text="${app.status != 2 ? (#strings.isEmpty(app.acceptedBy) ? '-' : app.acceptedBy) : '-'}">
+          </td>
+          
               <td
                 class="whitespace-nowrap max-w-0 truncate"
                 th:text="${#strings.isEmpty(app.evaluatedBy) ? '-' : app.evaluatedBy}"
