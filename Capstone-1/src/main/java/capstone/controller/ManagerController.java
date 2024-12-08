@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import capstone.common.constant.CommonConstant;
+import capstone.common.constant.MessageConstant;
 import capstone.controller.webdto.ApplicantWebDto;
 import capstone.controller.webdto.ManagerWebDto;
 import capstone.controller.webdto.OfficerWebDto;
@@ -181,7 +182,34 @@ public class ManagerController {
 	}
 
 	@PostMapping("/rank-startups/evaluate")
-	public String epostApplicantForRanking(@ModelAttribute ManagerWebDto webDto) throws Exception {
+	public String epostApplicantForRanking(@ModelAttribute ManagerWebDto webDto, RedirectAttributes ra) throws Exception {
+		
+		if(CommonConstant.BLANK.equals(webDto.getManagerFeedback())) {
+			
+			ra.addFlashAttribute("error", MessageConstant.FEEDBACK_BLANK);
+			
+			ra.addFlashAttribute("managerWebDto", webDto);
+			
+			return "redirect:/manager/rank-startups/evaluate?id=" + webDto.getEncryptedApplicantIdPk();
+			
+		}
+		
+		if(webDto.getCtOneRating() == 0 ||
+				webDto.getCtTwoRating() == 0 ||
+				webDto.getCtThreeRating() == 0 ||
+				webDto.getCtFourRating() == 0 ||
+				webDto.getCtFiveRating() == 0 ||
+				webDto.getCtSixRating() == 0 ||
+				webDto.getCtSevenRating() == 0 ||
+				webDto.getCtEightRating() == 0) {
+			
+			ra.addFlashAttribute("error", MessageConstant.RATING_BLANK);
+			
+			ra.addFlashAttribute("managerWebDto", webDto);
+			
+			return "redirect:/manager/rank-startups/evaluate?id=" + webDto.getEncryptedApplicantIdPk();
+			
+		}
 
 		ManagerInOutDto inDto = new ManagerInOutDto();
 

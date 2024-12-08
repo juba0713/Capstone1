@@ -44,6 +44,7 @@ public class UserInformationEntity {
 	@Column(nullable = false)
 	private Boolean deleteFlg;
 	
+	@Column(nullable = false, columnDefinition = "boolean default false")
 	private Boolean blockFlg;
 	
 
