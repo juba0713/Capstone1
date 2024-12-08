@@ -476,9 +476,9 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "AND p.id_pk = :projectIdPk "
 			+ "ORDER BY p.id_pk ASC";
 	
-	public final String UPDATE_APPLICANT_SUBMISSION_COUNT = "UPDATE ApplicantEntity  "
-			+ "SET submissionCount = submissionCount + 1 "
-			+ "WHERE idPk = :applicantIdPk ";
+	public final String UPDATE_APPLICANT_SUBMISSION_COUNT = "UPDATE m_applicant  "
+			+ "SET submission_count = submission_count + 1 "
+			+ "WHERE id_pk = :applicantIdPk ";
 	
 	@Modifying
 	@Transactional
