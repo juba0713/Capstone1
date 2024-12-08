@@ -143,7 +143,7 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 			+ "COALESCE(CAST(( "
 			+ "		SELECT SUM(e.submission_count) "
 			+ "		FROM m_applicant e "
-			+ ") AS INTEGER, 0) AS submission_count; ";
+			+ ") AS INTEGER), 0) AS submission_count; ";
 
 	public final String GET_DETAILS_FOR_TBI_DASHBOARD = "SELECT   "
 			+ "    COALESCE(CAST( (  "
