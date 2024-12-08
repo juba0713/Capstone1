@@ -482,7 +482,7 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 	
 	@Modifying
 	@Transactional
-	@Query(value=UPDATE_APPLICANT_SUBMISSION_COUNT)
+	@Query(value=UPDATE_APPLICANT_SUBMISSION_COUNT, nativeQuery = true)
 	public void updateApplicantSubmissionCount(int applicantIdPk) throws DataAccessException;
 	
 	@Query(value=GET_HISTORY_APPLICANT_DETAILS_BY_ID_PK, nativeQuery=true)
