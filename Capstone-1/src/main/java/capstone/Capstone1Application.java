@@ -53,13 +53,13 @@ public class Capstone1Application {
 			user.setCreatedDate(new Timestamp(System.currentTimeMillis()));
 			user.setUpdatedDate(new Timestamp(System.currentTimeMillis()));
 			user.setDeleteFlg(false);
+			user.setBlockFlg(false);
 			int idPk = userLogic.saveUser(user);
 			UserInfoAccountEntity userAcc = new UserInfoAccountEntity();
 			userAcc.setUserIdPk(idPk);
 			userAcc.setPassword(encoder.encode(password));
 			userAcc.setCreatedDate(new Timestamp(System.currentTimeMillis()));
 			userAcc.setDeleteFlg(false);
-			user.setBlockFlg(false);
 			userLogic.saveUserAccount(userAcc);
 		}
 	}
