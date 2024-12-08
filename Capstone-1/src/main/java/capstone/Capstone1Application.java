@@ -1,7 +1,5 @@
 package capstone;
 
-
-
 import java.sql.Timestamp;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,29 +20,29 @@ public class Capstone1Application {
 
 	@Autowired
 	private UserLogic userLogic;
-	
+
 	@Autowired
 	private Environment env;
-	
+
 	@Autowired
 	private PasswordEncoder encoder;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(Capstone1Application.class, args);
 
 	}
-	
+
 	@PostConstruct
-    public void init() {
+	public void init() {
 		int count = userLogic.countAdminUsers();
-		
+
 		String firstName = env.getProperty("admin.first.name");
 		String lastName = env.getProperty("admin.last.name");
 		String mobileNumber = env.getProperty("admin.mobile.number");
 		String email = env.getProperty("admin.email");
 		String password = env.getProperty("admin.password");
-		
-		if(count == 0) {
+
+		if (count == 0) {
 			UserInformationEntity user = new UserInformationEntity();
 			user.setEmail(email);
 			user.setFirstName(firstName);
@@ -61,8 +59,9 @@ public class Capstone1Application {
 			userAcc.setPassword(encoder.encode(password));
 			userAcc.setCreatedDate(new Timestamp(System.currentTimeMillis()));
 			userAcc.setDeleteFlg(false);
+			user.setBlockFlg(false);
 			userLogic.saveUserAccount(userAcc);
 		}
-    }
+	}
 
 }
