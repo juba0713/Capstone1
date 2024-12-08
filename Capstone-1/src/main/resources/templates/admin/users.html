@@ -295,45 +295,45 @@
                 <!-- th:name="${user.deletable} ? 'delete' : ''" -->
                 <!-- th:classappend="${user.deletable} ? '' : 'border-gray-300 bg-gray-300 pointer-events-none'"
                 th:disabled="${user.deletable} ? false : true" -->
-                
-            
-                <button
-                  name="block"
-                  class="btn-row border-4 border-[#FF4C4C] bg-[#FF4C4C] hover:bg-red-600 hover:border-red-600 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-                  type="button"
-                  th:if="${!user.blockFlg}"
-                >
-                  <img class="h-4" th:src="@{/icons/block.svg}" />
-                </button>
-                
-                <button
-                  name="unblock"
-                  class="btn-row border-4 border-[#FF4C4C] bg-[#FF4C4C] hover:bg-red-600 hover:border-red-600 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-                  type="button"
-                  th:if="${user.blockFlg}"
-                >
-                  <img class="h-4" th:src="@{/icons/trash.svg}" />
-                </button>
-                
-                <button
-                  th:name="${user.deletable} ? 'delete' : ''"
-                  class="btn-row border-4 border-[#FF4C4C] bg-[#FF4C4C] hover:bg-red-600 hover:border-red-600 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-                  type="button"
-                  th:classappend="${user.deletable} ? '' : 'border-gray-300 bg-gray-300 pointer-events-none'"
-                  th:disabled="${user.deletable} ? false : true"
-                >
-                  <img class="h-4" th:src="@{/icons/trash.svg}" />
-                </button>
+                <div class="flex mr-4 justify-end gap-1">
+                  <button
+                    name="block"
+                    class="btn-row border-4 border-[#FFA500] bg-[#FFA500] hover:bg-orange-500 hover:border-orange-500 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                    type="button"
+                    th:if="${!user.blockFlg && user.role == 'APPLICANT'}"
+                  >
+                    <img class="h-4" th:src="@{/icons/unblock.svg}" />
+                  </button>
 
-                <button
-                  name="edit"
-                  class="btn-row border-4 border-[#2493DF] hover:bg-blue-600 hover:border-blue-600 bg-[#2493DF] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
-                  type="button"
-                >
-                  <!-- <a th:href="@{/admin/editUser}"> -->
-                  <img class="h-4" th:src="@{/icons/edit.svg}" />
-                  <!-- </a> -->
-                </button>
+                  <button
+                    name="unblock"
+                    class="btn-row border-4 border-[#FFA500] bg-[#FFA500] hover:bg-orange-500 hover:border-orange-500 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                    type="button"
+                    th:if="${user.blockFlg && user.role == 'APPLICANT'}"
+                  >
+                    <img class="h-4" th:src="@{/icons/block.svg}" />
+                  </button>
+
+                  <button
+                    th:name="${user.deletable} ? 'delete' : ''"
+                    class="btn-row border-4 border-[#FF4C4C] bg-[#FF4C4C] hover:bg-red-600 hover:border-red-600 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                    type="button"
+                    th:classappend="${user.deletable} ? '' : 'border-gray-300 bg-gray-300 pointer-events-none'"
+                    th:disabled="${user.deletable} ? false : true"
+                  >
+                    <img class="h-4" th:src="@{/icons/trash.svg}" />
+                  </button>
+
+                  <button
+                    name="edit"
+                    class="btn-row border-4 border-[#2493DF] hover:bg-blue-600 hover:border-blue-600 bg-[#2493DF] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                    type="button"
+                  >
+                    <!-- <a th:href="@{/admin/editUser}"> -->
+                    <img class="h-4" th:src="@{/icons/edit.svg}" />
+                    <!-- </a> -->
+                  </button>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -358,7 +358,7 @@
     >
       <div class="modal-dialog delete-modal-dialog" role="document">
         <div class="modal-content delete-modal-content">
-          <div class="mb-20">
+          <div class="mb-24">
             <div
               class="rounded-t-md flex items-center flex-col justify-items-center mx-auto absolute z-10 w-full py-2"
             >
@@ -387,7 +387,7 @@
                 </button>
                 <button
                   name="delete"
-                  class="w-3/6 px-3 h-8 border-black hover:bg-red-500 bg-[#FF4C4C] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  class="w-32 text-center px-3 h-8 border-black hover:bg-red-500 bg-[#FF4C4C] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                 >
                   delete
                 </button>
@@ -456,16 +456,23 @@
             <div
               class="rounded-t-md flex items-center flex-col justify-items-center mx-auto absolute z-10 w-full py-2"
             >
-              <img th:src="@{/images/warning.png}" />
+              <img th:src="@{/images/warning-orange.png}" />
             </div>
           </div>
           <div class="modal-body" id="modal-body">
             <form th:action="@{/admin/users/block-user}" method="POST">
-              <input type="hidden" name="userIdPk" value="0" id="block-user-id-pk" />
+              <input
+                type="hidden"
+                name="userIdPk"
+                value="0"
+                id="block-user-id-pk"
+              />
               <p class="font-semibold text-xl text-center">
                 Are you sure you want to block this user?
               </p>
-              <p class="opacity-45 text-center">Select "block" to proceed.</p>
+              <p class="opacity-45 text-center">
+                Block the user from submitting applications with this email.
+              </p>
               <div class="justify-between flex mx-16 mt-2 text-center">
                 <button
                   data-dismiss="modal"
@@ -476,7 +483,7 @@
                   cancel
                 </button>
                 <button
-                  class="w-32 text-center px-3 h-8 border-black hover:bg-blue-500 hover:bg-opacity-75 bg-[#2493DF] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  class="w-32 text-center px-3 h-8 border-black hover:bg-orange-500 hover:bg-opacity-75 bg-[#FFA500] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                 >
                   Block
                 </button>
@@ -487,7 +494,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- unblock modal -->
     <div
       class="modal font-secondary"
@@ -501,12 +508,17 @@
             <div
               class="rounded-t-md flex items-center flex-col justify-items-center mx-auto absolute z-10 w-full py-2"
             >
-              <img th:src="@{/images/warning.png}" />
+              <img th:src="@{/images/warning-orange.png}" />
             </div>
           </div>
           <div class="modal-body" id="modal-body">
             <form th:action="@{/admin/users/unblock-user}" method="POST">
-              <input type="hidden" name="userIdPk" value="0" id="unblock-user-id-pk" />
+              <input
+                type="hidden"
+                name="userIdPk"
+                value="0"
+                id="unblock-user-id-pk"
+              />
               <p class="font-semibold text-xl text-center">
                 Are you sure you want to unblock this user?
               </p>
@@ -521,7 +533,7 @@
                   cancel
                 </button>
                 <button
-                  class="w-32 text-center px-3 h-8 border-black hover:bg-blue-500 hover:bg-opacity-75 bg-[#2493DF] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  class="w-32 text-center px-3 h-8 border-black hover:bg-orange-500 hover:bg-opacity-75 bg-[#FFA500] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                 >
                   Unblock
                 </button>
@@ -532,8 +544,7 @@
         </div>
       </div>
     </div>
-    
-    
+
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -607,7 +618,7 @@
               document
                 .getElementById("block-user-id-pk")
                 .setAttribute("value", idPk);
-            }else if (this.name === "unblock") {
+            } else if (this.name === "unblock") {
               $("#unblock-modal").modal("show");
               document
                 .getElementById("unblock-user-id-pk")
