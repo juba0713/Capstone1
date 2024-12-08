@@ -34,4 +34,6 @@ public class AdminDashboardObj {
 	private int reapplicationFailedCount;
 	
 	private int issuedCertificateCount;
+	
+	private int managerToTbiCount;
 }

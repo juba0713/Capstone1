@@ -139,7 +139,11 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 			+ "        FROM m_applicant e "
 			+ "        WHERE e.delete_flg = false "
 			+ "		AND e.certificate_name IS NOT NULL "
-			+ "    ) AS INTEGER) AS issued_certifate;";	
+			+ "    ) AS INTEGER) AS issued_certifate,"
+			+ "CAST(( "
+			+ "		SELECT SUM(e.submission_count) "
+			+ "		FROM m_applicant e "
+			+ ") AS INTEGER) AS submission_count; ";	
 	
 	public final String GET_DETAILS_FOR_TBI_DASHBOARD = "SELECT   "
 			+ "    COALESCE(CAST( (  "

@@ -205,7 +205,8 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 			+ "AND a.delete_flg = false";
 
 	public final String UPDATE_APPLICANT_STATUS = "UPDATE ApplicantEntity a "
-			+ "SET a.status = :status "
+			+ "SET a.status = :status, "
+			+ " a.submissionCount = a.submissionCount + 1 "
 			+ "WHERE a.idPk IN (:idPks) ";
 	
 	public final String GET_APPLICANT_BY_CREATED_BY = "SELECT e"

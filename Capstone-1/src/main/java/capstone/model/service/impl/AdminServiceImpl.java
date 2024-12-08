@@ -76,6 +76,8 @@ public class AdminServiceImpl  implements AdminService{
 		
 		obj.setIssuedCertificateCount(entity.getIssuedCertificateCount());
 		
+		obj.setManagerToTbiCount(entity.getSubmissionCount());
+		
 		outDto.setAdminDashboardObj(obj);
 		
 		return outDto;

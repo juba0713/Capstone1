@@ -88,4 +88,7 @@ public class ApplicantEntity {
 	private int createdBy;
 	
 	private String certificateName;
+	
+	@Column(nullable = false, columnDefinition = "int default 0")
+	private int submissionCount;
 }

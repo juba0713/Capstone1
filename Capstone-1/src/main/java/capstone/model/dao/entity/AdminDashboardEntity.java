@@ -26,7 +26,8 @@ public class AdminDashboardEntity {
 				(Integer) objects[11],
 				(Integer) objects[12],
 				(Integer) objects[13],
-				(Integer) objects[14]
+				(Integer) objects[14],
+				(Integer) objects[15]
 				);
 		
 	}
@@ -60,4 +61,6 @@ public class AdminDashboardEntity {
 	private int reapplicationFailedCount;
 	
 	private int issuedCertificateCount;
+	
+	private int submissionCount;
 }
