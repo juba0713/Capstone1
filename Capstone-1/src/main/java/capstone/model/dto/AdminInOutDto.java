@@ -44,4 +44,6 @@ public class AdminInOutDto {
 	private ErrorObj errors;
 	
 	private String result;
+	
+	private Boolean status;
 }

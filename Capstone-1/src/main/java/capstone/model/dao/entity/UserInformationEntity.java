@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Builder.Default;
 import lombok.Data;
 
 @Data
@@ -42,6 +43,8 @@ public class UserInformationEntity {
 	
 	@Column(nullable = false)
 	private Boolean deleteFlg;
+	
+	private Boolean blockFlg;
 	
 
 	private Timestamp updatedDate;

@@ -168,4 +168,48 @@ public class AdminController {
     	
     	return "redirect:/admin/users";
     }
+    
+   @PostMapping("/admin/users/block-user")
+    public String postBlockUser(@ModelAttribute AdminWebDto webDto, RedirectAttributes ra) {
+    	
+    	AdminInOutDto inDto = new AdminInOutDto();
+    	
+    	inDto.setUserIdPk(webDto.getUserIdPk());
+    	
+    	inDto.setStatus(true);
+
+    	String updateResult = adminService.updaterUserBlockStatus(inDto).getResult();
+    	
+    	if(CommonConstant.INVALID.equals(updateResult)) {
+    		
+    		ra.addFlashAttribute("errorMsg",  "No changes were made. Please verify the details and try again.");
+ 
+    	}
+    	
+    	ra.addFlashAttribute("succMsg",  "User has been blocked successfully!!");
+    	
+        return "redirect:/admin/users";
+    }
+   
+   @PostMapping("/admin/users/unblock-user")
+   public String postUnblockUser(@ModelAttribute AdminWebDto webDto, RedirectAttributes ra) {
+   	
+   	AdminInOutDto inDto = new AdminInOutDto();
+   	
+   	inDto.setUserIdPk(webDto.getUserIdPk());
+   	
+   	inDto.setStatus(false);
+
+   	String updateResult = adminService.updaterUserBlockStatus(inDto).getResult();
+   	
+   	if(CommonConstant.INVALID.equals(updateResult)) {
+   		
+   		ra.addFlashAttribute("errorMsg",  "No changes were made. Please verify the details and try again.");
+
+   	}
+   	
+   	ra.addFlashAttribute("succMsg",  "User has been unblocked successfully!!");
+   	
+       return "redirect:/admin/users";
+   }
 }

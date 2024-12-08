@@ -295,13 +295,26 @@
                 <!-- th:name="${user.deletable} ? 'delete' : ''" -->
                 <!-- th:classappend="${user.deletable} ? '' : 'border-gray-300 bg-gray-300 pointer-events-none'"
                 th:disabled="${user.deletable} ? false : true" -->
+                
+            
                 <button
                   name="block"
                   class="btn-row border-4 border-[#FF4C4C] bg-[#FF4C4C] hover:bg-red-600 hover:border-red-600 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                   type="button"
+                  th:if="${!user.blockFlg}"
                 >
                   <img class="h-4" th:src="@{/icons/block.svg}" />
                 </button>
+                
+                <button
+                  name="unblock"
+                  class="btn-row border-4 border-[#FF4C4C] bg-[#FF4C4C] hover:bg-red-600 hover:border-red-600 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                  type="button"
+                  th:if="${user.blockFlg}"
+                >
+                  <img class="h-4" th:src="@{/icons/trash.svg}" />
+                </button>
+                
                 <button
                   th:name="${user.deletable} ? 'delete' : ''"
                   class="btn-row border-4 border-[#FF4C4C] bg-[#FF4C4C] hover:bg-red-600 hover:border-red-600 rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
@@ -447,8 +460,8 @@
             </div>
           </div>
           <div class="modal-body" id="modal-body">
-            <form th:action="@{/admin/users/block-user}" method="GET">
-              <input type="hidden" name="id" value="0" id="block-user-id-pk" />
+            <form th:action="@{/admin/users/block-user}" method="POST">
+              <input type="hidden" name="userIdPk" value="0" id="block-user-id-pk" />
               <p class="font-semibold text-xl text-center">
                 Are you sure you want to block this user?
               </p>
@@ -463,7 +476,6 @@
                   cancel
                 </button>
                 <button
-                  th:href="@{/admin/users/edit-user}"
                   class="w-32 text-center px-3 h-8 border-black hover:bg-blue-500 hover:bg-opacity-75 bg-[#2493DF] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
                 >
                   Block
@@ -475,6 +487,53 @@
         </div>
       </div>
     </div>
+    
+    <!-- unblock modal -->
+    <div
+      class="modal font-secondary"
+      tabindex="-1"
+      role="dialog"
+      id="unblock-modal"
+    >
+      <div class="modal-dialog block-modal-dialog" role="document">
+        <div class="modal-content block-modal-content">
+          <div class="mb-24">
+            <div
+              class="rounded-t-md flex items-center flex-col justify-items-center mx-auto absolute z-10 w-full py-2"
+            >
+              <img th:src="@{/images/warning.png}" />
+            </div>
+          </div>
+          <div class="modal-body" id="modal-body">
+            <form th:action="@{/admin/users/unblock-user}" method="POST">
+              <input type="hidden" name="userIdPk" value="0" id="unblock-user-id-pk" />
+              <p class="font-semibold text-xl text-center">
+                Are you sure you want to unblock this user?
+              </p>
+              <p class="opacity-45 text-center">Select "unblock" to proceed.</p>
+              <div class="justify-between flex mx-16 mt-2 text-center">
+                <button
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  type="button"
+                  class="close h-8 border-black hover:bg-[#ede9e9] rounded-lg w-32 hover:text-black text-black border font-secondary sm:text-sm text-xs sm:p-1"
+                >
+                  cancel
+                </button>
+                <button
+                  class="w-32 text-center px-3 h-8 border-black hover:bg-blue-500 hover:bg-opacity-75 bg-[#2493DF] rounded-lg hover:text-black text-gray-50 font-secondary sm:text-sm text-xs sm:p-1"
+                >
+                  Unblock
+                </button>
+                <!-- once rejected, send info to applicant email the feedback -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -547,6 +606,11 @@
               $("#block-modal").modal("show");
               document
                 .getElementById("block-user-id-pk")
+                .setAttribute("value", idPk);
+            }else if (this.name === "unblock") {
+              $("#unblock-modal").modal("show");
+              document
+                .getElementById("unblock-user-id-pk")
                 .setAttribute("value", idPk);
             }
 

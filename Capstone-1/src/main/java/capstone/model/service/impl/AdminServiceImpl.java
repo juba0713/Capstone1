@@ -102,7 +102,7 @@ public class AdminServiceImpl  implements AdminService{
 			
 			obj.setRole(user.getRole());
 			
-			
+			obj.setBlockFlg(user.getBlockFlg());
 			
 			obj.setCreatedDate(user.getCreatedDate());
 			
@@ -362,6 +362,22 @@ public class AdminServiceImpl  implements AdminService{
 		Timestamp timeNow = new Timestamp(System.currentTimeMillis());
 		
 		int result = userLogic.updateuser(inDto.getFirstName(), inDto.getLastName(), inDto.getMobileNumber(), inDto.getRole(), timeNow, inDto.getUserIdPk());
+	
+		if(result == 0) {
+			outDto.setResult(CommonConstant.INVALID);
+		}
+		
+		return outDto;
+	}
+
+	@Override
+	public AdminInOutDto updaterUserBlockStatus(AdminInOutDto inDto) {
+		
+		AdminInOutDto outDto = new AdminInOutDto();
+		
+		outDto.setResult(CommonConstant.VALID);
+			
+		int result = userLogic.updateUserBlockStatus(inDto.getUserIdPk(), inDto.getStatus());
 	
 		if(result == 0) {
 			outDto.setResult(CommonConstant.INVALID);

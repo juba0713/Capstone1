@@ -2,6 +2,7 @@ package capstone.common.config;
 
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -14,8 +15,14 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
+import capstone.model.dao.entity.UserInformationEntity;
+import capstone.model.logic.UserLogic;
+
 @Component
 public class CustomerFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+	
+	@Autowired
+	private UserLogic userLogic;
 	
 	@Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
@@ -43,9 +50,24 @@ public class CustomerFailureHandler extends SimpleUrlAuthenticationFailureHandle
 //        
 //        request.getSession().setAttribute("errorMessageLogin", "Invalid credentials for " + fromLogin);
 		HttpSession session = request.getSession(false);
-		session.setAttribute("errorMessageLogin", "Invalid username and password"); // Clear the message
-		System.out.println("AW");
+
+        String email = request.getParameter("username"); // Get the username from the login form
+        System.out.println(email);
+        UserInformationEntity user = userLogic.getUserByEmail(email);
+
+        if (user != null && user.getBlockFlg()) {
+            // User exists and is blocked
+            if (session != null) {
+                session.setAttribute("errorMessageLogin", "Your account has been blocked");
+            }
+        } else {
+            // General invalid login attempt
+            if (session != null) {
+                session.setAttribute("errorMessageLogin", "Invalid username and password");
+            }
+        }
+
         super.setDefaultFailureUrl("/login"); // Set the failure URL
-        super.onAuthenticationFailure(request, response, exception); // Continue with default behavior
+        super.onAuthenticationFailure(request, response, exception); // Conti
     }
 }

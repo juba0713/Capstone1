@@ -21,7 +21,8 @@ public class UserDetailsEntity {
 				 (String) objects[4],
 				 (Timestamp) objects[5],
 				 (Timestamp) objects[6],
-				 (Boolean) objects[7]
+				 (Boolean) objects[7],
+				 (Boolean) objects[8]
 		);
 	}
 	
@@ -40,4 +41,6 @@ public class UserDetailsEntity {
 	private Timestamp updatedDate;
 	
 	private Boolean deletable;
+	
+	private Boolean blockFlg;
 }

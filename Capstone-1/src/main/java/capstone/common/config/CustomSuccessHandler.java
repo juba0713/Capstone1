@@ -24,6 +24,19 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 			jakarta.servlet.http.HttpServletResponse response, Authentication authentication)
 			throws IOException, jakarta.servlet.ServletException {
 		
+			// Retrieve user information
+			UserInformationEntity user = loggedInUserService.getUserInformation();
+	        System.out.println("This is user");
+	        System.out.println(user);
+	        if (user.getBlockFlg()) {
+	            // If the user is blocked, redirect to login with an error message
+	        	SecurityContextHolder.clearContext();
+	            request.getSession().invalidate();
+	            request.getSession().setAttribute("errorMessageLogin", "Your account has been blocked");
+	            response.sendRedirect("/login");
+	            return;
+	        }
+		
 			Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 			
 			// Check if the user has the "ROLE_ADMIN" authority
@@ -47,8 +60,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 	      
 	        if (authentication != null) {
 	            String username = authentication.getName();
-	            
-	            UserInformationEntity user = loggedInUserService.getUserInformation();
+	          
 	            
 	            request.getSession().setAttribute("fullname", user.getFirstName() + " " + user.getLastName());
 	    

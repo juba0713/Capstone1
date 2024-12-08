@@ -28,4 +28,6 @@ public class UserDetailsObj {
 	private Boolean deletable;
 	
 	private Boolean isApplicant;
+	
+	private Boolean blockFlg;
 }

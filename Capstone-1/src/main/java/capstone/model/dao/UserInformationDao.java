@@ -389,7 +389,8 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 			+ "  WHERE u.role IN ('APPLICANT', 'ADMIN') "
 			+ "  AND u.id_pk = e.id_pk) "
 			+ " ) "
-			+ " AS deletable "
+			+ " AS deletable,"
+			+ " e.block_flg AS block_flg "
 			+ "FROM m_user_information e "
 			+ "WHERE e.delete_flg = false";
 	
@@ -408,6 +409,14 @@ public interface UserInformationDao extends JpaRepository<UserInformationEntity,
 	        + "    updated_date = :updatedDate "
 	        + "WHERE "
 	        + "    id_pk = :userIdPk";
+	
+	String UPDATE_USER_BLOCK_STATUS = "UPDATE m_user_information "
+			+ "SET block_flg = :status "
+			+ "WHERE id_pk = :userIdPk ";
+	
+	@Modifying
+	@Query(value=UPDATE_USER_BLOCK_STATUS, nativeQuery=true)
+	public int updateUserBlockStatus(@Param("userIdPk") int userIdPk, @Param("status") boolean status) throws DataAccessException;
 
 	
 	@Modifying

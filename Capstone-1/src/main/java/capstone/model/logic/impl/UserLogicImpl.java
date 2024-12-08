@@ -165,6 +165,12 @@ public class UserLogicImpl implements UserLogic {
 		return userInformationDao.getMonthlyRejectedApplications();
 	}
 
+	@Override
+	public int updateUserBlockStatus(int userIdPk, boolean status) {
+		// TODO Auto-generated method stub
+		return userInformationDao.updateUserBlockStatus(userIdPk, status);
+	}
+
 
 
 }

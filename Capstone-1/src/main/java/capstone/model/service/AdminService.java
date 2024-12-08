@@ -22,4 +22,6 @@ public interface AdminService {
 	public void deleteUser(AdminInOutDto inDto);
 	
 	public AdminInOutDto updateUser(AdminInOutDto inDto);
+	
+	public AdminInOutDto updaterUserBlockStatus(AdminInOutDto inDto);
 }
