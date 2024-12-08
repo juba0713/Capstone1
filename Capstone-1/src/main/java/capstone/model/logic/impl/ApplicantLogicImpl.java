@@ -419,9 +419,9 @@ public class ApplicantLogicImpl implements ApplicantLogic{
 	}
 
 	@Override
-	public void updateSubmissionCount(int applicantIdPk) {
+	public void updateSubmissionCount(List<Integer> idPks) {
 		// TODO Auto-generated method stub
-		applicantDao.updateApplicantSubmissionCount(applicantIdPk);
+		applicantDao.updateApplicantSubmissionCount(idPks);
 	}
 	
 }

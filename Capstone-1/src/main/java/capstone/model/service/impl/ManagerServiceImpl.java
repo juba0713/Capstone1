@@ -995,7 +995,7 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public void updateSubmissionCount(ManagerInOutDto inDto) {
 		// TODO Auto-generated method stub
-		applicantLogic.updateSubmissionCount(inDto.getApplicantIdPk());
+		applicantLogic.updateSubmissionCount(inDto.getChosenApplicant());
 	}
 
 }

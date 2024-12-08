@@ -1183,6 +1183,8 @@ if (inDto.getMembers() == null || inDto.getMembers().size() < 4) {
 			appTbiFeedbackObj.setCtEightComments(evaluationDetails.getCtEightComments());
 
 			appTbiFeedbackObj.setTbiFeedback(evaluationDetails.getTbiFeedback());
+			
+			appTbiFeedbackObj.setTotalRating(evaluationDetails.getTotal());
 
 			AcceptedApplicantEntity acceptedApplicant = applicantLogic
 					.getAcceptedApplicantByApplicantIdPk(applicantIdPk);

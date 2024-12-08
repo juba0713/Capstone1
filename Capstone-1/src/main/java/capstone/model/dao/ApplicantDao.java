@@ -478,12 +478,12 @@ public interface ApplicantDao extends JpaRepository<ApplicantEntity, Integer>{
 	
 	public final String UPDATE_APPLICANT_SUBMISSION_COUNT = "UPDATE m_applicant  "
 			+ "SET submission_count = submission_count + 1 "
-			+ "WHERE id_pk = :applicantIdPk ";
+			+ "WHERE id_pk IN (:idPks)  ";
 	
 	@Modifying
 	@Transactional
 	@Query(value=UPDATE_APPLICANT_SUBMISSION_COUNT, nativeQuery = true)
-	public void updateApplicantSubmissionCount(int applicantIdPk) throws DataAccessException;
+	public void updateApplicantSubmissionCount(List<Integer> idPks) throws DataAccessException;
 	
 	@Query(value=GET_HISTORY_APPLICANT_DETAILS_BY_ID_PK, nativeQuery=true)
 	public List<Object[]> getHistoryApplicantDetailsByIdPkRaw(int applicantIdPk, int projectIdPk) throws DataAccessException;

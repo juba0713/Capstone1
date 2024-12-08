@@ -316,8 +316,12 @@ public class ManagerController {
 		inDto.setApplicantIdPk(Integer.valueOf(commonService.decrypt(webDto.getEncryptedApplicantIdPk())));
 
 		inDto.setStatus(6);
-
+		
 		managerService.sendResubmissionMail(inDto);
+		
+		inDto.setChosenApplicant(List.of(inDto.getApplicantIdPk()));
+		
+		managerService.updateSubmissionCount(inDto);
 
 		return "redirect:/manager/evaluated-result";
 	}

@@ -314,5 +314,5 @@ public interface ApplicantLogic {
 	
 	public List<ProjectEntity> getHistoryOfApplicant(int applicantIdPk);
 	
-	public void updateSubmissionCount(int applicantIdPk);
+	public void updateSubmissionCount(List<Integer> idPks);
 }
